@@ -1,0 +1,11 @@
+Demo project that provides a minimal implementation of an annotation processor
+that prints elements annotated by @PrintMe during compilation.
+
+To build it:
+
+mvn package
+
+To test it:
+
+javac -cp /path/to/aptdemo-1.0-SNAPSHOT.jar SomeTestClass.java
+

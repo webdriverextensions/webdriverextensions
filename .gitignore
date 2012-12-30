@@ -1,6 +1,16 @@
+#java specific
 *.class
 
-# Package Files #
-*.jar
-*.war
-*.ear
+#maven specific
+*/target/**
+
+#netbeans ignore personal stuff 
+nbproject/private/
+
+
+## generic files to ignore
+*~
+*.lock
+*.DS_Store
+*.swp
+*.out

@@ -1,0 +1,36 @@
+package ${siteTestBase.packageName};
+
+import ${site.packageName}.${site.className};
+#foreach($page in $pages)
+import ${page.packageName}.${page.className};
+#end
+import org.junit.Before;
+import org.openqa.selenium.WebDriver;
+
+public class ${siteTestBase.className} {    
+    // Declare Web Driver
+    public WebDriver driver;
+
+    // Declare Site Object
+    public ${site.className} ${site.fieldName};
+	
+    // Declare Page Objects
+#foreach($page in $pages)
+    public ${page.className} ${page.fieldName};
+#end
+
+    public ${siteTestBase.className}(WebDriver driver) {
+        this.driver = driver;
+    }
+
+    @Before
+    public void beforeTest() {
+        // Instantiate Site Object
+        ${site.fieldName} = new ${site.className}(driver);
+
+        // Set Page Objects
+#foreach($page in $pages)
+        ${page.fieldName} = ${site.fieldName}.${page.fieldName};
+#end
+    }
+}
