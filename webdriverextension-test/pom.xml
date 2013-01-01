@@ -29,7 +29,7 @@
             <version>${project.version}</version>
         </dependency>
 
-        <!-- Webdriver Extension -->
+        <!-- Webdriver Extension Generator -->
         <dependency>
             <groupId>com.eniro.swat</groupId>
             <artifactId>webdriverextension-generator</artifactId>

@@ -56,7 +56,7 @@ public class ExamplesPage extends WebPage<ExamplesPage> {
 
     @Override
     public void load() {
-        getDriver().get("http://mrjamesbrown.github.com/webdriver-extension/index.html");
+        getDriver().get("http://mrjamesbrown.github.com/webdriverextension/index.html");
     }
 
     @Override

@@ -1,4 +1,4 @@
-webdriverextension
+WebDriver Extension
 ===================
 
-An extension to WebDriver that uses PageObject-pattern together with the Bot Style Testing pattern.
+Webdriver Enxtention is a framework that exdents the webdriver framework with components that encourages the PageObject pattern and Bot Style testning
