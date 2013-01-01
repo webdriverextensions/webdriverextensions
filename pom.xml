@@ -14,10 +14,10 @@
     <url>https://github.com/andidevelopment/webdriverextension</url>
 
     <modules>
-        <module>webdriverextension-core</module>
-        <module>webdriverextension-models</module>
-        <module>webdriverextension-generator</module>
-        <module>webdriverextension-test</module>
+        <module>webdriver-extension-core</module>
+        <module>webdriver-extension-models</module>
+        <module>webdriver-extension-generator</module>
+        <module>webdriver-extension-test</module>
     </modules>
 
     <licenses>
