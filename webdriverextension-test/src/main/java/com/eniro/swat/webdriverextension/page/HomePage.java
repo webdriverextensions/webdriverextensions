@@ -25,7 +25,7 @@ public class HomePage extends WebPage<HomePage> {
 
     @Override
     public void load() {
-    	getDriver().get("http://mrjamesbrown.github.com/webdriverextension/index.html");
+    	getDriver().get("http://andidevelopment.github.com/webdriver-extension/index.html");
     }
 
     @Override

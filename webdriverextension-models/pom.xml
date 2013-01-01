@@ -11,7 +11,7 @@
 
     <name>Webdriver Extension Models</name>
     <description>Webdriver Enxtention Models contains the objects for basic html tag interaction e.g. table tags, list tags, etc.</description>
-    <url>https://github.com/eniro/webdriverextension</url>
+    <url>https://github.com/andidevelopment/webdriverextension</url>
 
     <properties>
         <!-- File Encoding -->

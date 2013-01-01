@@ -10,7 +10,7 @@
 
     <name>Webdriver Extension Test Google</name>
     <description>Test used to test the Webdriver Extension Framework</description>
-    <url>https://github.com/eniro/webdriverextension</url>
+    <url>https://github.com/andidevelopment/webdriverextension</url>
 
     <properties>
         <!-- File Encoding -->
