@@ -1,18 +1,17 @@
 package org.andidev.webdriverextension.page;
 
+import java.util.List;
 import org.andidev.webdriverextension.DefaultHtmlTagFieldDecorator;
 import org.andidev.webdriverextension.HtmlTag;
+import static org.andidev.webdriverextension.WebDriverAssert.*;
 import static org.andidev.webdriverextension.WebDriverBot.*;
 import org.andidev.webdriverextension.WebPage;
 import org.andidev.webdriverextension.annotation.Page;
-import org.andidev.webdriverextension.models.MenuButtonGroup;
 import org.andidev.webdriverextension.models.Menu;
+import org.andidev.webdriverextension.models.MenuButtonGroup;
 import org.andidev.webdriverextension.models.UserRow;
 import org.andidev.webdriverextension.models.UserTableSearchContext;
-import java.util.List;
 import static org.junit.Assert.fail;
-import org.openqa.selenium.By;
-import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -62,9 +61,11 @@ public class ExamplesPage extends WebPage<ExamplesPage> {
     @Override
     public void isLoaded() throws Error {
         try {
-            getDriver().findElement(By.cssSelector("body.webdriverextension-site"));
-        } catch (NoSuchElementException e) {
-            fail("Cannot locate ExamplesPage");
+            assertIsDisplayed(searchQuery);
+            assertIsDisplayed(search);
+            assertIsDisplayed(menu);
+        } catch (AssertionError e) {
+            fail(this.getClass().getSimpleName() + " is not loaded");
         }
 
     }

@@ -32,7 +32,21 @@
         <!-- WebDriver Extension Generator -->
         <dependency>
             <groupId>org.andidev</groupId>
-            <artifactId>webdriver-extension-generator</artifactId>
+            <artifactId>webdriver-extension-generator-sitebase</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
+        <!-- WebDriver Extension Generator -->
+        <dependency>
+            <groupId>org.andidev</groupId>
+            <artifactId>webdriver-extension-generator-sitetestbase</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
+        <!-- WebDriver Extension Generator Annotation Processor Service -->
+        <dependency>
+            <groupId>org.andidev</groupId>
+            <artifactId>webdriver-extension-generator-annotation-processor-service</artifactId>
             <version>${project.version}</version>
         </dependency>
 

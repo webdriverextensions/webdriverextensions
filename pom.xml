@@ -18,6 +18,7 @@
         <module>webdriver-extension-models</module>
         <module>webdriver-extension-generator</module>
         <module>webdriver-extension-test</module>
+        <module>webdriver-extension-example-google</module>
     </modules>
 
     <licenses>
@@ -34,19 +35,6 @@
     </properties>
 
     <dependencies>
-        <!-- WebDriver Extension Core -->
-<!--        <dependency>
-            <groupId>org.andidev</groupId>
-            <artifactId>webdriver-extension-core</artifactId>
-            <version>${project.version}</version>
-        </dependency>-->
-
-        <!-- WebDriver Extension Generator -->
-<!--        <dependency>
-            <groupId>org.andidev</groupId>
-            <artifactId>webdriver-extension-generator</artifactId>
-            <version>${project.version}</version>
-        </dependency>-->
     </dependencies>
 
     <build>

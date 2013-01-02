@@ -28,29 +28,6 @@
     </properties>
 
     <dependencies>
-        <!-- WebDriver Extension Generator SiteBase -->
-        <dependency>
-            <groupId>org.andidev</groupId>
-            <artifactId>webdriver-extension-generator-annotation-processor-service</artifactId>
-            <version>${project.version}</version>
-            <scope>compile</scope>
-        </dependency>
-
-        <!-- WebDriver Extension Generator SiteBase -->
-        <dependency>
-            <groupId>org.andidev</groupId>
-            <artifactId>webdriver-extension-generator-sitebase</artifactId>
-            <version>${project.version}</version>
-            <scope>compile</scope>
-        </dependency>
-
-        <!-- WebDriver Extension Generator TestBase -->
-        <dependency>
-            <groupId>org.andidev</groupId>
-            <artifactId>webdriver-extension-generator-sitetestbase</artifactId>
-            <version>${project.version}</version>
-            <scope>compile</scope>
-        </dependency>
     </dependencies>
 
     <build>

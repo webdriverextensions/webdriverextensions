@@ -1,8 +1,9 @@
 package org.andidev.webdriverextension;
 
-import static org.andidev.webdriverextension.WebDriverBot.*;
 import java.util.List;
+import static org.andidev.webdriverextension.WebDriverBot.*;
 import org.junit.Assert;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
 
 public class WebDriverAssert {
@@ -15,7 +16,11 @@ public class WebDriverAssert {
 
     public static void assertIsDisplayed(WebElement webElement) {
         delay();
-        Assert.assertTrue(webElement.isDisplayed());
+        try {
+            Assert.assertTrue(webElement.isDisplayed());
+        } catch (NoSuchElementException e) {
+            Assert.fail("Element not found!");
+        }
     }
 
     public static void assertText(String expected, WebElement webElement) {
@@ -41,9 +46,6 @@ public class WebDriverAssert {
 
     public static void assertUrl(WebPage page) {
         delay();
-        System.out.println(page.getUrl());
-        System.out.println(page.getDriver().getCurrentUrl());
-        System.out.println(page.getDriver().getCurrentUrl().matches(page.getUrl()));        
         boolean urlEquals = page.getDriver().getCurrentUrl().matches(page.getUrl()); 
         Assert.assertTrue(urlEquals);
     }
@@ -63,10 +65,7 @@ public class WebDriverAssert {
         Assert.assertTrue(webElement.getAttribute("href").endsWith(expected));
     }
 
- //   public static void assertNumberOfElements(int numberOfElementsExpected, WebContainerList webContainerList) {
-
     public static void assertNumberOfElements(int numberOfElementsExpected, List<? extends WebElement> webElementList) {
-
         delay();
         Assert.assertEquals(numberOfElementsExpected, webElementList.size());
     }
