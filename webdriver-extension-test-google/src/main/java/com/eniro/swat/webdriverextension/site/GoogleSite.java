@@ -1,6 +1,6 @@
-package com.eniro.swat.webdriverextension.site;
+package org.andidev.webdriverextension.site;
 
-import com.eniro.swat.webdriverextension.annotation.Site;
+import org.andidev.webdriverextension.annotation.Site;
 import org.openqa.selenium.WebDriver;
 
 @Site

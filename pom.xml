@@ -4,14 +4,14 @@
     xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.eniro.swat</groupId>
-    <artifactId>webdriverextension</artifactId>
+    <groupId>org.andidev</groupId>
+    <artifactId>webdriver-extension</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <packaging>pom</packaging>
 
-    <name>Webdriver Extension</name>
-    <description>Webdriver Enxtention is a framework that exdents the webdriver framework with components that encourages the PageObject pattern and Bot Style testning</description>
-    <url>https://github.com/andidevelopment/webdriverextension</url>
+    <name>WebDriver Extension</name>
+    <description>WebDriver Enxtention is a framework that exdents the WebDriver framework with components that encourages the PageObject pattern and Bot Style testning</description>
+    <url>https://github.com/andidevelopment/webdriver-extension</url>
 
     <modules>
         <module>webdriver-extension-core</module>
@@ -34,21 +34,21 @@
     </properties>
 
     <dependencies>
-        <!-- Webdriver Extension -->
-        <dependency>
-            <groupId>com.eniro.swat</groupId>
-            <artifactId>webdriverextension</artifactId>
+        <!-- WebDriver Extension Core -->
+<!--        <dependency>
+            <groupId>org.andidev</groupId>
+            <artifactId>webdriver-extension-core</artifactId>
             <version>${project.version}</version>
-        </dependency>
+        </dependency>-->
 
-        <!-- Webdriver Extension Generator -->
-        <dependency>
-            <groupId>com.eniro.swat</groupId>
-            <artifactId>webdriverextension-generator</artifactId>
+        <!-- WebDriver Extension Generator -->
+<!--        <dependency>
+            <groupId>org.andidev</groupId>
+            <artifactId>webdriver-extension-generator</artifactId>
             <version>${project.version}</version>
-        </dependency>
+        </dependency>-->
     </dependencies>
-    
+
     <build>
         <plugins>
             <plugin>

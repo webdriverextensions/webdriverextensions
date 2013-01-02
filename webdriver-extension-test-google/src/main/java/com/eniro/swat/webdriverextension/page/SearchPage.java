@@ -1,9 +1,9 @@
-package com.eniro.swat.webdriverextension.page;
+package org.andidev.webdriverextension.page;
 
-import com.eniro.swat.webdriverextension.DefaultHtmlTagFieldDecorator;
-import com.eniro.swat.webdriverextension.HtmlTag;
-import com.eniro.swat.webdriverextension.WebPage;
-import com.eniro.swat.webdriverextension.annotation.Page;
+import org.andidev.webdriverextension.DefaultHtmlTagFieldDecorator;
+import org.andidev.webdriverextension.HtmlTag;
+import org.andidev.webdriverextension.WebPage;
+import org.andidev.webdriverextension.annotation.Page;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;

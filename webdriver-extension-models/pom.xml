@@ -4,14 +4,14 @@
     xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.eniro.swat</groupId>
-    <artifactId>webdriverextension-models</artifactId>
+    <groupId>org.andidev</groupId>
+    <artifactId>webdriver-extension-models</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <packaging>jar</packaging>
 
-    <name>Webdriver Extension Models</name>
-    <description>Webdriver Enxtention Models contains the objects for basic html tag interaction e.g. table tags, list tags, etc.</description>
-    <url>https://github.com/andidevelopment/webdriverextension</url>
+    <name>WebDriver Extension Models</name>
+    <description>WebDriver Enxtention Models contains the objects for basic html tag interaction e.g. table tags, list tags, etc.</description>
+    <url>https://github.com/andidevelopment/webdriver-extension</url>
 
     <properties>
         <!-- File Encoding -->
@@ -22,10 +22,10 @@
     </properties>
 
     <dependencies>
-        <!-- Webdriver Extension -->
+        <!-- WebDriver Extension Core -->
         <dependency>
-            <groupId>com.eniro.swat</groupId>
-            <artifactId>webdriverextension-core</artifactId>
+            <groupId>org.andidev</groupId>
+            <artifactId>webdriver-extension-core</artifactId>
             <version>${project.version}</version>
         </dependency>
     </dependencies>

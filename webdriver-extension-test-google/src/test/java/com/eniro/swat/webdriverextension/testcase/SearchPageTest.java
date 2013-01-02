@@ -1,7 +1,7 @@
-package com.eniro.swat.webdriverextension.testcase;
+package org.andidev.webdriverextension.testcase;
 
-import static com.eniro.swat.webdriverextension.WebDriverBot.*;
-import com.eniro.swat.webdriverextension.site.GoogleSiteTestBase;
+import static org.andidev.webdriverextension.WebDriverBot.*;
+import org.andidev.webdriverextension.site.GoogleSiteTestBase;
 import org.junit.Test;
 import org.openqa.selenium.firefox.FirefoxDriver;
 

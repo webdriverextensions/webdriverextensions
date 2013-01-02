@@ -14,3 +14,15 @@ nbproject/private/
 *.DS_Store
 *.swp
 *.out
+/webdriver-extension-generators/webdriver-extension-generators-commons/target/
+/webdriver-extension-generators/webdriver-extension-generators-sitebase/target/
+/webdriver-extension-generator/webdriver-extension-generators-commons/target/
+/webdriver-extension-generator/webdriver-extension-generators-sitebase/target/
+/webdriver-extension-generator/webdriver-extension-generators-sitetestbase/target/
+/webdriver-extension-generator/webdriver-extension-generator-sitebase/target/
+/webdriver-extension-generator/webdriver-extension-generator-sitetestbase/target/
+/webdriver-extension-generator/webdriver-extension-generator-commons/target/
+/webdriver-extension-generator/webdriver-extension-generator-util/target/
+/webdriver-extension-generator/webdriver-extension-generator-util copy/target/
+/webdriver-extension-generator/webdriver-extension-generator-services/target/
+/webdriver-extension-generator/webdriver-extension-generator-annotation-processor-service/target/

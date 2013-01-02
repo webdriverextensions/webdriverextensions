@@ -4,37 +4,43 @@
     xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.eniro.swat</groupId>
-    <artifactId>webdriverextension-generator</artifactId>
+    <groupId>org.andidev</groupId>
+    <artifactId>webdriver-extension-generator</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <packaging>jar</packaging>
+    <packaging>pom</packaging>
 
-    <name>Webdriver Extension Generator</name>
-    <description>Generatea SiteBase and SiteTestBase objects from @Page, @Site and @SiteTest annotations included in the Webdriver Extension Framework</description>
-    <url>https://github.com/andidevelopment/webdriverextension</url>
+    <name>WebDriver Extension Generator</name>
+    <description>Generator/Annotation Processors used in the WebDriver Extension Framework</description>
+    <url>https://github.com/andidevelopment/webdriver-extension</url>
+
+    <modules>
+        <module>webdriver-extension-generator-util</module>
+        <module>webdriver-extension-generator-sitebase</module>
+        <module>webdriver-extension-generator-sitetestbase</module>
+        <module>webdriver-extension-generator-annotation-processor-service</module>
+    </modules>
 
     <properties>
         <!-- File Encoding -->
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        
+
         <!-- Dependency Versions -->
-        <velocity.version>1.7</velocity.version>
     </properties>
 
     <dependencies>
-        <!-- Webdriver Extension -->
+        <!-- WebDriver Extension Generator SiteBase -->
         <dependency>
-            <groupId>com.eniro.swat</groupId>
-            <artifactId>webdriverextension-core</artifactId>
+            <groupId>org.andidev</groupId>
+            <artifactId>webdriver-extension-generator-sitebase</artifactId>
             <version>${project.version}</version>
             <scope>compile</scope>
         </dependency>
-        
-        <!-- Velocity -->
+
+        <!-- WebDriver Extension Generator TestBase -->
         <dependency>
-            <groupId>org.apache.velocity</groupId>
-            <artifactId>velocity</artifactId>
-            <version>${velocity.version}</version>
+            <groupId>org.andidev</groupId>
+            <artifactId>webdriver-extension-generator-sitetestbase</artifactId>
+            <version>${project.version}</version>
             <scope>compile</scope>
         </dependency>
     </dependencies>

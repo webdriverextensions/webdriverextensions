@@ -4,13 +4,13 @@
            http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.eniro.swat</groupId>
-    <artifactId>webdriverextension-test-google</artifactId>
+    <groupId>org.andidev</groupId>
+    <artifactId>webdriver-extension-test-google</artifactId>
     <version>0.0.1-SNAPSHOT</version>
 
-    <name>Webdriver Extension Test Google</name>
-    <description>Test used to test the Webdriver Extension Framework</description>
-    <url>https://github.com/andidevelopment/webdriverextension</url>
+    <name>WebDriver Extension Test Google</name>
+    <description>Test used to test the WebDriver Extension Framework</description>
+    <url>https://github.com/andidevelopment/webdriver-extension</url>
 
     <properties>
         <!-- File Encoding -->
@@ -22,17 +22,17 @@
     </properties>
 
     <dependencies>
-        <!-- Webdriver Extension -->
+        <!-- WebDriver Extension Core -->
         <dependency>
-            <groupId>com.eniro.swat</groupId>
-            <artifactId>webdriverextension-core</artifactId>
+            <groupId>org.andidev</groupId>
+            <artifactId>webdriver-extension-core</artifactId>
             <version>${project.version}</version>
         </dependency>
 
-        <!-- Webdriver Extension -->
+        <!-- WebDriver Extension Generator -->
         <dependency>
-            <groupId>com.eniro.swat</groupId>
-            <artifactId>webdriverextension-generator</artifactId>
+            <groupId>org.andidev</groupId>
+            <artifactId>webdriver-extension-generator</artifactId>
             <version>${project.version}</version>
         </dependency>
 
@@ -42,7 +42,7 @@
             <artifactId>junit</artifactId>
             <version>4.11</version>
         </dependency>
-        
+
         <!-- Logback -->
         <dependency>
             <groupId>ch.qos.logback</groupId>
