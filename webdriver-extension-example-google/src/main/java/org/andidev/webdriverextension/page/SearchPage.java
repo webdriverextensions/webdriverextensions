@@ -14,7 +14,7 @@ import org.openqa.selenium.support.PageFactory;
 public class SearchPage extends WebPage<SearchPage> {
 
     // Web Elements
-    @FindBy(css="[name='qsss']")
+    @FindBy(css="[name='q']")
     public HtmlTag searchQuery;
     @FindBy(css="#gbqfba")
     public HtmlTag googleSearch;
