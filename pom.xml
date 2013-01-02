@@ -10,7 +10,7 @@
     <packaging>pom</packaging>
 
     <name>WebDriver Extension</name>
-    <description>WebDriver Enxtention is a framework that exdents the WebDriver framework with components that encourages the PageObject pattern and Bot Style testning</description>
+    <description>WebDriver Enxtention is a framework that exdends the WebDriver framework with components that encourages the PageObject pattern and Bot Style testning</description>
     <url>https://github.com/andidevelopment/webdriver-extension</url>
 
     <modules>
