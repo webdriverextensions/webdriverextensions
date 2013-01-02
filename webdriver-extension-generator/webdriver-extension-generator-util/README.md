@@ -1,4 +1,4 @@
-WebDriver Extension Generator
+WebDriver Extension Generator Util
 ===================
 
-Generatea SiteBase and SiteTestBase objects from @Page, @Site and @SiteTest annotations included in the Webdriver Extension Framework
+Utils used by Annotation Processors

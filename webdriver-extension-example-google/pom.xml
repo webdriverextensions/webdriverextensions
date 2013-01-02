@@ -5,11 +5,11 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>org.andidev</groupId>
-    <artifactId>webdriver-extension-test-google</artifactId>
+    <artifactId>webdriver-extension-example-google</artifactId>
     <version>0.0.1-SNAPSHOT</version>
 
-    <name>WebDriver Extension Test Google</name>
-    <description>Test used to test the WebDriver Extension Framework</description>
+    <name>WebDriver Extension Example Google</name>
+    <description>Contains examples for testing google.com</description>
     <url>https://github.com/andidevelopment/webdriver-extension</url>
 
     <properties>

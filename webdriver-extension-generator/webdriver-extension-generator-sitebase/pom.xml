@@ -10,7 +10,7 @@
     <packaging>jar</packaging>
 
     <name>WebDriver Extension Generator SiteBase</name>
-    <description>Generates SiteBase objects from @@Site and @Page annotation included in the WebDriver Extension Framework</description>
+    <description>Generates SiteBase objects from @Site and @Page annotation included in the WebDriver Extension Framework</description>
     <url>https://github.com/andidevelopment/webdriver-extension</url>
 
     <properties>

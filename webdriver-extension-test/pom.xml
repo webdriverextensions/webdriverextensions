@@ -9,7 +9,7 @@
     <version>0.0.1-SNAPSHOT</version>
 
     <name>WebDriver Extension Test</name>
-    <description>Test used to test the WebDriver Extension Framework</description>
+    <description>Contains tests used for testing test the WebDriver Extension Framework</description>
     <url>https://github.com/andidevelopment/webdriver-extension</url>
 
     <properties>

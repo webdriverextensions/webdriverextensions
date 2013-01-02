@@ -1,4 +1,4 @@
-WebDriver Extension Generator
+WebDriver Extension Core
 ===================
 
-Webdriver Enxtention Core contains the basic core functionality of the Webdriver Extension Framework
+Contains the basic core functionality of the Webdriver Extension Framework

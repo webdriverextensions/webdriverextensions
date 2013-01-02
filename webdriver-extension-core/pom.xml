@@ -10,7 +10,7 @@
     <packaging>jar</packaging>
 
     <name>WebDriver Extension Core</name>
-    <description>WebDriver Enxtention Core contains the basic core functionality of the WebDriver Extension Framework</description>
+    <description>Contains the basic core functionality of the Webdriver Extension Framework</description>
     <url>https://github.com/andidevelopment/webdriver-extension</url>
 
     <properties>

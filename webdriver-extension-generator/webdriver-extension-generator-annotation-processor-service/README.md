@@ -1,4 +1,4 @@
-WebDriver Extension Generator
+WebDriver Extension Generator Annotation Processor Service
 ===================
 
-Generatea SiteBase and SiteTestBase objects from @Page, @Site and @SiteTest annotations included in the Webdriver Extension Framework
+Service used to enable the generation of SiteBase and SiteTestBase classes

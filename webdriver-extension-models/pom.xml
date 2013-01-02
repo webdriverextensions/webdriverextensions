@@ -10,7 +10,7 @@
     <packaging>jar</packaging>
 
     <name>WebDriver Extension Models</name>
-    <description>WebDriver Enxtention Models contains the objects for basic html tag interaction e.g. table tags, list tags, etc.</description>
+    <description>Cnntains the objects for basic html tag interaction e.g. table tags, list tags, etc.</description>
     <url>https://github.com/andidevelopment/webdriver-extension</url>
 
     <properties>

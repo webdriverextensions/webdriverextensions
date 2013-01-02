@@ -1,4 +1,4 @@
 WebDriver Extension Test
 ===================
 
-Test used to test the Webdriver Extension Framework
+Contains tests used for testing test the WebDriver Extension Framework
