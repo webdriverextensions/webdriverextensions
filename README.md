@@ -17,6 +17,7 @@ This project is under development and therefore not recomended to use yet, thoug
 * Consider weather logback configurations should be included
 * Start using Maven Realease Plugin
 * Add to Maven Repository
+* Fix Promo Page
 * Add JavaDoc
 
 
