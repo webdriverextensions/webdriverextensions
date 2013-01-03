@@ -3,6 +3,24 @@ WebDriver Extension
 
 WebDriver Enxtention is a framework that exdends the WebDriver/Selenium2 framework with components that encourages the PageObject pattern and Bot Style testning
 
+## Under Development
+This project is under development and therefore not recomended to use yet, though the development in it's final stages.
+
+
+
+## TODOs before release
+
+* Refactor Maven Module structure
+* Consider the name of the @Delegate annotation
+* Complete Google Example with more complex model for the results
+* Add logging to WebDriverBot
+* Consider weather logback configurations should be included
+* Start using Maven Realease Plugin
+* Add to Maven Repository
+* Add JavaDoc
+
+
+
 ## License
 
 Licensed under the Apache License, Version 2.0 (the "License");
