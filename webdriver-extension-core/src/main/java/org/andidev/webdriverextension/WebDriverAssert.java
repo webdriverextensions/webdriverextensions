@@ -3,9 +3,9 @@ package org.andidev.webdriverextension;
 import java.util.List;
 import static org.andidev.webdriverextension.WebDriverBot.*;
 import org.junit.Assert;
-import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
 
+// TODO: Change methods to wrap WebDriverBot mthods instead of using webEkents calls, e.g. Assert.assertTrue(isSomething(webElement)) instead of Assert.assertSomething(webElement.something())
 public class WebDriverAssert {
 
 
@@ -16,11 +16,7 @@ public class WebDriverAssert {
 
     public static void assertIsDisplayed(WebElement webElement) {
         delay();
-        try {
-            Assert.assertTrue(webElement.isDisplayed());
-        } catch (NoSuchElementException e) {
-            Assert.fail("Element not found!");
-        }
+        Assert.assertTrue(isDisplayed(webElement));
     }
 
     public static void assertText(String expected, WebElement webElement) {
