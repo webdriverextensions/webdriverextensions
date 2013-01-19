@@ -16,7 +16,7 @@ public abstract class WebPage<P extends WebPage<P>> extends LoadableComponent<P>
     }
 
     public String getUrl() {
-        return "";
+        return null;
     }
     
     @Override

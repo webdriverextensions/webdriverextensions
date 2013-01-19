@@ -4,8 +4,9 @@ package ${siteBase.packageName};
 import ${page.packageName}.${page.className};
 #end
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.LoadableComponent;
 
-public class ${siteBase.className} {
+public abstract class ${siteBase.className}<P extends ${siteBase.className}<P>> extends LoadableComponent<P> {
     // Declare WebDriver
     private WebDriver driver;
 
@@ -23,4 +24,19 @@ public class ${siteBase.className} {
         ${page.fieldName} = new ${page.className}(driver);
 #end
     }
+
+    public WebDriver getDriver() {
+        return driver;
+    }
+
+    public abstract String getUrl();
+
+    @Override
+    public void load() {
+        driver.get(getUrl());
+    }
+
+    @Override
+    public abstract void isLoaded() throws Error;
+
 }

@@ -7,6 +7,7 @@ import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.LoadableComponent;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -92,9 +93,9 @@ public class WebDriverBot {
         return webElement.getText().startsWith(expected);
     }
 
-    public static void open(WebPage page) {
+    public static void open(LoadableComponent loadableComponent) {
         delay();
-        page.get();
+        loadableComponent.get();
     }
 
     public static void pressKeys(WebElement webElement, CharSequence... keysToSend) {

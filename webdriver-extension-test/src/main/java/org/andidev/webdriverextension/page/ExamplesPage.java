@@ -67,7 +67,6 @@ public class ExamplesPage extends WebPage<ExamplesPage> {
         } catch (AssertionError e) {
             fail(this.getClass().getSimpleName() + " is not loaded");
         }
-
     }
     
     public UserRow findUserRowByFirstName(String firstName) {

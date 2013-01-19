@@ -20,7 +20,7 @@ public class ExamplesPageTest extends WebDriverExtensionSiteTestBase {
     
     @Before
     public void before() {
-        //open(webDriverExtensionSite); TODO: Support following, site class should implement loadable componant
+        open(webDriverExtensionSite);
         open(examplesPage);
     }
     
