@@ -3,7 +3,7 @@ package org.andidev.webdriverextension.page;
 import org.andidev.webdriverextension.DefaultHtmlTagFieldDecorator;
 import org.andidev.webdriverextension.HtmlTag;
 import static org.andidev.webdriverextension.WebDriverAssert.*;
-import org.andidev.webdriverextension.WebPage;
+import org.andidev.webdriverextension.PageObject;
 import org.andidev.webdriverextension.annotation.Page;
 import static org.junit.Assert.fail;
 import org.openqa.selenium.WebDriver;
@@ -11,7 +11,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 @Page
-public class SearchPage extends WebPage<SearchPage> {
+public class SearchPage extends PageObject<SearchPage> {
 
     // Web Elements
     @FindBy(css="[name='q']")

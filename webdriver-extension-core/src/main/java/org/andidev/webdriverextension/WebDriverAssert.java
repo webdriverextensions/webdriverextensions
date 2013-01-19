@@ -9,7 +9,7 @@ import org.openqa.selenium.WebElement;
 public class WebDriverAssert {
 
 
-    public static void assertIsLoaded(WebPage page) {
+    public static void assertIsLoaded(PageObject page) {
         delay();
         page.isLoaded();
     }
@@ -40,13 +40,13 @@ public class WebDriverAssert {
         Assert.assertEquals(expected, webElement.getAttribute("href"));
     }
 
-    public static void assertUrl(WebPage page) {
+    public static void assertUrl(PageObject page) {
         delay();
         boolean urlEquals = page.getDriver().getCurrentUrl().matches(page.getUrl()); 
         Assert.assertTrue(urlEquals);
     }
 
-    public static void assertUrlContains(String expected, WebPage page) {
+    public static void assertUrlContains(String expected, PageObject page) {
         delay();
         Assert.assertTrue(page.getDriver().getCurrentUrl().contains(expected));
     }

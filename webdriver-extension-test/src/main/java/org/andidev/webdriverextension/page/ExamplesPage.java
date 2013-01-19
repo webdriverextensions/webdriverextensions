@@ -5,7 +5,7 @@ import org.andidev.webdriverextension.DefaultHtmlTagFieldDecorator;
 import org.andidev.webdriverextension.HtmlTag;
 import static org.andidev.webdriverextension.WebDriverAssert.*;
 import static org.andidev.webdriverextension.WebDriverBot.*;
-import org.andidev.webdriverextension.WebPage;
+import org.andidev.webdriverextension.PageObject;
 import org.andidev.webdriverextension.annotation.Page;
 import org.andidev.webdriverextension.models.Menu;
 import org.andidev.webdriverextension.models.MenuButtonGroup;
@@ -17,7 +17,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 @Page
-public class ExamplesPage extends WebPage<ExamplesPage> {
+public class ExamplesPage extends PageObject<ExamplesPage> {
 
     // Section: WebElements
     @FindBy(css = "#search-query")

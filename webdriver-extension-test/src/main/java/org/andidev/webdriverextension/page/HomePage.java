@@ -2,7 +2,7 @@ package org.andidev.webdriverextension.page;
 
 import org.andidev.webdriverextension.DefaultHtmlTagFieldDecorator;
 import org.andidev.webdriverextension.HtmlTag;
-import org.andidev.webdriverextension.WebPage;
+import org.andidev.webdriverextension.PageObject;
 import org.andidev.webdriverextension.annotation.Page;
 import static org.junit.Assert.fail;
 import org.openqa.selenium.By;
@@ -12,7 +12,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 @Page
-public class HomePage extends WebPage<HomePage> {
+public class HomePage extends PageObject<HomePage> {
 
     @FindBy(css = "nav a.examples")
     HtmlTag examples;

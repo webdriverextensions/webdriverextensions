@@ -62,7 +62,7 @@ public class WebDriverBot {
         return isDisplayed;
     }
 
-    public static boolean isLoaded(WebPage page) {
+    public static boolean isLoaded(PageObject page) {
         delay();
         boolean isLoaded = true;
         try {
