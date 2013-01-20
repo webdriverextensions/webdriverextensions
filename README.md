@@ -10,8 +10,7 @@ This project is under development and therefore not recomended to use yet, thoug
 
 ## TODOs before release
 
-Milestone 1.0.0
-[GitHub](https://github.com/andidev/webdriver-extension/issues?milestone=1&page=1&sort=created&state=open)
+[Milestone 1.0.0](https://github.com/andidev/webdriver-extension/issues?milestone=1&page=1&sort=created&state=open)
 
 ## License
 
