@@ -15,7 +15,7 @@
 
     <modules>
         <module>webdriver-extension-generator-util</module>
-        <module>webdriver-extension-generator-sitebase</module>
+        <module>webdriver-extension-generator-siteobject</module>
         <module>webdriver-extension-generator-sitetestbase</module>
         <module>webdriver-extension-generator-annotation-processor-service</module>
     </modules>

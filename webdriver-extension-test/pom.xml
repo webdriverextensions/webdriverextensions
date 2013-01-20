@@ -32,7 +32,7 @@
         <!-- WebDriver Extension Generator -->
         <dependency>
             <groupId>org.andidev</groupId>
-            <artifactId>webdriver-extension-generator-sitebase</artifactId>
+            <artifactId>webdriver-extension-generator-siteobject</artifactId>
             <version>${project.version}</version>
         </dependency>
 

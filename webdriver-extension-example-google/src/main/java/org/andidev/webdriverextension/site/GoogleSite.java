@@ -5,7 +5,7 @@ import static org.junit.Assert.fail;
 import org.openqa.selenium.WebDriver;
 
 @Site
-public class GoogleSite extends GoogleSiteBase<GoogleSite> {
+public class GoogleSite extends GoogleSiteObject<GoogleSite> {
 
     public GoogleSite(WebDriver driver) {
         super(driver);

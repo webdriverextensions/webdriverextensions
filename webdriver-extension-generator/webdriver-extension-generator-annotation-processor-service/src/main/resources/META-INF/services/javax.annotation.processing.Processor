@@ -1,2 +1,2 @@
-org.andidev.webdriverextension.generator.sitebase.GeneratorSiteBaseProcessor
+org.andidev.webdriverextension.generator.siteobject.GeneratorSiteObjectProcessor
 org.andidev.webdriverextension.generator.sitetestbase.GeneratorSiteTestBaseProcessor

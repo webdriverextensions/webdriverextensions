@@ -6,7 +6,7 @@ import static org.junit.Assert.fail;
 import org.openqa.selenium.WebDriver;
 
 @Site
-public class WebDriverExtensionSite extends WebDriverExtensionSiteBase<WebDriverExtensionSite> {
+public class WebDriverExtensionSite extends WebDriverExtensionSiteObject<WebDriverExtensionSite> {
 
     private WebDriver driver;
     

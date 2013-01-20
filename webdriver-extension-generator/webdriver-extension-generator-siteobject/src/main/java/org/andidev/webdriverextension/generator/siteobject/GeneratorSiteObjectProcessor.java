@@ -1,4 +1,4 @@
-package org.andidev.webdriverextension.generator.sitebase;
+package org.andidev.webdriverextension.generator.siteobject;
 
 import java.util.Set;
 import java.util.TreeSet;
@@ -15,7 +15,7 @@ import org.apache.velocity.VelocityContext;
 
 @SupportedAnnotationTypes({"org.andidev.webdriverextension.annotation.Site"})
 @SupportedSourceVersion(SourceVersion.RELEASE_6)
-public class GeneratorSiteBaseProcessor extends AbstractExtendedProcessor {
+public class GeneratorSiteObjectProcessor extends AbstractExtendedProcessor {
 
     @Override
     public boolean process(Set<? extends TypeElement> annotations, RoundEnvironment roundEnvironment) {
@@ -44,7 +44,7 @@ public class GeneratorSiteBaseProcessor extends AbstractExtendedProcessor {
         // Create Meta Data
         VelocityContext metaData = new VelocityContext();
         metaData.put("site", createSiteMetaData());
-        metaData.put("siteBase", createSiteBaseMetaData());
+        metaData.put("siteObject", createSiteObjectMetaData());
         metaData.put("pages", createPagesMetaData());
         return metaData;
     }
@@ -58,7 +58,7 @@ public class GeneratorSiteBaseProcessor extends AbstractExtendedProcessor {
         Set<? extends Element> siteElements = roundEnvironment.getElementsAnnotatedWith(Site.class);
         debug("@Site Annotated Classes: " + siteElements);
         if (siteElements.isEmpty()) {
-            warn("No @Site annotation was found! Using default name SiteBase for generated site class.");
+            warn("No @Site annotation was found! Using default name SiteObject for generated site class.");
         }
         if (siteElements.size() > 1) {
             error("More than one @Site annotation was found! Only one @Site annotation must be set. Please ensure that and recompile!");
@@ -93,24 +93,24 @@ public class GeneratorSiteBaseProcessor extends AbstractExtendedProcessor {
         return siteMetaData;
     }
 
-    private ClassMetaData createSiteBaseMetaData() {
+    private ClassMetaData createSiteObjectMetaData() {
         // Create Default Meta Data
-        ClassMetaData siteBaseMetaData = new ClassMetaData();
+        ClassMetaData siteObjectMetaData = new ClassMetaData();
 
         // Validate Annotations
         Set<? extends Element> siteElements = roundEnvironment.getElementsAnnotatedWith(Site.class);
         if (siteElements.isEmpty()) {
-            return siteBaseMetaData;
+            return siteObjectMetaData;
         }
 
         // Override Meta Data with Class Data
         TypeElement siteElement = (TypeElement) siteElements.toArray()[0];
-        debug("Creating SiteBase Meta Data from: " + siteElement);
-        siteBaseMetaData.setPackageName(ProcessorUtils.getPackageName(siteElement));
-        siteBaseMetaData.setClassName(ProcessorUtils.getClassName(siteElement) + "Base");
-        siteBaseMetaData.setFieldName(StringUtils.uncapitalize(siteBaseMetaData.getClassName()));
+        debug("Creating SiteObject Meta Data from: " + siteElement);
+        siteObjectMetaData.setPackageName(ProcessorUtils.getPackageName(siteElement));
+        siteObjectMetaData.setClassName(ProcessorUtils.getClassName(siteElement) + "Object");
+        siteObjectMetaData.setFieldName(StringUtils.uncapitalize(siteObjectMetaData.getClassName()));
 
-        return siteBaseMetaData;
+        return siteObjectMetaData;
     }
 
     private Set<ClassMetaData> createPagesMetaData() {
@@ -135,9 +135,9 @@ public class GeneratorSiteBaseProcessor extends AbstractExtendedProcessor {
     }
 
     private void generateSiteClass(VelocityContext metaData) {
-        ClassMetaData siteBaseMetaData = (ClassMetaData) metaData.get("siteBase");
-        String filePackage = siteBaseMetaData.getPackageName();
-        String fileName = siteBaseMetaData.getClassName();
-        generateClass("SiteBase.java.template", metaData, filePackage, fileName);
+        ClassMetaData siteObjectMetaData = (ClassMetaData) metaData.get("siteObject");
+        String filePackage = siteObjectMetaData.getPackageName();
+        String fileName = siteObjectMetaData.getClassName();
+        generateClass("SiteObject.java.template", metaData, filePackage, fileName);
     }
 }

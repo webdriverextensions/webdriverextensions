@@ -1,4 +1,4 @@
-package ${siteBase.packageName};
+package ${siteObject.packageName};
 
 #foreach($page in $pages)
 import ${page.packageName}.${page.className};
@@ -6,7 +6,7 @@ import ${page.packageName}.${page.className};
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.LoadableComponent;
 
-public abstract class ${siteBase.className}<P extends ${siteBase.className}<P>> extends LoadableComponent<P> {
+public abstract class ${siteObject.className}<P extends ${siteObject.className}<P>> extends LoadableComponent<P> {
     // Declare WebDriver
     private WebDriver driver;
 
@@ -15,7 +15,7 @@ public abstract class ${siteBase.className}<P extends ${siteBase.className}<P>> 
     public ${page.className} ${page.fieldName};
 #end
 
-    public ${siteBase.className}(WebDriver driver) {        
+    public ${siteObject.className}(WebDriver driver) {        
         // Set WebDriver
         this.driver = driver;        
         
