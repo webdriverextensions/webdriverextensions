@@ -10,17 +10,8 @@ This project is under development and therefore not recomended to use yet, thoug
 
 ## TODOs before release
 
-* Refactor Maven Module structure
-* Consider the name of the @Delegate annotation
-* Complete Google Example with more complex model for the results
-* Add logging to WebDriverBot
-* Consider weather logback configurations should be included
-* Start using Maven Realease Plugin
-* Add to Maven Repository
-* Fix Promo Page
-* Add JavaDoc
-
-
+Milestone 1.0.0
+[GitHub](https://github.com/andidev/webdriver-extension/issues?milestone=1&page=1&sort=created&state=open)
 
 ## License
 

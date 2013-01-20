@@ -11,7 +11,7 @@
 
     <name>WebDriver Extension Generator Annotation Processor Service</name>
     <description>Service used to enable the generation of SiteObject and SiteTestBase classes</description>
-    <url>https://github.com/andidevelopment/webdriver-extension</url>
+    <url>https://github.com/andidev/webdriver-extension</url>
 
     <properties>
         <!-- File Encoding -->

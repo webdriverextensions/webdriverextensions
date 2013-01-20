@@ -11,7 +11,7 @@
 
     <name>WebDriver Extension Generator SiteObject</name>
     <description>Generates SiteObject classes from @Site and @Page annotation included in the WebDriver Extension Framework</description>
-    <url>https://github.com/andidevelopment/webdriver-extension</url>
+    <url>https://github.com/andidev/webdriver-extension</url>
 
     <properties>
         <!-- File Encoding -->

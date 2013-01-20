@@ -11,7 +11,7 @@
 
     <name>WebDriver Extension Generator SiteTestBase</name>
     <description>Generates SiteTestBase objects from @Site annotation included in the WebDriver Extension Framework</description>
-    <url>https://github.com/andidevelopment/webdriver-extension</url>
+    <url>https://github.com/andidev/webdriver-extension</url>
 
     <properties>
         <!-- File Encoding -->

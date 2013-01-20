@@ -25,7 +25,7 @@ public class HomePage extends PageObject<HomePage> {
 
     @Override
     public void load() {
-    	getDriver().get("http://andidevelopment.github.com/webdriver-extension/index.html");
+    	getDriver().get("http://andidev.github.com/webdriver-extension/index.html");
     }
 
     @Override

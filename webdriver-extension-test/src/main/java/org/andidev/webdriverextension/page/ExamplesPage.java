@@ -55,7 +55,7 @@ public class ExamplesPage extends PageObject<ExamplesPage> {
 
     @Override
     public void load() {
-        getDriver().get("http://andidevelopment.github.com/webdriver-extension/index.html");
+        getDriver().get("http://andidev.github.com/webdriver-extension/index.html");
     }
 
     @Override

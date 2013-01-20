@@ -11,7 +11,7 @@
 
     <name>WebDriver Extension Models</name>
     <description>Cnntains the objects for basic html tag interaction e.g. table tags, list tags, etc.</description>
-    <url>https://github.com/andidevelopment/webdriver-extension</url>
+    <url>https://github.com/andidev/webdriver-extension</url>
 
     <properties>
         <!-- File Encoding -->

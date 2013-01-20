@@ -11,7 +11,7 @@
 
     <name>WebDriver Extension Generator Util</name>
     <description>Utils used by Annotation Processors</description>
-    <url>https://github.com/andidevelopment/webdriver-extension</url>
+    <url>https://github.com/andidev/webdriver-extension</url>
 
     <properties>
         <!-- File Encoding -->

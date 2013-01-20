@@ -10,7 +10,7 @@
 
     <name>WebDriver Extension Test</name>
     <description>Contains tests used for testing test the WebDriver Extension Framework</description>
-    <url>https://github.com/andidevelopment/webdriver-extension</url>
+    <url>https://github.com/andidev/webdriver-extension</url>
 
     <properties>
         <!-- File Encoding -->

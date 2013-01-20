@@ -21,7 +21,7 @@ public class WebDriverExtensionSite extends WebDriverExtensionSiteObject<WebDriv
 
     @Override
     public String getUrl() {
-        return "http://andidevelopment.github.com/webdriver-extension";
+        return "http://andidev.github.com/webdriver-extension";
     }
 
     @Override
