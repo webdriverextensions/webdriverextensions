@@ -1,4 +1,4 @@
-package ${siteTestBase.packageName};
+package ${siteTest.packageName};
 
 import ${site.packageName}.${site.className};
 #foreach($page in $pages)
@@ -7,7 +7,7 @@ import ${page.packageName}.${page.className};
 import org.junit.Before;
 import org.openqa.selenium.WebDriver;
 
-public class ${siteTestBase.className} {    
+public class ${siteTest.className} {    
     // Declare Web Driver
     public WebDriver driver;
 
@@ -19,7 +19,7 @@ public class ${siteTestBase.className} {
     public ${page.className} ${page.fieldName};
 #end
 
-    public ${siteTestBase.className}(WebDriver driver) {
+    public ${siteTest.className}(WebDriver driver) {
         this.driver = driver;
     }
 

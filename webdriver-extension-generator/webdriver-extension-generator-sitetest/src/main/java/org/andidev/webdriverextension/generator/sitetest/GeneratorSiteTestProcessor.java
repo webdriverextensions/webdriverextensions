@@ -1,4 +1,4 @@
-package org.andidev.webdriverextension.generator.sitetestbase;
+package org.andidev.webdriverextension.generator.sitetest;
 
 import java.util.Set;
 import java.util.TreeSet;
@@ -15,7 +15,7 @@ import org.apache.velocity.VelocityContext;
 
 @SupportedAnnotationTypes({"org.andidev.webdriverextension.annotation.Site"})
 @SupportedSourceVersion(SourceVersion.RELEASE_6)
-public class GeneratorSiteTestBaseProcessor extends AbstractExtendedProcessor {
+public class GeneratorSiteTestProcessor extends AbstractExtendedProcessor {
 
     @Override
     public boolean process(Set<? extends TypeElement> annotations, RoundEnvironment roundEnvironment) {
@@ -43,7 +43,7 @@ public class GeneratorSiteTestBaseProcessor extends AbstractExtendedProcessor {
     private VelocityContext createMetaData() {
         // Create Meta Data
         VelocityContext metaData = new VelocityContext();
-        metaData.put("siteTestBase", createSiteTestBaseMetaData());
+        metaData.put("siteTest", createSiteTestMetaData());
         metaData.put("site", createSiteMetaData());
         metaData.put("pages", createPagesMetaData());
         return metaData;
@@ -64,23 +64,23 @@ public class GeneratorSiteTestBaseProcessor extends AbstractExtendedProcessor {
         }
     }
 
-    private ClassMetaData createSiteTestBaseMetaData() {
+    private ClassMetaData createSiteTestMetaData() {
         // Create Default Meta Data
-        ClassMetaData siteTestBaseMetaData = new ClassMetaData();
+        ClassMetaData siteTestMetaData = new ClassMetaData();
 
         // Validate Annotations
         Set<? extends Element> siteElements = roundEnvironment.getElementsAnnotatedWith(Site.class);
         if (siteElements.isEmpty()) {
-            return siteTestBaseMetaData;
+            return siteTestMetaData;
         }
 
         // Override Meta Data with Class Data
         TypeElement siteElement = (TypeElement) siteElements.toArray()[0];
-        debug("Creating SiteTestBase Meta Data from: " + siteElement);
-        siteTestBaseMetaData.setPackageName(ProcessorUtils.getPackageName(siteElement));
-        siteTestBaseMetaData.setClassName(ProcessorUtils.getClassName(siteElement) + "TestBase");
+        debug("Creating SiteTest Meta Data from: " + siteElement);
+        siteTestMetaData.setPackageName(ProcessorUtils.getPackageName(siteElement));
+        siteTestMetaData.setClassName(ProcessorUtils.getClassName(siteElement) + "Test");
 
-        return siteTestBaseMetaData;
+        return siteTestMetaData;
     }
 
     private ClassMetaData createSiteMetaData() {
@@ -125,9 +125,9 @@ public class GeneratorSiteTestBaseProcessor extends AbstractExtendedProcessor {
     }
 
     private void generateSiteTestClass(VelocityContext metaData) {
-        ClassMetaData siteTestMetaData = (ClassMetaData) metaData.get("siteTestBase");
+        ClassMetaData siteTestMetaData = (ClassMetaData) metaData.get("siteTest");
         String filePackage = siteTestMetaData.getPackageName();
         String fileName = siteTestMetaData.getClassName();
-        generateClass("SiteTestBase.java.template", metaData, filePackage, fileName);
+        generateClass("SiteTest.java.template", metaData, filePackage, fileName);
     }
 }

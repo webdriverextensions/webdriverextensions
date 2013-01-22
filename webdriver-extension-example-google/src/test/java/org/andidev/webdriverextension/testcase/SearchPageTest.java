@@ -2,13 +2,13 @@ package org.andidev.webdriverextension.testcase;
 
 import java.util.concurrent.TimeUnit;
 import static org.andidev.webdriverextension.WebDriverBot.*;
-import org.andidev.webdriverextension.site.GoogleSiteTestBase;
+import org.andidev.webdriverextension.site.GoogleSiteTest;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
-public class SearchPageTest extends GoogleSiteTestBase {
+public class SearchPageTest extends GoogleSiteTest {
 
     public SearchPageTest() {
         super(new FirefoxDriver());
