@@ -29,6 +29,10 @@ public abstract class ${siteObject.className} implements Openable {
         return driver;
     }
 
+    public void setDriver(WebDriver driver) {
+        this.driver = driver;
+    }
+
     public abstract String getUrl();
 
     @Override
