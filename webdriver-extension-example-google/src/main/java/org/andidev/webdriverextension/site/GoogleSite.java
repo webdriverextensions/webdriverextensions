@@ -1,11 +1,10 @@
 package org.andidev.webdriverextension.site;
 
 import org.andidev.webdriverextension.annotation.Site;
-import static org.junit.Assert.fail;
 import org.openqa.selenium.WebDriver;
 
 @Site
-public class GoogleSite extends GoogleSiteObject<GoogleSite> {
+public class GoogleSite extends GoogleSiteObject {
 
     public GoogleSite(WebDriver driver) {
         super(driver);
@@ -17,12 +16,7 @@ public class GoogleSite extends GoogleSiteObject<GoogleSite> {
     }
 
     @Override
-    public void isLoaded() throws Error {
-       try {
-            searchPage.isLoaded();
-        } catch (AssertionError e) {
-            fail(this.getClass().getSimpleName() + " is not loaded");
-        }
+    public void assertIsOpen() throws Error {
+        searchPage.isOpen();
     }
-
 }

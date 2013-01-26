@@ -11,7 +11,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 @Page
-public class SearchPage extends PageObject<SearchPage> {
+public class SearchPage extends PageObject {
 
     // Web Elements
     @FindBy(css="[name='q']")
@@ -28,18 +28,14 @@ public class SearchPage extends PageObject<SearchPage> {
     }
 
     @Override
-    public void load() {
+    public void open() {
         getDriver().get("http://www.google.com");
     }
 
     @Override
-    public void isLoaded() throws Error {
-        try {
-            assertIsDisplayed(searchQuery);
-            assertIsDisplayed(googleSearch);
-            assertIsDisplayed(imFeelingLucky);
-        } catch (AssertionError e) {
-            fail(this.getClass().getSimpleName() + " is not loaded");
-        }
+    public void assertIsOpen() throws Error {
+        assertIsDisplayed(searchQuery);
+        assertIsDisplayed(googleSearch);
+        assertIsDisplayed(imFeelingLucky);
     }
 }

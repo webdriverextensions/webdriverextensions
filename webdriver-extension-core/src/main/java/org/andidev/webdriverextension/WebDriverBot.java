@@ -62,15 +62,9 @@ public class WebDriverBot {
         return isDisplayed;
     }
 
-    public static boolean isLoaded(PageObject page) {
+    public static boolean isOpen(Openable openable) {
         delay();
-        boolean isLoaded = true;
-        try {
-            page.isLoaded();
-        } catch (AssertionError e) {
-            isLoaded = false;
-        }
-        return isLoaded;
+        return openable.isOpen();
     }
 
     public static boolean isText(String expected, WebElement webElement) {
@@ -93,9 +87,14 @@ public class WebDriverBot {
         return webElement.getText().startsWith(expected);
     }
 
-    public static void open(LoadableComponent loadableComponent) {
+    public static void open(Openable openable) {
         delay();
-        loadableComponent.get();
+        openable.open();
+    }
+
+    public static void open(String url, WebDriver driver) {
+        delay();
+        driver.get(url);
     }
 
     public static void pressKeys(WebElement webElement, CharSequence... keysToSend) {

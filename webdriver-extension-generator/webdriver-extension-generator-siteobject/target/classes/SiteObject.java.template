@@ -3,10 +3,10 @@ package ${siteObject.packageName};
 #foreach($page in $pages)
 import ${page.packageName}.${page.className};
 #end
+import org.andidev.webdriverextension.Openable;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.support.ui.LoadableComponent;
 
-public abstract class ${siteObject.className}<P extends ${siteObject.className}<P>> extends LoadableComponent<P> {
+public abstract class ${siteObject.className} implements Openable {
     // Declare WebDriver
     private WebDriver driver;
 
@@ -15,10 +15,10 @@ public abstract class ${siteObject.className}<P extends ${siteObject.className}<
     public ${page.className} ${page.fieldName};
 #end
 
-    public ${siteObject.className}(WebDriver driver) {        
+    public ${siteObject.className}(WebDriver driver) {
         // Set WebDriver
-        this.driver = driver;        
-        
+        this.driver = driver;
+
         // Instantiate Page Objects
 #foreach($page in $pages)
         ${page.fieldName} = new ${page.className}(driver);
@@ -32,11 +32,17 @@ public abstract class ${siteObject.className}<P extends ${siteObject.className}<
     public abstract String getUrl();
 
     @Override
-    public void load() {
+    public void open() {
         driver.get(getUrl());
     }
 
-    @Override
-    public abstract void isLoaded() throws Error;
+    public boolean isOpen() {
+        try {
+            assertIsOpen();
+            return true;
+        } catch (Error e) {
+            return false;
+        }
+    }
 
 }

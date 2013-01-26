@@ -3,20 +3,18 @@ package org.andidev.webdriverextension.page;
 import org.andidev.webdriverextension.DefaultHtmlTagFieldDecorator;
 import org.andidev.webdriverextension.HtmlTag;
 import org.andidev.webdriverextension.PageObject;
+import static org.andidev.webdriverextension.WebDriverAssert.*;
 import org.andidev.webdriverextension.annotation.Page;
-import static org.junit.Assert.fail;
-import org.openqa.selenium.By;
-import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 @Page
-public class HomePage extends PageObject<HomePage> {
+public class HomePage extends PageObject {
 
     @FindBy(css = "nav a.examples")
     HtmlTag examples;
-    
+
     public HomePage(WebDriver driver) {
         super(driver);
         // Init page elements
@@ -24,16 +22,12 @@ public class HomePage extends PageObject<HomePage> {
     }
 
     @Override
-    public void load() {
-    	getDriver().get("http://andidev.github.com/webdriver-extension/index.html");
+    public void open() {
+        getDriver().get("http://andidev.github.com/webdriver-extension/index.html");
     }
 
     @Override
-    public void isLoaded() throws Error {
-        try {
-            getDriver().findElement(By.cssSelector("body.webdriverextension-site"));
-        } catch (NoSuchElementException e) {
-            fail("Cannot locate HomePage");
-        }
+    public void assertIsOpen() throws Error {
+        assertIsDisplayed(examples);
     }
 }

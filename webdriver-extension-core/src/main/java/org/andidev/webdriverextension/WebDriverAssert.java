@@ -8,10 +8,9 @@ import org.openqa.selenium.WebElement;
 // TODO: Change methods to wrap WebDriverBot mthods instead of using webEkents calls, e.g. Assert.assertTrue(isSomething(webElement)) instead of Assert.assertSomething(webElement.something())
 public class WebDriverAssert {
 
-
-    public static void assertIsLoaded(PageObject page) {
+    public static void assertIsOpen(Openable openable) {
         delay();
-        page.isLoaded();
+        openable.assertIsOpen();
     }
 
     public static void assertIsDisplayed(WebElement webElement) {
