@@ -1,9 +1,8 @@
 package org.andidev.webdriverdesignproposalopenableredesign;
 
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.support.ui.LoadableComponent;
 
-public abstract class PageObject<P extends PageObject> implements OpenableI<P> {
+public abstract class PageObject implements Openable {
 
     private WebDriver driver;
 
@@ -17,6 +16,15 @@ public abstract class PageObject<P extends PageObject> implements OpenableI<P> {
 
     public String getUrl() {
         return null;
+    }
+
+    public boolean isOpen() {
+        try {
+            assertIsOpen();
+            return true;
+        } catch (Error e) {
+            return false;
+        }
     }
     
 }
