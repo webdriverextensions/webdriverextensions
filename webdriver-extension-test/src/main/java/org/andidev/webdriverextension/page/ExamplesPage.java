@@ -1,7 +1,6 @@
 package org.andidev.webdriverextension.page;
 
 import java.util.List;
-import org.andidev.webdriverextension.DefaultHtmlTagFieldDecorator;
 import org.andidev.webdriverextension.HtmlTag;
 import org.andidev.webdriverextension.PageObject;
 import static org.andidev.webdriverextension.WebDriverAssert.*;
@@ -13,7 +12,6 @@ import org.andidev.webdriverextension.models.UserRow;
 import org.andidev.webdriverextension.models.UserTableSearchContext;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
 
 @Page
 public class ExamplesPage extends PageObject {
@@ -43,8 +41,6 @@ public class ExamplesPage extends PageObject {
 //    public UserTable userTable;
     public ExamplesPage(WebDriver driver) {
         super(driver);
-        // Init page elements
-        PageFactory.initElements(new DefaultHtmlTagFieldDecorator(driver), this);
     }
 
     @Override

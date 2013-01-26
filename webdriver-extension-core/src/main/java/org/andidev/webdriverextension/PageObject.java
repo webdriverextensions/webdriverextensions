@@ -1,6 +1,7 @@
 package org.andidev.webdriverextension;
 
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.PageFactory;
 
 public abstract class PageObject implements Openable {
 
@@ -8,6 +9,8 @@ public abstract class PageObject implements Openable {
 
     public PageObject(WebDriver driver) {
         this.driver = driver;
+        // Init page elements
+        PageFactory.initElements(new DefaultHtmlTagFieldDecorator(driver), this);
     }
 
     public WebDriver getDriver() {
