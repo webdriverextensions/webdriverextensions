@@ -14,6 +14,10 @@ public abstract class PageObject implements Openable {
         return driver;
     }
 
+    public void setDriver(WebDriver driver) {
+        this.driver = driver;
+    }
+
     public String getUrl() {
         return null;
     }
