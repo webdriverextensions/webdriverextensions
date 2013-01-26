@@ -1,4 +1,4 @@
-package com.eniro.aspectjtest;
+package org.andidev.aspectjtest;
 
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;

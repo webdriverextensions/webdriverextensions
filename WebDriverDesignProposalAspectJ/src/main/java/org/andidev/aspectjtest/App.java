@@ -1,4 +1,4 @@
-package com.eniro.aspectjtest;
+package org.andidev.aspectjtest;
 
 public class App {
 

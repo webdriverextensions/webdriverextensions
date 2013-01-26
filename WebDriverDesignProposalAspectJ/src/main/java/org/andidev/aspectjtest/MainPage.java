@@ -1,4 +1,4 @@
-package com.eniro.aspectjtest;
+package org.andidev.aspectjtest;
 
 import org.junit.Assert;
 
