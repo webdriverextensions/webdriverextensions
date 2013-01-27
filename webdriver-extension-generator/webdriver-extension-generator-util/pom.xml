@@ -6,7 +6,7 @@
 
     <groupId>org.andidev</groupId>
     <artifactId>webdriver-extension-generator-util</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>1.0.0.M1-SNAPSHOT</version>
     <packaging>jar</packaging>
 
     <name>WebDriver Extension Generator Util</name>
