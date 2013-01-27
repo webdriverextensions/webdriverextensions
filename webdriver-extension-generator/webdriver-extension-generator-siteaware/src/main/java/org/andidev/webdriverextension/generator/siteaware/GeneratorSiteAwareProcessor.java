@@ -1,4 +1,4 @@
-package org.andidev.webdriverextension.generator.sitetest;
+package org.andidev.webdriverextension.generator.siteaware;
 
 import java.util.Set;
 import java.util.TreeSet;
@@ -15,7 +15,7 @@ import org.apache.velocity.VelocityContext;
 
 @SupportedAnnotationTypes({"org.andidev.webdriverextension.annotation.Site"})
 @SupportedSourceVersion(SourceVersion.RELEASE_6)
-public class GeneratorSiteTestProcessor extends AbstractExtendedProcessor {
+public class GeneratorSiteAwareProcessor extends AbstractExtendedProcessor {
 
     @Override
     public boolean process(Set<? extends TypeElement> annotations, RoundEnvironment roundEnvironment) {
@@ -32,6 +32,7 @@ public class GeneratorSiteTestProcessor extends AbstractExtendedProcessor {
         VelocityContext metaData = createMetaData();
         generateClasses(metaData);
 
+        debug("PROCESSING DONE");
         return false;
     }
 
@@ -41,16 +42,20 @@ public class GeneratorSiteTestProcessor extends AbstractExtendedProcessor {
     }
 
     private VelocityContext createMetaData() {
+        debug("CREATING METADATA");
         // Create Meta Data
         VelocityContext metaData = new VelocityContext();
-        metaData.put("siteTest", createSiteTestMetaData());
+        metaData.put("siteAware", createSiteAwareMetaData());
         metaData.put("site", createSiteMetaData());
         metaData.put("pages", createPagesMetaData());
+        debug("CREATED METADATA");
         return metaData;
     }
 
     private void validateAnnotations() {
+        debug("VALIDATING ANNOTATIONS");
         validateSiteAnnotation();
+        debug("VALIDATED ANNOTATIONS");
     }
 
     private void validateSiteAnnotation() {
@@ -64,23 +69,23 @@ public class GeneratorSiteTestProcessor extends AbstractExtendedProcessor {
         }
     }
 
-    private ClassMetaData createSiteTestMetaData() {
+    private ClassMetaData createSiteAwareMetaData() {
         // Create Default Meta Data
-        ClassMetaData siteTestMetaData = new ClassMetaData();
+        ClassMetaData siteAwareMetaData = new ClassMetaData();
 
         // Validate Annotations
         Set<? extends Element> siteElements = roundEnvironment.getElementsAnnotatedWith(Site.class);
         if (siteElements.isEmpty()) {
-            return siteTestMetaData;
+            return siteAwareMetaData;
         }
 
         // Override Meta Data with Class Data
         TypeElement siteElement = (TypeElement) siteElements.toArray()[0];
-        debug("Creating SiteTest Meta Data from: " + siteElement);
-        siteTestMetaData.setPackageName(ProcessorUtils.getPackageName(siteElement));
-        siteTestMetaData.setClassName(ProcessorUtils.getClassName(siteElement) + "Test");
+        debug("Creating SiteAware Meta Data from: " + siteElement);
+        siteAwareMetaData.setPackageName(ProcessorUtils.getPackageName(siteElement));
+        siteAwareMetaData.setClassName("SiteAware");
 
-        return siteTestMetaData;
+        return siteAwareMetaData;
     }
 
     private ClassMetaData createSiteMetaData() {
@@ -121,13 +126,15 @@ public class GeneratorSiteTestProcessor extends AbstractExtendedProcessor {
     }
 
     private void generateClasses(VelocityContext metaData) {
-        generateSiteTestClass(metaData);
+        debug("GENERATING CLASSES");
+        generateSiteAwareClass(metaData);
+        debug("GENERATED CLASSES");
     }
 
-    private void generateSiteTestClass(VelocityContext metaData) {
-        ClassMetaData siteTestMetaData = (ClassMetaData) metaData.get("siteTest");
-        String filePackage = siteTestMetaData.getPackageName();
-        String fileName = siteTestMetaData.getClassName();
-        generateClass("SiteTest.java.template", metaData, filePackage, fileName);
+    private void generateSiteAwareClass(VelocityContext metaData) {
+        ClassMetaData siteAwareMetaData = (ClassMetaData) metaData.get("siteAware");
+        String filePackage = siteAwareMetaData.getPackageName();
+        String fileName = siteAwareMetaData.getClassName();
+        generateClass("SiteAware.java.template", metaData, filePackage, fileName);
     }
 }

@@ -5,12 +5,12 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>org.andidev</groupId>
-    <artifactId>webdriver-extension-generator-sitetest</artifactId>
+    <artifactId>webdriver-extension-generator-pageaware</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <packaging>jar</packaging>
 
-    <name>WebDriver Extension Generator SiteTest</name>
-    <description>Generates SiteTest objects from @Site annotation included in the WebDriver Extension Framework</description>
+    <name>WebDriver Extension Generator PageAware</name>
+    <description>Generates PageAware classes from @Site and @Page annotation included in the WebDriver Extension Framework</description>
     <url>https://github.com/andidev/webdriver-extension</url>
 
     <properties>

@@ -5,21 +5,13 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>org.andidev</groupId>
-    <artifactId>webdriver-extension-generator</artifactId>
+    <artifactId>webdriver-extension-generator-siteaware</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <packaging>pom</packaging>
+    <packaging>jar</packaging>
 
-    <name>WebDriver Extension Generator</name>
-    <description>Generator/Annotation Processors used in the WebDriver Extension Framework</description>
+    <name>WebDriver Extension Generator SiteAware</name>
+    <description>Generates SiteAware objects from @Site annotation included in the WebDriver Extension Framework</description>
     <url>https://github.com/andidev/webdriver-extension</url>
-
-    <modules>
-        <module>webdriver-extension-generator-util</module>
-        <module>webdriver-extension-generator-siteobject</module>
-        <module>webdriver-extension-generator-siteaware</module>
-        <module>webdriver-extension-generator-pageaware</module>
-        <module>webdriver-extension-generator-annotation-processor-service</module>
-    </modules>
 
     <properties>
         <!-- File Encoding -->
@@ -29,6 +21,21 @@
     </properties>
 
     <dependencies>
+        <!-- WebDriver Extension Core -->
+        <dependency>
+            <groupId>org.andidev</groupId>
+            <artifactId>webdriver-extension-core</artifactId>
+            <version>${project.version}</version>
+            <scope>compile</scope>
+        </dependency>
+
+        <!-- WebDriver Extension Generator Commons -->
+        <dependency>
+            <groupId>org.andidev</groupId>
+            <artifactId>webdriver-extension-generator-util</artifactId>
+            <version>${project.version}</version>
+            <scope>compile</scope>
+        </dependency>
     </dependencies>
 
     <build>

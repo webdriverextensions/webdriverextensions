@@ -1,12 +1,11 @@
-package ${siteObject.packageName};
+package ${pageAware.packageName};
 
 #foreach($page in $pages)
 import ${page.packageName}.${page.className};
 #end
-import org.andidev.webdriverextension.Openable;
 import org.openqa.selenium.WebDriver;
 
-public abstract class ${siteObject.className} implements Openable {
+public abstract class ${pageAware.className} {
     // Declare WebDriver
     private WebDriver driver;
 
@@ -15,7 +14,7 @@ public abstract class ${siteObject.className} implements Openable {
     public ${page.className} ${page.fieldName};
 #end
 
-    public ${siteObject.className}(WebDriver driver) {
+    public ${pageAware.className}(WebDriver driver) {
         // Set WebDriver
         this.driver = driver;
 
@@ -37,22 +36,6 @@ public abstract class ${siteObject.className} implements Openable {
 #foreach($page in $pages)
         ${page.fieldName}.setDriver(driver);
 #end
-    }
-
-    public abstract String getUrl();
-
-    @Override
-    public void open() {
-        driver.get(getUrl());
-    }
-
-    public boolean isOpen() {
-        try {
-            assertIsOpen();
-            return true;
-        } catch (Error e) {
-            return false;
-        }
     }
 
 }

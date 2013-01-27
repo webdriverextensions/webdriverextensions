@@ -1,4 +1,4 @@
-package org.andidev.webdriverextension.generator.siteobject;
+package org.andidev.webdriverextension.generator.pageaware;
 
 import java.util.Set;
 import java.util.TreeSet;
@@ -15,7 +15,7 @@ import org.apache.velocity.VelocityContext;
 
 @SupportedAnnotationTypes({"org.andidev.webdriverextension.annotation.Site"})
 @SupportedSourceVersion(SourceVersion.RELEASE_6)
-public class GeneratorSiteObjectProcessor extends AbstractExtendedProcessor {
+public class GeneratorPageAwareProcessor extends AbstractExtendedProcessor {
 
     @Override
     public boolean process(Set<? extends TypeElement> annotations, RoundEnvironment roundEnvironment) {
@@ -46,7 +46,7 @@ public class GeneratorSiteObjectProcessor extends AbstractExtendedProcessor {
         // Create Meta Data
         VelocityContext metaData = new VelocityContext();
         metaData.put("site", createSiteMetaData());
-        metaData.put("siteObject", createSiteObjectMetaData());
+        metaData.put("pageAware", createPageAwareMetaData());
         metaData.put("pages", createPagesMetaData());
         debug("CREATED METADATA");
         return metaData;
@@ -63,7 +63,7 @@ public class GeneratorSiteObjectProcessor extends AbstractExtendedProcessor {
         Set<? extends Element> siteElements = roundEnvironment.getElementsAnnotatedWith(Site.class);
         debug("@Site Annotated Classes: " + siteElements);
         if (siteElements.isEmpty()) {
-            warn("No @Site annotation was found! Using default name SiteObject for generated site class.");
+            warn("No @Site annotation was found! Using default name PageAware for generated site class.");
         }
         if (siteElements.size() > 1) {
             error("More than one @Site annotation was found! Only one @Site annotation must be set. Please ensure that and recompile!");
@@ -98,24 +98,24 @@ public class GeneratorSiteObjectProcessor extends AbstractExtendedProcessor {
         return siteMetaData;
     }
 
-    private ClassMetaData createSiteObjectMetaData() {
+    private ClassMetaData createPageAwareMetaData() {
         // Create Default Meta Data
-        ClassMetaData siteObjectMetaData = new ClassMetaData();
+        ClassMetaData pageAwareMetaData = new ClassMetaData();
 
         // Validate Annotations
         Set<? extends Element> siteElements = roundEnvironment.getElementsAnnotatedWith(Site.class);
         if (siteElements.isEmpty()) {
-            return siteObjectMetaData;
+            return pageAwareMetaData;
         }
 
         // Override Meta Data with Class Data
         TypeElement siteElement = (TypeElement) siteElements.toArray()[0];
-        debug("Creating SiteObject Meta Data from: " + siteElement);
-        siteObjectMetaData.setPackageName(ProcessorUtils.getPackageName(siteElement));
-        siteObjectMetaData.setClassName("SiteObject");
-        siteObjectMetaData.setFieldName(StringUtils.uncapitalize(siteObjectMetaData.getClassName()));
+        debug("Creating PageAware Meta Data from: " + siteElement);
+        pageAwareMetaData.setPackageName(ProcessorUtils.getPackageName(siteElement));
+        pageAwareMetaData.setClassName("PageAware");
+        pageAwareMetaData.setFieldName(StringUtils.uncapitalize(pageAwareMetaData.getClassName()));
 
-        return siteObjectMetaData;
+        return pageAwareMetaData;
     }
 
     private Set<ClassMetaData> createPagesMetaData() {
@@ -142,9 +142,9 @@ public class GeneratorSiteObjectProcessor extends AbstractExtendedProcessor {
     }
 
     private void generateSiteClass(VelocityContext metaData) {
-        ClassMetaData siteObjectMetaData = (ClassMetaData) metaData.get("siteObject");
-        String filePackage = siteObjectMetaData.getPackageName();
-        String fileName = siteObjectMetaData.getClassName();
-        generateClass("SiteObject.java.template", metaData, filePackage, fileName);
+        ClassMetaData pageAwareMetaData = (ClassMetaData) metaData.get("pageAware");
+        String filePackage = pageAwareMetaData.getPackageName();
+        String fileName = pageAwareMetaData.getClassName();
+        generateClass("PageAware.java.template", metaData, filePackage, fileName);
     }
 }

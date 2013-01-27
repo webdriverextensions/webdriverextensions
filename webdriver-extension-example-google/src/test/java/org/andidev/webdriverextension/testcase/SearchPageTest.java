@@ -2,13 +2,13 @@ package org.andidev.webdriverextension.testcase;
 
 import java.util.concurrent.TimeUnit;
 import static org.andidev.webdriverextension.WebDriverBot.*;
-import org.andidev.webdriverextension.site.GoogleSiteTest;
+import org.andidev.webdriverextension.site.SiteAware;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
-public class SearchPageTest extends GoogleSiteTest {
+public class SearchPageTest extends SiteAware {
 
     public SearchPageTest() {
         super(new FirefoxDriver());
@@ -24,13 +24,13 @@ public class SearchPageTest extends GoogleSiteTest {
     
     @Test
     public void searchTest() {
-        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
-        driver.manage().timeouts().pageLoadTimeout(5, TimeUnit.SECONDS);
+        getDriver().manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+        getDriver().manage().timeouts().pageLoadTimeout(5, TimeUnit.SECONDS);
         open(searchPage);
         type("Test", searchPage.searchQuery);
         delay(1);
 //        click(searchPage.googleSearch);
-        driver.close();        
+        getDriver().close();        
     }
 
 }

@@ -4,13 +4,15 @@ import org.andidev.webdriverextension.HtmlTag;
 import static org.andidev.webdriverextension.WebDriverAssert.*;
 import static org.andidev.webdriverextension.WebDriverBot.*;
 import org.andidev.webdriverextension.models.UserRow;
-import org.andidev.webdriverextension.site.WebDriverExtensionSiteTest;
+import org.andidev.webdriverextension.site.SiteAware;
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
-public class ExamplesPageTest extends WebDriverExtensionSiteTest {
+@Ignore
+public class ExamplesPageTest extends SiteAware {
 
     public ExamplesPageTest() {
         super(new FirefoxDriver());
@@ -26,7 +28,7 @@ public class ExamplesPageTest extends WebDriverExtensionSiteTest {
     
     @After
     public void after() {
-        driver.close();        
+        getDriver().close();        
     }
     
     

@@ -29,17 +29,24 @@
             <version>${project.version}</version>
         </dependency>
 
-        <!-- WebDriver Extension Generator -->
+        <!-- WebDriver Extension Generator SiteObject -->
         <dependency>
             <groupId>org.andidev</groupId>
             <artifactId>webdriver-extension-generator-siteobject</artifactId>
             <version>${project.version}</version>
         </dependency>
 
-        <!-- WebDriver Extension Generator -->
+        <!-- WebDriver Extension Generator SiteAware -->
         <dependency>
             <groupId>org.andidev</groupId>
-            <artifactId>webdriver-extension-generator-sitetest</artifactId>
+            <artifactId>webdriver-extension-generator-siteaware</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
+        <!-- WebDriver Extension Generator PageAware -->
+        <dependency>
+            <groupId>org.andidev</groupId>
+            <artifactId>webdriver-extension-generator-pageaware</artifactId>
             <version>${project.version}</version>
         </dependency>
 
