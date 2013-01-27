@@ -20,16 +20,16 @@ import org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader;
     protected boolean debug = true;
 
     protected void error(String msg) {
-        messager.printMessage(Diagnostic.Kind.ERROR, msg);
+        messager.printMessage(Diagnostic.Kind.ERROR, prefixClassName(msg));
     }
 
     protected void warn(String msg) {
-        messager.printMessage(Diagnostic.Kind.WARNING, msg);
+        messager.printMessage(Diagnostic.Kind.WARNING, prefixClassName(msg));
     }
 
     protected void debug(String msg) {
         if (debug) {
-            messager.printMessage(Diagnostic.Kind.NOTE, msg);
+            messager.printMessage(Diagnostic.Kind.NOTE, prefixClassName(msg));
         }
     }
 
@@ -58,6 +58,10 @@ import org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader;
         } catch (IOException ex) {
             error("Generation ERROR, IOException: " + ex);
         }
+    }
+
+    private CharSequence prefixClassName(String msg) {
+        return this.getClass().getSimpleName() + ":" + msg;
     }
     
     
