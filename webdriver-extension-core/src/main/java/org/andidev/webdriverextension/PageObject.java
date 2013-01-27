@@ -8,8 +8,10 @@ public abstract class PageObject implements Openable {
     private WebDriver driver;
 
     public PageObject(WebDriver driver) {
+        // Set WebDriver
         this.driver = driver;
-        // Init page elements
+
+        // Init HtmlTags
         PageFactory.initElements(new DefaultHtmlTagFieldDecorator(driver), this);
     }
 
