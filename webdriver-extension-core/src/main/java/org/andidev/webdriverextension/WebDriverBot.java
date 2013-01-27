@@ -13,22 +13,17 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 public class WebDriverBot {
 
     public static double delayTime = 0.0;
-    // public static boolean debugMode = false; Implement later
 
     public static void check(WebElement webElement) {
         delay();
         if (!isChecked(webElement)) {
             webElement.click();
-            // DEBUG TEXT: Checked <input type="checkbox" name="">
-        } else {
-            // DEBUG TEXT: Checkbox already checked! Skipped checking <input type="checkbox" name="">           
         }
     }
 
     public static void clear(WebElement webElement) {
         webElement.clear();
         delay();
-        // DEBUG TEXT: Cleared text "textcleared" in <input name="">
     }
 
     public static void clearAndType(String str, WebElement webElement) {
@@ -42,7 +37,40 @@ public class WebDriverBot {
     public static void click(WebElement webElement) {
         delay();
         webElement.click();
-        // DEBUG TEXT: Clicked <tagname ...>
+    }
+
+    private static void debug(String str) {
+        System.out.println(str);
+    }
+
+    public static void debugNumberOfElements(List<WebElement> webElements) {
+        System.out.println("Number of " + webElements.get(0).getTagName() + "-tags: " + webElements.size());
+    }
+
+    public static void debugText(List<WebElement> webElements) {
+        for (WebElement webElement : webElements) {
+            debugText(webElement);
+        }
+    }
+
+    public static void debugText(WebElement webElement) {
+        System.out.println("Text in " + webElement.getTagName() + "-tag: " + webElement.getText());
+    }
+
+    public static void delay() {
+        delay(delayTime);
+    }
+
+    public static void delay(double seconds) {
+        if (seconds > 0) {
+            try {
+                Thread.sleep((long) (seconds * 1000));
+            } catch (InterruptedException ex) {
+                // Swallow exception
+                ex.printStackTrace();
+            }
+
+        }
     }
 
     public static boolean isChecked(WebElement webElement) {
@@ -96,25 +124,14 @@ public class WebDriverBot {
         driver.get(url);
     }
 
-    public static void pressKeys(WebElement webElement, CharSequence... keysToSend) {
-        delay();
-        webElement.sendKeys(keysToSend);
-        // DEBUG TEXT: Pressed keys "keysToSend" in <input name="">
-    }
-
     public static void pressEnter(WebElement webElement) {
         delay();
         webElement.sendKeys(Keys.ENTER);
-        // DEBUG TEXT: Pressed enter key in <input name="">
     }
 
-    public static void type(String str, WebElement webElement) {
-        if (str == null) {
-            return;
-        }
+    public static void pressKeys(WebElement webElement, CharSequence... keysToSend) {
         delay();
-        webElement.sendKeys(str);
-        // DEBUG TEXT: Typed "str" in <input name="">
+        webElement.sendKeys(keysToSend);
     }
 
     public static String read(WebElement webElement) {
@@ -135,34 +152,20 @@ public class WebDriverBot {
     public static void select(String optionText, WebElement webElement) {
         delay();
         new Select(webElement).selectByVisibleText(optionText);
-        // DEBUG TEXT: Selected "optionText" from <select name="">
+    }
+
+    public static void type(String str, WebElement webElement) {
+        if (str == null) {
+            return;
+        }
+        delay();
+        webElement.sendKeys(str);
     }
 
     public static void uncheck(WebElement webElement) {
         delay();
         if (isChecked(webElement)) {
             webElement.click();
-            // DEBUG TEXT: Un-checked <input type="checkbox" name="">
-        } else {
-            // DEBUG TEXT: Checkbox already un-checked! Skipped un-checking <input type="checkbox" name="">           
-        }
-    }
-
-    private static void debug(String str) {
-        System.out.println(str);
-    }
-
-    public static void debugNumberOfElements(List<WebElement> webElements) {
-        System.out.println("Number of " + webElements.get(0).getTagName() + "-tags: " + webElements.size());
-    }
-
-    public static void debugText(WebElement webElement) {
-        System.out.println("Text in " + webElement.getTagName() + "-tag: " + webElement.getText());
-    }
-
-    public static void debugText(List<WebElement> webElements) {
-        for (WebElement webElement : webElements) {
-            debugText(webElement);
         }
     }
 
@@ -170,21 +173,5 @@ public class WebDriverBot {
         delay();
         WebDriverWait wait = new WebDriverWait(driver, 30);
         wait.until(ExpectedConditions.visibilityOf(webElement));
-    }
-
-    public static void delay(double seconds) {
-        if (seconds > 0) {
-            try {
-                Thread.sleep((long) (seconds * 1000));
-            } catch (InterruptedException ex) {
-                // Swallow exception
-                ex.printStackTrace();
-            }
-
-        }
-    }
-
-    public static void delay() {
-        delay(delayTime);
     }
 }
