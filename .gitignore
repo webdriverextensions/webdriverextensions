@@ -1,29 +1,37 @@
-#java specific
+# Compiled source #
+###################
+*.com
 *.class
+*.dll
+*.exe
+*.o
+*.so
 
-#maven specific
-*/target/**
-
-#netbeans ignore personal stuff 
-nbproject/private/
-
-
-## generic files to ignore
-*~
-*.lock
-*.DS_Store
-*.swp
+# Logs and databases #
+######################
+*.log
+*.sqlite
 *.out
-/webdriver-extension-generators/webdriver-extension-generators-commons/target/
-/webdriver-extension-generators/webdriver-extension-generators-sitebase/target/
-/webdriver-extension-generator/webdriver-extension-generators-commons/target/
-/webdriver-extension-generator/webdriver-extension-generators-sitebase/target/
-/webdriver-extension-generator/webdriver-extension-generators-sitetestbase/target/
-/webdriver-extension-generator/webdriver-extension-generator-sitebase/target/
-/webdriver-extension-generator/webdriver-extension-generator-sitetestbase/target/
-/webdriver-extension-generator/webdriver-extension-generator-commons/target/
-/webdriver-extension-generator/webdriver-extension-generator-util/target/
-/webdriver-extension-generator/webdriver-extension-generator-util copy/target/
-/webdriver-extension-generator/webdriver-extension-generator-services/target/
-/webdriver-extension-generator/webdriver-extension-generator-annotation-processor-service/target/
-/webdriver-extension-generator/webdriver-extension-generator-sitetest/target/
+
+# OS generated files #
+######################
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+Icon?
+ehthumbs.db
+Thumbs.db
+*~
+
+# Maven #
+#########
+.classpath
+.project
+.settings/
+target/
+
+# NetBeans #
+############
+nbproject/private/
