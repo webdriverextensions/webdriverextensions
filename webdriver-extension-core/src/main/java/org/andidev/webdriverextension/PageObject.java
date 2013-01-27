@@ -20,7 +20,11 @@ public abstract class PageObject implements Openable {
     }
 
     public void setDriver(WebDriver driver) {
+        // Set WebDriver
         this.driver = driver;
+
+        // Init HtmlTags
+        PageFactory.initElements(new DefaultHtmlTagFieldDecorator(driver), this);
     }
 
     public String getUrl() {
