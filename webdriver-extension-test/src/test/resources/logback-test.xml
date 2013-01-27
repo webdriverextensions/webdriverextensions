@@ -3,15 +3,15 @@
     <appender name="console-tests" class="ch.qos.logback.core.ConsoleAppender">
         <encoder>
             <pattern>%cyan(%d{"HH:mm ss"})   %highlight(%-5level   %-130message)   %cyan(%c{0}:%line) %n</pattern>
-        </encoder>  
+        </encoder>
     </appender>
-    
+
     <!-- Spring -->
     <logger name="org.springframework" level="INHERITED"/>
-    
+
     <!-- Hibernate -->
     <logger name="org.hibernate" level="INHERITED"/>
-    
+
     <!-- Sql -->
     <logger name="jdbc.sqlonly" level="INHERITED"/>
     <logger name="jdbc.sqltiming" level="INHERITED"/>
@@ -19,45 +19,12 @@
     <logger name="jdbc.resultset" level="ERROR"/>
     <logger name="jdbc.connection" level="ERROR"/>
     <logger name="log4jdbc.debug" level="ERROR"/>
-    
+
     <!-- AndiDev -->
     <logger name="org.andidev" level="TRACE"/>
-    
+
     <!-- Main log level (levels: TRACE, DEBUG, INFO, WARN, ERROR, ALL, OFF, INHERITED) -->
     <root level="WARN">
-        <appender-ref ref="console-tests"/>        
+        <appender-ref ref="console-tests"/>
     </root>
-    
-    <!-- log4jdbc logging
-        Logger           Function
-        
-        jdbc.sqlonly	 Log all SQL DML statements as they are executed with all JDBC parameters
-        jdbc.sqltiming	 Log all SQL post-execution info, including timing statistics on how long the SQL took to execute.
-        jdbc.audit	 Log all JDBC method-calls except for ResultSets. This is a very voluminous output, and is not normally needed unless tracking down a specific JDBC problem.
-        jdbc.resultset	 Log all JDBC ResultSets. Even more voluminous, because all calls to ResultSet objects are logged.
-        jdbc.connection  Log all connection open and close events as well as dumping all open connection numbers. This is very useful for hunting down connection leak problems.
-        log4jdbc.debug   At this time it just prints out information on which underlying drivers were found and not found when the log4jdbc spy driver loads.
-
-        Each of these logs can be set at either DEBUG, INFO or ERROR level.
-
-        DEBUG  includes the class name and line number (if available) at which the SQL was executed. Use DEBUG level with extra care, as this imposes an additional performance penalty when in use.
-        INFO   includes the SQL (or other information as applicable.)
-        ERROR  will show the stack traces in the log output when SQLExceptions occur.
-    -->
-    
-    <!-- Hibernate logging
-        Logger                      Function
-
-        org.hibernate.SQL           Log all SQL DML statements as they are executed
-        org.hibernate.type          Log all JDBC parameters
-        org.hibernate.tool.hbm2ddl  Log all SQL DDL statements as they are executed
-        org.hibernate.pretty        Log the state of all entities (max 20 entities) associated with the session at flush time
-        org.hibernate.cache         Log all second-level cache activity
-        org.hibernate.transaction   Log transaction related activity
-        org.hibernate.jdbc          Log all JDBC resource acquisition
-        org.hibernate.hql.ast.AST   Log HQL and SQL ASTs during query parsing
-        org.hibernate.secure        Log all JAAS authorization requests
-        org.hibernate               Log everything (a lot of information, but very useful for troubleshooting)     
-    -->
-    
 </configuration>

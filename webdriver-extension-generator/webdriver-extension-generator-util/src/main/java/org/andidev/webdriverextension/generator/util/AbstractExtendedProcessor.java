@@ -13,7 +13,7 @@ import org.apache.velocity.app.VelocityEngine;
 import org.apache.velocity.runtime.RuntimeConstants;
 import org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader;
 
-    public abstract class AbstractExtendedProcessor extends AbstractProcessor {
+public abstract class AbstractExtendedProcessor extends AbstractProcessor {
 
     protected RoundEnvironment roundEnvironment;
     private Messager messager;
@@ -37,16 +37,16 @@ import org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader;
         this.roundEnvironment = roundEnvironment;
         this.messager = processingEnv.getMessager();
     }
-    
+
     protected void generateClass(String templateName, VelocityContext metaData, String filePackage, String fileName) {
         // Get Velocity Template
         VelocityEngine velocityEngine = new VelocityEngine();
         velocityEngine.setProperty("runtime.log.logsystem.class", "org.apache.velocity.runtime.log.SystemLogChute");
-        velocityEngine.setProperty(RuntimeConstants.RESOURCE_LOADER, "classpath"); 
+        velocityEngine.setProperty(RuntimeConstants.RESOURCE_LOADER, "classpath");
         velocityEngine.setProperty("classpath.resource.loader.class", ClasspathResourceLoader.class.getName());
         velocityEngine.init();
         Template template = velocityEngine.getTemplate(templateName);
-                
+
         try {
             // Get File Writer
             JavaFileObject file = processingEnv.getFiler().createSourceFile(filePackage + "." + fileName);
@@ -63,6 +63,4 @@ import org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader;
     private CharSequence prefixClassName(String msg) {
         return this.getClass().getSimpleName() + ":" + msg;
     }
-    
-    
 }

@@ -1,6 +1,7 @@
 package org.andidev.webdriverextension.generator.util;
 
 public class ClassMetaData implements Comparable<Object> {
+
     private String packageName;
     private String className;
     private String fieldName;
@@ -42,5 +43,4 @@ public class ClassMetaData implements Comparable<Object> {
         }
         return this.className.compareTo(comparedTo.className);
     }
-        
 }

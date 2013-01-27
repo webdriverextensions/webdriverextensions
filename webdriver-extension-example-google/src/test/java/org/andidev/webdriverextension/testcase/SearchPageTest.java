@@ -13,15 +13,15 @@ public class SearchPageTest extends SiteAware {
     public SearchPageTest() {
         super(new FirefoxDriver());
     }
-    
+
     @Before
     public void before() {
     }
-    
+
     @After
     public void after() {
     }
-    
+
     @Test
     public void searchTest() {
         getDriver().manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
@@ -30,7 +30,6 @@ public class SearchPageTest extends SiteAware {
         type("Test", searchPage.searchQuery);
         delay(1);
 //        click(searchPage.googleSearch);
-        getDriver().close();        
+        getDriver().close();
     }
-
 }

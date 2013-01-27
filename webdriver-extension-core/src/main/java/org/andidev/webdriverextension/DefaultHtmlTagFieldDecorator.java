@@ -1,17 +1,14 @@
 package org.andidev.webdriverextension;
 
-import org.andidev.webdriverextension.annotation.Delegate;
-import org.andidev.webdriverextension.annotation.ResetSearchContext;
 import java.lang.reflect.Field;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import org.apache.commons.lang3.ArrayUtils;
-import org.openqa.selenium.WebDriver;
+import org.andidev.webdriverextension.annotation.Delegate;
+import org.andidev.webdriverextension.annotation.ResetSearchContext;
 import org.openqa.selenium.By;
 import org.openqa.selenium.SearchContext;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.FindBys;
@@ -31,7 +28,7 @@ public class DefaultHtmlTagFieldDecorator extends DefaultFieldDecorator {
     public DefaultHtmlTagFieldDecorator(final WebDriver driver) {
         this(driver, driver);
     }
-    
+
     public DefaultHtmlTagFieldDecorator(final SearchContext searchContext, final WebDriver driver) {
         super(new DefaultElementLocatorFactory(searchContext));
         this.driver = driver;
@@ -96,9 +93,9 @@ public class DefaultHtmlTagFieldDecorator extends DefaultFieldDecorator {
         final By by = ReflectionUtils.getBy(locator);
         final HtmlTag htmlTag = htmlTagFactory.create(type, webElement, by);
         if (hasAnnotatedResetSearchContext(field)) {
-            PageFactory.initElements(new DefaultHtmlTagFieldDecorator(driver), htmlTag);        
+            PageFactory.initElements(new DefaultHtmlTagFieldDecorator(driver), htmlTag);
         } else {
-            PageFactory.initElements(new DefaultHtmlTagFieldDecorator(webElement, driver), htmlTag);        
+            PageFactory.initElements(new DefaultHtmlTagFieldDecorator(webElement, driver), htmlTag);
         }
         htmlTag.delegateWebElement = getDelagate(htmlTag);
         return htmlTag;
@@ -123,7 +120,7 @@ public class DefaultHtmlTagFieldDecorator extends DefaultFieldDecorator {
 
     private boolean hasAnnotatedResetSearchContext(Field field) {
         ResetSearchContext annotation = (ResetSearchContext) field.getAnnotation(ResetSearchContext.class);
-        if(annotation != null) {
+        if (annotation != null) {
             return true;
         }
         return false;
@@ -131,7 +128,7 @@ public class DefaultHtmlTagFieldDecorator extends DefaultFieldDecorator {
 
     private boolean hasAnnotatedDelegate(Field field) {
         Delegate annotation = (Delegate) field.getAnnotation(Delegate.class);
-        if(annotation != null) {
+        if (annotation != null) {
             return true;
         }
         return false;
@@ -143,7 +140,7 @@ public class DefaultHtmlTagFieldDecorator extends DefaultFieldDecorator {
             return null;
         }
         if (fields.length > 1) {
-           throw new RuntimeException("More than one @Delagate annotation used. There should only exist one.");
+            throw new RuntimeException("More than one @Delagate annotation used. There should only exist one.");
         }
         WebElement delegate;
         try {

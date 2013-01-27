@@ -1,7 +1,7 @@
 package org.andidev.webdriverextension.models;
 
-import org.andidev.webdriverextension.HtmlTag;
 import java.util.List;
+import org.andidev.webdriverextension.HtmlTag;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -9,6 +9,7 @@ import org.openqa.selenium.support.FindBy;
 public class UserTable extends HtmlTag {
 
     public static class Row extends HtmlTag {
+
         @FindBy(css = ".row")
         public HtmlTag row;
         @FindBy(css = ".first-name")

@@ -6,13 +6,13 @@ import ${page.packageName}.${page.className};
 #end
 import org.openqa.selenium.WebDriver;
 
-public class ${siteAware.className} {    
+public class ${siteAware.className} {
     // Declare Web Driver
     private WebDriver driver;
 
     // Declare Site Object
     public ${site.className} ${site.fieldName};
-	
+
     // Declare Page Objects
 #foreach($page in $pages)
     public ${page.className} ${page.fieldName};

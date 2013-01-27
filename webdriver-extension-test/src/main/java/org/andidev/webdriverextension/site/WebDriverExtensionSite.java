@@ -1,12 +1,11 @@
 package org.andidev.webdriverextension.site;
 
-import static org.andidev.webdriverextension.WebDriverBot.*;
 import org.andidev.webdriverextension.annotation.Site;
 import org.openqa.selenium.WebDriver;
 
 @Site
 public class WebDriverExtensionSite extends SiteObject {
-    
+
     public WebDriverExtensionSite(WebDriver driver) {
         super(driver);
     }
@@ -20,5 +19,4 @@ public class WebDriverExtensionSite extends SiteObject {
     public void assertIsOpen() throws Error {
         examplesPage.assertIsOpen();
     }
-    
 }

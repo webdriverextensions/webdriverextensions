@@ -11,13 +11,13 @@ import org.openqa.selenium.support.FindBy;
 public class SearchPage extends PageObject {
 
     // Web Elements
-    @FindBy(css="[name='q']")
+    @FindBy(css = "[name='q']")
     public HtmlTag searchQuery;
-    @FindBy(css="#gbqfba")
+    @FindBy(css = "#gbqfba")
     public HtmlTag googleSearch;
-    @FindBy(css="#gbqfbb")
+    @FindBy(css = "#gbqfbb")
     public HtmlTag imFeelingLucky;
-    
+
     public SearchPage(WebDriver driver) {
         super(driver);
     }

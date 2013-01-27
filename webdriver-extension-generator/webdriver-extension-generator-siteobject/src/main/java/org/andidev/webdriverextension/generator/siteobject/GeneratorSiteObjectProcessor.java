@@ -21,12 +21,12 @@ public class GeneratorSiteObjectProcessor extends AbstractExtendedProcessor {
     public boolean process(Set<? extends TypeElement> annotations, RoundEnvironment roundEnvironment) {
         super.init(roundEnvironment);
         debug("PROCESSING: " + annotations);
-        
+
         // Return if no annotations where found
         if (annotations.isEmpty()) {
             return false;
         }
-        
+
         // Generate
         validateAnnotations();
         VelocityContext metaData = createMetaData();

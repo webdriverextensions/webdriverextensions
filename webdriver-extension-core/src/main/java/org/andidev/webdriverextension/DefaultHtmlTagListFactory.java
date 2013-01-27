@@ -6,7 +6,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 public class DefaultHtmlTagListFactory implements HtmlTagListFactory {
-    
+
     private HtmlTagFactory htmlTagFactory;
 
     public DefaultHtmlTagListFactory(HtmlTagFactory htmlTagFactory) {

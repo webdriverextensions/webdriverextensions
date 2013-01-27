@@ -17,7 +17,7 @@ public class Menu extends HtmlTag {
     public HtmlTag update;
     @FindBy(css = "#menu-delete")
     public HtmlTag delete;
-    
+
     public Menu(WebElement webElement, By by) {
         super(webElement, by);
     }

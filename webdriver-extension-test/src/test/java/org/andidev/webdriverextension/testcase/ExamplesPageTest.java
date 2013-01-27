@@ -14,24 +14,23 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 @Ignore
 public class ExamplesPageTest extends SiteAware {
 
+    Double delayTime = 0.0;
+
     public ExamplesPageTest() {
         super(new FirefoxDriver());
     }
-    
-    Double delayTime = 0.0;
-    
+
     @Before
     public void before() {
         open(webDriverExtensionSite);
         open(examplesPage);
     }
-    
+
     @After
     public void after() {
-        getDriver().close();        
+        getDriver().close();
     }
-    
-    
+
     @Test
     public void webElementsTest() {
         type("What is WebDriver", examplesPage.searchQuery);

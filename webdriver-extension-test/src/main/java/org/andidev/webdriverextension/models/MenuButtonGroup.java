@@ -15,7 +15,7 @@ public class MenuButtonGroup extends HtmlTag {
     public HtmlTag update;
     @FindBy(css = "#menu-delete")
     public HtmlTag delete;
-    
+
     public MenuButtonGroup(WebElement webElement, By by) {
         super(webElement, by);
     }

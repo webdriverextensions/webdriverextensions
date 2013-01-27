@@ -1,13 +1,14 @@
 package org.andidev.webdriverextension.models;
 
+import java.util.List;
 import org.andidev.webdriverextension.HtmlTag;
 import org.andidev.webdriverextension.annotation.ResetSearchContext;
-import java.util.List;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 public class UserTableSearchContext extends HtmlTag {
+
     @ResetSearchContext
     @FindBy(css = "#search-query")
     public HtmlTag searchQuery;

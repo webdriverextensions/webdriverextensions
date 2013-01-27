@@ -6,6 +6,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 public class Parent extends HtmlTag {
+
     @FindBy(css = ".row")
     public HtmlTag row;
     @FindBy(css = ".first-name")
