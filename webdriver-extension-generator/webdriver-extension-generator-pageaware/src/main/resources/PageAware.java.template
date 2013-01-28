@@ -9,7 +9,7 @@ public abstract class ${pageAware.className} {
     // Declare WebDriver
     private WebDriver driver;
 
-    // Declare Page Objects
+    // Declare PageObjects
 #foreach($page in $pages)
     public ${page.className} ${page.fieldName};
 #end
@@ -18,7 +18,7 @@ public abstract class ${pageAware.className} {
         // Set WebDriver
         this.driver = driver;
 
-        // Instantiate Page Objects
+        // Instantiate PageObjects
 #foreach($page in $pages)
         ${page.fieldName} = new ${page.className}(driver);
 #end
@@ -32,7 +32,7 @@ public abstract class ${pageAware.className} {
         // Set WebDriver
         this.driver = driver;
 
-        // Set WebDriver in Page Objects
+        // Set WebDriver in PageObjects
 #foreach($page in $pages)
         ${page.fieldName}.setDriver(driver);
 #end

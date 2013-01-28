@@ -1,10 +1,10 @@
 package org.andidev.webdriverextension.page;
 
 import java.util.List;
-import org.andidev.webdriverextension.HtmlTag;
-import org.andidev.webdriverextension.PageObject;
+import org.andidev.webdriverextension.WebPage;
 import static org.andidev.webdriverextension.WebDriverAssert.*;
 import static org.andidev.webdriverextension.WebDriverBot.*;
+import org.andidev.webdriverextension.WebElement;
 import org.andidev.webdriverextension.annotation.Page;
 import org.andidev.webdriverextension.models.Menu;
 import org.andidev.webdriverextension.models.MenuButtonGroup;
@@ -14,19 +14,19 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
 
 @Page
-public class ExamplesPage extends PageObject {
+public class ExamplesPage extends WebPage {
 
     // Section: WebElements
     @FindBy(css = "#search-query")
-    public HtmlTag searchQuery;
+    public WebElement searchQuery;
     @FindBy(css = "#search")
-    public HtmlTag search;
+    public WebElement search;
     // Section: Extended WebElements
     @FindBy(css = ".btn-group")
     public MenuButtonGroup menuButtonGroup;
     // Section: List with WebElements
     @FindBy(css = "#todo-list li")
-    public List<HtmlTag> todoList;
+    public List<WebElement> todoList;
     // Section: List with Extended WebElements
     @FindBy(css = "#user-table tbody tr")
     public List<UserRow> rows;

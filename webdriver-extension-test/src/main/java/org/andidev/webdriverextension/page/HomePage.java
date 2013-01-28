@@ -1,17 +1,17 @@
 package org.andidev.webdriverextension.page;
 
-import org.andidev.webdriverextension.HtmlTag;
-import org.andidev.webdriverextension.PageObject;
+import org.andidev.webdriverextension.WebPage;
 import static org.andidev.webdriverextension.WebDriverAssert.*;
+import org.andidev.webdriverextension.WebElement;
 import org.andidev.webdriverextension.annotation.Page;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
 
 @Page
-public class HomePage extends PageObject {
+public class HomePage extends WebPage {
 
     @FindBy(css = "nav a.examples")
-    HtmlTag examples;
+    WebElement examples;
 
     public HomePage(WebDriver driver) {
         super(driver);

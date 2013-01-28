@@ -3,7 +3,6 @@ package org.andidev.webdriverextension;
 import java.util.List;
 import static org.andidev.webdriverextension.WebDriverBot.*;
 import org.junit.Assert;
-import org.openqa.selenium.WebElement;
 
 public class WebDriverAssert {
 
@@ -52,13 +51,13 @@ public class WebDriverAssert {
         Assert.assertTrue(webElement.getText().endsWith(expected));
     }
 
-    public static void assertUrl(PageObject page) {
+    public static void assertUrl(WebPage page) {
         delay();
         boolean urlEquals = page.getDriver().getCurrentUrl().matches(page.getUrl());
         Assert.assertTrue(urlEquals);
     }
 
-    public static void assertUrlContains(String expected, PageObject page) {
+    public static void assertUrlContains(String expected, WebPage page) {
         delay();
         Assert.assertTrue(page.getDriver().getCurrentUrl().contains(expected));
     }

@@ -1,17 +1,15 @@
 package org.andidev.webdriverextension.testcase;
 
-import org.andidev.webdriverextension.HtmlTag;
 import static org.andidev.webdriverextension.WebDriverAssert.*;
 import static org.andidev.webdriverextension.WebDriverBot.*;
+import org.andidev.webdriverextension.WebElement;
 import org.andidev.webdriverextension.models.UserRow;
 import org.andidev.webdriverextension.site.SiteAware;
 import org.junit.After;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
-@Ignore
 public class ExamplesPageTest extends SiteAware {
 
     Double delayTime = 0.0;
@@ -50,7 +48,7 @@ public class ExamplesPageTest extends SiteAware {
     @Test
     public void listWithWebElementsTest() {
         delay(delayTime);
-        for (HtmlTag todo : examplesPage.todoList) {
+        for (WebElement todo : examplesPage.todoList) {
             assertTextEndsWith("!", todo);
         }
     }

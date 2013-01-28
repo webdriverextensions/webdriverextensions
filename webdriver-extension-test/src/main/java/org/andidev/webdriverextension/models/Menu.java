@@ -1,24 +1,18 @@
 package org.andidev.webdriverextension.models;
 
-import org.andidev.webdriverextension.HtmlTag;
+import org.andidev.webdriverextension.WebElement;
 import org.andidev.webdriverextension.annotation.Delegate;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-public class Menu extends HtmlTag {
+public class Menu extends WebElement {
 
     @Delegate
     @FindBy(css = "#menu")
-    public HtmlTag menu;
+    public WebElement menu;
     @FindBy(css = "#menu-create")
-    public HtmlTag create;
+    public WebElement create;
     @FindBy(css = "#menu-update")
-    public HtmlTag update;
+    public WebElement update;
     @FindBy(css = "#menu-delete")
-    public HtmlTag delete;
-
-    public Menu(WebElement webElement, By by) {
-        super(webElement, by);
-    }
+    public WebElement delete;
 }

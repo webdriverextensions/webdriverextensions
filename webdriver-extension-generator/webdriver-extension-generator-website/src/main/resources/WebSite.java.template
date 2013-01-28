@@ -1,4 +1,4 @@
-package ${siteObject.packageName};
+package ${webSite.packageName};
 
 #foreach($page in $pages)
 import ${page.packageName}.${page.className};
@@ -6,20 +6,20 @@ import ${page.packageName}.${page.className};
 import org.andidev.webdriverextension.Openable;
 import org.openqa.selenium.WebDriver;
 
-public abstract class ${siteObject.className} implements Openable {
+public abstract class ${webSite.className} implements Openable {
     // Declare WebDriver
     private WebDriver driver;
 
-    // Declare Page Objects
+    // Declare PageObjects
 #foreach($page in $pages)
     public ${page.className} ${page.fieldName};
 #end
 
-    public ${siteObject.className}(WebDriver driver) {
+    public ${webSite.className}(WebDriver driver) {
         // Set WebDriver
         this.driver = driver;
 
-        // Instantiate Page Objects
+        // Instantiate PageObjects
 #foreach($page in $pages)
         ${page.fieldName} = new ${page.className}(driver);
 #end
@@ -33,7 +33,7 @@ public abstract class ${siteObject.className} implements Openable {
         // Set WebDriver
         this.driver = driver;
 
-        // Set WebDriver in Page Objects
+        // Set WebDriver in PageObjects
 #foreach($page in $pages)
         ${page.fieldName}.setDriver(driver);
 #end

@@ -10,7 +10,7 @@
     <packaging>jar</packaging>
 
     <name>WebDriver Extension Generator SiteAware</name>
-    <description>Generates SiteAware objects from @Site annotation included in the WebDriver Extension Framework</description>
+    <description>Generates SiteAware class from @Site annotation included in the WebDriver Extension Framework</description>
     <url>https://github.com/andidev/webdriver-extension</url>
 
     <properties>

@@ -1,22 +1,16 @@
 package org.andidev.webdriverextension.models;
 
 import java.util.List;
-import org.andidev.webdriverextension.HtmlTag;
+import org.andidev.webdriverextension.WebElement;
 import org.andidev.webdriverextension.annotation.ResetSearchContext;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-public class UserTableSearchContext extends HtmlTag {
+public class UserTableSearchContext extends WebElement {
 
     @ResetSearchContext
     @FindBy(css = "#search-query")
-    public HtmlTag searchQuery;
+    public WebElement searchQuery;
     @ResetSearchContext
     @FindBy(css = "#todo-list li")
-    public List<HtmlTag> todoList;
-
-    public UserTableSearchContext(WebElement webElement, By by) {
-        super(webElement, by);
-    }
+    public List<WebElement> todoList;
 }

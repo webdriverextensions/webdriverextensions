@@ -4,7 +4,7 @@ import org.andidev.webdriverextension.annotation.Site;
 import org.openqa.selenium.WebDriver;
 
 @Site
-public class GoogleSite extends SiteObject {
+public class GoogleSite extends WebSite {
 
     public GoogleSite(WebDriver driver) {
         super(driver);

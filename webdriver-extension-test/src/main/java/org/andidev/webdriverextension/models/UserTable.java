@@ -1,34 +1,25 @@
 package org.andidev.webdriverextension.models;
 
 import java.util.List;
-import org.andidev.webdriverextension.HtmlTag;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
+import org.andidev.webdriverextension.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-public class UserTable extends HtmlTag {
+public class UserTable extends WebElement {
 
-    public static class Row extends HtmlTag {
+    public static class Row extends WebElement {
 
         @FindBy(css = ".row")
-        public HtmlTag row;
+        public WebElement row;
         @FindBy(css = ".first-name")
-        public HtmlTag firstName;
+        public WebElement firstName;
         @FindBy(css = ".last-name")
-        public HtmlTag lastName;
+        public WebElement lastName;
         @FindBy(css = ".username")
-        public HtmlTag username;
+        public WebElement username;
 
-        public Row(WebElement webElement, By by) {
-            super(webElement, by);
-        }
     }
     @FindBy(css = "thead tr")
     public Row header;
     @FindBy(css = "tbody tr")
     public List<Row> rows;
-
-    public UserTable(WebElement webElement, By by) {
-        super(webElement, by);
-    }
 }

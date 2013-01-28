@@ -5,21 +5,20 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.Point;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 
-public class HtmlTag implements WebElement {
+public class WebElement implements org.openqa.selenium.WebElement {
 
     public By by;
     public WebDriver driver;
-    public WebElement wrappedWebElement;
-    public WebElement delegateWebElement;
+    public org.openqa.selenium.WebElement wrappedWebElement;
+    public org.openqa.selenium.WebElement delegateWebElement;
 
-    public HtmlTag(WebElement wrappedWebElement, By by) {
+    public void init(org.openqa.selenium.WebElement wrappedWebElement, By by) {
         this.by = by;
         this.wrappedWebElement = wrappedWebElement;
     }
 
-    public HtmlTag(WebElement wrappedWebElement, By by, WebElement delegateWebElement) {
+    public void init(org.openqa.selenium.WebElement wrappedWebElement, By by, org.openqa.selenium.WebElement delegateWebElement) {
         this.by = by;
         this.wrappedWebElement = wrappedWebElement;
         this.delegateWebElement = delegateWebElement;
@@ -107,12 +106,12 @@ public class HtmlTag implements WebElement {
     }
 
     @Override
-    public List<WebElement> findElements(By by) {
+    public List<org.openqa.selenium.WebElement> findElements(By by) {
         return wrappedWebElement.findElements(by);
     }
 
     @Override
-    public WebElement findElement(By by) {
+    public org.openqa.selenium.WebElement findElement(By by) {
         return wrappedWebElement.findElement(by);
     }
 

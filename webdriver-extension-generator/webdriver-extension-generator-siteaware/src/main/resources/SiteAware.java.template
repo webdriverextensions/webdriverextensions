@@ -10,10 +10,10 @@ public class ${siteAware.className} {
     // Declare Web Driver
     private WebDriver driver;
 
-    // Declare Site Object
+    // Declare SiteObject
     public ${site.className} ${site.fieldName};
 
-    // Declare Page Objects
+    // Declare PageObjects
 #foreach($page in $pages)
     public ${page.className} ${page.fieldName};
 #end
@@ -22,10 +22,10 @@ public class ${siteAware.className} {
         // Set WebDriver
         this.driver = driver;
 
-        // Instantiate Site Object
+        // Instantiate SiteObject
         ${site.fieldName} = new ${site.className}(driver);
 
-        // Set Page Objects
+        // Set PageObjects
 #foreach($page in $pages)
         ${page.fieldName} = ${site.fieldName}.${page.fieldName};
 #end
@@ -39,10 +39,10 @@ public class ${siteAware.className} {
         // Set WebDriver
         this.driver = driver;
 
-        // Set Site Object WebDriver
+        // Set SiteObject WebDriver
         ${site.fieldName}.setDriver(driver);
 
-        // Set WebDriver in Page Objects
+        // Set WebDriver in PageObjects
 #foreach($page in $pages)
         ${page.fieldName}.setDriver(driver);
 #end

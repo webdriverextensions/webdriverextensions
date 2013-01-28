@@ -1,22 +1,22 @@
 package org.andidev.webdriverextension.page;
 
-import org.andidev.webdriverextension.HtmlTag;
-import org.andidev.webdriverextension.PageObject;
+import org.andidev.webdriverextension.WebPage;
 import static org.andidev.webdriverextension.WebDriverAssert.*;
+import org.andidev.webdriverextension.WebElement;
 import org.andidev.webdriverextension.annotation.Page;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
 
 @Page
-public class SearchPage extends PageObject {
+public class SearchPage extends WebPage {
 
     // Web Elements
     @FindBy(css = "[name='q']")
-    public HtmlTag searchQuery;
+    public WebElement searchQuery;
     @FindBy(css = "#gbqfba")
-    public HtmlTag googleSearch;
+    public WebElement googleSearch;
     @FindBy(css = "#gbqfbb")
-    public HtmlTag imFeelingLucky;
+    public WebElement imFeelingLucky;
 
     public SearchPage(WebDriver driver) {
         super(driver);
