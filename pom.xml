@@ -13,14 +13,6 @@
     <description>WebDriver Enxtention is a framework that exdends the WebDriver framework with components that encourages the PageObject pattern and Bot Style testning</description>
     <url>https://github.com/andidev/webdriver-extension</url>
 
-    <modules>
-        <module>webdriver-extension-core</module>
-        <module>webdriver-extension-models</module>
-        <module>webdriver-extension-generator</module>
-        <module>webdriver-extension-test</module>
-        <module>webdriver-extension-example-google</module>
-    </modules>
-
     <licenses>
         <license>
             <name>The Apache Software License, Version 2.0</name>
@@ -28,6 +20,45 @@
             <distribution>repo</distribution>
         </license>
     </licenses>
+
+    <scm>
+        <connection>scm:git:git@github.com:andidev/webdriver-extension.git</connection>
+        <developerConnection>scm:git:git@github.com:andidev/webdriver-extension.git</developerConnection>
+        <url>git@github.com:andidev/webdriver-extension.git</url>
+    </scm>
+
+    <organization>
+        <name>AndiDev</name>
+        <url>http://www.andidev.org</url>
+    </organization>
+
+    <developers>
+        <developer>
+            <id>andidev</id>
+            <name>Anders Steiner</name>
+            <email>anders.steiner@gmail.com</email>
+            <roles>
+                <role>author</role>
+                <role>architect</role>
+                <role>developer</role>
+            </roles>
+            <organization>http://www.andidev.org</organization>
+        </developer>
+    </developers>
+
+    <parent>
+        <groupId>org.sonatype.oss</groupId>
+        <artifactId>oss-parent</artifactId>
+        <version>7</version>
+    </parent>
+
+    <modules>
+        <module>webdriver-extension-core</module>
+        <module>webdriver-extension-models</module>
+        <module>webdriver-extension-generator</module>
+        <module>webdriver-extension-test</module>
+        <module>webdriver-extension-example-google</module>
+    </modules>
 
     <properties>
         <!-- File Encoding -->
