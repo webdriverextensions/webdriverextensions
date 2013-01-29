@@ -15,7 +15,7 @@
 
     <modules>
         <module>webdriver-extension-generator-util</module>
-        <module>webdriver-extension-generator-website</module>
+        <module>webdriver-extension-generator-sitemodel</module>
         <module>webdriver-extension-generator-siteaware</module>
         <module>webdriver-extension-generator-pageaware</module>
         <module>webdriver-extension-generator-annotation-processor-service</module>

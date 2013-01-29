@@ -29,10 +29,10 @@
             <version>${project.version}</version>
         </dependency>
 
-        <!-- WebDriver Extension Generator WebSite -->
+        <!-- WebDriver Extension Generator SiteModel -->
         <dependency>
             <groupId>org.andidev</groupId>
-            <artifactId>webdriver-extension-generator-website</artifactId>
+            <artifactId>webdriver-extension-generator-sitemodel</artifactId>
             <version>${project.version}</version>
         </dependency>
 

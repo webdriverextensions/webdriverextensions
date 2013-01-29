@@ -5,12 +5,12 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>org.andidev</groupId>
-    <artifactId>webdriver-extension-generator-website</artifactId>
+    <artifactId>webdriver-extension-generator-sitemodel</artifactId>
     <version>1.0.0.M1-SNAPSHOT</version>
     <packaging>jar</packaging>
 
-    <name>WebDriver Extension Generator WebSite</name>
-    <description>Generates WebSite classes from @SiteObject and @PageObject annotation included in the WebDriver Extension Framework</description>
+    <name>WebDriver Extension Generator SiteModel</name>
+    <description>Generates SiteModel classes from @SiteObject and @PageObject annotation included in the WebDriver Extension Framework</description>
     <url>https://github.com/andidev/webdriver-extension</url>
 
     <properties>

@@ -1,0 +1,34 @@
+package ${siteModel.packageName};
+
+#foreach($page in $pages)
+import ${page.packageName}.${page.className};
+#end
+import org.andidev.webdriverextension.WebSite;
+import org.openqa.selenium.WebDriver;
+
+public abstract class ${siteModel.className} extends WebSite {
+
+    // Declare PageObjects
+#foreach($page in $pages)
+    public ${page.className} ${page.fieldName};
+#end
+
+    public ${siteModel.className}(WebDriver driver) {
+        super(driver);
+
+        // Instantiate PageObjects
+#foreach($page in $pages)
+        ${page.fieldName} = new ${page.className}(driver);
+#end
+    }
+
+    public void setDriver(WebDriver driver) {
+        // Set WebDriver
+        setDriver(driver);
+
+        // Set WebDriver in PageObjects
+#foreach($page in $pages)
+        ${page.fieldName}.setDriver(driver);
+#end
+    }
+}

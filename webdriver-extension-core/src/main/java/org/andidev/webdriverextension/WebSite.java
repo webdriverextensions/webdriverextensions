@@ -1,18 +1,14 @@
 package org.andidev.webdriverextension;
 
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.support.PageFactory;
 
-public abstract class WebPage implements Openable {
+public abstract class WebSite implements Openable {
 
     private WebDriver driver;
 
-    public WebPage(WebDriver driver) {
+    public WebSite(WebDriver driver) {
         // Set WebDriver
         this.driver = driver;
-
-        // Init WebElements
-        PageFactory.initElements(new DefaultWebElementFieldDecorator(driver), this);
     }
 
     public WebDriver getDriver() {
@@ -22,13 +18,13 @@ public abstract class WebPage implements Openable {
     public void setDriver(WebDriver driver) {
         // Set WebDriver
         this.driver = driver;
-
-        // Init WebElements
-        PageFactory.initElements(new DefaultWebElementFieldDecorator(driver), this);
     }
 
-    public String getUrl() {
-        return null;
+    public abstract String getUrl();
+
+    @Override
+    public void open() {
+        driver.get(getUrl());
     }
 
     public boolean isOpen() {
