@@ -1,8 +1,7 @@
-package org.andidev.webdriverextension.testcase;
+package org.andidev.webdriverextension.examples.google;
 
 import java.util.concurrent.TimeUnit;
 import static org.andidev.webdriverextension.WebDriverBot.*;
-import org.andidev.webdriverextension.site.SiteAware;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;

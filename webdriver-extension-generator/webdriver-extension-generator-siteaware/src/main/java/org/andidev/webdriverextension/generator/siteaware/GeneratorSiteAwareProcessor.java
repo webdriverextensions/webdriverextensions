@@ -84,6 +84,7 @@ public class GeneratorSiteAwareProcessor extends AbstractExtendedProcessor {
         debug("Creating SiteAware Meta Data from: " + siteElement);
         siteAwareMetaData.setPackageName(ProcessorUtils.getPackageName(siteElement));
         siteAwareMetaData.setClassName("SiteAware");
+//        siteAwareMetaData.setClassName(StringUtils.removeEnd(StringUtils.removeEnd(ProcessorUtils.getClassName(siteElement), "Bot"), "Model") + "Aware");
 
         return siteAwareMetaData;
     }
@@ -103,7 +104,22 @@ public class GeneratorSiteAwareProcessor extends AbstractExtendedProcessor {
         debug("Creating Site Meta Data from: " + siteElement);
         siteMetaData.setPackageName(ProcessorUtils.getPackageName(siteElement));
         siteMetaData.setClassName(ProcessorUtils.getClassName(siteElement));
-        siteMetaData.setFieldName(StringUtils.uncapitalize(siteMetaData.getClassName()));
+        String name = siteElement.getAnnotation(SiteObject.class).name();
+        if (!StringUtils.isEmpty(name)) {
+            siteMetaData.setFieldName(name);
+        } else {
+            siteMetaData.setFieldName(StringUtils.uncapitalize(siteMetaData.getClassName()));
+        }
+
+//        if (StringUtils.endsWith(siteMetaData.getClassName(), "SiteBot")) {
+//            siteMetaData.setFieldName(StringUtils.removeEnd(StringUtils.uncapitalize(siteMetaData.getClassName()), "Bot"));
+//        } else if (StringUtils.endsWith(siteMetaData.getClassName(), "SiteModel")) {
+//            siteMetaData.setFieldName(StringUtils.removeEnd(StringUtils.uncapitalize(siteMetaData.getClassName()), "Model"));
+//        } else if (StringUtils.endsWith(siteMetaData.getClassName(), "SiteObject")) {
+//            siteMetaData.setFieldName(StringUtils.removeEnd(StringUtils.uncapitalize(siteMetaData.getClassName()), "Object"));
+//        } else {
+//            siteMetaData.setFieldName(StringUtils.uncapitalize(siteMetaData.getClassName()));
+//        }
 
         return siteMetaData;
     }
@@ -117,8 +133,21 @@ public class GeneratorSiteAwareProcessor extends AbstractExtendedProcessor {
             ClassMetaData pageMetaData = new ClassMetaData();
             pageMetaData.setPackageName(ProcessorUtils.getPackageName((TypeElement) pageElement));
             pageMetaData.setClassName(ProcessorUtils.getClassName((TypeElement) pageElement));
-            pageMetaData.setFieldName(StringUtils.uncapitalize(pageMetaData.getClassName()));
-
+            String name = pageElement.getAnnotation(PageObject.class).name();
+            if (!StringUtils.isEmpty(name)) {
+                pageMetaData.setFieldName(name);
+            } else {
+                pageMetaData.setFieldName(StringUtils.uncapitalize(pageMetaData.getClassName()));
+            }
+//            if (StringUtils.endsWith(pageMetaData.getClassName(), "PageBot")) {
+//                pageMetaData.setFieldName(StringUtils.removeEnd(StringUtils.uncapitalize(pageMetaData.getClassName()), "Bot"));
+//            } else if (StringUtils.endsWith(pageMetaData.getClassName(), "PageModel")) {
+//                pageMetaData.setFieldName(StringUtils.removeEnd(StringUtils.uncapitalize(pageMetaData.getClassName()), "Model"));
+//            } else if (StringUtils.endsWith(pageMetaData.getClassName(), "PageObject")) {
+//                pageMetaData.setFieldName(StringUtils.removeEnd(StringUtils.uncapitalize(pageMetaData.getClassName()), "Object"));
+//            } else {
+//                pageMetaData.setFieldName(StringUtils.uncapitalize(pageMetaData.getClassName()));
+//            }
             pagesMetaData.add(pageMetaData);
         }
 

@@ -1,4 +1,4 @@
-package org.andidev.webdriverextension.models;
+package org.andidev.webdriverextension.pagemodels.models;
 
 import java.util.List;
 import org.andidev.webdriverextension.WebElement;

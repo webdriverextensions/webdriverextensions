@@ -1,14 +1,18 @@
-package org.andidev.webdriverextension.page;
+package org.andidev.webdriverextension.examples.google;
 
-import org.andidev.webdriverextension.WebPage;
 import static org.andidev.webdriverextension.WebDriverAssert.*;
 import org.andidev.webdriverextension.WebElement;
+import org.andidev.webdriverextension.WebPage;
 import org.andidev.webdriverextension.annotation.PageObject;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
 
 @PageObject
 public class SearchPage extends WebPage {
+
+    public SearchPage(WebDriver driver) {
+        super(driver);
+    }
 
     // Web Elements
     @FindBy(css = "[name='q']")
@@ -17,10 +21,6 @@ public class SearchPage extends WebPage {
     public WebElement googleSearch;
     @FindBy(css = "#gbqfbb")
     public WebElement imFeelingLucky;
-
-    public SearchPage(WebDriver driver) {
-        super(driver);
-    }
 
     @Override
     public void open() {

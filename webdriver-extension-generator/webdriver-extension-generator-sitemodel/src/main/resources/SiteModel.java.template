@@ -22,9 +22,9 @@ public abstract class ${siteModel.className} extends WebSite {
 #end
     }
 
+    @Override
     public void setDriver(WebDriver driver) {
-        // Set WebDriver
-        setDriver(driver);
+        super.setDriver(driver);
 
         // Set WebDriver in PageObjects
 #foreach($page in $pages)

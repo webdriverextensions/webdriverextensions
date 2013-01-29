@@ -19,4 +19,5 @@ public class WebDriverExtensionSite extends SiteModel {
     public void assertIsOpen() throws Error {
         examplesPage.assertIsOpen();
     }
+
 }

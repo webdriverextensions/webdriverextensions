@@ -1,19 +1,14 @@
-package org.andidev.webdriverextension.page;
+package org.andidev.webdriverextension.pagebots;
 
-import org.andidev.webdriverextension.WebPage;
 import static org.andidev.webdriverextension.WebDriverAssert.*;
-import org.andidev.webdriverextension.WebElement;
 import org.andidev.webdriverextension.annotation.PageObject;
+import org.andidev.webdriverextension.pagemodels.HomePageModel;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.support.FindBy;
 
-@PageObject
-public class HomePage extends WebPage {
+@PageObject(name = "homePage")
+public class HomePageBot extends HomePageModel {
 
-    @FindBy(css = "nav a.examples")
-    WebElement examples;
-
-    public HomePage(WebDriver driver) {
+    public HomePageBot(WebDriver driver) {
         super(driver);
     }
 

@@ -3,7 +3,7 @@ package org.andidev.webdriverextension.testcase;
 import static org.andidev.webdriverextension.WebDriverAssert.*;
 import static org.andidev.webdriverextension.WebDriverBot.*;
 import org.andidev.webdriverextension.WebElement;
-import org.andidev.webdriverextension.models.UserRow;
+import org.andidev.webdriverextension.pagemodels.models.UserRow;
 import org.andidev.webdriverextension.site.SiteAware;
 import org.junit.After;
 import org.junit.Before;

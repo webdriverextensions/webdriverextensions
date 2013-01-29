@@ -45,7 +45,6 @@ public class GeneratorPageAwareProcessor extends AbstractExtendedProcessor {
         debug("CREATING METADATA");
         // Create Meta Data
         VelocityContext metaData = new VelocityContext();
-        metaData.put("site", createSiteMetaData());
         metaData.put("pageAware", createPageAwareMetaData());
         metaData.put("pages", createPagesMetaData());
         debug("CREATED METADATA");
@@ -78,26 +77,6 @@ public class GeneratorPageAwareProcessor extends AbstractExtendedProcessor {
         }
     }
 
-    private ClassMetaData createSiteMetaData() {
-        // Create Default Meta Data
-        ClassMetaData siteMetaData = new ClassMetaData();
-
-        // Validate Annotations
-        Set<? extends Element> siteElements = roundEnvironment.getElementsAnnotatedWith(SiteObject.class);
-        if (siteElements.isEmpty()) {
-            return siteMetaData;
-        }
-
-        // Override Meta Data with Class Data
-        TypeElement siteElement = (TypeElement) siteElements.toArray()[0];
-        debug("Creating Site Meta Data from: " + siteElement);
-        siteMetaData.setPackageName(ProcessorUtils.getPackageName(siteElement));
-        siteMetaData.setClassName(ProcessorUtils.getClassName(siteElement));
-        siteMetaData.setFieldName(StringUtils.uncapitalize(siteMetaData.getClassName()));
-
-        return siteMetaData;
-    }
-
     private ClassMetaData createPageAwareMetaData() {
         // Create Default Meta Data
         ClassMetaData pageAwareMetaData = new ClassMetaData();
@@ -113,7 +92,7 @@ public class GeneratorPageAwareProcessor extends AbstractExtendedProcessor {
         debug("Creating PageAware Meta Data from: " + siteElement);
         pageAwareMetaData.setPackageName(ProcessorUtils.getPackageName(siteElement));
         pageAwareMetaData.setClassName("PageAware");
-        pageAwareMetaData.setFieldName(StringUtils.uncapitalize(pageAwareMetaData.getClassName()));
+//        pageAwareMetaData.setClassName(StringUtils.removeEnd(StringUtils.removeEnd(StringUtils.removeEnd(ProcessorUtils.getClassName(siteElement), "Bot"), "Model"), "Site") + "PageAware");
 
         return pageAwareMetaData;
     }
@@ -127,8 +106,21 @@ public class GeneratorPageAwareProcessor extends AbstractExtendedProcessor {
             ClassMetaData pageMetaData = new ClassMetaData();
             pageMetaData.setPackageName(ProcessorUtils.getPackageName((TypeElement) pageElement));
             pageMetaData.setClassName(ProcessorUtils.getClassName((TypeElement) pageElement));
-            pageMetaData.setFieldName(StringUtils.uncapitalize(pageMetaData.getClassName()));
-
+            String name = pageElement.getAnnotation(PageObject.class).name();
+            if (!StringUtils.isEmpty(name)) {
+                pageMetaData.setFieldName(name);
+            } else {
+                pageMetaData.setFieldName(StringUtils.uncapitalize(pageMetaData.getClassName()));
+            }
+//            if (StringUtils.endsWith(pageMetaData.getClassName(), "PageBot")) {
+//                pageMetaData.setFieldName(StringUtils.removeEnd(StringUtils.uncapitalize(pageMetaData.getClassName()), "Bot"));
+//            } else if (StringUtils.endsWith(pageMetaData.getClassName(), "PageModel")) {
+//                pageMetaData.setFieldName(StringUtils.removeEnd(StringUtils.uncapitalize(pageMetaData.getClassName()), "Model"));
+//            } else if (StringUtils.endsWith(pageMetaData.getClassName(), "PageObject")) {
+//                pageMetaData.setFieldName(StringUtils.removeEnd(StringUtils.uncapitalize(pageMetaData.getClassName()), "Object"));
+//            } else {
+//                pageMetaData.setFieldName(StringUtils.uncapitalize(pageMetaData.getClassName()));
+//            }
             pagesMetaData.add(pageMetaData);
         }
 

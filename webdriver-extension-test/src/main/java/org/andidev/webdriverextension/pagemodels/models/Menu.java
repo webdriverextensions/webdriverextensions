@@ -1,4 +1,4 @@
-package org.andidev.webdriverextension.models;
+package org.andidev.webdriverextension.pagemodels.models;
 
 import org.andidev.webdriverextension.WebElement;
 import org.andidev.webdriverextension.annotation.Delegate;
