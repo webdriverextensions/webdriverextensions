@@ -3,11 +3,11 @@ package org.andidev.webdriverextension.page;
 import org.andidev.webdriverextension.WebPage;
 import static org.andidev.webdriverextension.WebDriverAssert.*;
 import org.andidev.webdriverextension.WebElement;
-import org.andidev.webdriverextension.annotation.Page;
+import org.andidev.webdriverextension.annotation.PageObject;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
 
-@Page
+@PageObject
 public class HomePage extends WebPage {
 
     @FindBy(css = "nav a.examples")

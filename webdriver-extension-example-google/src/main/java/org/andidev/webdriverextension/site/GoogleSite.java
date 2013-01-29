@@ -1,9 +1,9 @@
 package org.andidev.webdriverextension.site;
 
-import org.andidev.webdriverextension.annotation.Site;
+import org.andidev.webdriverextension.annotation.SiteObject;
 import org.openqa.selenium.WebDriver;
 
-@Site
+@SiteObject
 public class GoogleSite extends WebSite {
 
     public GoogleSite(WebDriver driver) {

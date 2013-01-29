@@ -5,15 +5,15 @@ import java.util.TreeSet;
 import javax.annotation.processing.*;
 import javax.lang.model.SourceVersion;
 import javax.lang.model.element.*;
-import org.andidev.webdriverextension.annotation.Page;
-import org.andidev.webdriverextension.annotation.Site;
+import org.andidev.webdriverextension.annotation.PageObject;
+import org.andidev.webdriverextension.annotation.SiteObject;
 import org.andidev.webdriverextension.generator.util.AbstractExtendedProcessor;
 import org.andidev.webdriverextension.generator.util.ClassMetaData;
 import org.andidev.webdriverextension.generator.util.ProcessorUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.velocity.VelocityContext;
 
-@SupportedAnnotationTypes({"org.andidev.webdriverextension.annotation.Site"})
+@SupportedAnnotationTypes({"org.andidev.webdriverextension.annotation.SiteObject"})
 @SupportedSourceVersion(SourceVersion.RELEASE_6)
 public class GeneratorSiteAwareProcessor extends AbstractExtendedProcessor {
 
@@ -59,13 +59,13 @@ public class GeneratorSiteAwareProcessor extends AbstractExtendedProcessor {
     }
 
     private void validateSiteAnnotation() {
-        Set<? extends Element> siteElements = roundEnvironment.getElementsAnnotatedWith(Site.class);
-        debug("@Site Annotated Classes: " + siteElements);
+        Set<? extends Element> siteElements = roundEnvironment.getElementsAnnotatedWith(SiteObject.class);
+        debug("@SiteObject Annotated Classes: " + siteElements);
         if (siteElements.isEmpty()) {
-            warn("No @Site annotation was found! Using default name Site for generated site class.");
+            warn("No @SiteObject annotation was found! Using default name Site for generated site class.");
         }
         if (siteElements.size() > 1) {
-            error("More than one @Site annotation was found! Only one @Site annotation must be set. Please ensure that and recompile!");
+            error("More than one @SiteObject annotation was found! Only one @SiteObject annotation must be set. Please ensure that and recompile!");
         }
     }
 
@@ -74,7 +74,7 @@ public class GeneratorSiteAwareProcessor extends AbstractExtendedProcessor {
         ClassMetaData siteAwareMetaData = new ClassMetaData();
 
         // Validate Annotations
-        Set<? extends Element> siteElements = roundEnvironment.getElementsAnnotatedWith(Site.class);
+        Set<? extends Element> siteElements = roundEnvironment.getElementsAnnotatedWith(SiteObject.class);
         if (siteElements.isEmpty()) {
             return siteAwareMetaData;
         }
@@ -93,7 +93,7 @@ public class GeneratorSiteAwareProcessor extends AbstractExtendedProcessor {
         ClassMetaData siteMetaData = new ClassMetaData();
 
         // Validate Annotations
-        Set<? extends Element> siteElements = roundEnvironment.getElementsAnnotatedWith(Site.class);
+        Set<? extends Element> siteElements = roundEnvironment.getElementsAnnotatedWith(SiteObject.class);
         if (siteElements.isEmpty()) {
             return siteMetaData;
         }
@@ -110,7 +110,7 @@ public class GeneratorSiteAwareProcessor extends AbstractExtendedProcessor {
 
     private Set<ClassMetaData> createPagesMetaData() {
         Set<ClassMetaData> pagesMetaData = new TreeSet();
-        Set<? extends Element> pageElements = roundEnvironment.getElementsAnnotatedWith(Page.class);
+        Set<? extends Element> pageElements = roundEnvironment.getElementsAnnotatedWith(PageObject.class);
         debug("Creating Page Meta Data from: " + pageElements);
         for (Element pageElement : pageElements) {
             // Create Default Meta Data

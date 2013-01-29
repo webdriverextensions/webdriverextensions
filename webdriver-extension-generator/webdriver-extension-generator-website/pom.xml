@@ -10,7 +10,7 @@
     <packaging>jar</packaging>
 
     <name>WebDriver Extension Generator WebSite</name>
-    <description>Generates WebSite classes from @Site and @Page annotation included in the WebDriver Extension Framework</description>
+    <description>Generates WebSite classes from @SiteObject and @PageObject annotation included in the WebDriver Extension Framework</description>
     <url>https://github.com/andidev/webdriver-extension</url>
 
     <properties>
