@@ -10,7 +10,7 @@
     <packaging>pom</packaging>
 
     <name>WebDriver Extension</name>
-    <description>WebDriver Enxtention is a framework that exdends the WebDriver framework with components that encourages the PageObject pattern and Bot Style testning</description>
+    <description>WebDriver Extension is a framework that exdends the WebDriver framework with components that encourages the PageObject pattern and Bot Style testning</description>
     <url>https://github.com/andidev/webdriver-extension</url>
 
     <licenses>
@@ -37,12 +37,13 @@
             <id>andidev</id>
             <name>Anders Steiner</name>
             <email>anders.steiner@gmail.com</email>
+            <organization>AndiDev</organization>
+            <organizationUrl>http://www.andidev.org</organizationUrl>
             <roles>
                 <role>author</role>
                 <role>architect</role>
                 <role>developer</role>
             </roles>
-            <organization>http://www.andidev.org</organization>
         </developer>
     </developers>
 
