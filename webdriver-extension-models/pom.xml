@@ -6,7 +6,7 @@
 
     <groupId>org.andidev</groupId>
     <artifactId>webdriver-extension-models</artifactId>
-    <version>1.0.0.M1-SNAPSHOT</version>
+    <version>1.0.0-SNAPSHOT</version>
     <packaging>jar</packaging>
 
     <name>WebDriver Extension Models</name>
