@@ -3,7 +3,7 @@
 
     <groupId>org.andidev</groupId>
     <artifactId>webdriver-extension-test</artifactId>
-    <version>1.0.0</version>
+    <version>1.0.0-SNAPSHOT</version>
 
     <name>WebDriver Extension Test</name>
     <description>Contains tests used for testing test the WebDriver Extension Framework</description>

@@ -3,7 +3,7 @@
 
     <groupId>org.andidev</groupId>
     <artifactId>webdriver-extension-generator-annotation-processor-service</artifactId>
-    <version>1.0.0</version>
+    <version>1.0.0-SNAPSHOT</version>
     <packaging>jar</packaging>
 
     <name>WebDriver Extension Generator Annotation Processor Service</name>
