@@ -15,7 +15,7 @@ public class ExamplesPageTest extends SiteAware {
     Double delayTime = 0.0;
 
     public ExamplesPageTest() {
-        super(new FirefoxDriver());
+        setDriver(new FirefoxDriver());
     }
 
     @Before

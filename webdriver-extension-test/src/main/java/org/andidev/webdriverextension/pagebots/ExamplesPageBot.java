@@ -5,14 +5,9 @@ import static org.andidev.webdriverextension.WebDriverBot.*;
 import org.andidev.webdriverextension.annotation.PageObject;
 import org.andidev.webdriverextension.pagemodels.ExamplesPageModel;
 import org.andidev.webdriverextension.pagemodels.models.UserRow;
-import org.openqa.selenium.WebDriver;
 
 @PageObject(name = "examplesPage")
 public class ExamplesPageBot extends ExamplesPageModel {
-
-    public ExamplesPageBot(WebDriver driver) {
-        super(driver);
-    }
 
     @Override
     public void open() {

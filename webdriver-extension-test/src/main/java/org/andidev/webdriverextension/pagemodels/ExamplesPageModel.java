@@ -7,14 +7,9 @@ import org.andidev.webdriverextension.pagemodels.models.Menu;
 import org.andidev.webdriverextension.pagemodels.models.MenuButtonGroup;
 import org.andidev.webdriverextension.pagemodels.models.UserRow;
 import org.andidev.webdriverextension.pagemodels.models.UserTableSearchContext;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
 
 public abstract class ExamplesPageModel extends WebPage {
-
-    public ExamplesPageModel(WebDriver driver) {
-        super(driver);
-    }
 
     // Section: WebElements
     @FindBy(css = "#search-query")

@@ -6,11 +6,12 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.andidev.webdriverextension.site.WebDriverExtensionSite;
 
-public class SearchPageTest extends SiteAware {
+public class SearchPageTest extends PageAware {
 
     public SearchPageTest() {
-        super(new FirefoxDriver());
+        setDriver(new FirefoxDriver());
     }
 
     @Before

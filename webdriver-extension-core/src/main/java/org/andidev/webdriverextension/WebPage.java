@@ -7,12 +7,11 @@ public abstract class WebPage implements Openable {
 
     private WebDriver driver;
 
-    public WebPage(WebDriver driver) {
-        // Set WebDriver
-        this.driver = driver;
+    public WebPage() {
+    }
 
-        // Init WebElements
-        PageFactory.initElements(new DefaultWebElementFieldDecorator(driver), this);
+    public WebPage(WebDriver driver) {
+        setDriver(driver);
     }
 
     public WebDriver getDriver() {
@@ -20,9 +19,7 @@ public abstract class WebPage implements Openable {
     }
 
     public void setDriver(WebDriver driver) {
-        // Set WebDriver
         this.driver = driver;
-
         // Init WebElements
         PageFactory.initElements(new DefaultWebElementFieldDecorator(driver), this);
     }

@@ -18,12 +18,9 @@ public class ${siteAware.className} {
     public ${page.className} ${page.fieldName};
 #end
 
-    public ${siteAware.className}(WebDriver driver) {
-        // Set WebDriver
-        this.driver = driver;
-
+    public ${siteAware.className}() {
         // Instantiate SiteObject
-        ${site.fieldName} = new ${site.className}(driver);
+        ${site.fieldName} = new ${site.className}();
 
         // Set PageObjects
 #foreach($page in $pages)
@@ -31,12 +28,16 @@ public class ${siteAware.className} {
 #end
     }
 
+    public ${siteAware.className}(WebDriver driver) {
+        this();
+        this.setDriver(driver);
+    }
+
     public WebDriver getDriver() {
         return driver;
     }
 
-    public void setDriver(WebDriver driver) {
-        // Set WebDriver
+    public ${siteAware.className} setDriver(WebDriver driver) {
         this.driver = driver;
 
         // Set SiteObject WebDriver
@@ -46,5 +47,6 @@ public class ${siteAware.className} {
 #foreach($page in $pages)
         ${page.fieldName}.setDriver(driver);
 #end
+        return this;
     }
 }

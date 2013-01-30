@@ -6,18 +6,19 @@ public abstract class WebSite implements Openable {
 
     private WebDriver driver;
 
+    public WebSite() {
+    }
     public WebSite(WebDriver driver) {
-        // Set WebDriver
-        this.driver = driver;
+        setDriver(driver);
     }
 
     public WebDriver getDriver() {
         return driver;
     }
 
-    public void setDriver(WebDriver driver) {
-        // Set WebDriver
+    public WebSite setDriver(WebDriver driver) {
         this.driver = driver;
+        return this;
     }
 
     public abstract String getUrl();

@@ -13,22 +13,24 @@ public abstract class ${siteModel.className} extends WebSite {
     public ${page.className} ${page.fieldName};
 #end
 
-    public ${siteModel.className}(WebDriver driver) {
-        super(driver);
-
+    public ${siteModel.className}() {
         // Instantiate PageObjects
 #foreach($page in $pages)
-        ${page.fieldName} = new ${page.className}(driver);
+        ${page.fieldName} = new ${page.className}();
 #end
     }
 
-    @Override
-    public void setDriver(WebDriver driver) {
-        super.setDriver(driver);
+    public ${siteModel.className}(WebDriver driver) {
+        this();
+        this.setDriver(driver);
+    }
 
+    @Override
+    public WebSite setDriver(WebDriver driver) {
         // Set WebDriver in PageObjects
 #foreach($page in $pages)
         ${page.fieldName}.setDriver(driver);
 #end
+        return super.setDriver(driver);
     }
 }

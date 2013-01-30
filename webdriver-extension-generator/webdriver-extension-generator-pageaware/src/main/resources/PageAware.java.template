@@ -14,28 +14,30 @@ public abstract class ${pageAware.className} {
     public ${page.className} ${page.fieldName};
 #end
 
-    public ${pageAware.className}(WebDriver driver) {
-        // Set WebDriver
-        this.driver = driver;
-
+    public ${pageAware.className}() {
         // Instantiate PageObjects
 #foreach($page in $pages)
-        ${page.fieldName} = new ${page.className}(driver);
+        ${page.fieldName} = new ${page.className}();
 #end
+    }
+
+    public ${pageAware.className}(WebDriver driver) {
+        this();
+        this.setDriver(driver);
     }
 
     public WebDriver getDriver() {
         return driver;
     }
 
-    public void setDriver(WebDriver driver) {
-        // Set WebDriver
+    public ${pageAware.className} setDriver(WebDriver driver) {
         this.driver = driver;
 
         // Set WebDriver in PageObjects
 #foreach($page in $pages)
         ${page.fieldName}.setDriver(driver);
 #end
+        return this;
     }
 
 }

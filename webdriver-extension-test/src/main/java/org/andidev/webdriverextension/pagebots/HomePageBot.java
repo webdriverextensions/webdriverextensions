@@ -8,10 +8,6 @@ import org.openqa.selenium.WebDriver;
 @PageObject(name = "homePage")
 public class HomePageBot extends HomePageModel {
 
-    public HomePageBot(WebDriver driver) {
-        super(driver);
-    }
-
     @Override
     public void open() {
         getDriver().get("http://andidev.github.com/webdriver-extension/index.html");
