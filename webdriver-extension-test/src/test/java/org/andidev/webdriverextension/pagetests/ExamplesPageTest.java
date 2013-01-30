@@ -1,4 +1,4 @@
-package org.andidev.webdriverextension.testcase;
+package org.andidev.webdriverextension.pagetests;
 
 import static org.andidev.webdriverextension.WebDriverAssert.*;
 import static org.andidev.webdriverextension.WebDriverBot.*;
