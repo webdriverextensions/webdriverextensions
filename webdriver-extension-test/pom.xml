@@ -9,6 +9,12 @@
     <description>Contains tests used for testing test the WebDriver Extension Framework</description>
     <url>https://github.com/andidev/webdriver-extension</url>
 
+    <parent>
+        <groupId>org.sonatype.oss</groupId>
+        <artifactId>oss-parent</artifactId>
+        <version>7</version>
+    </parent>
+
     <properties>
         <!-- File Encoding -->
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

@@ -10,6 +10,12 @@
     <description>Generator/Annotation Processors used in the WebDriver Extension Framework</description>
     <url>https://github.com/andidev/webdriver-extension</url>
 
+    <parent>
+        <groupId>org.sonatype.oss</groupId>
+        <artifactId>oss-parent</artifactId>
+        <version>7</version>
+    </parent>
+
     <modules>
         <module>webdriver-extension-generator-util</module>
         <module>webdriver-extension-generator-sitemodel</module>

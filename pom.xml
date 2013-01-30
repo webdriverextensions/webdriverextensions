@@ -22,7 +22,7 @@
         <connection>scm:git:git@github.com:andidev/webdriver-extension.git</connection>
         <developerConnection>scm:git:git@github.com:andidev/webdriver-extension.git</developerConnection>
         <url>git@github.com:andidev/webdriver-extension.git</url>
-  </scm>
+    </scm>
 
     <organization>
         <name>AndiDev</name>

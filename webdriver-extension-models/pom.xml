@@ -9,6 +9,12 @@
     <version>1.0.0-SNAPSHOT-SNAPSHOT</version>
     <packaging>jar</packaging>
 
+    <parent>
+        <groupId>org.sonatype.oss</groupId>
+        <artifactId>oss-parent</artifactId>
+        <version>7</version>
+    </parent>
+
     <name>WebDriver Extension Models</name>
     <description>Cnntains the objects for basic html tag interaction e.g. table tags, list tags, etc.</description>
     <url>https://github.com/andidev/webdriver-extension</url>
