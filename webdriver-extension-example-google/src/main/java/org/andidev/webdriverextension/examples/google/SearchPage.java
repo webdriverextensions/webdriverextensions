@@ -7,7 +7,7 @@ import org.andidev.webdriverextension.annotation.PageObject;
 import org.openqa.selenium.support.FindBy;
 
 @PageObject
-public class SearchPage extends WebPage {
+public class SearchPage extends WebPage<GoogleSite> {
 
     // Web Elements
     @FindBy(css = "[name='q']")

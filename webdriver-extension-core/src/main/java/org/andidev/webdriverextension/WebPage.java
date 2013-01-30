@@ -3,9 +3,10 @@ package org.andidev.webdriverextension;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
 
-public abstract class WebPage implements Openable {
+public abstract class WebPage<S> implements Openable {
 
     private WebDriver driver;
+    public S site;
 
     public WebPage() {
     }

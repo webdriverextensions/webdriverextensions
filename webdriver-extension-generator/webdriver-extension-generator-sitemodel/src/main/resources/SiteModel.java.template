@@ -17,6 +17,7 @@ public abstract class ${siteModel.className} extends WebSite {
         // Instantiate PageObjects
 #foreach($page in $pages)
         ${page.fieldName} = new ${page.className}();
+        ${page.fieldName}.site = (${site.className}) this;
 #end
     }
 

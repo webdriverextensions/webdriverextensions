@@ -46,6 +46,7 @@ public class GeneratorSiteModelProcessor extends AbstractExtendedProcessor {
         debug("CREATING METADATA");
         // Create Meta Data
         VelocityContext metaData = new VelocityContext();
+        metaData.put("site", createSiteMetaData());
         metaData.put("siteModel", createSiteModelMetaData());
         metaData.put("pages", createPagesMetaData());
         debug("CREATED METADATA");
@@ -78,6 +79,41 @@ public class GeneratorSiteModelProcessor extends AbstractExtendedProcessor {
         }
     }
 
+    private ClassMetaData createSiteMetaData() {
+        // Create Default Meta Data
+        ClassMetaData siteMetaData = new ClassMetaData();
+
+        // Validate Annotations
+        Set<? extends Element> siteElements = roundEnvironment.getElementsAnnotatedWith(SiteObject.class);
+        if (siteElements.isEmpty()) {
+            return siteMetaData;
+        }
+
+        // Override Meta Data with Class Data
+        TypeElement siteElement = (TypeElement) siteElements.toArray()[0];
+        debug("Creating Site Meta Data from: " + siteElement);
+        siteMetaData.setPackageName(ProcessorUtils.getPackageName(siteElement));
+        siteMetaData.setClassName(ProcessorUtils.getClassName(siteElement));
+        String name = siteElement.getAnnotation(SiteObject.class).name();
+        if (!StringUtils.isEmpty(name)) {
+            siteMetaData.setFieldName(name);
+        } else {
+            siteMetaData.setFieldName(StringUtils.uncapitalize(siteMetaData.getClassName()));
+        }
+
+//        if (StringUtils.endsWith(siteMetaData.getClassName(), "SiteBot")) {
+//            siteMetaData.setFieldName(StringUtils.removeEnd(StringUtils.uncapitalize(siteMetaData.getClassName()), "Bot"));
+//        } else if (StringUtils.endsWith(siteMetaData.getClassName(), "SiteModel")) {
+//            siteMetaData.setFieldName(StringUtils.removeEnd(StringUtils.uncapitalize(siteMetaData.getClassName()), "Model"));
+//        } else if (StringUtils.endsWith(siteMetaData.getClassName(), "SiteObject")) {
+//            siteMetaData.setFieldName(StringUtils.removeEnd(StringUtils.uncapitalize(siteMetaData.getClassName()), "Object"));
+//        } else {
+//            siteMetaData.setFieldName(StringUtils.uncapitalize(siteMetaData.getClassName()));
+//        }
+
+        return siteMetaData;
+    }
+    
     private ClassMetaData createSiteModelMetaData() {
         // Create Default Meta Data
         ClassMetaData siteModelMetaData = new ClassMetaData();
