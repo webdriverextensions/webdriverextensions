@@ -55,7 +55,6 @@
 
     <modules>
         <module>webdriver-extension-core</module>
-        <module>webdriver-extension-models</module>
         <module>webdriver-extension-generator</module>
         <module>webdriver-extension-test</module>
         <module>webdriver-extension-example-google</module>
@@ -81,6 +80,11 @@
                     <!--<verbose>true</verbose>-->
                     <!--<showWarnings>true</showWarnings>-->
                 </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-release-plugin</artifactId>
+                <version>2.4</version>
             </plugin>
         </plugins>
     </build>
