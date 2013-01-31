@@ -6,8 +6,8 @@
     <version>1.0.0-SNAPSHOT</version>
     <packaging>jar</packaging>
 
-    <name>WebDriver Extension Generator Utils</name>
-    <description>Utils used by Annotation Processors</description>
+    <name>Annotation Processor File Generation Utils</name>
+    <description>Utils and help classes that can be used when Generating files with Annotation Processors and Velocity</description>
     <url>https://github.com/andidev/webdriver-extension</url>
 
     <parent>

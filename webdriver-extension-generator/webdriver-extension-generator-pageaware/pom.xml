@@ -7,7 +7,7 @@
     <packaging>jar</packaging>
 
     <name>WebDriver Extension Generator PageAware</name>
-    <description>Generates PageAware classes from @SiteObject and @PageObject annotation included in the WebDriver Extension Framework</description>
+    <description>Generates the PageAware class from @SiteObject and @PageObject annotation</description>
     <url>https://github.com/andidev/webdriver-extension</url>
 
     <parent>
@@ -19,8 +19,6 @@
     <properties>
         <!-- File Encoding -->
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-
-        <!-- Dependency Versions -->
     </properties>
 
     <dependencies>

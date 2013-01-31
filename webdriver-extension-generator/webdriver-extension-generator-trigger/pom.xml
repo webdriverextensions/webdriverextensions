@@ -2,12 +2,12 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>org.andidev</groupId>
-    <artifactId>webdriver-extension-generator-annotation-processor-service</artifactId>
+    <artifactId>webdriver-extension-generator-trigger</artifactId>
     <version>1.0.0-SNAPSHOT</version>
     <packaging>jar</packaging>
 
-    <name>WebDriver Extension Generator Annotation Processor Service</name>
-    <description>Service used to enable the generation of SiteModel, SiteAware and PageAware classes</description>
+    <name>WebDriver Extension Generator Trigger</name>
+    <description>Triggers the generation of SiteModel, SiteAware and PageAware classes</description>
     <url>https://github.com/andidev/webdriver-extension</url>
 
     <parent>
@@ -19,9 +19,6 @@
     <properties>
         <!-- File Encoding -->
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-
-        <!-- Dependency Versions -->
-        <velocity.version>1.7</velocity.version>
     </properties>
 
     <dependencies>

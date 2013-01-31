@@ -7,7 +7,7 @@
     <packaging>jar</packaging>
 
     <name>WebDriver Extension Generator SiteModel</name>
-    <description>Generates SiteModel classes from @SiteObject and @PageObject annotation included in the WebDriver Extension Framework</description>
+    <description>Generates the SiteModel class from @SiteObject and @PageObject annotation</description>
     <url>https://github.com/andidev/webdriver-extension</url>
 
     <parent>
@@ -19,8 +19,6 @@
     <properties>
         <!-- File Encoding -->
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-
-        <!-- Dependency Versions -->
     </properties>
 
     <dependencies>

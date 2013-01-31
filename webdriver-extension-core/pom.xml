@@ -7,7 +7,7 @@
     <packaging>jar</packaging>
 
     <name>WebDriver Extension Core</name>
-    <description>Contains the basic core functionality of the Webdriver Extension Framework</description>
+    <description>Core of the Webdriver Extension framework</description>
     <url>https://github.com/andidev/webdriver-extension</url>
 
     <parent>
@@ -32,19 +32,11 @@
             <version>${selenium.version}</version>
         </dependency>
 
-        <!-- Selenium Server -->
-        <dependency>
-            <groupId>org.seleniumhq.selenium</groupId>
-            <artifactId>selenium-server</artifactId>
-            <version>${selenium.version}</version>
-        </dependency>
-
         <!-- JUnit -->
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
             <version>4.11</version>
-            <type>jar</type>
         </dependency>
     </dependencies>
 
