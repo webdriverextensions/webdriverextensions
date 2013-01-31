@@ -23,7 +23,6 @@
         <module>webdriver-extension-generator-project</module>
         <module>webdriver-extension</module>
         <module>webdriver-extension-test</module>
-        <module>webdriver-extension-example-google</module>
     </modules>
 
     <build>
