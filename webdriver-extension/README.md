@@ -1,4 +1,4 @@
-WebDriver Extension Core
+WebDriver Extension
 ===================
 
-Contains the basic core functionality of the Webdriver Extension Framework
+The complete WebDriver Extension framework in one artifact

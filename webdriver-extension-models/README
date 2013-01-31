@@ -1,4 +1,4 @@
 WebDriver Extension Models
 ===================
 
-Cnntains the objects for basic html tag interaction e.g. table tags, list tags, etc.
+Components for basic html tag interaction e.g. table tags, list tags, etc.

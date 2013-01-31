@@ -7,71 +7,45 @@
     <packaging>jar</packaging>
 
     <name>WebDriver Extension</name>
-    <description>WebDriver Extension is a framework that exdends the WebDriver framework with components that makes it easier to apply the PageObject pattern and Bot Style testning pattern</description>
+    <description>The complete WebDriver Extension framework in one artifact</description>
     <url>https://github.com/andidev/webdriver-extension</url>
 
     <parent>
-        <groupId>org.sonatype.oss</groupId>
-        <artifactId>oss-parent</artifactId>
-        <version>7</version>
+        <groupId>org.andidev</groupId>
+        <artifactId>webdriver-extension-parent</artifactId>
+        <version>1.0.0-SNAPSHOT</version>
+        <relativePath>../webdriver-extension-parent</relativePath>
     </parent>
-
-    <properties>
-        <!-- File Encoding -->
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    </properties>
 
     <dependencies>
         <!-- WebDriver Extension Core -->
         <dependency>
             <groupId>org.andidev</groupId>
             <artifactId>webdriver-extension-core</artifactId>
-            <version>${project.version}</version>
         </dependency>
 
         <!-- WebDriver Extension Generator SiteModel -->
         <dependency>
             <groupId>org.andidev</groupId>
             <artifactId>webdriver-extension-generator-sitemodel</artifactId>
-            <version>${project.version}</version>
         </dependency>
 
         <!-- WebDriver Extension Generator SiteAware -->
         <dependency>
             <groupId>org.andidev</groupId>
             <artifactId>webdriver-extension-generator-siteaware</artifactId>
-            <version>${project.version}</version>
         </dependency>
 
         <!-- WebDriver Extension Generator PageAware -->
         <dependency>
             <groupId>org.andidev</groupId>
             <artifactId>webdriver-extension-generator-pageaware</artifactId>
-            <version>${project.version}</version>
         </dependency>
 
-        <!-- WebDriver Extension Generator Annotation Processor Service -->
+        <!-- WebDriver Extension Generator Trigger -->
         <dependency>
             <groupId>org.andidev</groupId>
-            <artifactId>webdriver-extension-generator-annotation-processor-service</artifactId>
-            <version>${project.version}</version>
+            <artifactId>webdriver-extension-generator-trigger</artifactId>
         </dependency>
     </dependencies>
-
-    <build>
-        <plugins>
-            <plugin>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.0</version>
-                <configuration>
-                    <compilerVersion>1.6</compilerVersion>
-                    <source>1.6</source>
-                    <target>1.6</target>
-                    <!--<verbose>true</verbose>-->
-                    <!--<showWarnings>true</showWarnings>-->
-                </configuration>
-            </plugin>
-        </plugins>
-    </build>
-
 </project>

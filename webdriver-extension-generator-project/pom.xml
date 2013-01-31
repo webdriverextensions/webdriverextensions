@@ -2,28 +2,26 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>org.andidev</groupId>
-    <artifactId>webdriver-extension-project</artifactId>
+    <artifactId>webdriver-extension-generator-project</artifactId>
     <version>1.0.0-SNAPSHOT</version>
     <packaging>pom</packaging>
 
-    <name>WebDriver Extension Project</name>
-    <description>Project pom for the WebDriver Extension framework</description>
+    <name>WebDriver Extension Generator Project</name>
+    <description>Project pom for Generator/Annotation Processors</description>
     <url>https://github.com/andidev/webdriver-extension</url>
 
     <parent>
         <groupId>org.andidev</groupId>
         <artifactId>webdriver-extension-parent</artifactId>
         <version>1.0.0-SNAPSHOT</version>
-        <relativePath>webdriver-extension-parent</relativePath>
+        <relativePath>../webdriver-extension-parent</relativePath>
     </parent>
 
     <modules>
-        <module>webdriver-extension-parent</module>
-        <module>webdriver-extension-core</module>
-        <module>webdriver-extension-generator-project</module>
-        <module>webdriver-extension</module>
-        <module>webdriver-extension-test</module>
-        <module>webdriver-extension-example-google</module>
+        <module>webdriver-extension-generator-sitemodel</module>
+        <module>webdriver-extension-generator-siteaware</module>
+        <module>webdriver-extension-generator-pageaware</module>
+        <module>webdriver-extension-generator-trigger</module>
     </modules>
 
     <build>
