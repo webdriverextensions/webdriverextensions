@@ -1,15 +1,15 @@
 package org.andidev.webdriverextension.generator.util;
 
+import javax.lang.model.element.Element;
 import javax.lang.model.element.PackageElement;
-import javax.lang.model.element.TypeElement;
 
-public class ProcessorUtils {
+public class ElementUtils {
 
-    public static String getPackageName(TypeElement element) {
+    public static String getPackageName(Element element) {
         return ((PackageElement) element.getEnclosingElement()).getQualifiedName().toString();
     }
 
-    public static String getClassName(TypeElement element) {
+    public static String getClassName(Element element) {
         return element.getSimpleName().toString();
     }
 }

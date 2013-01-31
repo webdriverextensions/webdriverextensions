@@ -9,7 +9,7 @@ import org.andidev.webdriverextension.annotation.PageObject;
 import org.andidev.webdriverextension.annotation.SiteObject;
 import org.andidev.webdriverextension.generator.util.AbstractExtendedProcessor;
 import org.andidev.webdriverextension.generator.util.ClassMetaData;
-import org.andidev.webdriverextension.generator.util.ProcessorUtils;
+import org.andidev.webdriverextension.generator.util.ElementUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.velocity.VelocityContext;
 
@@ -88,9 +88,9 @@ public class GeneratorPageAwareProcessor extends AbstractExtendedProcessor {
         }
 
         // Override Meta Data with Class Data
-        TypeElement siteElement = (TypeElement) siteElements.toArray()[0];
+        Element siteElement = (Element) siteElements.toArray()[0];
         debug("Creating PageAware Meta Data from: " + siteElement);
-        pageAwareMetaData.setPackageName(ProcessorUtils.getPackageName(siteElement));
+        pageAwareMetaData.setPackageName(ElementUtils.getPackageName(siteElement));
         pageAwareMetaData.setClassName("PageAware");
 //        pageAwareMetaData.setClassName(StringUtils.removeEnd(StringUtils.removeEnd(StringUtils.removeEnd(ProcessorUtils.getClassName(siteElement), "Bot"), "Model"), "Site") + "PageAware");
 
@@ -104,8 +104,8 @@ public class GeneratorPageAwareProcessor extends AbstractExtendedProcessor {
         for (Element pageElement : pageElements) {
             // Create Default Meta Data
             ClassMetaData pageMetaData = new ClassMetaData();
-            pageMetaData.setPackageName(ProcessorUtils.getPackageName((TypeElement) pageElement));
-            pageMetaData.setClassName(ProcessorUtils.getClassName((TypeElement) pageElement));
+            pageMetaData.setPackageName(ElementUtils.getPackageName(pageElement));
+            pageMetaData.setClassName(ElementUtils.getClassName(pageElement));
             String name = pageElement.getAnnotation(PageObject.class).name();
             if (!StringUtils.isEmpty(name)) {
                 pageMetaData.setFieldName(name);
