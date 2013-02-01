@@ -8,9 +8,10 @@ import javax.lang.model.element.*;
 import org.andidev.annotationprocessorvelocityutils.AbstractExtendedProcessor;
 import org.andidev.annotationprocessorvelocityutils.ClassMetaData;
 import org.andidev.annotationprocessorvelocityutils.ElementUtils;
+import org.andidev.webdriverextension.PageObjectUtils;
+import org.andidev.webdriverextension.SiteObjectUtils;
 import org.andidev.webdriverextension.annotation.PageObject;
 import org.andidev.webdriverextension.annotation.SiteObject;
-import org.apache.commons.lang.StringUtils;
 import org.apache.velocity.VelocityContext;
 
 @SupportedAnnotationTypes({"org.andidev.webdriverextension.annotation.SiteObject"})
@@ -93,22 +94,7 @@ public class GeneratorSiteModelProcessor extends AbstractExtendedProcessor {
         debug("Creating Site Meta Data from: " + siteElement);
         siteMetaData.setPackageName(ElementUtils.getPackageName(siteElement));
         siteMetaData.setClassName(ElementUtils.getClassName(siteElement));
-        String name = siteElement.getAnnotation(SiteObject.class).name();
-        if (!StringUtils.isEmpty(name)) {
-            siteMetaData.setFieldName(name);
-        } else {
-            siteMetaData.setFieldName(StringUtils.uncapitalize(siteMetaData.getClassName()));
-        }
-
-//        if (StringUtils.endsWith(siteMetaData.getClassName(), "SiteBot")) {
-//            siteMetaData.setFieldName(StringUtils.removeEnd(StringUtils.uncapitalize(siteMetaData.getClassName()), "Bot"));
-//        } else if (StringUtils.endsWith(siteMetaData.getClassName(), "SiteModel")) {
-//            siteMetaData.setFieldName(StringUtils.removeEnd(StringUtils.uncapitalize(siteMetaData.getClassName()), "Model"));
-//        } else if (StringUtils.endsWith(siteMetaData.getClassName(), "SiteObject")) {
-//            siteMetaData.setFieldName(StringUtils.removeEnd(StringUtils.uncapitalize(siteMetaData.getClassName()), "Object"));
-//        } else {
-//            siteMetaData.setFieldName(StringUtils.uncapitalize(siteMetaData.getClassName()));
-//        }
+        siteMetaData.setFieldName(SiteObjectUtils.getName(siteElement));
 
         return siteMetaData;
     }
@@ -128,13 +114,7 @@ public class GeneratorSiteModelProcessor extends AbstractExtendedProcessor {
         debug("Creating SiteModel Meta Data from: " + siteElement);
         siteModelMetaData.setPackageName(ElementUtils.getPackageName(siteElement));
         siteModelMetaData.setClassName("SiteModel");
-//        if (StringUtils.endsWith(ProcessorUtils.getClassName(siteElement), "SiteBot")) {
-//            siteModelMetaData.setClassName(StringUtils.removeEnd(ProcessorUtils.getClassName(siteElement), "Bot") + "Model");
-//        } else if (StringUtils.endsWith(ProcessorUtils.getClassName(siteElement), "SiteObject")) {
-//            siteModelMetaData.setClassName(StringUtils.removeEnd(ProcessorUtils.getClassName(siteElement), "Object") + "Model");
-//        } else {
-//            siteModelMetaData.setClassName(ProcessorUtils.getClassName(siteElement) + "Model");
-//        }
+
         return siteModelMetaData;
     }
 
@@ -147,21 +127,7 @@ public class GeneratorSiteModelProcessor extends AbstractExtendedProcessor {
             ClassMetaData pageMetaData = new ClassMetaData();
             pageMetaData.setPackageName(ElementUtils.getPackageName(pageElement));
             pageMetaData.setClassName(ElementUtils.getClassName(pageElement));
-            String name = pageElement.getAnnotation(PageObject.class).name();
-            if (!StringUtils.isEmpty(name)) {
-                pageMetaData.setFieldName(name);
-            } else {
-                pageMetaData.setFieldName(StringUtils.uncapitalize(pageMetaData.getClassName()));
-            }
-//            if (StringUtils.endsWith(pageMetaData.getClassName(), "PageBot")) {
-//                pageMetaData.setFieldName(StringUtils.removeEnd(StringUtils.uncapitalize(pageMetaData.getClassName()), "Bot"));
-//            } else if (StringUtils.endsWith(pageMetaData.getClassName(), "PageModel")) {
-//                pageMetaData.setFieldName(StringUtils.removeEnd(StringUtils.uncapitalize(pageMetaData.getClassName()), "Model"));
-//            } else if (StringUtils.endsWith(pageMetaData.getClassName(), "PageObject")) {
-//                pageMetaData.setFieldName(StringUtils.removeEnd(StringUtils.uncapitalize(pageMetaData.getClassName()), "Object"));
-//            } else {
-//                pageMetaData.setFieldName(StringUtils.uncapitalize(pageMetaData.getClassName()));
-//            }
+            pageMetaData.setFieldName(PageObjectUtils.getName(pageElement));
             pagesMetaData.add(pageMetaData);
         }
 
