@@ -41,17 +41,6 @@ public class GeneratorSiteModelProcessor extends AbstractExtendedProcessor {
         return SourceVersion.latestSupported();
     }
 
-    private VelocityContext createMetaData() {
-        debug("CREATING METADATA");
-        // Create Meta Data
-        VelocityContext metaData = new VelocityContext();
-        metaData.put("site", createSiteMetaData());
-        metaData.put("siteModel", createSiteModelMetaData());
-        metaData.put("pages", createPagesMetaData());
-        debug("CREATED METADATA");
-        return metaData;
-    }
-
     private void validateAnnotations() {
         debug("VALIDATING ANNOTATIONS");
         validateSiteAnnotation();
@@ -76,6 +65,17 @@ public class GeneratorSiteModelProcessor extends AbstractExtendedProcessor {
         if (pageElements.isEmpty()) {
             warn("No @PageObject annotations where found! Nothing to add to generated site class.");
         }
+    }
+
+    private VelocityContext createMetaData() {
+        debug("CREATING METADATA");
+        // Create Meta Data
+        VelocityContext metaData = new VelocityContext();
+        metaData.put("site", createSiteMetaData());
+        metaData.put("siteModel", createSiteModelMetaData());
+        metaData.put("pages", createPagesMetaData());
+        debug("CREATED METADATA");
+        return metaData;
     }
 
     private ClassMetaData createSiteMetaData() {

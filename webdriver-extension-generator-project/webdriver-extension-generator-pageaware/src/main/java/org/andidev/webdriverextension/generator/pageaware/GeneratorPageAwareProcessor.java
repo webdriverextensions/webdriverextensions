@@ -41,16 +41,6 @@ public class GeneratorPageAwareProcessor extends AbstractExtendedProcessor {
         return SourceVersion.latestSupported();
     }
 
-    private VelocityContext createMetaData() {
-        debug("CREATING METADATA");
-        // Create Meta Data
-        VelocityContext metaData = new VelocityContext();
-        metaData.put("pageAware", createPageAwareMetaData());
-        metaData.put("pages", createPagesMetaData());
-        debug("CREATED METADATA");
-        return metaData;
-    }
-
     private void validateAnnotations() {
         debug("VALIDATING ANNOTATIONS");
         validateSiteAnnotation();
@@ -75,6 +65,16 @@ public class GeneratorPageAwareProcessor extends AbstractExtendedProcessor {
         if (pageElements.isEmpty()) {
             warn("No @PageObject annotations where found! Nothing to add to generated site class.");
         }
+    }
+
+    private VelocityContext createMetaData() {
+        debug("CREATING METADATA");
+        // Create Meta Data
+        VelocityContext metaData = new VelocityContext();
+        metaData.put("pageAware", createPageAwareMetaData());
+        metaData.put("pages", createPagesMetaData());
+        debug("CREATED METADATA");
+        return metaData;
     }
 
     private ClassMetaData createPageAwareMetaData() {

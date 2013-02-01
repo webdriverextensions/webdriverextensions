@@ -41,17 +41,6 @@ public class GeneratorSiteAwareProcessor extends AbstractExtendedProcessor {
         return SourceVersion.latestSupported();
     }
 
-    private VelocityContext createMetaData() {
-        debug("CREATING METADATA");
-        // Create Meta Data
-        VelocityContext metaData = new VelocityContext();
-        metaData.put("siteAware", createSiteAwareMetaData());
-        metaData.put("site", createSiteMetaData());
-        metaData.put("pages", createPagesMetaData());
-        debug("CREATED METADATA");
-        return metaData;
-    }
-
     private void validateAnnotations() {
         debug("VALIDATING ANNOTATIONS");
         validateSiteAnnotation();
@@ -87,6 +76,17 @@ public class GeneratorSiteAwareProcessor extends AbstractExtendedProcessor {
 //        siteAwareMetaData.setClassName(StringUtils.removeEnd(StringUtils.removeEnd(ProcessorUtils.getClassName(siteElement), "Bot"), "Model") + "Aware");
 
         return siteAwareMetaData;
+    }
+
+    private VelocityContext createMetaData() {
+        debug("CREATING METADATA");
+        // Create Meta Data
+        VelocityContext metaData = new VelocityContext();
+        metaData.put("siteAware", createSiteAwareMetaData());
+        metaData.put("site", createSiteMetaData());
+        metaData.put("pages", createPagesMetaData());
+        debug("CREATED METADATA");
+        return metaData;
     }
 
     private ClassMetaData createSiteMetaData() {
