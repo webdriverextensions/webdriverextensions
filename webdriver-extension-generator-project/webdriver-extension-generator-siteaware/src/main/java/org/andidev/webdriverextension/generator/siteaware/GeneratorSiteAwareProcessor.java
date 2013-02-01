@@ -5,11 +5,11 @@ import java.util.TreeSet;
 import javax.annotation.processing.*;
 import javax.lang.model.SourceVersion;
 import javax.lang.model.element.*;
+import org.andidev.annotationprocessorvelocityutils.AbstractExtendedProcessor;
+import org.andidev.annotationprocessorvelocityutils.ClassMetaData;
+import org.andidev.annotationprocessorvelocityutils.ElementUtils;
 import org.andidev.webdriverextension.annotation.PageObject;
 import org.andidev.webdriverextension.annotation.SiteObject;
-import org.andidev.webdriverextension.generator.util.AbstractExtendedProcessor;
-import org.andidev.webdriverextension.generator.util.ClassMetaData;
-import org.andidev.webdriverextension.generator.util.ElementUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.velocity.VelocityContext;
 
