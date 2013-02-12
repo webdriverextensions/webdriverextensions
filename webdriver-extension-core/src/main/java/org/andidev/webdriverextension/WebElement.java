@@ -150,4 +150,16 @@ public class WebElement implements org.openqa.selenium.WebElement {
             return wrappedWebElement.getCssValue(propertyName);
         }
     }
+
+    public void click(WebElement webElement) {
+        webElement.click();
+    }
+
+    public void clear(WebElement webElement) {
+        webElement.clear();
+    }
+
+    public boolean isDisplayed(WebElement webElement) {
+        return webElement.isDisplayed();
+    }
 }

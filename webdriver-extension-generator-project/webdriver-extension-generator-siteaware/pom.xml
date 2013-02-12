@@ -25,11 +25,23 @@
             <scope>compile</scope>
         </dependency>
 
-        <!-- Annotation Processor Velocity Utils -->
+        <!-- Annotation Processor Utils -->
         <dependency>
             <groupId>org.andidev</groupId>
-            <artifactId>annotation-processor-velocity-utils</artifactId>
+            <artifactId>annotation-processor-utils</artifactId>
             <scope>compile</scope>
+        </dependency>
+
+        <!-- CodeModel -->
+        <dependency>
+            <groupId>com.sun.codemodel</groupId>
+            <artifactId>codemodel</artifactId>
+        </dependency>
+
+        <!-- Lombok -->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
         </dependency>
     </dependencies>
 

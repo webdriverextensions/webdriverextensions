@@ -1,8 +1,11 @@
 package org.andidev.webdriverextension.site;
 
+import org.andidev.webdriverextension.annotation.SiteAwareExtends;
 import org.andidev.webdriverextension.annotation.SiteObject;
+import temp.DriverAware;
 
-@SiteObject
+@SiteObject(name = "site")
+@SiteAwareExtends({DriverAware.class})
 public class WebDriverExtensionSite extends SiteModel {
 
     @Override

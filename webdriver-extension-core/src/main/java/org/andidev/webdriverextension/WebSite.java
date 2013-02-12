@@ -8,6 +8,7 @@ public abstract class WebSite implements Openable {
 
     public WebSite() {
     }
+
     public WebSite(WebDriver driver) {
         setDriver(driver);
     }
@@ -27,6 +28,7 @@ public abstract class WebSite implements Openable {
         driver.get(getUrl());
     }
 
+    @Override
     public boolean isOpen() {
         try {
             assertIsOpen();
@@ -34,5 +36,17 @@ public abstract class WebSite implements Openable {
         } catch (Error e) {
             return false;
         }
+    }
+
+    public void open(Openable openable) {
+        openable.open();
+    }
+
+    public boolean isOpen(Openable openable) {
+        return openable.isOpen();
+    }
+
+    public void assertIsOpen(Openable openable) throws Error {
+        openable.assertIsOpen();
     }
 }

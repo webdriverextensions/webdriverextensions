@@ -20,7 +20,6 @@
     <modules>
         <module>webdriver-extension-generator-sitemodel</module>
         <module>webdriver-extension-generator-siteaware</module>
-        <module>webdriver-extension-generator-pageaware</module>
         <module>webdriver-extension-generator-trigger</module>
     </modules>
 

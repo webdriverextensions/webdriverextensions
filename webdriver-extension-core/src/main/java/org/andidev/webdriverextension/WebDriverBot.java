@@ -9,7 +9,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-public class WebDriverBot {
+public class WebDriverBot extends WebDriverAssert {
 
     public static double delayTime = 0.0;
 

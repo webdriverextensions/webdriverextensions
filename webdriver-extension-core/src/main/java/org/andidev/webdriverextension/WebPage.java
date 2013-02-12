@@ -29,6 +29,7 @@ public abstract class WebPage<S> implements Openable {
         return null;
     }
 
+    @Override
     public boolean isOpen() {
         try {
             assertIsOpen();
@@ -36,5 +37,17 @@ public abstract class WebPage<S> implements Openable {
         } catch (Error e) {
             return false;
         }
+    }
+
+    public void open(Openable openable) {
+        openable.open();
+    }
+
+    public boolean isOpen(Openable openable) {
+        return openable.isOpen();
+    }
+
+    public void assertIsOpen(Openable openable) throws Error {
+        openable.assertIsOpen();
     }
 }
