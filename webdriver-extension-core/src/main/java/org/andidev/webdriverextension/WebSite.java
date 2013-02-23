@@ -21,6 +21,7 @@ public abstract class WebSite implements Openable {
         this.driver = driver;
     }
 
+    @Override
     public abstract String getUrl();
 
     @Override

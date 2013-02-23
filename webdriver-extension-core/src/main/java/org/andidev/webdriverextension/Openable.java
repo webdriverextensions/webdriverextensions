@@ -7,4 +7,6 @@ public interface Openable {
     public boolean isOpen();
 
     public void assertIsOpen() throws Error;
+
+    public String getUrl();
 }

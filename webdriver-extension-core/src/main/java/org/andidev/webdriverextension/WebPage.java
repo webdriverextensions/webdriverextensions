@@ -25,6 +25,7 @@ public abstract class WebPage<S> implements Openable {
         PageFactory.initElements(new DefaultWebElementFieldDecorator(driver), this);
     }
 
+    @Override
     public String getUrl() {
         return null;
     }
