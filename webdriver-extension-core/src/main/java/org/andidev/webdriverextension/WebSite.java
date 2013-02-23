@@ -1,5 +1,6 @@
 package org.andidev.webdriverextension;
 
+import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 
 public abstract class WebSite implements Openable {
@@ -39,6 +40,18 @@ public abstract class WebSite implements Openable {
         }
     }
 
+    @Override
+    public boolean isNotOpen() {
+        return !isOpen();
+    }
+
+    @Override
+    public void assertIsNotOpen() throws Error {
+        if (isNotOpen()) {
+            Assert.fail(this.getClass().getSimpleName() + " is open!");
+        }
+    }
+
     public void open(Openable openable) {
         openable.open();
     }
@@ -47,7 +60,15 @@ public abstract class WebSite implements Openable {
         return openable.isOpen();
     }
 
+    public boolean isNotOpen(Openable openable) {
+        return openable.isNotOpen();
+    }
+
     public void assertIsOpen(Openable openable) throws Error {
         openable.assertIsOpen();
+    }
+
+    public void assertIsNotOpen(Openable openable) throws Error {
+        openable.assertIsNotOpen();
     }
 }

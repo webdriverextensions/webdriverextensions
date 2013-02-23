@@ -1,5 +1,6 @@
 package org.andidev.webdriverextension;
 
+import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
 
@@ -40,6 +41,18 @@ public abstract class WebPage<S> implements Openable {
         }
     }
 
+    @Override
+    public boolean isNotOpen() {
+        return !isOpen();
+    }
+
+    @Override
+    public void assertIsNotOpen() throws Error {
+        if (isNotOpen()) {
+            Assert.fail(this.getClass().getSimpleName() + " is open when it shouldn't!");
+        }
+    }
+
     public void open(Openable openable) {
         openable.open();
     }
@@ -48,7 +61,15 @@ public abstract class WebPage<S> implements Openable {
         return openable.isOpen();
     }
 
+    public boolean isNotOpen(Openable openable) {
+        return openable.isNotOpen();
+    }
+
     public void assertIsOpen(Openable openable) throws Error {
         openable.assertIsOpen();
+    }
+
+    public void assertIsNotOpen(Openable openable) throws Error {
+        openable.assertIsNotOpen();
     }
 }
