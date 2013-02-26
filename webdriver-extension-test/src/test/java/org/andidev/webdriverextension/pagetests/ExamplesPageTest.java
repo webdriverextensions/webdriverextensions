@@ -1,7 +1,7 @@
 package org.andidev.webdriverextension.pagetests;
 
 import lombok.extern.slf4j.Slf4j;
-import static org.andidev.webdriverextension.WebDriverAssert.*;
+import static org.andidev.webdriverextension.WebDriverBot.*;
 import static org.andidev.webdriverextension.WebDriverBot.*;
 import org.andidev.webdriverextension.WebElement;
 import org.andidev.webdriverextension.pagemodels.models.UserRow;

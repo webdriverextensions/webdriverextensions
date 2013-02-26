@@ -1,6 +1,5 @@
 package org.andidev.webdriverextension.pagebots;
 
-import static org.andidev.webdriverextension.WebDriverAssert.*;
 import static org.andidev.webdriverextension.WebDriverBot.*;
 import org.andidev.webdriverextension.annotation.PageObject;
 import org.andidev.webdriverextension.pagemodels.ExamplesPageModel;
