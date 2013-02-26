@@ -1,6 +1,7 @@
 package org.andidev.webdriverextension.pagemodels;
 
 import java.util.List;
+
 import org.andidev.webdriverextension.WebElement;
 import org.andidev.webdriverextension.WebPage;
 import org.andidev.webdriverextension.pagemodels.models.Menu;
@@ -20,6 +21,8 @@ public abstract class ExamplesPageModel extends WebPage<WebDriverExtensionSite> 
     // Section: Extended WebElements
     @FindBy(css = ".btn-group")
     public MenuButtonGroup menuButtonGroup;
+    @FindBy(css = ".btn-group")
+    public MenuButtonGroup menuButtonGroups;
     // Section: List with WebElements
     @FindBy(css = "#todo-list li")
     public List<WebElement> todoList;
@@ -34,4 +37,9 @@ public abstract class ExamplesPageModel extends WebPage<WebDriverExtensionSite> 
     public Menu menu;
 //    @FindBy(css = "#user-table")
 //    public UserTable userTable;
+
+    public ExamplesPageModel() {
+    }
+
+
 }

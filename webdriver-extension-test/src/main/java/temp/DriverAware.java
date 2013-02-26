@@ -4,7 +4,7 @@ import org.openqa.selenium.WebDriver;
 
 public abstract class DriverAware {
 
-    private WebDriver driver;
+    protected WebDriver driver;
 
     public DriverAware() {
     }
