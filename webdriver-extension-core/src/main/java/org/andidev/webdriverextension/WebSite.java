@@ -48,7 +48,7 @@ public abstract class WebSite implements Openable {
     @Override
     public void assertIsNotOpen() throws Error {
         if (isNotOpen()) {
-            Assert.fail(this.getClass().getSimpleName() + " is open!");
+            Assert.fail(this.getClass().getSimpleName() + " is open when it shouldn't!");
         }
     }
 
