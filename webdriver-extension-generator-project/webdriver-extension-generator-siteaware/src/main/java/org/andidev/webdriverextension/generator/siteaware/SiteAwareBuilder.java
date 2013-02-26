@@ -19,7 +19,7 @@ import javax.annotation.processing.ProcessingEnvironment;
 import javax.lang.model.element.ExecutableElement;
 import javax.lang.model.element.TypeElement;
 import javax.lang.model.element.VariableElement;
-import org.andidev.annotationprocessorutils.ElementUtils;
+import static org.andidev.annotationprocessorutils.ElementUtils.*;
 import org.andidev.annotationprocessorutils.JCodeModelUtils;
 import org.andidev.annotationprocessorutils.ProcessingEnvironmentCodeWriter;
 import org.andidev.webdriverextension.PageObjectUtils;
@@ -85,11 +85,11 @@ public class SiteAwareBuilder implements Builder<Boolean> {
     private void init() throws JClassAlreadyExistsException {
         codeModel = new JCodeModel();
         if (isExtended()) {
-            siteAwareClass = codeModel._class(JMod.PUBLIC | JMod.ABSTRACT, ElementUtils.getPackageName(siteObjectElement) + ".SiteAware" + ElementUtils.getClassName(extendedObjectElement), ClassType.CLASS);
-            extendedObjectClass = codeModel.ref(ElementUtils.getFullClassName(extendedObjectElement));
+            siteAwareClass = codeModel._class(JMod.PUBLIC | JMod.ABSTRACT, getPackageName(siteObjectElement) + ".SiteAware" + getClassName(extendedObjectElement), ClassType.CLASS);
+            extendedObjectClass = codeModel.ref(getFullClassName(extendedObjectElement));
             siteAwareClass._extends(extendedObjectClass);
         } else {
-            siteAwareClass = codeModel._class(JMod.PUBLIC | JMod.ABSTRACT, ElementUtils.getPackageName(siteObjectElement) + ".SiteAware", ClassType.CLASS);
+            siteAwareClass = codeModel._class(JMod.PUBLIC | JMod.ABSTRACT, getPackageName(siteObjectElement) + ".SiteAware", ClassType.CLASS);
         }
         webDriverClass = codeModel.ref(WebDriver.class);
         siteObjectClass = codeModel.ref(siteObjectElement.getQualifiedName().toString());
@@ -98,7 +98,9 @@ public class SiteAwareBuilder implements Builder<Boolean> {
 
     private void fields() {
         // Declare Web Driver
-        siteAwareClass.field(JMod.PRIVATE, webDriverClass, "driver");
+        if (!hasSuperDriverField()) {
+            siteAwareClass.field(JMod.PRIVATE, webDriverClass, "driver");
+        }
 
         // Declare SiteObject
         siteAwareClass.field(JMod.PUBLIC, siteObjectClass, getSiteObjectFieldName());
@@ -155,19 +157,19 @@ public class SiteAwareBuilder implements Builder<Boolean> {
     }
 
     private void constructorExtendedConstructors() {
-        for (ExecutableElement constructorElement : ElementUtils.getConstructors(extendedObjectElement)) {
+        for (ExecutableElement constructorElement : getConstructors(extendedObjectElement)) {
             constructorExtendedConstructor(constructorElement);
         }
     }
 
     private void constructorExtendedConstructor(ExecutableElement constructorElement) {
-        log.debug("Creating constructor: {}", ElementUtils.getConstructorName(constructorElement));
-        if (ElementUtils.hasParameter(constructorElement, WebDriver.class)) {
-            log.debug("The constructor {} has class WebDriver class as parameter", ElementUtils.getConstructorName(constructorElement));
+        log.debug("Creating constructor: {}", getConstructorName(constructorElement));
+        if (hasParameter(constructorElement, WebDriver.class)) {
+            log.debug("The constructor {} has class WebDriver class as parameter", getConstructorName(constructorElement));
             JMethod method = siteAwareClass.constructor(JMod.PUBLIC);
             int i = 1;
-            for (VariableElement parameter : ElementUtils.getParameters(constructorElement)) {
-                String parameterName = ElementUtils.getParamenterName(parameter);
+            for (VariableElement parameter : getParameters(constructorElement)) {
+                String parameterName = getParamenterName(parameter);
                 JClass parameterClass = codeModel.ref(parameterName);
                 String parameterFieldName = StringUtils.uncapitalize("arg" + i++);
                 method.param(parameterClass, parameterFieldName);
@@ -178,11 +180,11 @@ public class SiteAwareBuilder implements Builder<Boolean> {
             method.body().assign(JExpr.ref(getSiteObjectFieldName()), JExpr._new(siteObjectClass));
             method.body().invoke("setPageObjects").arg(JExpr.ref(getSiteObjectFieldName()));
         } else {
-            log.debug("The constructor {} does not have class WebDriver class as parameter", ElementUtils.getConstructorName(constructorElement));
+            log.debug("The constructor {} does not have class WebDriver class as parameter", getConstructorName(constructorElement));
             JMethod method = siteAwareClass.constructor(JMod.PUBLIC);
             int i = 1;
-            for (VariableElement parameter : ElementUtils.getParameters(constructorElement)) {
-                String parameterName = ElementUtils.getParamenterName(parameter);
+            for (VariableElement parameter : getParameters(constructorElement)) {
+                String parameterName = getParamenterName(parameter);
                 JClass parameterClass = codeModel.ref(parameterName);
                 String parameterFieldName = StringUtils.uncapitalize("arg" + i++);
                 method.param(parameterClass, parameterFieldName);
@@ -207,24 +209,33 @@ public class SiteAwareBuilder implements Builder<Boolean> {
 
     private void getDriver() {
         // Create getDriver()
-        JMethod method = siteAwareClass.method(JMod.PUBLIC, webDriverClass, "getDriver");
         if (hasSuperGetDriverMethod()) {
+            JMethod method = siteAwareClass.method(JMod.PUBLIC, webDriverClass, "getDriver");
             method.annotate(Override.class);
+            method.body()._return(JExpr.ref("driver"));
+        } else {
+            JMethod method = siteAwareClass.method(JMod.PUBLIC, webDriverClass, "getDriver");
+            method.body()._return(JExpr.ref("driver"));
         }
-        method.body()._return(JExpr.ref("driver"));
     }
 
     private void setDriver() {
         // Create setDriver(...)
-        JMethod method = siteAwareClass.method(JMod.PUBLIC, void.class, "setDriver");
-        method.param(webDriverClass, "driver");
         if (hasSuperSetDriverMethod()) {
+            JMethod method = siteAwareClass.method(JMod.PUBLIC, void.class, "setDriver");
+            method.param(webDriverClass, "driver");
             method.annotate(Override.class);
             method.body().invoke(JExpr._super(), "setDriver").arg(JExpr.ref("driver"));
+            method.body().assign(JExpr._this().ref("driver"), JExpr.ref("driver"));
+            method.body().invoke(JExpr.ref(getSiteObjectFieldName()), "setDriver").arg(JExpr.ref("driver"));
+            method.body().invoke("setPageObjectsDriver").arg(JExpr.ref("driver"));
+        } else {
+            JMethod method = siteAwareClass.method(JMod.PUBLIC, void.class, "setDriver");
+            method.param(webDriverClass, "driver");
+            method.body().assign(JExpr._this().ref("driver"), JExpr.ref("driver"));
+            method.body().invoke(JExpr.ref(getSiteObjectFieldName()), "setDriver").arg(JExpr.ref("driver"));
+            method.body().invoke("setPageObjectsDriver").arg(JExpr.ref("driver"));
         }
-        method.body().assign(JExpr._this().ref("driver"), JExpr.ref("driver"));
-        method.body().invoke(JExpr.ref(getSiteObjectFieldName()), "setDriver").arg(JExpr.ref("driver"));
-        method.body().invoke("setPageObjectsDriver").arg(JExpr.ref("driver"));
     }
 
     private void setPageObjectsDriver() {
@@ -253,10 +264,25 @@ public class SiteAwareBuilder implements Builder<Boolean> {
         return extendedObjectElement != null;
     }
 
+    private boolean hasSuperDriverField() {
+        if (isExtended()) {
+            log.debug("hasField(extendedObjectElement, \"driver\") = {}", hasField(extendedObjectElement, "driver"));
+            log.debug("isPrivate(getField(extendedObjectElement, \"driver\") = {}", isPublic(getField(extendedObjectElement, "driver")));
+            log.debug("isPrivate(getField(extendedObjectElement, \"driver\")) = {}", isProtected(getField(extendedObjectElement, "driver")));
+            if (hasField(extendedObjectElement, "driver")
+                    && (isPublic(getField(extendedObjectElement, "driver")) || isProtected(getField(extendedObjectElement, "driver")))) {
+                log.debug("hasSuperDriverField");
+                return true;
+            }
+        }
+        return false;
+    }
+
     private boolean hasSuperGetDriverMethod() {
         if (isExtended()) {
-            log.debug("hasSuperGetDriverMethod");
-            if (ElementUtils.hasMethod(extendedObjectElement, "getDriver()")) {
+            if (hasMethod(extendedObjectElement, "getDriver()")
+                    && (isPublic(getMethod(extendedObjectElement, "getDriver()")) || isProtected(getMethod(extendedObjectElement, "getDriver()")))) {
+                log.debug("hasSuperGetDriverMethod");
                 return true;
             }
         }
@@ -265,8 +291,9 @@ public class SiteAwareBuilder implements Builder<Boolean> {
 
     private boolean hasSuperSetDriverMethod() {
         if (isExtended()) {
-            log.debug("hasSuperSetDriverMethod");
-            if (ElementUtils.hasMethod(extendedObjectElement, "setDriver(org.openqa.selenium.WebDriver)")) {
+            if (hasMethod(extendedObjectElement, "setDriver(org.openqa.selenium.WebDriver)")
+                    && (isPublic(getMethod(extendedObjectElement, "setDriver(org.openqa.selenium.WebDriver)")) || isProtected(getMethod(extendedObjectElement, "setDriver(org.openqa.selenium.WebDriver)")))) {
+                log.debug("hasSuperSetDriverMethod");
                 return true;
             }
         }

@@ -16,7 +16,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.annotation.processing.ProcessingEnvironment;
 import javax.lang.model.element.TypeElement;
-import org.andidev.annotationprocessorutils.ElementUtils;
+import static org.andidev.annotationprocessorutils.ElementUtils.*;
 import org.andidev.annotationprocessorutils.ProcessingEnvironmentCodeWriter;
 import org.andidev.webdriverextension.PageObjectUtils;
 import org.andidev.webdriverextension.SiteObjectUtils;
@@ -67,7 +67,7 @@ public class SiteModelBuilder implements Builder<Boolean> {
 
     private void init() throws JClassAlreadyExistsException {
         codeModel = new JCodeModel();
-        siteModelClass = codeModel._class(JMod.PUBLIC | JMod.ABSTRACT, ElementUtils.getPackageName(siteObjectElement) + ".SiteModel", ClassType.CLASS);
+        siteModelClass = codeModel._class(JMod.PUBLIC | JMod.ABSTRACT, getPackageName(siteObjectElement) + ".SiteModel", ClassType.CLASS);
         siteModelClass._extends(codeModel.ref(WebSite.class));
         webDriverClass = codeModel.ref(WebDriver.class);
         siteObjectClass = codeModel.ref(siteObjectElement.getQualifiedName().toString());
