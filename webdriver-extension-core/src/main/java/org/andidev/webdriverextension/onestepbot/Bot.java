@@ -281,32 +281,6 @@ public class Bot implements BotI {
     /* Select */
 
     /* Select Option */
-    @Override
-    public void selectOption(String text, WebElement webElement) {
-        new Select(webElement).selectByVisibleText(text);
-    }
-
-    @Override
-    public void selectOptions(List<String> texts, WebElement webElement) {
-        for (String text : texts) {
-            select(text, webElement);
-        }
-    }
-
-    @Override
-    public void select(String text, List<? extends WebElement> webElements) {
-        for (WebElement webElement : webElements) {
-            select(text, webElement);
-        }
-    }
-
-    @Override
-    public void select(List<String> texts, List<? extends WebElement> webElements) {
-        int i = 0;
-        for (WebElement webElement : webElements) {
-            select(texts.get(i), webElement);
-        }
-    }
 
     /* Check/Uncheck */
     @Override
@@ -1165,120 +1139,72 @@ public class Bot implements BotI {
     @Override
     public void assertIsSelected(WebElement webElement) {
         if (isNotSelected(webElement)) {
-            Assert.fail(readTagName(webElement) + " is not selected!");
+            Assert.fail(describeTag(webElement) + " is not selected!");
         }
     }
 
     @Override
     public void assertIsNotSelected(WebElement webElement) {
         if (isSelected(webElement)) {
-            Assert.fail(readTagName(webElement) + " is selected when it shouldn't!");
+            Assert.fail(describeTag(webElement) + " is selected when it shouldn't!");
         }
     }
 
     /* Checked/Unchecked */
     @Override
     public boolean isChecked(WebElement webElement) {
+        return webElement.isSelected();
     }
 
     @Override
     public boolean isUnchecked(WebElement webElement) {
+        return !isChecked(webElement);
     }
 
     @Override
     public void assertIsChecked(WebElement webElement) {
+        if (isUnchecked(webElement)) {
+            Assert.fail(describeTag(webElement) + " is not checked!");
+        }
     }
 
     @Override
     public void assertIsUnchecked(WebElement webElement) {
+        if (isChecked(webElement)) {
+            Assert.fail(describeTag(webElement) + " is checked when it shouldn't!");
+        }
     }
 
     /* Enabled/Disabled */
     @Override
     public boolean isEnabled(WebElement webElement) {
+        return webElement.isEnabled();
     }
 
     @Override
     public boolean isDisabled(WebElement webElement) {
+        return !isEnabled(webElement);
     }
 
     @Override
     public void assertIsEnabled(WebElement webElement) {
+        if (isUnchecked(webElement)) {
+            Assert.fail(describeTag(webElement) + " is not enabled!");
+        }
     }
 
     @Override
     public void assertIsDisabled(WebElement webElement) {
-    }
-
-    /* Option */
-    @Override
-    public boolean hasOption(String text, WebElement webElement) {
-    }
-
-    @Override
-    public boolean hasNotOption(String text, WebElement webElement) {
-    }
-
-    @Override
-    public boolean hasOptionSelected(String text, WebElement webElement) {
-
-        if (isTagName("select", webElement)) {
-            List<org.openqa.selenium.WebElement> selectedOptions = new Select(webElement).getAllSelectedOptions();
-            if (selectedOptions == null || selectedOptions.isEmpty()) {
-                return false;
-            }
-            for (WebElement selectedOption : selectedOptions) {
-                if (isText(text, selectedOption)) {
-                    return true;
-                }
-            }
-            return false;
-        }
-        throw new IllegalArgumentException();
-    }
-
-    @Override
-    public boolean hasOptionNotSelected(String text, WebElement webElement) {
-        return !isSelected(text, webElement);
-    }
-
-    @Override
-    public boolean hasOptionEnabled(String text, WebElement webElement) {
-    }
-
-    @Override
-    public boolean hasOptionDisabled(String text, WebElement webElement) {
-    }
-
-    @Override
-    public void assertHasOption(String text, WebElement webElement) {
-    }
-
-    @Override
-    public void assertHasNotOption(String text, WebElement webElement) {
-    }
-
-    @Override
-    public void assertHasOptionSelected(String text, WebElement webElement) {
-        if (isNotSelected(text, webElement)) {
-            Assert.fail(readTagName(webElement) + " has no option \"" + text.trim() + "\" selected!");
+        if (isChecked(webElement)) {
+            Assert.fail(describeTag(webElement) + " is enabled when it shouldn't!");
         }
     }
 
-    @Override
-    public void assertHasOptionNotSelected(String text, WebElement webElement) {
-        if (isSelected(text, webElement)) {
-            Assert.fail(readTagName(webElement) + " has option \"" + text.trim() + "\" selected when it shouldn't!");
-        }
-    }
+    /* Select Option */
 
-    @Override
-    public void assertOptionEnabled(String text, WebElement webElement) {
-    }
+    /* Select Option With Value */
 
-    @Override
-    public void assertOptionDisabled(String text, WebElement webElement) {
-    }
+    /* Select Option With Index */
 
     /* Display */
     @Override
@@ -1369,4 +1295,83 @@ public class Bot implements BotI {
     public void assertNumberOfElementsLargerThenOrEquals(int number, List<? extends WebElement> webElements) {
         assertIsLargerThenOrEquals("Number of elements", (double) number, (double) webElements.size());
     }
+
+
+//
+//    @Override
+//    public void selectOption(String text, WebElement webElement) {
+//        new Select(webElement).selectByVisibleText(text);
+//    }
+//
+//    @Override
+//    public boolean hasOptionSelected(String text, WebElement webElement) {
+//
+//        if (isTagName("select", webElement)) {
+//            List<org.openqa.selenium.WebElement> selectedOptions = new Select(webElement).getAllSelectedOptions();
+//            if (selectedOptions == null || selectedOptions.isEmpty()) {
+//                return false;
+//            }
+//            for (WebElement selectedOption : selectedOptions) {
+//                if (isText(text, selectedOption)) {
+//                    return true;
+//                }
+//            }
+//            return false;
+//        }
+//        throw new IllegalArgumentException();
+//    }
+//
+//    @Override
+//    public boolean hasOptionNotSelected(String text, WebElement webElement) {
+//        return !isSelected(text, webElement);
+//    }
+//    @Override
+//    public void assertHasOptionSelected(String text, WebElement webElement) {
+//        if (isNotSelected(text, webElement)) {
+//            Assert.fail(readTagName(webElement) + " has no option \"" + text.trim() + "\" selected!");
+//        }
+//    }
+//
+//    @Override
+//    public void assertHasOptionNotSelected(String text, WebElement webElement) {
+//        if (isSelected(text, webElement)) {
+//            Assert.fail(readTagName(webElement) + " has option \"" + text.trim() + "\" selected when it shouldn't!");
+//        }
+//    }
+
+    private String describeTag(WebElement webElement) {
+        if (webElement == null) {
+            return "WebElement";
+        }
+        return "Tag <" + readTagName(webElement)
+                + describeId(webElement)
+                + describeName(webElement)
+                + describeClass(webElement)
+                + describeValue(webElement)
+                + describeAttribute("disabled", webElement)
+                + describeAttribute("selected", webElement)
+                + describeAttribute("checked", webElement)
+                + ">";
+    }
+
+    private String describeAttribute(String attributeName, WebElement webElement) {
+        return hasAttribute(attributeName, webElement) ? attributeName + " = '" + readAttribute(attributeName, webElement) + "' " : "";
+    }
+
+    private String describeId(WebElement webElement) {
+        return hasId(webElement) ? "id = '" + readId(webElement) + "' " : "";
+    }
+
+    private String describeName(WebElement webElement) {
+        return hasName(webElement) ? "name = '" + readName(webElement) + "' " : "";
+    }
+
+    private String describeClass(WebElement webElement) {
+        return hasClass(webElement) ? "class = '" + readClass(webElement) + "' " : "";
+    }
+
+    private String describeValue(WebElement webElement) {
+        return hasValue(webElement) ? "value = '" + readValue(webElement) + "' " : "";
+    }
+
 }

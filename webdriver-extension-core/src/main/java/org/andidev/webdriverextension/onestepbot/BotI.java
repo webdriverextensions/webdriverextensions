@@ -90,6 +90,8 @@ public interface BotI {
     public void assertTagNameNot(String value, WebElement webElement);
 
     /* Attribute */
+    public boolean hasAttribute(String name, WebElement webElement);
+    public boolean hasNotAttribute(String name, WebElement webElement);
     public boolean isAttribute(String name, String value, WebElement webElement);
     public boolean isAttributeNot(String name, String value, WebElement webElement);
     public boolean isAttributeContaining(String name, String searchText, WebElement webElement);
@@ -108,6 +110,8 @@ public interface BotI {
     public void assertAttributeNotEndsWith(String name, String suffix, WebElement webElement);
 
     /* Id */
+    public boolean hasId(WebElement webElement);
+    public boolean hasNotId(WebElement webElement);
     public boolean isId(String value, WebElement webElement);
     public boolean isIdNot(String value, WebElement webElement);
     public boolean isIdContaining(String searchText, WebElement webElement);
@@ -126,6 +130,8 @@ public interface BotI {
     public void assertIdNotEndsWith(String suffix, WebElement webElement);
 
     /* Name */
+    public boolean hasName(WebElement webElement);
+    public boolean hasNotName(WebElement webElement);
     public boolean isName(String value, WebElement webElement);
     public boolean isNameNot(String value, WebElement webElement);
     public boolean isNameContaining(String searchText, WebElement webElement);
@@ -144,7 +150,9 @@ public interface BotI {
     public void assertNameNotEndsWith(String suffix, WebElement webElement);
 
     /* Class */
+    public boolean hasClass(WebElement webElement);
     public boolean hasClass(String className, WebElement webElement);
+    public boolean hasNotClass(WebElement webElement);
     public boolean hasNotClass(String className, WebElement webElement);
     public boolean isClass(String value, WebElement webElement);
     public boolean isClassNot(String value, WebElement webElement);
@@ -165,7 +173,33 @@ public interface BotI {
     public void assertClassEndsWith(String suffix, WebElement webElement);
     public void assertClassNotEndsWith(String suffix, WebElement webElement);
 
+    /* Value */
+    public boolean hasValue(WebElement webElement);
+    public boolean hasValue(String className, WebElement webElement);
+    public boolean hasNotValue(WebElement webElement);
+    public boolean hasNotValue(String className, WebElement webElement);
+    public boolean isValue(String value, WebElement webElement);
+    public boolean isValueNot(String value, WebElement webElement);
+    public boolean isValueContaining(String searchText, WebElement webElement);
+    public boolean isValueNotContaining(String searchText, WebElement webElement);
+    public boolean isValueStartingWith(String prefix, WebElement webElement);
+    public boolean isValueNotStartingWith(String prefix, WebElement webElement);
+    public boolean isValueEndingWith(String suffix, WebElement webElement);
+    public boolean isValueNotEndingWith(String suffix, WebElement webElement);
+    public void assertHasValue(String className, WebElement webElement);
+    public void assertHasNotValue(String className, WebElement webElement);
+    public void assertValue(String value, WebElement webElement);
+    public void assertValueNot(String value, WebElement webElement);
+    public void assertValueContains(String searchText, WebElement webElement);
+    public void assertValueNotContains(String searchText, WebElement webElement);
+    public void assertValueStartsWith(String prefix, WebElement webElement);
+    public void assertValueNotStartsWith(String prefix, WebElement webElement);
+    public void assertValueEndsWith(String suffix, WebElement webElement);
+    public void assertValueNotEndsWith(String suffix, WebElement webElement);
+
     /* Href */
+    public boolean hasHref(WebElement webElement);
+    public boolean hasNotHref(WebElement webElement);
     public boolean isHref(String value, WebElement webElement);
     public boolean isHrefNot(String value, WebElement webElement);
     public boolean isHrefContaining(String searchText, WebElement webElement);
