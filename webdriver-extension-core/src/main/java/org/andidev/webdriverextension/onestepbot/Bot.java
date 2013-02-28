@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 import org.andidev.webdriverextension.Openable;
+import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.math.NumberUtils;
 import org.junit.Assert;
@@ -15,7 +16,7 @@ import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.openqa.selenium.WebElement;
 
-public class Bot implements BotI {
+public abstract class Bot implements BotI {
 
     private static final org.slf4j.Logger log = org.slf4j.LoggerFactory.getLogger(Bot.class);
 
@@ -132,48 +133,96 @@ public class Bot implements BotI {
     }
 
     private boolean isSmallerThen(Double comparedTo, Double number) {
-        throw new UnsupportedOperationException("Not yet implemented");
+        return number < comparedTo;
     }
 
     private boolean isSmallerThenOrEquals(double comparedTo, double number) {
-        throw new UnsupportedOperationException("Not yet implemented");
+        return number <= comparedTo;
     }
 
     private boolean isLargerThen(double comparedTo, double number) {
-        throw new UnsupportedOperationException("Not yet implemented");
+        return number > comparedTo;
     }
 
     private boolean isLargerThenOrEquals(double comparedTo, double number) {
-        throw new UnsupportedOperationException("Not yet implemented");
+        return number >= comparedTo;
     }
 
     private void assertIs(String name, double comparedTo, double number) {
-        throw new UnsupportedOperationException("Not yet implemented");
+        if (isNot(comparedTo, number)) {
+            Assert.fail(name + ": " + number + " is not " + comparedTo + " !");
+        }
     }
 
     private void assertIsNot(String name, double comparedTo, double number) {
-        throw new UnsupportedOperationException("Not yet implemented");
+        if (is(comparedTo, number)) {
+            Assert.fail(name + ": " + number + " is " + comparedTo + " when it shouldn't!");
+        }
     }
 
     private void assertIsSmallerThen(String name, double comparedTo, double number) {
-        throw new UnsupportedOperationException("Not yet implemented");
+        if (isLargerThenOrEquals(comparedTo, number)) {
+            Assert.fail(name + ": " + number + " is not smaller then " + comparedTo + " !");
+        }
     }
 
     private void assertIsSmallerThenOrEquals(String name, double comparedTo, double number) {
-        throw new UnsupportedOperationException("Not yet implemented");
+        if (isLargerThen(comparedTo, number)) {
+            Assert.fail(name + ": " + number + " is not smaller then or equal " + comparedTo + " !");
+        }
     }
 
     private void assertIsLargerThen(String name, double comparedTo, double number) {
-        throw new UnsupportedOperationException("Not yet implemented");
+        if (isSmallerThenOrEquals(comparedTo, number)) {
+            Assert.fail(name + ": " + number + " is not larger then " + comparedTo + " !");
+        }
     }
 
     private void assertIsLargerThenOrEquals(String name, double comparedTo, double number) {
-        throw new UnsupportedOperationException("Not yet implemented");
+        if (isSmallerThen(comparedTo, number)) {
+            Assert.fail(name + ": " + number + " is not larger then or equal " + comparedTo + " !");
+        }
     }
 
-    @Override
-    public WebDriver getDriver() {
-        throw new UnsupportedOperationException("Not supported yet.");
+    private String describeTag(WebElement webElement) {
+        return describeTag(webElement, null);
+    }
+
+    private String describeTag(WebElement webElement, String extraAttribute) {
+        if (webElement == null) {
+            return "WebElement";
+        }
+        boolean printExtraAttribute = extraAttribute != null && !ArrayUtils.contains(new String[]{"id", "name", "name", "class", "value", "disabled", "selected", "checked"}, extraAttribute);
+        return "Tag <" + readTagName(webElement)
+                + describeId(webElement)
+                + describeName(webElement)
+                + describeClass(webElement)
+                + describeValue(webElement)
+                + describeAttribute("disabled", webElement)
+                + describeAttribute("selected", webElement)
+                + describeAttribute("checked", webElement)
+                + (printExtraAttribute ? describeAttribute(extraAttribute, webElement) : "")
+                + ">";
+    }
+
+    private String describeAttribute(String attributeName, WebElement webElement) {
+        return hasAttribute(attributeName, webElement) ? attributeName + " = '" + readAttribute(attributeName, webElement) + "' " : "";
+    }
+
+    private String describeId(WebElement webElement) {
+        return hasId(webElement) ? "id = '" + readId(webElement) + "' " : "";
+    }
+
+    private String describeName(WebElement webElement) {
+        return hasName(webElement) ? "name = '" + readName(webElement) + "' " : "";
+    }
+
+    private String describeClass(WebElement webElement) {
+        return hasClass(webElement) ? "class = '" + readClass(webElement) + "' " : "";
+    }
+
+    private String describeValue(WebElement webElement) {
+        return hasValue(webElement) ? "value = '" + readValue(webElement) + "' " : "";
     }
 
     /* Click */
@@ -195,6 +244,16 @@ public class Bot implements BotI {
         } catch (NumberFormatException e) {
             return null;
         }
+    }
+
+    @Override
+    public List<String> readOptions(WebElement webElement) {
+        List<WebElement> options = new Select(webElement).getOptions();
+        List<String> optionTexts = new ArrayList<String>();
+        for (WebElement option : options) {
+            optionTexts.add(read(option));
+        }
+        return optionTexts;
     }
 
     @Override
@@ -225,6 +284,11 @@ public class Bot implements BotI {
     @Override
     public String readClass(WebElement webElement) {
         return readAttribute("class", webElement);
+    }
+
+    @Override
+    public String readValue(WebElement webElement) {
+        return readAttribute("value", webElement);
     }
 
     @Override
@@ -310,7 +374,7 @@ public class Bot implements BotI {
 
     /* Count */
     @Override
-    public Integer countNumberOfElements(List<? extends WebElement> webElements) {
+    public int count(List<? extends WebElement> webElements) {
         return webElements.size();
     }
 
@@ -414,6 +478,16 @@ public class Bot implements BotI {
 
     /* Attribute */
     @Override
+    public boolean hasAttribute(String name, WebElement webElement) {
+        return webElement.getAttribute(name) != null;
+    }
+
+    @Override
+    public boolean hasNotAttribute(String name, WebElement webElement) {
+        return !hasAttribute(name, webElement);
+    }
+
+    @Override
     public boolean isAttribute(String name, String value, WebElement webElement) {
         return is(value, readAttribute(name, webElement));
     }
@@ -451,6 +525,20 @@ public class Bot implements BotI {
     @Override
     public boolean isAttributeNotEndingWith(String name, String suffix, WebElement webElement) {
         return isNotEndingWith(suffix, readAttribute(name, webElement));
+    }
+
+    @Override
+    public void assertHasAttribute(String name, WebElement webElement) {
+        if (hasNotAttribute(name, webElement)) {
+            Assert.fail(describeTag(webElement, name) + " does not have the " + name + " attribute!");
+        }
+    }
+
+    @Override
+    public void assertHasNotAttribute(String name, WebElement webElement) {
+        if (hasAttribute(name, webElement)) {
+            Assert.fail(describeTag(webElement, name) + " has the " + name + " attribute when it shouldn't!");
+        }
     }
 
     @Override
@@ -495,6 +583,16 @@ public class Bot implements BotI {
 
     /* Id */
     @Override
+    public boolean hasId(WebElement webElement) {
+        return hasAttribute("id", webElement);
+    }
+
+    @Override
+    public boolean hasNotId(WebElement webElement) {
+        return hasNotAttribute("id", webElement);
+    }
+
+    @Override
     public boolean isId(String value, WebElement webElement) {
         return is(value, readId(webElement));
     }
@@ -535,46 +633,66 @@ public class Bot implements BotI {
     }
 
     @Override
+    public void assertHasId(WebElement webElement) {
+        assertHasAttribute("id", webElement);
+    }
+
+    @Override
+    public void assertHasNotId(WebElement webElement) {
+        assertHasNotAttribute("id", webElement);
+    }
+
+    @Override
     public void assertId(String value, WebElement webElement) {
-        assertIs("Id", value, readId(webElement));
+        assertIs("id", value, readId(webElement));
     }
 
     @Override
     public void assertIdNot(String value, WebElement webElement) {
-        assertIsNot("Id", value, readId(webElement));
+        assertIsNot("id", value, readId(webElement));
     }
 
     @Override
     public void assertIdContains(String searchText, WebElement webElement) {
-        assertContains("Id", searchText, readId(webElement));
+        assertContains("id", searchText, readId(webElement));
     }
 
     @Override
     public void assertIdNotContains(String searchText, WebElement webElement) {
-        assertNotContains("Id", searchText, readId(webElement));
+        assertNotContains("id", searchText, readId(webElement));
     }
 
     @Override
     public void assertIdStartsWith(String prefix, WebElement webElement) {
-        assertStartsWidth("Id", prefix, readId(webElement));
+        assertStartsWidth("id", prefix, readId(webElement));
     }
 
     @Override
     public void assertIdNotStartsWith(String prefix, WebElement webElement) {
-        assertNotStartsWidth("Id", prefix, readId(webElement));
+        assertNotStartsWidth("id", prefix, readId(webElement));
     }
 
     @Override
     public void assertIdEndsWith(String suffix, WebElement webElement) {
-        assertEndsWidth("Id", suffix, readId(webElement));
+        assertEndsWidth("id", suffix, readId(webElement));
     }
 
     @Override
     public void assertIdNotEndsWith(String suffix, WebElement webElement) {
-        assertNotEndsWidth("Id", suffix, readId(webElement));
+        assertNotEndsWidth("id", suffix, readId(webElement));
     }
 
     /* Name */
+    @Override
+    public boolean hasName(WebElement webElement) {
+        return hasAttribute("name", webElement);
+    }
+
+    @Override
+    public boolean hasNotName(WebElement webElement) {
+        return hasNotAttribute("name", webElement);
+    }
+
     @Override
     public boolean isName(String value, WebElement webElement) {
         return is(value, readName(webElement));
@@ -616,49 +734,69 @@ public class Bot implements BotI {
     }
 
     @Override
+    public void assertHasName(WebElement webElement) {
+        assertHasAttribute("name", webElement);
+    }
+
+    @Override
+    public void assertHasNotName(WebElement webElement) {
+        assertHasNotAttribute("name", webElement);
+    }
+
+    @Override
     public void assertName(String value, WebElement webElement) {
-        assertIs("Name", value, readName(webElement));
+        assertIs("name", value, readName(webElement));
     }
 
     @Override
     public void assertNameNot(String value, WebElement webElement) {
-        assertIsNot("Name", value, readName(webElement));
+        assertIsNot("name", value, readName(webElement));
     }
 
     @Override
     public void assertNameContains(String searchText, WebElement webElement) {
-        assertContains("Name", searchText, readName(webElement));
+        assertContains("name", searchText, readName(webElement));
     }
 
     @Override
     public void assertNameNotContains(String searchText, WebElement webElement) {
-        assertNotContains("Name", searchText, readName(webElement));
+        assertNotContains("name", searchText, readName(webElement));
     }
 
     @Override
     public void assertNameStartsWith(String prefix, WebElement webElement) {
-        assertStartsWidth("Name", prefix, readName(webElement));
+        assertStartsWidth("name", prefix, readName(webElement));
     }
 
     @Override
     public void assertNameNotStartsWith(String prefix, WebElement webElement) {
-        assertNotStartsWidth("Name", prefix, readName(webElement));
+        assertNotStartsWidth("name", prefix, readName(webElement));
     }
 
     @Override
     public void assertNameEndsWith(String suffix, WebElement webElement) {
-        assertEndsWidth("Name", suffix, readName(webElement));
+        assertEndsWidth("name", suffix, readName(webElement));
     }
 
     @Override
     public void assertNameNotEndsWith(String suffix, WebElement webElement) {
-        assertNotEndsWidth("Name", suffix, readName(webElement));
+        assertNotEndsWidth("name", suffix, readName(webElement));
     }
 
     /* Class */
     @Override
+    public boolean hasClass(WebElement webElement) {
+        return hasAttribute("class", webElement);
+    }
+
+    @Override
     public boolean hasClass(String className, WebElement webElement) {
         return readClass(webElement).matches("(\\\"|\\s)" + className.trim() + "(\\\"|\\s)");
+    }
+
+    @Override
+    public boolean hasNotClass(WebElement webElement) {
+        return hasNotAttribute("class", webElement);
     }
 
     @Override
@@ -707,60 +845,182 @@ public class Bot implements BotI {
     }
 
     @Override
+    public void assertHasClass(WebElement webElement) {
+        assertHasAttribute("class", webElement);
+    }
+
+    @Override
     public void assertHasClass(String className, WebElement webElement) {
         if (hasNotClass(className, webElement)) {
-            Assert.fail("Class: " + readClass(webElement) + " is not containing " + className.trim() + "!");
+            Assert.fail("class: " + readClass(webElement) + " is not containing " + className.trim() + "!");
         }
+    }
+
+    @Override
+    public void assertHasNotClass(WebElement webElement) {
+        assertHasNotAttribute("class", webElement);
     }
 
     @Override
     public void assertHasNotClass(String className, WebElement webElement) {
         if (hasClass(className, webElement)) {
-            Assert.fail("Class: " + readClass(webElement) + " is containing " + className.trim() + " when it shouldn't!");
+            Assert.fail("class: " + readClass(webElement) + " is containing " + className.trim() + " when it shouldn't!");
         }
     }
 
     @Override
     public void assertClass(String value, WebElement webElement) {
-        assertIs("Class", value, readClass(webElement));
+        assertIs("class", value, readClass(webElement));
     }
 
     @Override
     public void assertClassNot(String value, WebElement webElement) {
-        assertIsNot("Class", value, readClass(webElement));
+        assertIsNot("class", value, readClass(webElement));
     }
 
     @Override
     public void assertClassContains(String searchText, WebElement webElement) {
-        assertContains("Class", searchText, readClass(webElement));
+        assertContains("class", searchText, readClass(webElement));
     }
 
     @Override
     public void assertClassNotContains(String searchText, WebElement webElement) {
-        assertNotContains("Class", searchText, readClass(webElement));
+        assertNotContains("class", searchText, readClass(webElement));
     }
 
     @Override
     public void assertClassStartsWith(String prefix, WebElement webElement) {
-        assertStartsWidth("Class", prefix, readClass(webElement));
+        assertStartsWidth("class", prefix, readClass(webElement));
     }
 
     @Override
     public void assertClassNotStartsWith(String prefix, WebElement webElement) {
-        assertNotStartsWidth("Class", prefix, readClass(webElement));
+        assertNotStartsWidth("class", prefix, readClass(webElement));
     }
 
     @Override
     public void assertClassEndsWith(String suffix, WebElement webElement) {
-        assertEndsWidth("Class", suffix, readClass(webElement));
+        assertEndsWidth("class", suffix, readClass(webElement));
     }
 
     @Override
     public void assertClassNotEndsWith(String suffix, WebElement webElement) {
-        assertNotEndsWidth("Class", suffix, readClass(webElement));
+        assertNotEndsWidth("class", suffix, readClass(webElement));
     }
 
+    /* Value */
+    @Override
+    public boolean hasValue(WebElement webElement) {
+        return hasAttribute("value", webElement);
+    }
+
+    @Override
+    public boolean hasNotValue(WebElement webElement) {
+        return hasNotAttribute("value", webElement);
+    }
+
+    @Override
+    public boolean isValue(String value, WebElement webElement) {
+        return is(value, readValue(webElement));
+    }
+
+    @Override
+    public boolean isValueNot(String value, WebElement webElement) {
+        return isNot(value, readValue(webElement));
+    }
+
+    @Override
+    public boolean isValueContaining(String searchText, WebElement webElement) {
+        return isContaining(searchText, readValue(webElement));
+    }
+
+    @Override
+    public boolean isValueNotContaining(String searchText, WebElement webElement) {
+        return isContaining(searchText, readValue(webElement));
+    }
+
+    @Override
+    public boolean isValueStartingWith(String prefix, WebElement webElement) {
+        return isStartingWith(prefix, readValue(webElement));
+    }
+
+    @Override
+    public boolean isValueNotStartingWith(String prefix, WebElement webElement) {
+        return isNotStartingWith(prefix, readValue(webElement));
+    }
+
+    @Override
+    public boolean isValueEndingWith(String suffix, WebElement webElement) {
+        return isEndingWith(suffix, readValue(webElement));
+    }
+
+    @Override
+    public boolean isValueNotEndingWith(String suffix, WebElement webElement) {
+        return isEndingWith(suffix, readValue(webElement));
+    }
+
+    @Override
+    public void assertHasValue(WebElement webElement) {
+        assertHasAttribute("value", webElement);
+    }
+
+    @Override
+    public void assertHasNotValue(WebElement webElement) {
+        assertHasNotAttribute("value", webElement);
+    }
+
+    @Override
+    public void assertValue(String value, WebElement webElement) {
+        assertIs("value", value, readValue(webElement));
+    }
+
+    @Override
+    public void assertValueNot(String value, WebElement webElement) {
+        assertIsNot("value", value, readValue(webElement));
+    }
+
+    @Override
+    public void assertValueContains(String searchText, WebElement webElement) {
+        assertContains("value", searchText, readValue(webElement));
+    }
+
+    @Override
+    public void assertValueNotContains(String searchText, WebElement webElement) {
+        assertNotContains("value", searchText, readValue(webElement));
+    }
+
+    @Override
+    public void assertValueStartsWith(String prefix, WebElement webElement) {
+        assertStartsWidth("value", prefix, readValue(webElement));
+    }
+
+    @Override
+    public void assertValueNotStartsWith(String prefix, WebElement webElement) {
+        assertNotStartsWidth("value", prefix, readValue(webElement));
+    }
+
+    @Override
+    public void assertValueEndsWith(String suffix, WebElement webElement) {
+        assertEndsWidth("value", suffix, readValue(webElement));
+    }
+
+    @Override
+    public void assertValueNotEndsWith(String suffix, WebElement webElement) {
+        assertNotEndsWidth("value", suffix, readValue(webElement));
+    }
+
+
     /* Href */
+    @Override
+    public boolean hasHref(WebElement webElement) {
+        return hasAttribute("href", webElement);
+    }
+
+    @Override
+    public boolean hasNotHref(WebElement webElement) {
+        return hasNotAttribute("href", webElement);
+    }
+
     @Override
     public boolean isHref(String value, WebElement webElement) {
         return is(value, readHref(webElement));
@@ -802,43 +1062,53 @@ public class Bot implements BotI {
     }
 
     @Override
+    public void assertHasHref(WebElement webElement) {
+        assertHasAttribute("href", webElement);
+    }
+
+    @Override
+    public void assertHasNotHref(WebElement webElement) {
+        assertHasNotAttribute("href", webElement);
+    }
+
+    @Override
     public void assertHref(String value, WebElement webElement) {
-        assertIs("Href", value, readHref(webElement));
+        assertIs("href", value, readHref(webElement));
     }
 
     @Override
     public void assertHrefNot(String value, WebElement webElement) {
-        assertIsNot("Href", value, readHref(webElement));
+        assertIsNot("href", value, readHref(webElement));
     }
 
     @Override
     public void assertHrefContains(String searchText, WebElement webElement) {
-        assertContains("Href", searchText, readHref(webElement));
+        assertContains("href", searchText, readHref(webElement));
     }
 
     @Override
     public void assertHrefNotContains(String searchText, WebElement webElement) {
-        assertNotContains("Href", searchText, readHref(webElement));
+        assertNotContains("href", searchText, readHref(webElement));
     }
 
     @Override
     public void assertHrefStartsWith(String prefix, WebElement webElement) {
-        assertStartsWidth("Href", prefix, readHref(webElement));
+        assertStartsWidth("href", prefix, readHref(webElement));
     }
 
     @Override
     public void assertHrefNotStartsWith(String prefix, WebElement webElement) {
-        assertNotStartsWidth("Href", prefix, readHref(webElement));
+        assertNotStartsWidth("href", prefix, readHref(webElement));
     }
 
     @Override
     public void assertHrefEndsWith(String suffix, WebElement webElement) {
-        assertEndsWidth("Href", suffix, readHref(webElement));
+        assertEndsWidth("href", suffix, readHref(webElement));
     }
 
     @Override
     public void assertHrefNotEndsWith(String suffix, WebElement webElement) {
-        assertNotEndsWidth("Href", suffix, readHref(webElement));
+        assertNotEndsWidth("href", suffix, readHref(webElement));
     }
 
     /* Text */
@@ -1132,21 +1402,21 @@ public class Bot implements BotI {
     }
 
     @Override
-    public boolean isNotSelected(WebElement webElement) {
+    public boolean isDeselected(WebElement webElement) {
         return !isSelected(webElement);
     }
 
     @Override
     public void assertIsSelected(WebElement webElement) {
-        if (isNotSelected(webElement)) {
+        if (isDeselected(webElement)) {
             Assert.fail(describeTag(webElement) + " is not selected!");
         }
     }
 
     @Override
-    public void assertIsNotSelected(WebElement webElement) {
+    public void assertIsDeselected(WebElement webElement) {
         if (isSelected(webElement)) {
-            Assert.fail(describeTag(webElement) + " is selected when it shouldn't!");
+            Assert.fail(describeTag(webElement) + " is not deselected!");
         }
     }
 
@@ -1171,7 +1441,7 @@ public class Bot implements BotI {
     @Override
     public void assertIsUnchecked(WebElement webElement) {
         if (isChecked(webElement)) {
-            Assert.fail(describeTag(webElement) + " is checked when it shouldn't!");
+            Assert.fail(describeTag(webElement) + " is not unchecked!");
         }
     }
 
@@ -1196,15 +1466,71 @@ public class Bot implements BotI {
     @Override
     public void assertIsDisabled(WebElement webElement) {
         if (isChecked(webElement)) {
-            Assert.fail(describeTag(webElement) + " is enabled when it shouldn't!");
+            Assert.fail(describeTag(webElement) + " is not disabled!");
+        }
+    }
+
+    /* Select */
+    @Override
+    public void select(WebElement webElement) {
+        if (isDeselected(webElement)) {
+            webElement.click();
+        }
+    }
+
+    @Override
+    public void deselect(WebElement webElement) {
+        if (isSelected(webElement)) {
+            webElement.click();
         }
     }
 
     /* Select Option */
+    @Override
+    public void selectOption(String text, WebElement webElement) {
+        new Select(webElement).selectByVisibleText(text);
+    }
 
-    /* Select Option With Value */
+    @Override
+    public void deselectOption(String text, WebElement webElement) {
+        new Select(webElement).deselectByVisibleText(text);
+    }
 
-    /* Select Option With Index */
+    @Override
+    public void selectAllOptions(WebElement webElement) {
+        List<WebElement> options = new Select(webElement).getOptions();
+        for (WebElement option : options) {
+            select(webElement);
+        }
+    }
+
+    @Override
+    public void deselectAllOptions(WebElement webElement) {
+        new Select(webElement).deselectAll();
+    }
+
+
+    /* Select Option Value */
+    @Override
+    public void selectOptionWithValue(String value, WebElement webElement) {
+        new Select(webElement).selectByValue(value);
+    }
+
+    @Override
+    public void deselectOptionWithValue(String value, WebElement webElement) {
+        new Select(webElement).deselectByValue(value);
+    }
+
+    /* Select Option Index */
+    @Override
+    public void selectOptionWithIndex(int index, WebElement webElement) {
+        new Select(webElement).selectByIndex(index);
+    }
+
+    @Override
+    public void deselectOptionWithIndex(int index, WebElement webElement) {
+        new Select(webElement).selectByIndex(index);
+    }
 
     /* Display */
     @Override
@@ -1296,82 +1622,343 @@ public class Bot implements BotI {
         assertIsLargerThenOrEquals("Number of elements", (double) number, (double) webElements.size());
     }
 
-
-//
-//    @Override
-//    public void selectOption(String text, WebElement webElement) {
-//        new Select(webElement).selectByVisibleText(text);
-//    }
-//
-//    @Override
-//    public boolean hasOptionSelected(String text, WebElement webElement) {
-//
-//        if (isTagName("select", webElement)) {
-//            List<org.openqa.selenium.WebElement> selectedOptions = new Select(webElement).getAllSelectedOptions();
-//            if (selectedOptions == null || selectedOptions.isEmpty()) {
-//                return false;
-//            }
-//            for (WebElement selectedOption : selectedOptions) {
-//                if (isText(text, selectedOption)) {
-//                    return true;
-//                }
-//            }
-//            return false;
-//        }
-//        throw new IllegalArgumentException();
-//    }
-//
-//    @Override
-//    public boolean hasOptionNotSelected(String text, WebElement webElement) {
-//        return !isSelected(text, webElement);
-//    }
-//    @Override
-//    public void assertHasOptionSelected(String text, WebElement webElement) {
-//        if (isNotSelected(text, webElement)) {
-//            Assert.fail(readTagName(webElement) + " has no option \"" + text.trim() + "\" selected!");
-//        }
-//    }
-//
-//    @Override
-//    public void assertHasOptionNotSelected(String text, WebElement webElement) {
-//        if (isSelected(text, webElement)) {
-//            Assert.fail(readTagName(webElement) + " has option \"" + text.trim() + "\" selected when it shouldn't!");
-//        }
-//    }
-
-    private String describeTag(WebElement webElement) {
-        if (webElement == null) {
-            return "WebElement";
+    /* Select Option */
+    @Override
+    public boolean hasOption(String text, WebElement webElement) {
+        List<WebElement> options = new Select(webElement).getOptions();
+        for (WebElement option : options) {
+            if (isText(text, option)) {
+                return true;
+            }
         }
-        return "Tag <" + readTagName(webElement)
-                + describeId(webElement)
-                + describeName(webElement)
-                + describeClass(webElement)
-                + describeValue(webElement)
-                + describeAttribute("disabled", webElement)
-                + describeAttribute("selected", webElement)
-                + describeAttribute("checked", webElement)
-                + ">";
+        return false;
     }
 
-    private String describeAttribute(String attributeName, WebElement webElement) {
-        return hasAttribute(attributeName, webElement) ? attributeName + " = '" + readAttribute(attributeName, webElement) + "' " : "";
+    @Override
+    public boolean hasNotOption(String text, WebElement webElement) {
+        return !hasOption(text, webElement);
     }
 
-    private String describeId(WebElement webElement) {
-        return hasId(webElement) ? "id = '" + readId(webElement) + "' " : "";
+    @Override
+    public boolean isOptionEnabled(String text, WebElement webElement) {
+        List<WebElement> options = new Select(webElement).getOptions();
+        for (WebElement option : options) {
+            if (isText(text, option) && isEnabled(option)) {
+                return true;
+            }
+        }
+        return false;
     }
 
-    private String describeName(WebElement webElement) {
-        return hasName(webElement) ? "name = '" + readName(webElement) + "' " : "";
+    @Override
+    public boolean isOptionDisabled(String text, WebElement webElement) {
+        List<WebElement> options = new Select(webElement).getOptions();
+        for (WebElement option : options) {
+            if (isText(text, option) && isDisabled(option)) {
+                return true;
+            }
+        }
+        return false;
     }
 
-    private String describeClass(WebElement webElement) {
-        return hasClass(webElement) ? "class = '" + readClass(webElement) + "' " : "";
+    @Override
+    public boolean isOptionSelected(String text, WebElement webElement) {
+        List<WebElement> options = new Select(webElement).getOptions();
+        for (WebElement option : options) {
+            if (isText(text, option) && isSelected(option)) {
+                return true;
+            }
+        }
+        return false;
     }
 
-    private String describeValue(WebElement webElement) {
-        return hasValue(webElement) ? "value = '" + readValue(webElement) + "' " : "";
+    @Override
+    public boolean isOptionDeselected(String text, WebElement webElement) {
+        List<WebElement> options = new Select(webElement).getOptions();
+        for (WebElement option : options) {
+            if (isText(text, option) && isDeselected(option)) {
+                return true;
+            }
+        }
+        return false;
     }
 
+    @Override
+    public boolean isAllOptionSelected(WebElement webElement) {
+        List<WebElement> options = new Select(webElement).getOptions();
+        for (WebElement option : options) {
+            if (isDeselected(option)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    @Override
+    public boolean isNoOptionSelected(WebElement webElement) {
+        List<WebElement> options = new Select(webElement).getOptions();
+        for (WebElement option : options) {
+            if (isSelected(option)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    @Override
+    public void assertHasOption(String text, WebElement webElement) {
+        if (hasNotOption(text, webElement)) {
+            Assert.fail(describeTag(webElement) + "has no option \"" + text.trim() + "\"!");
+        }
+    }
+
+    @Override
+    public void assertHasNotOption(String text, WebElement webElement) {
+        if (hasOption(text, webElement)) {
+            Assert.fail(describeTag(webElement) + "has option \"" + text.trim() + "\" when it shouldn't!");
+        }
+    }
+
+    @Override
+    public void assertIsOptionEnabled(String text, WebElement webElement) {
+        if (isOptionDisabled(text, webElement)) {
+            Assert.fail("Option \"" + text.trim() + "\" is not enabled!");
+        }
+    }
+
+    @Override
+    public void assertIsOptionDisabled(String text, WebElement webElement) {
+        if (isOptionEnabled(text, webElement)) {
+            Assert.fail("Option \"" + text.trim() + "\" is not disabled!");
+        }
+    }
+
+    @Override
+    public void assertIsOptionSelected(String text, WebElement webElement) {
+        if (isOptionDeselected(text, webElement)) {
+            Assert.fail("Option \"" + text.trim() + "\" is not selected!");
+        }
+    }
+
+    @Override
+    public void assertIsOptionDeselected(String text, WebElement webElement) {
+        if (isOptionSelected(text, webElement)) {
+            Assert.fail("Option \"" + text.trim() + "\" is not deselected!");
+        }
+    }
+
+    @Override
+    public void assertIsAllOptionSelected(WebElement webElement) {
+        if (!isAllOptionSelected(webElement)) {
+            Assert.fail("All options are not selected!");
+        }
+    }
+
+    @Override
+    public void assertIsNoOptionSelected(WebElement webElement) {
+        if (!isNoOptionSelected(webElement)) {
+            Assert.fail("All options are not deselected!");
+        }
+    }
+
+    /* Select Option Value */
+    @Override
+    public boolean hasOptionWithValue(String value, WebElement webElement) {
+        List<WebElement> options = new Select(webElement).getOptions();
+        for (WebElement option : options) {
+            if (isValue(value, option)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    @Override
+    public boolean hasNotOptionWithValue(String value, WebElement webElement) {
+        return !hasOptionWithValue(value, webElement);
+    }
+
+    @Override
+    public boolean isOptionWithValueEnabled(String value, WebElement webElement) {
+        List<WebElement> options = new Select(webElement).getOptions();
+        for (WebElement option : options) {
+            if (isValue(value, option) && isEnabled(option)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    @Override
+    public boolean isOptionWithValueDisabled(String value, WebElement webElement) {
+        List<WebElement> options = new Select(webElement).getOptions();
+        for (WebElement option : options) {
+            if (isValue(value, option) && isDisabled(option)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    @Override
+    public boolean isOptionWithValueSelected(String value, WebElement webElement) {
+        List<WebElement> options = new Select(webElement).getOptions();
+        for (WebElement option : options) {
+            if (isValue(value, option) && isSelected(option)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    @Override
+    public boolean isOptionWithValueDeselected(String value, WebElement webElement) {
+        List<WebElement> options = new Select(webElement).getOptions();
+        for (WebElement option : options) {
+            if (isValue(value, option) && isDeselected(option)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    @Override
+    public void assertHasOptionWithValue(String value, WebElement webElement) {
+        if (hasNotOptionWithValue(value, webElement)) {
+            Assert.fail(describeTag(webElement) + "has no option with value \"" + value.trim() + "\"!");
+        }
+    }
+
+    @Override
+    public void assertHasNotOptionWithValue(String value, WebElement webElement) {
+        if (hasOptionWithValue(value, webElement)) {
+            Assert.fail(describeTag(webElement) + "has option with value \"" + value.trim() + "\" when it shouldn't!");
+        }
+    }
+
+    @Override
+    public void assertIsOptionWithValueEnabled(String value, WebElement webElement) {
+        if (isOptionWithValueDisabled(value, webElement)) {
+            Assert.fail("Option with value \"" + value.trim() + "\" is not enabled!");
+        }
+    }
+
+    @Override
+    public void assertIsOptionWithValueDisabled(String value, WebElement webElement) {
+        if (isOptionWithValueEnabled(value, webElement)) {
+            Assert.fail("Option with value \"" + value.trim() + "\" is not disabled!");
+        }
+    }
+
+    @Override
+    public void assertIsOptionWithValueSelected(String value, WebElement webElement) {
+        if (isOptionWithValueDeselected(value, webElement)) {
+            Assert.fail("Option with value \"" + value.trim() + "\" is not selected!");
+        }
+    }
+
+    @Override
+    public void assertIsOptionWithValueDeselected(String value, WebElement webElement) {
+        if (isOptionWithValueSelected(value, webElement)) {
+            Assert.fail("Option with value \"" + value.trim() + "\" is not deselected!");
+        }
+    }
+
+    /* Select Option Index */
+    @Override
+    public boolean hasOptionWithIndex(int index, WebElement webElement) {
+        List<WebElement> options = new Select(webElement).getOptions();
+        try {
+            return options.get(index) != null;
+        } catch (IndexOutOfBoundsException e) {
+            return false;
+        }
+    }
+
+    @Override
+    public boolean hasNotOptionWithIndex(int index, WebElement webElement) {
+        return !hasNotOptionWithIndex(index, webElement);
+    }
+
+    @Override
+    public boolean isOptionWithIndexEnabled(int index, WebElement webElement) {
+        List<WebElement> options = new Select(webElement).getOptions();
+        try {
+            return isEnabled(options.get(index));
+        } catch (IndexOutOfBoundsException e) {
+            return false;
+        }
+    }
+
+    @Override
+    public boolean isOptionWithIndexDisabled(int index, WebElement webElement) {
+        List<WebElement> options = new Select(webElement).getOptions();
+        try {
+            return isDisabled(options.get(index));
+        } catch (IndexOutOfBoundsException e) {
+            return false;
+        }
+    }
+
+    @Override
+    public boolean isOptionWithIndexSelected(int index, WebElement webElement) {
+        List<WebElement> options = new Select(webElement).getOptions();
+        try {
+            return isSelected(options.get(index));
+        } catch (IndexOutOfBoundsException e) {
+            return false;
+        }
+    }
+
+    @Override
+    public boolean isOptionWithIndexDeselected(int index, WebElement webElement) {
+        List<WebElement> options = new Select(webElement).getOptions();
+        try {
+            return isDeselected(options.get(index));
+        } catch (IndexOutOfBoundsException e) {
+            return false;
+        }
+    }
+
+    @Override
+    public void assertHasOptionWithIndex(int index, WebElement webElement) {
+        if (hasNotOptionWithIndex(index, webElement)) {
+            Assert.fail(describeTag(webElement) + "has no option with index \"" + index + "\"!");
+        }
+    }
+
+    @Override
+    public void assertHasNotOptionWithIndex(int index, WebElement webElement) {
+        if (hasOptionWithIndex(index, webElement)) {
+            Assert.fail(describeTag(webElement) + "has option with index \"" + index + "\" when it shouldn't!");
+        }
+    }
+
+    @Override
+    public void assertIsOptionWithIndexEnabled(int index, WebElement webElement) {
+        if (isOptionWithIndexDisabled(index, webElement)) {
+            Assert.fail("Option with index \"" + index + "\" is not enabled!");
+        }
+    }
+
+    @Override
+    public void assertIsOptionWithIndexDisabled(int index, WebElement webElement) {
+        if (isOptionWithIndexEnabled(index, webElement)) {
+            Assert.fail("Option with index \"" + index + "\" is not disabled!");
+        }
+    }
+
+    @Override
+    public void assertIsOptionWithIndexSelected(int index, WebElement webElement) {
+        if (isOptionWithIndexDeselected(index, webElement)) {
+            Assert.fail("Option with index \"" + index + "\" is not selected!");
+        }
+    }
+
+    @Override
+    public void assertIsOptionWithIndexDeselected(int index, WebElement webElement) {
+        if (isOptionWithIndexSelected(index, webElement)) {
+            Assert.fail("Option with index \"" + index + "\" is not deselected!");
+        }
+    }
 }

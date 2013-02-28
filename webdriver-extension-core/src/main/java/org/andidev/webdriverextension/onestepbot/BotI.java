@@ -24,6 +24,7 @@ public interface BotI {
     public String readId(WebElement webElement);
     public String readName(WebElement webElement);
     public String readClass(WebElement webElement);
+    public String readValue(WebElement webElement);
     public String readHref(WebElement webElement);
 
     /* Clear */
@@ -66,7 +67,7 @@ public interface BotI {
     public void open(Openable openable);
 
     /* Count */
-    public Integer countNumberOfElements(List<? extends WebElement> webElements);
+    public int count(List<? extends WebElement> webElements);
 
     /* Wait */
     public void delay(double seconds);
@@ -100,6 +101,8 @@ public interface BotI {
     public boolean isAttributeNotStartingWith(String name, String prefix, WebElement webElement);
     public boolean isAttributeEndingWith(String name, String suffix, WebElement webElement);
     public boolean isAttributeNotEndingWith(String name, String suffix, WebElement webElement);
+    public void assertHasAttribute(String name, WebElement webElement);
+    public void assertHasNotAttribute(String name, WebElement webElement);
     public void assertAttribute(String name, String value, WebElement webElement);
     public void assertAttributeNot(String name, String value, WebElement webElement);
     public void assertAttributeContains(String name, String searchText, WebElement webElement);
@@ -120,6 +123,8 @@ public interface BotI {
     public boolean isIdNotStartingWith(String prefix, WebElement webElement);
     public boolean isIdEndingWith(String suffix, WebElement webElement);
     public boolean isIdNotEndingWith(String suffix, WebElement webElement);
+    public void assertHasId(WebElement webElement);
+    public void assertHasNotId(WebElement webElement);
     public void assertId(String value, WebElement webElement);
     public void assertIdNot(String value, WebElement webElement);
     public void assertIdContains(String searchText, WebElement webElement);
@@ -140,6 +145,8 @@ public interface BotI {
     public boolean isNameNotStartingWith(String prefix, WebElement webElement);
     public boolean isNameEndingWith(String suffix, WebElement webElement);
     public boolean isNameNotEndingWith(String suffix, WebElement webElement);
+    public void assertHasName(WebElement webElement);
+    public void assertHasNotName(WebElement webElement);
     public void assertName(String value, WebElement webElement);
     public void assertNameNot(String value, WebElement webElement);
     public void assertNameContains(String searchText, WebElement webElement);
@@ -162,7 +169,9 @@ public interface BotI {
     public boolean isClassNotStartingWith(String prefix, WebElement webElement);
     public boolean isClassEndingWith(String suffix, WebElement webElement);
     public boolean isClassNotEndingWith(String suffix, WebElement webElement);
+    public void assertHasClass(WebElement webElement);
     public void assertHasClass(String className, WebElement webElement);
+    public void assertHasNotClass(WebElement webElement);
     public void assertHasNotClass(String className, WebElement webElement);
     public void assertClass(String value, WebElement webElement);
     public void assertClassNot(String value, WebElement webElement);
@@ -175,9 +184,7 @@ public interface BotI {
 
     /* Value */
     public boolean hasValue(WebElement webElement);
-    public boolean hasValue(String className, WebElement webElement);
     public boolean hasNotValue(WebElement webElement);
-    public boolean hasNotValue(String className, WebElement webElement);
     public boolean isValue(String value, WebElement webElement);
     public boolean isValueNot(String value, WebElement webElement);
     public boolean isValueContaining(String searchText, WebElement webElement);
@@ -186,8 +193,8 @@ public interface BotI {
     public boolean isValueNotStartingWith(String prefix, WebElement webElement);
     public boolean isValueEndingWith(String suffix, WebElement webElement);
     public boolean isValueNotEndingWith(String suffix, WebElement webElement);
-    public void assertHasValue(String className, WebElement webElement);
-    public void assertHasNotValue(String className, WebElement webElement);
+    public void assertHasValue(WebElement webElement);
+    public void assertHasNotValue(WebElement webElement);
     public void assertValue(String value, WebElement webElement);
     public void assertValueNot(String value, WebElement webElement);
     public void assertValueContains(String searchText, WebElement webElement);
@@ -208,6 +215,8 @@ public interface BotI {
     public boolean isHrefNotStartingWith(String prefix, WebElement webElement);
     public boolean isHrefEndingWith(String suffix, WebElement webElement);
     public boolean isHrefNotEndingWith(String suffix, WebElement webElement);
+    public void assertHasHref(WebElement webElement);
+    public void assertHasNotHref(WebElement webElement);
     public void assertHref(String value, WebElement webElement);
     public void assertHrefNot(String value, WebElement webElement);
     public void assertHrefContains(String searchText, WebElement webElement);
@@ -283,9 +292,9 @@ public interface BotI {
 
     /* Selected */
     public boolean isSelected(WebElement webElement);
-    public boolean isNotSelected(WebElement webElement);
+    public boolean isDeselected(WebElement webElement);
     public void assertIsSelected(WebElement webElement);
-    public void assertIsNotSelected(WebElement webElement);
+    public void assertIsDeselected(WebElement webElement);
 
     /* Checked/Unchecked */
     public boolean isChecked(WebElement webElement);
@@ -302,10 +311,6 @@ public interface BotI {
     /* Select Option */
     public boolean hasOption(String text, WebElement webElement);
     public boolean hasNotOption(String text, WebElement webElement);
-    public boolean hasOptionEnabled(String text, WebElement webElement);
-    public boolean hasOptionDisabled(String text, WebElement webElement);
-    public boolean hasOptionSelected(String text, WebElement webElement);
-    public boolean hasOptionDeselected(String text, WebElement webElement);
     public boolean isOptionEnabled(String text, WebElement webElement);
     public boolean isOptionDisabled(String text, WebElement webElement);
     public boolean isOptionSelected(String text, WebElement webElement);
@@ -314,60 +319,40 @@ public interface BotI {
     public boolean isNoOptionSelected(WebElement webElement);
     public void assertHasOption(String text, WebElement webElement);
     public void assertHasNotOption(String text, WebElement webElement);
-    public void assertHasOptionEnabled(String text, WebElement webElement);
-    public void assertHasOptionDisabled(String text, WebElement webElement);
-    public void assertHasOptionSelected(String text, WebElement webElement);
-    public void assertHasOptionDeselected(String text, WebElement webElement);
     public void assertIsOptionEnabled(String text, WebElement webElement);
     public void assertIsOptionDisabled(String text, WebElement webElement);
     public void assertIsOptionSelected(String text, WebElement webElement);
     public void assertIsOptionDeselected(String text, WebElement webElement);
-    public void assertIsAllOptionSelected(String text, WebElement webElement);
-    public void assertIsNoOptionSelected(String text, WebElement webElement);
+    public void assertIsAllOptionSelected(WebElement webElement);
+    public void assertIsNoOptionSelected(WebElement webElement);
 
     /* Select Option Value */
     public boolean hasOptionWithValue(String value, WebElement webElement);
     public boolean hasNotOptionWithValue(String value, WebElement webElement);
-    public boolean hasOptionEnabledWithValue(String value, WebElement webElement);
-    public boolean hasOptionDisabledWithValue(String value, WebElement webElement);
-    public boolean hasOptionSelectedWithValue(String value, WebElement webElement);
-    public boolean hasOptionDeselectedWithValue(String value, WebElement webElement);
-    public boolean isOptionEnabledWithValue(String value, WebElement webElement);
-    public boolean isOptionDisabledWithValue(String value, WebElement webElement);
-    public boolean isOptionSelectedWithValue(String value, WebElement webElement);
-    public boolean isOptionDeselectedWithValue(String value, WebElement webElement);
+    public boolean isOptionWithValueEnabled(String value, WebElement webElement);
+    public boolean isOptionWithValueDisabled(String value, WebElement webElement);
+    public boolean isOptionWithValueSelected(String value, WebElement webElement);
+    public boolean isOptionWithValueDeselected(String value, WebElement webElement);
     public void assertHasOptionWithValue(String value, WebElement webElement);
     public void assertHasNotOptionWithValue(String value, WebElement webElement);
-    public void assertHasOptionEnabledWithValue(String value, WebElement webElement);
-    public void assertHasOptionDisabledWithValue(String value, WebElement webElement);
-    public void assertHasOptionSelectedWithValue(String value, WebElement webElement);
-    public void assertHasOptionDeselectedWithValue(String value, WebElement webElement);
-    public void assertIsOptionEnabledWithValue(String value, WebElement webElement);
-    public void assertIsOptionDisabledWithValue(String value, WebElement webElement);
-    public void assertIsOptionSelectedWithValue(String value, WebElement webElement);
-    public void assertIsOptionDeselectedWithValue(String value, WebElement webElement);
+    public void assertIsOptionWithValueEnabled(String value, WebElement webElement);
+    public void assertIsOptionWithValueDisabled(String value, WebElement webElement);
+    public void assertIsOptionWithValueSelected(String value, WebElement webElement);
+    public void assertIsOptionWithValueDeselected(String value, WebElement webElement);
 
     /* Select Option Index */
     public boolean hasOptionWithIndex(int index, WebElement webElement);
     public boolean hasNotOptionWithIndex(int index, WebElement webElement);
-    public boolean hasOptionEnabledWithIndex(int index, WebElement webElement);
-    public boolean hasOptionDisabledWithIndex(int index, WebElement webElement);
-    public boolean hasOptionSelectedWithIndex(int index, WebElement webElement);
-    public boolean hasOptionDeselectedWithIndex(int index, WebElement webElement);
-    public boolean isOptionEnabledWithIndex(int index, WebElement webElement);
-    public boolean isOptionDisabledWithIndex(int index, WebElement webElement);
-    public boolean isOptionSelectedWithIndex(int index, WebElement webElement);
-    public boolean isOptionDeselectedWithIndex(int index, WebElement webElement);
+    public boolean isOptionWithIndexEnabled(int index, WebElement webElement);
+    public boolean isOptionWithIndexDisabled(int index, WebElement webElement);
+    public boolean isOptionWithIndexSelected(int index, WebElement webElement);
+    public boolean isOptionWithIndexDeselected(int index, WebElement webElement);
     public void assertHasOptionWithIndex(int index, WebElement webElement);
     public void assertHasNotOptionWithIndex(int index, WebElement webElement);
-    public void assertHasOptionEnabledWithIndex(int index, WebElement webElement);
-    public void assertHasOptionDisabledWithIndex(int index, WebElement webElement);
-    public void assertHasOptionSelectedWithIndex(int index, WebElement webElement);
-    public void assertHasOptionDeselectedWithIndex(int index, WebElement webElement);
-    public void assertIsOptionEnabledWithIndex(int index, WebElement webElement);
-    public void assertIsOptionDisabledWithIndex(int index, WebElement webElement);
-    public void assertIsOptionSelectedWithIndex(int index, WebElement webElement);
-    public void assertIsOptionDeselectedWithIndex(int index, WebElement webElement);
+    public void assertIsOptionWithIndexEnabled(int index, WebElement webElement);
+    public void assertIsOptionWithIndexDisabled(int index, WebElement webElement);
+    public void assertIsOptionWithIndexSelected(int index, WebElement webElement);
+    public void assertIsOptionWithIndexDeselected(int index, WebElement webElement);
 
     /* Display */
     public boolean isDisplayed(WebElement webElement);
