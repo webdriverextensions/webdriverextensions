@@ -1,0 +1,13 @@
+
+
+    assertThat(loginButton).text.is("Login");
+
+    assertThat(loginName).value.is("myusername");
+
+    assertThat(loginName).attribute.is("myusername");
+
+    assertThat(loginName).has.attribute.("myusername");
+
+    assertThat(country).has.option("Sweden").selected();
+
+    assertThat(userRoles).has.options("Admin", "Normal").selected();
