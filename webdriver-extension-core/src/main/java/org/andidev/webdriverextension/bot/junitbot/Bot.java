@@ -564,37 +564,37 @@ public abstract class Bot {
 
     public static void assertHasClassContains(String searchText, WebElement webElement) {
         if (hasClassNotContaining(searchText, webElement)) {
-            Assert.fail(describeTag(webElement) + " does not have class containing text " + searchText.trim() + "!");
+            Assert.fail(describeTag(webElement) + " does not have class containing " + searchText.trim() + "!");
         }
     }
 
     public static void assertHasClassNotContains(String searchText, WebElement webElement) {
         if (hasClassContaining(searchText, webElement)) {
-            Assert.fail(describeTag(webElement) + " has class containing text " + searchText.trim() + " when it shouldn't!");
+            Assert.fail(describeTag(webElement) + " has class containing " + searchText.trim() + " when it shouldn't!");
         }
     }
 
     public static void assertHasClassStartsWith(String prefix, WebElement webElement) {
         if (hasClassNotStartingWith(prefix, webElement)) {
-            Assert.fail(describeTag(webElement) + " does not have class containing prefix " + prefix.trim() + "!");
+            Assert.fail(describeTag(webElement) + " does not have class starting with " + prefix.trim() + "!");
         }
     }
 
     public static void assertHasClassNotStartsWith(String prefix, WebElement webElement) {
         if (hasClassStartingWith(prefix, webElement)) {
-            Assert.fail(describeTag(webElement) + " has class containing prefix " + prefix.trim() + " when it shouldn't!");
+            Assert.fail(describeTag(webElement) + " has class starting with " + prefix.trim() + " when it shouldn't!");
         }
     }
 
     public static void assertHasClassEndsWith(String suffix, WebElement webElement) {
         if (hasClassNotEndingWith(suffix, webElement)) {
-            Assert.fail(describeTag(webElement) + " does not have class containing suffix " + suffix.trim() + "!");
+            Assert.fail(describeTag(webElement) + " does not have class ending with suffix " + suffix.trim() + "!");
         }
     }
 
     public static void assertHasClassNotEndsWith(String suffix, WebElement webElement) {
         if (hasClassEndingWith(suffix, webElement)) {
-            Assert.fail(describeTag(webElement) + " has class containing suffix " + suffix.trim() + " when it shouldn't!");
+            Assert.fail(describeTag(webElement) + " has class ending with " + suffix.trim() + " when it shouldn't!");
         }
     }
 
