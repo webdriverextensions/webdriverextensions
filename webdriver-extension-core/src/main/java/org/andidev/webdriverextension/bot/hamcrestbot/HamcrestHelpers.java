@@ -1,5 +1,6 @@
 package org.andidev.webdriverextension.bot.hamcrestbot;
 
+import java.util.List;
 import org.apache.commons.lang3.math.NumberUtils;
 import org.openqa.selenium.WebElement;
 
@@ -37,4 +38,7 @@ public class HamcrestHelpers {
         return NumberUtils.createDouble(webElement.getText());
     }
 
+    public static int numberOf(List<WebElement> webElements) {
+        return webElements.size();
+    }
 }
