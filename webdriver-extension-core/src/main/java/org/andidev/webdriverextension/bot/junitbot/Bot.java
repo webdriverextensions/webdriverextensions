@@ -183,14 +183,6 @@ public class Bot {
         BotUtils.debug(webElements);
     }
 
-    public static void debugText(WebElement webElement) {
-        BotUtils.debugText(webElement);
-    }
-
-    public static void debugText(List<WebElement> webElements) {
-        BotUtils.debugText(webElements);
-    }
-
     public static void debugNumberOf(List<WebElement> webElements) {
         BotUtils.debugNumberOf(webElements);
     }
