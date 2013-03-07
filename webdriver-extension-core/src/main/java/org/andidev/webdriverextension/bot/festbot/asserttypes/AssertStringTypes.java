@@ -10,11 +10,11 @@ public class AssertStringTypes {
         this.actual = actual;
     }
 
-    public void is(String text) {
+    public void equals(String text) {
         Assert.assertEquals(text, actual);
     }
 
-    public void isNot(String text) {
+    public void notEquals(String text) {
         Assert.assertNotEquals(text, actual);
     }
 

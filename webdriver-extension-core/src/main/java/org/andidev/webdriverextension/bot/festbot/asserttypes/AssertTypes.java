@@ -1,8 +1,8 @@
 package org.andidev.webdriverextension.bot.festbot.asserttypes;
 
 import lombok.Delegate;
-import org.andidev.webdriverextension.WebElement;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 
 public class AssertTypes {
 

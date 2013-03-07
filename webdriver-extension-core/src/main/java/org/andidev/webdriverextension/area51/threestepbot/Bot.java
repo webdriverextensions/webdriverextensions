@@ -2,7 +2,7 @@ package org.andidev.webdriverextension.area51.threestepbot;
 
 import org.andidev.webdriverextension.bot.festbot.asserttypes.AssertTypes;
 import org.andidev.webdriverextension.WebElement;
-import org.andidev.webdriverextension.bot.festbot.asserttypes.IsTypes;
+import org.andidev.webdriverextension.bot.festbot.istypes.IsTypes;
 import org.openqa.selenium.WebDriver;
 
 public class Bot {

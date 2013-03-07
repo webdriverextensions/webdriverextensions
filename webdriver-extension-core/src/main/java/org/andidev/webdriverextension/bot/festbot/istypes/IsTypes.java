@@ -1,14 +1,10 @@
-package org.andidev.webdriverextension.bot.festbot.asserttypes;
+package org.andidev.webdriverextension.bot.festbot.istypes;
 
-import org.andidev.webdriverextension.bot.festbot.istypes.IsDoubleTypes;
-import org.andidev.webdriverextension.bot.festbot.istypes.IsClassTypes;
 import lombok.Delegate;
-import org.andidev.webdriverextension.WebElement;
-import org.andidev.webdriverextension.bot.junitbot.BotUtils;
-import org.andidev.webdriverextension.bot.festbot.istypes.IsOptionsTypes;
-import org.andidev.webdriverextension.bot.festbot.istypes.IsStringTypes;
+import org.andidev.webdriverextension.bot.BotUtils;
 import org.apache.commons.lang3.math.NumberUtils;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 
 public class IsTypes {
 

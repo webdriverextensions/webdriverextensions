@@ -1,6 +1,6 @@
 package org.andidev.webdriverextension.bot.festbot.istypes;
 
-import org.andidev.webdriverextension.bot.junitbot.BotUtils;
+import org.andidev.webdriverextension.bot.BotUtils;
 
 public class IsStringTypes {
 

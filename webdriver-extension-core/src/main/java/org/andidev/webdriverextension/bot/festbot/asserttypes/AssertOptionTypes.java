@@ -1,6 +1,6 @@
 package org.andidev.webdriverextension.bot.festbot.asserttypes;
 
-import org.andidev.webdriverextension.bot.junitbot.BotUtils;
+import org.andidev.webdriverextension.bot.BotUtils;
 import org.openqa.selenium.WebElement;
 
 public class AssertOptionTypes extends AssertStringTypes {
@@ -12,20 +12,24 @@ public class AssertOptionTypes extends AssertStringTypes {
     }
 
     /* Selected/Deselected */
-    public boolean selected() {
-        return BotUtils.isSelected(option);
+    public boolean isSelected() {
+        return false;
+//        return BotUtils.assertSelected(option);
     }
 
-    public boolean deselected() {
-        return BotUtils.isDeselected(option);
+    public boolean isDeselected() {
+        return false;
+//        return BotUtils.assertDeselected(option);
     }
 
     /* Enabled/Disabled */
-    public boolean enabled() {
-        return BotUtils.isEnabled(option);
+    public boolean isEnabled() {
+        return false;
+//        return BotUtils.assertEnabled(option);
     }
 
-    public boolean disabled() {
-        return BotUtils.isDisabled(option);
+    public boolean isDisabled() {
+        return false;
+//        return BotUtils.assertDisabled(option);
     }
 }
