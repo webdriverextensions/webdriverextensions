@@ -1,15 +1,10 @@
 package org.andidev.webdriverextension.pagetests;
 
 import lombok.extern.slf4j.Slf4j;
-import static org.andidev.webdriverextension.WebDriverBot.*;
-import static org.andidev.webdriverextension.WebDriverBot.*;
-import org.andidev.webdriverextension.WebElement;
-import org.andidev.webdriverextension.pagemodels.models.UserRow;
-import org.andidev.webdriverextension.site.SiteAware;
+import static org.andidev.webdriverextension.bot.JunitBot.*;
 import org.andidev.webdriverextension.site.SiteAwareDriverAware;
 import org.junit.After;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
@@ -36,14 +31,14 @@ public class ExamplesPageTest extends SiteAwareDriverAware {
     @Test
     public void webElementsTest() {
         type("What is WebDriver", examplesPage.searchQuery);
-        delay(delayTime);
+        waitFor(delayTime);
         click(examplesPage.search);
     }
 //
 //    @Test
 //    public void extendedWebElementsTest() {
 //        click(examplesPage.menuButtonGroup.menu);
-//        delay(delayTime);
+//        waitFor(delayTime);
 //        assertIsDisplayed(examplesPage.menuButtonGroup.create);
 //        assertIsDisplayed(examplesPage.menuButtonGroup.update);
 //        assertIsDisplayed(examplesPage.menuButtonGroup.delete);
@@ -51,7 +46,7 @@ public class ExamplesPageTest extends SiteAwareDriverAware {
 //
 //    @Test
 //    public void listWithWebElementsTest() {
-//        delay(delayTime);
+//        waitFor(delayTime);
 //        for (WebElement todo : examplesPage.todoList) {
 //            assertTextEndsWith("!", todo);
 //        }
@@ -60,27 +55,27 @@ public class ExamplesPageTest extends SiteAwareDriverAware {
 //    @Test
 //    public void listWithExtendedWebElementsTest() {
 //        UserRow userRow = examplesPage.findUserRowByFirstName("Jacob");
-//        delay(delayTime);
+//        waitFor(delayTime);
 //        assertText("Thornton", userRow.lastName);
 //    }
 //
 //    @Test
 //    public void resetSearchContextTest() {
 //        // Test Search Context ROOT with WebElement
-//        delay(delayTime);
+//        waitFor(delayTime);
 //        assertIsDisplayed(examplesPage.userTableSearchContext.searchQuery);
 //    }
 //
 //    @Test
 //    public void resetSearchContextListTest() {
-//        delay(delayTime);
+//        waitFor(delayTime);
 //        assertNumberOfElements(3, examplesPage.userTableSearchContext.todoList);
 //    }
 //
 //    @Test
 //    public void wrapperTest() {
 //        click(examplesPage.menu);
-//        delay(delayTime);
+//        waitFor(delayTime);
 //        assertIsDisplayed(examplesPage.menu.create);
 //        assertIsDisplayed(examplesPage.menu.update);
 //        assertIsDisplayed(examplesPage.menu.delete);

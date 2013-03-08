@@ -1,6 +1,6 @@
 package org.andidev.webdriverextension.pagebots;
 
-import static org.andidev.webdriverextension.WebDriverBot.*;
+import static org.andidev.webdriverextension.bot.JunitBot.*;
 import org.andidev.webdriverextension.annotation.PageObject;
 import org.andidev.webdriverextension.pagemodels.HomePageModel;
 import org.openqa.selenium.WebDriver;
