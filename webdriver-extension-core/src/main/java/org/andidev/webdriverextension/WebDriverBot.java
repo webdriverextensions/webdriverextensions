@@ -201,7 +201,7 @@ public class WebDriverBot {
         Assert.assertEquals(expected, webElement.getAttribute("href"));
     }
 
-    public static void assertNumberOfElements(int numberOfElementsExpected, List<WebElement> webElementList) {
+    public static void assertNumberOfElements(int numberOfElementsExpected, List<? extends WebElement> webElementList) {
         delay();
         Assert.assertEquals(numberOfElementsExpected, webElementList.size());
     }
