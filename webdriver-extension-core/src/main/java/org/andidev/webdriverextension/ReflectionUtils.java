@@ -8,11 +8,12 @@ import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.pagefactory.ElementLocator;
 
 public class ReflectionUtils {
 
-    public static By getBy(org.openqa.selenium.WebElement webElement) {
+    public static By getBy(WebElement webElement) {
         return getBy(getLocator(webElement));
     }
 
@@ -30,7 +31,7 @@ public class ReflectionUtils {
         }
     }
 
-    public static ElementLocator getLocator(org.openqa.selenium.WebElement webElement) {
+    public static ElementLocator getLocator(WebElement webElement) {
         try {
             Field locatorField = webElement.getClass().getDeclaredField("locator");
             locatorField.setAccessible(true);
@@ -44,10 +45,10 @@ public class ReflectionUtils {
         }
     }
 
-    public static Class<? extends WebElement> getListType(Field field) {
+    public static Class<? extends WebContainer> getListType(Field field) {
         Type genericType = field.getGenericType();
         Type listType = ((ParameterizedType) genericType).getActualTypeArguments()[0];
-        return (Class<? extends WebElement>) listType;
+        return (Class<? extends WebContainer>) listType;
     }
 
     public static Field[] getDeclaredFields(Class clazz, boolean recursively) {

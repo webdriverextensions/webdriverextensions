@@ -1,16 +1,17 @@
 package org.andidev.webdriverextension;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 
-public class DefaultWebElementFactory implements WebElementFactory {
+public class DefaultWebContainerFactory implements WebContainerFactory {
 
     @Override
-    public <T extends WebElement> T create(Class<T> htmlTagClass, org.openqa.selenium.WebElement webElement, By by) {
+    public <T extends WebContainer> T create(Class<T> htmlTagClass, WebElement webElement, By by) {
         final T htmlTag = createInstanceOf(htmlTagClass, webElement, by);
         return htmlTag;
     }
 
-    private <T extends WebElement> T createInstanceOf(final Class<T> htmlTagClass, final org.openqa.selenium.WebElement webElement, final By by) {
+    private <T extends WebContainer> T createInstanceOf(final Class<T> htmlTagClass, final WebElement webElement, final By by) {
         try {
             T htmlElement = (T) htmlTagClass.newInstance();
             htmlElement.init(webElement, by);

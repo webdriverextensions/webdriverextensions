@@ -1,9 +1,10 @@
 package org.andidev.webdriverextension.pagemodels.models;
 
-import org.andidev.webdriverextension.WebElement;
+import org.andidev.webdriverextension.WebContainer;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-public class MenuButtonGroup extends WebElement {
+public class MenuButtonGroup extends WebContainer {
     @FindBy(css = "#menu")
     public WebElement menu;
     @FindBy(css = "#menu-create")

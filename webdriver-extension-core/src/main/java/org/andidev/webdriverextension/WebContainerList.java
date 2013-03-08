@@ -7,18 +7,19 @@ import java.util.List;
 import java.util.ListIterator;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 
-public class WebElementList<T extends WebElement> implements List<T> {
+public class WebContainerList<T extends WebContainer> implements List<T> {
 
     private Class<T> htmlTagClass;
     public By by;
-    private List<org.openqa.selenium.WebElement> wrappedWebElements;
+    private List<WebElement> wrappedWebElements;
     private List<T> htmlTags;
-    private WebElementFactory htmlTagFactory = new DefaultWebElementFactory();
+    private WebContainerFactory htmlTagFactory = new DefaultWebContainerFactory();
     private WebDriver driver;
 
-    public WebElementList(Class<T> htmlTagClass, List<org.openqa.selenium.WebElement> webElements, WebElementFactory htmlTagFactory, By by, WebDriver driver) {
+    public WebContainerList(Class<T> htmlTagClass, List<WebElement> webElements, WebContainerFactory htmlTagFactory, By by, WebDriver driver) {
         this.htmlTagClass = htmlTagClass;
         this.by = by;
         this.wrappedWebElements = webElements;
@@ -28,11 +29,11 @@ public class WebElementList<T extends WebElement> implements List<T> {
 
     public void createHtmlTags() {
         htmlTags = new ArrayList<T>();
-        for (org.openqa.selenium.WebElement webElement : wrappedWebElements) {
+        for (WebElement webElement : wrappedWebElements) {
             try {
                 // Create html tag and add to list
                 T htmlTag = htmlTagFactory.create(htmlTagClass, webElement, by);
-                PageFactory.initElements(new DefaultWebElementFieldDecorator(webElement, driver), htmlTag);
+                PageFactory.initElements(new DefaultWebContainerFieldDecorator(webElement, driver), htmlTag);
                 htmlTags.add(htmlTag);
             } catch (Exception e) {
                 throw new RuntimeException(e);

@@ -5,20 +5,21 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.Point;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 
-public class WebElement implements org.openqa.selenium.WebElement {
+public class WebContainer implements WebElement {
 
     public By by;
     public WebDriver driver;
-    public org.openqa.selenium.WebElement wrappedWebElement;
-    public org.openqa.selenium.WebElement delegateWebElement;
+    public WebElement wrappedWebElement;
+    public WebElement delegateWebElement;
 
-    public void init(org.openqa.selenium.WebElement wrappedWebElement, By by) {
+    public void init(WebElement wrappedWebElement, By by) {
         this.by = by;
         this.wrappedWebElement = wrappedWebElement;
     }
 
-    public void init(org.openqa.selenium.WebElement wrappedWebElement, By by, org.openqa.selenium.WebElement delegateWebElement) {
+    public void init(WebElement wrappedWebElement, By by, WebElement delegateWebElement) {
         this.by = by;
         this.wrappedWebElement = wrappedWebElement;
         this.delegateWebElement = delegateWebElement;
@@ -106,12 +107,12 @@ public class WebElement implements org.openqa.selenium.WebElement {
     }
 
     @Override
-    public List<org.openqa.selenium.WebElement> findElements(By by) {
+    public List<WebElement> findElements(By by) {
         return wrappedWebElement.findElements(by);
     }
 
     @Override
-    public org.openqa.selenium.WebElement findElement(By by) {
+    public WebElement findElement(By by) {
         return wrappedWebElement.findElement(by);
     }
 
@@ -151,15 +152,15 @@ public class WebElement implements org.openqa.selenium.WebElement {
         }
     }
 
-    public void click(WebElement webElement) {
+    public void click(WebContainer webElement) {
         webElement.click();
     }
 
-    public void clear(WebElement webElement) {
+    public void clear(WebContainer webElement) {
         webElement.clear();
     }
 
-    public boolean isDisplayed(WebElement webElement) {
+    public boolean isDisplayed(WebContainer webElement) {
         return webElement.isDisplayed();
     }
 }

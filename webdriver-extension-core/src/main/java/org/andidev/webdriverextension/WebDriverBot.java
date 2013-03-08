@@ -6,6 +6,7 @@ import org.junit.Assert;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -200,7 +201,7 @@ public class WebDriverBot {
         Assert.assertEquals(expected, webElement.getAttribute("href"));
     }
 
-    public static void assertNumberOfElements(int numberOfElementsExpected, List<? extends WebElement> webElementList) {
+    public static void assertNumberOfElements(int numberOfElementsExpected, List<WebElement> webElementList) {
         delay();
         Assert.assertEquals(numberOfElementsExpected, webElementList.size());
     }

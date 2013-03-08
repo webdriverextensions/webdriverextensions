@@ -9,6 +9,7 @@ import org.andidev.webdriverextension.annotation.ResetSearchContext;
 import org.openqa.selenium.By;
 import org.openqa.selenium.SearchContext;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.FindBys;
 import org.openqa.selenium.support.PageFactory;
@@ -17,23 +18,23 @@ import org.openqa.selenium.support.pagefactory.DefaultFieldDecorator;
 import org.openqa.selenium.support.pagefactory.ElementLocator;
 import org.openqa.selenium.support.pagefactory.ElementLocatorFactory;
 
-public class DefaultWebElementFieldDecorator extends DefaultFieldDecorator {
+public class DefaultWebContainerFieldDecorator extends DefaultFieldDecorator {
 
     private WebDriver driver;
     ElementLocatorFactory driverFactory;
-    private WebElementFactory htmlTagFactory;
-    private WebElementListFactory htmlTagListFactory;
+    private WebContainerFactory htmlTagFactory;
+    private WebContainerListFactory htmlTagListFactory;
 
-    public DefaultWebElementFieldDecorator(final WebDriver driver) {
+    public DefaultWebContainerFieldDecorator(final WebDriver driver) {
         this(driver, driver);
     }
 
-    public DefaultWebElementFieldDecorator(final SearchContext searchContext, final WebDriver driver) {
+    public DefaultWebContainerFieldDecorator(final SearchContext searchContext, final WebDriver driver) {
         super(new DefaultElementLocatorFactory(searchContext));
         this.driver = driver;
         this.driverFactory = new DefaultElementLocatorFactory(driver);
-        this.htmlTagFactory = new DefaultWebElementFactory();
-        this.htmlTagListFactory = new DefaultWebElementListFactory(htmlTagFactory);
+        this.htmlTagFactory = new DefaultWebContainerFactory();
+        this.htmlTagListFactory = new DefaultWebContainerListFactory(htmlTagFactory);
     }
 
     @Override
@@ -44,11 +45,11 @@ public class DefaultWebElementFieldDecorator extends DefaultFieldDecorator {
         if (isDecoratableHtmlTagList(field)) {
             return decorateHtmlTagList(loader, field);
         }
-        return null;
+        return super.decorate(loader, field);
     }
 
     private boolean isDecoratableHtmlTag(Field field) {
-        if (!WebElement.class.isAssignableFrom(field.getType())) {
+        if (!WebContainer.class.isAssignableFrom(field.getType())) {
             return false;
         }
 
@@ -73,7 +74,7 @@ public class DefaultWebElementFieldDecorator extends DefaultFieldDecorator {
 //            return false;
 //        }
 
-        if (!WebElement.class.isAssignableFrom((Class) listType)) {
+        if (!WebContainer.class.isAssignableFrom((Class) listType)) {
             return false;
         }
 
@@ -87,14 +88,14 @@ public class DefaultWebElementFieldDecorator extends DefaultFieldDecorator {
 
     private Object decorateHtmlTag(final ClassLoader loader, final Field field) {
         ElementLocator locator = createLocator(field);
-        Class type = (Class<? extends WebElement>) field.getType();
-        final org.openqa.selenium.WebElement webElement = proxyForLocator(loader, locator);
+        Class type = (Class<? extends WebContainer>) field.getType();
+        final WebElement webElement = proxyForLocator(loader, locator);
         final By by = ReflectionUtils.getBy(locator);
-        final WebElement htmlTag = htmlTagFactory.create(type, webElement, by);
+        final WebContainer htmlTag = htmlTagFactory.create(type, webElement, by);
         if (hasAnnotatedResetSearchContext(field)) {
-            PageFactory.initElements(new DefaultWebElementFieldDecorator(driver), htmlTag);
+            PageFactory.initElements(new DefaultWebContainerFieldDecorator(driver), htmlTag);
         } else {
-            PageFactory.initElements(new DefaultWebElementFieldDecorator(webElement, driver), htmlTag);
+            PageFactory.initElements(new DefaultWebContainerFieldDecorator(webElement, driver), htmlTag);
         }
         htmlTag.delegateWebElement = getDelagate(htmlTag);
         return htmlTag;
@@ -103,9 +104,9 @@ public class DefaultWebElementFieldDecorator extends DefaultFieldDecorator {
     private Object decorateHtmlTagList(final ClassLoader loader, final Field field) {
         ElementLocator locator = createLocator(field);
         Class listType = ReflectionUtils.getListType(field);
-        List<org.openqa.selenium.WebElement> webElements = proxyForListLocator(loader, locator);
+        List<WebElement> webElements = proxyForListLocator(loader, locator);
         final By by = ReflectionUtils.getBy(locator);
-        final List<? extends WebElement> htmlTagList = htmlTagListFactory.create(listType, webElements, by, driver);
+        final List<? extends WebContainer> htmlTagList = htmlTagListFactory.create(listType, webElements, by, driver);
         return htmlTagList;
     }
 
@@ -133,7 +134,7 @@ public class DefaultWebElementFieldDecorator extends DefaultFieldDecorator {
         return false;
     }
 
-    private org.openqa.selenium.WebElement getDelagate(WebElement htmlTag) {
+    private WebElement getDelagate(WebContainer htmlTag) {
         Field[] fields = ReflectionUtils.getAnnotatedDeclaredFields(htmlTag.getClass(), Delegate.class, true);
         if (fields.length == 0) {
             return null;
@@ -141,9 +142,9 @@ public class DefaultWebElementFieldDecorator extends DefaultFieldDecorator {
         if (fields.length > 1) {
             throw new RuntimeException("More than one @Delagate annotation used. There should only exist one.");
         }
-        org.openqa.selenium.WebElement delegate;
+        WebElement delegate;
         try {
-            delegate = (org.openqa.selenium.WebElement) fields[0].get(htmlTag);
+            delegate = (WebElement) fields[0].get(htmlTag);
         } catch (IllegalArgumentException e) {
             throw new RuntimeException(e);
         } catch (IllegalAccessException e) {
