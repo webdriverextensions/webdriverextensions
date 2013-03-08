@@ -1,61 +1,58 @@
-package org.andidev.webdriverextension.bot.festbot.readtypes;
+package org.andidev.webdriverextension.bot.festbot.presstypes;
 
-import java.util.List;
-import org.andidev.webdriverextension.bot.BotUtils;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.Keys;
 
-public class ReadTypes {
+public class PressTypes {
 
-    private final WebDriver driver;
-    private final WebElement webElement;
-
-    public ReadTypes(WebDriver driver, WebElement webElement) {
-        this.driver = driver;
-        this.webElement = webElement;
+    public PressKeysTypes enter() {
+        return new PressKeysTypes(Keys.ENTER);
     }
+//
+//    public String space() {
+//        return BotUtils.read(webElement);
+//    }
+//
+//    public String backspace() {
+//        return BotUtils.read(webElement);
+//    }
+//
+//    public String up() {
+//        return BotUtils.read(webElement);
+//    }
+//
+//    public String down() {
+//        return BotUtils.read(webElement);
+//    }
+//
+//    public String left() {
+//        return BotUtils.read(webElement);
+//    }
+//
+//    public String right() {
+//        return BotUtils.read(webElement);
+//    }
+//
+//    public Double key() {
+//        return BotUtils.readNumber(webElement);
+//    }
 
-    public String text() {
-        return BotUtils.read(webElement);
-    }
+//    public PressKeyTypes shift(CharSequence... keys) {
+//        return new PressKeyTypes(Keys.chord(Keys.SHIFT.toString() + keys));
+//    }
+//
+//    public PressKeyTypes control(CharSequence... keys) {
+//        return BotUtils.readNumber(webElement);
+//    }
+//
+//    public PressKeyTypes alt(CharSequence... keys) {
+//        return BotUtils.readNumber(webElement);
+//    }
+//
+//    public PressKeyTypes meta(CharSequence... keys) {
+//        return BotUtils.readNumber(webElement);
+//    }
 
-    public Double number() {
-        return BotUtils.readNumber(webElement);
-    }
-
-    public List<String> options() {
-        return BotUtils.readOptions(webElement);
-    }
-
-    public String url() {
-        return BotUtils.readUrl(driver);
-    }
-
-    public String tagName() {
-        return BotUtils.readTagName(webElement);
-    }
-
-    public String attribute(String name) {
-        return BotUtils.readAttribute(name, webElement);
-    }
-
-    public String id() {
-        return BotUtils.readId(webElement);
-    }
-
-    public String name() {
-        return BotUtils.readName(webElement);
-    }
-
-    public List<String> classes() {
-        return BotUtils.readClasses(webElement);
-    }
-
-    public String value() {
-        return BotUtils.readValue(webElement);
-    }
-
-    public String href() {
-        return BotUtils.readHref(webElement);
+    public PressKeysTypes keys(CharSequence... keys) {
+        return new PressKeysTypes(keys);
     }
 }

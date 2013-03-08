@@ -5,6 +5,8 @@ import org.andidev.webdriverextension.Openable;
 import org.andidev.webdriverextension.bot.festbot.asserttypes.AssertTypes;
 import org.andidev.webdriverextension.bot.BotUtils;
 import org.andidev.webdriverextension.bot.festbot.istypes.IsTypes;
+import org.andidev.webdriverextension.bot.festbot.presstypes.PressKeysTypes;
+import org.andidev.webdriverextension.bot.festbot.presstypes.PressTypes;
 import org.andidev.webdriverextension.bot.festbot.readtypes.ReadDriverTypes;
 import org.andidev.webdriverextension.bot.festbot.readtypes.ReadTypes;
 import org.andidev.webdriverextension.bot.festbot.selectoptiontypes.SelectOptionInTypes;
@@ -13,9 +15,7 @@ import org.andidev.webdriverextension.bot.festbot.typetypes.TypeInTypes;
 import org.andidev.webdriverextension.bot.festbot.typetypes.TypeTypes;
 import org.andidev.webdriverextension.bot.festbot.waitfortypes.WaitForTimeTypes;
 import org.andidev.webdriverextension.bot.festbot.waitfortypes.WaitForWebElementTypes;
-import static org.andidev.webdriverextension.bot.junitbot.Bot.open;
-import static org.andidev.webdriverextension.bot.junitbot.Bot.pressEnter;
-import static org.andidev.webdriverextension.bot.junitbot.Bot.pressKeys;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
@@ -74,12 +74,13 @@ public class Bot {
     }
 
     /* Press */
-    public static void pressEnter(WebElement webElement) { // TODO: rethink
-        BotUtils.pressEnter(webElement);
+    public static PressTypes press() {
+        return new PressTypes();
     }
 
-    public static void pressKeys(WebElement webElement, CharSequence... keys) {  // TODO: rethink
-        BotUtils.pressKeys(webElement, keys);
+    public static PressKeysTypes press(CharSequence... keys) {
+        return new PressKeysTypes(keys);
+
     }
 
     /* Click */
@@ -164,7 +165,7 @@ public class Bot {
 
         // Normal types
         type("anst07").in(username);
-//        type(42).in(totalOrders);
+        type(42).in(totalOrders);
 
         // Normal click
         click(loginButton);
@@ -182,7 +183,7 @@ public class Bot {
         // Normal ises
         is(username).text().equalTo("anst07");
         is(errorMsg).text().containing("Warning");
-//        is(country).option("Sweden").selected();
+        is(country).option("Sweden").selected();
 
         // Normal asserts
         assertThat(username).value().equals("anst07");
@@ -190,30 +191,22 @@ public class Bot {
         assertThat(country).option("Sweden").isSelected();
 
         // Alternatives (Implement theese as well?)
-//        assertThat(errorMsg).textIs().containing("Warning");
 //        assertThat(errorMsg).text().is().containing("Warning");
 //        assertThat(country).option("Sweden").is().selected();
-//        assertThat(country).option("Sweden").isSelected();
-//        assertThat(country).option("Sweden").textIs().containing();
 
         // Intelligent shortcut methods
         select("Sweden").in(country);
 
-//        is(username).equalTo("anst07");
-//        is(errorMsg).containing("Warning");
-//        is(country).option("Sweden").selected();
+        
+
+        is(username).equalTo("anst07");
+        is(errorMsg).containing("Warning");
+        is(country).option("Sweden").selected();
 
         assertThat(errorMsg).is("Warning this deletes the content!");
-//        assertThat(orders).is(42);
-//        assertThat(totalOrders).is(42);
+        assertThat(orders).is(42);
+        assertThat(totalOrders).is(42);
         assertThat(username).is("anst07");
         assertThat(country).is("Sweden");
-
-
-        // Another alternative
-//        is(Text.in(username)).equalTo("anst07");
-//        is(Id.in(username)).equalTo("anst07");
-//        assertThat(Id.in(username)).equalsTo("anst07");
-//        assertThat(SelectedOption.in(country)).equalsTo("anst07");
     }
 }

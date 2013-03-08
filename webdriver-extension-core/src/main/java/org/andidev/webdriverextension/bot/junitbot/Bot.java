@@ -10,6 +10,15 @@ import org.openqa.selenium.WebElement;
 public class Bot {
 
     private static final org.slf4j.Logger log = org.slf4j.LoggerFactory.getLogger(Bot.class);
+    private static ThreadLocal<WebDriver> threadLocalDriver = new ThreadLocal<WebDriver>();
+
+    public static WebDriver getDriver() {
+        return threadLocalDriver.get();
+    }
+
+    public static void setDriver(WebDriver driver) {
+        threadLocalDriver.set(driver);
+    }
 
     public static String read(WebElement webElement) {
         return BotUtils.read(webElement);
