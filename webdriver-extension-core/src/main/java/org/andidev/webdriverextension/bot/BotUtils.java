@@ -1699,11 +1699,11 @@ public class BotUtils {
     }
 
     public static boolean is(Double comparedTo, Double number) {
-        throw new UnsupportedOperationException("Not yet implemented");
+        return number == comparedTo;
     }
 
     public static boolean isNot(double comparedTo, double number) {
-        throw new UnsupportedOperationException("Not yet implemented");
+        return number != comparedTo;
     }
 
     public static boolean isSmallerThan(Double comparedTo, Double number) {
