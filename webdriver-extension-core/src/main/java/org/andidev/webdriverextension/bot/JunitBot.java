@@ -68,7 +68,7 @@ public class JunitBot {
         return BotUtils.readHref(webElement);
     }
 
-    public static int count(List<WebElement> webElements) {
+    public static int count(List<? extends WebElement> webElements) {
         return BotUtils.count(webElements);
     }
 
@@ -188,11 +188,11 @@ public class JunitBot {
         BotUtils.debug(webElement);
     }
 
-    public static void debug(List<WebElement> webElements) {
+    public static void debug(List<? extends WebElement> webElements) {
         BotUtils.debug(webElements);
     }
 
-    public static void debugNumberOf(List<WebElement> webElements) {
+    public static void debugNumberOf(List<? extends WebElement> webElements) {
         BotUtils.debugNumberOf(webElements);
     }
 
@@ -980,51 +980,51 @@ public class JunitBot {
         BotUtils.assertIsNotDisplayed(webElement);
     }
 
-    public static boolean isNumberOf(int number, List<WebElement> webElements) {
+    public static boolean isNumberOf(int number, List<? extends WebElement> webElements) {
         return BotUtils.isNumberOf(number, webElements);
     }
 
-    public static boolean isNumberOfNot(int number, List<WebElement> webElements) {
+    public static boolean isNumberOfNot(int number, List<? extends WebElement> webElements) {
         return BotUtils.isNumberOfNot(number, webElements);
     }
 
-    public static boolean isNumberOfSmallerThan(int number, List<WebElement> webElements) {
+    public static boolean isNumberOfSmallerThan(int number, List<? extends WebElement> webElements) {
         return BotUtils.isNumberOfSmallerThan(number, webElements);
     }
 
-    public static boolean isNumberOfSmallerThanOrEquals(int number, List<WebElement> webElements) {
+    public static boolean isNumberOfSmallerThanOrEquals(int number, List<? extends WebElement> webElements) {
         return BotUtils.isNumberOfSmallerThanOrEquals(number, webElements);
     }
 
-    public static boolean isNumberOfLargerThan(int number, List<WebElement> webElements) {
+    public static boolean isNumberOfLargerThan(int number, List<? extends WebElement> webElements) {
         return BotUtils.isNumberOfLargerThan(number, webElements);
     }
 
-    public static boolean isNumberOfLargerThanOrEquals(int number, List<WebElement> webElements) {
+    public static boolean isNumberOfLargerThanOrEquals(int number, List<? extends WebElement> webElements) {
         return BotUtils.isNumberOfLargerThanOrEquals(number, webElements);
     }
 
-    public static void assertNumberOf(int number, List<WebElement> webElements) {
+    public static void assertNumberOf(int number, List<? extends WebElement> webElements) {
         BotUtils.assertNumberOf(number, webElements);
     }
 
-    public static void assertNumberOfNot(int number, List<WebElement> webElements) {
+    public static void assertNumberOfNot(int number, List<? extends WebElement> webElements) {
         BotUtils.assertNumberOfNot(number, webElements);
     }
 
-    public static void assertNumberOfSmallerThan(int number, List<WebElement> webElements) {
+    public static void assertNumberOfSmallerThan(int number, List<? extends WebElement> webElements) {
         BotUtils.assertNumberOfSmallerThan(number, webElements);
     }
 
-    public static void assertNumberOfSmallerThanOrEquals(int number, List<WebElement> webElements) {
+    public static void assertNumberOfSmallerThanOrEquals(int number, List<? extends WebElement> webElements) {
         BotUtils.assertNumberOfSmallerThanOrEquals(number, webElements);
     }
 
-    public static void assertNumberOfLargerThan(int number, List<WebElement> webElements) {
+    public static void assertNumberOfLargerThan(int number, List<? extends WebElement> webElements) {
         BotUtils.assertNumberOfLargerThan(number, webElements);
     }
 
-    public static void assertNumberOfLargerThanOrEquals(int number, List<WebElement> webElements) {
+    public static void assertNumberOfLargerThanOrEquals(int number, List<? extends WebElement> webElements) {
         BotUtils.assertNumberOfLargerThanOrEquals(number, webElements);
     }
 

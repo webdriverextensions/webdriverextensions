@@ -33,6 +33,8 @@ public class ExamplesPageTest extends SiteAwareDriverAware {
         type("What is WebDriver", examplesPage.searchQuery);
         waitFor(delayTime);
         click(examplesPage.search);
+        assertNumberOf(3, examplesPage.rows);
+        assertNumberOf(3, examplesPage.todoList);
     }
 //
 //    @Test
