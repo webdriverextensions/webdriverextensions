@@ -1,11 +1,7 @@
 package org.andidev.webdriverextension.pagetests;
 
 import lombok.extern.slf4j.Slf4j;
-<<<<<<< HEAD
-import static org.andidev.webdriverextension.WebDriverBot.*;
-=======
 import static org.andidev.webdriverextension.bot.JunitBot.*;
->>>>>>> master
 import org.andidev.webdriverextension.site.SiteAwareDriverAware;
 import org.junit.After;
 import org.junit.Before;
@@ -37,14 +33,8 @@ public class ExamplesPageTest extends SiteAwareDriverAware {
         type("What is WebDriver", examplesPage.searchQuery);
         waitFor(delayTime);
         click(examplesPage.search);
-<<<<<<< HEAD
-        assertNumberOfElements(3, examplesPage.rows);
-        assertNumberOfElements(3, examplesPage.todoList);
-
-=======
         assertNumberOf(3, examplesPage.rows);
         assertNumberOf(3, examplesPage.todoList);
->>>>>>> master
     }
 //
 //    @Test
