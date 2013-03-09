@@ -9,7 +9,6 @@ import static java.util.concurrent.TimeUnit.HOURS;
 import static java.util.concurrent.TimeUnit.MINUTES;
 import static java.util.concurrent.TimeUnit.SECONDS;
 import org.andidev.webdriverextension.Openable;
-import static org.andidev.webdriverextension.bot.festbot.Bot.click;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.math.NumberUtils;
@@ -85,7 +84,7 @@ public class BotUtils {
     }
 
     /* Count */
-    public static int count(List<WebElement> webElements) {
+    public static int count(List<? extends WebElement> webElements) {
         return webElements.size();
     }
 
@@ -279,13 +278,13 @@ public class BotUtils {
         log.debug("Tag {} has text = \"{}\"", describeTag(webElement), read(webElement));
     }
 
-    public static void debug(List<WebElement> webElements) {
+    public static void debug(List<? extends WebElement> webElements) {
         for (WebElement webElement : webElements) {
             debug(webElement);
         }
     }
 
-    public static void debugNumberOf(List<WebElement> webElements) {
+    public static void debugNumberOf(List<? extends WebElement> webElements) {
         log.debug("Number of elements are {}", count(webElements));
     }
 
@@ -1148,51 +1147,51 @@ public class BotUtils {
     }
 
     /* Number of Elements */
-    public static boolean isNumberOf(int number, List<WebElement> webElements) {
+    public static boolean isNumberOf(int number, List<? extends WebElement> webElements) {
         return is((double) number, (double) webElements.size());
     }
 
-    public static boolean isNumberOfNot(int number, List<WebElement> webElements) {
+    public static boolean isNumberOfNot(int number, List<? extends WebElement> webElements) {
         return isNot((double) number, (double) webElements.size());
     }
 
-    public static boolean isNumberOfSmallerThan(int number, List<WebElement> webElements) {
+    public static boolean isNumberOfSmallerThan(int number, List<? extends WebElement> webElements) {
         return isSmallerThan((double) number, (double) webElements.size());
     }
 
-    public static boolean isNumberOfSmallerThanOrEquals(int number, List<WebElement> webElements) {
+    public static boolean isNumberOfSmallerThanOrEquals(int number, List<? extends WebElement> webElements) {
         return isSmallerThanOrEquals((double) number, (double) webElements.size());
     }
 
-    public static boolean isNumberOfLargerThan(int number, List<WebElement> webElements) {
+    public static boolean isNumberOfLargerThan(int number, List<? extends WebElement> webElements) {
         return isLargerThan((double) number, (double) webElements.size());
     }
 
-    public static boolean isNumberOfLargerThanOrEquals(int number, List<WebElement> webElements) {
+    public static boolean isNumberOfLargerThanOrEquals(int number, List<? extends WebElement> webElements) {
         return isLargerThanOrEquals((double) number, (double) webElements.size());
     }
 
-    public static void assertNumberOf(int number, List<WebElement> webElements) {
+    public static void assertNumberOf(int number, List<? extends WebElement> webElements) {
         assertIs("Number of elements", (double) number, (double) webElements.size());
     }
 
-    public static void assertNumberOfNot(int number, List<WebElement> webElements) {
+    public static void assertNumberOfNot(int number, List<? extends WebElement> webElements) {
         assertIsNot("Number of elements", (double) number, (double) webElements.size());
     }
 
-    public static void assertNumberOfSmallerThan(int number, List<WebElement> webElements) {
+    public static void assertNumberOfSmallerThan(int number, List<? extends WebElement> webElements) {
         assertIsSmallerThan("Number of elements", (double) number, (double) webElements.size());
     }
 
-    public static void assertNumberOfSmallerThanOrEquals(int number, List<WebElement> webElements) {
+    public static void assertNumberOfSmallerThanOrEquals(int number, List<? extends WebElement> webElements) {
         assertIsSmallerThanOrEquals("Number of elements", (double) number, (double) webElements.size());
     }
 
-    public static void assertNumberOfLargerThan(int number, List<WebElement> webElements) {
+    public static void assertNumberOfLargerThan(int number, List<? extends WebElement> webElements) {
         assertIsLargerThan("Number of elements", (double) number, (double) webElements.size());
     }
 
-    public static void assertNumberOfLargerThanOrEquals(int number, List<WebElement> webElements) {
+    public static void assertNumberOfLargerThanOrEquals(int number, List<? extends WebElement> webElements) {
         assertIsLargerThanOrEquals("Number of elements", (double) number, (double) webElements.size());
     }
 
