@@ -6,12 +6,15 @@ import org.andidev.webdriverextension.Openable;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-public class JunitBot {
+public class JUnitBot {
 
-    private static final org.slf4j.Logger log = org.slf4j.LoggerFactory.getLogger(JunitBot.class);
+    private static final org.slf4j.Logger log = org.slf4j.LoggerFactory.getLogger(JUnitBot.class);
     private static ThreadLocal<WebDriver> threadLocalDriver = new ThreadLocal<WebDriver>();
 
     public static WebDriver getDriver() {
+        if (threadLocalDriver.get() == null) {
+            throw new RuntimeException("WebDriver in JUnitBot is null. Please set it with JUnitBot.setDriver(driver) before using the JUnitBot static methods. Note that the driver will be thread safe since it is set with ThreadLocal so don't worry about thread safety.");
+        }
         return threadLocalDriver.get();
     }
 
@@ -31,8 +34,8 @@ public class JunitBot {
         return BotUtils.readOptions(webElement);
     }
 
-    public static String readUrl(WebDriver driver) {
-        return BotUtils.readUrl(driver);
+    public static String readUrl() {
+        return BotUtils.readUrl(getDriver());
     }
 
     public static String readTagName(WebElement webElement) {
@@ -151,8 +154,8 @@ public class JunitBot {
         BotUtils.uncheck(webElement);
     }
 
-    public static void open(String url, WebDriver driver) {
-        BotUtils.open(url, driver);
+    public static void open(String url) {
+        BotUtils.open(url, getDriver());
     }
 
     public static void open(Openable openable) {
@@ -167,16 +170,16 @@ public class JunitBot {
         BotUtils.waitFor(time, unit);
     }
 
-    public static void waitForElementToDisplay(WebElement webElement, WebDriver driver) {
-        BotUtils.waitForElementToDisplay(webElement, driver);
+    public static void waitForElementToDisplay(WebElement webElement) {
+        BotUtils.waitForElementToDisplay(webElement, getDriver());
     }
 
-    public static void waitForElementToDisplay(WebElement webElement, long timeOutInSeconds, WebDriver driver) {
-        BotUtils.waitForElementToDisplay(webElement, timeOutInSeconds, driver);
+    public static void waitForElementToDisplay(WebElement webElement, long timeOutInSeconds) {
+        BotUtils.waitForElementToDisplay(webElement, timeOutInSeconds, getDriver());
     }
 
-    public static void waitForElementToDisplay(WebElement webElement, long timeOutInSeconds, long sleepInMillis, WebDriver driver) {
-        BotUtils.waitForElementToDisplay(webElement, timeOutInSeconds, sleepInMillis, driver);
+    public static void waitForElementToDisplay(WebElement webElement, long timeOutInSeconds, long sleepInMillis) {
+        BotUtils.waitForElementToDisplay(webElement, timeOutInSeconds, sleepInMillis, getDriver());
     }
 
     public static void debug(String str) {
@@ -803,100 +806,100 @@ public class JunitBot {
         BotUtils.assertNumberLargerThanOrEquals(number, webElement);
     }
 
-    public static boolean isUrl(String url, WebDriver driver) {
-        return BotUtils.isUrl(url, driver);
+    public static boolean isUrl(String url) {
+        return BotUtils.isUrl(url, getDriver());
     }
 
-    public static boolean isUrlNot(String url, WebDriver driver) {
-        return BotUtils.isUrlNot(url, driver);
+    public static boolean isUrlNot(String url) {
+        return BotUtils.isUrlNot(url, getDriver());
     }
 
-    public static boolean isUrlMatching(String regExp, WebDriver driver) {
-        return BotUtils.isUrlMatching(regExp, driver);
+    public static boolean isUrlMatching(String regExp) {
+        return BotUtils.isUrlMatching(regExp, getDriver());
     }
 
-    public static boolean isUrlNotMatching(String regExp, WebDriver driver) {
-        return BotUtils.isUrlNotMatching(regExp, driver);
+    public static boolean isUrlNotMatching(String regExp) {
+        return BotUtils.isUrlNotMatching(regExp, getDriver());
     }
 
-    public static boolean isUrlMatching(Openable openable, WebDriver driver) {
-        return BotUtils.isUrlMatching(openable, driver);
+    public static boolean isUrlMatching(Openable openable) {
+        return BotUtils.isUrlMatching(openable, getDriver());
     }
 
-    public static boolean isUrlNotMatching(Openable openable, WebDriver driver) {
-        return BotUtils.isUrlNotMatching(openable, driver);
+    public static boolean isUrlNotMatching(Openable openable) {
+        return BotUtils.isUrlNotMatching(openable, getDriver());
     }
 
-    public static boolean isUrlContaining(String searchText, WebDriver driver) {
-        return BotUtils.isUrlContaining(searchText, driver);
+    public static boolean isUrlContaining(String searchText) {
+        return BotUtils.isUrlContaining(searchText, getDriver());
     }
 
-    public static boolean isUrlNotContaining(String searchText, WebDriver driver) {
-        return BotUtils.isUrlNotContaining(searchText, driver);
+    public static boolean isUrlNotContaining(String searchText) {
+        return BotUtils.isUrlNotContaining(searchText, getDriver());
     }
 
-    public static boolean isUrlStartingWidth(String prefix, WebDriver driver) {
-        return BotUtils.isUrlStartingWidth(prefix, driver);
+    public static boolean isUrlStartingWidth(String prefix) {
+        return BotUtils.isUrlStartingWidth(prefix, getDriver());
     }
 
-    public static boolean isUrlNotStartingWidth(String prefix, WebDriver driver) {
-        return BotUtils.isUrlNotStartingWidth(prefix, driver);
+    public static boolean isUrlNotStartingWidth(String prefix) {
+        return BotUtils.isUrlNotStartingWidth(prefix, getDriver());
     }
 
-    public static boolean isUrlEndingWidth(String suffix, WebDriver driver) {
-        return BotUtils.isUrlEndingWidth(suffix, driver);
+    public static boolean isUrlEndingWidth(String suffix) {
+        return BotUtils.isUrlEndingWidth(suffix, getDriver());
     }
 
-    public static boolean isUrlNotEndingWidth(String suffix, WebDriver driver) {
-        return BotUtils.isUrlNotEndingWidth(suffix, driver);
+    public static boolean isUrlNotEndingWidth(String suffix) {
+        return BotUtils.isUrlNotEndingWidth(suffix, getDriver());
     }
 
-    public static void assertUrl(String url, WebDriver driver) {
-        BotUtils.assertUrl(url, driver);
+    public static void assertUrl(String url) {
+        BotUtils.assertUrl(url, getDriver());
     }
 
-    public static void assertUrlNot(String url, WebDriver driver) {
-        BotUtils.assertUrlNot(url, driver);
+    public static void assertUrlNot(String url) {
+        BotUtils.assertUrlNot(url, getDriver());
     }
 
-    public static void assertUrlMatching(String regExp, WebDriver driver) {
-        BotUtils.assertUrlMatching(regExp, driver);
+    public static void assertUrlMatching(String regExp) {
+        BotUtils.assertUrlMatching(regExp, getDriver());
     }
 
-    public static void assertUrlNotMatching(String regExp, WebDriver driver) {
-        BotUtils.assertUrlNotMatching(regExp, driver);
+    public static void assertUrlNotMatching(String regExp) {
+        BotUtils.assertUrlNotMatching(regExp, getDriver());
     }
 
-    public static void assertUrlMatching(Openable openable, WebDriver driver) {
-        BotUtils.assertUrlMatching(openable, driver);
+    public static void assertUrlMatching(Openable openable) {
+        BotUtils.assertUrlMatching(openable, getDriver());
     }
 
-    public static void assertUrlNotMatching(Openable openable, WebDriver driver) {
-        BotUtils.assertUrlNotMatching(openable, driver);
+    public static void assertUrlNotMatching(Openable openable) {
+        BotUtils.assertUrlNotMatching(openable, getDriver());
     }
 
-    public static void assertUrlContains(String searchText, WebDriver driver) {
-        BotUtils.assertUrlContains(searchText, driver);
+    public static void assertUrlContains(String searchText) {
+        BotUtils.assertUrlContains(searchText, getDriver());
     }
 
-    public static void assertUrlNotContains(String searchText, WebDriver driver) {
-        BotUtils.assertUrlNotContains(searchText, driver);
+    public static void assertUrlNotContains(String searchText) {
+        BotUtils.assertUrlNotContains(searchText, getDriver());
     }
 
-    public static void assertUrlStartsWidth(String prefix, WebDriver driver) {
-        BotUtils.assertUrlStartsWidth(prefix, driver);
+    public static void assertUrlStartsWidth(String prefix) {
+        BotUtils.assertUrlStartsWidth(prefix, getDriver());
     }
 
-    public static void assertUrlNotStartsWidth(String prefix, WebDriver driver) {
-        BotUtils.assertUrlNotStartsWidth(prefix, driver);
+    public static void assertUrlNotStartsWidth(String prefix) {
+        BotUtils.assertUrlNotStartsWidth(prefix, getDriver());
     }
 
-    public static void assertUrlEndsWidth(String suffix, WebDriver driver) {
-        BotUtils.assertUrlEndsWidth(suffix, driver);
+    public static void assertUrlEndsWidth(String suffix) {
+        BotUtils.assertUrlEndsWidth(suffix, getDriver());
     }
 
-    public static void assertUrlNotEndsWidth(String suffix, WebDriver driver) {
-        BotUtils.assertUrlNotEndsWidth(suffix, driver);
+    public static void assertUrlNotEndsWidth(String suffix) {
+        BotUtils.assertUrlNotEndsWidth(suffix, getDriver());
     }
 
     public static boolean isOpen(Openable openable) {

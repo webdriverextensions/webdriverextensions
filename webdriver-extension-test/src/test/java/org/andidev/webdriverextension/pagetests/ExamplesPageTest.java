@@ -1,7 +1,7 @@
 package org.andidev.webdriverextension.pagetests;
 
 import lombok.extern.slf4j.Slf4j;
-import static org.andidev.webdriverextension.bot.JunitBot.*;
+import static org.andidev.webdriverextension.bot.JUnitBot.*;
 import org.andidev.webdriverextension.site.SiteAwareDriverAware;
 import org.junit.After;
 import org.junit.Before;
