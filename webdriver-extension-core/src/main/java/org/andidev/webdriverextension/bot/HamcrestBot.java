@@ -1,11 +1,27 @@
 package org.andidev.webdriverextension.bot;
 
 import java.util.List;
+import org.andidev.webdriverextension.exceptions.WebDriverExtensionException;
 import org.apache.commons.lang3.math.NumberUtils;
+import org.openqa.selenium.WebDriver;
 
 import org.openqa.selenium.WebElement;
 
 public class HamcrestBot {
+
+    private static final org.slf4j.Logger log = org.slf4j.LoggerFactory.getLogger(HamcrestBot.class);
+    private static ThreadLocal<WebDriver> threadLocalDriver = new ThreadLocal<WebDriver>();
+
+    public static WebDriver getDriver() {
+        if (threadLocalDriver.get() == null) {
+            throw new WebDriverExtensionException("WebDriver in HamcrestBot is not set. Please set the driver with JUnitBot.setDriver(driver) before using the JUnitBot static methods. Note that the driver will be thread safe since it is set with ThreadLocal so don't worry about thread safety.");
+        }
+        return threadLocalDriver.get();
+    }
+
+    public static void setDriver(WebDriver driver) {
+        threadLocalDriver.set(driver);
+    }
 
     public static String tagNameOf(WebElement webElement) {
         return webElement.getTagName();
