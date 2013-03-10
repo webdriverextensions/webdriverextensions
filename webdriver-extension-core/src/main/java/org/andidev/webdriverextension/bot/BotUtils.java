@@ -1650,49 +1650,49 @@ public class BotUtils {
     }
 
     public static void assertIsMatching(String name, String regExp, String actual) {
-        if (actual.matches(regExp)) {
+        if (isNotMatching(regExp, actual)) {
             Assert.fail(name + ": " + actual + " is not matching " + regExp + "!");
         }
     }
 
     public static void assertIsNotMatching(String name, String regExp, String actual) {
-        if (!actual.matches(regExp)) {
+        if (isMatching(regExp, actual)) {
             Assert.fail(name + ": " + actual + " is matching " + regExp + " when it shouldn't!");
         }
     }
 
     public static void assertContains(String name, String searchText, String actual) {
-        if (!StringUtils.contains(actual, searchText)) {
+        if (isNotContaining(searchText, actual)) {
             Assert.fail(name + ": " + actual + " is not containing " + searchText);
         }
     }
 
     public static void assertNotContains(String name, String searchText, String actual) {
-        if (StringUtils.contains(actual, searchText)) {
+        if (isContaining(searchText, actual)) {
             Assert.fail(name + ": " + actual + " is containing " + searchText + " when it shouldn't!");
         }
     }
 
     public static void assertStartsWidth(String name, String prefix, String actual) {
-        if (!StringUtils.startsWith(actual, prefix)) {
+        if (isNotStartingWith(prefix, actual)) {
             Assert.fail(name + ": " + actual + " is not starting with " + prefix);
         }
     }
 
     public static void assertNotStartsWidth(String name, String prefix, String actual) {
-        if (StringUtils.startsWith(actual, prefix)) {
+        if (isStartingWith(prefix, actual)) {
             Assert.fail(name + ": " + actual + " is starting with " + prefix + " when it shouldn't!");
         }
     }
 
     public static void assertEndsWidth(String name, String suffix, String actual) {
-        if (!StringUtils.startsWith(actual, suffix)) {
+        if (isNotEndingWith(suffix, actual)) {
             Assert.fail(name + ": " + actual + " is not ending with " + suffix);
         }
     }
 
     public static void assertNotEndsWidth(String name, String suffix, String actual) {
-        if (StringUtils.endsWith(actual, suffix)) {
+        if (isEndingWith(suffix, actual)) {
             Assert.fail(name + ": " + actual + " is ending with " + suffix + " when it shouldn't!");
         }
     }
