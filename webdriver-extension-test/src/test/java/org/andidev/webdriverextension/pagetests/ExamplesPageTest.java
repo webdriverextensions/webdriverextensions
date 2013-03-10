@@ -1,7 +1,8 @@
 package org.andidev.webdriverextension.pagetests;
 
 import lombok.extern.slf4j.Slf4j;
-import static org.andidev.webdriverextension.bot.JunitBot.*;
+import org.andidev.webdriverextension.bot.JUnitBot;
+import static org.andidev.webdriverextension.bot.JUnitBot.*;
 import org.andidev.webdriverextension.site.SiteAwareDriverAware;
 import org.junit.After;
 import org.junit.Before;
@@ -19,8 +20,10 @@ public class ExamplesPageTest extends SiteAwareDriverAware {
 
     @Before
     public void before() {
+        JUnitBot.setDriver(getDriver());
         open(site);
         open(examplesPage);
+        assertUrlEndsWidth("andidev.github.com/webdriver-extension/index.html");
     }
 
     @After
