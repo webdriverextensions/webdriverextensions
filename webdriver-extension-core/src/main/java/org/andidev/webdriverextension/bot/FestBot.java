@@ -34,22 +34,12 @@ public class FestBot {
         threadLocalDriver.set(driver);
     }
 
-    private WebElement country;
-    private WebElement swedenOption;
-    private WebElement errorMsg;
-    private WebElement loginButton;
-    private WebElement username;
-    private List<WebElement> orders;
-    private WebElement totalOrders;
-    private WebElement rememberMe;
-
-
     /* Read */
-    public ReadDriverTypes read() {
+    public static ReadDriverTypes read() {
         return new ReadDriverTypes(getDriver());
     }
 
-    public ReadTypes read(WebElement webElement) {
+    public static ReadTypes read(WebElement webElement) {
         return new ReadTypes(getDriver(), webElement);
     }
 
@@ -64,15 +54,15 @@ public class FestBot {
     }
 
     /* Type */
-    public TypeTypes type() {
+    public static TypeTypes type() {
         return new TypeTypes();
     }
 
-    public TypeInTypes type(String text) {
+    public static TypeInTypes type(String text) {
         return new TypeInTypes(text);
     }
 
-    public TypeInTypes type(double number) {
+    public static TypeInTypes type(double number) {
         return new TypeInTypes(BotUtils.toString(number));
     }
 
@@ -101,27 +91,27 @@ public class FestBot {
     }
 
     /* Select */
-    public void select(WebElement webElement) {
+    public static void select(WebElement webElement) {
         BotUtils.select(webElement);
     }
 
-    public SelectOptionTypes select() {
+    public static SelectOptionTypes select() {
         return new SelectOptionTypes();
     }
 
-    public SelectOptionInTypes select(String text) {
+    public static SelectOptionInTypes select(String text) {
         return new SelectOptionInTypes(text);
     }
 
-    public void deselect(WebElement webElement) {
+    public static void deselect(WebElement webElement) {
         BotUtils.deselect(webElement);
     }
 
-    public DeselectOptionTypes deselect() {
+    public static DeselectOptionTypes deselect() {
         return new DeselectOptionTypes();
     }
 
-    public DeselectOptionInTypes deselect(String text) {
+    public static DeselectOptionInTypes deselect(String text) {
         return new DeselectOptionInTypes(text);
     }
 
@@ -157,68 +147,12 @@ public class FestBot {
     /* Has */
 
     /* Is */
-    public IsTypes is(WebElement webElement) {
+    public static IsTypes is(WebElement webElement) {
         return new IsTypes(getDriver(), webElement);
     }
 
     /* Select */
-    public AssertTypes assertThat(WebElement webElement) {
+    public static AssertTypes assertThat(WebElement webElement) {
         return new AssertTypes(getDriver(), webElement);
-    }
-
-    public FestBot() {
-        // Normal reads
-        read(username);
-        read(username).options();
-        read().url();
-
-        // Normal clear
-        clear(username);
-
-        // Normal types
-        type("anst07").in(username);
-        type(42).in(totalOrders);
-
-        // Normal click
-        click(loginButton);
-
-        // Normal selects
-        select(swedenOption);
-        select().option("Sweden").in(country);
-        select().optionWithValue("SWEDEN").in(country);
-        select().optionWithIndex(3).in(country);
-
-        // Normal checks
-        check(rememberMe);
-        uncheck(rememberMe);
-
-        // Normal ises
-        is(username).text().equalTo("anst07");
-        is(errorMsg).text().containing("Warning");
-        is(country).option("Sweden").selected();
-
-        // Normal asserts
-        assertThat(username).value().equals("anst07");
-        assertThat(errorMsg).text().contains("Warning");
-        assertThat(country).option("Sweden").isSelected();
-
-        // Alternatives (Implement theese as well?)
-//        assertThat(errorMsg).text().is().containing("Warning");
-//        assertThat(country).option("Sweden").is().selected();
-
-        // Intelligent shortcut methods
-        select("Sweden").in(country);
-
-
-
-        is(username).equalTo("anst07");
-        is(errorMsg).containing("Warning");
-        is(country).option("Sweden").selected();
-
-        assertThat(errorMsg).is("Warning this deletes the content!");
-        assertThat(orders).is(42);
-        assertThat(totalOrders).is(42);
-        assertThat(username).is("anst07");
-        assertThat(country).is("Sweden");
     }
 }
