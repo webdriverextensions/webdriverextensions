@@ -13,7 +13,7 @@ public class JUnitBot {
 
     public static WebDriver getDriver() {
         if (threadLocalDriver.get() == null) {
-            throw new RuntimeException("WebDriver in JUnitBot is null. Please set it with JUnitBot.setDriver(driver) before using the JUnitBot static methods. Note that the driver will be thread safe since it is set with ThreadLocal so don't worry about thread safety.");
+            throw new RuntimeException("WebDriver in JUnitBot is not set. Please set the driver with JUnitBot.setDriver(driver) before using the JUnitBot static methods. Note that the driver will be thread safe since it is set with ThreadLocal so don't worry about thread safety.");
         }
         return threadLocalDriver.get();
     }
