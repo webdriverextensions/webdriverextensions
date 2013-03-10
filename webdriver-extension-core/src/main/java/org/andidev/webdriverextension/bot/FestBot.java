@@ -14,12 +14,26 @@ import org.andidev.webdriverextension.bot.fest.typetypes.TypeInTypes;
 import org.andidev.webdriverextension.bot.fest.typetypes.TypeTypes;
 import org.andidev.webdriverextension.bot.fest.waitfortypes.WaitForTimeTypes;
 import org.andidev.webdriverextension.bot.fest.waitfortypes.WaitForWebElementTypes;
+import org.andidev.webdriverextension.exceptions.WebDriverExtensionException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 public class FestBot {
 
-    private WebDriver driver;
+    private static final org.slf4j.Logger log = org.slf4j.LoggerFactory.getLogger(JUnitBot.class);
+    private static ThreadLocal<WebDriver> threadLocalDriver = new ThreadLocal<WebDriver>();
+
+    public static WebDriver getDriver() {
+        if (threadLocalDriver.get() == null) {
+            throw new WebDriverExtensionException("WebDriver in FestBot is not set. Please set the driver with FestBot.setDriver(driver) before using the FestBot static methods. Note that the driver will be thread safe since it is set with ThreadLocal so don't worry about thread safety.");
+        }
+        return threadLocalDriver.get();
+    }
+
+    public static void setDriver(WebDriver driver) {
+        threadLocalDriver.set(driver);
+    }
+
     private WebElement country;
     private WebElement swedenOption;
     private WebElement errorMsg;
@@ -31,12 +45,12 @@ public class FestBot {
 
 
     /* Read */
-    public ReadTypes read(WebElement webElement) {
-        return new ReadTypes(driver, webElement);
+    public ReadDriverTypes read() {
+        return new ReadDriverTypes(getDriver());
     }
 
-    public ReadDriverTypes read(WebDriver driver) {
-        return new ReadDriverTypes(driver);
+    public ReadTypes read(WebElement webElement) {
+        return new ReadTypes(getDriver(), webElement);
     }
 
     /* Count */
@@ -121,8 +135,8 @@ public class FestBot {
     }
 
     /* Open */
-    public static void open(String url, WebDriver driver) {
-        BotUtils.open(url, driver);
+    public static void open(String url) {
+        BotUtils.open(url, getDriver());
     }
 
     public static void open(Openable openable) {
@@ -144,19 +158,19 @@ public class FestBot {
 
     /* Is */
     public IsTypes is(WebElement webElement) {
-        return new IsTypes(driver, webElement);
+        return new IsTypes(getDriver(), webElement);
     }
 
     /* Select */
     public AssertTypes assertThat(WebElement webElement) {
-        return new AssertTypes(driver, webElement);
+        return new AssertTypes(getDriver(), webElement);
     }
 
-    public FestBot(WebDriver driver) {
+    public FestBot() {
         // Normal reads
         read(username);
         read(username).options();
-        read(driver).url();
+        read().url();
 
         // Normal clear
         clear(username);
