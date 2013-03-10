@@ -3,6 +3,7 @@ package org.andidev.webdriverextension.bot;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 import org.andidev.webdriverextension.Openable;
+import org.andidev.webdriverextension.exceptions.WebDriverExtensionException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
@@ -13,7 +14,7 @@ public class JUnitBot {
 
     public static WebDriver getDriver() {
         if (threadLocalDriver.get() == null) {
-            throw new RuntimeException("WebDriver in JUnitBot is not set. Please set the driver with JUnitBot.setDriver(driver) before using the JUnitBot static methods. Note that the driver will be thread safe since it is set with ThreadLocal so don't worry about thread safety.");
+            throw new WebDriverExtensionException("WebDriver in JUnitBot is not set. Please set the driver with JUnitBot.setDriver(driver) before using the JUnitBot static methods. Note that the driver will be thread safe since it is set with ThreadLocal so don't worry about thread safety.");
         }
         return threadLocalDriver.get();
     }
