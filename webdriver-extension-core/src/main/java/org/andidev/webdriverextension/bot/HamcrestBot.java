@@ -58,4 +58,8 @@ public class HamcrestBot {
     public static int numberOf(List<WebElement> webElements) {
         return webElements.size();
     }
+
+    public static String url() {
+        return getDriver().getCurrentUrl();
+    }
 }
