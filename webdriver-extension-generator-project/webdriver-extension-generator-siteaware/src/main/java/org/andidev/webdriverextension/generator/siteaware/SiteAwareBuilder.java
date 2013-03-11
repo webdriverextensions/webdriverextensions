@@ -24,6 +24,7 @@ import org.andidev.annotationprocessorutils.JCodeModelUtils;
 import org.andidev.annotationprocessorutils.ProcessingEnvironmentCodeWriter;
 import org.andidev.webdriverextension.PageObjectUtils;
 import org.andidev.webdriverextension.SiteObjectUtils;
+import org.andidev.webdriverextension.bot.JUnitBot;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.builder.Builder;
 import org.apache.commons.lang3.exception.ExceptionUtils;
@@ -43,6 +44,7 @@ public class SiteAwareBuilder implements Builder<Boolean> {
     private JDefinedClass siteAwareClass;
     private JClass extendedObjectClass;
     private JClass webDriverClass;
+    private JClass jUnitBotClass;
     private JClass siteObjectClass;
     private Set<JClass> pageObjectClasses;
 
@@ -92,6 +94,7 @@ public class SiteAwareBuilder implements Builder<Boolean> {
             siteAwareClass = codeModel._class(JMod.PUBLIC | JMod.ABSTRACT, getPackageName(siteObjectElement) + ".SiteAware", ClassType.CLASS);
         }
         webDriverClass = codeModel.ref(WebDriver.class);
+        jUnitBotClass = codeModel.ref(JUnitBot.class);
         siteObjectClass = codeModel.ref(siteObjectElement.getQualifiedName().toString());
         pageObjectClasses = getCodeModelRefs(pageObjectElements);
     }
@@ -227,6 +230,7 @@ public class SiteAwareBuilder implements Builder<Boolean> {
             method.annotate(Override.class);
             method.body().invoke(JExpr._super(), "setDriver").arg(JExpr.ref("driver"));
             method.body().assign(JExpr._this().ref("driver"), JExpr.ref("driver"));
+            method.body().staticInvoke(jUnitBotClass, "setDriver").arg(JExpr.ref("driver"));
             method.body().invoke(JExpr.ref(getSiteObjectFieldName()), "setDriver").arg(JExpr.ref("driver"));
             method.body().invoke("setPageObjectsDriver").arg(JExpr.ref("driver"));
         } else {
