@@ -23,7 +23,7 @@ public abstract class WebPage<S> implements Openable {
     public void setDriver(WebDriver driver) {
         this.driver = driver;
         // Init WebElements
-        PageFactory.initElements(new DefaultWebContainerFieldDecorator(driver), this);
+        PageFactory.initElements(new WebDriverExtensionFieldDecorator(driver), this);
     }
 
     @Override

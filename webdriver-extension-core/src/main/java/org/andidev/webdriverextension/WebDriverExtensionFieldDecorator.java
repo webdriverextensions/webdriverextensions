@@ -16,19 +16,19 @@ import org.openqa.selenium.support.pagefactory.DefaultFieldDecorator;
 import org.openqa.selenium.support.pagefactory.ElementLocator;
 import org.openqa.selenium.support.pagefactory.ElementLocatorFactory;
 
-public class DefaultWebContainerFieldDecorator extends DefaultFieldDecorator {
+public class WebDriverExtensionFieldDecorator extends DefaultFieldDecorator {
 
     private WebDriver driver;
     ElementLocatorFactory driverFactory;
     private WebContainerFactory webContainerFactory;
     private WebContainerListFactory webContainerListFactory;
 
-    public DefaultWebContainerFieldDecorator(final WebDriver driver) {
+    public WebDriverExtensionFieldDecorator(final WebDriver driver) {
         this(driver, driver);
     }
 
-    public DefaultWebContainerFieldDecorator(final SearchContext searchContext, final WebDriver driver) {
-        super(new ResetSearchContextElementLocatorFactory(searchContext, driver));
+    public WebDriverExtensionFieldDecorator(final SearchContext searchContext, final WebDriver driver) {
+        super(new WebDriverExtensionElementLocatorFactory(searchContext, driver));
         this.driver = driver;
         this.webContainerFactory = new DefaultWebContainerFactory();
         this.webContainerListFactory = new DefaultWebContainerListFactory(webContainerFactory);
@@ -85,9 +85,9 @@ public class DefaultWebContainerFieldDecorator extends DefaultFieldDecorator {
         final WebElement webElement = proxyForLocator(loader, locator);
         final WebContainer webContainer = webContainerFactory.create(type, webElement);
         if (hasAnnotatedResetSearchContext(field)) {
-            PageFactory.initElements(new DefaultWebContainerFieldDecorator(driver, driver), webContainer);
+            PageFactory.initElements(new WebDriverExtensionFieldDecorator(driver, driver), webContainer);
         } else {
-            PageFactory.initElements(new DefaultWebContainerFieldDecorator(webElement, driver), webContainer);
+            PageFactory.initElements(new WebDriverExtensionFieldDecorator(webElement, driver), webContainer);
         }
         webContainer.delegateWebElement = getDelagate(webContainer);
         return webContainer;

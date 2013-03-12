@@ -7,7 +7,7 @@ import org.openqa.selenium.support.pagefactory.DefaultElementLocator;
 import org.openqa.selenium.support.pagefactory.ElementLocator;
 import org.openqa.selenium.support.pagefactory.ElementLocatorFactory;
 
-public class ResetSearchContextElementLocatorFactory implements ElementLocatorFactory {
+public class WebDriverExtensionElementLocatorFactory implements ElementLocatorFactory {
 
     private final SearchContext searchContext;
     private final SearchContext resetSearchContext;
@@ -19,7 +19,7 @@ public class ResetSearchContextElementLocatorFactory implements ElementLocatorFa
      * @param field The field on the Page Object that will hold the located
      * value
      */
-    public ResetSearchContextElementLocatorFactory(SearchContext searchContext, SearchContext resetSearchContext) {
+    public WebDriverExtensionElementLocatorFactory(SearchContext searchContext, SearchContext resetSearchContext) {
         this.searchContext = searchContext;
         this.resetSearchContext = resetSearchContext;
     }

@@ -30,7 +30,7 @@ public class WebContainerList<T extends WebContainer> implements List<T> {
             try {
                 // Create web container and add it to list
                 T webContainer = webContainerFactory.create(webContainerClass, webElement);
-                PageFactory.initElements(new DefaultWebContainerFieldDecorator(webElement, driver), webContainer);
+                PageFactory.initElements(new WebDriverExtensionFieldDecorator(webElement, driver), webContainer);
                 webContainers.add(webContainer);
             } catch (Exception e) {
                 throw new RuntimeException(e);
