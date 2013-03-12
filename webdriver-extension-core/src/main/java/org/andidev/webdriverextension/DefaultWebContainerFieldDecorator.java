@@ -70,10 +70,6 @@ public class DefaultWebContainerFieldDecorator extends DefaultFieldDecorator {
 
         Type listType = ((ParameterizedType) genericType).getActualTypeArguments()[0];
 
-//        if (!WebElement.class.equals(listType)) {
-//            return false;
-//        }
-
         if (!WebContainer.class.isAssignableFrom((Class) listType)) {
             return false;
         }
