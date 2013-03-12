@@ -7,5 +7,5 @@ import org.openqa.selenium.WebElement;
 
 public interface WebContainerListFactory {
 
-    <T extends WebContainer> List<T> create(Class<T> htmlTagClass, List<WebElement> webElements, By by, WebDriver driver);
+    <T extends WebContainer> List<T> create(Class<T> webContainerClass, List<WebElement> webElements, By by, WebDriver driver);
 }

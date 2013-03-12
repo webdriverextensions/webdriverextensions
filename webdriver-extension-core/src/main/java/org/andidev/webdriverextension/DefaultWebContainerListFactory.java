@@ -7,14 +7,14 @@ import org.openqa.selenium.WebElement;
 
 public class DefaultWebContainerListFactory implements WebContainerListFactory {
 
-    private WebContainerFactory htmlTagFactory;
+    private WebContainerFactory webContainerFactory;
 
-    public DefaultWebContainerListFactory(WebContainerFactory htmlTagFactory) {
-        this.htmlTagFactory = htmlTagFactory;
+    public DefaultWebContainerListFactory(WebContainerFactory webContainerFactory) {
+        this.webContainerFactory = webContainerFactory;
     }
 
     @Override
-    public <T extends WebContainer> List<T> create(Class<T> htmlTagClass, List<WebElement> webElements, By by, WebDriver driver) {
-        return new WebContainerList<T>(htmlTagClass, webElements, htmlTagFactory, by, driver);
+    public <T extends WebContainer> List<T> create(Class<T> webContainerClass, List<WebElement> webElements, By by, WebDriver driver) {
+        return new WebContainerList<T>(webContainerClass, webElements, webContainerFactory, by, driver);
     }
 }

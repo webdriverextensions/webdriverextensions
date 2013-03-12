@@ -22,8 +22,8 @@ public class DefaultWebContainerFieldDecorator extends DefaultFieldDecorator {
 
     private WebDriver driver;
     ElementLocatorFactory driverFactory;
-    private WebContainerFactory htmlTagFactory;
-    private WebContainerListFactory htmlTagListFactory;
+    private WebContainerFactory webContainerFactory;
+    private WebContainerListFactory webContainerListFactory;
 
     public DefaultWebContainerFieldDecorator(final WebDriver driver) {
         this(driver, driver);
@@ -33,22 +33,22 @@ public class DefaultWebContainerFieldDecorator extends DefaultFieldDecorator {
         super(new DefaultElementLocatorFactory(searchContext));
         this.driver = driver;
         this.driverFactory = new DefaultElementLocatorFactory(driver);
-        this.htmlTagFactory = new DefaultWebContainerFactory();
-        this.htmlTagListFactory = new DefaultWebContainerListFactory(htmlTagFactory);
+        this.webContainerFactory = new DefaultWebContainerFactory();
+        this.webContainerListFactory = new DefaultWebContainerListFactory(webContainerFactory);
     }
 
     @Override
     public Object decorate(ClassLoader loader, Field field) {
-        if (isDecoratableHtmlTag(field)) {
-            return decorateHtmlTag(loader, field);
+        if (isDecoratableWebContainer(field)) {
+            return decorateWebContainer(loader, field);
         }
-        if (isDecoratableHtmlTagList(field)) {
-            return decorateHtmlTagList(loader, field);
+        if (isDecoratableWebContainerList(field)) {
+            return decorateWebContainerList(loader, field);
         }
         return super.decorate(loader, field);
     }
 
-    private boolean isDecoratableHtmlTag(Field field) {
+    private boolean isDecoratableWebContainer(Field field) {
         if (!WebContainer.class.isAssignableFrom(field.getType())) {
             return false;
         }
@@ -56,7 +56,7 @@ public class DefaultWebContainerFieldDecorator extends DefaultFieldDecorator {
         return true;
     }
 
-    private boolean isDecoratableHtmlTagList(Field field) {
+    private boolean isDecoratableWebContainerList(Field field) {
         if (!List.class.isAssignableFrom(field.getType())) {
             return false;
         }
@@ -82,28 +82,28 @@ public class DefaultWebContainerFieldDecorator extends DefaultFieldDecorator {
         return true;
     }
 
-    private Object decorateHtmlTag(final ClassLoader loader, final Field field) {
+    private Object decorateWebContainer(final ClassLoader loader, final Field field) {
         ElementLocator locator = createLocator(field);
         Class type = (Class<? extends WebContainer>) field.getType();
         final WebElement webElement = proxyForLocator(loader, locator);
         final By by = ReflectionUtils.getBy(locator);
-        final WebContainer htmlTag = htmlTagFactory.create(type, webElement, by);
+        final WebContainer webContainer = webContainerFactory.create(type, webElement, by);
         if (hasAnnotatedResetSearchContext(field)) {
-            PageFactory.initElements(new DefaultWebContainerFieldDecorator(driver), htmlTag);
+            PageFactory.initElements(new DefaultWebContainerFieldDecorator(driver), webContainer);
         } else {
-            PageFactory.initElements(new DefaultWebContainerFieldDecorator(webElement, driver), htmlTag);
+            PageFactory.initElements(new DefaultWebContainerFieldDecorator(webElement, driver), webContainer);
         }
-        htmlTag.delegateWebElement = getDelagate(htmlTag);
-        return htmlTag;
+        webContainer.delegateWebElement = getDelagate(webContainer);
+        return webContainer;
     }
 
-    private Object decorateHtmlTagList(final ClassLoader loader, final Field field) {
+    private Object decorateWebContainerList(final ClassLoader loader, final Field field) {
         ElementLocator locator = createLocator(field);
         Class listType = ReflectionUtils.getListType(field);
         List<WebElement> webElements = proxyForListLocator(loader, locator);
         final By by = ReflectionUtils.getBy(locator);
-        final List<? extends WebContainer> htmlTagList = htmlTagListFactory.create(listType, webElements, by, driver);
-        return htmlTagList;
+        final List<? extends WebContainer> webContainerList = webContainerListFactory.create(listType, webElements, by, driver);
+        return webContainerList;
     }
 
     private ElementLocator createLocator(final Field field) {
@@ -130,8 +130,8 @@ public class DefaultWebContainerFieldDecorator extends DefaultFieldDecorator {
         return false;
     }
 
-    private WebElement getDelagate(WebContainer htmlTag) {
-        Field[] fields = ReflectionUtils.getAnnotatedDeclaredFields(htmlTag.getClass(), Delegate.class, true);
+    private WebElement getDelagate(WebContainer webContainer) {
+        Field[] fields = ReflectionUtils.getAnnotatedDeclaredFields(webContainer.getClass(), Delegate.class);
         if (fields.length == 0) {
             return null;
         }
@@ -140,7 +140,7 @@ public class DefaultWebContainerFieldDecorator extends DefaultFieldDecorator {
         }
         WebElement delegate;
         try {
-            delegate = (WebElement) fields[0].get(htmlTag);
+            delegate = (WebElement) fields[0].get(webContainer);
         } catch (IllegalArgumentException e) {
             throw new RuntimeException(e);
         } catch (IllegalAccessException e) {
