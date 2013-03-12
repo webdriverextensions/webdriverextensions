@@ -5,7 +5,6 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
@@ -13,15 +12,13 @@ import org.openqa.selenium.support.PageFactory;
 public class WebContainerList<T extends WebContainer> implements List<T> {
 
     private Class<T> webContainerClass;
-    public By by;
     private List<WebElement> wrappedWebElements;
     private List<T> webContainers;
     private WebContainerFactory webContainerFactory = new DefaultWebContainerFactory();
     private WebDriver driver;
 
-    public WebContainerList(Class<T> webContainerClass, List<WebElement> webElements, WebContainerFactory webContainerFactory, By by, WebDriver driver) {
+    public WebContainerList(Class<T> webContainerClass, List<WebElement> webElements, WebContainerFactory webContainerFactory, WebDriver driver) {
         this.webContainerClass = webContainerClass;
-        this.by = by;
         this.wrappedWebElements = webElements;
         this.webContainerFactory = webContainerFactory;
         this.driver = driver;
@@ -32,7 +29,7 @@ public class WebContainerList<T extends WebContainer> implements List<T> {
         for (WebElement webElement : wrappedWebElements) {
             try {
                 // Create web container and add it to list
-                T webContainer = webContainerFactory.create(webContainerClass, webElement, by);
+                T webContainer = webContainerFactory.create(webContainerClass, webElement);
                 PageFactory.initElements(new DefaultWebContainerFieldDecorator(webElement, driver), webContainer);
                 webContainers.add(webContainer);
             } catch (Exception e) {

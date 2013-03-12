@@ -7,29 +7,10 @@ import java.lang.reflect.Type;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.pagefactory.ElementLocator;
 
 public class ReflectionUtils {
-
-    public static By getBy(WebElement webElement) {
-        return getBy(getLocator(webElement));
-    }
-
-    public static By getBy(ElementLocator locator) {
-        try {
-            Field byField = locator.getClass().getDeclaredField("by");
-            byField.setAccessible(true);
-            By by = (By) byField.get(locator);
-            byField.setAccessible(false);
-            return by;
-        } catch (IllegalAccessException e) {
-            throw new RuntimeException(e);
-        } catch (NoSuchFieldException e) {
-            throw new RuntimeException(e);
-        }
-    }
 
     public static ElementLocator getLocator(WebElement webElement) {
         try {

@@ -6,7 +6,6 @@ import java.lang.reflect.Type;
 import java.util.List;
 import org.andidev.webdriverextension.annotation.Delegate;
 import org.andidev.webdriverextension.annotation.ResetSearchContext;
-import org.openqa.selenium.By;
 import org.openqa.selenium.SearchContext;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -86,8 +85,7 @@ public class DefaultWebContainerFieldDecorator extends DefaultFieldDecorator {
         ElementLocator locator = createLocator(field);
         Class type = (Class<? extends WebContainer>) field.getType();
         final WebElement webElement = proxyForLocator(loader, locator);
-        final By by = ReflectionUtils.getBy(locator);
-        final WebContainer webContainer = webContainerFactory.create(type, webElement, by);
+        final WebContainer webContainer = webContainerFactory.create(type, webElement);
         if (hasAnnotatedResetSearchContext(field)) {
             PageFactory.initElements(new DefaultWebContainerFieldDecorator(driver), webContainer);
         } else {
@@ -101,8 +99,7 @@ public class DefaultWebContainerFieldDecorator extends DefaultFieldDecorator {
         ElementLocator locator = createLocator(field);
         Class listType = ReflectionUtils.getListType(field);
         List<WebElement> webElements = proxyForListLocator(loader, locator);
-        final By by = ReflectionUtils.getBy(locator);
-        final List<? extends WebContainer> webContainerList = webContainerListFactory.create(listType, webElements, by, driver);
+        final List<? extends WebContainer> webContainerList = webContainerListFactory.create(listType, webElements, driver);
         return webContainerList;
     }
 

@@ -9,18 +9,15 @@ import org.openqa.selenium.WebElement;
 
 public class WebContainer implements WebElement {
 
-    public By by;
     public WebDriver driver;
     public WebElement wrappedWebElement;
     public WebElement delegateWebElement;
 
-    public void init(WebElement wrappedWebElement, By by) {
-        this.by = by;
+    public void init(WebElement wrappedWebElement) {
         this.wrappedWebElement = wrappedWebElement;
     }
 
-    public void init(WebElement wrappedWebElement, By by, WebElement delegateWebElement) {
-        this.by = by;
+    public void init(WebElement wrappedWebElement, WebElement delegateWebElement) {
         this.wrappedWebElement = wrappedWebElement;
         this.delegateWebElement = delegateWebElement;
     }
