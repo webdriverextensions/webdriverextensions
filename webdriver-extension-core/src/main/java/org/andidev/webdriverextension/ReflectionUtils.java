@@ -51,27 +51,9 @@ public class ReflectionUtils {
         return (Class<? extends WebContainer>) listType;
     }
 
-    public static Field[] getDeclaredFields(Class clazz, boolean recursively) {
-        List<Field> fields = new LinkedList<Field>();
-        Field[] declaredFields = clazz.getDeclaredFields();
-        Collections.addAll(fields, declaredFields);
-
-        Class superClass = clazz.getSuperclass();
-
-        if (superClass != null && recursively) {
-            Field[] declaredFieldsOfSuper = getDeclaredFields(superClass, recursively);
-            if (declaredFieldsOfSuper.length > 0) {
-                Collections.addAll(fields, declaredFieldsOfSuper);
-            }
-        }
-
-        return fields.toArray(new Field[fields.size()]);
-    }
-
     public static Field[] getAnnotatedDeclaredFields(Class clazz,
-            Class<? extends Annotation> annotationClass,
-            boolean recursively) {
-        Field[] allFields = getDeclaredFields(clazz, recursively);
+            Class<? extends Annotation> annotationClass) {
+        Field[] allFields = getDeclaredFields(clazz);
         List<Field> annotatedFields = new LinkedList<Field>();
 
         for (Field field : allFields) {
@@ -81,5 +63,22 @@ public class ReflectionUtils {
         }
 
         return annotatedFields.toArray(new Field[annotatedFields.size()]);
+    }
+
+    public static Field[] getDeclaredFields(Class clazz) {
+        List<Field> fields = new LinkedList<Field>();
+        Field[] declaredFields = clazz.getDeclaredFields();
+        Collections.addAll(fields, declaredFields);
+
+        Class superClass = clazz.getSuperclass();
+
+        if (superClass != null) {
+            Field[] declaredFieldsOfSuper = getDeclaredFields(superClass);
+            if (declaredFieldsOfSuper.length > 0) {
+                Collections.addAll(fields, declaredFieldsOfSuper);
+            }
+        }
+
+        return fields.toArray(new Field[fields.size()]);
     }
 }
