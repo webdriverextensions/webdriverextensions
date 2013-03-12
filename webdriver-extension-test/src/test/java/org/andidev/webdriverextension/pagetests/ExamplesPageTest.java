@@ -36,8 +36,7 @@ public class ExamplesPageTest extends SiteAwareDriverAware {
         delay(delayTime);
         click(examplesPage.search);
         assertNumberOfElements(3, examplesPage.rows);
-        assertNumberOfElements(3, examplesPage.todoList);
-
+        assertNumberOfElements(3, examplesPage.todos);
     }
 
     @Test
@@ -52,7 +51,7 @@ public class ExamplesPageTest extends SiteAwareDriverAware {
     @Test
     public void listWithWebElementsTest() {
         delay(delayTime);
-        for (WebElement todo : examplesPage.todoList) {
+        for (WebElement todo : examplesPage.todos) {
             assertTextEndsWith("!", todo);
         }
     }
@@ -74,7 +73,7 @@ public class ExamplesPageTest extends SiteAwareDriverAware {
     @Test
     public void resetSearchContextListTest() {
         delay(delayTime);
-        assertNumberOfElements(3, examplesPage.userTableSearchContext.todoList);
+        assertNumberOfElements(3, examplesPage.userTableSearchContext.todos);
     }
 
     @Test

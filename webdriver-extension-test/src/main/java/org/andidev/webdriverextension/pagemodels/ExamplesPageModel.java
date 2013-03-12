@@ -25,7 +25,7 @@ public abstract class ExamplesPageModel extends WebPage<WebDriverExtensionSite> 
     public MenuButtonGroup menuButtonGroups;
     // Section: List with WebElements
     @FindBy(css = "#todo-list li")
-    public List<WebElement> todoList;
+    public List<WebElement> todos;
     // Section: List with Extended WebElements
     @FindBy(css = "#user-table tbody tr")
     public List<UserRow> rows;

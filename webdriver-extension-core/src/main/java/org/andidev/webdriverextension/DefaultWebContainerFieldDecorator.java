@@ -30,7 +30,7 @@ public class DefaultWebContainerFieldDecorator extends DefaultFieldDecorator {
     }
 
     public DefaultWebContainerFieldDecorator(final SearchContext searchContext, final WebDriver driver) {
-        super(new DefaultElementLocatorFactory(searchContext));
+        super(new ResetSearchContextElementLocatorFactory(searchContext, driver));
         this.driver = driver;
         this.driverFactory = new DefaultElementLocatorFactory(driver);
         this.htmlTagFactory = new DefaultWebContainerFactory();
