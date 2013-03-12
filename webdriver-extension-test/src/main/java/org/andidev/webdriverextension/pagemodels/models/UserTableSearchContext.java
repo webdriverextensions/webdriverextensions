@@ -13,5 +13,5 @@ public class UserTableSearchContext extends WebContainer {
     public WebElement searchQuery;
     @ResetSearchContext
     @FindBy(css = "#todo-list li")
-    public List<WebElement> todoList;
+    public List<WebElement> todos;
 }

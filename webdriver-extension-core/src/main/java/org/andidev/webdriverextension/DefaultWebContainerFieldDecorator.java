@@ -12,7 +12,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.FindBys;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.pagefactory.DefaultElementLocatorFactory;
 import org.openqa.selenium.support.pagefactory.DefaultFieldDecorator;
 import org.openqa.selenium.support.pagefactory.ElementLocator;
 import org.openqa.selenium.support.pagefactory.ElementLocatorFactory;
@@ -29,9 +28,8 @@ public class DefaultWebContainerFieldDecorator extends DefaultFieldDecorator {
     }
 
     public DefaultWebContainerFieldDecorator(final SearchContext searchContext, final WebDriver driver) {
-        super(new DefaultElementLocatorFactory(searchContext));
+        super(new ResetSearchContextElementLocatorFactory(searchContext, driver));
         this.driver = driver;
-        this.driverFactory = new DefaultElementLocatorFactory(driver);
         this.webContainerFactory = new DefaultWebContainerFactory();
         this.webContainerListFactory = new DefaultWebContainerListFactory(webContainerFactory);
     }
@@ -87,7 +85,7 @@ public class DefaultWebContainerFieldDecorator extends DefaultFieldDecorator {
         final WebElement webElement = proxyForLocator(loader, locator);
         final WebContainer webContainer = webContainerFactory.create(type, webElement);
         if (hasAnnotatedResetSearchContext(field)) {
-            PageFactory.initElements(new DefaultWebContainerFieldDecorator(driver), webContainer);
+            PageFactory.initElements(new DefaultWebContainerFieldDecorator(driver, driver), webContainer);
         } else {
             PageFactory.initElements(new DefaultWebContainerFieldDecorator(webElement, driver), webContainer);
         }

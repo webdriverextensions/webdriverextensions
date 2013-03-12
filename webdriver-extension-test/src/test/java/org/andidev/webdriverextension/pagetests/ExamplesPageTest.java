@@ -39,7 +39,7 @@ public class ExamplesPageTest extends SiteAwareDriverAware {
         waitFor(delayTime);
         click(examplesPage.search);
         assertNumberOf(3, examplesPage.rows);
-        assertNumberOf(3, examplesPage.todoList);
+        assertNumberOf(3, examplesPage.todos);
     }
 
     @Test
@@ -54,7 +54,7 @@ public class ExamplesPageTest extends SiteAwareDriverAware {
     @Test
     public void listWithWebElementsTest() {
         waitFor(delayTime);
-        for (WebElement todo : examplesPage.todoList) {
+        for (WebElement todo : examplesPage.todos) {
             assertTextEndsWith("!", todo);
         }
     }
@@ -66,18 +66,18 @@ public class ExamplesPageTest extends SiteAwareDriverAware {
         assertText("Thornton", userRow.lastName);
     }
 
-//    @Test
-//    public void resetSearchContextTest() {
-//        // Test Search Context ROOT with WebElement
-//        waitFor(delayTime);
-//        assertIsDisplayed(examplesPage.userTableSearchContext.searchQuery);
-//    }
-//
-//    @Test
-//    public void resetSearchContextListTest() {
-//        waitFor(delayTime);
-//        assertNumberOf(3, examplesPage.userTableSearchContext.todoList);
-//    }
+    @Test
+    public void resetSearchContextTest() {
+        // Test Search Context ROOT with WebElement
+        waitFor(delayTime);
+        assertIsDisplayed(examplesPage.userTableSearchContext.searchQuery);
+    }
+
+    @Test
+    public void resetSearchContextListTest() {
+        waitFor(delayTime);
+        assertNumberOf(3, examplesPage.userTableSearchContext.todos);
+    }
 
     @Test
     public void wrapperTest() {
