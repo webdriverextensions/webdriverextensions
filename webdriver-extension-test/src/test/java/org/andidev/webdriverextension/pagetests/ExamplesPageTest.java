@@ -3,10 +3,12 @@ package org.andidev.webdriverextension.pagetests;
 import lombok.extern.slf4j.Slf4j;
 import org.andidev.webdriverextension.bot.JUnitBot;
 import static org.andidev.webdriverextension.bot.JUnitBot.*;
+import org.andidev.webdriverextension.pagemodels.models.UserRow;
 import org.andidev.webdriverextension.site.SiteAwareDriverAware;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
 @Slf4j
@@ -39,31 +41,31 @@ public class ExamplesPageTest extends SiteAwareDriverAware {
         assertNumberOf(3, examplesPage.rows);
         assertNumberOf(3, examplesPage.todoList);
     }
-//
-//    @Test
-//    public void extendedWebElementsTest() {
-//        click(examplesPage.menuButtonGroup.menu);
-//        waitFor(delayTime);
-//        assertIsDisplayed(examplesPage.menuButtonGroup.create);
-//        assertIsDisplayed(examplesPage.menuButtonGroup.update);
-//        assertIsDisplayed(examplesPage.menuButtonGroup.delete);
-//    }
-//
-//    @Test
-//    public void listWithWebElementsTest() {
-//        waitFor(delayTime);
-//        for (WebElement todo : examplesPage.todoList) {
-//            assertTextEndsWith("!", todo);
-//        }
-//    }
-//
-//    @Test
-//    public void listWithExtendedWebElementsTest() {
-//        UserRow userRow = examplesPage.findUserRowByFirstName("Jacob");
-//        waitFor(delayTime);
-//        assertText("Thornton", userRow.lastName);
-//    }
-//
+
+    @Test
+    public void extendedWebElementsTest() {
+        click(examplesPage.menuButtonGroup.menu);
+        waitFor(delayTime);
+        assertIsDisplayed(examplesPage.menuButtonGroup.create);
+        assertIsDisplayed(examplesPage.menuButtonGroup.update);
+        assertIsDisplayed(examplesPage.menuButtonGroup.delete);
+    }
+
+    @Test
+    public void listWithWebElementsTest() {
+        waitFor(delayTime);
+        for (WebElement todo : examplesPage.todoList) {
+            assertTextEndsWith("!", todo);
+        }
+    }
+
+    @Test
+    public void listWithExtendedWebElementsTest() {
+        UserRow userRow = examplesPage.findUserRowByFirstName("Jacob");
+        waitFor(delayTime);
+        assertText("Thornton", userRow.lastName);
+    }
+
 //    @Test
 //    public void resetSearchContextTest() {
 //        // Test Search Context ROOT with WebElement
@@ -74,15 +76,15 @@ public class ExamplesPageTest extends SiteAwareDriverAware {
 //    @Test
 //    public void resetSearchContextListTest() {
 //        waitFor(delayTime);
-//        assertNumberOfElements(3, examplesPage.userTableSearchContext.todoList);
+//        assertNumberOf(3, examplesPage.userTableSearchContext.todoList);
 //    }
-//
-//    @Test
-//    public void wrapperTest() {
-//        click(examplesPage.menu);
-//        waitFor(delayTime);
-//        assertIsDisplayed(examplesPage.menu.create);
-//        assertIsDisplayed(examplesPage.menu.update);
-//        assertIsDisplayed(examplesPage.menu.delete);
-//    }
+
+    @Test
+    public void wrapperTest() {
+        click(examplesPage.menu);
+        waitFor(delayTime);
+        assertIsDisplayed(examplesPage.menu.create);
+        assertIsDisplayed(examplesPage.menu.update);
+        assertIsDisplayed(examplesPage.menu.delete);
+    }
 }
