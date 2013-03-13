@@ -1131,7 +1131,7 @@ public class BotUtils {
     }
 
     public static boolean isNotDisplayed(WebElement webElement) {
-        return isDisplayed(webElement);
+        return !isDisplayed(webElement);
     }
 
     public static void assertIsDisplayed(WebElement webElement) {

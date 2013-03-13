@@ -2,13 +2,13 @@ package org.andidev.webdriverextension.pagemodels;
 
 import java.util.List;
 
-import org.andidev.webdriverextension.WebElement;
 import org.andidev.webdriverextension.WebPage;
 import org.andidev.webdriverextension.pagemodels.models.Menu;
 import org.andidev.webdriverextension.pagemodels.models.MenuButtonGroup;
 import org.andidev.webdriverextension.pagemodels.models.UserRow;
 import org.andidev.webdriverextension.pagemodels.models.UserTableSearchContext;
 import org.andidev.webdriverextension.site.WebDriverExtensionSite;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 public abstract class ExamplesPageModel extends WebPage<WebDriverExtensionSite> {
@@ -25,7 +25,7 @@ public abstract class ExamplesPageModel extends WebPage<WebDriverExtensionSite> 
     public MenuButtonGroup menuButtonGroups;
     // Section: List with WebElements
     @FindBy(css = "#todo-list li")
-    public List<WebElement> todoList;
+    public List<WebElement> todos;
     // Section: List with Extended WebElements
     @FindBy(css = "#user-table tbody tr")
     public List<UserRow> rows;

@@ -1,7 +1,8 @@
-package org.andidev.webdriverextension;
+package org.andidev.webdriverextension.utils;
 
 import static com.google.common.base.Preconditions.*;
 import javax.lang.model.element.Element;
+import org.andidev.webdriverextension.WebPage;
 import org.andidev.webdriverextension.annotation.PageObject;
 import org.apache.commons.lang3.StringUtils;
 
