@@ -1,4 +1,4 @@
-package org.andidev.webdriverextension;
+package org.andidev.webdriverextension.utils;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
@@ -7,6 +7,7 @@ import java.lang.reflect.Type;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
+import org.andidev.webdriverextension.WebContainer;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.pagefactory.ElementLocator;
 
