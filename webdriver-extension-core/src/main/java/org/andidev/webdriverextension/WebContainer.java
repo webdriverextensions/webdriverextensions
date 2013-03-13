@@ -163,146 +163,82 @@ public class WebContainer implements org.openqa.selenium.WebElement, org.openqa.
 
     @Override
     public WebElement findElementByLinkText(String using) {
-        if (delegateWebElement != null) {
-            return ((org.openqa.selenium.internal.FindsByLinkText) delegateWebElement).findElementByLinkText(using);
-        } else {
             return ((org.openqa.selenium.internal.FindsByLinkText) wrappedWebElement).findElementByLinkText(using);
-        }
     }
 
     @Override
     public List<WebElement> findElementsByLinkText(String using) {
-        if (delegateWebElement != null) {
-            return ((org.openqa.selenium.internal.FindsByLinkText) delegateWebElement).findElementsByLinkText(using);
-        } else {
             return ((org.openqa.selenium.internal.FindsByLinkText) wrappedWebElement).findElementsByLinkText(using);
-        }
     }
 
     @Override
     public WebElement findElementByPartialLinkText(String using) {
-        if (delegateWebElement != null) {
-            return ((org.openqa.selenium.internal.FindsByLinkText) delegateWebElement).findElementByPartialLinkText(using);
-        } else {
             return ((org.openqa.selenium.internal.FindsByLinkText) wrappedWebElement).findElementByPartialLinkText(using);
-        }
     }
 
     @Override
     public List<WebElement> findElementsByPartialLinkText(String using) {
-        if (delegateWebElement != null) {
-            return ((org.openqa.selenium.internal.FindsByLinkText) delegateWebElement).findElementsByPartialLinkText(using);
-        } else {
             return ((org.openqa.selenium.internal.FindsByLinkText) wrappedWebElement).findElementsByPartialLinkText(using);
-        }
     }
 
     @Override
     public WebElement findElementById(String using) {
-        if (delegateWebElement != null) {
-            return ((org.openqa.selenium.internal.FindsById) delegateWebElement).findElementById(using);
-        } else {
             return ((org.openqa.selenium.internal.FindsById) wrappedWebElement).findElementById(using);
-        }
     }
 
     @Override
     public List<WebElement> findElementsById(String using) {
-        if (delegateWebElement != null) {
-            return ((org.openqa.selenium.internal.FindsById) delegateWebElement).findElementsById(using);
-        } else {
             return ((org.openqa.selenium.internal.FindsById) wrappedWebElement).findElementsById(using);
-        }
     }
 
     @Override
     public WebElement findElementByName(String using) {
-        if (delegateWebElement != null) {
-            return ((org.openqa.selenium.internal.FindsByName) delegateWebElement).findElementByName(using);
-        } else {
             return ((org.openqa.selenium.internal.FindsByName) wrappedWebElement).findElementByName(using);
-        }
     }
 
     @Override
     public List<WebElement> findElementsByName(String using) {
-        if (delegateWebElement != null) {
-            return ((org.openqa.selenium.internal.FindsByName) delegateWebElement).findElementsByName(using);
-        } else {
             return ((org.openqa.selenium.internal.FindsByName) wrappedWebElement).findElementsByName(using);
-        }
     }
 
     @Override
     public WebElement findElementByTagName(String using) {
-        if (delegateWebElement != null) {
-            return ((org.openqa.selenium.internal.FindsByTagName) delegateWebElement).findElementByTagName(using);
-        } else {
             return ((org.openqa.selenium.internal.FindsByTagName) wrappedWebElement).findElementByTagName(using);
-        }
     }
 
     @Override
     public List<WebElement> findElementsByTagName(String using) {
-        if (delegateWebElement != null) {
-            return ((org.openqa.selenium.internal.FindsByTagName) delegateWebElement).findElementsByTagName(using);
-        } else {
             return ((org.openqa.selenium.internal.FindsByTagName) wrappedWebElement).findElementsByTagName(using);
-        }
     }
 
     @Override
     public WebElement findElementByClassName(String using) {
-        if (delegateWebElement != null) {
-            return ((org.openqa.selenium.internal.FindsByClassName) delegateWebElement).findElementByClassName(using);
-        } else {
             return ((org.openqa.selenium.internal.FindsByClassName) wrappedWebElement).findElementByClassName(using);
-        }
     }
 
     @Override
     public List<WebElement> findElementsByClassName(String using) {
-        if (delegateWebElement != null) {
-            return ((org.openqa.selenium.internal.FindsByClassName) delegateWebElement).findElementsByClassName(using);
-        } else {
             return ((org.openqa.selenium.internal.FindsByClassName) wrappedWebElement).findElementsByClassName(using);
-        }
     }
 
     @Override
     public WebElement findElementByCssSelector(String using) {
-        if (delegateWebElement != null) {
-            return ((org.openqa.selenium.internal.FindsByCssSelector) delegateWebElement).findElementByCssSelector(using);
-        } else {
             return ((org.openqa.selenium.internal.FindsByCssSelector) wrappedWebElement).findElementByCssSelector(using);
-        }
     }
 
     @Override
     public List<WebElement> findElementsByCssSelector(String using) {
-        if (delegateWebElement != null) {
-            return ((org.openqa.selenium.internal.FindsByCssSelector) delegateWebElement).findElementsByCssSelector(using);
-        } else {
             return ((org.openqa.selenium.internal.FindsByCssSelector) wrappedWebElement).findElementsByCssSelector(using);
-        }
     }
 
     @Override
     public WebElement findElementByXPath(String using) {
-        if (delegateWebElement != null) {
-            return ((org.openqa.selenium.internal.FindsByXPath) delegateWebElement).findElementByXPath(using);
-        } else {
             return ((org.openqa.selenium.internal.FindsByXPath) wrappedWebElement).findElementByXPath(using);
-        }
     }
 
     @Override
     public List<WebElement> findElementsByXPath(String using) {
-        if (delegateWebElement != null) {
-            return ((org.openqa.selenium.internal.FindsByXPath) delegateWebElement).findElementsByXPath(using);
-        } else {
-            return ((org.openqa.selenium.internal.FindsByXPath) wrappedWebElement).findElementsByXPath(using);
-        }
+        return ((org.openqa.selenium.internal.FindsByXPath) wrappedWebElement).findElementsByXPath(using);
     }
 
     @Override
