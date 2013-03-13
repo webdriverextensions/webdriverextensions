@@ -1,11 +1,12 @@
 package org.andidev.webdriverextension.models;
 
 import java.util.List;
-import static org.andidev.webdriverextension.WebDriverBot.*;
-import org.andidev.webdriverextension.WebElement;
+import org.andidev.webdriverextension.WebContainer;
+import static org.andidev.webdriverextension.bot.JUnitBot.*;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-public class Table extends WebElement {
+public class Table extends WebContainer {
 
     @FindBy(css = "th")
     public List<WebElement> header;
@@ -14,8 +15,8 @@ public class Table extends WebElement {
 
     public Integer getHeader(String header) {
         int i = 0;
-        for (WebElement htmlTag : this.header) {
-            if (isText(header, htmlTag)) {
+        for (WebElement webElement : this.header) {
+            if (isText(header, webElement)) {
                 return new Integer(i);
             }
             i++;
@@ -25,8 +26,8 @@ public class Table extends WebElement {
 
     public Integer getHeaderContains(String header) {
         int i = 0;
-        for (WebElement htmlTag : this.header) {
-            if (isTextContaining(header, htmlTag)) {
+        for (WebElement webElement : this.header) {
+            if (isTextContaining(header, webElement)) {
                 return new Integer(i);
             }
             i++;
@@ -36,8 +37,8 @@ public class Table extends WebElement {
 
     public Integer getHeaderStrartsWith(String header) {
         int i = 0;
-        for (WebElement htmlTag : this.header) {
-            if (isTextStartingWith(header, htmlTag)) {
+        for (WebElement webElement : this.header) {
+            if (isTextStartingWith(header, webElement)) {
                 return new Integer(i);
             }
             i++;
@@ -47,8 +48,8 @@ public class Table extends WebElement {
 
     public Integer getHeaderEndsWith(String header) {
         int i = 0;
-        for (WebElement htmlTag : this.header) {
-            if (isTextEndingWith(header, htmlTag)) {
+        for (WebElement webElement : this.header) {
+            if (isTextEndingWith(header, webElement)) {
                 return new Integer(i);
             }
             i++;

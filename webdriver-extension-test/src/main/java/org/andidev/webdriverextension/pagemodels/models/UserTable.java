@@ -1,12 +1,13 @@
 package org.andidev.webdriverextension.pagemodels.models;
 
 import java.util.List;
-import org.andidev.webdriverextension.WebElement;
+import org.andidev.webdriverextension.WebContainer;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-public class UserTable extends WebElement {
+public class UserTable extends WebContainer {
 
-    public static class Row extends WebElement {
+    public static class Row extends WebContainer {
 
         @FindBy(css = ".row")
         public WebElement row;

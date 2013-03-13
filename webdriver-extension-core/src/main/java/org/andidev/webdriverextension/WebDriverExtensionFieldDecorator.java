@@ -1,61 +1,60 @@
 package org.andidev.webdriverextension;
 
+import org.andidev.webdriverextension.utils.ReflectionUtils;
 import java.lang.reflect.Field;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.util.List;
 import org.andidev.webdriverextension.annotation.Delegate;
 import org.andidev.webdriverextension.annotation.ResetSearchContext;
-import org.openqa.selenium.By;
 import org.openqa.selenium.SearchContext;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.FindBys;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.pagefactory.DefaultElementLocatorFactory;
 import org.openqa.selenium.support.pagefactory.DefaultFieldDecorator;
 import org.openqa.selenium.support.pagefactory.ElementLocator;
 import org.openqa.selenium.support.pagefactory.ElementLocatorFactory;
 
-public class DefaultWebElementFieldDecorator extends DefaultFieldDecorator {
+public class WebDriverExtensionFieldDecorator extends DefaultFieldDecorator {
 
     private WebDriver driver;
     ElementLocatorFactory driverFactory;
-    private WebElementFactory htmlTagFactory;
-    private WebElementListFactory htmlTagListFactory;
+    private WebContainerFactory webContainerFactory;
+    private WebContainerListFactory webContainerListFactory;
 
-    public DefaultWebElementFieldDecorator(final WebDriver driver) {
+    public WebDriverExtensionFieldDecorator(final WebDriver driver) {
         this(driver, driver);
     }
 
-    public DefaultWebElementFieldDecorator(final SearchContext searchContext, final WebDriver driver) {
-        super(new DefaultElementLocatorFactory(searchContext));
+    public WebDriverExtensionFieldDecorator(final SearchContext searchContext, final WebDriver driver) {
+        super(new WebDriverExtensionElementLocatorFactory(searchContext, driver));
         this.driver = driver;
-        this.driverFactory = new DefaultElementLocatorFactory(driver);
-        this.htmlTagFactory = new DefaultWebElementFactory();
-        this.htmlTagListFactory = new DefaultWebElementListFactory(htmlTagFactory);
+        this.webContainerFactory = new DefaultWebContainerFactory();
+        this.webContainerListFactory = new DefaultWebContainerListFactory(webContainerFactory);
     }
 
     @Override
     public Object decorate(ClassLoader loader, Field field) {
-        if (isDecoratableHtmlTag(field)) {
-            return decorateHtmlTag(loader, field);
+        if (isDecoratableWebContainer(field)) {
+            return decorateWebContainer(loader, field);
         }
-        if (isDecoratableHtmlTagList(field)) {
-            return decorateHtmlTagList(loader, field);
+        if (isDecoratableWebContainerList(field)) {
+            return decorateWebContainerList(loader, field);
         }
-        return null;
+        return super.decorate(loader, field);
     }
 
-    private boolean isDecoratableHtmlTag(Field field) {
-        if (!WebElement.class.isAssignableFrom(field.getType())) {
+    private boolean isDecoratableWebContainer(Field field) {
+        if (!WebContainer.class.isAssignableFrom(field.getType())) {
             return false;
         }
 
         return true;
     }
 
-    private boolean isDecoratableHtmlTagList(Field field) {
+    private boolean isDecoratableWebContainerList(Field field) {
         if (!List.class.isAssignableFrom(field.getType())) {
             return false;
         }
@@ -69,11 +68,7 @@ public class DefaultWebElementFieldDecorator extends DefaultFieldDecorator {
 
         Type listType = ((ParameterizedType) genericType).getActualTypeArguments()[0];
 
-//        if (!WebElement.class.equals(listType)) {
-//            return false;
-//        }
-
-        if (!WebElement.class.isAssignableFrom((Class) listType)) {
+        if (!WebContainer.class.isAssignableFrom((Class) listType)) {
             return false;
         }
 
@@ -85,28 +80,26 @@ public class DefaultWebElementFieldDecorator extends DefaultFieldDecorator {
         return true;
     }
 
-    private Object decorateHtmlTag(final ClassLoader loader, final Field field) {
+    private Object decorateWebContainer(final ClassLoader loader, final Field field) {
         ElementLocator locator = createLocator(field);
-        Class type = (Class<? extends WebElement>) field.getType();
-        final org.openqa.selenium.WebElement webElement = proxyForLocator(loader, locator);
-        final By by = ReflectionUtils.getBy(locator);
-        final WebElement htmlTag = htmlTagFactory.create(type, webElement, by);
+        Class type = (Class<? extends WebContainer>) field.getType();
+        final WebElement webElement = proxyForLocator(loader, locator);
+        final WebContainer webContainer = webContainerFactory.create(type, webElement);
         if (hasAnnotatedResetSearchContext(field)) {
-            PageFactory.initElements(new DefaultWebElementFieldDecorator(driver), htmlTag);
+            PageFactory.initElements(new WebDriverExtensionFieldDecorator(driver, driver), webContainer);
         } else {
-            PageFactory.initElements(new DefaultWebElementFieldDecorator(webElement, driver), htmlTag);
+            PageFactory.initElements(new WebDriverExtensionFieldDecorator(webElement, driver), webContainer);
         }
-        htmlTag.delegateWebElement = getDelagate(htmlTag);
-        return htmlTag;
+        webContainer.delegateWebElement = getDelagate(webContainer);
+        return webContainer;
     }
 
-    private Object decorateHtmlTagList(final ClassLoader loader, final Field field) {
+    private Object decorateWebContainerList(final ClassLoader loader, final Field field) {
         ElementLocator locator = createLocator(field);
         Class listType = ReflectionUtils.getListType(field);
-        List<org.openqa.selenium.WebElement> webElements = proxyForListLocator(loader, locator);
-        final By by = ReflectionUtils.getBy(locator);
-        final List<? extends WebElement> htmlTagList = htmlTagListFactory.create(listType, webElements, by, driver);
-        return htmlTagList;
+        List<WebElement> webElements = proxyForListLocator(loader, locator);
+        final List<? extends WebContainer> webContainerList = webContainerListFactory.create(listType, webElements, driver);
+        return webContainerList;
     }
 
     private ElementLocator createLocator(final Field field) {
@@ -133,17 +126,17 @@ public class DefaultWebElementFieldDecorator extends DefaultFieldDecorator {
         return false;
     }
 
-    private org.openqa.selenium.WebElement getDelagate(WebElement htmlTag) {
-        Field[] fields = ReflectionUtils.getAnnotatedDeclaredFields(htmlTag.getClass(), Delegate.class, true);
+    private WebElement getDelagate(WebContainer webContainer) {
+        Field[] fields = ReflectionUtils.getAnnotatedDeclaredFields(webContainer.getClass(), Delegate.class);
         if (fields.length == 0) {
             return null;
         }
         if (fields.length > 1) {
             throw new RuntimeException("More than one @Delagate annotation used. There should only exist one.");
         }
-        org.openqa.selenium.WebElement delegate;
+        WebElement delegate;
         try {
-            delegate = (org.openqa.selenium.WebElement) fields[0].get(htmlTag);
+            delegate = (WebElement) fields[0].get(webContainer);
         } catch (IllegalArgumentException e) {
             throw new RuntimeException(e);
         } catch (IllegalAccessException e) {
