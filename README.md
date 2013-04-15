@@ -1,10 +1,10 @@
 WebDriver Extension
 ===================
 
-WebDriver Extension is a framework that exdends the WebDriver framework with components that makes it easier to apply the PageObject pattern and Bot Style testning pattern
+WebDriver Extension is a framework that extends the WebDriver framework with components that makes it easier to apply the PageObject pattern and Bot Style testing pattern
 
 ### Under Development
-This project is under development and therefore not recomended to use yet, though the development in it's final stages. Once the [Milestone 1.0.0](https://github.com/andidev/webdriver-extension/issues?milestone=1&page=1&sort=created&state=open) is released the framework will be fully functional.
+This project is under development and therefore not recomended to use yet, though the development in its final stages. Once the [Milestone 1.0.0](https://github.com/andidev/webdriver-extension/issues?milestone=1&page=1&sort=created&state=open) is released the framework will be fully functional.
 
 ### <a href="http://testingbot.com" target="_blank">TestingBot</a> is now supporting this project by giving it a Free account!
 
