@@ -36,12 +36,6 @@
             <artifactId>webdriver-extension-generator-siteaware</artifactId>
         </dependency>
 
-        <!-- WebDriver Extension Generator PageAware -->
-        <dependency>
-            <groupId>org.andidev</groupId>
-            <artifactId>webdriver-extension-generator-pageaware</artifactId>
-        </dependency>
-
         <!-- WebDriver Extension Generator Trigger -->
         <dependency>
             <groupId>org.andidev</groupId>

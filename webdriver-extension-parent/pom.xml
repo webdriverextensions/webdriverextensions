@@ -62,7 +62,7 @@
         <junit.version>4.11</junit.version>
         <logback.version>1.0.9</logback.version>
         <lombok.version>0.11.6</lombok.version>
-        <selenium.version>2.31.0</selenium.version>
+        <selenium.version>2.32.0</selenium.version>
     </properties>
 
     <dependencies>
@@ -107,13 +107,6 @@
             <dependency>
                 <groupId>org.andidev</groupId>
                 <artifactId>webdriver-extension-generator-siteaware</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-
-            <!-- WebDriver Extension Generator PageAware -->
-            <dependency>
-                <groupId>org.andidev</groupId>
-                <artifactId>webdriver-extension-generator-pageaware</artifactId>
                 <version>${project.version}</version>
             </dependency>
 
