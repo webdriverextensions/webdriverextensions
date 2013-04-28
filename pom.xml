@@ -10,6 +10,40 @@
     <description>Project pom for the WebDriver Extension framework</description>
     <url>https://github.com/andidev/webdriver-extension</url>
 
+    <licenses>
+        <license>
+            <name>The Apache Software License, Version 2.0</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
+
+    <scm>
+        <connection>scm:git:git@github.com:andidev/webdriver-extension.git</connection>
+        <developerConnection>scm:git:git@github.com:andidev/webdriver-extension.git</developerConnection>
+        <url>git@github.com:andidev/webdriver-extension.git</url>
+    </scm>
+
+    <organization>
+        <name>AndiDev</name>
+        <url>http://www.andidev.org</url>
+    </organization>
+
+    <developers>
+        <developer>
+            <id>andidev</id>
+            <name>Anders Steiner</name>
+            <email>anders.steiner@gmail.com</email>
+            <organization>AndiDev</organization>
+            <organizationUrl>http://www.andidev.org</organizationUrl>
+            <roles>
+                <role>author</role>
+                <role>architect</role>
+                <role>developer</role>
+            </roles>
+        </developer>
+    </developers>
+
     <parent>
         <groupId>org.andidev</groupId>
         <artifactId>webdriver-extension-parent</artifactId>
