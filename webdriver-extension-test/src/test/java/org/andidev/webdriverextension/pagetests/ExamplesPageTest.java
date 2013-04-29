@@ -2,10 +2,12 @@ package org.andidev.webdriverextension.pagetests;
 
 import lombok.extern.slf4j.Slf4j;
 import static org.andidev.webdriverextension.WebDriverBot.*;
+import org.andidev.webdriverextension.pagemodels.models.UserRow;
 import org.andidev.webdriverextension.site.SiteAwareDriverAware;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
 @Slf4j
