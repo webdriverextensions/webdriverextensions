@@ -3,7 +3,7 @@
 
     <groupId>org.andidev</groupId>
     <artifactId>webdriver-extension-generator-project</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.0-DEV1</version>
     <packaging>pom</packaging>
 
     <name>WebDriver Extension Generator Project</name>
