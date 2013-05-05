@@ -2,38 +2,163 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>org.andidev</groupId>
-    <artifactId>webdriver-extension-project</artifactId>
-    <version>1.0.0-SNAPSHOT</version>
-    <packaging>pom</packaging>
+    <artifactId>webdriver-extension</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <packaging>jar</packaging>
 
-    <name>WebDriver Extension Project</name>
-    <description>Project pom for the WebDriver Extension framework</description>
+    <name>WebDriver Extension</name>
+    <description>WebDriver Extension is a framework that extends the Selenium WebDriver Framework to make tests more readable, reusability and maintainable by providing components like Extendable WebElements, Page Objects, Generated Site Objects, Bots, Junit Annotation Runners and more.</description>
     <url>https://github.com/andidev/webdriver-extension</url>
 
-    <parent>
-        <groupId>org.andidev</groupId>
-        <artifactId>webdriver-extension-parent</artifactId>
-        <version>1.0.0-SNAPSHOT</version>
-        <relativePath>webdriver-extension-parent</relativePath>
-    </parent>
+    <licenses>
+        <license>
+            <name>The Apache Software License, Version 2.0</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
 
-    <modules>
-        <module>webdriver-extension-parent</module>
-        <module>webdriver-extension-core</module>
-        <module>webdriver-extension-generator-project</module>
-        <module>webdriver-extension</module>
-        <module>webdriver-extension-test</module>
-    </modules>
+    <scm>
+        <connection>scm:git:git@github.com:andidev/webdriver-extension.git</connection>
+        <developerConnection>scm:git:git@github.com:andidev/webdriver-extension.git</developerConnection>
+        <url>git@github.com:andidev/webdriver-extension.git</url>
+    </scm>
 
+    <organization>
+        <name>AndiDev</name>
+        <url>http://www.andidev.org</url>
+    </organization>
+
+    <developers>
+        <developer>
+            <id>andidev</id>
+            <name>Anders Steiner</name>
+            <email>anders.steiner@gmail.com</email>
+            <organization>AndiDev</organization>
+            <organizationUrl>http://www.andidev.org</organizationUrl>
+            <roles>
+                <role>author</role>
+                <role>architect</role>
+                <role>developer</role>
+            </roles>
+        </developer>
+    </developers>
+
+    <properties>
+        <!-- File Encoding -->
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+
+        <!-- Dependency Versions -->
+        <annotation-processor-utils.version>1.0-DEV2</annotation-processor-utils.version>
+        <commons-lang3.version>3.1</commons-lang3.version>
+        <codemodel.version>2.6</codemodel.version>
+        <guava.version>13.0.1</guava.version>
+        <junit.version>4.11</junit.version>
+        <logback.version>1.0.9</logback.version>
+        <selenium.version>2.31.0</selenium.version>
+    </properties>
+    
+    <dependencies>
+        <!-- Annotation Processor Utils -->
+        <dependency>
+            <groupId>org.andidev</groupId>
+            <artifactId>annotation-processor-utils</artifactId>
+            <version>${annotation-processor-utils.version}</version>
+            <!--                <scope>compile</scope>-->
+        </dependency>
+
+        <!-- CodeModel -->
+        <dependency>
+            <groupId>com.sun.codemodel</groupId>
+            <artifactId>codemodel</artifactId>
+            <version>${codemodel.version}</version>
+            <scope>compile</scope>
+        </dependency>
+
+        <!-- Commons Lang3 -->
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>${commons-lang3.version}</version>
+        </dependency>
+
+        <!-- Guava -->
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+            <version>${guava.version}</version>
+        </dependency>
+
+        <!-- JUnit -->
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>${junit.version}</version>
+        </dependency>
+
+        <!-- Logback -->
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+            <version>${logback.version}</version>
+        </dependency>
+
+        <!-- Selenium Java -->
+        <dependency>
+            <groupId>org.seleniumhq.selenium</groupId>
+            <artifactId>selenium-java</artifactId>
+            <version>${selenium.version}</version>
+        </dependency>
+    </dependencies>
+    
     <build>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-deploy-plugin</artifactId>
+                <version>2.7</version>
+            </plugin>
+                
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-release-plugin</artifactId>
+                <version>2.4.1</version>
+            </plugin>
+
+            <plugin>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.1</version>
                 <configuration>
-                    <skip>true</skip>
-                </configuration>
+                    <compilerVersion>1.6</compilerVersion>
+                    <source>1.6</source>
+                    <target>1.6</target>
+                    <verbose>true</verbose>
+                    <showWarnings>true</showWarnings>
+                    <!-- trigger -->
+                    <!--<fork>true</fork>-->
+                    <!-- trigger -->
+                    <!--<proc>none</proc>-->
+                    <compilerArgument>-proc:none</compilerArgument><!-- Disable annotation processors during normal compilation -->
+               </configuration>
+            </plugin>
+
+            <!-- Run annotation processors on src/test/java sources -->
+            <plugin>
+                <groupId>org.bsc.maven</groupId>
+                <artifactId>maven-processor-plugin</artifactId>
+                <version>2.2.1</version>
+                <executions>
+                    <execution>
+                        <id>process-test</id>
+                        <goals>
+                            <goal>process-test</goal>
+                        </goals>
+                        <phase>generate-test-sources</phase>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>
+
 </project>

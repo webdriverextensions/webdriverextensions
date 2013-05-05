@@ -1,6 +1,5 @@
 package org.andidev.webdriverextension.pagetests;
 
-import lombok.extern.slf4j.Slf4j;
 import org.andidev.webdriverextension.bot.JUnitBot;
 import static org.andidev.webdriverextension.bot.JUnitBot.*;
 import org.andidev.webdriverextension.pagemodels.models.UserRow;
@@ -11,7 +10,6 @@ import org.junit.Test;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
-@Slf4j
 public class ExamplesPageTest extends SiteAwareDriverAware {
 
     Double delayTime = 0.0;
@@ -25,7 +23,7 @@ public class ExamplesPageTest extends SiteAwareDriverAware {
         JUnitBot.setDriver(getDriver());
         open(site);
         open(examplesPage);
-        assertUrlEndsWidth("andidev.github.com/webdriver-extension/index.html");
+        assertUrlEndsWidth("/webdriver-extension/index.html");
     }
 
     @After
