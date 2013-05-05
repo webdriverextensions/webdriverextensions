@@ -56,7 +56,6 @@
         <guava.version>13.0.1</guava.version>
         <junit.version>4.11</junit.version>
         <logback.version>1.0.9</logback.version>
-        <lombok.version>0.11.6</lombok.version>
         <selenium.version>2.31.0</selenium.version>
     </properties>
     
@@ -99,19 +98,11 @@
         </dependency>
 
         <!-- Logback -->
-        <!--        <dependency>
+        <dependency>
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-classic</artifactId>
             <version>${logback.version}</version>
-        </dependency>-->
-
-        <!-- Lombok -->
-        <!--        <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-            <version>${lombok.version}</version>
-            <scope>provided</scope>
-        </dependency>-->
+        </dependency>
 
         <!-- Selenium Java -->
         <dependency>
