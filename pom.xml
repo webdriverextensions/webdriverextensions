@@ -60,9 +60,12 @@
         <commons-lang3.version>3.1</commons-lang3.version>
         <codemodel.version>2.6</codemodel.version>
         <guava.version>13.0.1</guava.version>
+        <gson.version>2.2.3</gson.version>
         <junit.version>4.11</junit.version>
         <logback.version>1.0.9</logback.version>
         <selenium.version>2.31.0</selenium.version>
+        <operadriver.version>1.2</operadriver.version>
+        <phantomjsdriver.version>1.0.3</phantomjsdriver.version>
     </properties>
 
     <dependencies>
@@ -96,6 +99,13 @@
             <version>${guava.version}</version>
         </dependency>
 
+        <!-- Gson -->
+        <dependency>
+            <groupId>com.google.code.gson</groupId>
+            <artifactId>gson</artifactId>
+            <version>${gson.version}</version>
+        </dependency>
+
         <!-- JUnit -->
         <dependency>
             <groupId>junit</groupId>
@@ -115,6 +125,20 @@
             <groupId>org.seleniumhq.selenium</groupId>
             <artifactId>selenium-java</artifactId>
             <version>${selenium.version}</version>
+        </dependency>
+
+        <!-- Selenium Java, OperaDriver -->
+        <dependency>
+            <groupId>com.opera</groupId>
+            <artifactId>operadriver</artifactId>
+            <version>${operadriver.version}</version>
+        </dependency>
+
+        <!-- Selenium Java, PhantomJSDriver -->
+        <dependency>
+            <groupId>com.github.detro.ghostdriver</groupId>
+            <artifactId>phantomjsdriver</artifactId>
+            <version>${phantomjsdriver.version}</version>
         </dependency>
     </dependencies>
 
