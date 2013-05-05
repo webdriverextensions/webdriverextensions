@@ -23,7 +23,7 @@ public class ExamplesPageTest extends SiteAwareDriverAware {
         JUnitBot.setDriver(getDriver());
         open(site);
         open(examplesPage);
-        assertUrlEndsWidth("andidev.github.com/webdriver-extension/index.html");
+        assertUrlEndsWidth("/webdriver-extension/index.html");
     }
 
     @After
