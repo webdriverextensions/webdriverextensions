@@ -44,6 +44,12 @@
         </developer>
     </developers>
 
+    <parent>
+        <groupId>org.sonatype.oss</groupId>
+        <artifactId>oss-parent</artifactId>
+        <version>7</version>
+    </parent>
+
     <properties>
         <!-- File Encoding -->
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -58,7 +64,7 @@
         <logback.version>1.0.9</logback.version>
         <selenium.version>2.31.0</selenium.version>
     </properties>
-    
+
     <dependencies>
         <!-- Annotation Processor Utils -->
         <dependency>
@@ -111,7 +117,7 @@
             <version>${selenium.version}</version>
         </dependency>
     </dependencies>
-    
+
     <build>
         <plugins>
             <plugin>
@@ -119,7 +125,7 @@
                 <artifactId>maven-deploy-plugin</artifactId>
                 <version>2.7</version>
             </plugin>
-                
+
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-release-plugin</artifactId>
