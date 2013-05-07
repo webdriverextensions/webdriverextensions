@@ -3,6 +3,7 @@ package org.andidev.webdriverextension.pagemodels;
 import java.util.List;
 
 import org.andidev.webdriverextension.WebPage;
+import org.andidev.webdriverextension.pagemodels.models.HtmlContainer;
 import org.andidev.webdriverextension.pagemodels.models.Menu;
 import org.andidev.webdriverextension.pagemodels.models.MenuButtonGroup;
 import org.andidev.webdriverextension.pagemodels.models.UserRow;
@@ -37,6 +38,8 @@ public abstract class ExamplesPageModel extends WebPage<WebDriverExtensionSite> 
     public Menu menu;
 //    @FindBy(css = "#user-table")
 //    public UserTable userTable;
+    @FindBy(css = "html")
+    public HtmlContainer html;
 
     public ExamplesPageModel() {
     }

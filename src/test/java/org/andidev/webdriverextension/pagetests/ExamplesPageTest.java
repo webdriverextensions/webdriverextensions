@@ -1,7 +1,10 @@
 package org.andidev.webdriverextension.pagetests;
 
+import org.andidev.webdriverextension.WebDriverExtensionFieldDecorator;
 import org.andidev.webdriverextension.bot.JUnitBot;
 import static org.andidev.webdriverextension.bot.JUnitBot.*;
+import org.andidev.webdriverextension.pagemodels.models.Menu;
+import org.andidev.webdriverextension.pagemodels.models.HtmlContainer;
 import org.andidev.webdriverextension.pagemodels.models.UserRow;
 import org.andidev.webdriverextension.site.SiteAwareDriverAware;
 import org.junit.After;
@@ -9,13 +12,23 @@ import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
 
 public class ExamplesPageTest extends SiteAwareDriverAware {
 
     Double delayTime = 0.0;
+    @FindBy(css = "div.btn-group")
+    Menu menu;
+    @FindBy(css = "html")
+    HtmlContainer html;
 
     public ExamplesPageTest() {
         setDriver(new FirefoxDriver());
+
+        // Instantiate Top Menu Object
+        this.menu = new Menu();
+        PageFactory.initElements(new WebDriverExtensionFieldDecorator(getDriver(), getDriver()), this);
     }
 
     @Before
@@ -84,5 +97,24 @@ public class ExamplesPageTest extends SiteAwareDriverAware {
         assertIsDisplayed(examplesPage.menu.create);
         assertIsDisplayed(examplesPage.menu.update);
         assertIsDisplayed(examplesPage.menu.delete);
+    }
+
+    @Test
+    public void pageFactoryInitTest() {
+        click(menu);
+        waitFor(delayTime);
+        assertIsDisplayed(menu.create);
+        assertIsDisplayed(menu.update);
+        assertIsDisplayed(menu.delete);
+    }
+
+    @Test
+    public void doubleWrappedContainers() {
+        click(examplesPage.html);
+        click(examplesPage.html.menu);
+        waitFor(delayTime);
+        assertIsDisplayed(examplesPage.html.menu.create);
+        assertIsDisplayed(examplesPage.html.menu.update);
+        assertIsDisplayed(examplesPage.html.menu.delete);
     }
 }
