@@ -43,6 +43,12 @@ public class WebDriverExtensionFieldDecorator extends DefaultFieldDecorator {
         if (isDecoratableWebContainerList(field)) {
             return decorateWebContainerList(loader, field);
         }
+        if ("wrappedWebElement".equals(field.getName())) {
+            return null;
+        }
+        if ("delegateWebElement".equals(field.getName())) {
+            return null;
+        }
         return super.decorate(loader, field);
     }
 
