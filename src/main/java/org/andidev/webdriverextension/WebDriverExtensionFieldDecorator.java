@@ -6,6 +6,9 @@ import java.lang.reflect.Field;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import org.andidev.webdriverextension.exceptions.WebDriverExtensionException;
 import org.openqa.selenium.SearchContext;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -35,6 +38,19 @@ public class WebDriverExtensionFieldDecorator extends DefaultFieldDecorator {
         }
         if (isDecoratableWebContainerList(field)) {
             return decorateWebContainerList(loader, field);
+        }
+        if (isPageObject(field)) {
+            WebPage pageObject;
+            try {
+                pageObject = (WebPage) field.getType().newInstance();
+                pageObject.setDriver(driver);
+            } catch (InstantiationException ex) {
+                throw new WebDriverExtensionException(ex);
+            } catch (IllegalAccessException ex) {
+                throw new WebDriverExtensionException(ex);
+            }
+            PageFactory.initElements(new WebDriverExtensionFieldDecorator(driver, driver), pageObject);
+            return pageObject;
         }
         if ("wrappedWebElement".equals(field.getName())) {
             return null;
@@ -79,6 +95,14 @@ public class WebDriverExtensionFieldDecorator extends DefaultFieldDecorator {
         return true;
     }
 
+    private boolean isPageObject(Field field) {
+        if (!WebPage.class.isAssignableFrom(field.getType())) {
+            return false;
+        }
+
+        return true;
+    }
+
     private Object decorateWebContainer(final ClassLoader loader, final Field field) {
         ElementLocator locator = factory.createLocator(field);
         Class type = (Class<? extends WebContainer>) field.getType();
@@ -96,5 +120,4 @@ public class WebDriverExtensionFieldDecorator extends DefaultFieldDecorator {
         final List<? extends WebContainer> webContainerList = webContainerListFactory.create(listType, webElements, driver);
         return webContainerList;
     }
-
 }

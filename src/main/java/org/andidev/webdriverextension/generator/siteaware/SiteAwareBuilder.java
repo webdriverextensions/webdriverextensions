@@ -114,19 +114,19 @@ public class SiteAwareBuilder implements Builder<Boolean> {
     }
 
     private void constructors() {
-        if (isExtended()) {
-            constructorExtendedConstructors();
-        } else {
-            constructorNoArgs();
-            constructorWebDriver();
-        }
+//        if (isExtended()) {
+//            constructorExtendedConstructors();
+//        } else {
+//            constructorNoArgs();
+//            constructorWebDriver();
+//        }
     }
 
     private void methods() {
-        setPageObjects();
-        getDriver();
-        setDriver();
-        setPageObjectsDriver();
+//        setPageObjects();
+//        getDriver();
+//        setDriver();
+//        setPageObjectsDriver();
     }
 
     private void generate() throws IOException {
