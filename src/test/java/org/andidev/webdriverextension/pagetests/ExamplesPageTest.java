@@ -55,71 +55,71 @@ public class ExamplesPageTest extends SiteAwareDriverAware {
         assertNumberOf(3, examplesPage.todos);
     }
 
-    @Test
-    public void extendedWebElementsTest() {
-        click(examplesPage.menuButtonGroup.menu);
-        waitFor(delayTime);
-        assertIsDisplayed(examplesPage.menuButtonGroup.create);
-        assertIsDisplayed(examplesPage.menuButtonGroup.update);
-        assertIsDisplayed(examplesPage.menuButtonGroup.delete);
-        assertIsDisplayed(examplesPage2.menuButtonGroup.create);
-        assertIsDisplayed(examplesPage2.menuButtonGroup.update);
-        assertIsDisplayed(examplesPage2.menuButtonGroup.delete);
-    }
-
-    @Test
-    public void listWithWebElementsTest() {
-        waitFor(delayTime);
-        for (WebElement todo : examplesPage.todos) {
-            assertTextEndsWith("!", todo);
-        }
-    }
-
-    @Test
-    public void listWithExtendedWebElementsTest() {
-        UserRow userRow = examplesPage.findUserRowByFirstName("Jacob");
-        waitFor(delayTime);
-        assertText("Thornton", userRow.lastName);
-    }
-
-    @Test
-    public void resetSearchContextTest() {
-        // Test Search Context ROOT with WebElement
-        waitFor(delayTime);
-        assertIsDisplayed(examplesPage.userTableSearchContext.searchQuery);
-    }
-
-    @Test
-    public void resetSearchContextListTest() {
-        waitFor(delayTime);
-        assertNumberOf(3, examplesPage.userTableSearchContext.todos);
-    }
-
-    @Test
-    public void wrapperTest() {
-        click(examplesPage.menu);
-        waitFor(delayTime);
-        assertIsDisplayed(examplesPage.menu.create);
-        assertIsDisplayed(examplesPage.menu.update);
-        assertIsDisplayed(examplesPage.menu.delete);
-    }
-
-    @Test
-    public void pageFactoryInitTest() {
-        click(menu);
-        waitFor(delayTime);
-        assertIsDisplayed(menu.create);
-        assertIsDisplayed(menu.update);
-        assertIsDisplayed(menu.delete);
-    }
-
-    @Test
-    public void doubleWrappedContainers() {
-        click(examplesPage.html);
-        click(examplesPage.html.menu);
-        waitFor(delayTime);
-        assertIsDisplayed(examplesPage.html.menu.create);
-        assertIsDisplayed(examplesPage.html.menu.update);
-        assertIsDisplayed(examplesPage.html.menu.delete);
-    }
+//    @Test
+//    public void extendedWebElementsTest() {
+//        click(examplesPage.menuButtonGroup.menu);
+//        waitFor(delayTime);
+//        assertIsDisplayed(examplesPage.menuButtonGroup.create);
+//        assertIsDisplayed(examplesPage.menuButtonGroup.update);
+//        assertIsDisplayed(examplesPage.menuButtonGroup.delete);
+//        assertIsDisplayed(examplesPage2.menuButtonGroup.create);
+//        assertIsDisplayed(examplesPage2.menuButtonGroup.update);
+//        assertIsDisplayed(examplesPage2.menuButtonGroup.delete);
+//    }
+//
+//    @Test
+//    public void listWithWebElementsTest() {
+//        waitFor(delayTime);
+//        for (WebElement todo : examplesPage.todos) {
+//            assertTextEndsWith("!", todo);
+//        }
+//    }
+//
+//    @Test
+//    public void listWithExtendedWebElementsTest() {
+//        UserRow userRow = examplesPage.findUserRowByFirstName("Jacob");
+//        waitFor(delayTime);
+//        assertText("Thornton", userRow.lastName);
+//    }
+//
+//    @Test
+//    public void resetSearchContextTest() {
+//        // Test Search Context ROOT with WebElement
+//        waitFor(delayTime);
+//        assertIsDisplayed(examplesPage.userTableSearchContext.searchQuery);
+//    }
+//
+//    @Test
+//    public void resetSearchContextListTest() {
+//        waitFor(delayTime);
+//        assertNumberOf(3, examplesPage.userTableSearchContext.todos);
+//    }
+//
+//    @Test
+//    public void wrapperTest() {
+//        click(examplesPage.menu);
+//        waitFor(delayTime);
+//        assertIsDisplayed(examplesPage.menu.create);
+//        assertIsDisplayed(examplesPage.menu.update);
+//        assertIsDisplayed(examplesPage.menu.delete);
+//    }
+//
+//    @Test
+//    public void pageFactoryInitTest() {
+//        click(menu);
+//        waitFor(delayTime);
+//        assertIsDisplayed(menu.create);
+//        assertIsDisplayed(menu.update);
+//        assertIsDisplayed(menu.delete);
+//    }
+//
+//    @Test
+//    public void doubleWrappedContainers() {
+//        click(examplesPage.html);
+//        click(examplesPage.html.menu);
+//        waitFor(delayTime);
+//        assertIsDisplayed(examplesPage.html.menu.create);
+//        assertIsDisplayed(examplesPage.html.menu.update);
+//        assertIsDisplayed(examplesPage.html.menu.delete);
+//    }
 }
