@@ -2,6 +2,7 @@ package org.andidev.webdriverextension;
 
 import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.PageFactory;
 
 public abstract class WebSite implements Openable {
 
@@ -20,6 +21,12 @@ public abstract class WebSite implements Openable {
 
     public void setDriver(WebDriver driver) {
         this.driver = driver;
+    }
+
+    public void setDriver(WebDriver driver, WebDriverExtensionFieldDecorator decorator) {
+        this.driver = driver;
+        // Init WebElements
+        PageFactory.initElements(decorator, this);
     }
 
     @Override

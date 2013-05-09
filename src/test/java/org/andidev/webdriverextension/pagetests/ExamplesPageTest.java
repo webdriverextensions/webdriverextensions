@@ -3,6 +3,7 @@ package org.andidev.webdriverextension.pagetests;
 import org.andidev.webdriverextension.WebDriverExtensionFieldDecorator;
 import org.andidev.webdriverextension.bot.JUnitBot;
 import static org.andidev.webdriverextension.bot.JUnitBot.*;
+import org.andidev.webdriverextension.pagebots.ExamplesPageBot;
 import org.andidev.webdriverextension.pagemodels.models.Menu;
 import org.andidev.webdriverextension.pagemodels.models.HtmlContainer;
 import org.andidev.webdriverextension.pagemodels.models.UserRow;
@@ -22,6 +23,7 @@ public class ExamplesPageTest extends SiteAwareDriverAware {
     Menu menu;
     @FindBy(css = "html")
     HtmlContainer html;
+    ExamplesPageBot examplesPage2;
 
     public ExamplesPageTest() {
         setDriver(new FirefoxDriver());
@@ -60,6 +62,9 @@ public class ExamplesPageTest extends SiteAwareDriverAware {
         assertIsDisplayed(examplesPage.menuButtonGroup.create);
         assertIsDisplayed(examplesPage.menuButtonGroup.update);
         assertIsDisplayed(examplesPage.menuButtonGroup.delete);
+        assertIsDisplayed(examplesPage2.menuButtonGroup.create);
+        assertIsDisplayed(examplesPage2.menuButtonGroup.update);
+        assertIsDisplayed(examplesPage2.menuButtonGroup.delete);
     }
 
     @Test

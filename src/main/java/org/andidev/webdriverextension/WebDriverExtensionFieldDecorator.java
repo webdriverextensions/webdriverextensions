@@ -21,12 +21,14 @@ import org.openqa.selenium.support.pagefactory.ElementLocator;
 public class WebDriverExtensionFieldDecorator extends DefaultFieldDecorator {
 
     private WebDriver driver;
+    private SiteAndPageObjectPool pool;
     private WebContainerFactory webContainerFactory;
     private WebContainerListFactory webContainerListFactory;
 
     public WebDriverExtensionFieldDecorator(final SearchContext searchContext, final WebDriver driver) {
         super(new WebDriverExtensionElementLocatorFactory(searchContext, driver));
         this.driver = driver;
+        this.pool = new SiteAndPageObjectPool(driver);
         this.webContainerFactory = new DefaultWebContainerFactory();
         this.webContainerListFactory = new DefaultWebContainerListFactory(webContainerFactory);
     }
@@ -39,18 +41,11 @@ public class WebDriverExtensionFieldDecorator extends DefaultFieldDecorator {
         if (isDecoratableWebContainerList(field)) {
             return decorateWebContainerList(loader, field);
         }
-        if (isPageObject(field)) {
-            WebPage pageObject;
-            try {
-                pageObject = (WebPage) field.getType().newInstance();
-                pageObject.setDriver(driver);
-            } catch (InstantiationException ex) {
-                throw new WebDriverExtensionException(ex);
-            } catch (IllegalAccessException ex) {
-                throw new WebDriverExtensionException(ex);
-            }
-            PageFactory.initElements(new WebDriverExtensionFieldDecorator(driver, driver), pageObject);
-            return pageObject;
+        if (isDecoratablePageObject(field)) {
+            return pool.getPageObject(field);
+        }
+        if (isDecoratableSiteObject(field)) {
+            return pool.getSiteObject(field, this);
         }
         if ("wrappedWebElement".equals(field.getName())) {
             return null;
@@ -95,8 +90,16 @@ public class WebDriverExtensionFieldDecorator extends DefaultFieldDecorator {
         return true;
     }
 
-    private boolean isPageObject(Field field) {
+    private boolean isDecoratablePageObject(Field field) {
         if (!WebPage.class.isAssignableFrom(field.getType())) {
+            return false;
+        }
+
+        return true;
+    }
+
+    private boolean isDecoratableSiteObject(Field field) {
+        if (!WebSite.class.isAssignableFrom(field.getType())) {
             return false;
         }
 
