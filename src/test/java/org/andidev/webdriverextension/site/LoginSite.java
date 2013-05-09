@@ -1,12 +1,9 @@
 package org.andidev.webdriverextension.site;
 
 import org.andidev.webdriverextension.annotation.Generate;
-import org.andidev.webdriverextension.annotation.SiteAwareExtends;
-import temp.DriverAware;
 
-@Generate(name = "site")
-@SiteAwareExtends({DriverAware.class})
-public class WebDriverExtensionSite extends SiteModel {
+@Generate(name = "LoginSite")
+public class LoginSite extends LoginSiteModel {
 
     @Override
     public String getUrl() {
@@ -15,7 +12,7 @@ public class WebDriverExtensionSite extends SiteModel {
 
     @Override
     public void assertIsOpen() throws Error {
-        examplesPage.assertIsOpen();
+        examplesPage2.assertIsOpen();
     }
 
 }

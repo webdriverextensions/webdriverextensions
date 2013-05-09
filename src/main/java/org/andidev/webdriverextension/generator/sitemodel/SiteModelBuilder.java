@@ -11,16 +11,16 @@ import com.sun.codemodel.JMethod;
 import com.sun.codemodel.JMod;
 import java.io.IOException;
 import java.util.Set;
-import java.util.TreeSet;
+import java.util.LinkedHashSet;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.annotation.processing.ProcessingEnvironment;
 import javax.lang.model.element.TypeElement;
 import static org.andidev.annotationprocessorutils.ElementUtils.*;
 import org.andidev.annotationprocessorutils.ProcessingEnvironmentCodeWriter;
-import org.andidev.webdriverextension.utils.PageObjectUtils;
-import org.andidev.webdriverextension.utils.SiteObjectUtils;
+import org.andidev.webdriverextension.utils.GeneratorUtils;
 import org.andidev.webdriverextension.WebSite;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.builder.Builder;
 import org.openqa.selenium.WebDriver;
 
@@ -67,7 +67,7 @@ public class SiteModelBuilder implements Builder<Boolean> {
 
     private void init() throws JClassAlreadyExistsException {
         codeModel = new JCodeModel();
-        siteModelClass = codeModel._class(JMod.PUBLIC | JMod.ABSTRACT, getPackageName(siteObjectElement) + ".SiteModel", ClassType.CLASS);
+        siteModelClass = codeModel._class(JMod.PUBLIC | JMod.ABSTRACT, getPackageName(siteObjectElement) + "." + StringUtils.capitalize(GeneratorUtils.getName(siteObjectElement)) + "Model", ClassType.CLASS);
         siteModelClass._extends(codeModel.ref(WebSite.class));
         webDriverClass = codeModel.ref(WebDriver.class);
         siteObjectClass = codeModel.ref(siteObjectElement.getQualifiedName().toString());
@@ -99,7 +99,7 @@ public class SiteModelBuilder implements Builder<Boolean> {
     }
 
     private Set<JClass> getCodeModelRefs(Set<TypeElement> elements) {
-        Set<JClass> codeModeModelRefs = new TreeSet<JClass>();
+        Set<JClass> codeModeModelRefs = new LinkedHashSet<JClass>();
         for (TypeElement pageObjectElement : pageObjectElements) {
             codeModeModelRefs.add(codeModel.ref(pageObjectElement.getQualifiedName().toString()));
         }
@@ -159,13 +159,13 @@ public class SiteModelBuilder implements Builder<Boolean> {
     }
 
     private String getSiteObjectFieldName() {
-        return SiteObjectUtils.getName(siteObjectElement);
+        return GeneratorUtils.getName(siteObjectElement);
     }
 
     private String getPageObjectFieldName(JClass pageObjectClass) {
         for (TypeElement pageObjectElement : pageObjectElements) {
             if (pageObjectElement.getQualifiedName().toString().equals(pageObjectClass.fullName())) {
-                return PageObjectUtils.getName(pageObjectElement);
+                return GeneratorUtils.getName(pageObjectElement);
             }
         }
         return null;

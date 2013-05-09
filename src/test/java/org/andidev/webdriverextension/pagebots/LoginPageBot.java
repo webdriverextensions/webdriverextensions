@@ -2,11 +2,11 @@ package org.andidev.webdriverextension.pagebots;
 
 import static org.andidev.webdriverextension.bot.JUnitBot.*;
 import org.andidev.webdriverextension.annotation.Generate;
-import org.andidev.webdriverextension.pagemodels.ExamplesPageModel;
+import org.andidev.webdriverextension.pagemodels.LoginPageModel;
 import org.andidev.webdriverextension.pagemodels.models.UserRow;
 
-@Generate(name = "examplesPage")
-public class ExamplesPageBot extends ExamplesPageModel {
+@Generate(name = "examplesPage2")
+public class LoginPageBot extends LoginPageModel {
 
     @Override
     public void open() {
