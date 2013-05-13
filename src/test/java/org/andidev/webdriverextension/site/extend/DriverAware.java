@@ -1,4 +1,4 @@
-package temp;
+package org.andidev.webdriverextension.site.extend;
 
 import org.openqa.selenium.WebDriver;
 

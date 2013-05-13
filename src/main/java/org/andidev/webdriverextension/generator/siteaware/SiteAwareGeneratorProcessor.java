@@ -13,6 +13,8 @@ import javax.lang.model.element.TypeElement;
 import org.andidev.annotationprocessorutils.AnnotationUtils;
 import org.andidev.webdriverextension.annotation.SiteAwareExtends;
 import org.andidev.webdriverextension.generator.AbstractGeneratorProcessor;
+import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringStyle;
 
 @SupportedAnnotationTypes({"org.andidev.webdriverextension.annotation.Generate"})
 @SupportedSourceVersion(SourceVersion.RELEASE_6)
@@ -32,6 +34,7 @@ public class SiteAwareGeneratorProcessor extends AbstractGeneratorProcessor {
         debug("Generating SiteAware class with Site Classes: " + siteClass.getSimpleName() + " and Page Classes: " + getAnnotatedPageClasses(siteClass));
         SiteAwareBuilder builder = new SiteAwareBuilder(processingEnv,
                 siteClass,
+                getAnnotatedSiteClasses(),
                 getAnnotatedPageClasses(siteClass));
         builder.build();
     }
@@ -40,6 +43,7 @@ public class SiteAwareGeneratorProcessor extends AbstractGeneratorProcessor {
         debug("Generating SiteAware class with Site Classes: " + siteClass.getSimpleName() + " and Page Classes: " + getAnnotatedPageClasses(siteClass));
         SiteAwareBuilder builder = new SiteAwareBuilder(processingEnv,
                 siteClass,
+                getAnnotatedSiteClasses(),
                 getAnnotatedPageClasses(siteClass),
                 exdendsClass);
         builder.build();

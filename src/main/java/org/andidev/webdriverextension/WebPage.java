@@ -1,29 +1,24 @@
 package org.andidev.webdriverextension;
 
+import org.andidev.webdriverextension.bot.JUnitBot;
 import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.pagefactory.FieldDecorator;
 
 public abstract class WebPage<S> implements Openable {
-
-    private WebDriver driver;
     public S site;
 
-    public WebPage() {
+    public void initElements() {
+        PageFactory.initElements(new WebDriverExtensionFieldDecorator(JUnitBot.getDriver(), JUnitBot.getDriver()), this);
     }
 
-    public WebPage(WebDriver driver) {
-        setDriver(driver);
-    }
-
-    public WebDriver getDriver() {
-        return driver;
-    }
-
-    public void setDriver(WebDriver driver) {
-        this.driver = driver;
-        // Init WebElements
+    public void initElements(WebDriver driver) {
         PageFactory.initElements(new WebDriverExtensionFieldDecorator(driver, driver), this);
+    }
+
+    public void initElements(FieldDecorator decorator) {
+        PageFactory.initElements(decorator, this);
     }
 
     @Override

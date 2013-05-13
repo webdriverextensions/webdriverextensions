@@ -2,7 +2,7 @@ package org.andidev.webdriverextension.site;
 
 import org.andidev.webdriverextension.annotation.Generate;
 import org.andidev.webdriverextension.annotation.SiteAwareExtends;
-import temp.DriverAware;
+import org.andidev.webdriverextension.site.extend.DriverAware;
 
 @Generate(name = "site")
 @SiteAwareExtends({DriverAware.class})

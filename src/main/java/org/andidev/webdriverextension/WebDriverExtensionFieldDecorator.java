@@ -6,9 +6,6 @@ import java.lang.reflect.Field;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import org.andidev.webdriverextension.exceptions.WebDriverExtensionException;
 import org.openqa.selenium.SearchContext;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -42,7 +39,7 @@ public class WebDriverExtensionFieldDecorator extends DefaultFieldDecorator {
             return decorateWebContainerList(loader, field);
         }
         if (isDecoratablePageObject(field)) {
-            return pool.getPageObject(field);
+            return pool.getPageObject(field, this);
         }
         if (isDecoratableSiteObject(field)) {
             return pool.getSiteObject(field, this);

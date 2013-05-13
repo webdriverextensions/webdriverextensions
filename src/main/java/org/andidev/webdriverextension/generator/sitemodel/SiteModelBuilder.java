@@ -22,7 +22,6 @@ import org.andidev.webdriverextension.utils.GeneratorUtils;
 import org.andidev.webdriverextension.WebSite;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.builder.Builder;
-import org.openqa.selenium.WebDriver;
 
 public class SiteModelBuilder implements Builder<Boolean> {
 
@@ -34,7 +33,6 @@ public class SiteModelBuilder implements Builder<Boolean> {
     // JClasses
     private JDefinedClass siteModelClass;
     private JClass webSiteClass;
-    private JClass webDriverClass;
     private JClass siteObjectClass;
     private Set<JClass> pageObjectClasses;
 
@@ -69,7 +67,6 @@ public class SiteModelBuilder implements Builder<Boolean> {
         codeModel = new JCodeModel();
         siteModelClass = codeModel._class(JMod.PUBLIC | JMod.ABSTRACT, getPackageName(siteObjectElement) + "." + StringUtils.capitalize(GeneratorUtils.getName(siteObjectElement)) + "Model", ClassType.CLASS);
         siteModelClass._extends(codeModel.ref(WebSite.class));
-        webDriverClass = codeModel.ref(WebDriver.class);
         siteObjectClass = codeModel.ref(siteObjectElement.getQualifiedName().toString());
         pageObjectClasses = getCodeModelRefs(pageObjectElements);
     }
@@ -82,15 +79,9 @@ public class SiteModelBuilder implements Builder<Boolean> {
     }
 
     private void constructors() {
-        constructorNoArgs();
-        constructorWebDriver();
     }
 
     private void methods() {
-        newPageObjects();
-        setSiteObjects();
-        setDriver();
-        setPageObjectsDriver();
     }
 
     private void generate() throws IOException {
@@ -106,56 +97,11 @@ public class SiteModelBuilder implements Builder<Boolean> {
         return codeModeModelRefs;
     }
 
-    private void constructorNoArgs() {
-        // Create No Arguments Constructor
-        JMethod method = siteModelClass.constructor(JMod.PUBLIC);
-        method.body().invoke("newPageObjects");
-        method.body().invoke("setSiteObjects");
-    }
-
-    private void constructorWebDriver() {
-        // Create WebDriver Argument Constructor
-        JMethod method = siteModelClass.constructor(JMod.PUBLIC);
-        method.param(webDriverClass, "driver");
-        method.body().invoke("newPageObjects");
-        method.body().invoke("setSiteObjects");
-        method.body().invoke("setDriver").arg(JExpr.ref("driver"));
-    }
-
     private void newPageObjects() {
         JMethod method = siteModelClass.method(JMod.PRIVATE, void.class, "newPageObjects");
         for (JClass pageObjectClass : pageObjectClasses) {
             method.body().assign(JExpr.ref(getPageObjectFieldName(pageObjectClass)), JExpr._new(pageObjectClass));
         }
-    }
-
-    private void setSiteObjects() {
-        JMethod method = siteModelClass.method(JMod.PRIVATE, void.class, "setSiteObjects");
-        for (JClass pageObjectClass : pageObjectClasses) {
-            method.body().assign(JExpr.ref(JExpr.ref(getPageObjectFieldName(pageObjectClass)), "site"), JExpr.cast(siteObjectClass, JExpr._this()));
-        }
-    }
-
-    private void setDriver() {
-        // Create setDriver(...)
-        JMethod method = siteModelClass.method(JMod.PUBLIC, void.class, "setDriver");
-        method.annotate(Override.class);
-        method.param(webDriverClass, "driver");
-        method.body().invoke(JExpr._super(), "setDriver").arg(JExpr.ref("driver"));
-        method.body().invoke("setPageObjectsDriver").arg(JExpr.ref("driver"));
-    }
-
-    private void setPageObjectsDriver() {
-        // Create setPageObjectsDriver(...)
-        JMethod method = siteModelClass.method(JMod.PRIVATE, void.class, "setPageObjectsDriver");
-        method.param(webDriverClass, "driver");
-        for (JClass pageObjectClass : pageObjectClasses) {
-            method.body().invoke(JExpr.ref(getPageObjectFieldName(pageObjectClass)), "setDriver").arg(JExpr.ref("driver"));
-        }
-    }
-
-    private String getConstructors(JClass pageObjectClass) {
-        return null;
     }
 
     private String getSiteObjectFieldName() {

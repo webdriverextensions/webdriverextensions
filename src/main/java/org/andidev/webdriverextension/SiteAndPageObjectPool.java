@@ -8,9 +8,6 @@ import java.util.HashMap;
 import org.andidev.webdriverextension.exceptions.WebDriverExtensionException;
 import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.pagefactory.DefaultFieldDecorator;
-import org.openqa.selenium.support.pagefactory.FieldDecorator;
 
 public class SiteAndPageObjectPool {
 
@@ -26,29 +23,29 @@ public class SiteAndPageObjectPool {
 
     public WebSite getSiteObject(Field field, WebDriverExtensionFieldDecorator decorator) {
         Key siteObjectKey = Key.createSiteObjectKey(field);
-        WebSite siteObject = null;
-        if (!siteObjects.containsKey(siteObjectKey)) {
+        WebSite siteObject = siteObjects.get(siteObjectKey);
+        if (siteObject == null) {
             siteObject = createSiteObject(field);
             siteObjects.put(siteObjectKey, siteObject);
-            siteObject.setDriver(driver);
+            siteObject.initElements(driver, decorator);
         }
         return siteObject;
     }
 
-    public WebPage getPageObject(Field field) {
+    public WebPage getPageObject(Field field, WebDriverExtensionFieldDecorator decorator) {
         Key pageObjectKey = Key.createPageObjectKey(field);
-        WebPage pageObject = null;
-        if (!pageObjects.containsKey(pageObjectKey)) {
+        WebPage pageObject = pageObjects.get(pageObjectKey);
+        if (pageObject == null) {
             pageObject = createPageObject(field);
             pageObjects.put(pageObjectKey, pageObject);
-            pageObject.setDriver(driver);
+            pageObject.initElements(driver);
         }
         Key siteObjectKey = Key.createSiteObjectKeyFromPageObjectField(field);
-        WebSite siteObject = null;
-        if (!siteObjects.containsKey(siteObjectKey)) {
+        WebSite siteObject = siteObjects.get(siteObjectKey);
+        if (siteObject == null) {
             siteObject = createSiteObjectFromPageObjectField(field);
             siteObjects.put(siteObjectKey, siteObject);
-            siteObject.setDriver(driver);
+            siteObject.initElements(driver, decorator);
         }
         pageObject.site = siteObject;
         return pageObject;
@@ -118,7 +115,7 @@ public class SiteAndPageObjectPool {
             }
             throw new WebDriverExtensionException();
         }
-        
+
         private static Key createPageObjectKey(Field field) {
             if (WebPage.class.isAssignableFrom(field.getType())) {
                 Type siteObjectType = ((ParameterizedType) ((Class) field.getType().getGenericSuperclass()).getGenericSuperclass()).getActualTypeArguments()[0];
