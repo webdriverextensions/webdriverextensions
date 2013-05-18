@@ -107,13 +107,13 @@ public class FestBot {
         BotUtils.deselect(webElement);
     }
 
-    public static DeselectOptionTypes deselect() {
-        return new DeselectOptionTypes();
-    }
-
-    public static DeselectOptionInTypes deselect(String text) {
-        return new DeselectOptionInTypes(text);
-    }
+//    public static DeselectOptionTypes deselect() {
+//        return new DeselectOptionTypes();
+//    }
+//
+//    public static DeselectOptionInTypes deselect(String text) {
+//        return new DeselectOptionInTypes(text);
+//    }
 
     /* Check */
     public static void check(WebElement webElement) {

@@ -14,6 +14,7 @@ import org.openqa.selenium.Platform;
 //@RunWith(SeleniumGridRunner.class)
 @Browsers(firefox =
     @Firefox(version = "20"))
+@Ignore
 public class WebDriverRunnerTest {
 
 //    @Test

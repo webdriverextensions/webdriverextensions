@@ -6,6 +6,8 @@ import org.junit.Ignore;
 import org.junit.Test;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
+
+@Ignore
 public class CurrentBrowserTest {
 
     @After
@@ -22,7 +24,6 @@ public class CurrentBrowserTest {
     }
 
     @Test
-    @Ignore
     public void testSetDriverByDesiredCapabilities() throws MalformedURLException {
         DesiredCapabilities desiredCapabilities = new DesiredCapabilities();
         desiredCapabilities.setBrowserName("firefox");
@@ -35,7 +36,6 @@ public class CurrentBrowserTest {
     }
 
     @Test
-    @Ignore
     public void testSetDriverByBrowserName() {
         CurrentBrowser.setDriver("firefox");
         System.out.println("browserName = " + CurrentBrowser.getBrowserName());

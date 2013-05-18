@@ -15,6 +15,7 @@ import org.andidev.webdriverextension.area51.annotations.browsers.Opera;
 import org.andidev.webdriverextension.area51.annotations.browsers.Safari;
 import org.andidev.webdriverextension.area51.enums.BooleanOption;
 import org.junit.Assert;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.Platform;
@@ -54,6 +55,7 @@ import org.openqa.selenium.Platform;
 //    @CustomBrowser(browserName = "nexuss", platform = Platform.ANDROID),
 //    @CustomBrowser(browserName = "htcdesire", platform = Platform.ANDROID)
 //})
+@Ignore
 public class SauceLabsTest {
 
     @Test
