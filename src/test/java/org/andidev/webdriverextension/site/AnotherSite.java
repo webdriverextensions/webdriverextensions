@@ -2,8 +2,8 @@ package org.andidev.webdriverextension.site;
 
 import org.andidev.webdriverextension.generator.annotations.Generate;
 
-@Generate(name = "LoginSite")
-public class LoginSite extends AbstractLoginSite {
+@Generate
+public class AnotherSite extends AbstractAnotherSite {
 
     @Override
     public String getUrl() {

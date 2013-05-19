@@ -2,11 +2,11 @@ package org.andidev.webdriverextension;
 
 import org.andidev.webdriverextension.internal.WebDriverExtensionFieldDecorator;
 import static org.andidev.webdriverextension.JUnitBot.*;
-import org.andidev.webdriverextension.site.SiteAwareDriverAware;
 import org.andidev.webdriverextension.page.ExamplesPage;
 import org.andidev.webdriverextension.page.components.Menu;
 import org.andidev.webdriverextension.page.components.HtmlContainer;
 import org.andidev.webdriverextension.page.components.UserRow;
+import org.andidev.webdriverextension.site.WebDriverExtensionSite;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -15,7 +15,7 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-public class ExamplesPageTest extends SiteAwareDriverAware {
+public class ExamplesPageTest extends WebDriverExtensionSite {
 
     Double delayTime = 0.0;
     @FindBy(css = "div.btn-group")

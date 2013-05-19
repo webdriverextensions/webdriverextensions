@@ -15,11 +15,9 @@ import javax.lang.model.element.TypeElement;
 import static org.andidev.annotationprocessorutils.ElementUtils.*;
 import org.andidev.annotationprocessorutils.ProcessingEnvironmentCodeWriter;
 import org.andidev.webdriverextension.internal.GeneratorUtils;
-import org.andidev.webdriverextension.JUnitBot;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.builder.Builder;
 import org.apache.commons.lang3.exception.ExceptionUtils;
-import org.openqa.selenium.WebDriver;
 
 //@Slf4j
 public class SiteAwareBuilder implements Builder<Boolean> {
@@ -30,14 +28,9 @@ public class SiteAwareBuilder implements Builder<Boolean> {
     private TypeElement siteObjectElement;
     private Set<TypeElement> siteObjectElements;
     private Set<TypeElement> pageObjectElements;
-    private TypeElement extendedObjectElement;
     private JCodeModel codeModel;
     // JClasses
     private JDefinedClass siteAwareClass;
-    private JClass extendedObjectClass;
-    private JClass webDriverClass;
-    private JClass jUnitBotClass;
-    private JClass siteObjectClass;
     private Set<JClass> siteObjectClasses;
     private Set<JClass> pageObjectClasses;
 
@@ -49,18 +42,6 @@ public class SiteAwareBuilder implements Builder<Boolean> {
         this.siteObjectElement = siteObjectElement;
         this.siteObjectElements = siteObjectElements;
         this.pageObjectElements = pageObjectElements;
-    }
-
-    public SiteAwareBuilder(ProcessingEnvironment processingEnv,
-            TypeElement siteObjectElement,
-            Set<TypeElement> siteObjectElements,
-            Set<TypeElement> pageObjectElements,
-            TypeElement extendedObjectElement) {
-        this.processingEnv = processingEnv;
-        this.siteObjectElement = siteObjectElement;
-        this.siteObjectElements = siteObjectElements;
-        this.pageObjectElements = pageObjectElements;
-        this.extendedObjectElement = extendedObjectElement;
     }
 
     @Override
@@ -85,16 +66,7 @@ public class SiteAwareBuilder implements Builder<Boolean> {
 
     private void init() throws JClassAlreadyExistsException {
         codeModel = new JCodeModel();
-        if (isExtended()) {
-            siteAwareClass = codeModel._class(JMod.PUBLIC | JMod.ABSTRACT, getPackageName(siteObjectElement) + "." + StringUtils.capitalize(GeneratorUtils.getName(siteObjectElement)) + "Aware" + getClassName(extendedObjectElement), ClassType.CLASS);
-            extendedObjectClass = codeModel.ref(getFullClassName(extendedObjectElement));
-            siteAwareClass._extends(extendedObjectClass);
-        } else {
-            siteAwareClass = codeModel._class(JMod.PUBLIC | JMod.ABSTRACT, getPackageName(siteObjectElement) + "." + StringUtils.capitalize(GeneratorUtils.getName(siteObjectElement)) + "Aware", ClassType.CLASS);
-        }
-        webDriverClass = codeModel.ref(WebDriver.class);
-        jUnitBotClass = codeModel.ref(JUnitBot.class);
-        siteObjectClass = codeModel.ref(siteObjectElement.getQualifiedName().toString());
+        siteAwareClass = codeModel._class(JMod.PUBLIC | JMod.ABSTRACT, getPackageName(siteObjectElement) + "." + StringUtils.capitalize(GeneratorUtils.getName(siteObjectElement)) + "Aware", ClassType.CLASS);
         siteObjectClasses = getCodeModelRefs(siteObjectElements);
         pageObjectClasses = getCodeModelRefs(pageObjectElements);
     }
@@ -151,9 +123,5 @@ public class SiteAwareBuilder implements Builder<Boolean> {
             }
         }
         return null;
-    }
-
-    private boolean isExtended() {
-        return extendedObjectElement != null;
     }
 }

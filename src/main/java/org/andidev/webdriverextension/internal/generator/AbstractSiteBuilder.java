@@ -32,8 +32,6 @@ public class AbstractSiteBuilder implements Builder<Boolean> {
     private JCodeModel codeModel;
     // JClasses
     private JDefinedClass abstractSiteClass;
-    private JClass webSiteClass;
-    private JClass siteObjectClass;
     private Set<JClass> pageObjectClasses;
 
     public AbstractSiteBuilder(ProcessingEnvironment processingEnv,
@@ -67,7 +65,6 @@ public class AbstractSiteBuilder implements Builder<Boolean> {
         codeModel = new JCodeModel();
         abstractSiteClass = codeModel._class(JMod.PUBLIC | JMod.ABSTRACT, getPackageName(siteObjectElement) + ".Abstract" + StringUtils.capitalize(GeneratorUtils.getName(siteObjectElement)), ClassType.CLASS);
         abstractSiteClass._extends(codeModel.ref(WebSite.class));
-        siteObjectClass = codeModel.ref(siteObjectElement.getQualifiedName().toString());
         pageObjectClasses = getCodeModelRefs(pageObjectElements);
     }
 

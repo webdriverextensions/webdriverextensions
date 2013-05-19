@@ -9,12 +9,12 @@ import org.andidev.webdriverextension.page.components.Menu;
 import org.andidev.webdriverextension.page.components.MenuButtonGroup;
 import org.andidev.webdriverextension.page.components.UserRow;
 import org.andidev.webdriverextension.page.components.UserTableSearchContext;
-import org.andidev.webdriverextension.site.LoginSite;
+import org.andidev.webdriverextension.site.AnotherSite;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 @Generate(name = "examplesPage2")
-public class LoginPage extends WebPage<LoginSite> {
+public class LoginPage extends WebPage<AnotherSite> {
 
     // Section: WebElements
     @FindBy(css = "#search-query")
