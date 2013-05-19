@@ -5,7 +5,7 @@ import org.andidev.webdriverextension.annotations.SiteAwareExtends;
 
 @Generate(name = "site")
 @SiteAwareExtends({DriverAware.class})
-public class WebDriverExtensionSite extends SiteModel {
+public class WebDriverExtensionSite extends AbstractSite {
 
     @Override
     public String getUrl() {

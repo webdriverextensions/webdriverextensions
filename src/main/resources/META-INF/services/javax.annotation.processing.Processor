@@ -1,2 +1,2 @@
-org.andidev.webdriverextension.generator.SiteModelGeneratorProcessor
+org.andidev.webdriverextension.generator.AbstractSiteGeneratorProcessor
 org.andidev.webdriverextension.generator.SiteAwareGeneratorProcessor

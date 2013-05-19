@@ -23,7 +23,7 @@ import org.andidev.webdriverextension.WebSite;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.builder.Builder;
 
-public class SiteModelBuilder implements Builder<Boolean> {
+public class AbstractSiteBuilder implements Builder<Boolean> {
 
     // Input Elements
     private ProcessingEnvironment processingEnv;
@@ -31,12 +31,12 @@ public class SiteModelBuilder implements Builder<Boolean> {
     private Set<TypeElement> pageObjectElements;
     private JCodeModel codeModel;
     // JClasses
-    private JDefinedClass siteModelClass;
+    private JDefinedClass abstractSiteClass;
     private JClass webSiteClass;
     private JClass siteObjectClass;
     private Set<JClass> pageObjectClasses;
 
-    public SiteModelBuilder(ProcessingEnvironment processingEnv,
+    public AbstractSiteBuilder(ProcessingEnvironment processingEnv,
             TypeElement siteObjectElement, Set<TypeElement> pageObjectElements) {
         this.processingEnv = processingEnv;
         this.siteObjectElement = siteObjectElement;
@@ -53,10 +53,10 @@ public class SiteModelBuilder implements Builder<Boolean> {
             generate();
             return true;
         } catch (IOException ex) {
-            Logger.getLogger(SiteModelBuilder.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(AbstractSiteBuilder.class.getName()).log(Level.SEVERE, null, ex);
             return false;
         } catch (JClassAlreadyExistsException ex) {
-            Logger.getLogger(SiteModelBuilder.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(AbstractSiteBuilder.class.getName()).log(Level.SEVERE, null, ex);
             return false;
         }
 
@@ -65,8 +65,8 @@ public class SiteModelBuilder implements Builder<Boolean> {
 
     private void init() throws JClassAlreadyExistsException {
         codeModel = new JCodeModel();
-        siteModelClass = codeModel._class(JMod.PUBLIC | JMod.ABSTRACT, getPackageName(siteObjectElement) + "." + StringUtils.capitalize(GeneratorUtils.getName(siteObjectElement)) + "Model", ClassType.CLASS);
-        siteModelClass._extends(codeModel.ref(WebSite.class));
+        abstractSiteClass = codeModel._class(JMod.PUBLIC | JMod.ABSTRACT, getPackageName(siteObjectElement) + ".Abstract" + StringUtils.capitalize(GeneratorUtils.getName(siteObjectElement)), ClassType.CLASS);
+        abstractSiteClass._extends(codeModel.ref(WebSite.class));
         siteObjectClass = codeModel.ref(siteObjectElement.getQualifiedName().toString());
         pageObjectClasses = getCodeModelRefs(pageObjectElements);
     }
@@ -74,7 +74,7 @@ public class SiteModelBuilder implements Builder<Boolean> {
     private void fields() {
         // Declare PageObjects
         for (JClass pageObjectClass : pageObjectClasses) {
-            siteModelClass.field(JMod.PUBLIC, pageObjectClass, getPageObjectFieldName(pageObjectClass));
+            abstractSiteClass.field(JMod.PUBLIC, pageObjectClass, getPageObjectFieldName(pageObjectClass));
         }
     }
 
@@ -98,7 +98,7 @@ public class SiteModelBuilder implements Builder<Boolean> {
     }
 
     private void newPageObjects() {
-        JMethod method = siteModelClass.method(JMod.PRIVATE, void.class, "newPageObjects");
+        JMethod method = abstractSiteClass.method(JMod.PRIVATE, void.class, "newPageObjects");
         for (JClass pageObjectClass : pageObjectClasses) {
             method.body().assign(JExpr.ref(getPageObjectFieldName(pageObjectClass)), JExpr._new(pageObjectClass));
         }

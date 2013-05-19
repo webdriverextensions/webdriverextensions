@@ -5,22 +5,22 @@ import javax.annotation.processing.SupportedSourceVersion;
 import javax.lang.model.SourceVersion;
 import javax.lang.model.element.*;
 import org.andidev.webdriverextension.internal.generator.AbstractGeneratorProcessor;
-import org.andidev.webdriverextension.internal.generator.SiteModelBuilder;
+import org.andidev.webdriverextension.internal.generator.AbstractSiteBuilder;
 
 @SupportedAnnotationTypes({"org.andidev.webdriverextension.generator.annotations.Generate"})
 @SupportedSourceVersion(SourceVersion.RELEASE_6)
-public class SiteModelGeneratorProcessor extends AbstractGeneratorProcessor {
+public class AbstractSiteGeneratorProcessor extends AbstractGeneratorProcessor {
 
     @Override
     public void generateClasses() {
         for (TypeElement siteClass : getReferencedSiteClasses()) {
-            generateSiteModelClass(siteClass);
+            generateAbstractSiteClass(siteClass);
         }
     }
 
-    private void generateSiteModelClass(TypeElement siteClass) {
-        debug("Generating SiteModel for class: " + siteClass.getSimpleName() + " with Page Classes: " + getAnnotatedPageClasses(siteClass));
-        SiteModelBuilder smb = new SiteModelBuilder(processingEnv,
+    private void generateAbstractSiteClass(TypeElement siteClass) {
+        debug("Generating AbstractSite for class: " + siteClass.getSimpleName() + " with Page Classes: " + getAnnotatedPageClasses(siteClass));
+        AbstractSiteBuilder smb = new AbstractSiteBuilder(processingEnv,
                 siteClass,
                 getAnnotatedPageClasses(siteClass));
         smb.build();

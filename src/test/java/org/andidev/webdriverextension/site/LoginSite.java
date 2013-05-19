@@ -3,7 +3,7 @@ package org.andidev.webdriverextension.site;
 import org.andidev.webdriverextension.generator.annotations.Generate;
 
 @Generate(name = "LoginSite")
-public class LoginSite extends LoginSiteModel {
+public class LoginSite extends AbstractLoginSite {
 
     @Override
     public String getUrl() {

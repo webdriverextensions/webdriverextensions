@@ -26,7 +26,7 @@ public class ExamplesPage extends WebPage<WebDriverExtensionSite> {
     public MenuButtonGroup menuButtonGroup;
     @FindBy(css = ".btn-group")
     public MenuButtonGroup menuButtonGroups;
-    // Section: List with WebElements
+        // Section: List with WebElements
     @FindBy(css = "#todo-list li")
     public List<WebElement> todos;
     // Section: List with Extended WebElements
