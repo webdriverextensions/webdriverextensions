@@ -8,6 +8,8 @@ import java.util.HashMap;
 import org.andidev.webdriverextension.WebPage;
 import org.andidev.webdriverextension.WebSite;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringStyle;
 import org.openqa.selenium.WebDriver;
 
 public class SiteAndPageObjectPool {
@@ -67,7 +69,7 @@ public class SiteAndPageObjectPool {
     private WebSite createSiteObjectFromPageObjectField(Field field) {
         WebSite siteObject;
         try {
-            Type siteObjectType = ((ParameterizedType) ((Class) field.getType().getGenericSuperclass()).getGenericSuperclass()).getActualTypeArguments()[0];
+            Type siteObjectType = getSiteObjectTypeFromGenerics(field.getType());
             siteObject = (WebSite) ((Class) siteObjectType).newInstance();
         } catch (InstantiationException ex) {
             throw new WebDriverExtensionException(ex);
@@ -110,7 +112,7 @@ public class SiteAndPageObjectPool {
 
         private static Key createSiteObjectKeyFromPageObjectField(Field field) {
             if (WebPage.class.isAssignableFrom(field.getType())) {
-                Type siteObjectType = ((ParameterizedType) ((Class) field.getType().getGenericSuperclass()).getGenericSuperclass()).getActualTypeArguments()[0];
+                Type siteObjectType = getSiteObjectTypeFromGenerics(field.getType());
                 String name = StringUtils.uncapitalize(((Class) siteObjectType).getName());
                 return new Key(name, siteObjectType);
             }
@@ -119,7 +121,7 @@ public class SiteAndPageObjectPool {
 
         private static Key createPageObjectKey(Field field) {
             if (WebPage.class.isAssignableFrom(field.getType())) {
-                Type siteObjectType = ((ParameterizedType) ((Class) field.getType().getGenericSuperclass()).getGenericSuperclass()).getActualTypeArguments()[0];
+                Type siteObjectType = getSiteObjectTypeFromGenerics(field.getType());
                 String name = field.getName();
                 return new Key(name, siteObjectType);
             }
@@ -140,6 +142,19 @@ public class SiteAndPageObjectPool {
         @Override
         public int hashCode() {
             return Objects.hashCode(name, objectType);
+        }
+    }
+
+    private static Type getSiteObjectTypeFromGenerics(Class type) {
+        if (type.getGenericSuperclass() instanceof Class) {
+            return getSiteObjectTypeFromGenerics((Class) type.getGenericSuperclass());
+        } else {
+            ParameterizedType superClass = (ParameterizedType) type.getGenericSuperclass();
+            if (superClass.getRawType().equals(WebPage.class)) {
+                return superClass.getActualTypeArguments()[0];
+            } else {
+                throw new WebDriverExtensionException("Something went wrong! superClass = " + ReflectionToStringBuilder.toString(superClass, ToStringStyle.MULTI_LINE_STYLE));
+            }
         }
     }
 }
