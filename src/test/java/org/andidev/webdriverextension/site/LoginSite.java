@@ -1,6 +1,6 @@
 package org.andidev.webdriverextension.site;
 
-import org.andidev.webdriverextension.annotation.Generate;
+import org.andidev.webdriverextension.generator.annotations.Generate;
 
 @Generate(name = "LoginSite")
 public class LoginSite extends LoginSiteModel {

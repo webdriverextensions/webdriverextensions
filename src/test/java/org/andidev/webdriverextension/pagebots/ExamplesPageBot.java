@@ -1,9 +1,9 @@
 package org.andidev.webdriverextension.pagebots;
 
-import static org.andidev.webdriverextension.bot.JUnitBot.*;
-import org.andidev.webdriverextension.annotation.Generate;
+import static org.andidev.webdriverextension.JUnitBot.*;
+import org.andidev.webdriverextension.generator.annotations.Generate;
 import org.andidev.webdriverextension.pagemodels.ExamplesPageModel;
-import org.andidev.webdriverextension.pagemodels.models.UserRow;
+import org.andidev.webdriverextension.pagemodels.components.UserRow;
 
 @Generate(name = "examplesPage")
 public class ExamplesPageBot extends ExamplesPageModel {

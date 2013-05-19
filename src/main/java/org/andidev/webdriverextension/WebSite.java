@@ -1,6 +1,7 @@
 package org.andidev.webdriverextension;
 
-import org.andidev.webdriverextension.bot.JUnitBot;
+import org.andidev.webdriverextension.internal.WebDriverExtensionFieldDecorator;
+import org.andidev.webdriverextension.internal.Openable;
 import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;

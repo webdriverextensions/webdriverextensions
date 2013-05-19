@@ -3,11 +3,11 @@ package org.andidev.webdriverextension.pagemodels;
 import java.util.List;
 
 import org.andidev.webdriverextension.WebPage;
-import org.andidev.webdriverextension.pagemodels.models.HtmlContainer;
-import org.andidev.webdriverextension.pagemodels.models.Menu;
-import org.andidev.webdriverextension.pagemodels.models.MenuButtonGroup;
-import org.andidev.webdriverextension.pagemodels.models.UserRow;
-import org.andidev.webdriverextension.pagemodels.models.UserTableSearchContext;
+import org.andidev.webdriverextension.pagemodels.components.HtmlContainer;
+import org.andidev.webdriverextension.pagemodels.components.Menu;
+import org.andidev.webdriverextension.pagemodels.components.MenuButtonGroup;
+import org.andidev.webdriverextension.pagemodels.components.UserRow;
+import org.andidev.webdriverextension.pagemodels.components.UserTableSearchContext;
 import org.andidev.webdriverextension.site.LoginSite;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;

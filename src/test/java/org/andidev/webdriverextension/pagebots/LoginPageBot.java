@@ -1,9 +1,9 @@
 package org.andidev.webdriverextension.pagebots;
 
-import static org.andidev.webdriverextension.bot.JUnitBot.*;
-import org.andidev.webdriverextension.annotation.Generate;
+import static org.andidev.webdriverextension.JUnitBot.*;
+import org.andidev.webdriverextension.generator.annotations.Generate;
 import org.andidev.webdriverextension.pagemodels.LoginPageModel;
-import org.andidev.webdriverextension.pagemodels.models.UserRow;
+import org.andidev.webdriverextension.pagemodels.components.UserRow;
 
 @Generate(name = "examplesPage2")
 public class LoginPageBot extends LoginPageModel {
