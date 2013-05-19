@@ -1,7 +1,7 @@
 package org.andidev.webdriverextension;
 
 import org.andidev.webdriverextension.internal.WebDriverExtensionFieldDecorator;
-import static org.andidev.webdriverextension.JUnitBot.*;
+import static org.andidev.webdriverextension.Bot.*;
 import org.andidev.webdriverextension.page.ExamplesPage;
 import org.andidev.webdriverextension.page.components.Menu;
 import org.andidev.webdriverextension.page.components.HtmlContainer;
@@ -34,7 +34,7 @@ public class ExamplesPageTest extends WebDriverExtensionSite {
 
     @Before
     public void before() {
-        JUnitBot.setDriver(getDriver());
+        Bot.setDriver(getDriver());
 //        open(site);
         open(examplesPage);
         assertUrlEndsWidth("/webdriver-extension/index.html");

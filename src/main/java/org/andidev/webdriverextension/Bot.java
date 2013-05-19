@@ -8,9 +8,9 @@ import org.andidev.webdriverextension.internal.WebDriverExtensionException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-public class JUnitBot {
+public class Bot {
 
-    private static final org.slf4j.Logger log = org.slf4j.LoggerFactory.getLogger(JUnitBot.class);
+    private static final org.slf4j.Logger log = org.slf4j.LoggerFactory.getLogger(Bot.class);
     private static ThreadLocal<WebDriver> threadLocalDriver = new ThreadLocal<WebDriver>();
 
     public static WebDriver getDriver() {

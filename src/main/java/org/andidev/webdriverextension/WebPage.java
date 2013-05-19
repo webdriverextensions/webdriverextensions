@@ -11,7 +11,7 @@ public abstract class WebPage<S> implements Openable {
     public S site;
 
     public void initElements() {
-        PageFactory.initElements(new WebDriverExtensionFieldDecorator(JUnitBot.getDriver(), JUnitBot.getDriver()), this);
+        PageFactory.initElements(new WebDriverExtensionFieldDecorator(Bot.getDriver(), Bot.getDriver()), this);
     }
 
     public void initElements(WebDriver driver) {

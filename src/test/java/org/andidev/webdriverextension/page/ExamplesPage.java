@@ -1,7 +1,7 @@
 package org.andidev.webdriverextension.page;
 
 import java.util.List;
-import static org.andidev.webdriverextension.JUnitBot.*;
+import static org.andidev.webdriverextension.Bot.*;
 import org.andidev.webdriverextension.WebPage;
 import org.andidev.webdriverextension.generator.annotations.Generate;
 import org.andidev.webdriverextension.page.components.HtmlContainer;

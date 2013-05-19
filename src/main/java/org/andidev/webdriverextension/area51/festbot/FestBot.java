@@ -1,7 +1,6 @@
 package org.andidev.webdriverextension.area51.festbot;
 
 import java.util.List;
-import org.andidev.webdriverextension.JUnitBot;
 import org.andidev.webdriverextension.internal.BotUtils;
 import org.andidev.webdriverextension.internal.Openable;
 import org.andidev.webdriverextension.internal.area51.festbot.AssertTypes;
@@ -22,7 +21,7 @@ import org.openqa.selenium.WebElement;
 
 public class FestBot {
 
-    private static final org.slf4j.Logger log = org.slf4j.LoggerFactory.getLogger(JUnitBot.class);
+    private static final org.slf4j.Logger log = org.slf4j.LoggerFactory.getLogger(FestBot.class);
     private static ThreadLocal<WebDriver> threadLocalDriver = new ThreadLocal<WebDriver>();
 
     public static WebDriver getDriver() {

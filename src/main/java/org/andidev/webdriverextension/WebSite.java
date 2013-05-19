@@ -13,8 +13,8 @@ public abstract class WebSite implements Openable {
     private WebDriver driver;
 
     public void initElements() {
-        driver = JUnitBot.getDriver();
-        PageFactory.initElements(new WebDriverExtensionFieldDecorator(JUnitBot.getDriver(), JUnitBot.getDriver()), this);
+        driver = Bot.getDriver();
+        PageFactory.initElements(new WebDriverExtensionFieldDecorator(Bot.getDriver(), Bot.getDriver()), this);
     }
 
     public void initElements(WebDriver driver) {
