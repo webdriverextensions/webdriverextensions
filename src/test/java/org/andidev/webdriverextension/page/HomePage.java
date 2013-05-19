@@ -1,11 +1,17 @@
-package org.andidev.webdriverextension.pagebots;
+package org.andidev.webdriverextension.page;
 
 import static org.andidev.webdriverextension.JUnitBot.*;
+import org.andidev.webdriverextension.WebPage;
 import org.andidev.webdriverextension.generator.annotations.Generate;
-import org.andidev.webdriverextension.pagemodels.HomePageModel;
+import org.andidev.webdriverextension.site.WebDriverExtensionSite;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
 
 @Generate(name = "homePage")
-public class HomePageBot extends HomePageModel {
+public class HomePage extends WebPage<WebDriverExtensionSite> {
+
+    @FindBy(css = "nav a.examples")
+    public WebElement examples;
 
     @Override
     public void open() {

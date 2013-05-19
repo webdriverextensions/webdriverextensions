@@ -1,4 +1,4 @@
-package org.andidev.webdriverextension.pagemodels.components;
+package org.andidev.webdriverextension.page.components;
 
 import java.util.List;
 import org.andidev.webdriverextension.WebContainer;
