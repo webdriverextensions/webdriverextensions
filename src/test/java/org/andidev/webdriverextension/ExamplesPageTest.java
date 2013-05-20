@@ -6,7 +6,7 @@ import org.andidev.webdriverextension.page.ExamplesPage;
 import org.andidev.webdriverextension.page.components.Menu;
 import org.andidev.webdriverextension.page.components.HtmlContainer;
 import org.andidev.webdriverextension.page.components.UserRow;
-import org.andidev.webdriverextension.site.WebDriverExtensionSite;
+import org.andidev.webdriverextension.site.SiteAware;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -15,7 +15,7 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-public class ExamplesPageTest extends WebDriverExtensionSite {
+public class ExamplesPageTest extends SiteAware {
 
     Double delayTime = 0.0;
     @FindBy(css = "div.btn-group")
@@ -34,8 +34,7 @@ public class ExamplesPageTest extends WebDriverExtensionSite {
 
     @Before
     public void before() {
-        Bot.setDriver(getDriver());
-//        open(site);
+        open(site);
         open(examplesPage);
         assertUrlEndsWidth("/webdriver-extension/index.html");
     }
