@@ -1,7 +1,7 @@
 package org.andidev.webdriverextension;
 
 import java.util.List;
-import org.andidev.webdriverextension.internal.CurrentBrowser;
+import org.andidev.webdriverextension.internal.ThreadDriver;
 import org.apache.commons.lang3.math.NumberUtils;
 
 import org.openqa.selenium.WebElement;
@@ -45,6 +45,6 @@ public class HamcrestHelpers {
     }
 
     public static String url() {
-        return CurrentBrowser.getDriver().getCurrentUrl();
+        return ThreadDriver.getDriver().getCurrentUrl();
     }
 }

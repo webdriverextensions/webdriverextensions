@@ -1,6 +1,6 @@
 package org.andidev.webdriverextension;
 
-import org.andidev.webdriverextension.internal.CurrentBrowser;
+import org.andidev.webdriverextension.internal.ThreadDriver;
 import java.net.MalformedURLException;
 import org.junit.After;
 import org.junit.Ignore;
@@ -13,15 +13,15 @@ public class CurrentBrowserTest {
 
     @After
     public void tearDown() {
-        CurrentBrowser.getDriver().quit();
+        ThreadDriver.getDriver().quit();
     }
 
     @Test
     public void testSetDriverByDriver() {
-        CurrentBrowser.setDriver(new FirefoxDriver());
-        System.out.println("browserName = " + CurrentBrowser.getBrowserName());
-        System.out.println("browserVersion = " + CurrentBrowser.getBrowserVersion());
-        System.out.println("platformName = " + CurrentBrowser.getPlatform().toString());
+        ThreadDriver.setDriver(new FirefoxDriver());
+        System.out.println("browserName = " + ThreadDriver.getBrowserName());
+        System.out.println("browserVersion = " + ThreadDriver.getBrowserVersion());
+        System.out.println("platformName = " + ThreadDriver.getPlatform().toString());
     }
 
     @Test
@@ -30,17 +30,17 @@ public class CurrentBrowserTest {
         desiredCapabilities.setBrowserName("firefox");
         desiredCapabilities.setVersion("20.0");
         desiredCapabilities.setPlatform(org.openqa.selenium.Platform.ANY);
-        CurrentBrowser.setDriver(desiredCapabilities);
-        System.out.println("browserName = " + CurrentBrowser.getBrowserName());
-        System.out.println("browserVersion = " + CurrentBrowser.getBrowserVersion());
-        System.out.println("platformName = " + CurrentBrowser.getPlatform().toString());
+        ThreadDriver.setDriver(desiredCapabilities);
+        System.out.println("browserName = " + ThreadDriver.getBrowserName());
+        System.out.println("browserVersion = " + ThreadDriver.getBrowserVersion());
+        System.out.println("platformName = " + ThreadDriver.getPlatform().toString());
     }
 
     @Test
     public void testSetDriverByBrowserName() {
-        CurrentBrowser.setDriver("firefox");
-        System.out.println("browserName = " + CurrentBrowser.getBrowserName());
-        System.out.println("browserVersion = " + CurrentBrowser.getBrowserVersion());
-        System.out.println("platformName = " + CurrentBrowser.getPlatform().toString());
+        ThreadDriver.setDriver("firefox");
+        System.out.println("browserName = " + ThreadDriver.getBrowserName());
+        System.out.println("browserVersion = " + ThreadDriver.getBrowserVersion());
+        System.out.println("platformName = " + ThreadDriver.getPlatform().toString());
     }
 }

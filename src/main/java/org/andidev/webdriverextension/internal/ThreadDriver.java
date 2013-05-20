@@ -6,21 +6,9 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
-public class CurrentBrowser {
+public class ThreadDriver {
 
     private static ThreadLocal<WebDriver> driverTl = new ThreadLocal<WebDriver>();
-
-    public static String getBrowserName() {
-        return ((RemoteWebDriver) getDriver()).getCapabilities().getBrowserName();
-    }
-
-    public static String getBrowserVersion() {
-        return ((RemoteWebDriver) getDriver()).getCapabilities().getVersion();
-    }
-
-    public static Platform getPlatform() {
-        return ((RemoteWebDriver) getDriver()).getCapabilities().getPlatform();
-    }
 
     public static WebDriver getDriver() {
         if (driverTl.get() == null) {

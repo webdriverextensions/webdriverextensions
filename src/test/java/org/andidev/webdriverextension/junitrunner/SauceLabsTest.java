@@ -1,6 +1,6 @@
 package org.andidev.webdriverextension.junitrunner;
 
-import org.andidev.webdriverextension.internal.CurrentBrowser;
+import org.andidev.webdriverextension.internal.ThreadDriver;
 import org.andidev.webdriverextension.junitrunner.SeleniumGridRunner;
 import org.andidev.webdriverextension.junitrunner.annotations.RemoteAddress;
 import org.andidev.webdriverextension.junitrunner.annotations.Android;
@@ -64,12 +64,12 @@ public class SauceLabsTest {
 @Firefox(platform = Platform.LINUX),
 @Firefox(platform = Platform.MAC)}, safari = @Safari(platform = Platform.WINDOWS, desiredCapabilities = "{ }"))
     public void test1() throws InterruptedException {
-        System.out.println("browserName = " + CurrentBrowser.getBrowserName());
-        System.out.println("browserVersion = " + CurrentBrowser.getBrowserVersion());
-        System.out.println("platformName = " + CurrentBrowser.getPlatform().toString());
+        System.out.println("browserName = " + ThreadDriver.getBrowserName());
+        System.out.println("browserVersion = " + ThreadDriver.getBrowserVersion());
+        System.out.println("platformName = " + ThreadDriver.getPlatform().toString());
 
-        CurrentBrowser.getDriver().get("http://www.google.com");
-        Assert.assertEquals("Google", CurrentBrowser.getDriver().getTitle());
+        ThreadDriver.getDriver().get("http://www.google.com");
+        Assert.assertEquals("Google", ThreadDriver.getDriver().getTitle());
     }
 
 //    @Test

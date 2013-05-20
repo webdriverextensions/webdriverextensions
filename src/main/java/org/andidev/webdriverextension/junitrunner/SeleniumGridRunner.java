@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import org.andidev.webdriverextension.internal.junitrunner.AnnotationUtils;
-import org.andidev.webdriverextension.internal.CurrentBrowser;
+import org.andidev.webdriverextension.internal.ThreadDriver;
 import org.andidev.webdriverextension.junitrunner.annotations.RemoteAddress;
 import org.andidev.webdriverextension.junitrunner.annotations.Android;
 import org.andidev.webdriverextension.junitrunner.annotations.Chrome;
@@ -135,13 +135,13 @@ public class SeleniumGridRunner extends BlockJUnit4ClassRunner {
                 long threadId = Thread.currentThread().getId();
                 String remoteAddress = ((RemoteAddress) getTestClass().getJavaClass().getAnnotation(RemoteAddress.class)).value();
                 try {
-                    CurrentBrowser.setDriver(browser.createDriver(new URL(remoteAddress)));
+                    ThreadDriver.setDriver(browser.createDriver(new URL(remoteAddress)));
                 } catch (Exception ex) {
                     notifier.fireTestFailure(new Failure(description, ex));
                     return;
                 }
                 runLeaf(methodBlock(method), description, notifier);
-                CurrentBrowser.getDriver().quit();
+                ThreadDriver.getDriver().quit();
             }
         } else {
             // Not a Selenium Grid Anotated test, treat as normal test
