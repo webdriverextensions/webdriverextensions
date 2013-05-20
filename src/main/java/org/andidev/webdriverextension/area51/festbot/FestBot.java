@@ -2,6 +2,7 @@ package org.andidev.webdriverextension.area51.festbot;
 
 import java.util.List;
 import org.andidev.webdriverextension.internal.BotUtils;
+import org.andidev.webdriverextension.internal.CurrentBrowser;
 import org.andidev.webdriverextension.internal.Openable;
 import org.andidev.webdriverextension.internal.area51.festbot.AssertTypes;
 import org.andidev.webdriverextension.internal.area51.festbot.IsTypes;
@@ -25,14 +26,15 @@ public class FestBot {
     private static ThreadLocal<WebDriver> threadLocalDriver = new ThreadLocal<WebDriver>();
 
     public static WebDriver getDriver() {
-        if (threadLocalDriver.get() == null) {
+        try {
+            return CurrentBrowser.getDriver();
+        } catch (WebDriverExtensionException e) {
             throw new WebDriverExtensionException("WebDriver in FestBot is not set. Please set the driver with FestBot.setDriver(driver) before using the FestBot static methods. Note that the driver will be thread safe since it is set with ThreadLocal so don't worry about thread safety.");
         }
-        return threadLocalDriver.get();
     }
 
     public static void setDriver(WebDriver driver) {
-        threadLocalDriver.set(driver);
+        CurrentBrowser.setDriver(driver);
     }
 
     /* Read */

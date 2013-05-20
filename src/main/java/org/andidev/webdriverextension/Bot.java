@@ -3,6 +3,7 @@ package org.andidev.webdriverextension;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 import org.andidev.webdriverextension.internal.BotUtils;
+import org.andidev.webdriverextension.internal.CurrentBrowser;
 import org.andidev.webdriverextension.internal.Openable;
 import org.andidev.webdriverextension.internal.WebDriverExtensionException;
 import org.openqa.selenium.WebDriver;
@@ -11,17 +12,17 @@ import org.openqa.selenium.WebElement;
 public class Bot {
 
     private static final org.slf4j.Logger log = org.slf4j.LoggerFactory.getLogger(Bot.class);
-    private static ThreadLocal<WebDriver> threadLocalDriver = new ThreadLocal<WebDriver>();
 
     public static WebDriver getDriver() {
-        if (threadLocalDriver.get() == null) {
+        try {
+            return CurrentBrowser.getDriver();
+        } catch (WebDriverExtensionException e) {
             throw new WebDriverExtensionException("WebDriver in JUnitBot is not set. Please set the driver with JUnitBot.setDriver(driver) before using the JUnitBot static methods. Note that the driver will be thread safe since it is set with ThreadLocal so don't worry about thread safety.");
         }
-        return threadLocalDriver.get();
     }
 
     public static void setDriver(WebDriver driver) {
-        threadLocalDriver.set(driver);
+        CurrentBrowser.setDriver(driver);
     }
 
     public static String read(WebElement webElement) {
