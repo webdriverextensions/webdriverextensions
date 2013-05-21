@@ -1,6 +1,7 @@
 package org.andidev.webdriverextension.page;
 
 import static org.andidev.webdriverextension.Bot.*;
+import static org.andidev.webdriverextension.ThreadDriver.*;
 import org.andidev.webdriverextension.WebPage;
 import org.andidev.webdriverextension.generator.annotations.Generate;
 import org.andidev.webdriverextension.site.WebDriverExtensionSite;

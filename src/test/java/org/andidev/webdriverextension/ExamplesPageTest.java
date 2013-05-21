@@ -2,6 +2,7 @@ package org.andidev.webdriverextension;
 
 import org.andidev.webdriverextension.internal.WebDriverExtensionFieldDecorator;
 import static org.andidev.webdriverextension.Bot.*;
+import static org.andidev.webdriverextension.ThreadDriver.*;
 import org.andidev.webdriverextension.page.ExamplesPage;
 import org.andidev.webdriverextension.page.components.Menu;
 import org.andidev.webdriverextension.page.components.HtmlContainer;

@@ -16,33 +16,19 @@ import org.andidev.webdriverextension.internal.area51.festbot.TypeInTypes;
 import org.andidev.webdriverextension.internal.area51.festbot.TypeTypes;
 import org.andidev.webdriverextension.internal.area51.festbot.WaitForTimeTypes;
 import org.andidev.webdriverextension.internal.area51.festbot.WaitForWebElementTypes;
-import org.andidev.webdriverextension.internal.WebDriverExtensionException;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 public class FestBot {
 
     private static final org.slf4j.Logger log = org.slf4j.LoggerFactory.getLogger(FestBot.class);
 
-    public static WebDriver getDriver() {
-        try {
-            return ThreadDriver.getDriver();
-        } catch (WebDriverExtensionException e) {
-            throw new WebDriverExtensionException("WebDriver in FestBot is not set. Please set the driver with FestBot.setDriver(driver) before using the FestBot static methods. Note that the driver will be thread safe since it is set with ThreadLocal so don't worry about thread safety.");
-        }
-    }
-
-    public static void setDriver(WebDriver driver) {
-        ThreadDriver.setDriver(driver);
-    }
-
     /* Read */
     public static ReadDriverTypes read() {
-        return new ReadDriverTypes(getDriver());
+        return new ReadDriverTypes(ThreadDriver.getDriver());
     }
 
     public static ReadTypes read(WebElement webElement) {
-        return new ReadTypes(getDriver(), webElement);
+        return new ReadTypes(ThreadDriver.getDriver(), webElement);
     }
 
     /* Count */
@@ -128,7 +114,7 @@ public class FestBot {
 
     /* Open */
     public static void open(String url) {
-        BotUtils.open(url, getDriver());
+        BotUtils.open(url, ThreadDriver.getDriver());
     }
 
     public static void open(Openable openable) {
@@ -150,11 +136,11 @@ public class FestBot {
 
     /* Is */
     public static IsTypes is(WebElement webElement) {
-        return new IsTypes(getDriver(), webElement);
+        return new IsTypes(ThreadDriver.getDriver(), webElement);
     }
 
     /* Select */
     public static AssertTypes assertThat(WebElement webElement) {
-        return new AssertTypes(getDriver(), webElement);
+        return new AssertTypes(ThreadDriver.getDriver(), webElement);
     }
 }
