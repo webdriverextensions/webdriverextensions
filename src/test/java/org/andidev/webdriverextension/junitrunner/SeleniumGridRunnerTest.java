@@ -19,17 +19,17 @@ public class SeleniumGridRunnerTest {
 
 //    @Test
 //    public void testSetDriverByDriver() {
-//        System.out.println("browserName = " + CurrentBrowser.getBrowserName());
-//        System.out.println("browserVersion = " + CurrentBrowser.getBrowserVersion());
-//        System.out.println("platformName = " + CurrentBrowser.getPlatform().toString());
+//        System.out.println("browserName = " + ((RemoteWebDriver) ThreadDriver.getDriver()).getCapabilities().getBrowserName());
+//        System.out.println("browserVersion = " + ((RemoteWebDriver) ThreadDriver.getDriver()).getCapabilities().getVersion());
+//        System.out.println("platformName = " + ((RemoteWebDriver) ThreadDriver.getDriver()).getCapabilities().getPlatform().toString());
 //    }
 //
 //    @Test
 //    @IgnoreChrome
 //    public void testSetDriverByDriver2() {
-//        System.out.println("browserName = " + CurrentBrowser.getBrowserName());
-//        System.out.println("browserVersion = " + CurrentBrowser.getBrowserVersion());
-//        System.out.println("platformName = " + CurrentBrowser.getPlatform().toString());
+//        System.out.println("browserName = " + ((RemoteWebDriver) ThreadDriver.getDriver()).getCapabilities().getBrowserName());
+//        System.out.println("browserVersion = " + ((RemoteWebDriver) ThreadDriver.getDriver()).getCapabilities().getVersion());
+//        System.out.println("platformName = " + ((RemoteWebDriver) ThreadDriver.getDriver()).getCapabilities().getPlatform().toString());
 //    }
     @Test
     @IgnoreFirefox

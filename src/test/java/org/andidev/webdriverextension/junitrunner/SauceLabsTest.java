@@ -19,6 +19,7 @@ import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.Platform;
+import org.openqa.selenium.remote.RemoteWebDriver;
 
 @RunWith(SeleniumGridRunner.class)
 @RemoteAddress("http://andidev:80b7768e-dc06-4d5b-b793-5b3b83f0e24c@ondemand.saucelabs.com:80/wd/hub")
@@ -64,9 +65,9 @@ public class SauceLabsTest {
 @Firefox(platform = Platform.LINUX),
 @Firefox(platform = Platform.MAC)}, safari = @Safari(platform = Platform.WINDOWS, desiredCapabilities = "{ }"))
     public void test1() throws InterruptedException {
-        System.out.println("browserName = " + ThreadDriver.getBrowserName());
-        System.out.println("browserVersion = " + ThreadDriver.getBrowserVersion());
-        System.out.println("platformName = " + ThreadDriver.getPlatform().toString());
+        System.out.println("browserName = " + ((RemoteWebDriver) ThreadDriver.getDriver()).getCapabilities().getBrowserName());
+        System.out.println("browserVersion = " + ((RemoteWebDriver) ThreadDriver.getDriver()).getCapabilities().getVersion());
+        System.out.println("platformName = " + ((RemoteWebDriver) ThreadDriver.getDriver()).getCapabilities().getPlatform().toString());
 
         ThreadDriver.getDriver().get("http://www.google.com");
         Assert.assertEquals("Google", ThreadDriver.getDriver().getTitle());
@@ -74,22 +75,22 @@ public class SauceLabsTest {
 
 //    @Test
 //    public void test2() {
-//        System.out.println("browserName = " + CurrentBrowser.getBrowserName());
-//        System.out.println("browserVersion = " + CurrentBrowser.getBrowserVersion());
-//        System.out.println("platformName = " + CurrentBrowser.getPlatform().toString());
+//        System.out.println("browserName = " + ((RemoteWebDriver) ThreadDriver.getDriver()).getCapabilities().getBrowserName());
+//        System.out.println("browserVersion = " + ((RemoteWebDriver) ThreadDriver.getDriver()).getCapabilities().getVersion());
+//        System.out.println("platformName = " + ((RemoteWebDriver) ThreadDriver.getDriver()).getCapabilities().getPlatform().toString());
 //
-//        CurrentBrowser.getDriver().get("http://www.google.com");
-//        Assert.assertEquals("Google", CurrentBrowser.getDriver().getTitle());
+//        ThreadDriver.getDriver().get("http://www.google.com");
+//        Assert.assertEquals("Google", ThreadDriver.getDriver().getTitle());
 //    }
 //
 //    @Test
 //    public void test3() {
-//        System.out.println("browserName = " + CurrentBrowser.getBrowserName());
-//        System.out.println("browserVersion = " + CurrentBrowser.getBrowserVersion());
-//        System.out.println("platformName = " + CurrentBrowser.getPlatform().toString());
+//        System.out.println("browserName = " + ((RemoteWebDriver) ThreadDriver.getDriver()).getCapabilities().getBrowserName());
+//        System.out.println("browserVersion = " + ((RemoteWebDriver) ThreadDriver.getDriver()).getCapabilities().getVersion());
+//        System.out.println("platformName = " + ((RemoteWebDriver) ThreadDriver.getDriver()).getCapabilities().getPlatform().toString());
 //
-//        CurrentBrowser.getDriver().get("http://www.google.com");
-//        Assert.assertEquals("Google", CurrentBrowser.getDriver().getTitle());
+//        ThreadDriver.getDriver().get("http://www.google.com");
+//        Assert.assertEquals("Google", ThreadDriver.getDriver().getTitle());
 //    }
 //
 //    @Test

@@ -13,7 +13,7 @@ public class ThreadDriver {
 
     public static WebDriver getDriver() {
         if (threadDriver.get() == null) {
-            throw new WebDriverExtensionException("Driver in CurrentBrowser is not set. Please set the driver with any CurrentBrowser.setDriver(...) method before using it. Note that the driver will be thread safe since ThreadLocal is used so don't worry about thread safety.");
+            throw new WebDriverExtensionException("Driver in ThreadDriver is not set. Please set the driver with any ThreadDriver.setDriver(...) method before using it. Note that the driver will be thread safe since ThreadLocal is used so don't worry about thread safety.");
         }
         return threadDriver.get();
     }
