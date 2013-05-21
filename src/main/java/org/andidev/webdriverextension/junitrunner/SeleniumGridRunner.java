@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import org.andidev.webdriverextension.internal.junitrunner.AnnotationUtils;
-import org.andidev.webdriverextension.internal.ThreadDriver;
+import org.andidev.webdriverextension.ThreadDriver;
 import org.andidev.webdriverextension.junitrunner.annotations.RemoteAddress;
 import org.andidev.webdriverextension.junitrunner.annotations.Android;
 import org.andidev.webdriverextension.junitrunner.annotations.Chrome;

@@ -1,6 +1,7 @@
-package org.andidev.webdriverextension.internal;
+package org.andidev.webdriverextension;
 
 import java.net.URL;
+import org.andidev.webdriverextension.internal.WebDriverExtensionException;
 import org.openqa.selenium.Platform;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;

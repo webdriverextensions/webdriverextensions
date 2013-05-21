@@ -3,7 +3,6 @@ package org.andidev.webdriverextension;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 import org.andidev.webdriverextension.internal.BotUtils;
-import org.andidev.webdriverextension.internal.ThreadDriver;
 import org.andidev.webdriverextension.internal.Openable;
 import org.andidev.webdriverextension.internal.WebDriverExtensionException;
 import org.openqa.selenium.WebDriver;

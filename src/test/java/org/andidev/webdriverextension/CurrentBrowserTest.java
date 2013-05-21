@@ -1,6 +1,5 @@
 package org.andidev.webdriverextension;
 
-import org.andidev.webdriverextension.internal.ThreadDriver;
 import java.net.MalformedURLException;
 import org.junit.After;
 import org.junit.Ignore;

@@ -2,7 +2,7 @@ package org.andidev.webdriverextension.area51.festbot;
 
 import java.util.List;
 import org.andidev.webdriverextension.internal.BotUtils;
-import org.andidev.webdriverextension.internal.ThreadDriver;
+import org.andidev.webdriverextension.ThreadDriver;
 import org.andidev.webdriverextension.internal.Openable;
 import org.andidev.webdriverextension.internal.area51.festbot.AssertTypes;
 import org.andidev.webdriverextension.internal.area51.festbot.IsTypes;

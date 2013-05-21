@@ -1,6 +1,6 @@
 package org.andidev.webdriverextension.junitrunner;
 
-import org.andidev.webdriverextension.internal.ThreadDriver;
+import org.andidev.webdriverextension.ThreadDriver;
 import org.andidev.webdriverextension.junitrunner.SeleniumGridRunner;
 import org.andidev.webdriverextension.junitrunner.annotations.RemoteAddress;
 import org.andidev.webdriverextension.junitrunner.annotations.Android;

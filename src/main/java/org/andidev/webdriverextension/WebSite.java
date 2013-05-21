@@ -1,6 +1,5 @@
 package org.andidev.webdriverextension;
 
-import org.andidev.webdriverextension.internal.ThreadDriver;
 import org.andidev.webdriverextension.internal.WebDriverExtensionFieldDecorator;
 import org.andidev.webdriverextension.internal.Openable;
 import org.junit.Assert;
