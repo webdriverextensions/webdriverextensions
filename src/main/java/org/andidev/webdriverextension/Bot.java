@@ -5,6 +5,8 @@ import java.util.concurrent.TimeUnit;
 import org.andidev.webdriverextension.internal.BotUtils;
 import org.andidev.webdriverextension.internal.Openable;
 import org.andidev.webdriverextension.internal.WebDriverExtensionException;
+import org.hamcrest.Matcher;
+import org.hamcrest.MatcherAssert;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
@@ -1190,5 +1192,18 @@ public class Bot {
 
     public static void assertIsOptionWithIndexDeselected(int index, WebElement webElement) {
         BotUtils.assertIsOptionWithIndexDeselected(index, webElement);
+    }
+
+    public static <T extends Object> boolean is(T actual, Matcher<? super T> matcher) {
+        try {
+            assertThat(actual, matcher);
+            return true;
+        } catch (AssertionError ae) {
+            return false;
+        }
+    }
+
+    public static <T extends Object> void assertThat(T actual, Matcher<? super T> matcher) {
+        MatcherAssert.assertThat(actual, matcher);
     }
 }
