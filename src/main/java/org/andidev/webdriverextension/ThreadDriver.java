@@ -18,12 +18,12 @@ public class ThreadDriver {
         return threadDriver.get();
     }
 
-    public static void setDriver(WebDriver driver) {
-        threadDriver.set(driver);
-    }
-
     public static void removeDriver() {
         threadDriver.remove();
+    }
+
+    public static void setDriver(WebDriver driver) {
+        threadDriver.set(driver);
     }
 
     public static void setDriver(DesiredCapabilities desiredCapabilities) {
