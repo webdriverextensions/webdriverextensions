@@ -978,8 +978,24 @@ public class Bot {
         return BotUtils.isNotDisplayed(webElement);
     }
 
+    public static boolean isDisplayed(WebElement webElement, long secondsToWait) {
+        return BotUtils.isDisplayed(webElement, secondsToWait, getDriver());
+    }
+
+    public static boolean isNotDisplayed(WebElement webElement, long secondsToWait) {
+        return BotUtils.isNotDisplayed(webElement, secondsToWait, getDriver());
+    }
+
     public static void assertIsDisplayed(WebElement webElement) {
         BotUtils.assertIsDisplayed(webElement);
+    }
+
+    public static void assertIsDisplayed(WebElement webElement, long secondsToWait) {
+        BotUtils.assertIsDisplayed(webElement, secondsToWait, getDriver());
+    }
+
+    public static void assertIsNotDisplayed(WebElement webElement, long secondsToWait) {
+        BotUtils.assertIsNotDisplayed(webElement, secondsToWait, getDriver());
     }
 
     public static void assertIsNotDisplayed(WebElement webElement) {

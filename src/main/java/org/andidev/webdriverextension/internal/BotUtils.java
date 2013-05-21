@@ -1134,6 +1134,19 @@ public class BotUtils {
         return !isDisplayed(webElement);
     }
 
+    public static boolean isDisplayed(WebElement webElement, long secondsToWait, WebDriver driver) {
+        WebElement foundWebElement = new WebDriverWait(driver, secondsToWait).until(ExpectedConditions.visibilityOf(webElement));
+        if (foundWebElement != null) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public static boolean isNotDisplayed(WebElement webElement, long secondsToWait, WebDriver driver) {
+        return !isDisplayed(webElement, secondsToWait, driver);
+    }
+
     public static void assertIsDisplayed(WebElement webElement) {
         if (isNotDisplayed(webElement)) {
             Assert.fail("WebElement is not displayed!");
@@ -1143,6 +1156,18 @@ public class BotUtils {
     public static void assertIsNotDisplayed(WebElement webElement) {
         if (isDisplayed(webElement)) {
             Assert.fail("WebElement is displayed when it shouldn't!");
+        }
+    }
+
+    public static void assertIsDisplayed(WebElement webElement, long secondsToWait , WebDriver driver) {
+        if (isNotDisplayed(webElement, secondsToWait , driver)) {
+            Assert.fail("WebElement is not displayed within " + secondsToWait + " seconds!");
+        }
+    }
+
+    public static void assertIsNotDisplayed(WebElement webElement, long secondsToWait , WebDriver driver) {
+        if (isDisplayed(webElement, secondsToWait , driver)) {
+            Assert.fail("WebElement is displayed within " + secondsToWait + " seconds when it shouldn't!");
         }
     }
 
