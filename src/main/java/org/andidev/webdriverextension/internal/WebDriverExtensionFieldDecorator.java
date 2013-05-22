@@ -8,6 +8,7 @@ import java.lang.reflect.Type;
 import java.util.List;
 import org.andidev.webdriverextension.WebContainer;
 import org.andidev.webdriverextension.WebPage;
+import org.andidev.webdriverextension.WebRepository;
 import org.andidev.webdriverextension.WebSite;
 import org.openqa.selenium.SearchContext;
 import org.openqa.selenium.WebDriver;
@@ -41,11 +42,14 @@ public class WebDriverExtensionFieldDecorator extends DefaultFieldDecorator {
         if (isDecoratableWebContainerList(field)) {
             return decorateWebContainerList(loader, field);
         }
+        if (isDecoratableSiteObject(field)) {
+            return pool.getSiteObject(field, this);
+        }
         if (isDecoratablePageObject(field)) {
             return pool.getPageObject(field, this);
         }
-        if (isDecoratableSiteObject(field)) {
-            return pool.getSiteObject(field, this);
+        if (isDecoratableRepositoryObject(field)) {
+            return pool.getRepositoryObject(field, this);
         }
         if ("wrappedWebElement".equals(field.getName())) {
             return null;
@@ -100,6 +104,14 @@ public class WebDriverExtensionFieldDecorator extends DefaultFieldDecorator {
 
     private boolean isDecoratableSiteObject(Field field) {
         if (!WebSite.class.isAssignableFrom(field.getType())) {
+            return false;
+        }
+
+        return true;
+    }
+
+    private boolean isDecoratableRepositoryObject(Field field) {
+        if (!WebRepository.class.isAssignableFrom(field.getType())) {
             return false;
         }
 

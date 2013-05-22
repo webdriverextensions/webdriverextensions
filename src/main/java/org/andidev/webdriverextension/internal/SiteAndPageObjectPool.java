@@ -6,6 +6,7 @@ import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.util.HashMap;
 import org.andidev.webdriverextension.WebPage;
+import org.andidev.webdriverextension.WebRepository;
 import org.andidev.webdriverextension.WebSite;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
@@ -17,11 +18,13 @@ public class SiteAndPageObjectPool {
     WebDriver driver;
     HashMap<Key, WebSite> siteObjects;
     HashMap<Key, WebPage> pageObjects;
+    HashMap<Key, WebRepository> repositoryObjects;
 
     public SiteAndPageObjectPool(WebDriver driver) {
         this.driver = driver;
         this.siteObjects = new HashMap<Key, WebSite>();
         this.pageObjects = new HashMap<Key, WebPage>();
+        this.repositoryObjects = new HashMap<Key, WebRepository>();
     }
 
     public WebSite getSiteObject(Field field, WebDriverExtensionFieldDecorator decorator) {
@@ -52,6 +55,17 @@ public class SiteAndPageObjectPool {
         }
         pageObject.site = siteObject;
         return pageObject;
+    }
+
+    public WebRepository getRepositoryObject(Field field, WebDriverExtensionFieldDecorator decorator) {
+        Key repositoryObjectKey = Key.createRepositoryObjectKey(field);
+        WebRepository repositoryObject = repositoryObjects.get(repositoryObjectKey);
+        if (repositoryObject == null) {
+            repositoryObject = createRepositoryObject(field);
+            repositoryObjects.put(repositoryObjectKey, repositoryObject);
+            repositoryObject.initElements(decorator);
+        }
+        return repositoryObject;
     }
 
     private WebSite createSiteObject(Field field) {
@@ -91,6 +105,18 @@ public class SiteAndPageObjectPool {
         return pageObject;
     }
 
+    private WebRepository createRepositoryObject(Field field) {
+        WebRepository repositoryObject;
+        try {
+            repositoryObject = (WebRepository) field.getType().newInstance();
+        } catch (InstantiationException ex) {
+            throw new WebDriverExtensionException(ex);
+        } catch (IllegalAccessException ex) {
+            throw new WebDriverExtensionException(ex);
+        }
+        return repositoryObject;
+    }
+
     public static class Key {
 
         private final String name;
@@ -124,6 +150,15 @@ public class SiteAndPageObjectPool {
                 Type siteObjectType = getSiteObjectTypeFromGenerics(field.getType());
                 String name = field.getName();
                 return new Key(name, siteObjectType);
+            }
+            throw new WebDriverExtensionException();
+        }
+
+        private static Key createRepositoryObjectKey(Field field) {
+            if (WebRepository.class.isAssignableFrom(field.getType())) {
+                Type repositoryObjectType = field.getType();
+                String name = field.getName();
+                return new Key(name, repositoryObjectType);
             }
             throw new WebDriverExtensionException();
         }
