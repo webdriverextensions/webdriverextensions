@@ -71,7 +71,7 @@ public class HamcrestHelpers {
         }
     }
 
-    public static int numberOf(List<WebElement> webElements) {
+    public static Integer numberOf(List<WebElement> webElements) {
         try {
             return webElements.size();
         } catch (Exception e) {
