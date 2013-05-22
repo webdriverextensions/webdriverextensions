@@ -30,7 +30,7 @@ public class SiteAwareBuilder implements Builder<Boolean> {
     private Set<TypeElement> pageObjectElements;
     private JCodeModel codeModel;
     // JClasses
-    private JDefinedClass siteAwareClass;
+    private JDefinedClass siteAwareRepositoryClass;
     private Set<JClass> siteObjectClasses;
     private Set<JClass> pageObjectClasses;
 
@@ -66,7 +66,7 @@ public class SiteAwareBuilder implements Builder<Boolean> {
 
     private void init() throws JClassAlreadyExistsException {
         codeModel = new JCodeModel();
-        siteAwareClass = codeModel._class(JMod.PUBLIC | JMod.ABSTRACT, getPackageName(siteObjectElement) + "." + StringUtils.capitalize(GeneratorUtils.getName(siteObjectElement)) + "Aware", ClassType.CLASS);
+        siteAwareRepositoryClass = codeModel._class(JMod.PUBLIC | JMod.ABSTRACT, getPackageName(siteObjectElement) + "." + StringUtils.capitalize(GeneratorUtils.getName(siteObjectElement)) + "AwareRepository", ClassType.CLASS);
         siteObjectClasses = getCodeModelRefs(siteObjectElements);
         pageObjectClasses = getCodeModelRefs(pageObjectElements);
     }
@@ -74,12 +74,12 @@ public class SiteAwareBuilder implements Builder<Boolean> {
     private void fields() {
         // Declare SiteObjects
         for (JClass siteObjectClass : siteObjectClasses) {
-            siteAwareClass.field(JMod.PUBLIC, siteObjectClass, getSiteObjectFieldName(siteObjectClass));
+            siteAwareRepositoryClass.field(JMod.PUBLIC, siteObjectClass, getSiteObjectFieldName(siteObjectClass));
         }
 
         // Declare PageObjects
         for (JClass pageObjectClass : pageObjectClasses) {
-            siteAwareClass.field(JMod.PUBLIC, pageObjectClass, getPageObjectFieldName(pageObjectClass));
+            siteAwareRepositoryClass.field(JMod.PUBLIC, pageObjectClass, getPageObjectFieldName(pageObjectClass));
         }
     }
 

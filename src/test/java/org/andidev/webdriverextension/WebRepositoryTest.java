@@ -49,13 +49,13 @@ public class WebRepositoryTest extends WebRepository {
         assertNumberOf(3, examplesPage.rows);
         assertNumberOf(3, examplesPage.todos);
     }
-
-    @Test
-    public void pageFactoryInitTest() {
-        click(menu);
-        waitFor(delayTime);
-        assertIsDisplayed(menu.create);
-        assertIsDisplayed(menu.update);
-        assertIsDisplayed(menu.delete);
-    }
+//
+//    @Test
+//    public void pageFactoryInitTest() {
+//        click(menu);
+//        waitFor(delayTime);
+//        assertIsDisplayed(menu.create);
+//        assertIsDisplayed(menu.update);
+//        assertIsDisplayed(menu.delete);
+//    }
 }
