@@ -8,42 +8,82 @@ import org.openqa.selenium.WebElement;
 public class HamcrestHelpers {
 
     public static String tagNameOf(WebElement webElement) {
-        return webElement.getTagName();
+        try {
+            return webElement.getTagName();
+        } catch (Exception e) {
+            return null;
+        }
     }
 
     public static String idIn(WebElement webElement) {
-        return webElement.getAttribute("id");
+        try {
+            return webElement.getAttribute("id");
+        } catch (Exception e) {
+            return null;
+        }
     }
 
     public static String nameIn(WebElement webElement) {
-        return webElement.getAttribute("name");
+        try {
+            return webElement.getAttribute("name");
+        } catch (Exception e) {
+            return null;
+        }
     }
 
     public static String classIn(WebElement webElement) {
-        return webElement.getAttribute("class");
+        try {
+            return webElement.getAttribute("class");
+        } catch (Exception e) {
+            return null;
+        }
     }
 
     public static String valueIn(WebElement webElement) {
-        return webElement.getAttribute("vale");
+        try {
+            return webElement.getAttribute("vale");
+        } catch (Exception e) {
+            return null;
+        }
     }
 
     public static String hrefIn(WebElement webElement) {
-        return webElement.getAttribute("href");
+        try {
+            return webElement.getAttribute("href");
+        } catch (Exception e) {
+            return null;
+        }
     }
 
     public static String textIn(WebElement webElement) {
-        return webElement.getText();
+        try {
+            return webElement.getText();
+        } catch (Exception e) {
+            return null;
+        }
     }
 
     public static Double numberIn(WebElement webElement) {
-        return NumberUtils.createDouble(webElement.getText());
+        try {
+            return NumberUtils.createDouble(webElement.getText());
+        } catch (Exception e) {
+            return null;
+        }
     }
 
     public static int numberOf(List<WebElement> webElements) {
-        return webElements.size();
+        try {
+            return webElements.size();
+        } catch (Exception e) {
+            return null;
+        }
     }
 
     public static String url() {
-        return ThreadDriver.getDriver().getCurrentUrl();
+        try {
+            return ThreadDriver.getDriver().getCurrentUrl();
+        } catch (Exception e) {
+            return null;
+        }
     }
 }
