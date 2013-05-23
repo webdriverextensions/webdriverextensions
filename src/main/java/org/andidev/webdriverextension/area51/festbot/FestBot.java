@@ -8,8 +8,6 @@ import org.andidev.webdriverextension.internal.area51.festbot.AssertTypes;
 import org.andidev.webdriverextension.internal.area51.festbot.IsTypes;
 import org.andidev.webdriverextension.internal.area51.festbot.PressKeysTypes;
 import org.andidev.webdriverextension.internal.area51.festbot.PressTypes;
-import org.andidev.webdriverextension.internal.area51.festbot.ReadDriverTypes;
-import org.andidev.webdriverextension.internal.area51.festbot.ReadTypes;
 import org.andidev.webdriverextension.internal.area51.festbot.SelectOptionInTypes;
 import org.andidev.webdriverextension.internal.area51.festbot.SelectOptionTypes;
 import org.andidev.webdriverextension.internal.area51.festbot.TypeInTypes;
@@ -23,17 +21,57 @@ public class FestBot {
     private static final org.slf4j.Logger log = org.slf4j.LoggerFactory.getLogger(FestBot.class);
 
     /* Read */
-    public static ReadDriverTypes read() {
-        return new ReadDriverTypes(ThreadDriver.getDriver());
+    public static String textIn(WebElement webElement) {
+        return BotUtils.textIn(webElement);
     }
 
-    public static ReadTypes read(WebElement webElement) {
-        return new ReadTypes(ThreadDriver.getDriver(), webElement);
+    public static Double numberIn(WebElement webElement) {
+        return BotUtils.numberIn(webElement);
+    }
+
+    public static List<String> optionsIn(WebElement webElement) {
+        return BotUtils.optionsIn(webElement);
+    }
+
+    public static String url() {
+        return BotUtils.url(ThreadDriver.getDriver());
+    }
+
+    public static String tagNameOf(WebElement webElement) {
+        return BotUtils.tagNameOf(webElement);
+    }
+
+    public static String attributeIn(String name, WebElement webElement) {
+        return BotUtils.attributeIn(name, webElement);
+    }
+
+    public static String idIn(WebElement webElement) {
+        return BotUtils.idIn(webElement);
+    }
+
+    public static String nameIn(WebElement webElement) {
+        return BotUtils.nameIn(webElement);
+    }
+
+    public static String classIn(WebElement webElement) {
+        return BotUtils.classIn(webElement);
+    }
+
+    public static List<String> classesIn(WebElement webElement) {
+        return BotUtils.classesIn(webElement);
+    }
+
+    public static String valueIn(WebElement webElement) {
+        return BotUtils.valueIn(webElement);
+    }
+
+    public static String hrefIn(WebElement webElement) {
+        return BotUtils.hrefIn(webElement);
     }
 
     /* Count */
-    public static int count(List<WebElement> webElements) {
-        return BotUtils.count(webElements);
+    public static Integer numberOf(List<? extends WebElement> webElements) {
+        return BotUtils.numberOf(webElements);
     }
 
     /* Clear */

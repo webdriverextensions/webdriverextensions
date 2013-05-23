@@ -12,56 +12,56 @@ public class Bot {
 
     private static final org.slf4j.Logger log = org.slf4j.LoggerFactory.getLogger(Bot.class);
 
-    public static String read(WebElement webElement) {
-        return BotUtils.read(webElement);
+    public static String textIn(WebElement webElement) {
+        return BotUtils.textIn(webElement);
     }
 
-    public static Double readNumber(WebElement webElement) {
-        return BotUtils.readNumber(webElement);
+    public static Double numberIn(WebElement webElement) {
+        return BotUtils.numberIn(webElement);
     }
 
-    public static List<String> readOptions(WebElement webElement) {
-        return BotUtils.readOptions(webElement);
+    public static List<String> optionsIn(WebElement webElement) {
+        return BotUtils.optionsIn(webElement);
     }
 
-    public static String readUrl() {
-        return BotUtils.readUrl(ThreadDriver.getDriver());
+    public static String url() {
+        return BotUtils.url(ThreadDriver.getDriver());
     }
 
-    public static String readTagName(WebElement webElement) {
-        return BotUtils.readTagName(webElement);
+    public static String tagNameOf(WebElement webElement) {
+        return BotUtils.tagNameOf(webElement);
     }
 
-    public static String readAttribute(String name, WebElement webElement) {
-        return BotUtils.readAttribute(name, webElement);
+    public static String attributeIn(String name, WebElement webElement) {
+        return BotUtils.attributeIn(name, webElement);
     }
 
-    public static String readId(WebElement webElement) {
-        return BotUtils.readId(webElement);
+    public static String idIn(WebElement webElement) {
+        return BotUtils.idIn(webElement);
     }
 
-    public static String readName(WebElement webElement) {
-        return BotUtils.readName(webElement);
+    public static String nameIn(WebElement webElement) {
+        return BotUtils.nameIn(webElement);
     }
 
-    public static String readClass(WebElement webElement) {
-        return BotUtils.readClass(webElement);
+    public static String classIn(WebElement webElement) {
+        return BotUtils.classIn(webElement);
     }
 
-    public static List<String> readClasses(WebElement webElement) {
-        return BotUtils.readClasses(webElement);
+    public static List<String> classesIn(WebElement webElement) {
+        return BotUtils.classesIn(webElement);
     }
 
-    public static String readValue(WebElement webElement) {
-        return BotUtils.readValue(webElement);
+    public static String valueIn(WebElement webElement) {
+        return BotUtils.valueIn(webElement);
     }
 
-    public static String readHref(WebElement webElement) {
-        return BotUtils.readHref(webElement);
+    public static String hrefIn(WebElement webElement) {
+        return BotUtils.hrefIn(webElement);
     }
 
-    public static int count(List<? extends WebElement> webElements) {
-        return BotUtils.count(webElements);
+    public static Integer numberOf(List<? extends WebElement> webElements) {
+        return BotUtils.numberOf(webElements);
     }
 
     public static void clear(WebElement webElement) {

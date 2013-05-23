@@ -20,16 +20,16 @@ import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-public class BotUtils {
+    public class BotUtils {
 
     private static final org.slf4j.Logger log = org.slf4j.LoggerFactory.getLogger(BotUtils.class);
 
     /* Read */
-    public static String read(WebElement webElement) {
+    public static String textIn(WebElement webElement) {
         return webElement.getText();
     }
 
-    public static Double readNumber(WebElement webElement) {
+    public static Double numberIn(WebElement webElement) {
         try {
             return NumberUtils.createDouble(webElement.getText());
         } catch (NumberFormatException e) {
@@ -37,53 +37,53 @@ public class BotUtils {
         }
     }
 
-    public static List<String> readOptions(WebElement webElement) {
+    public static List<String> optionsIn(WebElement webElement) {
         List<WebElement> options = new Select(webElement).getOptions();
         List<String> optionTexts = new ArrayList<String>();
         for (WebElement option : options) {
-            optionTexts.add(read(option));
+            optionTexts.add(textIn(option));
         }
         return optionTexts;
     }
 
-    public static String readUrl(WebDriver driver) {
+    public static String url(WebDriver driver) {
         return driver.getCurrentUrl();
     }
 
-    public static String readTagName(WebElement webElement) {
+    public static String tagNameOf(WebElement webElement) {
         return webElement.getTagName();
     }
 
-    public static String readAttribute(String name, WebElement webElement) {
+    public static String attributeIn(String name, WebElement webElement) {
         return webElement.getAttribute(name);
     }
 
-    public static String readId(WebElement webElement) {
-        return readAttribute("id", webElement);
+    public static String idIn(WebElement webElement) {
+        return attributeIn("id", webElement);
     }
 
-    public static String readName(WebElement webElement) {
-        return readAttribute("name", webElement);
+    public static String nameIn(WebElement webElement) {
+        return attributeIn("name", webElement);
     }
 
-    public static String readClass(WebElement webElement) {
-        return readAttribute("class", webElement);
+    public static String classIn(WebElement webElement) {
+        return attributeIn("class", webElement);
     }
 
-    public static List<String> readClasses(WebElement webElement) {
-        return Arrays.asList(StringUtils.split(readClass(webElement)));
+    public static List<String> classesIn(WebElement webElement) {
+        return Arrays.asList(StringUtils.split(classIn(webElement)));
     }
 
-    public static String readValue(WebElement webElement) {
-        return readAttribute("value", webElement);
+    public static String valueIn(WebElement webElement) {
+        return attributeIn("value", webElement);
     }
 
-    public static String readHref(WebElement webElement) {
-        return readAttribute("href", webElement);
+    public static String hrefIn(WebElement webElement) {
+        return attributeIn("href", webElement);
     }
 
     /* Count */
-    public static int count(List<? extends WebElement> webElements) {
+    public static int numberOf(List<? extends WebElement> webElements) {
         return webElements.size();
     }
 
@@ -274,7 +274,7 @@ public class BotUtils {
     }
 
     public static void debug(WebElement webElement) {
-        log.debug("Tag {} has text = \"{}\"", describeTag(webElement), read(webElement));
+        log.debug("Tag {} has text = \"{}\"", describeTag(webElement), textIn(webElement));
     }
 
     public static void debug(List<? extends WebElement> webElements) {
@@ -284,24 +284,24 @@ public class BotUtils {
     }
 
     public static void debugNumberOf(List<? extends WebElement> webElements) {
-        log.debug("Number of elements are {}", count(webElements));
+        log.debug("Number of elements are {}", numberOf(webElements));
     }
 
     /* Tag Name */
     public static boolean isTagName(String value, WebElement webElement) {
-        return is(value, readTagName(webElement));
+        return is(value, tagNameOf(webElement));
     }
 
     public static boolean isTagNameNot(String value, WebElement webElement) {
-        return isNot(value, readTagName(webElement));
+        return isNot(value, tagNameOf(webElement));
     }
 
     public static void assertTagName(String value, WebElement webElement) {
-        assertIs("Tag name", value, readTagName(webElement));
+        assertIs("Tag name", value, tagNameOf(webElement));
     }
 
     public static void assertTagNameNot(String value, WebElement webElement) {
-        assertIsNot("Tag name", value, readTagName(webElement));
+        assertIsNot("Tag name", value, tagNameOf(webElement));
     }
 
     /* Attribute */
@@ -314,35 +314,35 @@ public class BotUtils {
     }
 
     public static boolean isAttribute(String name, String value, WebElement webElement) {
-        return is(value, readAttribute(name, webElement));
+        return is(value, attributeIn(name, webElement));
     }
 
     public static boolean isAttributeNot(String name, String value, WebElement webElement) {
-        return isNot(value, readAttribute(name, webElement));
+        return isNot(value, attributeIn(name, webElement));
     }
 
     public static boolean isAttributeContaining(String name, String searchText, WebElement webElement) {
-        return isContaining(searchText, readAttribute(name, webElement));
+        return isContaining(searchText, attributeIn(name, webElement));
     }
 
     public static boolean isAttributeNotContaining(String name, String searchText, WebElement webElement) {
-        return isNotContaining(searchText, readAttribute(name, webElement));
+        return isNotContaining(searchText, attributeIn(name, webElement));
     }
 
     public static boolean isAttributeStartingWith(String name, String prefix, WebElement webElement) {
-        return isStartingWith(prefix, readAttribute(name, webElement));
+        return isStartingWith(prefix, attributeIn(name, webElement));
     }
 
     public static boolean isAttributeNotStartingWith(String name, String prefix, WebElement webElement) {
-        return isNotStartingWith(prefix, readAttribute(name, webElement));
+        return isNotStartingWith(prefix, attributeIn(name, webElement));
     }
 
     public static boolean isAttributeEndingWith(String name, String suffix, WebElement webElement) {
-        return isEndingWith(suffix, readAttribute(name, webElement));
+        return isEndingWith(suffix, attributeIn(name, webElement));
     }
 
     public static boolean isAttributeNotEndingWith(String name, String suffix, WebElement webElement) {
-        return isNotEndingWith(suffix, readAttribute(name, webElement));
+        return isNotEndingWith(suffix, attributeIn(name, webElement));
     }
 
     public static void assertHasAttribute(String name, WebElement webElement) {
@@ -358,35 +358,35 @@ public class BotUtils {
     }
 
     public static void assertAttribute(String name, String value, WebElement webElement) {
-        assertIs(name, value, readAttribute(name, webElement));
+        assertIs(name, value, attributeIn(name, webElement));
     }
 
     public static void assertAttributeNot(String name, String value, WebElement webElement) {
-        assertIsNot(name, value, readAttribute(name, webElement));
+        assertIsNot(name, value, attributeIn(name, webElement));
     }
 
     public static void assertAttributeContains(String name, String searchText, WebElement webElement) {
-        assertContains(name, searchText, readAttribute(name, webElement));
+        assertContains(name, searchText, attributeIn(name, webElement));
     }
 
     public static void assertAttributeNotContains(String name, String searchText, WebElement webElement) {
-        assertNotContains(name, searchText, readAttribute(name, webElement));
+        assertNotContains(name, searchText, attributeIn(name, webElement));
     }
 
     public static void assertAttributeStartsWith(String name, String prefix, WebElement webElement) {
-        assertStartsWidth(name, prefix, readAttribute(name, webElement));
+        assertStartsWidth(name, prefix, attributeIn(name, webElement));
     }
 
     public static void assertAttributeNotStartsWith(String name, String prefix, WebElement webElement) {
-        assertNotStartsWidth(name, prefix, readAttribute(name, webElement));
+        assertNotStartsWidth(name, prefix, attributeIn(name, webElement));
     }
 
     public static void assertAttributeEndsWith(String name, String suffix, WebElement webElement) {
-        assertEndsWidth(name, suffix, readAttribute(name, webElement));
+        assertEndsWidth(name, suffix, attributeIn(name, webElement));
     }
 
     public static void assertAttributeNotEndsWith(String name, String suffix, WebElement webElement) {
-        assertNotEndsWidth(name, suffix, readAttribute(name, webElement));
+        assertNotEndsWidth(name, suffix, attributeIn(name, webElement));
     }
 
     /* Id */
@@ -399,35 +399,35 @@ public class BotUtils {
     }
 
     public static boolean isId(String value, WebElement webElement) {
-        return is(value, readId(webElement));
+        return is(value, idIn(webElement));
     }
 
     public static boolean isIdNot(String value, WebElement webElement) {
-        return isNot(value, readId(webElement));
+        return isNot(value, idIn(webElement));
     }
 
     public static boolean isIdContaining(String searchText, WebElement webElement) {
-        return isContaining(searchText, readId(webElement));
+        return isContaining(searchText, idIn(webElement));
     }
 
     public static boolean isIdNotContaining(String searchText, WebElement webElement) {
-        return isContaining(searchText, readId(webElement));
+        return isContaining(searchText, idIn(webElement));
     }
 
     public static boolean isIdStartingWith(String prefix, WebElement webElement) {
-        return isStartingWith(prefix, readId(webElement));
+        return isStartingWith(prefix, idIn(webElement));
     }
 
     public static boolean isIdNotStartingWith(String prefix, WebElement webElement) {
-        return isNotStartingWith(prefix, readId(webElement));
+        return isNotStartingWith(prefix, idIn(webElement));
     }
 
     public static boolean isIdEndingWith(String suffix, WebElement webElement) {
-        return isEndingWith(suffix, readId(webElement));
+        return isEndingWith(suffix, idIn(webElement));
     }
 
     public static boolean isIdNotEndingWith(String suffix, WebElement webElement) {
-        return isEndingWith(suffix, readId(webElement));
+        return isEndingWith(suffix, idIn(webElement));
     }
 
     public static void assertHasId(WebElement webElement) {
@@ -439,35 +439,35 @@ public class BotUtils {
     }
 
     public static void assertId(String value, WebElement webElement) {
-        assertIs("id", value, readId(webElement));
+        assertIs("id", value, idIn(webElement));
     }
 
     public static void assertIdNot(String value, WebElement webElement) {
-        assertIsNot("id", value, readId(webElement));
+        assertIsNot("id", value, idIn(webElement));
     }
 
     public static void assertIdContains(String searchText, WebElement webElement) {
-        assertContains("id", searchText, readId(webElement));
+        assertContains("id", searchText, idIn(webElement));
     }
 
     public static void assertIdNotContains(String searchText, WebElement webElement) {
-        assertNotContains("id", searchText, readId(webElement));
+        assertNotContains("id", searchText, idIn(webElement));
     }
 
     public static void assertIdStartsWith(String prefix, WebElement webElement) {
-        assertStartsWidth("id", prefix, readId(webElement));
+        assertStartsWidth("id", prefix, idIn(webElement));
     }
 
     public static void assertIdNotStartsWith(String prefix, WebElement webElement) {
-        assertNotStartsWidth("id", prefix, readId(webElement));
+        assertNotStartsWidth("id", prefix, idIn(webElement));
     }
 
     public static void assertIdEndsWith(String suffix, WebElement webElement) {
-        assertEndsWidth("id", suffix, readId(webElement));
+        assertEndsWidth("id", suffix, idIn(webElement));
     }
 
     public static void assertIdNotEndsWith(String suffix, WebElement webElement) {
-        assertNotEndsWidth("id", suffix, readId(webElement));
+        assertNotEndsWidth("id", suffix, idIn(webElement));
     }
 
     /* Name */
@@ -480,35 +480,35 @@ public class BotUtils {
     }
 
     public static boolean isName(String value, WebElement webElement) {
-        return is(value, readName(webElement));
+        return is(value, nameIn(webElement));
     }
 
     public static boolean isNameNot(String value, WebElement webElement) {
-        return isNot(value, readName(webElement));
+        return isNot(value, nameIn(webElement));
     }
 
     public static boolean isNameContaining(String searchText, WebElement webElement) {
-        return isContaining(searchText, readName(webElement));
+        return isContaining(searchText, nameIn(webElement));
     }
 
     public static boolean isNameNotContaining(String searchText, WebElement webElement) {
-        return isContaining(searchText, readName(webElement));
+        return isContaining(searchText, nameIn(webElement));
     }
 
     public static boolean isNameStartingWith(String prefix, WebElement webElement) {
-        return isStartingWith(prefix, readName(webElement));
+        return isStartingWith(prefix, nameIn(webElement));
     }
 
     public static boolean isNameNotStartingWith(String prefix, WebElement webElement) {
-        return isNotStartingWith(prefix, readName(webElement));
+        return isNotStartingWith(prefix, nameIn(webElement));
     }
 
     public static boolean isNameEndingWith(String suffix, WebElement webElement) {
-        return isEndingWith(suffix, readName(webElement));
+        return isEndingWith(suffix, nameIn(webElement));
     }
 
     public static boolean isNameNotEndingWith(String suffix, WebElement webElement) {
-        return isEndingWith(suffix, readName(webElement));
+        return isEndingWith(suffix, nameIn(webElement));
     }
 
     public static void assertHasName(WebElement webElement) {
@@ -520,35 +520,35 @@ public class BotUtils {
     }
 
     public static void assertName(String value, WebElement webElement) {
-        assertIs("name", value, readName(webElement));
+        assertIs("name", value, nameIn(webElement));
     }
 
     public static void assertNameNot(String value, WebElement webElement) {
-        assertIsNot("name", value, readName(webElement));
+        assertIsNot("name", value, nameIn(webElement));
     }
 
     public static void assertNameContains(String searchText, WebElement webElement) {
-        assertContains("name", searchText, readName(webElement));
+        assertContains("name", searchText, nameIn(webElement));
     }
 
     public static void assertNameNotContains(String searchText, WebElement webElement) {
-        assertNotContains("name", searchText, readName(webElement));
+        assertNotContains("name", searchText, nameIn(webElement));
     }
 
     public static void assertNameStartsWith(String prefix, WebElement webElement) {
-        assertStartsWidth("name", prefix, readName(webElement));
+        assertStartsWidth("name", prefix, nameIn(webElement));
     }
 
     public static void assertNameNotStartsWith(String prefix, WebElement webElement) {
-        assertNotStartsWidth("name", prefix, readName(webElement));
+        assertNotStartsWidth("name", prefix, nameIn(webElement));
     }
 
     public static void assertNameEndsWith(String suffix, WebElement webElement) {
-        assertEndsWidth("name", suffix, readName(webElement));
+        assertEndsWidth("name", suffix, nameIn(webElement));
     }
 
     public static void assertNameNotEndsWith(String suffix, WebElement webElement) {
-        assertNotEndsWidth("name", suffix, readName(webElement));
+        assertNotEndsWidth("name", suffix, nameIn(webElement));
     }
 
     /* Class */
@@ -561,7 +561,7 @@ public class BotUtils {
     }
 
     public static boolean hasClass(String className, WebElement webElement) {
-        return readClass(webElement).matches("(\\\"|\\s)" + className.trim() + "(\\\"|\\s)");
+        return classIn(webElement).matches("(\\\"|\\s)" + className.trim() + "(\\\"|\\s)");
     }
 
     public static boolean hasNotClass(String className, WebElement webElement) {
@@ -569,7 +569,7 @@ public class BotUtils {
     }
 
     public static boolean hasClassContaining(String searchText, WebElement webElement) {
-        List<String> classes = readClasses(webElement);
+        List<String> classes = classesIn(webElement);
         for (String clazz : classes) {
             if (isContaining(searchText, clazz)) {
                 return true;
@@ -583,7 +583,7 @@ public class BotUtils {
     }
 
     public static boolean hasClassStartingWith(String prefix, WebElement webElement) {
-        List<String> classes = readClasses(webElement);
+        List<String> classes = classesIn(webElement);
         for (String clazz : classes) {
             if (isStartingWith(prefix, clazz)) {
                 return true;
@@ -597,7 +597,7 @@ public class BotUtils {
     }
 
     public static boolean hasClassEndingWith(String suffix, WebElement webElement) {
-        List<String> classes = readClasses(webElement);
+        List<String> classes = classesIn(webElement);
         for (String clazz : classes) {
             if (isEndingWith(suffix, clazz)) {
                 return true;
@@ -676,35 +676,35 @@ public class BotUtils {
     }
 
     public static boolean isValue(String value, WebElement webElement) {
-        return is(value, readValue(webElement));
+        return is(value, valueIn(webElement));
     }
 
     public static boolean isValueNot(String value, WebElement webElement) {
-        return isNot(value, readValue(webElement));
+        return isNot(value, valueIn(webElement));
     }
 
     public static boolean isValueContaining(String searchText, WebElement webElement) {
-        return isContaining(searchText, readValue(webElement));
+        return isContaining(searchText, valueIn(webElement));
     }
 
     public static boolean isValueNotContaining(String searchText, WebElement webElement) {
-        return isContaining(searchText, readValue(webElement));
+        return isContaining(searchText, valueIn(webElement));
     }
 
     public static boolean isValueStartingWith(String prefix, WebElement webElement) {
-        return isStartingWith(prefix, readValue(webElement));
+        return isStartingWith(prefix, valueIn(webElement));
     }
 
     public static boolean isValueNotStartingWith(String prefix, WebElement webElement) {
-        return isNotStartingWith(prefix, readValue(webElement));
+        return isNotStartingWith(prefix, valueIn(webElement));
     }
 
     public static boolean isValueEndingWith(String suffix, WebElement webElement) {
-        return isEndingWith(suffix, readValue(webElement));
+        return isEndingWith(suffix, valueIn(webElement));
     }
 
     public static boolean isValueNotEndingWith(String suffix, WebElement webElement) {
-        return isEndingWith(suffix, readValue(webElement));
+        return isEndingWith(suffix, valueIn(webElement));
     }
 
     public static void assertHasValue(WebElement webElement) {
@@ -716,35 +716,35 @@ public class BotUtils {
     }
 
     public static void assertValue(String value, WebElement webElement) {
-        assertIs("value", value, readValue(webElement));
+        assertIs("value", value, valueIn(webElement));
     }
 
     public static void assertValueNot(String value, WebElement webElement) {
-        assertIsNot("value", value, readValue(webElement));
+        assertIsNot("value", value, valueIn(webElement));
     }
 
     public static void assertValueContains(String searchText, WebElement webElement) {
-        assertContains("value", searchText, readValue(webElement));
+        assertContains("value", searchText, valueIn(webElement));
     }
 
     public static void assertValueNotContains(String searchText, WebElement webElement) {
-        assertNotContains("value", searchText, readValue(webElement));
+        assertNotContains("value", searchText, valueIn(webElement));
     }
 
     public static void assertValueStartsWith(String prefix, WebElement webElement) {
-        assertStartsWidth("value", prefix, readValue(webElement));
+        assertStartsWidth("value", prefix, valueIn(webElement));
     }
 
     public static void assertValueNotStartsWith(String prefix, WebElement webElement) {
-        assertNotStartsWidth("value", prefix, readValue(webElement));
+        assertNotStartsWidth("value", prefix, valueIn(webElement));
     }
 
     public static void assertValueEndsWith(String suffix, WebElement webElement) {
-        assertEndsWidth("value", suffix, readValue(webElement));
+        assertEndsWidth("value", suffix, valueIn(webElement));
     }
 
     public static void assertValueNotEndsWith(String suffix, WebElement webElement) {
-        assertNotEndsWidth("value", suffix, readValue(webElement));
+        assertNotEndsWidth("value", suffix, valueIn(webElement));
     }
 
 
@@ -758,35 +758,35 @@ public class BotUtils {
     }
 
     public static boolean isHref(String value, WebElement webElement) {
-        return is(value, readHref(webElement));
+        return is(value, hrefIn(webElement));
     }
 
     public static boolean isHrefNot(String value, WebElement webElement) {
-        return isNot(value, readHref(webElement));
+        return isNot(value, hrefIn(webElement));
     }
 
     public static boolean isHrefContaining(String searchText, WebElement webElement) {
-        return isContaining(searchText, readHref(webElement));
+        return isContaining(searchText, hrefIn(webElement));
     }
 
     public static boolean isHrefNotContaining(String searchText, WebElement webElement) {
-        return isContaining(searchText, readHref(webElement));
+        return isContaining(searchText, hrefIn(webElement));
     }
 
     public static boolean isHrefStartingWith(String prefix, WebElement webElement) {
-        return isStartingWith(prefix, readHref(webElement));
+        return isStartingWith(prefix, hrefIn(webElement));
     }
 
     public static boolean isHrefNotStartingWith(String prefix, WebElement webElement) {
-        return isNotStartingWith(prefix, readHref(webElement));
+        return isNotStartingWith(prefix, hrefIn(webElement));
     }
 
     public static boolean isHrefEndingWith(String suffix, WebElement webElement) {
-        return isEndingWith(suffix, readHref(webElement));
+        return isEndingWith(suffix, hrefIn(webElement));
     }
 
     public static boolean isHrefNotEndingWith(String suffix, WebElement webElement) {
-        return isEndingWith(suffix, readHref(webElement));
+        return isEndingWith(suffix, hrefIn(webElement));
     }
 
     public static void assertHasHref(WebElement webElement) {
@@ -798,246 +798,246 @@ public class BotUtils {
     }
 
     public static void assertHref(String value, WebElement webElement) {
-        assertIs("href", value, readHref(webElement));
+        assertIs("href", value, hrefIn(webElement));
     }
 
     public static void assertHrefNot(String value, WebElement webElement) {
-        assertIsNot("href", value, readHref(webElement));
+        assertIsNot("href", value, hrefIn(webElement));
     }
 
     public static void assertHrefContains(String searchText, WebElement webElement) {
-        assertContains("href", searchText, readHref(webElement));
+        assertContains("href", searchText, hrefIn(webElement));
     }
 
     public static void assertHrefNotContains(String searchText, WebElement webElement) {
-        assertNotContains("href", searchText, readHref(webElement));
+        assertNotContains("href", searchText, hrefIn(webElement));
     }
 
     public static void assertHrefStartsWith(String prefix, WebElement webElement) {
-        assertStartsWidth("href", prefix, readHref(webElement));
+        assertStartsWidth("href", prefix, hrefIn(webElement));
     }
 
     public static void assertHrefNotStartsWith(String prefix, WebElement webElement) {
-        assertNotStartsWidth("href", prefix, readHref(webElement));
+        assertNotStartsWidth("href", prefix, hrefIn(webElement));
     }
 
     public static void assertHrefEndsWith(String suffix, WebElement webElement) {
-        assertEndsWidth("href", suffix, readHref(webElement));
+        assertEndsWidth("href", suffix, hrefIn(webElement));
     }
 
     public static void assertHrefNotEndsWith(String suffix, WebElement webElement) {
-        assertNotEndsWidth("href", suffix, readHref(webElement));
+        assertNotEndsWidth("href", suffix, hrefIn(webElement));
     }
 
     /* Text */
     public static boolean isText(String text, WebElement webElement) {
-        return is(text, read(webElement));
+        return is(text, textIn(webElement));
     }
 
     public static boolean isTextNot(String text, WebElement webElement) {
-        return isNot(text, read(webElement));
+        return isNot(text, textIn(webElement));
     }
 
     public static boolean isTextContaining(String searchText, WebElement webElement) {
-        return isContaining(searchText, read(webElement));
+        return isContaining(searchText, textIn(webElement));
     }
 
     public static boolean isTextNotContaining(String searchText, WebElement webElement) {
-        return isContaining(searchText, read(webElement));
+        return isContaining(searchText, textIn(webElement));
     }
 
     public static boolean isTextStartingWith(String prefix, WebElement webElement) {
-        return isStartingWith(prefix, read(webElement));
+        return isStartingWith(prefix, textIn(webElement));
     }
 
     public static boolean isTextNotStartingWith(String prefix, WebElement webElement) {
-        return isNotStartingWith(prefix, read(webElement));
+        return isNotStartingWith(prefix, textIn(webElement));
     }
 
     public static boolean isTextEndingWith(String suffix, WebElement webElement) {
-        return isEndingWith(suffix, read(webElement));
+        return isEndingWith(suffix, textIn(webElement));
     }
 
     public static boolean isTextNotEndingWith(String suffix, WebElement webElement) {
-        return isEndingWith(suffix, read(webElement));
+        return isEndingWith(suffix, textIn(webElement));
     }
 
     public static void assertText(String text, WebElement webElement) {
-        assertIs("Text", text, read(webElement));
+        assertIs("Text", text, textIn(webElement));
     }
 
     public static void assertTextNot(String text, WebElement webElement) {
-        assertIsNot("Text", text, read(webElement));
+        assertIsNot("Text", text, textIn(webElement));
     }
 
     public static void assertTextContains(String searchText, WebElement webElement) {
-        assertContains("Text", searchText, read(webElement));
+        assertContains("Text", searchText, textIn(webElement));
     }
 
     public static void assertTextNotContains(String searchText, WebElement webElement) {
-        assertNotContains("Text", searchText, read(webElement));
+        assertNotContains("Text", searchText, textIn(webElement));
     }
 
     public static void assertTextStartsWith(String prefix, WebElement webElement) {
-        assertStartsWidth("Text", prefix, read(webElement));
+        assertStartsWidth("Text", prefix, textIn(webElement));
     }
 
     public static void assertTextNotStartsWith(String prefix, WebElement webElement) {
-        assertNotStartsWidth("Text", prefix, read(webElement));
+        assertNotStartsWidth("Text", prefix, textIn(webElement));
     }
 
     public static void assertTextEndsWith(String suffix, WebElement webElement) {
-        assertEndsWidth("Text", suffix, read(webElement));
+        assertEndsWidth("Text", suffix, textIn(webElement));
     }
 
     public static void assertTextNotEndsWith(String suffix, WebElement webElement) {
-        assertNotEndsWidth("Text", suffix, read(webElement));
+        assertNotEndsWidth("Text", suffix, textIn(webElement));
     }
 
     /* Number */
     public static boolean isNumber(Double number, WebElement webElement) {
-        return is(number, readNumber(webElement));
+        return is(number, numberIn(webElement));
     }
 
     public static boolean isNumberNot(Double number, WebElement webElement) {
-        return isNot(number, readNumber(webElement));
+        return isNot(number, numberIn(webElement));
     }
 
     public static boolean isNumberSmallerThan(Double number, WebElement webElement) {
-        return isSmallerThan(number, readNumber(webElement));
+        return isSmallerThan(number, numberIn(webElement));
     }
 
     public static boolean isNumberSmallerThanOrEquals(Double number, WebElement webElement) {
-        return isSmallerThanOrEquals(number, readNumber(webElement));
+        return isSmallerThanOrEquals(number, numberIn(webElement));
     }
 
     public static boolean isNumberLargerThan(Double number, WebElement webElement) {
-        return isLargerThan(number, readNumber(webElement));
+        return isLargerThan(number, numberIn(webElement));
     }
 
     public static boolean isNumberLargerThanOrEquals(Double number, WebElement webElement) {
-        return isLargerThanOrEquals(number, readNumber(webElement));
+        return isLargerThanOrEquals(number, numberIn(webElement));
     }
 
     public static void assertNumber(Double number, WebElement webElement) {
-        assertIs("Number", number, readNumber(webElement));
+        assertIs("Number", number, numberIn(webElement));
     }
 
     public static void assertNumberNot(Double number, WebElement webElement) {
-        assertIsNot("Number", number, readNumber(webElement));
+        assertIsNot("Number", number, numberIn(webElement));
     }
 
     public static void assertNumberSmallerThan(Double number, WebElement webElement) {
-        assertIsSmallerThan("Number", number, readNumber(webElement));
+        assertIsSmallerThan("Number", number, numberIn(webElement));
     }
 
     public static void assertNumberSmallerThanOrEquals(Double number, WebElement webElement) {
-        assertIsSmallerThanOrEquals("Number", number, readNumber(webElement));
+        assertIsSmallerThanOrEquals("Number", number, numberIn(webElement));
     }
 
     public static void assertNumberLargerThan(Double number, WebElement webElement) {
-        assertIsLargerThan("Number", number, readNumber(webElement));
+        assertIsLargerThan("Number", number, numberIn(webElement));
     }
 
     public static void assertNumberLargerThanOrEquals(Double number, WebElement webElement) {
-        assertIsLargerThanOrEquals("Number", number, readNumber(webElement));
+        assertIsLargerThanOrEquals("Number", number, numberIn(webElement));
     }
 
     /* Browser Url */
     public static boolean isUrl(String url, WebDriver driver) {
-        return is(url, readUrl(driver));
+        return is(url, url(driver));
     }
 
     public static boolean isUrlNot(String url, WebDriver driver) {
-        return isNot(url, readUrl(driver));
+        return isNot(url, url(driver));
     }
 
     public static boolean isUrlMatching(String regExp, WebDriver driver) {
-        return isMatching(regExp, readUrl(driver));
+        return isMatching(regExp, url(driver));
     }
 
     public static boolean isUrlNotMatching(String regExp, WebDriver driver) {
-        return isNotMatching(regExp, readUrl(driver));
+        return isNotMatching(regExp, url(driver));
     }
 
     public static boolean isUrlMatching(Openable openable, WebDriver driver) {
-        return isMatching(openable.getUrl(), readUrl(driver));
+        return isMatching(openable.getUrl(), url(driver));
     }
 
     public static boolean isUrlNotMatching(Openable openable, WebDriver driver) {
-        return isNotMatching(openable.getUrl(), readUrl(driver));
+        return isNotMatching(openable.getUrl(), url(driver));
     }
 
     public static boolean isUrlContaining(String searchText, WebDriver driver) {
-        return isContaining(searchText, readUrl(driver));
+        return isContaining(searchText, url(driver));
     }
 
     public static boolean isUrlNotContaining(String searchText, WebDriver driver) {
-        return isNotContaining(searchText, readUrl(driver));
+        return isNotContaining(searchText, url(driver));
     }
 
     public static boolean isUrlStartingWidth(String prefix, WebDriver driver) {
-        return isStartingWith(prefix, readUrl(driver));
+        return isStartingWith(prefix, url(driver));
     }
 
     public static boolean isUrlNotStartingWidth(String prefix, WebDriver driver) {
-        return isNotStartingWith(prefix, readUrl(driver));
+        return isNotStartingWith(prefix, url(driver));
     }
 
     public static boolean isUrlEndingWidth(String suffix, WebDriver driver) {
-        return isEndingWith(suffix, readUrl(driver));
+        return isEndingWith(suffix, url(driver));
     }
 
     public static boolean isUrlNotEndingWidth(String suffix, WebDriver driver) {
-        return isNotEndingWith(suffix, readUrl(driver));
+        return isNotEndingWith(suffix, url(driver));
     }
 
     public static void assertUrl(String url, WebDriver driver) {
-        assertIs("Url", url, readUrl(driver));
+        assertIs("Url", url, url(driver));
     }
 
     public static void assertUrlNot(String url, WebDriver driver) {
-        assertIsNot("Url", url, readUrl(driver));
+        assertIsNot("Url", url, url(driver));
     }
 
     public static void assertUrlMatching(String regExp, WebDriver driver) {
-        assertIsMatching("Url", regExp, readUrl(driver));
+        assertIsMatching("Url", regExp, url(driver));
     }
 
     public static void assertUrlNotMatching(String regExp, WebDriver driver) {
-        assertIsNotMatching("Url", regExp, readUrl(driver));
+        assertIsNotMatching("Url", regExp, url(driver));
     }
 
     public static void assertUrlMatching(Openable openable, WebDriver driver) {
-        assertIsMatching("Url", openable.getUrl(), readUrl(driver));
+        assertIsMatching("Url", openable.getUrl(), url(driver));
     }
 
     public static void assertUrlNotMatching(Openable openable, WebDriver driver) {
-        assertIsNotMatching("Url", openable.getUrl(), readUrl(driver));
+        assertIsNotMatching("Url", openable.getUrl(), url(driver));
     }
 
     public static void assertUrlContains(String searchText, WebDriver driver) {
-        assertContains("Url", searchText, readUrl(driver));
+        assertContains("Url", searchText, url(driver));
     }
 
     public static void assertUrlNotContains(String searchText, WebDriver driver) {
-        assertNotContains("Url", searchText, readUrl(driver));
+        assertNotContains("Url", searchText, url(driver));
     }
 
     public static void assertUrlStartsWidth(String prefix, WebDriver driver) {
-        assertStartsWidth("Url", prefix, readUrl(driver));
+        assertStartsWidth("Url", prefix, url(driver));
     }
 
     public static void assertUrlNotStartsWidth(String prefix, WebDriver driver) {
-        assertNotStartsWidth("Url", prefix, readUrl(driver));
+        assertNotStartsWidth("Url", prefix, url(driver));
     }
 
     public static void assertUrlEndsWidth(String suffix, WebDriver driver) {
-        assertEndsWidth("Url", suffix, readUrl(driver));
+        assertEndsWidth("Url", suffix, url(driver));
     }
 
     public static void assertUrlNotEndsWidth(String suffix, WebDriver driver) {
-        assertNotEndsWidth("Url", suffix, readUrl(driver));
+        assertNotEndsWidth("Url", suffix, url(driver));
     }
 
     /* Open */
@@ -1790,7 +1790,7 @@ public class BotUtils {
             return "WebElement";
         }
         boolean printExtraAttribute = extraAttribute != null && !ArrayUtils.contains(new String[]{"id", "name", "name", "class", "value", "disabled", "selected", "checked"}, extraAttribute);
-        return "Tag <" + readTagName(webElement)
+        return "Tag <" + tagNameOf(webElement)
                 + describeId(webElement)
                 + describeName(webElement)
                 + describeClass(webElement)
@@ -1803,23 +1803,23 @@ public class BotUtils {
     }
 
     public static String describeAttribute(String attributeName, WebElement webElement) {
-        return hasAttribute(attributeName, webElement) ? attributeName + " = '" + readAttribute(attributeName, webElement) + "' " : "";
+        return hasAttribute(attributeName, webElement) ? attributeName + " = '" + attributeIn(attributeName, webElement) + "' " : "";
     }
 
     public static String describeId(WebElement webElement) {
-        return hasId(webElement) ? "id = '" + readId(webElement) + "' " : "";
+        return hasId(webElement) ? "id = '" + idIn(webElement) + "' " : "";
     }
 
     public static String describeName(WebElement webElement) {
-        return hasName(webElement) ? "name = '" + readName(webElement) + "' " : "";
+        return hasName(webElement) ? "name = '" + nameIn(webElement) + "' " : "";
     }
 
     public static String describeClass(WebElement webElement) {
-        return hasClass(webElement) ? "class = '" + readClass(webElement) + "' " : "";
+        return hasClass(webElement) ? "class = '" + classIn(webElement) + "' " : "";
     }
 
     public static String describeValue(WebElement webElement) {
-        return hasValue(webElement) ? "value = '" + readValue(webElement) + "' " : "";
+        return hasValue(webElement) ? "value = '" + valueIn(webElement) + "' " : "";
     }
 
     public static String toString(double number) {

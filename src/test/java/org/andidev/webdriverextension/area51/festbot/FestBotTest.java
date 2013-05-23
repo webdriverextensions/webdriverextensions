@@ -21,9 +21,9 @@ public class FestBotTest {
     @Test
     public void testAssertThat() {
         // Normal reads
-        read(username);
-        read(username).options();
-        read().url();
+        textIn(username);
+        optionsIn(username);
+        url();
 
         // Normal clear
         clear(username);
