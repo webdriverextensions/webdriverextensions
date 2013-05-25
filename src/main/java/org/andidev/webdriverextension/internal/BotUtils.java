@@ -374,19 +374,19 @@ import org.openqa.selenium.support.ui.WebDriverWait;
     }
 
     public static void assertAttributeStartsWith(String name, String prefix, WebElement webElement) {
-        assertStartsWidth(name, prefix, attributeIn(name, webElement));
+        assertStartsWith(name, prefix, attributeIn(name, webElement));
     }
 
     public static void assertAttributeNotStartsWith(String name, String prefix, WebElement webElement) {
-        assertNotStartsWidth(name, prefix, attributeIn(name, webElement));
+        assertNotStartsWith(name, prefix, attributeIn(name, webElement));
     }
 
     public static void assertAttributeEndsWith(String name, String suffix, WebElement webElement) {
-        assertEndsWidth(name, suffix, attributeIn(name, webElement));
+        assertEndsWith(name, suffix, attributeIn(name, webElement));
     }
 
     public static void assertAttributeNotEndsWith(String name, String suffix, WebElement webElement) {
-        assertNotEndsWidth(name, suffix, attributeIn(name, webElement));
+        assertNotEndsWith(name, suffix, attributeIn(name, webElement));
     }
 
     /* Id */
@@ -455,19 +455,19 @@ import org.openqa.selenium.support.ui.WebDriverWait;
     }
 
     public static void assertIdStartsWith(String prefix, WebElement webElement) {
-        assertStartsWidth("id", prefix, idIn(webElement));
+        assertStartsWith("id", prefix, idIn(webElement));
     }
 
     public static void assertIdNotStartsWith(String prefix, WebElement webElement) {
-        assertNotStartsWidth("id", prefix, idIn(webElement));
+        assertNotStartsWith("id", prefix, idIn(webElement));
     }
 
     public static void assertIdEndsWith(String suffix, WebElement webElement) {
-        assertEndsWidth("id", suffix, idIn(webElement));
+        assertEndsWith("id", suffix, idIn(webElement));
     }
 
     public static void assertIdNotEndsWith(String suffix, WebElement webElement) {
-        assertNotEndsWidth("id", suffix, idIn(webElement));
+        assertNotEndsWith("id", suffix, idIn(webElement));
     }
 
     /* Name */
@@ -536,19 +536,19 @@ import org.openqa.selenium.support.ui.WebDriverWait;
     }
 
     public static void assertNameStartsWith(String prefix, WebElement webElement) {
-        assertStartsWidth("name", prefix, nameIn(webElement));
+        assertStartsWith("name", prefix, nameIn(webElement));
     }
 
     public static void assertNameNotStartsWith(String prefix, WebElement webElement) {
-        assertNotStartsWidth("name", prefix, nameIn(webElement));
+        assertNotStartsWith("name", prefix, nameIn(webElement));
     }
 
     public static void assertNameEndsWith(String suffix, WebElement webElement) {
-        assertEndsWidth("name", suffix, nameIn(webElement));
+        assertEndsWith("name", suffix, nameIn(webElement));
     }
 
     public static void assertNameNotEndsWith(String suffix, WebElement webElement) {
-        assertNotEndsWidth("name", suffix, nameIn(webElement));
+        assertNotEndsWith("name", suffix, nameIn(webElement));
     }
 
     /* Class */
@@ -732,19 +732,19 @@ import org.openqa.selenium.support.ui.WebDriverWait;
     }
 
     public static void assertValueStartsWith(String prefix, WebElement webElement) {
-        assertStartsWidth("value", prefix, valueIn(webElement));
+        assertStartsWith("value", prefix, valueIn(webElement));
     }
 
     public static void assertValueNotStartsWith(String prefix, WebElement webElement) {
-        assertNotStartsWidth("value", prefix, valueIn(webElement));
+        assertNotStartsWith("value", prefix, valueIn(webElement));
     }
 
     public static void assertValueEndsWith(String suffix, WebElement webElement) {
-        assertEndsWidth("value", suffix, valueIn(webElement));
+        assertEndsWith("value", suffix, valueIn(webElement));
     }
 
     public static void assertValueNotEndsWith(String suffix, WebElement webElement) {
-        assertNotEndsWidth("value", suffix, valueIn(webElement));
+        assertNotEndsWith("value", suffix, valueIn(webElement));
     }
 
 
@@ -814,19 +814,19 @@ import org.openqa.selenium.support.ui.WebDriverWait;
     }
 
     public static void assertHrefStartsWith(String prefix, WebElement webElement) {
-        assertStartsWidth("href", prefix, hrefIn(webElement));
+        assertStartsWith("href", prefix, hrefIn(webElement));
     }
 
     public static void assertHrefNotStartsWith(String prefix, WebElement webElement) {
-        assertNotStartsWidth("href", prefix, hrefIn(webElement));
+        assertNotStartsWith("href", prefix, hrefIn(webElement));
     }
 
     public static void assertHrefEndsWith(String suffix, WebElement webElement) {
-        assertEndsWidth("href", suffix, hrefIn(webElement));
+        assertEndsWith("href", suffix, hrefIn(webElement));
     }
 
     public static void assertHrefNotEndsWith(String suffix, WebElement webElement) {
-        assertNotEndsWidth("href", suffix, hrefIn(webElement));
+        assertNotEndsWith("href", suffix, hrefIn(webElement));
     }
 
     /* Text */
@@ -879,19 +879,19 @@ import org.openqa.selenium.support.ui.WebDriverWait;
     }
 
     public static void assertTextStartsWith(String prefix, WebElement webElement) {
-        assertStartsWidth("Text", prefix, textIn(webElement));
+        assertStartsWith("Text", prefix, textIn(webElement));
     }
 
     public static void assertTextNotStartsWith(String prefix, WebElement webElement) {
-        assertNotStartsWidth("Text", prefix, textIn(webElement));
+        assertNotStartsWith("Text", prefix, textIn(webElement));
     }
 
     public static void assertTextEndsWith(String suffix, WebElement webElement) {
-        assertEndsWidth("Text", suffix, textIn(webElement));
+        assertEndsWith("Text", suffix, textIn(webElement));
     }
 
     public static void assertTextNotEndsWith(String suffix, WebElement webElement) {
-        assertNotEndsWidth("Text", suffix, textIn(webElement));
+        assertNotEndsWith("Text", suffix, textIn(webElement));
     }
 
     /* Number */
@@ -976,19 +976,19 @@ import org.openqa.selenium.support.ui.WebDriverWait;
         return isNotContaining(searchText, url(driver));
     }
 
-    public static boolean isUrlStartingWidth(String prefix, WebDriver driver) {
+    public static boolean isUrlStartingWith(String prefix, WebDriver driver) {
         return isStartingWith(prefix, url(driver));
     }
 
-    public static boolean isUrlNotStartingWidth(String prefix, WebDriver driver) {
+    public static boolean isUrlNotStartingWith(String prefix, WebDriver driver) {
         return isNotStartingWith(prefix, url(driver));
     }
 
-    public static boolean isUrlEndingWidth(String suffix, WebDriver driver) {
+    public static boolean isUrlEndingWith(String suffix, WebDriver driver) {
         return isEndingWith(suffix, url(driver));
     }
 
-    public static boolean isUrlNotEndingWidth(String suffix, WebDriver driver) {
+    public static boolean isUrlNotEndingWith(String suffix, WebDriver driver) {
         return isNotEndingWith(suffix, url(driver));
     }
 
@@ -1024,20 +1024,20 @@ import org.openqa.selenium.support.ui.WebDriverWait;
         assertNotContains("Url", searchText, url(driver));
     }
 
-    public static void assertUrlStartsWidth(String prefix, WebDriver driver) {
-        assertStartsWidth("Url", prefix, url(driver));
+    public static void assertUrlStartsWith(String prefix, WebDriver driver) {
+        assertStartsWith("Url", prefix, url(driver));
     }
 
-    public static void assertUrlNotStartsWidth(String prefix, WebDriver driver) {
-        assertNotStartsWidth("Url", prefix, url(driver));
+    public static void assertUrlNotStartsWith(String prefix, WebDriver driver) {
+        assertNotStartsWith("Url", prefix, url(driver));
     }
 
-    public static void assertUrlEndsWidth(String suffix, WebDriver driver) {
-        assertEndsWidth("Url", suffix, url(driver));
+    public static void assertUrlEndsWith(String suffix, WebDriver driver) {
+        assertEndsWith("Url", suffix, url(driver));
     }
 
-    public static void assertUrlNotEndsWidth(String suffix, WebDriver driver) {
-        assertNotEndsWidth("Url", suffix, url(driver));
+    public static void assertUrlNotEndsWith(String suffix, WebDriver driver) {
+        assertNotEndsWith("Url", suffix, url(driver));
     }
 
     /* Open */
@@ -1697,25 +1697,25 @@ import org.openqa.selenium.support.ui.WebDriverWait;
         }
     }
 
-    public static void assertStartsWidth(String name, String prefix, String actual) {
+    public static void assertStartsWith(String name, String prefix, String actual) {
         if (isNotStartingWith(prefix, actual)) {
             Assert.fail(name + ": " + actual + " is not starting with " + prefix);
         }
     }
 
-    public static void assertNotStartsWidth(String name, String prefix, String actual) {
+    public static void assertNotStartsWith(String name, String prefix, String actual) {
         if (isStartingWith(prefix, actual)) {
             Assert.fail(name + ": " + actual + " is starting with " + prefix + " when it shouldn't!");
         }
     }
 
-    public static void assertEndsWidth(String name, String suffix, String actual) {
+    public static void assertEndsWith(String name, String suffix, String actual) {
         if (isNotEndingWith(suffix, actual)) {
             Assert.fail(name + ": " + actual + " is not ending with " + suffix);
         }
     }
 
-    public static void assertNotEndsWidth(String name, String suffix, String actual) {
+    public static void assertNotEndsWith(String name, String suffix, String actual) {
         if (isEndingWith(suffix, actual)) {
             Assert.fail(name + ": " + actual + " is ending with " + suffix + " when it shouldn't!");
         }

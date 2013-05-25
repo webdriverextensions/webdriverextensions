@@ -828,20 +828,20 @@ public class Bot {
         return BotUtils.isUrlNotContaining(searchText, ThreadDriver.getDriver());
     }
 
-    public static boolean isUrlStartingWidth(String prefix) {
-        return BotUtils.isUrlStartingWidth(prefix, ThreadDriver.getDriver());
+    public static boolean isUrlStarting(String prefix) {
+        return BotUtils.isUrlStartingWith(prefix, ThreadDriver.getDriver());
     }
 
-    public static boolean isUrlNotStartingWidth(String prefix) {
-        return BotUtils.isUrlNotStartingWidth(prefix, ThreadDriver.getDriver());
+    public static boolean isUrlNotStartingWith(String prefix) {
+        return BotUtils.isUrlNotStartingWith(prefix, ThreadDriver.getDriver());
     }
 
-    public static boolean isUrlEndingWidth(String suffix) {
-        return BotUtils.isUrlEndingWidth(suffix, ThreadDriver.getDriver());
+    public static boolean isUrlEndingWith(String suffix) {
+        return BotUtils.isUrlEndingWith(suffix, ThreadDriver.getDriver());
     }
 
-    public static boolean isUrlNotEndingWidth(String suffix) {
-        return BotUtils.isUrlNotEndingWidth(suffix, ThreadDriver.getDriver());
+    public static boolean isUrlNotEndingWith(String suffix) {
+        return BotUtils.isUrlNotEndingWith(suffix, ThreadDriver.getDriver());
     }
 
     public static void assertUrl(String url) {
@@ -876,20 +876,20 @@ public class Bot {
         BotUtils.assertUrlNotContains(searchText, ThreadDriver.getDriver());
     }
 
-    public static void assertUrlStartsWidth(String prefix) {
-        BotUtils.assertUrlStartsWidth(prefix, ThreadDriver.getDriver());
+    public static void assertUrlStartsWith(String prefix) {
+        BotUtils.assertUrlStartsWith(prefix, ThreadDriver.getDriver());
     }
 
-    public static void assertUrlNotStartsWidth(String prefix) {
-        BotUtils.assertUrlNotStartsWidth(prefix, ThreadDriver.getDriver());
+    public static void assertUrlNotStartsWith(String prefix) {
+        BotUtils.assertUrlNotStartsWith(prefix, ThreadDriver.getDriver());
     }
 
-    public static void assertUrlEndsWidth(String suffix) {
-        BotUtils.assertUrlEndsWidth(suffix, ThreadDriver.getDriver());
+    public static void assertUrlEndsWith(String suffix) {
+        BotUtils.assertUrlEndsWith(suffix, ThreadDriver.getDriver());
     }
 
-    public static void assertUrlNotEndsWidth(String suffix) {
-        BotUtils.assertUrlNotEndsWidth(suffix, ThreadDriver.getDriver());
+    public static void assertUrlNotEndsWith(String suffix) {
+        BotUtils.assertUrlNotEndsWith(suffix, ThreadDriver.getDriver());
     }
 
     public static boolean isOpen(Openable openable) {
