@@ -578,7 +578,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
         return false;
     }
 
-    public static boolean hasClassNotContaining(String searchText, WebElement webElement) {
+    public static boolean hasNotClassContaining(String searchText, WebElement webElement) {
         return !hasClassContaining(searchText, webElement);
     }
 
@@ -592,7 +592,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
         return false;
     }
 
-    public static boolean hasClassNotStartingWith(String prefix, WebElement webElement) {
+    public static boolean hasNotClassStartingWith(String prefix, WebElement webElement) {
         return !hasClassStartingWith(prefix, webElement);
     }
 
@@ -606,7 +606,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
         return false;
     }
 
-    public static boolean hasClassNotEndingWith(String suffix, WebElement webElement) {
+    public static boolean hasNotClassEndingWith(String suffix, WebElement webElement) {
         return !hasClassEndingWith(suffix, webElement);
     }
 
@@ -631,36 +631,36 @@ import org.openqa.selenium.support.ui.WebDriverWait;
     }
 
     public static void assertHasClassContaining(String searchText, WebElement webElement) {
-        if (hasClassNotContaining(searchText, webElement)) {
+        if (hasNotClassContaining(searchText, webElement)) {
             Assert.fail(describeTag(webElement) + " does not have class containing text " + searchText.trim() + "!");
         }
     }
 
-    public static void assertHasClassNotContaining(String searchText, WebElement webElement) {
+    public static void assertHasNotClassContaining(String searchText, WebElement webElement) {
         if (hasClassContaining(searchText, webElement)) {
             Assert.fail(describeTag(webElement) + " has class containing text " + searchText.trim() + " when it shouldn't!");
         }
     }
 
     public static void assertHasClassStartingWith(String prefix, WebElement webElement) {
-        if (hasClassNotStartingWith(prefix, webElement)) {
+        if (hasNotClassStartingWith(prefix, webElement)) {
             Assert.fail(describeTag(webElement) + " does not have class containing prefix " + prefix.trim() + "!");
         }
     }
 
-    public static void assertHasClassNotStartingWith(String prefix, WebElement webElement) {
+    public static void assertHasNotClassStartingWith(String prefix, WebElement webElement) {
         if (hasClassStartingWith(prefix, webElement)) {
             Assert.fail(describeTag(webElement) + " has class containing prefix " + prefix.trim() + " when it shouldn't!");
         }
     }
 
     public static void assertHasClassEndingWith(String suffix, WebElement webElement) {
-        if (hasClassNotEndingWith(suffix, webElement)) {
+        if (hasNotClassEndingWith(suffix, webElement)) {
             Assert.fail(describeTag(webElement) + " does not have class containing suffix " + suffix.trim() + "!");
         }
     }
 
-    public static void assertHasClassNotEndingWith(String suffix, WebElement webElement) {
+    public static void assertHasNotClassEndingWith(String suffix, WebElement webElement) {
         if (hasClassEndingWith(suffix, webElement)) {
             Assert.fail(describeTag(webElement) + " has class containing suffix " + suffix.trim() + " when it shouldn't!");
         }

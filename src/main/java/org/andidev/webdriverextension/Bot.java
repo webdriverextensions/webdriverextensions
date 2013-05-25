@@ -464,24 +464,24 @@ public class Bot {
         return BotUtils.hasClassContaining(searchText, webElement);
     }
 
-    public static boolean hasClassNotContaining(String searchText, WebElement webElement) {
-        return BotUtils.hasClassNotContaining(searchText, webElement);
+    public static boolean hasNotClassContaining(String searchText, WebElement webElement) {
+        return BotUtils.hasNotClassContaining(searchText, webElement);
     }
 
     public static boolean hasClassStartingWith(String prefix, WebElement webElement) {
         return BotUtils.hasClassStartingWith(prefix, webElement);
     }
 
-    public static boolean hasClassNotStartingWith(String prefix, WebElement webElement) {
-        return BotUtils.hasClassNotStartingWith(prefix, webElement);
+    public static boolean hasNotClassStartingWith(String prefix, WebElement webElement) {
+        return BotUtils.hasNotClassStartingWith(prefix, webElement);
     }
 
     public static boolean hasClassEndingWith(String suffix, WebElement webElement) {
         return BotUtils.hasClassEndingWith(suffix, webElement);
     }
 
-    public static boolean hasClassNotEndingWith(String suffix, WebElement webElement) {
-        return BotUtils.hasClassNotEndingWith(suffix, webElement);
+    public static boolean hasNotClassEndingWith(String suffix, WebElement webElement) {
+        return BotUtils.hasNotClassEndingWith(suffix, webElement);
     }
 
     public static void assertHasClass(WebElement webElement) {
@@ -504,24 +504,24 @@ public class Bot {
         BotUtils.assertHasClassContaining(searchText, webElement);
     }
 
-    public static void assertHasClassNotContaining(String searchText, WebElement webElement) {
-        BotUtils.assertHasClassNotContaining(searchText, webElement);
+    public static void assertHasNotClassContaining(String searchText, WebElement webElement) {
+        BotUtils.assertHasNotClassContaining(searchText, webElement);
     }
 
     public static void assertHasClassStartingWith(String prefix, WebElement webElement) {
         BotUtils.assertHasClassStartingWith(prefix, webElement);
     }
 
-    public static void assertHasClassNotStartingWith(String prefix, WebElement webElement) {
-        BotUtils.assertHasClassNotStartingWith(prefix, webElement);
+    public static void assertHasNotClassStartingWith(String prefix, WebElement webElement) {
+        BotUtils.assertHasNotClassStartingWith(prefix, webElement);
     }
 
     public static void assertHasClassEndingWith(String suffix, WebElement webElement) {
         BotUtils.assertHasClassEndingWith(suffix, webElement);
     }
 
-    public static void assertHasClassNotEndingWith(String suffix, WebElement webElement) {
-        BotUtils.assertHasClassNotEndingWith(suffix, webElement);
+    public static void assertHasNotClassEndingWith(String suffix, WebElement webElement) {
+        BotUtils.assertHasNotClassEndingWith(suffix, webElement);
     }
 
     public static boolean hasValue(WebElement webElement) {
