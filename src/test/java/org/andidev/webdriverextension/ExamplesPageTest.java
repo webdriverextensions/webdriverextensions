@@ -27,7 +27,7 @@ public class ExamplesPageTest extends SiteAwareRepository {
     public void before() {
         open(site);
         open(examplesPage);
-        assertUrlEndsWidth("/webdriver-extension/index.html");
+        assertUrlEndsWith("/webdriver-extension/index.html");
     }
 
     @After
