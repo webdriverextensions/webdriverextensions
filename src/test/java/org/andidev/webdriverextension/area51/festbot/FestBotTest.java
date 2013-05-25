@@ -47,7 +47,7 @@ public class FestBotTest {
 
         // Normal ises
         is(username).text().equalTo("anst07");
-        is(errorMsg).text().containing("Warning");
+        is(errorMsg).text().contains("Warning");
 //        is(country).option("Sweden").selected();
 
         // Normal asserts
@@ -56,7 +56,7 @@ public class FestBotTest {
 //        assertThat(country).option("Sweden").isSelected();
 
         // Alternatives (Implement theese as well?)
-//        assertThat(errorMsg).text().is().containing("Warning");
+//        assertThat(errorMsg).text().is().contains("Warning");
 //        assertThat(country).option("Sweden").is().selected();
 
         // Intelligent shortcut methods
@@ -65,7 +65,7 @@ public class FestBotTest {
 
 
 //        is(username).equalTo("anst07");
-//        is(errorMsg).containing("Warning");
+//        is(errorMsg).contains("Warning");
 //        is(country).option("Sweden").selected();
 //
 //        assertThat(errorMsg).is("Warning this deletes the content!");

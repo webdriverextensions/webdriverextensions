@@ -220,28 +220,28 @@ public class Bot {
         return BotUtils.isAttributeNot(name, value, webElement);
     }
 
-    public static boolean isAttributeContaining(String name, String searchText, WebElement webElement) {
-        return BotUtils.isAttributeContaining(name, searchText, webElement);
+    public static boolean isAttributeContains(String name, String searchText, WebElement webElement) {
+        return BotUtils.isAttributeContains(name, searchText, webElement);
     }
 
-    public static boolean isAttributeNotContaining(String name, String searchText, WebElement webElement) {
-        return BotUtils.isAttributeNotContaining(name, searchText, webElement);
+    public static boolean isAttributeNotContains(String name, String searchText, WebElement webElement) {
+        return BotUtils.isAttributeNotContains(name, searchText, webElement);
     }
 
-    public static boolean isAttributeStartingWith(String name, String prefix, WebElement webElement) {
-        return BotUtils.isAttributeStartingWith(name, prefix, webElement);
+    public static boolean isAttributeStartsWith(String name, String prefix, WebElement webElement) {
+        return BotUtils.isAttributeStartsWith(name, prefix, webElement);
     }
 
-    public static boolean isAttributeNotStartingWith(String name, String prefix, WebElement webElement) {
-        return BotUtils.isAttributeNotStartingWith(name, prefix, webElement);
+    public static boolean isAttributeNotStartsWith(String name, String prefix, WebElement webElement) {
+        return BotUtils.isAttributeNotStartsWith(name, prefix, webElement);
     }
 
-    public static boolean isAttributeEndingWith(String name, String suffix, WebElement webElement) {
-        return BotUtils.isAttributeEndingWith(name, suffix, webElement);
+    public static boolean isAttributeEndsWith(String name, String suffix, WebElement webElement) {
+        return BotUtils.isAttributeEndsWith(name, suffix, webElement);
     }
 
-    public static boolean isAttributeNotEndingWith(String name, String suffix, WebElement webElement) {
-        return BotUtils.isAttributeNotEndingWith(name, suffix, webElement);
+    public static boolean isAttributeNotEndsWith(String name, String suffix, WebElement webElement) {
+        return BotUtils.isAttributeNotEndsWith(name, suffix, webElement);
     }
 
     public static void assertHasAttribute(String name, WebElement webElement) {
@@ -300,28 +300,28 @@ public class Bot {
         return BotUtils.isIdNot(value, webElement);
     }
 
-    public static boolean isIdContaining(String searchText, WebElement webElement) {
-        return BotUtils.isIdContaining(searchText, webElement);
+    public static boolean isIdContains(String searchText, WebElement webElement) {
+        return BotUtils.isIdContains(searchText, webElement);
     }
 
-    public static boolean isIdNotContaining(String searchText, WebElement webElement) {
-        return BotUtils.isIdNotContaining(searchText, webElement);
+    public static boolean isIdNotContains(String searchText, WebElement webElement) {
+        return BotUtils.isIdNotContains(searchText, webElement);
     }
 
-    public static boolean isIdStartingWith(String prefix, WebElement webElement) {
-        return BotUtils.isIdStartingWith(prefix, webElement);
+    public static boolean isIdStartsWith(String prefix, WebElement webElement) {
+        return BotUtils.isIdStartsWith(prefix, webElement);
     }
 
-    public static boolean isIdNotStartingWith(String prefix, WebElement webElement) {
-        return BotUtils.isIdNotStartingWith(prefix, webElement);
+    public static boolean isIdNotStartsWith(String prefix, WebElement webElement) {
+        return BotUtils.isIdNotStartsWith(prefix, webElement);
     }
 
-    public static boolean isIdEndingWith(String suffix, WebElement webElement) {
-        return BotUtils.isIdEndingWith(suffix, webElement);
+    public static boolean isIdEndsWith(String suffix, WebElement webElement) {
+        return BotUtils.isIdEndsWith(suffix, webElement);
     }
 
-    public static boolean isIdNotEndingWith(String suffix, WebElement webElement) {
-        return BotUtils.isIdNotEndingWith(suffix, webElement);
+    public static boolean isIdNotEndsWith(String suffix, WebElement webElement) {
+        return BotUtils.isIdNotEndsWith(suffix, webElement);
     }
 
     public static void assertHasId(WebElement webElement) {
@@ -380,28 +380,28 @@ public class Bot {
         return BotUtils.isNameNot(value, webElement);
     }
 
-    public static boolean isNameContaining(String searchText, WebElement webElement) {
-        return BotUtils.isNameContaining(searchText, webElement);
+    public static boolean isNameContains(String searchText, WebElement webElement) {
+        return BotUtils.isNameContains(searchText, webElement);
     }
 
-    public static boolean isNameNotContaining(String searchText, WebElement webElement) {
-        return BotUtils.isNameNotContaining(searchText, webElement);
+    public static boolean isNameNotContains(String searchText, WebElement webElement) {
+        return BotUtils.isNameNotContains(searchText, webElement);
     }
 
-    public static boolean isNameStartingWith(String prefix, WebElement webElement) {
-        return BotUtils.isNameStartingWith(prefix, webElement);
+    public static boolean isNameStartsWith(String prefix, WebElement webElement) {
+        return BotUtils.isNameStartsWith(prefix, webElement);
     }
 
-    public static boolean isNameNotStartingWith(String prefix, WebElement webElement) {
-        return BotUtils.isNameNotStartingWith(prefix, webElement);
+    public static boolean isNameNotStartsWith(String prefix, WebElement webElement) {
+        return BotUtils.isNameNotStartsWith(prefix, webElement);
     }
 
-    public static boolean isNameEndingWith(String suffix, WebElement webElement) {
-        return BotUtils.isNameEndingWith(suffix, webElement);
+    public static boolean isNameEndsWith(String suffix, WebElement webElement) {
+        return BotUtils.isNameEndsWith(suffix, webElement);
     }
 
-    public static boolean isNameNotEndingWith(String suffix, WebElement webElement) {
-        return BotUtils.isNameNotEndingWith(suffix, webElement);
+    public static boolean isNameNotEndsWith(String suffix, WebElement webElement) {
+        return BotUtils.isNameNotEndsWith(suffix, webElement);
     }
 
     public static void assertHasName(WebElement webElement) {
@@ -500,28 +500,28 @@ public class Bot {
         BotUtils.assertHasNotClass(className, webElement);
     }
 
-    public static void assertHasClassContains(String searchText, WebElement webElement) {
-        BotUtils.assertHasClassContains(searchText, webElement);
+    public static void assertHasClassContaining(String searchText, WebElement webElement) {
+        BotUtils.assertHasClassContaining(searchText, webElement);
     }
 
-    public static void assertHasClassNotContains(String searchText, WebElement webElement) {
-        BotUtils.assertHasClassNotContains(searchText, webElement);
+    public static void assertHasClassNotContaining(String searchText, WebElement webElement) {
+        BotUtils.assertHasClassNotContaining(searchText, webElement);
     }
 
-    public static void assertHasClassStartsWith(String prefix, WebElement webElement) {
-        BotUtils.assertHasClassStartsWith(prefix, webElement);
+    public static void assertHasClassStartingWith(String prefix, WebElement webElement) {
+        BotUtils.assertHasClassStartingWith(prefix, webElement);
     }
 
-    public static void assertHasClassNotStartsWith(String prefix, WebElement webElement) {
-        BotUtils.assertHasClassNotStartsWith(prefix, webElement);
+    public static void assertHasClassNotStartingWith(String prefix, WebElement webElement) {
+        BotUtils.assertHasClassNotStartingWith(prefix, webElement);
     }
 
-    public static void assertHasClassEndsWith(String suffix, WebElement webElement) {
-        BotUtils.assertHasClassEndsWith(suffix, webElement);
+    public static void assertHasClassEndingWith(String suffix, WebElement webElement) {
+        BotUtils.assertHasClassEndingWith(suffix, webElement);
     }
 
-    public static void assertHasClassNotEndsWith(String suffix, WebElement webElement) {
-        BotUtils.assertHasClassNotEndsWith(suffix, webElement);
+    public static void assertHasClassNotEndingWith(String suffix, WebElement webElement) {
+        BotUtils.assertHasClassNotEndingWith(suffix, webElement);
     }
 
     public static boolean hasValue(WebElement webElement) {
@@ -540,28 +540,28 @@ public class Bot {
         return BotUtils.isValueNot(value, webElement);
     }
 
-    public static boolean isValueContaining(String searchText, WebElement webElement) {
-        return BotUtils.isValueContaining(searchText, webElement);
+    public static boolean isValueContains(String searchText, WebElement webElement) {
+        return BotUtils.isValueContains(searchText, webElement);
     }
 
-    public static boolean isValueNotContaining(String searchText, WebElement webElement) {
-        return BotUtils.isValueNotContaining(searchText, webElement);
+    public static boolean isValueNotContains(String searchText, WebElement webElement) {
+        return BotUtils.isValueNotContains(searchText, webElement);
     }
 
-    public static boolean isValueStartingWith(String prefix, WebElement webElement) {
-        return BotUtils.isValueStartingWith(prefix, webElement);
+    public static boolean isValueStartsWith(String prefix, WebElement webElement) {
+        return BotUtils.isValueStartsWith(prefix, webElement);
     }
 
-    public static boolean isValueNotStartingWith(String prefix, WebElement webElement) {
-        return BotUtils.isValueNotStartingWith(prefix, webElement);
+    public static boolean isValueNotStartsWith(String prefix, WebElement webElement) {
+        return BotUtils.isValueNotStartsWith(prefix, webElement);
     }
 
-    public static boolean isValueEndingWith(String suffix, WebElement webElement) {
-        return BotUtils.isValueEndingWith(suffix, webElement);
+    public static boolean isValueEndsWith(String suffix, WebElement webElement) {
+        return BotUtils.isValueEndsWith(suffix, webElement);
     }
 
-    public static boolean isValueNotEndingWith(String suffix, WebElement webElement) {
-        return BotUtils.isValueNotEndingWith(suffix, webElement);
+    public static boolean isValueNotEndsWith(String suffix, WebElement webElement) {
+        return BotUtils.isValueNotEndsWith(suffix, webElement);
     }
 
     public static void assertHasValue(WebElement webElement) {
@@ -620,28 +620,28 @@ public class Bot {
         return BotUtils.isHrefNot(value, webElement);
     }
 
-    public static boolean isHrefContaining(String searchText, WebElement webElement) {
-        return BotUtils.isHrefContaining(searchText, webElement);
+    public static boolean isHrefContains(String searchText, WebElement webElement) {
+        return BotUtils.isHrefContains(searchText, webElement);
     }
 
-    public static boolean isHrefNotContaining(String searchText, WebElement webElement) {
-        return BotUtils.isHrefNotContaining(searchText, webElement);
+    public static boolean isHrefNotContains(String searchText, WebElement webElement) {
+        return BotUtils.isHrefNotContains(searchText, webElement);
     }
 
-    public static boolean isHrefStartingWith(String prefix, WebElement webElement) {
-        return BotUtils.isHrefStartingWith(prefix, webElement);
+    public static boolean isHrefStartsWith(String prefix, WebElement webElement) {
+        return BotUtils.isHrefStartsWith(prefix, webElement);
     }
 
-    public static boolean isHrefNotStartingWith(String prefix, WebElement webElement) {
-        return BotUtils.isHrefNotStartingWith(prefix, webElement);
+    public static boolean isHrefNotStartsWith(String prefix, WebElement webElement) {
+        return BotUtils.isHrefNotStartsWith(prefix, webElement);
     }
 
-    public static boolean isHrefEndingWith(String suffix, WebElement webElement) {
-        return BotUtils.isHrefEndingWith(suffix, webElement);
+    public static boolean isHrefEndsWith(String suffix, WebElement webElement) {
+        return BotUtils.isHrefEndsWith(suffix, webElement);
     }
 
-    public static boolean isHrefNotEndingWith(String suffix, WebElement webElement) {
-        return BotUtils.isHrefNotEndingWith(suffix, webElement);
+    public static boolean isHrefNotEndsWith(String suffix, WebElement webElement) {
+        return BotUtils.isHrefNotEndsWith(suffix, webElement);
     }
 
     public static void assertHasHref(WebElement webElement) {
@@ -692,28 +692,28 @@ public class Bot {
         return BotUtils.isTextNot(text, webElement);
     }
 
-    public static boolean isTextContaining(String searchText, WebElement webElement) {
-        return BotUtils.isTextContaining(searchText, webElement);
+    public static boolean isTextContains(String searchText, WebElement webElement) {
+        return BotUtils.isTextContains(searchText, webElement);
     }
 
-    public static boolean isTextNotContaining(String searchText, WebElement webElement) {
-        return BotUtils.isTextNotContaining(searchText, webElement);
+    public static boolean isTextNotContains(String searchText, WebElement webElement) {
+        return BotUtils.isTextNotContains(searchText, webElement);
     }
 
-    public static boolean isTextStartingWith(String prefix, WebElement webElement) {
-        return BotUtils.isTextStartingWith(prefix, webElement);
+    public static boolean isTextStartsWith(String prefix, WebElement webElement) {
+        return BotUtils.isTextStartsWith(prefix, webElement);
     }
 
-    public static boolean isTextNotStartingWith(String prefix, WebElement webElement) {
-        return BotUtils.isTextNotStartingWith(prefix, webElement);
+    public static boolean isTextNotStartsWith(String prefix, WebElement webElement) {
+        return BotUtils.isTextNotStartsWith(prefix, webElement);
     }
 
-    public static boolean isTextEndingWith(String suffix, WebElement webElement) {
-        return BotUtils.isTextEndingWith(suffix, webElement);
+    public static boolean isTextEndsWith(String suffix, WebElement webElement) {
+        return BotUtils.isTextEndsWith(suffix, webElement);
     }
 
-    public static boolean isTextNotEndingWith(String suffix, WebElement webElement) {
-        return BotUtils.isTextNotEndingWith(suffix, webElement);
+    public static boolean isTextNotEndsWith(String suffix, WebElement webElement) {
+        return BotUtils.isTextNotEndsWith(suffix, webElement);
     }
 
     public static void assertText(String text, WebElement webElement) {
@@ -820,28 +820,28 @@ public class Bot {
         return BotUtils.isUrlNotMatching(openable, ThreadDriver.getDriver());
     }
 
-    public static boolean isUrlContaining(String searchText) {
-        return BotUtils.isUrlContaining(searchText, ThreadDriver.getDriver());
+    public static boolean isUrlContains(String searchText) {
+        return BotUtils.isUrlContains(searchText, ThreadDriver.getDriver());
     }
 
-    public static boolean isUrlNotContaining(String searchText) {
-        return BotUtils.isUrlNotContaining(searchText, ThreadDriver.getDriver());
+    public static boolean isUrlNotContains(String searchText) {
+        return BotUtils.isUrlNotContains(searchText, ThreadDriver.getDriver());
     }
 
-    public static boolean isUrlStarting(String prefix) {
-        return BotUtils.isUrlStartingWith(prefix, ThreadDriver.getDriver());
+    public static boolean isUrlStartsWith(String prefix) {
+        return BotUtils.isUrlStartsWith(prefix, ThreadDriver.getDriver());
     }
 
-    public static boolean isUrlNotStartingWith(String prefix) {
-        return BotUtils.isUrlNotStartingWith(prefix, ThreadDriver.getDriver());
+    public static boolean isUrlNotStartsWith(String prefix) {
+        return BotUtils.isUrlNotStartsWith(prefix, ThreadDriver.getDriver());
     }
 
-    public static boolean isUrlEndingWith(String suffix) {
-        return BotUtils.isUrlEndingWith(suffix, ThreadDriver.getDriver());
+    public static boolean isUrlEndsWith(String suffix) {
+        return BotUtils.isUrlEndsWith(suffix, ThreadDriver.getDriver());
     }
 
-    public static boolean isUrlNotEndingWith(String suffix) {
-        return BotUtils.isUrlNotEndingWith(suffix, ThreadDriver.getDriver());
+    public static boolean isUrlNotEndsWith(String suffix) {
+        return BotUtils.isUrlNotEndsWith(suffix, ThreadDriver.getDriver());
     }
 
     public static void assertUrl(String url) {

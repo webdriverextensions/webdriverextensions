@@ -321,28 +321,28 @@ import org.openqa.selenium.support.ui.WebDriverWait;
         return isNot(value, attributeIn(name, webElement));
     }
 
-    public static boolean isAttributeContaining(String name, String searchText, WebElement webElement) {
-        return isContaining(searchText, attributeIn(name, webElement));
+    public static boolean isAttributeContains(String name, String searchText, WebElement webElement) {
+        return isContains(searchText, attributeIn(name, webElement));
     }
 
-    public static boolean isAttributeNotContaining(String name, String searchText, WebElement webElement) {
-        return isNotContaining(searchText, attributeIn(name, webElement));
+    public static boolean isAttributeNotContains(String name, String searchText, WebElement webElement) {
+        return isNotContains(searchText, attributeIn(name, webElement));
     }
 
-    public static boolean isAttributeStartingWith(String name, String prefix, WebElement webElement) {
-        return isStartingWith(prefix, attributeIn(name, webElement));
+    public static boolean isAttributeStartsWith(String name, String prefix, WebElement webElement) {
+        return isStartsWith(prefix, attributeIn(name, webElement));
     }
 
-    public static boolean isAttributeNotStartingWith(String name, String prefix, WebElement webElement) {
-        return isNotStartingWith(prefix, attributeIn(name, webElement));
+    public static boolean isAttributeNotStartsWith(String name, String prefix, WebElement webElement) {
+        return isNotStartsWith(prefix, attributeIn(name, webElement));
     }
 
-    public static boolean isAttributeEndingWith(String name, String suffix, WebElement webElement) {
-        return isEndingWith(suffix, attributeIn(name, webElement));
+    public static boolean isAttributeEndsWith(String name, String suffix, WebElement webElement) {
+        return isEndsWith(suffix, attributeIn(name, webElement));
     }
 
-    public static boolean isAttributeNotEndingWith(String name, String suffix, WebElement webElement) {
-        return isNotEndingWith(suffix, attributeIn(name, webElement));
+    public static boolean isAttributeNotEndsWith(String name, String suffix, WebElement webElement) {
+        return isNotEndsWith(suffix, attributeIn(name, webElement));
     }
 
     public static void assertHasAttribute(String name, WebElement webElement) {
@@ -406,28 +406,28 @@ import org.openqa.selenium.support.ui.WebDriverWait;
         return isNot(value, idIn(webElement));
     }
 
-    public static boolean isIdContaining(String searchText, WebElement webElement) {
-        return isContaining(searchText, idIn(webElement));
+    public static boolean isIdContains(String searchText, WebElement webElement) {
+        return isContains(searchText, idIn(webElement));
     }
 
-    public static boolean isIdNotContaining(String searchText, WebElement webElement) {
-        return isContaining(searchText, idIn(webElement));
+    public static boolean isIdNotContains(String searchText, WebElement webElement) {
+        return isContains(searchText, idIn(webElement));
     }
 
-    public static boolean isIdStartingWith(String prefix, WebElement webElement) {
-        return isStartingWith(prefix, idIn(webElement));
+    public static boolean isIdStartsWith(String prefix, WebElement webElement) {
+        return isStartsWith(prefix, idIn(webElement));
     }
 
-    public static boolean isIdNotStartingWith(String prefix, WebElement webElement) {
-        return isNotStartingWith(prefix, idIn(webElement));
+    public static boolean isIdNotStartsWith(String prefix, WebElement webElement) {
+        return isNotStartsWith(prefix, idIn(webElement));
     }
 
-    public static boolean isIdEndingWith(String suffix, WebElement webElement) {
-        return isEndingWith(suffix, idIn(webElement));
+    public static boolean isIdEndsWith(String suffix, WebElement webElement) {
+        return isEndsWith(suffix, idIn(webElement));
     }
 
-    public static boolean isIdNotEndingWith(String suffix, WebElement webElement) {
-        return isEndingWith(suffix, idIn(webElement));
+    public static boolean isIdNotEndsWith(String suffix, WebElement webElement) {
+        return isEndsWith(suffix, idIn(webElement));
     }
 
     public static void assertHasId(WebElement webElement) {
@@ -487,28 +487,28 @@ import org.openqa.selenium.support.ui.WebDriverWait;
         return isNot(value, nameIn(webElement));
     }
 
-    public static boolean isNameContaining(String searchText, WebElement webElement) {
-        return isContaining(searchText, nameIn(webElement));
+    public static boolean isNameContains(String searchText, WebElement webElement) {
+        return isContains(searchText, nameIn(webElement));
     }
 
-    public static boolean isNameNotContaining(String searchText, WebElement webElement) {
-        return isContaining(searchText, nameIn(webElement));
+    public static boolean isNameNotContains(String searchText, WebElement webElement) {
+        return isContains(searchText, nameIn(webElement));
     }
 
-    public static boolean isNameStartingWith(String prefix, WebElement webElement) {
-        return isStartingWith(prefix, nameIn(webElement));
+    public static boolean isNameStartsWith(String prefix, WebElement webElement) {
+        return isStartsWith(prefix, nameIn(webElement));
     }
 
-    public static boolean isNameNotStartingWith(String prefix, WebElement webElement) {
-        return isNotStartingWith(prefix, nameIn(webElement));
+    public static boolean isNameNotStartsWith(String prefix, WebElement webElement) {
+        return isNotStartsWith(prefix, nameIn(webElement));
     }
 
-    public static boolean isNameEndingWith(String suffix, WebElement webElement) {
-        return isEndingWith(suffix, nameIn(webElement));
+    public static boolean isNameEndsWith(String suffix, WebElement webElement) {
+        return isEndsWith(suffix, nameIn(webElement));
     }
 
-    public static boolean isNameNotEndingWith(String suffix, WebElement webElement) {
-        return isEndingWith(suffix, nameIn(webElement));
+    public static boolean isNameNotEndsWith(String suffix, WebElement webElement) {
+        return isEndsWith(suffix, nameIn(webElement));
     }
 
     public static void assertHasName(WebElement webElement) {
@@ -571,7 +571,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
     public static boolean hasClassContaining(String searchText, WebElement webElement) {
         List<String> classes = classesIn(webElement);
         for (String clazz : classes) {
-            if (isContaining(searchText, clazz)) {
+            if (isContains(searchText, clazz)) {
                 return true;
             }
         }
@@ -585,7 +585,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
     public static boolean hasClassStartingWith(String prefix, WebElement webElement) {
         List<String> classes = classesIn(webElement);
         for (String clazz : classes) {
-            if (isStartingWith(prefix, clazz)) {
+            if (isStartsWith(prefix, clazz)) {
                 return true;
             }
         }
@@ -599,7 +599,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
     public static boolean hasClassEndingWith(String suffix, WebElement webElement) {
         List<String> classes = classesIn(webElement);
         for (String clazz : classes) {
-            if (isEndingWith(suffix, clazz)) {
+            if (isEndsWith(suffix, clazz)) {
                 return true;
             }
         }
@@ -630,37 +630,37 @@ import org.openqa.selenium.support.ui.WebDriverWait;
         }
     }
 
-    public static void assertHasClassContains(String searchText, WebElement webElement) {
+    public static void assertHasClassContaining(String searchText, WebElement webElement) {
         if (hasClassNotContaining(searchText, webElement)) {
             Assert.fail(describeTag(webElement) + " does not have class containing text " + searchText.trim() + "!");
         }
     }
 
-    public static void assertHasClassNotContains(String searchText, WebElement webElement) {
+    public static void assertHasClassNotContaining(String searchText, WebElement webElement) {
         if (hasClassContaining(searchText, webElement)) {
             Assert.fail(describeTag(webElement) + " has class containing text " + searchText.trim() + " when it shouldn't!");
         }
     }
 
-    public static void assertHasClassStartsWith(String prefix, WebElement webElement) {
+    public static void assertHasClassStartingWith(String prefix, WebElement webElement) {
         if (hasClassNotStartingWith(prefix, webElement)) {
             Assert.fail(describeTag(webElement) + " does not have class containing prefix " + prefix.trim() + "!");
         }
     }
 
-    public static void assertHasClassNotStartsWith(String prefix, WebElement webElement) {
+    public static void assertHasClassNotStartingWith(String prefix, WebElement webElement) {
         if (hasClassStartingWith(prefix, webElement)) {
             Assert.fail(describeTag(webElement) + " has class containing prefix " + prefix.trim() + " when it shouldn't!");
         }
     }
 
-    public static void assertHasClassEndsWith(String suffix, WebElement webElement) {
+    public static void assertHasClassEndingWith(String suffix, WebElement webElement) {
         if (hasClassNotEndingWith(suffix, webElement)) {
             Assert.fail(describeTag(webElement) + " does not have class containing suffix " + suffix.trim() + "!");
         }
     }
 
-    public static void assertHasClassNotEndsWith(String suffix, WebElement webElement) {
+    public static void assertHasClassNotEndingWith(String suffix, WebElement webElement) {
         if (hasClassEndingWith(suffix, webElement)) {
             Assert.fail(describeTag(webElement) + " has class containing suffix " + suffix.trim() + " when it shouldn't!");
         }
@@ -683,28 +683,28 @@ import org.openqa.selenium.support.ui.WebDriverWait;
         return isNot(value, valueIn(webElement));
     }
 
-    public static boolean isValueContaining(String searchText, WebElement webElement) {
-        return isContaining(searchText, valueIn(webElement));
+    public static boolean isValueContains(String searchText, WebElement webElement) {
+        return isContains(searchText, valueIn(webElement));
     }
 
-    public static boolean isValueNotContaining(String searchText, WebElement webElement) {
-        return isContaining(searchText, valueIn(webElement));
+    public static boolean isValueNotContains(String searchText, WebElement webElement) {
+        return isContains(searchText, valueIn(webElement));
     }
 
-    public static boolean isValueStartingWith(String prefix, WebElement webElement) {
-        return isStartingWith(prefix, valueIn(webElement));
+    public static boolean isValueStartsWith(String prefix, WebElement webElement) {
+        return isStartsWith(prefix, valueIn(webElement));
     }
 
-    public static boolean isValueNotStartingWith(String prefix, WebElement webElement) {
-        return isNotStartingWith(prefix, valueIn(webElement));
+    public static boolean isValueNotStartsWith(String prefix, WebElement webElement) {
+        return isNotStartsWith(prefix, valueIn(webElement));
     }
 
-    public static boolean isValueEndingWith(String suffix, WebElement webElement) {
-        return isEndingWith(suffix, valueIn(webElement));
+    public static boolean isValueEndsWith(String suffix, WebElement webElement) {
+        return isEndsWith(suffix, valueIn(webElement));
     }
 
-    public static boolean isValueNotEndingWith(String suffix, WebElement webElement) {
-        return isEndingWith(suffix, valueIn(webElement));
+    public static boolean isValueNotEndsWith(String suffix, WebElement webElement) {
+        return isEndsWith(suffix, valueIn(webElement));
     }
 
     public static void assertHasValue(WebElement webElement) {
@@ -765,28 +765,28 @@ import org.openqa.selenium.support.ui.WebDriverWait;
         return isNot(value, hrefIn(webElement));
     }
 
-    public static boolean isHrefContaining(String searchText, WebElement webElement) {
-        return isContaining(searchText, hrefIn(webElement));
+    public static boolean isHrefContains(String searchText, WebElement webElement) {
+        return isContains(searchText, hrefIn(webElement));
     }
 
-    public static boolean isHrefNotContaining(String searchText, WebElement webElement) {
-        return isContaining(searchText, hrefIn(webElement));
+    public static boolean isHrefNotContains(String searchText, WebElement webElement) {
+        return isContains(searchText, hrefIn(webElement));
     }
 
-    public static boolean isHrefStartingWith(String prefix, WebElement webElement) {
-        return isStartingWith(prefix, hrefIn(webElement));
+    public static boolean isHrefStartsWith(String prefix, WebElement webElement) {
+        return isStartsWith(prefix, hrefIn(webElement));
     }
 
-    public static boolean isHrefNotStartingWith(String prefix, WebElement webElement) {
-        return isNotStartingWith(prefix, hrefIn(webElement));
+    public static boolean isHrefNotStartsWith(String prefix, WebElement webElement) {
+        return isNotStartsWith(prefix, hrefIn(webElement));
     }
 
-    public static boolean isHrefEndingWith(String suffix, WebElement webElement) {
-        return isEndingWith(suffix, hrefIn(webElement));
+    public static boolean isHrefEndsWith(String suffix, WebElement webElement) {
+        return isEndsWith(suffix, hrefIn(webElement));
     }
 
-    public static boolean isHrefNotEndingWith(String suffix, WebElement webElement) {
-        return isEndingWith(suffix, hrefIn(webElement));
+    public static boolean isHrefNotEndsWith(String suffix, WebElement webElement) {
+        return isEndsWith(suffix, hrefIn(webElement));
     }
 
     public static void assertHasHref(WebElement webElement) {
@@ -838,28 +838,28 @@ import org.openqa.selenium.support.ui.WebDriverWait;
         return isNot(text, textIn(webElement));
     }
 
-    public static boolean isTextContaining(String searchText, WebElement webElement) {
-        return isContaining(searchText, textIn(webElement));
+    public static boolean isTextContains(String searchText, WebElement webElement) {
+        return isContains(searchText, textIn(webElement));
     }
 
-    public static boolean isTextNotContaining(String searchText, WebElement webElement) {
-        return isContaining(searchText, textIn(webElement));
+    public static boolean isTextNotContains(String searchText, WebElement webElement) {
+        return isContains(searchText, textIn(webElement));
     }
 
-    public static boolean isTextStartingWith(String prefix, WebElement webElement) {
-        return isStartingWith(prefix, textIn(webElement));
+    public static boolean isTextStartsWith(String prefix, WebElement webElement) {
+        return isStartsWith(prefix, textIn(webElement));
     }
 
-    public static boolean isTextNotStartingWith(String prefix, WebElement webElement) {
-        return isNotStartingWith(prefix, textIn(webElement));
+    public static boolean isTextNotStartsWith(String prefix, WebElement webElement) {
+        return isNotStartsWith(prefix, textIn(webElement));
     }
 
-    public static boolean isTextEndingWith(String suffix, WebElement webElement) {
-        return isEndingWith(suffix, textIn(webElement));
+    public static boolean isTextEndsWith(String suffix, WebElement webElement) {
+        return isEndsWith(suffix, textIn(webElement));
     }
 
-    public static boolean isTextNotEndingWith(String suffix, WebElement webElement) {
-        return isEndingWith(suffix, textIn(webElement));
+    public static boolean isTextNotEndsWith(String suffix, WebElement webElement) {
+        return isEndsWith(suffix, textIn(webElement));
     }
 
     public static void assertText(String text, WebElement webElement) {
@@ -968,28 +968,28 @@ import org.openqa.selenium.support.ui.WebDriverWait;
         return isNotMatching(openable.getUrl(), url(driver));
     }
 
-    public static boolean isUrlContaining(String searchText, WebDriver driver) {
-        return isContaining(searchText, url(driver));
+    public static boolean isUrlContains(String searchText, WebDriver driver) {
+        return isContains(searchText, url(driver));
     }
 
-    public static boolean isUrlNotContaining(String searchText, WebDriver driver) {
-        return isNotContaining(searchText, url(driver));
+    public static boolean isUrlNotContains(String searchText, WebDriver driver) {
+        return isNotContains(searchText, url(driver));
     }
 
-    public static boolean isUrlStartingWith(String prefix, WebDriver driver) {
-        return isStartingWith(prefix, url(driver));
+    public static boolean isUrlStartsWith(String prefix, WebDriver driver) {
+        return isStartsWith(prefix, url(driver));
     }
 
-    public static boolean isUrlNotStartingWith(String prefix, WebDriver driver) {
-        return isNotStartingWith(prefix, url(driver));
+    public static boolean isUrlNotStartsWith(String prefix, WebDriver driver) {
+        return isNotStartsWith(prefix, url(driver));
     }
 
-    public static boolean isUrlEndingWith(String suffix, WebDriver driver) {
-        return isEndingWith(suffix, url(driver));
+    public static boolean isUrlEndsWith(String suffix, WebDriver driver) {
+        return isEndsWith(suffix, url(driver));
     }
 
-    public static boolean isUrlNotEndingWith(String suffix, WebDriver driver) {
-        return isNotEndingWith(suffix, url(driver));
+    public static boolean isUrlNotEndsWith(String suffix, WebDriver driver) {
+        return isNotEndsWith(suffix, url(driver));
     }
 
     public static void assertUrl(String url, WebDriver driver) {
@@ -1537,27 +1537,27 @@ import org.openqa.selenium.support.ui.WebDriverWait;
         return !StringUtils.equals(text1, text2);
     }
 
-    public static boolean isContaining(String searchText, String text) {
+    public static boolean isContains(String searchText, String text) {
         return StringUtils.contains(text, searchText);
     }
 
-    public static boolean isNotContaining(String searchText, String text) {
+    public static boolean isNotContains(String searchText, String text) {
         return !StringUtils.contains(text, searchText);
     }
 
-    public static boolean isStartingWith(String prefix, String text) {
+    public static boolean isStartsWith(String prefix, String text) {
         return StringUtils.startsWith(text, prefix);
     }
 
-    public static boolean isNotStartingWith(String prefix, String text) {
+    public static boolean isNotStartsWith(String prefix, String text) {
         return !StringUtils.startsWith(text, prefix);
     }
 
-    public static boolean isEndingWith(String suffix, String text) {
+    public static boolean isEndsWith(String suffix, String text) {
         return StringUtils.endsWith(text, suffix);
     }
 
-    public static boolean isNotEndingWith(String suffix, String text) {
+    public static boolean isNotEndsWith(String suffix, String text) {
         return !StringUtils.endsWith(text, suffix);
     }
 
@@ -1589,7 +1589,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
         return !isAnyOf(anyOfTexts, text);
     }
 
-    public static boolean isContainingAnyOf(String[] searchTexts, String text) {
+    public static boolean isContainsAnyOf(String[] searchTexts, String text) {
         for (String searchText : searchTexts) {
             if (StringUtils.contains(text, searchText)) {
                 return true;
@@ -1598,24 +1598,24 @@ import org.openqa.selenium.support.ui.WebDriverWait;
         return false;
     }
 
-    public static boolean isNotContainingAnyOf(String[] searchTexts, String text) {
-        return !isContainingAnyOf(searchTexts, text);
+    public static boolean isNotContainsAnyOf(String[] searchTexts, String text) {
+        return !isContainsAnyOf(searchTexts, text);
     }
 
-    public static boolean isStartingWithAnyOf(String[] prefixes, String text) {
+    public static boolean isStartsWithAnyOf(String[] prefixes, String text) {
         return StringUtils.startsWithAny(text, prefixes);
     }
 
-    public static boolean isNotStartingWithAnyOf(String[] prefixes, String text) {
-        return !isStartingWithAnyOf(prefixes, text);
+    public static boolean isNotStartsWithAnyOf(String[] prefixes, String text) {
+        return !isStartsWithAnyOf(prefixes, text);
     }
 
-    public static boolean isEndingWithAnyOf(String[] suffix, String text) {
+    public static boolean isEndsWithAnyOf(String[] suffix, String text) {
         return StringUtils.endsWithAny(text, suffix);
     }
 
-    public static boolean isNotEndingWithAnyOf(String[] suffix, String text) {
-        return !isEndingWithAnyOf(suffix, text);
+    public static boolean isNotEndsWithAnyOf(String[] suffix, String text) {
+        return !isEndsWithAnyOf(suffix, text);
     }
 
     public static boolean isMatchingAnyOf(String[] regularExpressions, String text) {
@@ -1640,28 +1640,28 @@ import org.openqa.selenium.support.ui.WebDriverWait;
         return !isIgnoreCase(text1, text2);
     }
 
-    public static boolean isContainingIgnoreCase(String searchText, String text) {
+    public static boolean isContainsIgnoreCase(String searchText, String text) {
         return StringUtils.containsIgnoreCase(text, searchText);
     }
 
-    public static boolean isNotContainingIgnoreCase(String searchText, String text) {
-        return !isContainingIgnoreCase(text, searchText);
+    public static boolean isNotContainsIgnoreCase(String searchText, String text) {
+        return !isContainsIgnoreCase(text, searchText);
     }
 
-    public static boolean isStartingWithIgnoreCase(String prefix, String text) {
+    public static boolean isStartsWithIgnoreCase(String prefix, String text) {
         return StringUtils.startsWithIgnoreCase(text, prefix);
     }
 
-    public static boolean isNotStartingWithIgnoreCase(String prefix, String text) {
-        return !isStartingWithIgnoreCase(prefix, text);
+    public static boolean isNotStartsWithIgnoreCase(String prefix, String text) {
+        return !isStartsWithIgnoreCase(prefix, text);
     }
 
-    public static boolean isEndingWithIgnoreCase(String suffix, String text) {
+    public static boolean isEndsWithIgnoreCase(String suffix, String text) {
         return StringUtils.endsWithIgnoreCase(text, suffix);
     }
 
-    public static boolean isNotEndingWithIgnoreCase(String suffix, String text) {
-        return !isEndingWithIgnoreCase(suffix, text);
+    public static boolean isNotEndsWithIgnoreCase(String suffix, String text) {
+        return !isEndsWithIgnoreCase(suffix, text);
     }
 
     /* Asserts */
@@ -1686,37 +1686,37 @@ import org.openqa.selenium.support.ui.WebDriverWait;
     }
 
     public static void assertContains(String name, String searchText, String actual) {
-        if (isNotContaining(searchText, actual)) {
+        if (isNotContains(searchText, actual)) {
             Assert.fail(name + ": " + actual + " is not containing " + searchText);
         }
     }
 
     public static void assertNotContains(String name, String searchText, String actual) {
-        if (isContaining(searchText, actual)) {
+        if (isContains(searchText, actual)) {
             Assert.fail(name + ": " + actual + " is containing " + searchText + " when it shouldn't!");
         }
     }
 
     public static void assertStartsWith(String name, String prefix, String actual) {
-        if (isNotStartingWith(prefix, actual)) {
+        if (isNotStartsWith(prefix, actual)) {
             Assert.fail(name + ": " + actual + " is not starting with " + prefix);
         }
     }
 
     public static void assertNotStartsWith(String name, String prefix, String actual) {
-        if (isStartingWith(prefix, actual)) {
+        if (isStartsWith(prefix, actual)) {
             Assert.fail(name + ": " + actual + " is starting with " + prefix + " when it shouldn't!");
         }
     }
 
     public static void assertEndsWith(String name, String suffix, String actual) {
-        if (isNotEndingWith(suffix, actual)) {
+        if (isNotEndsWith(suffix, actual)) {
             Assert.fail(name + ": " + actual + " is not ending with " + suffix);
         }
     }
 
     public static void assertNotEndsWith(String name, String suffix, String actual) {
-        if (isEndingWith(suffix, actual)) {
+        if (isEndsWith(suffix, actual)) {
             Assert.fail(name + ": " + actual + " is ending with " + suffix + " when it shouldn't!");
         }
     }

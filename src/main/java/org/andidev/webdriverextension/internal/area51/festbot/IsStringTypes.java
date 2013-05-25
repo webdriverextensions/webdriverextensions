@@ -19,28 +19,28 @@ public class IsStringTypes {
         return BotUtils.isNot(text, actual);
     }
 
-    public boolean containing(String text) {
-        return BotUtils.isContaining(text, actual);
+    public boolean contains(String text) {
+        return BotUtils.isContains(text, actual);
     }
 
-    public boolean notContaining(String text) {
-        return BotUtils.isNotContaining(text, actual);
+    public boolean notContains(String text) {
+        return BotUtils.isNotContains(text, actual);
     }
 
-    public boolean startingWith(String prefix) {
-        return BotUtils.isStartingWith(prefix, actual);
+    public boolean startsWith(String prefix) {
+        return BotUtils.isStartsWith(prefix, actual);
     }
 
-    public boolean notStartingWith(String prefix) {
-        return BotUtils.isNotStartingWith(prefix, actual);
+    public boolean notStartsWith(String prefix) {
+        return BotUtils.isNotStartsWith(prefix, actual);
     }
 
     public boolean endingWith(String suffix) {
-        return BotUtils.isEndingWith(suffix, actual);
+        return BotUtils.isEndsWith(suffix, actual);
     }
 
-    public boolean notEndingWith(String suffix) {
-        return BotUtils.isNotEndingWith(suffix, actual);
+    public boolean notEndsWith(String suffix) {
+        return BotUtils.isNotEndsWith(suffix, actual);
     }
 
     public boolean matching(String regularExpression) {
@@ -60,28 +60,28 @@ public class IsStringTypes {
         return BotUtils.isNotAnyOf(texts, actual);
     }
 
-    public boolean containingAnyOf(String[] texts) {
-        return BotUtils.isContainingAnyOf(texts, actual);
+    public boolean containsAnyOf(String[] texts) {
+        return BotUtils.isContainsAnyOf(texts, actual);
     }
 
-    public boolean notContainingAnyOf(String[] texts) {
-        return BotUtils.isNotContainingAnyOf(texts, actual);
+    public boolean notContainsAnyOf(String[] texts) {
+        return BotUtils.isNotContainsAnyOf(texts, actual);
     }
 
-    public boolean startingWithAnyOf(String[] prefixes) {
-        return BotUtils.isStartingWithAnyOf(prefixes, actual);
+    public boolean startsWithAnyOf(String[] prefixes) {
+        return BotUtils.isStartsWithAnyOf(prefixes, actual);
     }
 
-    public boolean notStartingWithAnyOf(String[] prefixes) {
-        return BotUtils.isNotStartingWithAnyOf(prefixes, actual);
+    public boolean notStartsWithAnyOf(String[] prefixes) {
+        return BotUtils.isNotStartsWithAnyOf(prefixes, actual);
     }
 
     public boolean endingWithAnyOf(String[] suffix) {
-        return BotUtils.isEndingWithAnyOf(suffix, actual);
+        return BotUtils.isEndsWithAnyOf(suffix, actual);
     }
 
-    public boolean notEndingWithAnyOf(String[] suffix) {
-        return BotUtils.isNotEndingWithAnyOf(suffix, actual);
+    public boolean notEndsWithAnyOf(String[] suffix) {
+        return BotUtils.isNotEndsWithAnyOf(suffix, actual);
     }
 
     public boolean matchingAnyOf(String[] regularExpressions) {
@@ -101,27 +101,27 @@ public class IsStringTypes {
         return BotUtils.isNotIgnoreCase(text, actual);
     }
 
-    public boolean containingIgnoreCase(String text) {
-        return BotUtils.isContainingIgnoreCase(text, actual);
+    public boolean containsIgnoreCase(String text) {
+        return BotUtils.isContainsIgnoreCase(text, actual);
     }
 
-    public boolean notContainingIgnoreCase(String text) {
-        return BotUtils.isNotContainingIgnoreCase(text, actual);
+    public boolean notContainsIgnoreCase(String text) {
+        return BotUtils.isNotContainsIgnoreCase(text, actual);
     }
 
-    public boolean startingWithIgnoreCase(String prefix) {
-        return BotUtils.isStartingWithIgnoreCase(prefix, actual);
+    public boolean startsWithIgnoreCase(String prefix) {
+        return BotUtils.isStartsWithIgnoreCase(prefix, actual);
     }
 
-    public boolean notStartingWithIgnoreCase(String prefix) {
-        return BotUtils.isNotStartingWithIgnoreCase(prefix, actual);
+    public boolean notStartsWithIgnoreCase(String prefix) {
+        return BotUtils.isNotStartsWithIgnoreCase(prefix, actual);
     }
 
     public boolean endingWithIgnoreCase(String suffix) {
-        return BotUtils.isEndingWithIgnoreCase(suffix, actual);
+        return BotUtils.isEndsWithIgnoreCase(suffix, actual);
     }
 
-    public boolean notEndingWithIgnoreCase(String suffix) {
-        return BotUtils.isNotEndingWithIgnoreCase(suffix, actual);
+    public boolean notEndsWithIgnoreCase(String suffix) {
+        return BotUtils.isNotEndsWithIgnoreCase(suffix, actual);
     }
 }
