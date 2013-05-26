@@ -11,117 +11,117 @@ public class IsStringTypes {
     }
 
     /* Is */
-    public boolean equalTo(String text) {
-        return BotUtils.is(text, actual);
+    public boolean equals(String text) {
+        return BotUtils.equals(text, actual);
     }
 
-    public boolean notEqualTo(String text) {
-        return BotUtils.isNot(text, actual);
+    public boolean notEquals(String text) {
+        return BotUtils.notEquals(text, actual);
     }
 
     public boolean contains(String text) {
-        return BotUtils.isContains(text, actual);
+        return BotUtils.contains(text, actual);
     }
 
     public boolean notContains(String text) {
-        return BotUtils.isNotContains(text, actual);
+        return BotUtils.notContains(text, actual);
     }
 
     public boolean startsWith(String prefix) {
-        return BotUtils.isStartsWith(prefix, actual);
+        return BotUtils.startsWith(prefix, actual);
     }
 
     public boolean notStartsWith(String prefix) {
-        return BotUtils.isNotStartsWith(prefix, actual);
+        return BotUtils.notStartsWith(prefix, actual);
     }
 
     public boolean endingWith(String suffix) {
-        return BotUtils.isEndsWith(suffix, actual);
+        return BotUtils.endsWith(suffix, actual);
     }
 
     public boolean notEndsWith(String suffix) {
-        return BotUtils.isNotEndsWith(suffix, actual);
+        return BotUtils.notEndsWith(suffix, actual);
     }
 
     public boolean matching(String regularExpression) {
-        return BotUtils.isMatching(regularExpression, actual);
+        return BotUtils.matches(regularExpression, actual);
     }
 
     public boolean notMatching(String regularExpression) {
-        return BotUtils.isNotMatching(regularExpression, actual);
+        return BotUtils.notMatches(regularExpression, actual);
     }
 
     /* Is Any Of */
-    public boolean equalToAnyOf(String[] texts) {
-        return BotUtils.isAnyOf(texts, actual);
+    public boolean equalsAnyOf(String[] texts) {
+        return BotUtils.equalsAnyOf(texts, actual);
     }
 
-    public boolean notEqualToAnyOf(String[] texts) {
-        return BotUtils.isNotAnyOf(texts, actual);
+    public boolean notEqualsAnyOf(String[] texts) {
+        return BotUtils.notEqualsAnyOf(texts, actual);
     }
 
     public boolean containsAnyOf(String[] texts) {
-        return BotUtils.isContainsAnyOf(texts, actual);
+        return BotUtils.containsAnyOf(texts, actual);
     }
 
     public boolean notContainsAnyOf(String[] texts) {
-        return BotUtils.isNotContainsAnyOf(texts, actual);
+        return BotUtils.notContainsAnyOf(texts, actual);
     }
 
     public boolean startsWithAnyOf(String[] prefixes) {
-        return BotUtils.isStartsWithAnyOf(prefixes, actual);
+        return BotUtils.startsWithAnyOf(prefixes, actual);
     }
 
     public boolean notStartsWithAnyOf(String[] prefixes) {
-        return BotUtils.isNotStartsWithAnyOf(prefixes, actual);
+        return BotUtils.notStartsWithAnyOf(prefixes, actual);
     }
 
-    public boolean endingWithAnyOf(String[] suffix) {
-        return BotUtils.isEndsWithAnyOf(suffix, actual);
+    public boolean endsWithAnyOf(String[] suffix) {
+        return BotUtils.endsWithAnyOf(suffix, actual);
     }
 
     public boolean notEndsWithAnyOf(String[] suffix) {
-        return BotUtils.isNotEndsWithAnyOf(suffix, actual);
+        return BotUtils.notEndsWithAnyOf(suffix, actual);
     }
 
     public boolean matchingAnyOf(String[] regularExpressions) {
-        return BotUtils.isMatchingAnyOf(regularExpressions, actual);
+        return BotUtils.matchingAnyOf(regularExpressions, actual);
     }
 
     public boolean notMatchingAnyOf(String[] regularExpressions) {
-        return BotUtils.isNotMatchingAnyOf(regularExpressions, actual);
+        return BotUtils.notMatchingAnyOf(regularExpressions, actual);
     }
 
     /* Is Ignore Case */
-    public boolean equalToignoreCase(String text) {
-        return BotUtils.isIgnoreCase(text, actual);
+    public boolean equalsIgnoreCase(String text) {
+        return BotUtils.equalsIgnoreCase(text, actual);
     }
 
-    public boolean notEqualToIgnoreCase(String text) {
-        return BotUtils.isNotIgnoreCase(text, actual);
+    public boolean notEqualsIgnoreCase(String text) {
+        return BotUtils.notEqualsIgnoreCase(text, actual);
     }
 
     public boolean containsIgnoreCase(String text) {
-        return BotUtils.isContainsIgnoreCase(text, actual);
+        return BotUtils.containsIgnoreCase(text, actual);
     }
 
     public boolean notContainsIgnoreCase(String text) {
-        return BotUtils.isNotContainsIgnoreCase(text, actual);
+        return BotUtils.notContainsIgnoreCase(text, actual);
     }
 
     public boolean startsWithIgnoreCase(String prefix) {
-        return BotUtils.isStartsWithIgnoreCase(prefix, actual);
+        return BotUtils.startsWithIgnoreCase(prefix, actual);
     }
 
     public boolean notStartsWithIgnoreCase(String prefix) {
-        return BotUtils.isNotStartsWithIgnoreCase(prefix, actual);
+        return BotUtils.notStartsWithIgnoreCase(prefix, actual);
     }
 
-    public boolean endingWithIgnoreCase(String suffix) {
-        return BotUtils.isEndsWithIgnoreCase(suffix, actual);
+    public boolean endsWithIgnoreCase(String suffix) {
+        return BotUtils.endsWithIgnoreCase(suffix, actual);
     }
 
     public boolean notEndsWithIgnoreCase(String suffix) {
-        return BotUtils.isNotEndsWithIgnoreCase(suffix, actual);
+        return BotUtils.notEndsWithIgnoreCase(suffix, actual);
     }
 }

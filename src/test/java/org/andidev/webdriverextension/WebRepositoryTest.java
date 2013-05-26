@@ -46,8 +46,8 @@ public class WebRepositoryTest extends WebRepository {
         type("What is WebDriver", examplesPage.searchQuery);
         waitFor(delayTime);
         click(examplesPage.search);
-        assertNumberOf(3, examplesPage.rows);
-        assertNumberOf(3, examplesPage.todos);
+        assertNumberOfElementsEquals(3, examplesPage.rows);
+        assertNumberOfElementsEquals(3, examplesPage.todos);
     }
 
     @Test

@@ -60,8 +60,8 @@ public class Bot {
         return BotUtils.hrefIn(webElement);
     }
 
-    public static Integer numberOf(List<? extends WebElement> webElements) {
-        return BotUtils.numberOf(webElements);
+    public static Integer numberOfElementsIn(List<? extends WebElement> webElements) {
+        return BotUtils.numberOfElementsIn(webElements);
     }
 
     public static void clear(WebElement webElement) {
@@ -184,26 +184,28 @@ public class Bot {
         BotUtils.debug(webElements);
     }
 
-    public static void debugNumberOf(List<? extends WebElement> webElements) {
-        BotUtils.debugNumberOf(webElements);
+    public static void debugNumberOfElementsIn(List<? extends WebElement> webElements) {
+        BotUtils.debugNumberOfElementsIn(webElements);
     }
 
-    public static boolean isTagName(String value, WebElement webElement) {
-        return BotUtils.isTagName(value, webElement);
+    /* Tag Name */
+    public static boolean tagNameEquals(String value, WebElement webElement) {
+        return BotUtils.tagNameEquals(value, webElement);
     }
 
-    public static boolean isTagNameNot(String value, WebElement webElement) {
-        return BotUtils.isTagNameNot(value, webElement);
+    public static boolean tagNameNotEquals(String value, WebElement webElement) {
+        return BotUtils.tagNameNotEquals(value, webElement);
     }
 
-    public static void assertTagName(String value, WebElement webElement) {
-        BotUtils.assertTagName(value, webElement);
+    public static void assertTagNameEquals(String value, WebElement webElement) {
+        BotUtils.assertTagNameEquals(value, webElement);
     }
 
-    public static void assertTagNameNot(String value, WebElement webElement) {
-        BotUtils.assertTagNameNot(value, webElement);
+    public static void assertTagNameNotEquals(String value, WebElement webElement) {
+        BotUtils.assertTagNameNotEquals(value, webElement);
     }
 
+    /* Attribute */
     public static boolean hasAttribute(String name, WebElement webElement) {
         return BotUtils.hasAttribute(name, webElement);
     }
@@ -212,36 +214,36 @@ public class Bot {
         return BotUtils.hasNotAttribute(name, webElement);
     }
 
-    public static boolean isAttribute(String name, String value, WebElement webElement) {
-        return BotUtils.isAttribute(name, value, webElement);
+    public static boolean attributeEquals(String name, String value, WebElement webElement) {
+        return BotUtils.attributeEquals(name, value, webElement);
     }
 
-    public static boolean isAttributeNot(String name, String value, WebElement webElement) {
-        return BotUtils.isAttributeNot(name, value, webElement);
+    public static boolean attributeNotEquals(String name, String value, WebElement webElement) {
+        return BotUtils.attributeNotEquals(name, value, webElement);
     }
 
-    public static boolean isAttributeContains(String name, String searchText, WebElement webElement) {
-        return BotUtils.isAttributeContains(name, searchText, webElement);
+    public static boolean attributeContains(String name, String searchText, WebElement webElement) {
+        return BotUtils.attributeContains(name, searchText, webElement);
     }
 
-    public static boolean isAttributeNotContains(String name, String searchText, WebElement webElement) {
-        return BotUtils.isAttributeNotContains(name, searchText, webElement);
+    public static boolean attributeNotContains(String name, String searchText, WebElement webElement) {
+        return BotUtils.attributeNotContains(name, searchText, webElement);
     }
 
-    public static boolean isAttributeStartsWith(String name, String prefix, WebElement webElement) {
-        return BotUtils.isAttributeStartsWith(name, prefix, webElement);
+    public static boolean attributeStartsWith(String name, String prefix, WebElement webElement) {
+        return BotUtils.attributeStartsWith(name, prefix, webElement);
     }
 
-    public static boolean isAttributeNotStartsWith(String name, String prefix, WebElement webElement) {
-        return BotUtils.isAttributeNotStartsWith(name, prefix, webElement);
+    public static boolean attributeNotStartsWith(String name, String prefix, WebElement webElement) {
+        return BotUtils.attributeNotStartsWith(name, prefix, webElement);
     }
 
-    public static boolean isAttributeEndsWith(String name, String suffix, WebElement webElement) {
-        return BotUtils.isAttributeEndsWith(name, suffix, webElement);
+    public static boolean attributeEndsWith(String name, String suffix, WebElement webElement) {
+        return BotUtils.attributeEndsWith(name, suffix, webElement);
     }
 
-    public static boolean isAttributeNotEndsWith(String name, String suffix, WebElement webElement) {
-        return BotUtils.isAttributeNotEndsWith(name, suffix, webElement);
+    public static boolean attributeNotEndsWith(String name, String suffix, WebElement webElement) {
+        return BotUtils.attributeNotEndsWith(name, suffix, webElement);
     }
 
     public static void assertHasAttribute(String name, WebElement webElement) {
@@ -252,12 +254,12 @@ public class Bot {
         BotUtils.assertHasNotAttribute(name, webElement);
     }
 
-    public static void assertAttribute(String name, String value, WebElement webElement) {
-        BotUtils.assertAttribute(name, value, webElement);
+    public static void assertAttributeEquals(String name, String value, WebElement webElement) {
+        BotUtils.assertAttributeEquals(name, value, webElement);
     }
 
-    public static void assertAttributeNot(String name, String value, WebElement webElement) {
-        BotUtils.assertAttributeNot(name, value, webElement);
+    public static void assertAttributeNotEquals(String name, String value, WebElement webElement) {
+        BotUtils.assertAttributeNotEquals(name, value, webElement);
     }
 
     public static void assertAttributeContains(String name, String searchText, WebElement webElement) {
@@ -284,6 +286,7 @@ public class Bot {
         BotUtils.assertAttributeNotEndsWith(name, suffix, webElement);
     }
 
+    /* Id */
     public static boolean hasId(WebElement webElement) {
         return BotUtils.hasId(webElement);
     }
@@ -292,36 +295,36 @@ public class Bot {
         return BotUtils.hasNotId(webElement);
     }
 
-    public static boolean isId(String value, WebElement webElement) {
-        return BotUtils.isId(value, webElement);
+    public static boolean idEquals(String value, WebElement webElement) {
+        return BotUtils.idEquals(value, webElement);
     }
 
-    public static boolean isIdNot(String value, WebElement webElement) {
-        return BotUtils.isIdNot(value, webElement);
+    public static boolean idNotEquals(String value, WebElement webElement) {
+        return BotUtils.idNotEquals(value, webElement);
     }
 
-    public static boolean isIdContains(String searchText, WebElement webElement) {
-        return BotUtils.isIdContains(searchText, webElement);
+    public static boolean idContains(String searchText, WebElement webElement) {
+        return BotUtils.idContains(searchText, webElement);
     }
 
-    public static boolean isIdNotContains(String searchText, WebElement webElement) {
-        return BotUtils.isIdNotContains(searchText, webElement);
+    public static boolean idNotContains(String searchText, WebElement webElement) {
+        return BotUtils.idNotContains(searchText, webElement);
     }
 
-    public static boolean isIdStartsWith(String prefix, WebElement webElement) {
-        return BotUtils.isIdStartsWith(prefix, webElement);
+    public static boolean idStartsWith(String prefix, WebElement webElement) {
+        return BotUtils.idStartsWith(prefix, webElement);
     }
 
-    public static boolean isIdNotStartsWith(String prefix, WebElement webElement) {
-        return BotUtils.isIdNotStartsWith(prefix, webElement);
+    public static boolean idNotStartsWith(String prefix, WebElement webElement) {
+        return BotUtils.idNotStartsWith(prefix, webElement);
     }
 
-    public static boolean isIdEndsWith(String suffix, WebElement webElement) {
-        return BotUtils.isIdEndsWith(suffix, webElement);
+    public static boolean idEndsWith(String suffix, WebElement webElement) {
+        return BotUtils.idEndsWith(suffix, webElement);
     }
 
-    public static boolean isIdNotEndsWith(String suffix, WebElement webElement) {
-        return BotUtils.isIdNotEndsWith(suffix, webElement);
+    public static boolean idNotEndsWith(String suffix, WebElement webElement) {
+        return BotUtils.idNotEndsWith(suffix, webElement);
     }
 
     public static void assertHasId(WebElement webElement) {
@@ -332,12 +335,12 @@ public class Bot {
         BotUtils.assertHasNotId(webElement);
     }
 
-    public static void assertId(String value, WebElement webElement) {
-        BotUtils.assertId(value, webElement);
+    public static void assertIdEquals(String value, WebElement webElement) {
+        BotUtils.assertIdEquals(value, webElement);
     }
 
-    public static void assertIdNot(String value, WebElement webElement) {
-        BotUtils.assertIdNot(value, webElement);
+    public static void assertIdNotEquals(String value, WebElement webElement) {
+        BotUtils.assertIdNotEquals(value, webElement);
     }
 
     public static void assertIdContains(String searchText, WebElement webElement) {
@@ -364,6 +367,7 @@ public class Bot {
         BotUtils.assertIdNotEndsWith(suffix, webElement);
     }
 
+    /* Name */
     public static boolean hasName(WebElement webElement) {
         return BotUtils.hasName(webElement);
     }
@@ -372,36 +376,36 @@ public class Bot {
         return BotUtils.hasNotName(webElement);
     }
 
-    public static boolean isName(String value, WebElement webElement) {
-        return BotUtils.isName(value, webElement);
+    public static boolean nameEquals(String value, WebElement webElement) {
+        return BotUtils.nameEquals(value, webElement);
     }
 
-    public static boolean isNameNot(String value, WebElement webElement) {
-        return BotUtils.isNameNot(value, webElement);
+    public static boolean nameNotEquals(String value, WebElement webElement) {
+        return BotUtils.nameNotEquals(value, webElement);
     }
 
-    public static boolean isNameContains(String searchText, WebElement webElement) {
-        return BotUtils.isNameContains(searchText, webElement);
+    public static boolean nameContains(String searchText, WebElement webElement) {
+        return BotUtils.nameContains(searchText, webElement);
     }
 
-    public static boolean isNameNotContains(String searchText, WebElement webElement) {
-        return BotUtils.isNameNotContains(searchText, webElement);
+    public static boolean nameNotContains(String searchText, WebElement webElement) {
+        return BotUtils.nameNotContains(searchText, webElement);
     }
 
-    public static boolean isNameStartsWith(String prefix, WebElement webElement) {
-        return BotUtils.isNameStartsWith(prefix, webElement);
+    public static boolean nameStartsWith(String prefix, WebElement webElement) {
+        return BotUtils.nameStartsWith(prefix, webElement);
     }
 
-    public static boolean isNameNotStartsWith(String prefix, WebElement webElement) {
-        return BotUtils.isNameNotStartsWith(prefix, webElement);
+    public static boolean nameNotStartsWith(String prefix, WebElement webElement) {
+        return BotUtils.nameNotStartsWith(prefix, webElement);
     }
 
-    public static boolean isNameEndsWith(String suffix, WebElement webElement) {
-        return BotUtils.isNameEndsWith(suffix, webElement);
+    public static boolean nameEndsWith(String suffix, WebElement webElement) {
+        return BotUtils.nameEndsWith(suffix, webElement);
     }
 
-    public static boolean isNameNotEndsWith(String suffix, WebElement webElement) {
-        return BotUtils.isNameNotEndsWith(suffix, webElement);
+    public static boolean nameNotEndsWith(String suffix, WebElement webElement) {
+        return BotUtils.nameNotEndsWith(suffix, webElement);
     }
 
     public static void assertHasName(WebElement webElement) {
@@ -412,12 +416,12 @@ public class Bot {
         BotUtils.assertHasNotName(webElement);
     }
 
-    public static void assertName(String value, WebElement webElement) {
-        BotUtils.assertName(value, webElement);
+    public static void assertNameEquals(String value, WebElement webElement) {
+        BotUtils.assertNameEquals(value, webElement);
     }
 
-    public static void assertNameNot(String value, WebElement webElement) {
-        BotUtils.assertNameNot(value, webElement);
+    public static void assertNameNotEquals(String value, WebElement webElement) {
+        BotUtils.assertNameNotEquals(value, webElement);
     }
 
     public static void assertNameContains(String searchText, WebElement webElement) {
@@ -444,6 +448,7 @@ public class Bot {
         BotUtils.assertNameNotEndsWith(suffix, webElement);
     }
 
+    /* Class */
     public static boolean hasClass(WebElement webElement) {
         return BotUtils.hasClass(webElement);
     }
@@ -524,6 +529,7 @@ public class Bot {
         BotUtils.assertHasNotClassEndingWith(suffix, webElement);
     }
 
+    /* Value */
     public static boolean hasValue(WebElement webElement) {
         return BotUtils.hasValue(webElement);
     }
@@ -532,36 +538,36 @@ public class Bot {
         return BotUtils.hasNotValue(webElement);
     }
 
-    public static boolean isValue(String value, WebElement webElement) {
-        return BotUtils.isValue(value, webElement);
+    public static boolean valueEquals(String value, WebElement webElement) {
+        return BotUtils.valueEquals(value, webElement);
     }
 
-    public static boolean isValueNot(String value, WebElement webElement) {
-        return BotUtils.isValueNot(value, webElement);
+    public static boolean valueNotEquals(String value, WebElement webElement) {
+        return BotUtils.valueNotEquals(value, webElement);
     }
 
-    public static boolean isValueContains(String searchText, WebElement webElement) {
-        return BotUtils.isValueContains(searchText, webElement);
+    public static boolean valueContains(String searchText, WebElement webElement) {
+        return BotUtils.valueContains(searchText, webElement);
     }
 
-    public static boolean isValueNotContains(String searchText, WebElement webElement) {
-        return BotUtils.isValueNotContains(searchText, webElement);
+    public static boolean valueNotContains(String searchText, WebElement webElement) {
+        return BotUtils.valueNotContains(searchText, webElement);
     }
 
-    public static boolean isValueStartsWith(String prefix, WebElement webElement) {
-        return BotUtils.isValueStartsWith(prefix, webElement);
+    public static boolean valueStartsWith(String prefix, WebElement webElement) {
+        return BotUtils.valueStartsWith(prefix, webElement);
     }
 
-    public static boolean isValueNotStartsWith(String prefix, WebElement webElement) {
-        return BotUtils.isValueNotStartsWith(prefix, webElement);
+    public static boolean valueNotStartsWith(String prefix, WebElement webElement) {
+        return BotUtils.valueNotStartsWith(prefix, webElement);
     }
 
-    public static boolean isValueEndsWith(String suffix, WebElement webElement) {
-        return BotUtils.isValueEndsWith(suffix, webElement);
+    public static boolean valueEndsWith(String suffix, WebElement webElement) {
+        return BotUtils.valueEndsWith(suffix, webElement);
     }
 
-    public static boolean isValueNotEndsWith(String suffix, WebElement webElement) {
-        return BotUtils.isValueNotEndsWith(suffix, webElement);
+    public static boolean valueNotEndsWith(String suffix, WebElement webElement) {
+        return BotUtils.valueNotEndsWith(suffix, webElement);
     }
 
     public static void assertHasValue(WebElement webElement) {
@@ -572,12 +578,12 @@ public class Bot {
         BotUtils.assertHasNotValue(webElement);
     }
 
-    public static void assertValue(String value, WebElement webElement) {
-        BotUtils.assertValue(value, webElement);
+    public static void assertValueEquals(String value, WebElement webElement) {
+        BotUtils.assertValueEquals(value, webElement);
     }
 
-    public static void assertValueNot(String value, WebElement webElement) {
-        BotUtils.assertValueNot(value, webElement);
+    public static void assertValueNotEquals(String value, WebElement webElement) {
+        BotUtils.assertValueNotEquals(value, webElement);
     }
 
     public static void assertValueContains(String searchText, WebElement webElement) {
@@ -604,6 +610,7 @@ public class Bot {
         BotUtils.assertValueNotEndsWith(suffix, webElement);
     }
 
+    /* Href */
     public static boolean hasHref(WebElement webElement) {
         return BotUtils.hasHref(webElement);
     }
@@ -612,36 +619,36 @@ public class Bot {
         return BotUtils.hasNotHref(webElement);
     }
 
-    public static boolean isHref(String value, WebElement webElement) {
-        return BotUtils.isHref(value, webElement);
+    public static boolean hrefEquals(String value, WebElement webElement) {
+        return BotUtils.hrefEquals(value, webElement);
     }
 
-    public static boolean isHrefNot(String value, WebElement webElement) {
-        return BotUtils.isHrefNot(value, webElement);
+    public static boolean hrefNotEquals(String value, WebElement webElement) {
+        return BotUtils.hrefNotEquals(value, webElement);
     }
 
-    public static boolean isHrefContains(String searchText, WebElement webElement) {
-        return BotUtils.isHrefContains(searchText, webElement);
+    public static boolean hrefContains(String searchText, WebElement webElement) {
+        return BotUtils.hrefContains(searchText, webElement);
     }
 
-    public static boolean isHrefNotContains(String searchText, WebElement webElement) {
-        return BotUtils.isHrefNotContains(searchText, webElement);
+    public static boolean hrefNotContains(String searchText, WebElement webElement) {
+        return BotUtils.hrefNotContains(searchText, webElement);
     }
 
-    public static boolean isHrefStartsWith(String prefix, WebElement webElement) {
-        return BotUtils.isHrefStartsWith(prefix, webElement);
+    public static boolean hrefStartsWith(String prefix, WebElement webElement) {
+        return BotUtils.hrefStartsWith(prefix, webElement);
     }
 
-    public static boolean isHrefNotStartsWith(String prefix, WebElement webElement) {
-        return BotUtils.isHrefNotStartsWith(prefix, webElement);
+    public static boolean hrefNotStartsWith(String prefix, WebElement webElement) {
+        return BotUtils.hrefNotStartsWith(prefix, webElement);
     }
 
-    public static boolean isHrefEndsWith(String suffix, WebElement webElement) {
-        return BotUtils.isHrefEndsWith(suffix, webElement);
+    public static boolean hrefEndsWith(String suffix, WebElement webElement) {
+        return BotUtils.hrefEndsWith(suffix, webElement);
     }
 
-    public static boolean isHrefNotEndsWith(String suffix, WebElement webElement) {
-        return BotUtils.isHrefNotEndsWith(suffix, webElement);
+    public static boolean hrefNotEndsWith(String suffix, WebElement webElement) {
+        return BotUtils.hrefNotEndsWith(suffix, webElement);
     }
 
     public static void assertHasHref(WebElement webElement) {
@@ -652,12 +659,12 @@ public class Bot {
         BotUtils.assertHasNotHref(webElement);
     }
 
-    public static void assertHref(String value, WebElement webElement) {
-        BotUtils.assertHref(value, webElement);
+    public static void assertHrefEquals(String value, WebElement webElement) {
+        BotUtils.assertHrefEquals(value, webElement);
     }
 
-    public static void assertHrefNot(String value, WebElement webElement) {
-        BotUtils.assertHrefNot(value, webElement);
+    public static void assertHrefNotEquals(String value, WebElement webElement) {
+        BotUtils.assertHrefNotEquals(value, webElement);
     }
 
     public static void assertHrefContains(String searchText, WebElement webElement) {
@@ -684,44 +691,45 @@ public class Bot {
         BotUtils.assertHrefNotEndsWith(suffix, webElement);
     }
 
-    public static boolean isText(String text, WebElement webElement) {
-        return BotUtils.isText(text, webElement);
+    /* Text */
+    public static boolean textEquals(String text, WebElement webElement) {
+        return BotUtils.textEquals(text, webElement);
     }
 
-    public static boolean isTextNot(String text, WebElement webElement) {
-        return BotUtils.isTextNot(text, webElement);
+    public static boolean textNotEquals(String text, WebElement webElement) {
+        return BotUtils.textNotEquals(text, webElement);
     }
 
-    public static boolean isTextContains(String searchText, WebElement webElement) {
-        return BotUtils.isTextContains(searchText, webElement);
+    public static boolean textContains(String searchText, WebElement webElement) {
+        return BotUtils.textContains(searchText, webElement);
     }
 
-    public static boolean isTextNotContains(String searchText, WebElement webElement) {
-        return BotUtils.isTextNotContains(searchText, webElement);
+    public static boolean textNotContains(String searchText, WebElement webElement) {
+        return BotUtils.textNotContains(searchText, webElement);
     }
 
-    public static boolean isTextStartsWith(String prefix, WebElement webElement) {
-        return BotUtils.isTextStartsWith(prefix, webElement);
+    public static boolean textStartsWith(String prefix, WebElement webElement) {
+        return BotUtils.textStartsWith(prefix, webElement);
     }
 
-    public static boolean isTextNotStartsWith(String prefix, WebElement webElement) {
-        return BotUtils.isTextNotStartsWith(prefix, webElement);
+    public static boolean textNotStartsWith(String prefix, WebElement webElement) {
+        return BotUtils.textNotStartsWith(prefix, webElement);
     }
 
-    public static boolean isTextEndsWith(String suffix, WebElement webElement) {
-        return BotUtils.isTextEndsWith(suffix, webElement);
+    public static boolean textEndsWith(String suffix, WebElement webElement) {
+        return BotUtils.textEndsWith(suffix, webElement);
     }
 
-    public static boolean isTextNotEndsWith(String suffix, WebElement webElement) {
-        return BotUtils.isTextNotEndsWith(suffix, webElement);
+    public static boolean textNotEndsWith(String suffix, WebElement webElement) {
+        return BotUtils.textNotEndsWith(suffix, webElement);
     }
 
-    public static void assertText(String text, WebElement webElement) {
-        BotUtils.assertText(text, webElement);
+    public static void assertTextEquals(String text, WebElement webElement) {
+        BotUtils.assertTextEquals(text, webElement);
     }
 
-    public static void assertTextNot(String text, WebElement webElement) {
-        BotUtils.assertTextNot(text, webElement);
+    public static void assertTextNotEquals(String text, WebElement webElement) {
+        BotUtils.assertTextNotEquals(text, webElement);
     }
 
     public static void assertTextContains(String searchText, WebElement webElement) {
@@ -748,124 +756,126 @@ public class Bot {
         BotUtils.assertTextNotEndsWith(suffix, webElement);
     }
 
-    public static boolean isNumber(Double number, WebElement webElement) {
-        return BotUtils.isNumber(number, webElement);
+    /* Number */
+    public static boolean numberEquals(Double number, WebElement webElement) {
+        return BotUtils.numberEquals(number, webElement);
     }
 
-    public static boolean isNumberNot(Double number, WebElement webElement) {
-        return BotUtils.isNumberNot(number, webElement);
+    public static boolean numberNotEquals(Double number, WebElement webElement) {
+        return BotUtils.numberNotEquals(number, webElement);
     }
 
-    public static boolean isNumberSmallerThan(Double number, WebElement webElement) {
-        return BotUtils.isNumberSmallerThan(number, webElement);
+    public static boolean numberLessThan(Double number, WebElement webElement) {
+        return BotUtils.numberLessThan(number, webElement);
     }
 
-    public static boolean isNumberSmallerThanOrEquals(Double number, WebElement webElement) {
-        return BotUtils.isNumberSmallerThanOrEquals(number, webElement);
+    public static boolean numberLessThanOrEquals(Double number, WebElement webElement) {
+        return BotUtils.numberLessThanOrEquals(number, webElement);
     }
 
-    public static boolean isNumberLargerThan(Double number, WebElement webElement) {
-        return BotUtils.isNumberLargerThan(number, webElement);
+    public static boolean numberGreaterThan(Double number, WebElement webElement) {
+        return BotUtils.numberGreaterThan(number, webElement);
     }
 
-    public static boolean isNumberLargerThanOrEquals(Double number, WebElement webElement) {
-        return BotUtils.isNumberLargerThanOrEquals(number, webElement);
+    public static boolean numberGreaterThanOrEquals(Double number, WebElement webElement) {
+        return BotUtils.numberGreaterThanOrEquals(number, webElement);
     }
 
-    public static void assertNumber(Double number, WebElement webElement) {
-        BotUtils.assertNumber(number, webElement);
+    public static void assertNumberEquals(Double number, WebElement webElement) {
+        BotUtils.assertNumberEquals(number, webElement);
     }
 
-    public static void assertNumberNot(Double number, WebElement webElement) {
-        BotUtils.assertNumberNot(number, webElement);
+    public static void assertNumberNotEquals(Double number, WebElement webElement) {
+        BotUtils.assertNumberNotEquals(number, webElement);
     }
 
-    public static void assertNumberSmallerThan(Double number, WebElement webElement) {
-        BotUtils.assertNumberSmallerThan(number, webElement);
+    public static void assertNumberLessThan(Double number, WebElement webElement) {
+        BotUtils.assertNumberLessThan(number, webElement);
     }
 
-    public static void assertNumberSmallerThanOrEquals(Double number, WebElement webElement) {
-        BotUtils.assertNumberSmallerThanOrEquals(number, webElement);
+    public static void assertNumberLessThanOrEquals(Double number, WebElement webElement) {
+        BotUtils.assertNumberLessThanOrEquals(number, webElement);
     }
 
-    public static void assertNumberLargerThan(Double number, WebElement webElement) {
-        BotUtils.assertNumberLargerThan(number, webElement);
+    public static void assertNumberGreaterThan(Double number, WebElement webElement) {
+        BotUtils.assertNumberGreaterThan(number, webElement);
     }
 
-    public static void assertNumberLargerThanOrEquals(Double number, WebElement webElement) {
-        BotUtils.assertNumberLargerThanOrEquals(number, webElement);
+    public static void assertNumberGreaterThanOrEquals(Double number, WebElement webElement) {
+        BotUtils.assertNumberGreaterThanOrEquals(number, webElement);
     }
 
-    public static boolean isUrl(String url) {
-        return BotUtils.isUrl(url, ThreadDriver.getDriver());
+    /* Url */
+    public static boolean urlEquals(String url) {
+        return BotUtils.urlEquals(url, ThreadDriver.getDriver());
     }
 
-    public static boolean isUrlNot(String url) {
-        return BotUtils.isUrlNot(url, ThreadDriver.getDriver());
+    public static boolean urlNotEquals(String url) {
+        return BotUtils.urlNotEquals(url, ThreadDriver.getDriver());
     }
 
-    public static boolean isUrlMatching(String regExp) {
-        return BotUtils.isUrlMatching(regExp, ThreadDriver.getDriver());
+    public static boolean urlMatches(String regExp) {
+        return BotUtils.urlMatches(regExp, ThreadDriver.getDriver());
     }
 
-    public static boolean isUrlNotMatching(String regExp) {
-        return BotUtils.isUrlNotMatching(regExp, ThreadDriver.getDriver());
+    public static boolean urlNotMatches(String regExp) {
+        return BotUtils.urlNotMatches(regExp, ThreadDriver.getDriver());
     }
 
-    public static boolean isUrlMatching(Openable openable) {
-        return BotUtils.isUrlMatching(openable, ThreadDriver.getDriver());
+    public static boolean urlMatches(Openable openable) {
+        return BotUtils.urlMatches(openable, ThreadDriver.getDriver());
     }
 
-    public static boolean isUrlNotMatching(Openable openable) {
-        return BotUtils.isUrlNotMatching(openable, ThreadDriver.getDriver());
+    public static boolean urlNotMatches(Openable openable) {
+        return BotUtils.urlNotMatches(openable, ThreadDriver.getDriver());
     }
 
-    public static boolean isUrlContains(String searchText) {
-        return BotUtils.isUrlContains(searchText, ThreadDriver.getDriver());
+    public static boolean urlContains(String searchText) {
+        return BotUtils.urlContains(searchText, ThreadDriver.getDriver());
     }
 
-    public static boolean isUrlNotContains(String searchText) {
-        return BotUtils.isUrlNotContains(searchText, ThreadDriver.getDriver());
+    public static boolean urlNotContains(String searchText) {
+        return BotUtils.urlNotContains(searchText, ThreadDriver.getDriver());
     }
 
-    public static boolean isUrlStartsWith(String prefix) {
-        return BotUtils.isUrlStartsWith(prefix, ThreadDriver.getDriver());
+    public static boolean urlStartsWith(String prefix) {
+        return BotUtils.urlStartsWith(prefix, ThreadDriver.getDriver());
     }
 
-    public static boolean isUrlNotStartsWith(String prefix) {
-        return BotUtils.isUrlNotStartsWith(prefix, ThreadDriver.getDriver());
+    public static boolean urlNotStartsWith(String prefix) {
+        return BotUtils.urlNotStartsWith(prefix, ThreadDriver.getDriver());
     }
 
-    public static boolean isUrlEndsWith(String suffix) {
-        return BotUtils.isUrlEndsWith(suffix, ThreadDriver.getDriver());
+    public static boolean urlEndsWith(String suffix) {
+        return BotUtils.urlEndsWith(suffix, ThreadDriver.getDriver());
     }
 
-    public static boolean isUrlNotEndsWith(String suffix) {
-        return BotUtils.isUrlNotEndsWith(suffix, ThreadDriver.getDriver());
+    public static boolean urlNotEndsWith(String suffix) {
+        return BotUtils.urlNotEndsWith(suffix, ThreadDriver.getDriver());
     }
 
-    public static void assertUrl(String url) {
-        BotUtils.assertUrl(url, ThreadDriver.getDriver());
+    public static void assertUrlEquals(String url) {
+        BotUtils.assertUrlEquals(url, ThreadDriver.getDriver());
     }
 
-    public static void assertUrlNot(String url) {
-        BotUtils.assertUrlNot(url, ThreadDriver.getDriver());
+    public static void assertUrlNotEquals(String url) {
+        BotUtils.assertUrlNotEquals(url, ThreadDriver.getDriver());
     }
 
-    public static void assertUrlMatching(String regExp) {
-        BotUtils.assertUrlMatching(regExp, ThreadDriver.getDriver());
+    public static void assertUrlMatches(String regExp) {
+        BotUtils.assertUrlMatches(regExp, ThreadDriver.getDriver());
     }
 
-    public static void assertUrlNotMatching(String regExp) {
-        BotUtils.assertUrlNotMatching(regExp, ThreadDriver.getDriver());
+    public static void assertUrlNotMatches(String regExp) {
+        BotUtils.assertUrlNotMatches(regExp, ThreadDriver.getDriver());
     }
 
-    public static void assertUrlMatching(Openable openable) {
-        BotUtils.assertUrlMatching(openable, ThreadDriver.getDriver());
+    public static void assertUrlMatches(Openable openable) {
+        BotUtils.assertUrlMatches(openable, ThreadDriver.getDriver());
     }
 
-    public static void assertUrlNotMatching(Openable openable) {
-        BotUtils.assertUrlNotMatching(openable, ThreadDriver.getDriver());
+    public static void assertUrlNotMatches(Openable openable) {
+        BotUtils.assertUrlNotMatches(openable, ThreadDriver.getDriver());
     }
 
     public static void assertUrlContains(String searchText) {
@@ -892,6 +902,7 @@ public class Bot {
         BotUtils.assertUrlNotEndsWith(suffix, ThreadDriver.getDriver());
     }
 
+    /* Open */
     public static boolean isOpen(Openable openable) {
         return BotUtils.isOpen(openable);
     }
@@ -908,6 +919,7 @@ public class Bot {
         BotUtils.assertIsNotOpen(openable);
     }
 
+    /* Selected */
     public static boolean isSelected(WebElement webElement) {
         return BotUtils.isSelected(webElement);
     }
@@ -924,6 +936,7 @@ public class Bot {
         BotUtils.assertIsDeselected(webElement);
     }
 
+    /* Checked/Unchecked */
     public static boolean isChecked(WebElement webElement) {
         return BotUtils.isChecked(webElement);
     }
@@ -940,6 +953,7 @@ public class Bot {
         BotUtils.assertIsUnchecked(webElement);
     }
 
+    /* Enabled/Disabled */
     public static boolean isEnabled(WebElement webElement) {
         return BotUtils.isEnabled(webElement);
     }
@@ -956,6 +970,7 @@ public class Bot {
         BotUtils.assertIsDisabled(webElement);
     }
 
+    /* Display */
     public static boolean isDisplayed(WebElement webElement) {
         return BotUtils.isDisplayed(webElement);
     }
@@ -976,6 +991,10 @@ public class Bot {
         BotUtils.assertIsDisplayed(webElement);
     }
 
+    public static void assertIsNotDisplayed(WebElement webElement) {
+        BotUtils.assertIsNotDisplayed(webElement);
+    }
+
     public static void assertIsDisplayed(WebElement webElement, long secondsToWait) {
         BotUtils.assertIsDisplayed(webElement, secondsToWait, ThreadDriver.getDriver());
     }
@@ -984,58 +1003,56 @@ public class Bot {
         BotUtils.assertIsNotDisplayed(webElement, secondsToWait, ThreadDriver.getDriver());
     }
 
-    public static void assertIsNotDisplayed(WebElement webElement) {
-        BotUtils.assertIsNotDisplayed(webElement);
+    /* Number of */
+    public static boolean numberOfElementsEquals(int number, List<? extends WebElement> webElements) {
+        return BotUtils.numberOfElementsEquals(number, webElements);
     }
 
-    public static boolean isNumberOf(int number, List<? extends WebElement> webElements) {
-        return BotUtils.isNumberOf(number, webElements);
+    public static boolean numberOfElementsNotEquals(int number, List<? extends WebElement> webElements) {
+        return BotUtils.numberOfElementsNotEquals(number, webElements);
     }
 
-    public static boolean isNumberOfNot(int number, List<? extends WebElement> webElements) {
-        return BotUtils.isNumberOfNot(number, webElements);
+    public static boolean numberOfElementsIsLessThan(int number, List<? extends WebElement> webElements) {
+        return BotUtils.numberOfElementsIsLessThan(number, webElements);
     }
 
-    public static boolean isNumberOfSmallerThan(int number, List<? extends WebElement> webElements) {
-        return BotUtils.isNumberOfSmallerThan(number, webElements);
+    public static boolean numberOfElementsIsLessThanOrEquals(int number, List<? extends WebElement> webElements) {
+        return BotUtils.numberOfElementsIsLessThanOrEquals(number, webElements);
     }
 
-    public static boolean isNumberOfSmallerThanOrEquals(int number, List<? extends WebElement> webElements) {
-        return BotUtils.isNumberOfSmallerThanOrEquals(number, webElements);
+    public static boolean numberOfElementsIsGreaterThan(int number, List<? extends WebElement> webElements) {
+        return BotUtils.numberOfElementsIsGreaterThan(number, webElements);
     }
 
-    public static boolean isNumberOfLargerThan(int number, List<? extends WebElement> webElements) {
-        return BotUtils.isNumberOfLargerThan(number, webElements);
+    public static boolean numberOfElementsIsGreaterThanOrEquals(int number, List<? extends WebElement> webElements) {
+        return BotUtils.numberOfElementsIsGreaterThanOrEquals(number, webElements);
     }
 
-    public static boolean isNumberOfLargerThanOrEquals(int number, List<? extends WebElement> webElements) {
-        return BotUtils.isNumberOfLargerThanOrEquals(number, webElements);
+    public static void assertNumberOfElementsEquals(int number, List<? extends WebElement> webElements) {
+        BotUtils.assertNumberOfElementsEquals(number, webElements);
     }
 
-    public static void assertNumberOf(int number, List<? extends WebElement> webElements) {
-        BotUtils.assertNumberOf(number, webElements);
+    public static void assertNumberOfElementsNotEquals(int number, List<? extends WebElement> webElements) {
+        BotUtils.assertNumberOfElementsNotEquals(number, webElements);
     }
 
-    public static void assertNumberOfNot(int number, List<? extends WebElement> webElements) {
-        BotUtils.assertNumberOfNot(number, webElements);
+    public static void assertNumberOfElementsIsLessThan(int number, List<? extends WebElement> webElements) {
+        BotUtils.assertNumberOfElementsIsLessThan(number, webElements);
     }
 
-    public static void assertNumberOfSmallerThan(int number, List<? extends WebElement> webElements) {
-        BotUtils.assertNumberOfSmallerThan(number, webElements);
+    public static void assertNumberOfElementsIsLessThanOrEquals(int number, List<? extends WebElement> webElements) {
+        BotUtils.assertNumberOfElementsIsLessThanOrEquals(number, webElements);
     }
 
-    public static void assertNumberOfSmallerThanOrEquals(int number, List<? extends WebElement> webElements) {
-        BotUtils.assertNumberOfSmallerThanOrEquals(number, webElements);
+    public static void assertNumberOfElementsIsGreaterThan(int number, List<? extends WebElement> webElements) {
+        BotUtils.assertNumberOfElementsIsGreaterThan(number, webElements);
     }
 
-    public static void assertNumberOfLargerThan(int number, List<? extends WebElement> webElements) {
-        BotUtils.assertNumberOfLargerThan(number, webElements);
+    public static void assertNumberOfElementsIsGreaterThanOrEquals(int number, List<? extends WebElement> webElements) {
+        BotUtils.assertNumberOfElementsIsGreaterThanOrEquals(number, webElements);
     }
 
-    public static void assertNumberOfLargerThanOrEquals(int number, List<? extends WebElement> webElements) {
-        BotUtils.assertNumberOfLargerThanOrEquals(number, webElements);
-    }
-
+    /* Option */
     public static boolean hasOption(String text, WebElement webElement) {
         return BotUtils.hasOption(text, webElement);
     }
@@ -1060,12 +1077,12 @@ public class Bot {
         return BotUtils.isOptionDeselected(text, webElement);
     }
 
-    public static boolean isAllOptionSelected(WebElement webElement) {
-        return BotUtils.isAllOptionSelected(webElement);
+    public static boolean isAllOptionsSelected(WebElement webElement) {
+        return BotUtils.isAllOptionsSelected(webElement);
     }
 
-    public static boolean isNoOptionSelected(WebElement webElement) {
-        return BotUtils.isNoOptionSelected(webElement);
+    public static boolean isNoOptionsSelected(WebElement webElement) {
+        return BotUtils.isNoOptionsSelected(webElement);
     }
 
     public static void assertHasOption(String text, WebElement webElement) {
@@ -1092,14 +1109,15 @@ public class Bot {
         BotUtils.assertIsOptionDeselected(text, webElement);
     }
 
-    public static void assertIsAllOptionSelected(WebElement webElement) {
-        BotUtils.assertIsAllOptionSelected(webElement);
+    public static void assertIsAllOptionsSelected(WebElement webElement) {
+        BotUtils.assertIsAllOptionsSelected(webElement);
     }
 
-    public static void assertIsNoOptionSelected(WebElement webElement) {
-        BotUtils.assertIsNoOptionSelected(webElement);
+    public static void assertIsNoOptionsSelected(WebElement webElement) {
+        BotUtils.assertIsNoOptionsSelected(webElement);
     }
 
+    /* Option Value */
     public static boolean hasOptionWithValue(String value, WebElement webElement) {
         return BotUtils.hasOptionWithValue(value, webElement);
     }
@@ -1148,6 +1166,7 @@ public class Bot {
         BotUtils.assertIsOptionWithValueDeselected(value, webElement);
     }
 
+    /* Option Index */
     public static boolean hasOptionWithIndex(int index, WebElement webElement) {
         return BotUtils.hasOptionWithIndex(index, webElement);
     }
@@ -1196,6 +1215,7 @@ public class Bot {
         BotUtils.assertIsOptionWithIndexDeselected(index, webElement);
     }
 
+    /* Hamcrest */
     public static <T extends Object> boolean is(T actual, Matcher<? super T> matcher) {
         try {
             assertThat(actual, matcher);

@@ -58,7 +58,7 @@ public class LoginPage extends WebPage<AnotherSite> {
 
     public UserRow findUserRowByFirstName(String firstName) {
         for (UserRow row : rows) {
-            if (isText(firstName, row.firstName)) {
+            if (textEquals(firstName, row.firstName)) {
                 return row;
             }
         }

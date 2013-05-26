@@ -26,7 +26,7 @@ public class IsTypes {
     }
 
     public boolean text(String text) {
-        return BotUtils.is(text, webElement.getText());
+        return BotUtils.equals(text, webElement.getText());
     }
 
     public IsStringTypes tagName() {

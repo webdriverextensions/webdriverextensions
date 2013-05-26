@@ -46,7 +46,7 @@ public class FestBotTest {
         uncheck(rememberMe);
 
         // Normal ises
-        is(username).text().equalTo("anst07");
+        is(username).text().equals("anst07");
         is(errorMsg).text().contains("Warning");
 //        is(country).option("Sweden").selected();
 

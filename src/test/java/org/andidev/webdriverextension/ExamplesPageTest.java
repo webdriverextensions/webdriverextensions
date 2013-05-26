@@ -40,8 +40,8 @@ public class ExamplesPageTest extends SiteAwareRepository {
         type("What is WebDriver", examplesPage.searchQuery);
         waitFor(delayTime);
         click(examplesPage.search);
-        assertNumberOf(3, examplesPage.rows);
-        assertNumberOf(3, examplesPage.todos);
+        assertNumberOfElementsEquals(3, examplesPage.rows);
+        assertNumberOfElementsEquals(3, examplesPage.todos);
     }
 
     @Test
@@ -65,7 +65,7 @@ public class ExamplesPageTest extends SiteAwareRepository {
     public void listWithExtendedWebElementsTest() {
         UserRow userRow = examplesPage.findUserRowByFirstName("Jacob");
         waitFor(delayTime);
-        assertText("Thornton", userRow.lastName);
+        assertTextEquals("Thornton", userRow.lastName);
     }
 
     @Test
@@ -78,7 +78,7 @@ public class ExamplesPageTest extends SiteAwareRepository {
     @Test
     public void resetSearchContextListTest() {
         waitFor(delayTime);
-        assertNumberOf(3, examplesPage.userTableSearchContext.todos);
+        assertNumberOfElementsEquals(3, examplesPage.userTableSearchContext.todos);
     }
 
     @Test

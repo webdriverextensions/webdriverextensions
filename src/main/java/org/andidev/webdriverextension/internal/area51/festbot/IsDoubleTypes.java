@@ -12,27 +12,27 @@ public class IsDoubleTypes {
 
     /* Is */
     public boolean is(Double number) {
-        return BotUtils.is(number, number);
+        return BotUtils.equals(number, number);
     }
 
     public boolean isNot(Double number) {
-        return BotUtils.isNot(number, number);
+        return BotUtils.notEquals(number, number);
     }
 
-    public boolean isSmallerThan(Double number) {
-        return BotUtils.isSmallerThan(number, number);
+    public boolean isLessThan(Double number) {
+        return BotUtils.isLessThan(number, number);
     }
 
-    public boolean isSmallerThanOrEquals(Double number) {
-        return BotUtils.isSmallerThanOrEquals(number, number);
+    public boolean isLessThanOrEquals(Double number) {
+        return BotUtils.isLessThanOrEquals(number, number);
     }
 
-    public boolean isLargerThan(Double number) {
-        return BotUtils.isLargerThan(number, number);
+    public boolean isGreaterThan(Double number) {
+        return BotUtils.isGreaterThan(number, number);
     }
 
-    public boolean isLargerThanOrEquals(Double number) {
-        return BotUtils.isLargerThanOrEquals(number, number);
+    public boolean isGreaterThanOrEquals(Double number) {
+        return BotUtils.isGreaterThanOrEquals(number, number);
     }
 
 }

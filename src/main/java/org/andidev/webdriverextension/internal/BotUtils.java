@@ -83,7 +83,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
     }
 
     /* Count */
-    public static int numberOf(List<? extends WebElement> webElements) {
+    public static int numberOfElementsIn(List<? extends WebElement> webElements) {
         return webElements.size();
     }
 
@@ -283,25 +283,25 @@ import org.openqa.selenium.support.ui.WebDriverWait;
         }
     }
 
-    public static void debugNumberOf(List<? extends WebElement> webElements) {
-        log.debug("Number of elements are {}", numberOf(webElements));
+    public static void debugNumberOfElementsIn(List<? extends WebElement> webElements) {
+        log.debug("Number of elements are {}", numberOfElementsIn(webElements));
     }
 
     /* Tag Name */
-    public static boolean isTagName(String value, WebElement webElement) {
-        return is(value, tagNameOf(webElement));
+    public static boolean tagNameEquals(String value, WebElement webElement) {
+        return equals(value, tagNameOf(webElement));
     }
 
-    public static boolean isTagNameNot(String value, WebElement webElement) {
-        return isNot(value, tagNameOf(webElement));
+    public static boolean tagNameNotEquals(String value, WebElement webElement) {
+        return notEquals(value, tagNameOf(webElement));
     }
 
-    public static void assertTagName(String value, WebElement webElement) {
-        assertIs("Tag name", value, tagNameOf(webElement));
+    public static void assertTagNameEquals(String value, WebElement webElement) {
+        assertEquals("Tag name", value, tagNameOf(webElement));
     }
 
-    public static void assertTagNameNot(String value, WebElement webElement) {
-        assertIsNot("Tag name", value, tagNameOf(webElement));
+    public static void assertTagNameNotEquals(String value, WebElement webElement) {
+        assertNotEquals("Tag name", value, tagNameOf(webElement));
     }
 
     /* Attribute */
@@ -313,36 +313,36 @@ import org.openqa.selenium.support.ui.WebDriverWait;
         return !hasAttribute(name, webElement);
     }
 
-    public static boolean isAttribute(String name, String value, WebElement webElement) {
-        return is(value, attributeIn(name, webElement));
+    public static boolean attributeEquals(String name, String value, WebElement webElement) {
+        return equals(value, attributeIn(name, webElement));
     }
 
-    public static boolean isAttributeNot(String name, String value, WebElement webElement) {
-        return isNot(value, attributeIn(name, webElement));
+    public static boolean attributeNotEquals(String name, String value, WebElement webElement) {
+        return notEquals(value, attributeIn(name, webElement));
     }
 
-    public static boolean isAttributeContains(String name, String searchText, WebElement webElement) {
-        return isContains(searchText, attributeIn(name, webElement));
+    public static boolean attributeContains(String name, String searchText, WebElement webElement) {
+        return contains(searchText, attributeIn(name, webElement));
     }
 
-    public static boolean isAttributeNotContains(String name, String searchText, WebElement webElement) {
-        return isNotContains(searchText, attributeIn(name, webElement));
+    public static boolean attributeNotContains(String name, String searchText, WebElement webElement) {
+        return notContains(searchText, attributeIn(name, webElement));
     }
 
-    public static boolean isAttributeStartsWith(String name, String prefix, WebElement webElement) {
-        return isStartsWith(prefix, attributeIn(name, webElement));
+    public static boolean attributeStartsWith(String name, String prefix, WebElement webElement) {
+        return startsWith(prefix, attributeIn(name, webElement));
     }
 
-    public static boolean isAttributeNotStartsWith(String name, String prefix, WebElement webElement) {
-        return isNotStartsWith(prefix, attributeIn(name, webElement));
+    public static boolean attributeNotStartsWith(String name, String prefix, WebElement webElement) {
+        return notStartsWith(prefix, attributeIn(name, webElement));
     }
 
-    public static boolean isAttributeEndsWith(String name, String suffix, WebElement webElement) {
-        return isEndsWith(suffix, attributeIn(name, webElement));
+    public static boolean attributeEndsWith(String name, String suffix, WebElement webElement) {
+        return endsWith(suffix, attributeIn(name, webElement));
     }
 
-    public static boolean isAttributeNotEndsWith(String name, String suffix, WebElement webElement) {
-        return isNotEndsWith(suffix, attributeIn(name, webElement));
+    public static boolean attributeNotEndsWith(String name, String suffix, WebElement webElement) {
+        return notEndsWith(suffix, attributeIn(name, webElement));
     }
 
     public static void assertHasAttribute(String name, WebElement webElement) {
@@ -357,12 +357,12 @@ import org.openqa.selenium.support.ui.WebDriverWait;
         }
     }
 
-    public static void assertAttribute(String name, String value, WebElement webElement) {
-        assertIs(name, value, attributeIn(name, webElement));
+    public static void assertAttributeEquals(String name, String value, WebElement webElement) {
+        assertEquals(name, value, attributeIn(name, webElement));
     }
 
-    public static void assertAttributeNot(String name, String value, WebElement webElement) {
-        assertIsNot(name, value, attributeIn(name, webElement));
+    public static void assertAttributeNotEquals(String name, String value, WebElement webElement) {
+        assertNotEquals(name, value, attributeIn(name, webElement));
     }
 
     public static void assertAttributeContains(String name, String searchText, WebElement webElement) {
@@ -398,36 +398,36 @@ import org.openqa.selenium.support.ui.WebDriverWait;
         return hasNotAttribute("id", webElement);
     }
 
-    public static boolean isId(String value, WebElement webElement) {
-        return is(value, idIn(webElement));
+    public static boolean idEquals(String value, WebElement webElement) {
+        return equals(value, idIn(webElement));
     }
 
-    public static boolean isIdNot(String value, WebElement webElement) {
-        return isNot(value, idIn(webElement));
+    public static boolean idNotEquals(String value, WebElement webElement) {
+        return notEquals(value, idIn(webElement));
     }
 
-    public static boolean isIdContains(String searchText, WebElement webElement) {
-        return isContains(searchText, idIn(webElement));
+    public static boolean idContains(String searchText, WebElement webElement) {
+        return contains(searchText, idIn(webElement));
     }
 
-    public static boolean isIdNotContains(String searchText, WebElement webElement) {
-        return isContains(searchText, idIn(webElement));
+    public static boolean idNotContains(String searchText, WebElement webElement) {
+        return contains(searchText, idIn(webElement));
     }
 
-    public static boolean isIdStartsWith(String prefix, WebElement webElement) {
-        return isStartsWith(prefix, idIn(webElement));
+    public static boolean idStartsWith(String prefix, WebElement webElement) {
+        return startsWith(prefix, idIn(webElement));
     }
 
-    public static boolean isIdNotStartsWith(String prefix, WebElement webElement) {
-        return isNotStartsWith(prefix, idIn(webElement));
+    public static boolean idNotStartsWith(String prefix, WebElement webElement) {
+        return notStartsWith(prefix, idIn(webElement));
     }
 
-    public static boolean isIdEndsWith(String suffix, WebElement webElement) {
-        return isEndsWith(suffix, idIn(webElement));
+    public static boolean idEndsWith(String suffix, WebElement webElement) {
+        return endsWith(suffix, idIn(webElement));
     }
 
-    public static boolean isIdNotEndsWith(String suffix, WebElement webElement) {
-        return isEndsWith(suffix, idIn(webElement));
+    public static boolean idNotEndsWith(String suffix, WebElement webElement) {
+        return endsWith(suffix, idIn(webElement));
     }
 
     public static void assertHasId(WebElement webElement) {
@@ -438,12 +438,12 @@ import org.openqa.selenium.support.ui.WebDriverWait;
         assertHasNotAttribute("id", webElement);
     }
 
-    public static void assertId(String value, WebElement webElement) {
-        assertIs("id", value, idIn(webElement));
+    public static void assertIdEquals(String value, WebElement webElement) {
+        assertEquals("id", value, idIn(webElement));
     }
 
-    public static void assertIdNot(String value, WebElement webElement) {
-        assertIsNot("id", value, idIn(webElement));
+    public static void assertIdNotEquals(String value, WebElement webElement) {
+        assertNotEquals("id", value, idIn(webElement));
     }
 
     public static void assertIdContains(String searchText, WebElement webElement) {
@@ -479,36 +479,36 @@ import org.openqa.selenium.support.ui.WebDriverWait;
         return hasNotAttribute("name", webElement);
     }
 
-    public static boolean isName(String value, WebElement webElement) {
-        return is(value, nameIn(webElement));
+    public static boolean nameEquals(String value, WebElement webElement) {
+        return equals(value, nameIn(webElement));
     }
 
-    public static boolean isNameNot(String value, WebElement webElement) {
-        return isNot(value, nameIn(webElement));
+    public static boolean nameNotEquals(String value, WebElement webElement) {
+        return notEquals(value, nameIn(webElement));
     }
 
-    public static boolean isNameContains(String searchText, WebElement webElement) {
-        return isContains(searchText, nameIn(webElement));
+    public static boolean nameContains(String searchText, WebElement webElement) {
+        return contains(searchText, nameIn(webElement));
     }
 
-    public static boolean isNameNotContains(String searchText, WebElement webElement) {
-        return isContains(searchText, nameIn(webElement));
+    public static boolean nameNotContains(String searchText, WebElement webElement) {
+        return contains(searchText, nameIn(webElement));
     }
 
-    public static boolean isNameStartsWith(String prefix, WebElement webElement) {
-        return isStartsWith(prefix, nameIn(webElement));
+    public static boolean nameStartsWith(String prefix, WebElement webElement) {
+        return startsWith(prefix, nameIn(webElement));
     }
 
-    public static boolean isNameNotStartsWith(String prefix, WebElement webElement) {
-        return isNotStartsWith(prefix, nameIn(webElement));
+    public static boolean nameNotStartsWith(String prefix, WebElement webElement) {
+        return notStartsWith(prefix, nameIn(webElement));
     }
 
-    public static boolean isNameEndsWith(String suffix, WebElement webElement) {
-        return isEndsWith(suffix, nameIn(webElement));
+    public static boolean nameEndsWith(String suffix, WebElement webElement) {
+        return endsWith(suffix, nameIn(webElement));
     }
 
-    public static boolean isNameNotEndsWith(String suffix, WebElement webElement) {
-        return isEndsWith(suffix, nameIn(webElement));
+    public static boolean nameNotEndsWith(String suffix, WebElement webElement) {
+        return endsWith(suffix, nameIn(webElement));
     }
 
     public static void assertHasName(WebElement webElement) {
@@ -519,12 +519,12 @@ import org.openqa.selenium.support.ui.WebDriverWait;
         assertHasNotAttribute("name", webElement);
     }
 
-    public static void assertName(String value, WebElement webElement) {
-        assertIs("name", value, nameIn(webElement));
+    public static void assertNameEquals(String value, WebElement webElement) {
+        assertEquals("name", value, nameIn(webElement));
     }
 
-    public static void assertNameNot(String value, WebElement webElement) {
-        assertIsNot("name", value, nameIn(webElement));
+    public static void assertNameNotEquals(String value, WebElement webElement) {
+        assertNotEquals("name", value, nameIn(webElement));
     }
 
     public static void assertNameContains(String searchText, WebElement webElement) {
@@ -571,7 +571,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
     public static boolean hasClassContaining(String searchText, WebElement webElement) {
         List<String> classes = classesIn(webElement);
         for (String clazz : classes) {
-            if (isContains(searchText, clazz)) {
+            if (contains(searchText, clazz)) {
                 return true;
             }
         }
@@ -585,7 +585,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
     public static boolean hasClassStartingWith(String prefix, WebElement webElement) {
         List<String> classes = classesIn(webElement);
         for (String clazz : classes) {
-            if (isStartsWith(prefix, clazz)) {
+            if (startsWith(prefix, clazz)) {
                 return true;
             }
         }
@@ -599,7 +599,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
     public static boolean hasClassEndingWith(String suffix, WebElement webElement) {
         List<String> classes = classesIn(webElement);
         for (String clazz : classes) {
-            if (isEndsWith(suffix, clazz)) {
+            if (endsWith(suffix, clazz)) {
                 return true;
             }
         }
@@ -675,36 +675,36 @@ import org.openqa.selenium.support.ui.WebDriverWait;
         return hasNotAttribute("value", webElement);
     }
 
-    public static boolean isValue(String value, WebElement webElement) {
-        return is(value, valueIn(webElement));
+    public static boolean valueEquals(String value, WebElement webElement) {
+        return equals(value, valueIn(webElement));
     }
 
-    public static boolean isValueNot(String value, WebElement webElement) {
-        return isNot(value, valueIn(webElement));
+    public static boolean valueNotEquals(String value, WebElement webElement) {
+        return notEquals(value, valueIn(webElement));
     }
 
-    public static boolean isValueContains(String searchText, WebElement webElement) {
-        return isContains(searchText, valueIn(webElement));
+    public static boolean valueContains(String searchText, WebElement webElement) {
+        return contains(searchText, valueIn(webElement));
     }
 
-    public static boolean isValueNotContains(String searchText, WebElement webElement) {
-        return isContains(searchText, valueIn(webElement));
+    public static boolean valueNotContains(String searchText, WebElement webElement) {
+        return contains(searchText, valueIn(webElement));
     }
 
-    public static boolean isValueStartsWith(String prefix, WebElement webElement) {
-        return isStartsWith(prefix, valueIn(webElement));
+    public static boolean valueStartsWith(String prefix, WebElement webElement) {
+        return startsWith(prefix, valueIn(webElement));
     }
 
-    public static boolean isValueNotStartsWith(String prefix, WebElement webElement) {
-        return isNotStartsWith(prefix, valueIn(webElement));
+    public static boolean valueNotStartsWith(String prefix, WebElement webElement) {
+        return notStartsWith(prefix, valueIn(webElement));
     }
 
-    public static boolean isValueEndsWith(String suffix, WebElement webElement) {
-        return isEndsWith(suffix, valueIn(webElement));
+    public static boolean valueEndsWith(String suffix, WebElement webElement) {
+        return endsWith(suffix, valueIn(webElement));
     }
 
-    public static boolean isValueNotEndsWith(String suffix, WebElement webElement) {
-        return isEndsWith(suffix, valueIn(webElement));
+    public static boolean valueNotEndsWith(String suffix, WebElement webElement) {
+        return endsWith(suffix, valueIn(webElement));
     }
 
     public static void assertHasValue(WebElement webElement) {
@@ -715,12 +715,12 @@ import org.openqa.selenium.support.ui.WebDriverWait;
         assertHasNotAttribute("value", webElement);
     }
 
-    public static void assertValue(String value, WebElement webElement) {
-        assertIs("value", value, valueIn(webElement));
+    public static void assertValueEquals(String value, WebElement webElement) {
+        assertEquals("value", value, valueIn(webElement));
     }
 
-    public static void assertValueNot(String value, WebElement webElement) {
-        assertIsNot("value", value, valueIn(webElement));
+    public static void assertValueNotEquals(String value, WebElement webElement) {
+        assertNotEquals("value", value, valueIn(webElement));
     }
 
     public static void assertValueContains(String searchText, WebElement webElement) {
@@ -757,36 +757,36 @@ import org.openqa.selenium.support.ui.WebDriverWait;
         return hasNotAttribute("href", webElement);
     }
 
-    public static boolean isHref(String value, WebElement webElement) {
-        return is(value, hrefIn(webElement));
+    public static boolean hrefEquals(String value, WebElement webElement) {
+        return equals(value, hrefIn(webElement));
     }
 
-    public static boolean isHrefNot(String value, WebElement webElement) {
-        return isNot(value, hrefIn(webElement));
+    public static boolean hrefNotEquals(String value, WebElement webElement) {
+        return notEquals(value, hrefIn(webElement));
     }
 
-    public static boolean isHrefContains(String searchText, WebElement webElement) {
-        return isContains(searchText, hrefIn(webElement));
+    public static boolean hrefContains(String searchText, WebElement webElement) {
+        return contains(searchText, hrefIn(webElement));
     }
 
-    public static boolean isHrefNotContains(String searchText, WebElement webElement) {
-        return isContains(searchText, hrefIn(webElement));
+    public static boolean hrefNotContains(String searchText, WebElement webElement) {
+        return contains(searchText, hrefIn(webElement));
     }
 
-    public static boolean isHrefStartsWith(String prefix, WebElement webElement) {
-        return isStartsWith(prefix, hrefIn(webElement));
+    public static boolean hrefStartsWith(String prefix, WebElement webElement) {
+        return startsWith(prefix, hrefIn(webElement));
     }
 
-    public static boolean isHrefNotStartsWith(String prefix, WebElement webElement) {
-        return isNotStartsWith(prefix, hrefIn(webElement));
+    public static boolean hrefNotStartsWith(String prefix, WebElement webElement) {
+        return notStartsWith(prefix, hrefIn(webElement));
     }
 
-    public static boolean isHrefEndsWith(String suffix, WebElement webElement) {
-        return isEndsWith(suffix, hrefIn(webElement));
+    public static boolean hrefEndsWith(String suffix, WebElement webElement) {
+        return endsWith(suffix, hrefIn(webElement));
     }
 
-    public static boolean isHrefNotEndsWith(String suffix, WebElement webElement) {
-        return isEndsWith(suffix, hrefIn(webElement));
+    public static boolean hrefNotEndsWith(String suffix, WebElement webElement) {
+        return endsWith(suffix, hrefIn(webElement));
     }
 
     public static void assertHasHref(WebElement webElement) {
@@ -797,12 +797,12 @@ import org.openqa.selenium.support.ui.WebDriverWait;
         assertHasNotAttribute("href", webElement);
     }
 
-    public static void assertHref(String value, WebElement webElement) {
-        assertIs("href", value, hrefIn(webElement));
+    public static void assertHrefEquals(String value, WebElement webElement) {
+        assertEquals("href", value, hrefIn(webElement));
     }
 
-    public static void assertHrefNot(String value, WebElement webElement) {
-        assertIsNot("href", value, hrefIn(webElement));
+    public static void assertHrefNotEquals(String value, WebElement webElement) {
+        assertNotEquals("href", value, hrefIn(webElement));
     }
 
     public static void assertHrefContains(String searchText, WebElement webElement) {
@@ -830,44 +830,44 @@ import org.openqa.selenium.support.ui.WebDriverWait;
     }
 
     /* Text */
-    public static boolean isText(String text, WebElement webElement) {
-        return is(text, textIn(webElement));
+    public static boolean textEquals(String text, WebElement webElement) {
+        return equals(text, textIn(webElement));
     }
 
-    public static boolean isTextNot(String text, WebElement webElement) {
-        return isNot(text, textIn(webElement));
+    public static boolean textNotEquals(String text, WebElement webElement) {
+        return notEquals(text, textIn(webElement));
     }
 
-    public static boolean isTextContains(String searchText, WebElement webElement) {
-        return isContains(searchText, textIn(webElement));
+    public static boolean textContains(String searchText, WebElement webElement) {
+        return contains(searchText, textIn(webElement));
     }
 
-    public static boolean isTextNotContains(String searchText, WebElement webElement) {
-        return isContains(searchText, textIn(webElement));
+    public static boolean textNotContains(String searchText, WebElement webElement) {
+        return contains(searchText, textIn(webElement));
     }
 
-    public static boolean isTextStartsWith(String prefix, WebElement webElement) {
-        return isStartsWith(prefix, textIn(webElement));
+    public static boolean textStartsWith(String prefix, WebElement webElement) {
+        return startsWith(prefix, textIn(webElement));
     }
 
-    public static boolean isTextNotStartsWith(String prefix, WebElement webElement) {
-        return isNotStartsWith(prefix, textIn(webElement));
+    public static boolean textNotStartsWith(String prefix, WebElement webElement) {
+        return notStartsWith(prefix, textIn(webElement));
     }
 
-    public static boolean isTextEndsWith(String suffix, WebElement webElement) {
-        return isEndsWith(suffix, textIn(webElement));
+    public static boolean textEndsWith(String suffix, WebElement webElement) {
+        return endsWith(suffix, textIn(webElement));
     }
 
-    public static boolean isTextNotEndsWith(String suffix, WebElement webElement) {
-        return isEndsWith(suffix, textIn(webElement));
+    public static boolean textNotEndsWith(String suffix, WebElement webElement) {
+        return endsWith(suffix, textIn(webElement));
     }
 
-    public static void assertText(String text, WebElement webElement) {
-        assertIs("Text", text, textIn(webElement));
+    public static void assertTextEquals(String text, WebElement webElement) {
+        assertEquals("Text", text, textIn(webElement));
     }
 
-    public static void assertTextNot(String text, WebElement webElement) {
-        assertIsNot("Text", text, textIn(webElement));
+    public static void assertTextNotEquals(String text, WebElement webElement) {
+        assertNotEquals("Text", text, textIn(webElement));
     }
 
     public static void assertTextContains(String searchText, WebElement webElement) {
@@ -895,125 +895,125 @@ import org.openqa.selenium.support.ui.WebDriverWait;
     }
 
     /* Number */
-    public static boolean isNumber(Double number, WebElement webElement) {
-        return is(number, numberIn(webElement));
+    public static boolean numberEquals(Double number, WebElement webElement) {
+        return equals(number, numberIn(webElement));
     }
 
-    public static boolean isNumberNot(Double number, WebElement webElement) {
-        return isNot(number, numberIn(webElement));
+    public static boolean numberNotEquals(Double number, WebElement webElement) {
+        return notEquals(number, numberIn(webElement));
     }
 
-    public static boolean isNumberSmallerThan(Double number, WebElement webElement) {
-        return isSmallerThan(number, numberIn(webElement));
+    public static boolean numberLessThan(Double number, WebElement webElement) {
+        return isLessThan(number, numberIn(webElement));
     }
 
-    public static boolean isNumberSmallerThanOrEquals(Double number, WebElement webElement) {
-        return isSmallerThanOrEquals(number, numberIn(webElement));
+    public static boolean numberLessThanOrEquals(Double number, WebElement webElement) {
+        return isLessThanOrEquals(number, numberIn(webElement));
     }
 
-    public static boolean isNumberLargerThan(Double number, WebElement webElement) {
-        return isLargerThan(number, numberIn(webElement));
+    public static boolean numberGreaterThan(Double number, WebElement webElement) {
+        return isGreaterThan(number, numberIn(webElement));
     }
 
-    public static boolean isNumberLargerThanOrEquals(Double number, WebElement webElement) {
-        return isLargerThanOrEquals(number, numberIn(webElement));
+    public static boolean numberGreaterThanOrEquals(Double number, WebElement webElement) {
+        return isGreaterThanOrEquals(number, numberIn(webElement));
     }
 
-    public static void assertNumber(Double number, WebElement webElement) {
-        assertIs("Number", number, numberIn(webElement));
+    public static void assertNumberEquals(Double number, WebElement webElement) {
+        assertEquals("Number", number, numberIn(webElement));
     }
 
-    public static void assertNumberNot(Double number, WebElement webElement) {
-        assertIsNot("Number", number, numberIn(webElement));
+    public static void assertNumberNotEquals(Double number, WebElement webElement) {
+        assertNotEequals("Number", number, numberIn(webElement));
     }
 
-    public static void assertNumberSmallerThan(Double number, WebElement webElement) {
-        assertIsSmallerThan("Number", number, numberIn(webElement));
+    public static void assertNumberLessThan(Double number, WebElement webElement) {
+        assertIsLessThan("Number", number, numberIn(webElement));
     }
 
-    public static void assertNumberSmallerThanOrEquals(Double number, WebElement webElement) {
-        assertIsSmallerThanOrEquals("Number", number, numberIn(webElement));
+    public static void assertNumberLessThanOrEquals(Double number, WebElement webElement) {
+        assertIsLessThanOrEquals("Number", number, numberIn(webElement));
     }
 
-    public static void assertNumberLargerThan(Double number, WebElement webElement) {
-        assertIsLargerThan("Number", number, numberIn(webElement));
+    public static void assertNumberGreaterThan(Double number, WebElement webElement) {
+        assertIsGreaterThan("Number", number, numberIn(webElement));
     }
 
-    public static void assertNumberLargerThanOrEquals(Double number, WebElement webElement) {
-        assertIsLargerThanOrEquals("Number", number, numberIn(webElement));
+    public static void assertNumberGreaterThanOrEquals(Double number, WebElement webElement) {
+        assertIsGreaterThanOrEquals("Number", number, numberIn(webElement));
     }
 
-    /* Browser Url */
-    public static boolean isUrl(String url, WebDriver driver) {
-        return is(url, url(driver));
+    /* Url */
+    public static boolean urlEquals(String url, WebDriver driver) {
+        return equals(url, url(driver));
     }
 
-    public static boolean isUrlNot(String url, WebDriver driver) {
-        return isNot(url, url(driver));
+    public static boolean urlNotEquals(String url, WebDriver driver) {
+        return notEquals(url, url(driver));
     }
 
-    public static boolean isUrlMatching(String regExp, WebDriver driver) {
-        return isMatching(regExp, url(driver));
+    public static boolean urlMatches(String regExp, WebDriver driver) {
+        return matches(regExp, url(driver));
     }
 
-    public static boolean isUrlNotMatching(String regExp, WebDriver driver) {
-        return isNotMatching(regExp, url(driver));
+    public static boolean urlNotMatches(String regExp, WebDriver driver) {
+        return notMatches(regExp, url(driver));
     }
 
-    public static boolean isUrlMatching(Openable openable, WebDriver driver) {
-        return isMatching(openable.getUrl(), url(driver));
+    public static boolean urlMatches(Openable openable, WebDriver driver) {
+        return matches(openable.getUrl(), url(driver));
     }
 
-    public static boolean isUrlNotMatching(Openable openable, WebDriver driver) {
-        return isNotMatching(openable.getUrl(), url(driver));
+    public static boolean urlNotMatches(Openable openable, WebDriver driver) {
+        return notMatches(openable.getUrl(), url(driver));
     }
 
-    public static boolean isUrlContains(String searchText, WebDriver driver) {
-        return isContains(searchText, url(driver));
+    public static boolean urlContains(String searchText, WebDriver driver) {
+        return contains(searchText, url(driver));
     }
 
-    public static boolean isUrlNotContains(String searchText, WebDriver driver) {
-        return isNotContains(searchText, url(driver));
+    public static boolean urlNotContains(String searchText, WebDriver driver) {
+        return notContains(searchText, url(driver));
     }
 
-    public static boolean isUrlStartsWith(String prefix, WebDriver driver) {
-        return isStartsWith(prefix, url(driver));
+    public static boolean urlStartsWith(String prefix, WebDriver driver) {
+        return startsWith(prefix, url(driver));
     }
 
-    public static boolean isUrlNotStartsWith(String prefix, WebDriver driver) {
-        return isNotStartsWith(prefix, url(driver));
+    public static boolean urlNotStartsWith(String prefix, WebDriver driver) {
+        return notStartsWith(prefix, url(driver));
     }
 
-    public static boolean isUrlEndsWith(String suffix, WebDriver driver) {
-        return isEndsWith(suffix, url(driver));
+    public static boolean urlEndsWith(String suffix, WebDriver driver) {
+        return endsWith(suffix, url(driver));
     }
 
-    public static boolean isUrlNotEndsWith(String suffix, WebDriver driver) {
-        return isNotEndsWith(suffix, url(driver));
+    public static boolean urlNotEndsWith(String suffix, WebDriver driver) {
+        return notEndsWith(suffix, url(driver));
     }
 
-    public static void assertUrl(String url, WebDriver driver) {
-        assertIs("Url", url, url(driver));
+    public static void assertUrlEquals(String url, WebDriver driver) {
+        assertEquals("Url", url, url(driver));
     }
 
-    public static void assertUrlNot(String url, WebDriver driver) {
-        assertIsNot("Url", url, url(driver));
+    public static void assertUrlNotEquals(String url, WebDriver driver) {
+        assertNotEquals("Url", url, url(driver));
     }
 
-    public static void assertUrlMatching(String regExp, WebDriver driver) {
-        assertIsMatching("Url", regExp, url(driver));
+    public static void assertUrlMatches(String regExp, WebDriver driver) {
+        assertMatches("Url", regExp, url(driver));
     }
 
-    public static void assertUrlNotMatching(String regExp, WebDriver driver) {
-        assertIsNotMatching("Url", regExp, url(driver));
+    public static void assertUrlNotMatches(String regExp, WebDriver driver) {
+        assertNotMatches("Url", regExp, url(driver));
     }
 
-    public static void assertUrlMatching(Openable openable, WebDriver driver) {
-        assertIsMatching("Url", openable.getUrl(), url(driver));
+    public static void assertUrlMatches(Openable openable, WebDriver driver) {
+        assertMatches("Url", openable.getUrl(), url(driver));
     }
 
-    public static void assertUrlNotMatching(Openable openable, WebDriver driver) {
-        assertIsNotMatching("Url", openable.getUrl(), url(driver));
+    public static void assertUrlNotMatches(Openable openable, WebDriver driver) {
+        assertNotMatches("Url", openable.getUrl(), url(driver));
     }
 
     public static void assertUrlContains(String searchText, WebDriver driver) {
@@ -1170,60 +1170,60 @@ import org.openqa.selenium.support.ui.WebDriverWait;
         }
     }
 
-    /* Number of Elements */
-    public static boolean isNumberOf(int number, List<? extends WebElement> webElements) {
-        return is((double) number, (double) webElements.size());
+    /* Number of */
+    public static boolean numberOfElementsEquals(int number, List<? extends WebElement> webElements) {
+        return equals((double) number, (double) webElements.size());
     }
 
-    public static boolean isNumberOfNot(int number, List<? extends WebElement> webElements) {
-        return isNot((double) number, (double) webElements.size());
+    public static boolean numberOfElementsNotEquals(int number, List<? extends WebElement> webElements) {
+        return notEquals((double) number, (double) webElements.size());
     }
 
-    public static boolean isNumberOfSmallerThan(int number, List<? extends WebElement> webElements) {
-        return isSmallerThan((double) number, (double) webElements.size());
+    public static boolean numberOfElementsIsLessThan(int number, List<? extends WebElement> webElements) {
+        return isLessThan((double) number, (double) webElements.size());
     }
 
-    public static boolean isNumberOfSmallerThanOrEquals(int number, List<? extends WebElement> webElements) {
-        return isSmallerThanOrEquals((double) number, (double) webElements.size());
+    public static boolean numberOfElementsIsLessThanOrEquals(int number, List<? extends WebElement> webElements) {
+        return isLessThanOrEquals((double) number, (double) webElements.size());
     }
 
-    public static boolean isNumberOfLargerThan(int number, List<? extends WebElement> webElements) {
-        return isLargerThan((double) number, (double) webElements.size());
+    public static boolean numberOfElementsIsGreaterThan(int number, List<? extends WebElement> webElements) {
+        return isGreaterThan((double) number, (double) webElements.size());
     }
 
-    public static boolean isNumberOfLargerThanOrEquals(int number, List<? extends WebElement> webElements) {
-        return isLargerThanOrEquals((double) number, (double) webElements.size());
+    public static boolean numberOfElementsIsGreaterThanOrEquals(int number, List<? extends WebElement> webElements) {
+        return isGreaterThanOrEquals((double) number, (double) webElements.size());
     }
 
-    public static void assertNumberOf(int number, List<? extends WebElement> webElements) {
-        assertIs("Number of elements", (double) number, (double) webElements.size());
+    public static void assertNumberOfElementsEquals(int number, List<? extends WebElement> webElements) {
+        assertEquals("Number of elements", (double) number, (double) webElements.size());
     }
 
-    public static void assertNumberOfNot(int number, List<? extends WebElement> webElements) {
-        assertIsNot("Number of elements", (double) number, (double) webElements.size());
+    public static void assertNumberOfElementsNotEquals(int number, List<? extends WebElement> webElements) {
+        assertNotEequals("Number of elements", (double) number, (double) webElements.size());
     }
 
-    public static void assertNumberOfSmallerThan(int number, List<? extends WebElement> webElements) {
-        assertIsSmallerThan("Number of elements", (double) number, (double) webElements.size());
+    public static void assertNumberOfElementsIsLessThan(int number, List<? extends WebElement> webElements) {
+        assertIsLessThan("Number of elements", (double) number, (double) webElements.size());
     }
 
-    public static void assertNumberOfSmallerThanOrEquals(int number, List<? extends WebElement> webElements) {
-        assertIsSmallerThanOrEquals("Number of elements", (double) number, (double) webElements.size());
+    public static void assertNumberOfElementsIsLessThanOrEquals(int number, List<? extends WebElement> webElements) {
+        assertIsLessThanOrEquals("Number of elements", (double) number, (double) webElements.size());
     }
 
-    public static void assertNumberOfLargerThan(int number, List<? extends WebElement> webElements) {
-        assertIsLargerThan("Number of elements", (double) number, (double) webElements.size());
+    public static void assertNumberOfElementsIsGreaterThan(int number, List<? extends WebElement> webElements) {
+        assertIsGreaterThan("Number of elements", (double) number, (double) webElements.size());
     }
 
-    public static void assertNumberOfLargerThanOrEquals(int number, List<? extends WebElement> webElements) {
-        assertIsLargerThanOrEquals("Number of elements", (double) number, (double) webElements.size());
+    public static void assertNumberOfElementsIsGreaterThanOrEquals(int number, List<? extends WebElement> webElements) {
+        assertIsGreaterThanOrEquals("Number of elements", (double) number, (double) webElements.size());
     }
 
-    /* Select Option */
+    /* Option */
     public static boolean hasOption(String text, WebElement webElement) {
         List<WebElement> options = new Select(webElement).getOptions();
         for (WebElement option : options) {
-            if (isText(text, option)) {
+            if (textEquals(text, option)) {
                 return true;
             }
         }
@@ -1237,7 +1237,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
     public static boolean isOptionEnabled(String text, WebElement webElement) {
         List<WebElement> options = new Select(webElement).getOptions();
         for (WebElement option : options) {
-            if (isText(text, option) && isEnabled(option)) {
+            if (textEquals(text, option) && isEnabled(option)) {
                 return true;
             }
         }
@@ -1247,7 +1247,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
     public static boolean isOptionDisabled(String text, WebElement webElement) {
         List<WebElement> options = new Select(webElement).getOptions();
         for (WebElement option : options) {
-            if (isText(text, option) && isDisabled(option)) {
+            if (textEquals(text, option) && isDisabled(option)) {
                 return true;
             }
         }
@@ -1257,7 +1257,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
     public static boolean isOptionSelected(String text, WebElement webElement) {
         List<WebElement> options = new Select(webElement).getOptions();
         for (WebElement option : options) {
-            if (isText(text, option) && isSelected(option)) {
+            if (textEquals(text, option) && isSelected(option)) {
                 return true;
             }
         }
@@ -1267,14 +1267,14 @@ import org.openqa.selenium.support.ui.WebDriverWait;
     public static boolean isOptionDeselected(String text, WebElement webElement) {
         List<WebElement> options = new Select(webElement).getOptions();
         for (WebElement option : options) {
-            if (isText(text, option) && isDeselected(option)) {
+            if (textEquals(text, option) && isDeselected(option)) {
                 return true;
             }
         }
         return false;
     }
 
-    public static boolean isAllOptionSelected(WebElement webElement) {
+    public static boolean isAllOptionsSelected(WebElement webElement) {
         List<WebElement> options = new Select(webElement).getOptions();
         for (WebElement option : options) {
             if (isDeselected(option)) {
@@ -1284,7 +1284,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
         return true;
     }
 
-    public static boolean isNoOptionSelected(WebElement webElement) {
+    public static boolean isNoOptionsSelected(WebElement webElement) {
         List<WebElement> options = new Select(webElement).getOptions();
         for (WebElement option : options) {
             if (isSelected(option)) {
@@ -1330,23 +1330,23 @@ import org.openqa.selenium.support.ui.WebDriverWait;
         }
     }
 
-    public static void assertIsAllOptionSelected(WebElement webElement) {
-        if (!isAllOptionSelected(webElement)) {
+    public static void assertIsAllOptionsSelected(WebElement webElement) {
+        if (!isAllOptionsSelected(webElement)) {
             Assert.fail("All options are not selected!");
         }
     }
 
-    public static void assertIsNoOptionSelected(WebElement webElement) {
-        if (!isNoOptionSelected(webElement)) {
+    public static void assertIsNoOptionsSelected(WebElement webElement) {
+        if (!isNoOptionsSelected(webElement)) {
             Assert.fail("All options are not deselected!");
         }
     }
 
-    /* Select Option Value */
+    /* Option Value */
     public static boolean hasOptionWithValue(String value, WebElement webElement) {
         List<WebElement> options = new Select(webElement).getOptions();
         for (WebElement option : options) {
-            if (isValue(value, option)) {
+            if (valueEquals(value, option)) {
                 return true;
             }
         }
@@ -1360,7 +1360,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
     public static boolean isOptionWithValueEnabled(String value, WebElement webElement) {
         List<WebElement> options = new Select(webElement).getOptions();
         for (WebElement option : options) {
-            if (isValue(value, option) && isEnabled(option)) {
+            if (valueEquals(value, option) && isEnabled(option)) {
                 return true;
             }
         }
@@ -1370,7 +1370,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
     public static boolean isOptionWithValueDisabled(String value, WebElement webElement) {
         List<WebElement> options = new Select(webElement).getOptions();
         for (WebElement option : options) {
-            if (isValue(value, option) && isDisabled(option)) {
+            if (valueEquals(value, option) && isDisabled(option)) {
                 return true;
             }
         }
@@ -1380,7 +1380,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
     public static boolean isOptionWithValueSelected(String value, WebElement webElement) {
         List<WebElement> options = new Select(webElement).getOptions();
         for (WebElement option : options) {
-            if (isValue(value, option) && isSelected(option)) {
+            if (valueEquals(value, option) && isSelected(option)) {
                 return true;
             }
         }
@@ -1390,7 +1390,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
     public static boolean isOptionWithValueDeselected(String value, WebElement webElement) {
         List<WebElement> options = new Select(webElement).getOptions();
         for (WebElement option : options) {
-            if (isValue(value, option) && isDeselected(option)) {
+            if (valueEquals(value, option) && isDeselected(option)) {
                 return true;
             }
         }
@@ -1433,7 +1433,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
         }
     }
 
-    /* Select Option Index */
+    /* Option Index */
     public static boolean hasOptionWithIndex(int index, WebElement webElement) {
         List<WebElement> options = new Select(webElement).getOptions();
         try {
@@ -1518,8 +1518,8 @@ import org.openqa.selenium.support.ui.WebDriverWait;
             Assert.fail("Option with index \"" + index + "\" is not deselected!");
         }
     }
-    /* Has */
 
+    /* Has */
     public static boolean has(String name, WebElement webElement) {
         return webElement.getAttribute(name) != null;
     }
@@ -1529,46 +1529,46 @@ import org.openqa.selenium.support.ui.WebDriverWait;
     }
 
     /* Is */
-    public static boolean is(String text1, String text2) {
+    public static boolean equals(String text1, String text2) {
         return StringUtils.equals(text1, text2);
     }
 
-    public static boolean isNot(String text1, String text2) {
+    public static boolean notEquals(String text1, String text2) {
         return !StringUtils.equals(text1, text2);
     }
 
-    public static boolean isContains(String searchText, String text) {
+    public static boolean contains(String searchText, String text) {
         return StringUtils.contains(text, searchText);
     }
 
-    public static boolean isNotContains(String searchText, String text) {
+    public static boolean notContains(String searchText, String text) {
         return !StringUtils.contains(text, searchText);
     }
 
-    public static boolean isStartsWith(String prefix, String text) {
+    public static boolean startsWith(String prefix, String text) {
         return StringUtils.startsWith(text, prefix);
     }
 
-    public static boolean isNotStartsWith(String prefix, String text) {
+    public static boolean notStartsWith(String prefix, String text) {
         return !StringUtils.startsWith(text, prefix);
     }
 
-    public static boolean isEndsWith(String suffix, String text) {
+    public static boolean endsWith(String suffix, String text) {
         return StringUtils.endsWith(text, suffix);
     }
 
-    public static boolean isNotEndsWith(String suffix, String text) {
+    public static boolean notEndsWith(String suffix, String text) {
         return !StringUtils.endsWith(text, suffix);
     }
 
-    public static boolean isMatching(String regularExpression, String text) {
+    public static boolean matches(String regularExpression, String text) {
         if (text == null || regularExpression == null) {
             return false;
         }
         return text.matches(regularExpression);
     }
 
-    public static boolean isNotMatching(String regularExpression, String text) {
+    public static boolean notMatches(String regularExpression, String text) {
         if (text == null || regularExpression == null) {
             return true;
         }
@@ -1576,7 +1576,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
     }
 
     /* Is Any Of */
-    public static boolean isAnyOf(String[] anyOfTexts, String text) {
+    public static boolean equalsAnyOf(String[] anyOfTexts, String text) {
         for (String anyOfText : anyOfTexts) {
             if (StringUtils.equals(text, anyOfText)) {
                 return true;
@@ -1585,11 +1585,11 @@ import org.openqa.selenium.support.ui.WebDriverWait;
         return false;
     }
 
-    public static boolean isNotAnyOf(String[] anyOfTexts, String text) {
-        return !isAnyOf(anyOfTexts, text);
+    public static boolean notEqualsAnyOf(String[] anyOfTexts, String text) {
+        return !equalsAnyOf(anyOfTexts, text);
     }
 
-    public static boolean isContainsAnyOf(String[] searchTexts, String text) {
+    public static boolean containsAnyOf(String[] searchTexts, String text) {
         for (String searchText : searchTexts) {
             if (StringUtils.contains(text, searchText)) {
                 return true;
@@ -1598,186 +1598,187 @@ import org.openqa.selenium.support.ui.WebDriverWait;
         return false;
     }
 
-    public static boolean isNotContainsAnyOf(String[] searchTexts, String text) {
-        return !isContainsAnyOf(searchTexts, text);
+    public static boolean notContainsAnyOf(String[] searchTexts, String text) {
+        return !containsAnyOf(searchTexts, text);
     }
 
-    public static boolean isStartsWithAnyOf(String[] prefixes, String text) {
+    public static boolean startsWithAnyOf(String[] prefixes, String text) {
         return StringUtils.startsWithAny(text, prefixes);
     }
 
-    public static boolean isNotStartsWithAnyOf(String[] prefixes, String text) {
-        return !isStartsWithAnyOf(prefixes, text);
+    public static boolean notStartsWithAnyOf(String[] prefixes, String text) {
+        return !startsWithAnyOf(prefixes, text);
     }
 
-    public static boolean isEndsWithAnyOf(String[] suffix, String text) {
+    public static boolean endsWithAnyOf(String[] suffix, String text) {
         return StringUtils.endsWithAny(text, suffix);
     }
 
-    public static boolean isNotEndsWithAnyOf(String[] suffix, String text) {
-        return !isEndsWithAnyOf(suffix, text);
+    public static boolean notEndsWithAnyOf(String[] suffix, String text) {
+        return !endsWithAnyOf(suffix, text);
     }
 
-    public static boolean isMatchingAnyOf(String[] regularExpressions, String text) {
+    public static boolean matchingAnyOf(String[] regularExpressions, String text) {
         for (String regularExpression : regularExpressions) {
-            if (isMatching(regularExpression, text)) {
+            if (matches(regularExpression, text)) {
                 return true;
             }
         }
         return false;
     }
 
-    public static boolean isNotMatchingAnyOf(String[] regularExpressions, String text) {
-        return !isMatchingAnyOf(regularExpressions, text);
+    public static boolean notMatchingAnyOf(String[] regularExpressions, String text) {
+        return !matchingAnyOf(regularExpressions, text);
     }
 
     /* Is Ignore Case */
-    public static boolean isIgnoreCase(String text1, String text2) {
+    public static boolean equalsIgnoreCase(String text1, String text2) {
         return StringUtils.equalsIgnoreCase(text1, text2);
     }
 
-    public static boolean isNotIgnoreCase(String text1, String text2) {
-        return !isIgnoreCase(text1, text2);
+    public static boolean notEqualsIgnoreCase(String text1, String text2) {
+        return !equalsIgnoreCase(text1, text2);
     }
 
-    public static boolean isContainsIgnoreCase(String searchText, String text) {
+    public static boolean containsIgnoreCase(String searchText, String text) {
         return StringUtils.containsIgnoreCase(text, searchText);
     }
 
-    public static boolean isNotContainsIgnoreCase(String searchText, String text) {
-        return !isContainsIgnoreCase(text, searchText);
+    public static boolean notContainsIgnoreCase(String searchText, String text) {
+        return !containsIgnoreCase(text, searchText);
     }
 
-    public static boolean isStartsWithIgnoreCase(String prefix, String text) {
+    public static boolean startsWithIgnoreCase(String prefix, String text) {
         return StringUtils.startsWithIgnoreCase(text, prefix);
     }
 
-    public static boolean isNotStartsWithIgnoreCase(String prefix, String text) {
-        return !isStartsWithIgnoreCase(prefix, text);
+    public static boolean notStartsWithIgnoreCase(String prefix, String text) {
+        return !startsWithIgnoreCase(prefix, text);
     }
 
-    public static boolean isEndsWithIgnoreCase(String suffix, String text) {
+    public static boolean endsWithIgnoreCase(String suffix, String text) {
         return StringUtils.endsWithIgnoreCase(text, suffix);
     }
 
-    public static boolean isNotEndsWithIgnoreCase(String suffix, String text) {
-        return !isEndsWithIgnoreCase(suffix, text);
+    public static boolean notEndsWithIgnoreCase(String suffix, String text) {
+        return !endsWithIgnoreCase(suffix, text);
     }
 
     /* Asserts */
-    public static void assertIs(String name, String expected, String actual) {
-        Assert.assertEquals(name + " is not " + expected + "!", expected, actual);
+    public static void assertEquals(String name, String expected, String actual) {
+        Assert.assertEquals(name + " is not equal to " + expected + "!", expected, actual);
     }
 
-    public static void assertIsNot(String name, String notExpected, String actual) {
-        Assert.assertNotEquals(name + " is " + notExpected + " when it shouldn't!", notExpected, actual);
+    public static void assertNotEquals(String name, String notExpected, String actual) {
+        Assert.assertNotEquals(name + " is equal to" + notExpected + " when it shouldn't!", notExpected, actual);
     }
 
-    public static void assertIsMatching(String name, String regExp, String actual) {
-        if (isNotMatching(regExp, actual)) {
+    public static void assertMatches(String name, String regExp, String actual) {
+        if (notMatches(regExp, actual)) {
             Assert.fail(name + ": " + actual + " is not matching " + regExp + "!");
         }
     }
 
-    public static void assertIsNotMatching(String name, String regExp, String actual) {
-        if (isMatching(regExp, actual)) {
+    public static void assertNotMatches(String name, String regExp, String actual) {
+        if (matches(regExp, actual)) {
             Assert.fail(name + ": " + actual + " is matching " + regExp + " when it shouldn't!");
         }
     }
 
     public static void assertContains(String name, String searchText, String actual) {
-        if (isNotContains(searchText, actual)) {
+        if (notContains(searchText, actual)) {
             Assert.fail(name + ": " + actual + " is not containing " + searchText);
         }
     }
 
     public static void assertNotContains(String name, String searchText, String actual) {
-        if (isContains(searchText, actual)) {
+        if (contains(searchText, actual)) {
             Assert.fail(name + ": " + actual + " is containing " + searchText + " when it shouldn't!");
         }
     }
 
     public static void assertStartsWith(String name, String prefix, String actual) {
-        if (isNotStartsWith(prefix, actual)) {
+        if (notStartsWith(prefix, actual)) {
             Assert.fail(name + ": " + actual + " is not starting with " + prefix);
         }
     }
 
     public static void assertNotStartsWith(String name, String prefix, String actual) {
-        if (isStartsWith(prefix, actual)) {
+        if (startsWith(prefix, actual)) {
             Assert.fail(name + ": " + actual + " is starting with " + prefix + " when it shouldn't!");
         }
     }
 
     public static void assertEndsWith(String name, String suffix, String actual) {
-        if (isNotEndsWith(suffix, actual)) {
+        if (notEndsWith(suffix, actual)) {
             Assert.fail(name + ": " + actual + " is not ending with " + suffix);
         }
     }
 
     public static void assertNotEndsWith(String name, String suffix, String actual) {
-        if (isEndsWith(suffix, actual)) {
+        if (endsWith(suffix, actual)) {
             Assert.fail(name + ": " + actual + " is ending with " + suffix + " when it shouldn't!");
         }
     }
 
-    public static boolean is(Double comparedTo, Double number) {
+    // TODO: is VS equals
+    public static boolean equals(Double comparedTo, Double number) {
         return number == comparedTo;
     }
 
-    public static boolean isNot(double comparedTo, double number) {
+    public static boolean notEquals(double comparedTo, double number) {
         return number != comparedTo;
     }
 
-    public static boolean isSmallerThan(Double comparedTo, Double number) {
+    public static boolean isLessThan(Double comparedTo, Double number) {
         return number < comparedTo;
     }
 
-    public static boolean isSmallerThanOrEquals(double comparedTo, double number) {
+    public static boolean isLessThanOrEquals(double comparedTo, double number) {
         return number <= comparedTo;
     }
 
-    public static boolean isLargerThan(double comparedTo, double number) {
+    public static boolean isGreaterThan(double comparedTo, double number) {
         return number > comparedTo;
     }
 
-    public static boolean isLargerThanOrEquals(double comparedTo, double number) {
+    public static boolean isGreaterThanOrEquals(double comparedTo, double number) {
         return number >= comparedTo;
     }
 
-    public static void assertIs(String name, double comparedTo, double number) {
-        if (isNot(comparedTo, number)) {
-            Assert.fail(name + ": " + number + " is not " + comparedTo + " !");
+    public static void assertEquals(String name, double comparedTo, double number) {
+        if (notEquals(comparedTo, number)) {
+            Assert.fail(name + ": " + number + " is not equal to " + comparedTo + " !");
         }
     }
 
-    public static void assertIsNot(String name, double comparedTo, double number) {
-        if (is(comparedTo, number)) {
-            Assert.fail(name + ": " + number + " is " + comparedTo + " when it shouldn't!");
+    public static void assertNotEequals(String name, double comparedTo, double number) {
+        if (equals(comparedTo, number)) {
+            Assert.fail(name + ": " + number + " is equal to " + comparedTo + " when it shouldn't!");
         }
     }
 
-    public static void assertIsSmallerThan(String name, double comparedTo, double number) {
-        if (isLargerThanOrEquals(comparedTo, number)) {
-            Assert.fail(name + ": " + number + " is not smaller then " + comparedTo + " !");
+    public static void assertIsLessThan(String name, double comparedTo, double number) {
+        if (isGreaterThanOrEquals(comparedTo, number)) {
+            Assert.fail(name + ": " + number + " is not less than " + comparedTo + " !");
         }
     }
 
-    public static void assertIsSmallerThanOrEquals(String name, double comparedTo, double number) {
-        if (isLargerThan(comparedTo, number)) {
-            Assert.fail(name + ": " + number + " is not smaller then or equal " + comparedTo + " !");
+    public static void assertIsLessThanOrEquals(String name, double comparedTo, double number) {
+        if (isGreaterThan(comparedTo, number)) {
+            Assert.fail(name + ": " + number + " is not less than or equal to " + comparedTo + " !");
         }
     }
 
-    public static void assertIsLargerThan(String name, double comparedTo, double number) {
-        if (isSmallerThanOrEquals(comparedTo, number)) {
-            Assert.fail(name + ": " + number + " is not larger then " + comparedTo + " !");
+    public static void assertIsGreaterThan(String name, double comparedTo, double number) {
+        if (isLessThanOrEquals(comparedTo, number)) {
+            Assert.fail(name + ": " + number + " is not greater than " + comparedTo + " !");
         }
     }
 
-    public static void assertIsLargerThanOrEquals(String name, double comparedTo, double number) {
-        if (isSmallerThan(comparedTo, number)) {
-            Assert.fail(name + ": " + number + " is not larger then or equal " + comparedTo + " !");
+    public static void assertIsGreaterThanOrEquals(String name, double comparedTo, double number) {
+        if (isLessThan(comparedTo, number)) {
+            Assert.fail(name + ": " + number + " is not greater than or equal to " + comparedTo + " !");
         }
     }
 

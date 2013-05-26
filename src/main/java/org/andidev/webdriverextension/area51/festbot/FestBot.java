@@ -71,7 +71,7 @@ public class FestBot {
 
     /* Count */
     public static Integer numberOf(List<? extends WebElement> webElements) {
-        return BotUtils.numberOf(webElements);
+        return BotUtils.numberOfElementsIn(webElements);
     }
 
     /* Clear */
