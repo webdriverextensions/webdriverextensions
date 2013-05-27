@@ -1098,13 +1098,13 @@ import org.openqa.selenium.support.ui.WebDriverWait;
     }
 
     public static void assertIsEnabled(WebElement webElement) {
-        if (isUnchecked(webElement)) {
+        if (isDisabled(webElement)) {
             Assert.fail(describeTag(webElement) + " is not enabled!");
         }
     }
 
     public static void assertIsDisabled(WebElement webElement) {
-        if (isChecked(webElement)) {
+        if (isEnabled(webElement)) {
             Assert.fail(describeTag(webElement) + " is not disabled!");
         }
     }
