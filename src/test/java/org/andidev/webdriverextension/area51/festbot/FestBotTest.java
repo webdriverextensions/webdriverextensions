@@ -22,7 +22,6 @@ public class FestBotTest {
     public void testAssertThat() {
         // Normal reads
         textIn(username);
-        optionsIn(username);
         url();
 
         // Normal clear

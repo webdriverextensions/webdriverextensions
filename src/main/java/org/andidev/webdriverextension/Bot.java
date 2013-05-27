@@ -21,10 +21,6 @@ public class Bot {
         return BotUtils.numberIn(webElement);
     }
 
-    public static List<String> optionsIn(WebElement webElement) {
-        return BotUtils.optionsIn(webElement);
-    }
-
     public static String url() {
         return BotUtils.url(ThreadDriver.getDriver());
     }

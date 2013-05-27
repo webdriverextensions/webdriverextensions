@@ -38,15 +38,6 @@ import org.openqa.selenium.support.ui.WebDriverWait;
         }
     }
 
-    public static List<String> optionsIn(WebElement webElement) {
-        List<WebElement> options = new Select(webElement).getOptions();
-        List<String> optionTexts = new ArrayList<String>();
-        for (WebElement option : options) {
-            optionTexts.add(textIn(option));
-        }
-        return optionTexts;
-    }
-
     public static String url(WebDriver driver) {
         return driver.getCurrentUrl();
     }
