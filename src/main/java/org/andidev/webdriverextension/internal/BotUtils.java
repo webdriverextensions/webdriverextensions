@@ -2,6 +2,7 @@ package org.andidev.webdriverextension.internal;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 import static java.util.concurrent.TimeUnit.DAYS;
@@ -83,8 +84,8 @@ import org.openqa.selenium.support.ui.WebDriverWait;
     }
 
     /* Count */
-    public static int numberOfElementsIn(List<? extends WebElement> webElements) {
-        return webElements.size();
+    public static int sizeOf(Collection collection) {
+        return collection.size();
     }
 
     /* Clear */
@@ -278,13 +279,10 @@ import org.openqa.selenium.support.ui.WebDriverWait;
     }
 
     public static void debug(List<? extends WebElement> webElements) {
+        log.debug("List contains the following {} tags", sizeOf(webElements));
         for (WebElement webElement : webElements) {
             debug(webElement);
         }
-    }
-
-    public static void debugNumberOfElementsIn(List<? extends WebElement> webElements) {
-        log.debug("Number of elements are {}", numberOfElementsIn(webElements));
     }
 
     /* Tag Name */
@@ -904,19 +902,19 @@ import org.openqa.selenium.support.ui.WebDriverWait;
     }
 
     public static boolean numberLessThan(Double number, WebElement webElement) {
-        return isLessThan(number, numberIn(webElement));
+        return lessThan(number, numberIn(webElement));
     }
 
     public static boolean numberLessThanOrEquals(Double number, WebElement webElement) {
-        return isLessThanOrEquals(number, numberIn(webElement));
+        return lessThanOrEquals(number, numberIn(webElement));
     }
 
     public static boolean numberGreaterThan(Double number, WebElement webElement) {
-        return isGreaterThan(number, numberIn(webElement));
+        return greaterThan(number, numberIn(webElement));
     }
 
     public static boolean numberGreaterThanOrEquals(Double number, WebElement webElement) {
-        return isGreaterThanOrEquals(number, numberIn(webElement));
+        return greaterThanOrEquals(number, numberIn(webElement));
     }
 
     public static void assertNumberEquals(Double number, WebElement webElement) {
@@ -928,19 +926,19 @@ import org.openqa.selenium.support.ui.WebDriverWait;
     }
 
     public static void assertNumberLessThan(Double number, WebElement webElement) {
-        assertIsLessThan("Number", number, numberIn(webElement));
+        assertLessThan("Number", number, numberIn(webElement));
     }
 
     public static void assertNumberLessThanOrEquals(Double number, WebElement webElement) {
-        assertIsLessThanOrEquals("Number", number, numberIn(webElement));
+        assertLessThanOrEquals("Number", number, numberIn(webElement));
     }
 
     public static void assertNumberGreaterThan(Double number, WebElement webElement) {
-        assertIsGreaterThan("Number", number, numberIn(webElement));
+        assertGreaterThan("Number", number, numberIn(webElement));
     }
 
     public static void assertNumberGreaterThanOrEquals(Double number, WebElement webElement) {
-        assertIsGreaterThanOrEquals("Number", number, numberIn(webElement));
+        assertGreaterThanOrEquals("Number", number, numberIn(webElement));
     }
 
     /* Url */
@@ -1171,52 +1169,52 @@ import org.openqa.selenium.support.ui.WebDriverWait;
     }
 
     /* Number of */
-    public static boolean numberOfElementsEquals(int number, List<? extends WebElement> webElements) {
-        return equals((double) number, (double) webElements.size());
+    public static boolean sizeEquals(int number, Collection collection) {
+        return equals((double) number, (double) collection.size());
     }
 
-    public static boolean numberOfElementsNotEquals(int number, List<? extends WebElement> webElements) {
-        return notEquals((double) number, (double) webElements.size());
+    public static boolean sizeNotEquals(int number, Collection collection) {
+        return notEquals((double) number, (double) collection.size());
     }
 
-    public static boolean numberOfElementsIsLessThan(int number, List<? extends WebElement> webElements) {
-        return isLessThan((double) number, (double) webElements.size());
+    public static boolean sizeLessThan(int number, Collection collection) {
+        return lessThan((double) number, (double) collection.size());
     }
 
-    public static boolean numberOfElementsIsLessThanOrEquals(int number, List<? extends WebElement> webElements) {
-        return isLessThanOrEquals((double) number, (double) webElements.size());
+    public static boolean sizeLessThanOrEquals(int number, Collection collection) {
+        return lessThanOrEquals((double) number, (double) collection.size());
     }
 
-    public static boolean numberOfElementsIsGreaterThan(int number, List<? extends WebElement> webElements) {
-        return isGreaterThan((double) number, (double) webElements.size());
+    public static boolean sizeGreaterThan(int number, Collection collection) {
+        return greaterThan((double) number, (double) collection.size());
     }
 
-    public static boolean numberOfElementsIsGreaterThanOrEquals(int number, List<? extends WebElement> webElements) {
-        return isGreaterThanOrEquals((double) number, (double) webElements.size());
+    public static boolean sizeGreaterThanOrEquals(int number, Collection collection) {
+        return greaterThanOrEquals((double) number, (double) collection.size());
     }
 
-    public static void assertNumberOfElementsEquals(int number, List<? extends WebElement> webElements) {
-        assertEquals("Number of elements", (double) number, (double) webElements.size());
+    public static void assertSizeEquals(int number, Collection collection) {
+        assertEquals("Size", (double) number, (double) collection.size());
     }
 
-    public static void assertNumberOfElementsNotEquals(int number, List<? extends WebElement> webElements) {
-        assertNotEequals("Number of elements", (double) number, (double) webElements.size());
+    public static void assertSizeNotEquals(int number, Collection collection) {
+        assertNotEequals("Size", (double) number, (double) collection.size());
     }
 
-    public static void assertNumberOfElementsIsLessThan(int number, List<? extends WebElement> webElements) {
-        assertIsLessThan("Number of elements", (double) number, (double) webElements.size());
+    public static void assertSizeLessThan(int number, Collection collection) {
+        assertLessThan("Size", (double) number, (double) collection.size());
     }
 
-    public static void assertNumberOfElementsIsLessThanOrEquals(int number, List<? extends WebElement> webElements) {
-        assertIsLessThanOrEquals("Number of elements", (double) number, (double) webElements.size());
+    public static void assertSizeLessThanOrEquals(int number, Collection collection) {
+        assertLessThanOrEquals("Size", (double) number, (double) collection.size());
     }
 
-    public static void assertNumberOfElementsIsGreaterThan(int number, List<? extends WebElement> webElements) {
-        assertIsGreaterThan("Number of elements", (double) number, (double) webElements.size());
+    public static void assertSizeGreaterThan(int number, Collection collection) {
+        assertGreaterThan("Size", (double) number, (double) collection.size());
     }
 
-    public static void assertNumberOfElementsIsGreaterThanOrEquals(int number, List<? extends WebElement> webElements) {
-        assertIsGreaterThanOrEquals("Number of elements", (double) number, (double) webElements.size());
+    public static void assertSizeGreaterThanOrEquals(int number, Collection collection) {
+        assertGreaterThanOrEquals("Size", (double) number, (double) collection.size());
     }
 
     /* Option */
@@ -1721,7 +1719,6 @@ import org.openqa.selenium.support.ui.WebDriverWait;
         }
     }
 
-    // TODO: is VS equals
     public static boolean equals(Double comparedTo, Double number) {
         return number == comparedTo;
     }
@@ -1730,19 +1727,19 @@ import org.openqa.selenium.support.ui.WebDriverWait;
         return number != comparedTo;
     }
 
-    public static boolean isLessThan(Double comparedTo, Double number) {
+    public static boolean lessThan(Double comparedTo, Double number) {
         return number < comparedTo;
     }
 
-    public static boolean isLessThanOrEquals(double comparedTo, double number) {
+    public static boolean lessThanOrEquals(double comparedTo, double number) {
         return number <= comparedTo;
     }
 
-    public static boolean isGreaterThan(double comparedTo, double number) {
+    public static boolean greaterThan(double comparedTo, double number) {
         return number > comparedTo;
     }
 
-    public static boolean isGreaterThanOrEquals(double comparedTo, double number) {
+    public static boolean greaterThanOrEquals(double comparedTo, double number) {
         return number >= comparedTo;
     }
 
@@ -1758,26 +1755,26 @@ import org.openqa.selenium.support.ui.WebDriverWait;
         }
     }
 
-    public static void assertIsLessThan(String name, double comparedTo, double number) {
-        if (isGreaterThanOrEquals(comparedTo, number)) {
+    public static void assertLessThan(String name, double comparedTo, double number) {
+        if (greaterThanOrEquals(comparedTo, number)) {
             Assert.fail(name + ": " + number + " is not less than " + comparedTo + " !");
         }
     }
 
-    public static void assertIsLessThanOrEquals(String name, double comparedTo, double number) {
-        if (isGreaterThan(comparedTo, number)) {
+    public static void assertLessThanOrEquals(String name, double comparedTo, double number) {
+        if (greaterThan(comparedTo, number)) {
             Assert.fail(name + ": " + number + " is not less than or equal to " + comparedTo + " !");
         }
     }
 
-    public static void assertIsGreaterThan(String name, double comparedTo, double number) {
-        if (isLessThanOrEquals(comparedTo, number)) {
+    public static void assertGreaterThan(String name, double comparedTo, double number) {
+        if (lessThanOrEquals(comparedTo, number)) {
             Assert.fail(name + ": " + number + " is not greater than " + comparedTo + " !");
         }
     }
 
-    public static void assertIsGreaterThanOrEquals(String name, double comparedTo, double number) {
-        if (isLessThan(comparedTo, number)) {
+    public static void assertGreaterThanOrEquals(String name, double comparedTo, double number) {
+        if (lessThan(comparedTo, number)) {
             Assert.fail(name + ": " + number + " is not greater than or equal to " + comparedTo + " !");
         }
     }

@@ -20,19 +20,19 @@ public class IsDoubleTypes {
     }
 
     public boolean isLessThan(Double number) {
-        return BotUtils.isLessThan(number, number);
+        return BotUtils.lessThan(number, number);
     }
 
     public boolean isLessThanOrEquals(Double number) {
-        return BotUtils.isLessThanOrEquals(number, number);
+        return BotUtils.lessThanOrEquals(number, number);
     }
 
     public boolean isGreaterThan(Double number) {
-        return BotUtils.isGreaterThan(number, number);
+        return BotUtils.greaterThan(number, number);
     }
 
     public boolean isGreaterThanOrEquals(Double number) {
-        return BotUtils.isGreaterThanOrEquals(number, number);
+        return BotUtils.greaterThanOrEquals(number, number);
     }
 
 }

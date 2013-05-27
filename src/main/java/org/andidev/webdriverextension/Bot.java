@@ -1,5 +1,6 @@
 package org.andidev.webdriverextension;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 import org.andidev.webdriverextension.internal.BotUtils;
@@ -60,8 +61,8 @@ public class Bot {
         return BotUtils.hrefIn(webElement);
     }
 
-    public static Integer numberOfElementsIn(List<? extends WebElement> webElements) {
-        return BotUtils.numberOfElementsIn(webElements);
+    public static Integer sizeOf(Collection collection) {
+        return BotUtils.sizeOf(collection);
     }
 
     public static void clear(WebElement webElement) {
@@ -182,10 +183,6 @@ public class Bot {
 
     public static void debug(List<? extends WebElement> webElements) {
         BotUtils.debug(webElements);
-    }
-
-    public static void debugNumberOfElementsIn(List<? extends WebElement> webElements) {
-        BotUtils.debugNumberOfElementsIn(webElements);
     }
 
     /* Tag Name */
@@ -1004,52 +1001,52 @@ public class Bot {
     }
 
     /* Number of */
-    public static boolean numberOfElementsEquals(int number, List<? extends WebElement> webElements) {
-        return BotUtils.numberOfElementsEquals(number, webElements);
+    public static boolean sizeEquals(int number, Collection collection) {
+        return BotUtils.sizeEquals(number, collection);
     }
 
-    public static boolean numberOfElementsNotEquals(int number, List<? extends WebElement> webElements) {
-        return BotUtils.numberOfElementsNotEquals(number, webElements);
+    public static boolean sizeNotEquals(int number, Collection collection) {
+        return BotUtils.sizeNotEquals(number, collection);
     }
 
-    public static boolean numberOfElementsIsLessThan(int number, List<? extends WebElement> webElements) {
-        return BotUtils.numberOfElementsIsLessThan(number, webElements);
+    public static boolean sizeLessThan(int number, Collection collection) {
+        return BotUtils.sizeLessThan(number, collection);
     }
 
-    public static boolean numberOfElementsIsLessThanOrEquals(int number, List<? extends WebElement> webElements) {
-        return BotUtils.numberOfElementsIsLessThanOrEquals(number, webElements);
+    public static boolean sizeLessThanOrEquals(int number, Collection collection) {
+        return BotUtils.sizeLessThanOrEquals(number, collection);
     }
 
-    public static boolean numberOfElementsIsGreaterThan(int number, List<? extends WebElement> webElements) {
-        return BotUtils.numberOfElementsIsGreaterThan(number, webElements);
+    public static boolean sizeGreaterThan(int number, Collection collection) {
+        return BotUtils.sizeGreaterThan(number, collection);
     }
 
-    public static boolean numberOfElementsIsGreaterThanOrEquals(int number, List<? extends WebElement> webElements) {
-        return BotUtils.numberOfElementsIsGreaterThanOrEquals(number, webElements);
+    public static boolean sizeGreaterThanOrEquals(int number, Collection collection) {
+        return BotUtils.sizeGreaterThanOrEquals(number, collection);
     }
 
-    public static void assertNumberOfElementsEquals(int number, List<? extends WebElement> webElements) {
-        BotUtils.assertNumberOfElementsEquals(number, webElements);
+    public static void assertSizeEquals(int number, Collection collection) {
+        BotUtils.assertSizeEquals(number, collection);
     }
 
-    public static void assertNumberOfElementsNotEquals(int number, List<? extends WebElement> webElements) {
-        BotUtils.assertNumberOfElementsNotEquals(number, webElements);
+    public static void assertSizeNotEquals(int number, Collection collection) {
+        BotUtils.assertSizeNotEquals(number, collection);
     }
 
-    public static void assertNumberOfElementsIsLessThan(int number, List<? extends WebElement> webElements) {
-        BotUtils.assertNumberOfElementsIsLessThan(number, webElements);
+    public static void assertSizeLessThan(int number, Collection collection) {
+        BotUtils.assertSizeLessThan(number, collection);
     }
 
-    public static void assertNumberOfElementsIsLessThanOrEquals(int number, List<? extends WebElement> webElements) {
-        BotUtils.assertNumberOfElementsIsLessThanOrEquals(number, webElements);
+    public static void assertSizeLessThanOrEquals(int number, Collection collection) {
+        BotUtils.assertSizeLessThanOrEquals(number, collection);
     }
 
-    public static void assertNumberOfElementsIsGreaterThan(int number, List<? extends WebElement> webElements) {
-        BotUtils.assertNumberOfElementsIsGreaterThan(number, webElements);
+    public static void assertSizeGreaterThan(int number, Collection collection) {
+        BotUtils.assertSizeGreaterThan(number, collection);
     }
 
-    public static void assertNumberOfElementsIsGreaterThanOrEquals(int number, List<? extends WebElement> webElements) {
-        BotUtils.assertNumberOfElementsIsGreaterThanOrEquals(number, webElements);
+    public static void assertSizeGreaterThanOrEquals(int number, Collection collection) {
+        BotUtils.assertSizeGreaterThanOrEquals(number, collection);
     }
 
     /* Option */
