@@ -1548,16 +1548,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
         }
     }
 
-    /* Has */
-    public static boolean has(String name, WebElement webElement) {
-        return webElement.getAttribute(name) != null;
-    }
-
-    public static boolean hasNot(String name, WebElement webElement) {
-        return !hasAttribute(name, webElement);
-    }
-
-    /* Is */
+    /* String Equals */
     public static boolean equals(String text1, String text2) {
         return StringUtils.equals(text1, text2);
     }
@@ -1604,96 +1595,6 @@ import org.openqa.selenium.support.ui.WebDriverWait;
         return !text.matches(regularExpression);
     }
 
-    /* Is Any Of */
-    public static boolean equalsAnyOf(String[] anyOfTexts, String text) {
-        for (String anyOfText : anyOfTexts) {
-            if (StringUtils.equals(text, anyOfText)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    public static boolean notEqualsAnyOf(String[] anyOfTexts, String text) {
-        return !equalsAnyOf(anyOfTexts, text);
-    }
-
-    public static boolean containsAnyOf(String[] searchTexts, String text) {
-        for (String searchText : searchTexts) {
-            if (StringUtils.contains(text, searchText)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    public static boolean notContainsAnyOf(String[] searchTexts, String text) {
-        return !containsAnyOf(searchTexts, text);
-    }
-
-    public static boolean startsWithAnyOf(String[] prefixes, String text) {
-        return StringUtils.startsWithAny(text, prefixes);
-    }
-
-    public static boolean notStartsWithAnyOf(String[] prefixes, String text) {
-        return !startsWithAnyOf(prefixes, text);
-    }
-
-    public static boolean endsWithAnyOf(String[] suffix, String text) {
-        return StringUtils.endsWithAny(text, suffix);
-    }
-
-    public static boolean notEndsWithAnyOf(String[] suffix, String text) {
-        return !endsWithAnyOf(suffix, text);
-    }
-
-    public static boolean matchingAnyOf(String[] regularExpressions, String text) {
-        for (String regularExpression : regularExpressions) {
-            if (matches(regularExpression, text)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    public static boolean notMatchingAnyOf(String[] regularExpressions, String text) {
-        return !matchingAnyOf(regularExpressions, text);
-    }
-
-    /* Is Ignore Case */
-    public static boolean equalsIgnoreCase(String text1, String text2) {
-        return StringUtils.equalsIgnoreCase(text1, text2);
-    }
-
-    public static boolean notEqualsIgnoreCase(String text1, String text2) {
-        return !equalsIgnoreCase(text1, text2);
-    }
-
-    public static boolean containsIgnoreCase(String searchText, String text) {
-        return StringUtils.containsIgnoreCase(text, searchText);
-    }
-
-    public static boolean notContainsIgnoreCase(String searchText, String text) {
-        return !containsIgnoreCase(text, searchText);
-    }
-
-    public static boolean startsWithIgnoreCase(String prefix, String text) {
-        return StringUtils.startsWithIgnoreCase(text, prefix);
-    }
-
-    public static boolean notStartsWithIgnoreCase(String prefix, String text) {
-        return !startsWithIgnoreCase(prefix, text);
-    }
-
-    public static boolean endsWithIgnoreCase(String suffix, String text) {
-        return StringUtils.endsWithIgnoreCase(text, suffix);
-    }
-
-    public static boolean notEndsWithIgnoreCase(String suffix, String text) {
-        return !endsWithIgnoreCase(suffix, text);
-    }
-
-    /* Asserts */
     public static void assertEquals(String name, String expected, String actual) {
         Assert.assertEquals(name + " is not equal to " + expected + "!", expected, actual);
     }
@@ -1750,6 +1651,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
         }
     }
 
+    /* Double Equals */
     public static boolean equals(Double comparedTo, Double number) {
         return number == comparedTo;
     }
@@ -1810,6 +1712,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
         }
     }
 
+    /* Describe */
     public static String describeTag(WebElement webElement) {
         return describeTag(webElement, null);
     }
