@@ -161,12 +161,12 @@ public class Bot {
         BotUtils.waitForElementToDisplay(webElement, ThreadDriver.getDriver());
     }
 
-    public static void waitForElementToDisplay(WebElement webElement, long timeOutInSeconds) {
-        BotUtils.waitForElementToDisplay(webElement, timeOutInSeconds, ThreadDriver.getDriver());
+    public static void waitForElementToDisplay(WebElement webElement, long secondsToWait) {
+        BotUtils.waitForElementToDisplay(webElement, secondsToWait, ThreadDriver.getDriver());
     }
 
-    public static void waitForElementToDisplay(WebElement webElement, long timeOutInSeconds, long sleepInMillis) {
-        BotUtils.waitForElementToDisplay(webElement, timeOutInSeconds, sleepInMillis, ThreadDriver.getDriver());
+    public static void waitForElementToDisplay(WebElement webElement, long secondsToWait, long sleepInMillis) {
+        BotUtils.waitForElementToDisplay(webElement, secondsToWait, sleepInMillis, ThreadDriver.getDriver());
     }
 
     public static void debug(String str) {
@@ -685,6 +685,14 @@ public class Bot {
     }
 
     /* Text */
+    public static boolean hasText(WebElement webElement) {
+        return BotUtils.hasText(webElement);
+    }
+
+    public static boolean hasNotText(WebElement webElement) {
+        return BotUtils.hasNotText(webElement);
+    }
+
     public static boolean textEquals(String text, WebElement webElement) {
         return BotUtils.textEquals(text, webElement);
     }
@@ -715,6 +723,14 @@ public class Bot {
 
     public static boolean textNotEndsWith(String suffix, WebElement webElement) {
         return BotUtils.textNotEndsWith(suffix, webElement);
+    }
+
+    public static void assertHasText(WebElement webElement) {
+        BotUtils.assertHasText(webElement);
+    }
+
+    public static void assertHasNotText(WebElement webElement) {
+        BotUtils.assertHasNotText(webElement);
     }
 
     public static void assertTextEquals(String text, WebElement webElement) {
@@ -750,6 +766,14 @@ public class Bot {
     }
 
     /* Number */
+    public static boolean hasNumber(WebElement webElement) {
+        return BotUtils.hasNumber(webElement);
+    }
+
+    public static boolean hasNotNumber(WebElement webElement) {
+        return BotUtils.hasNotNumber(webElement);
+    }
+
     public static boolean numberEquals(Double number, WebElement webElement) {
         return BotUtils.numberEquals(number, webElement);
     }
@@ -772,6 +796,14 @@ public class Bot {
 
     public static boolean numberGreaterThanOrEquals(Double number, WebElement webElement) {
         return BotUtils.numberGreaterThanOrEquals(number, webElement);
+    }
+
+    public static void assertHasNumber(WebElement webElement) {
+        BotUtils.assertHasNumber(webElement);
+    }
+
+    public static void assertHasNotNumber(WebElement webElement) {
+        BotUtils.assertHasNotNumber(webElement);
     }
 
     public static void assertNumberEquals(Double number, WebElement webElement) {
@@ -996,7 +1028,7 @@ public class Bot {
         BotUtils.assertIsNotDisplayed(webElement, secondsToWait, ThreadDriver.getDriver());
     }
 
-    /* Number of */
+    /* Size */
     public static boolean sizeEquals(int number, Collection collection) {
         return BotUtils.sizeEquals(number, collection);
     }
@@ -1054,28 +1086,28 @@ public class Bot {
         return BotUtils.hasNotOption(text, webElement);
     }
 
-    public static boolean isOptionEnabled(String text, WebElement webElement) {
-        return BotUtils.isOptionEnabled(text, webElement);
+    public static boolean optionIsEnabled(String text, WebElement webElement) {
+        return BotUtils.optionIsEnabled(text, webElement);
     }
 
-    public static boolean isOptionDisabled(String text, WebElement webElement) {
-        return BotUtils.isOptionDisabled(text, webElement);
+    public static boolean optionIsDisabled(String text, WebElement webElement) {
+        return BotUtils.optionIsDisabled(text, webElement);
     }
 
-    public static boolean isOptionSelected(String text, WebElement webElement) {
-        return BotUtils.isOptionSelected(text, webElement);
+    public static boolean optionIsSelected(String text, WebElement webElement) {
+        return BotUtils.optionIsSelected(text, webElement);
     }
 
-    public static boolean isOptionDeselected(String text, WebElement webElement) {
-        return BotUtils.isOptionDeselected(text, webElement);
+    public static boolean optionIsDeselected(String text, WebElement webElement) {
+        return BotUtils.optionIsDeselected(text, webElement);
     }
 
-    public static boolean isAllOptionsSelected(WebElement webElement) {
-        return BotUtils.isAllOptionsSelected(webElement);
+    public static boolean allOptionsAreSelected(WebElement webElement) {
+        return BotUtils.allOptionsAreSelected(webElement);
     }
 
-    public static boolean isNoOptionsSelected(WebElement webElement) {
-        return BotUtils.isNoOptionsSelected(webElement);
+    public static boolean noOptionIsSelected(WebElement webElement) {
+        return BotUtils.noOptionIsSelected(webElement);
     }
 
     public static void assertHasOption(String text, WebElement webElement) {
@@ -1086,28 +1118,28 @@ public class Bot {
         BotUtils.assertHasNotOption(text, webElement);
     }
 
-    public static void assertIsOptionEnabled(String text, WebElement webElement) {
-        BotUtils.assertIsOptionEnabled(text, webElement);
+    public static void assertOptionIsEnabled(String text, WebElement webElement) {
+        BotUtils.assertOptionIsEnabled(text, webElement);
     }
 
-    public static void assertIsOptionDisabled(String text, WebElement webElement) {
-        BotUtils.assertIsOptionDisabled(text, webElement);
+    public static void assertOptionIsDisabled(String text, WebElement webElement) {
+        BotUtils.assertOptionIsDisabled(text, webElement);
     }
 
-    public static void assertIsOptionSelected(String text, WebElement webElement) {
-        BotUtils.assertIsOptionSelected(text, webElement);
+    public static void assertOptionIsSelected(String text, WebElement webElement) {
+        BotUtils.assertOptionIsSelected(text, webElement);
     }
 
-    public static void assertIsOptionDeselected(String text, WebElement webElement) {
-        BotUtils.assertIsOptionDeselected(text, webElement);
+    public static void assertOptionIsDeselected(String text, WebElement webElement) {
+        BotUtils.assertOptionIsDeselected(text, webElement);
     }
 
-    public static void assertIsAllOptionsSelected(WebElement webElement) {
-        BotUtils.assertIsAllOptionsSelected(webElement);
+    public static void assertAllOptionsAreSelected(WebElement webElement) {
+        BotUtils.assertAllOptionsAreSelected(webElement);
     }
 
-    public static void assertIsNoOptionsSelected(WebElement webElement) {
-        BotUtils.assertIsNoOptionsSelected(webElement);
+    public static void assertNoOptionIsSelected(WebElement webElement) {
+        BotUtils.assertNoOptionIsSelected(webElement);
     }
 
     /* Option Value */
@@ -1119,20 +1151,20 @@ public class Bot {
         return BotUtils.hasNotOptionWithValue(value, webElement);
     }
 
-    public static boolean isOptionWithValueEnabled(String value, WebElement webElement) {
-        return BotUtils.isOptionWithValueEnabled(value, webElement);
+    public static boolean optionWithValueIsEnabled(String value, WebElement webElement) {
+        return BotUtils.optionWithValueIsEnabled(value, webElement);
     }
 
-    public static boolean isOptionWithValueDisabled(String value, WebElement webElement) {
-        return BotUtils.isOptionWithValueDisabled(value, webElement);
+    public static boolean optionWithValueIsDisabled(String value, WebElement webElement) {
+        return BotUtils.optionWithValueIsDisabled(value, webElement);
     }
 
-    public static boolean isOptionWithValueSelected(String value, WebElement webElement) {
-        return BotUtils.isOptionWithValueSelected(value, webElement);
+    public static boolean optionWithValueIsSelected(String value, WebElement webElement) {
+        return BotUtils.optionWithValueIsSelected(value, webElement);
     }
 
-    public static boolean isOptionWithValueDeselected(String value, WebElement webElement) {
-        return BotUtils.isOptionWithValueDeselected(value, webElement);
+    public static boolean optionWithValueIsDeselected(String value, WebElement webElement) {
+        return BotUtils.optionWithValueIsDeselected(value, webElement);
     }
 
     public static void assertHasOptionWithValue(String value, WebElement webElement) {
@@ -1143,20 +1175,20 @@ public class Bot {
         BotUtils.assertHasNotOptionWithValue(value, webElement);
     }
 
-    public static void assertIsOptionWithValueEnabled(String value, WebElement webElement) {
-        BotUtils.assertIsOptionWithValueEnabled(value, webElement);
+    public static void assertOptionWithValueIsEnabled(String value, WebElement webElement) {
+        BotUtils.assertOptionWithValueIsEnabled(value, webElement);
     }
 
-    public static void assertIsOptionWithValueDisabled(String value, WebElement webElement) {
-        BotUtils.assertIsOptionWithValueDisabled(value, webElement);
+    public static void assertOptionWithValueIsDisabled(String value, WebElement webElement) {
+        BotUtils.assertOptionWithValueIsDisabled(value, webElement);
     }
 
-    public static void assertIsOptionWithValueSelected(String value, WebElement webElement) {
-        BotUtils.assertIsOptionWithValueSelected(value, webElement);
+    public static void assertOptionWithValueIsSelected(String value, WebElement webElement) {
+        BotUtils.assertOptionWithValueIsSelected(value, webElement);
     }
 
-    public static void assertIsOptionWithValueDeselected(String value, WebElement webElement) {
-        BotUtils.assertIsOptionWithValueDeselected(value, webElement);
+    public static void assertOptionWithValueIsDeselected(String value, WebElement webElement) {
+        BotUtils.assertOptionWithValueIsDeselected(value, webElement);
     }
 
     /* Option Index */
@@ -1168,20 +1200,20 @@ public class Bot {
         return BotUtils.hasNotOptionWithIndex(index, webElement);
     }
 
-    public static boolean isOptionWithIndexEnabled(int index, WebElement webElement) {
-        return BotUtils.isOptionWithIndexEnabled(index, webElement);
+    public static boolean optionWithIndexIsEnabled(int index, WebElement webElement) {
+        return BotUtils.optionWithIndexIsEnabled(index, webElement);
     }
 
-    public static boolean isOptionWithIndexDisabled(int index, WebElement webElement) {
-        return BotUtils.isOptionWithIndexDisabled(index, webElement);
+    public static boolean optionWithIndexIsDisabled(int index, WebElement webElement) {
+        return BotUtils.optionWithIndexIsDisabled(index, webElement);
     }
 
-    public static boolean isOptionWithIndexSelected(int index, WebElement webElement) {
-        return BotUtils.isOptionWithIndexSelected(index, webElement);
+    public static boolean optionWithIndexIsSelected(int index, WebElement webElement) {
+        return BotUtils.optionWithIndexIsSelected(index, webElement);
     }
 
-    public static boolean isOptionWithIndexDeselected(int index, WebElement webElement) {
-        return BotUtils.isOptionWithIndexDeselected(index, webElement);
+    public static boolean optionWithIndexIsDeselected(int index, WebElement webElement) {
+        return BotUtils.optionWithIndexIsDeselected(index, webElement);
     }
 
     public static void assertHasOptionWithIndex(int index, WebElement webElement) {
@@ -1192,20 +1224,20 @@ public class Bot {
         BotUtils.assertHasNotOptionWithIndex(index, webElement);
     }
 
-    public static void assertIsOptionWithIndexEnabled(int index, WebElement webElement) {
-        BotUtils.assertIsOptionWithIndexEnabled(index, webElement);
+    public static void assertOptionWithIndexIsEnabled(int index, WebElement webElement) {
+        BotUtils.assertOptionWithIndexIsEnabled(index, webElement);
     }
 
-    public static void assertIsOptionWithIndexDisabled(int index, WebElement webElement) {
-        BotUtils.assertIsOptionWithIndexDisabled(index, webElement);
+    public static void assertOptionWithIndexIsDisabled(int index, WebElement webElement) {
+        BotUtils.assertOptionWithIndexIsDisabled(index, webElement);
     }
 
-    public static void assertIsOptionWithIndexSelected(int index, WebElement webElement) {
-        BotUtils.assertIsOptionWithIndexSelected(index, webElement);
+    public static void assertOptionWithIndexIsSelected(int index, WebElement webElement) {
+        BotUtils.assertOptionWithIndexIsSelected(index, webElement);
     }
 
-    public static void assertIsOptionWithIndexDeselected(int index, WebElement webElement) {
-        BotUtils.assertIsOptionWithIndexDeselected(index, webElement);
+    public static void assertOptionWithIndexIsDeselected(int index, WebElement webElement) {
+        BotUtils.assertOptionWithIndexIsDeselected(index, webElement);
     }
 
     /* Hamcrest */

@@ -250,13 +250,13 @@ import org.openqa.selenium.support.ui.WebDriverWait;
         waitForElementToDisplay(webElement, 30, driver);
     }
 
-    public static void waitForElementToDisplay(WebElement webElement, long timeOutInSeconds, WebDriver driver) {
-        WebDriverWait wait = new WebDriverWait(driver, timeOutInSeconds);
+    public static void waitForElementToDisplay(WebElement webElement, long secondsToWait, WebDriver driver) {
+        WebDriverWait wait = new WebDriverWait(driver, secondsToWait);
         wait.until(ExpectedConditions.visibilityOf(webElement));
     }
 
-    public static void waitForElementToDisplay(WebElement webElement, long timeOutInSeconds, long sleepInMillis, WebDriver driver) {
-        WebDriverWait wait = new WebDriverWait(driver, timeOutInSeconds, sleepInMillis);
+    public static void waitForElementToDisplay(WebElement webElement, long secondsToWait, long sleepInMillis, WebDriver driver) {
+        WebDriverWait wait = new WebDriverWait(driver, secondsToWait, sleepInMillis);
         wait.until(ExpectedConditions.visibilityOf(webElement));
     }
 
@@ -819,6 +819,14 @@ import org.openqa.selenium.support.ui.WebDriverWait;
     }
 
     /* Text */
+    public static boolean hasText(WebElement webElement) {
+        return notEquals("", textIn(webElement));
+    }
+
+    public static boolean hasNotText(WebElement webElement) {
+        return equals("", textIn(webElement));
+    }
+
     public static boolean textEquals(String text, WebElement webElement) {
         return equals(text, textIn(webElement));
     }
@@ -849,6 +857,18 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
     public static boolean textNotEndsWith(String suffix, WebElement webElement) {
         return endsWith(suffix, textIn(webElement));
+    }
+
+    public static void assertHasText(WebElement webElement) {
+        if (hasNotText(webElement)) {
+            Assert.fail(describeTag(webElement) + " has no text!");
+        }
+    }
+
+    public static void assertHasNotText(WebElement webElement) {
+        if (hasText(webElement)) {
+            Assert.fail(describeTag(webElement) + " has text \"" + textIn(webElement) + "\" when it shouldn't!");
+        }
     }
 
     public static void assertTextEquals(String text, WebElement webElement) {
@@ -884,6 +904,14 @@ import org.openqa.selenium.support.ui.WebDriverWait;
     }
 
     /* Number */
+    public static boolean hasNumber(WebElement webElement) {
+        return numberIn(webElement) != null;
+    }
+
+    public static boolean hasNotNumber(WebElement webElement) {
+        return numberIn(webElement) == null;
+    }
+
     public static boolean numberEquals(Double number, WebElement webElement) {
         return equals(number, numberIn(webElement));
     }
@@ -906,6 +934,18 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
     public static boolean numberGreaterThanOrEquals(Double number, WebElement webElement) {
         return greaterThanOrEquals(number, numberIn(webElement));
+    }
+
+    public static void assertHasNumber(WebElement webElement) {
+        if (hasNotNumber(webElement)) {
+            Assert.fail(describeTag(webElement) + " has no number!");
+        }
+    }
+
+    public static void assertHasNotNumber(WebElement webElement) {
+        if (hasNumber(webElement)) {
+            Assert.fail(describeTag(webElement) + " has number \"" + numberIn(webElement) + "\" when it shouldn't!");
+        }
     }
 
     public static void assertNumberEquals(Double number, WebElement webElement) {
@@ -1159,7 +1199,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
         }
     }
 
-    /* Number of */
+    /* Size */
     public static boolean sizeEquals(int number, Collection collection) {
         return equals((double) number, (double) collection.size());
     }
@@ -1223,7 +1263,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
         return !hasOption(text, webElement);
     }
 
-    public static boolean isOptionEnabled(String text, WebElement webElement) {
+    public static boolean optionIsEnabled(String text, WebElement webElement) {
         List<WebElement> options = new Select(webElement).getOptions();
         for (WebElement option : options) {
             if (textEquals(text, option) && isEnabled(option)) {
@@ -1233,7 +1273,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
         return false;
     }
 
-    public static boolean isOptionDisabled(String text, WebElement webElement) {
+    public static boolean optionIsDisabled(String text, WebElement webElement) {
         List<WebElement> options = new Select(webElement).getOptions();
         for (WebElement option : options) {
             if (textEquals(text, option) && isDisabled(option)) {
@@ -1243,7 +1283,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
         return false;
     }
 
-    public static boolean isOptionSelected(String text, WebElement webElement) {
+    public static boolean optionIsSelected(String text, WebElement webElement) {
         List<WebElement> options = new Select(webElement).getOptions();
         for (WebElement option : options) {
             if (textEquals(text, option) && isSelected(option)) {
@@ -1253,7 +1293,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
         return false;
     }
 
-    public static boolean isOptionDeselected(String text, WebElement webElement) {
+    public static boolean optionIsDeselected(String text, WebElement webElement) {
         List<WebElement> options = new Select(webElement).getOptions();
         for (WebElement option : options) {
             if (textEquals(text, option) && isDeselected(option)) {
@@ -1263,7 +1303,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
         return false;
     }
 
-    public static boolean isAllOptionsSelected(WebElement webElement) {
+    public static boolean allOptionsAreSelected(WebElement webElement) {
         List<WebElement> options = new Select(webElement).getOptions();
         for (WebElement option : options) {
             if (isDeselected(option)) {
@@ -1273,7 +1313,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
         return true;
     }
 
-    public static boolean isNoOptionsSelected(WebElement webElement) {
+    public static boolean noOptionIsSelected(WebElement webElement) {
         List<WebElement> options = new Select(webElement).getOptions();
         for (WebElement option : options) {
             if (isSelected(option)) {
@@ -1285,48 +1325,48 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
     public static void assertHasOption(String text, WebElement webElement) {
         if (hasNotOption(text, webElement)) {
-            Assert.fail(describeTag(webElement) + "has no option \"" + text.trim() + "\"!");
+            Assert.fail(describeTag(webElement) + " has no option \"" + text.trim() + "\"!");
         }
     }
 
     public static void assertHasNotOption(String text, WebElement webElement) {
         if (hasOption(text, webElement)) {
-            Assert.fail(describeTag(webElement) + "has option \"" + text.trim() + "\" when it shouldn't!");
+            Assert.fail(describeTag(webElement) + " has option \"" + text.trim() + "\" when it shouldn't!");
         }
     }
 
-    public static void assertIsOptionEnabled(String text, WebElement webElement) {
-        if (isOptionDisabled(text, webElement)) {
+    public static void assertOptionIsEnabled(String text, WebElement webElement) {
+        if (optionIsDisabled(text, webElement)) {
             Assert.fail("Option \"" + text.trim() + "\" is not enabled!");
         }
     }
 
-    public static void assertIsOptionDisabled(String text, WebElement webElement) {
-        if (isOptionEnabled(text, webElement)) {
+    public static void assertOptionIsDisabled(String text, WebElement webElement) {
+        if (optionIsEnabled(text, webElement)) {
             Assert.fail("Option \"" + text.trim() + "\" is not disabled!");
         }
     }
 
-    public static void assertIsOptionSelected(String text, WebElement webElement) {
-        if (isOptionDeselected(text, webElement)) {
+    public static void assertOptionIsSelected(String text, WebElement webElement) {
+        if (optionIsDeselected(text, webElement)) {
             Assert.fail("Option \"" + text.trim() + "\" is not selected!");
         }
     }
 
-    public static void assertIsOptionDeselected(String text, WebElement webElement) {
-        if (isOptionSelected(text, webElement)) {
+    public static void assertOptionIsDeselected(String text, WebElement webElement) {
+        if (optionIsSelected(text, webElement)) {
             Assert.fail("Option \"" + text.trim() + "\" is not deselected!");
         }
     }
 
-    public static void assertIsAllOptionsSelected(WebElement webElement) {
-        if (!isAllOptionsSelected(webElement)) {
+    public static void assertAllOptionsAreSelected(WebElement webElement) {
+        if (!allOptionsAreSelected(webElement)) {
             Assert.fail("All options are not selected!");
         }
     }
 
-    public static void assertIsNoOptionsSelected(WebElement webElement) {
-        if (!isNoOptionsSelected(webElement)) {
+    public static void assertNoOptionIsSelected(WebElement webElement) {
+        if (!noOptionIsSelected(webElement)) {
             Assert.fail("All options are not deselected!");
         }
     }
@@ -1346,7 +1386,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
         return !hasOptionWithValue(value, webElement);
     }
 
-    public static boolean isOptionWithValueEnabled(String value, WebElement webElement) {
+    public static boolean optionWithValueIsEnabled(String value, WebElement webElement) {
         List<WebElement> options = new Select(webElement).getOptions();
         for (WebElement option : options) {
             if (valueEquals(value, option) && isEnabled(option)) {
@@ -1356,7 +1396,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
         return false;
     }
 
-    public static boolean isOptionWithValueDisabled(String value, WebElement webElement) {
+    public static boolean optionWithValueIsDisabled(String value, WebElement webElement) {
         List<WebElement> options = new Select(webElement).getOptions();
         for (WebElement option : options) {
             if (valueEquals(value, option) && isDisabled(option)) {
@@ -1366,7 +1406,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
         return false;
     }
 
-    public static boolean isOptionWithValueSelected(String value, WebElement webElement) {
+    public static boolean optionWithValueIsSelected(String value, WebElement webElement) {
         List<WebElement> options = new Select(webElement).getOptions();
         for (WebElement option : options) {
             if (valueEquals(value, option) && isSelected(option)) {
@@ -1376,7 +1416,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
         return false;
     }
 
-    public static boolean isOptionWithValueDeselected(String value, WebElement webElement) {
+    public static boolean optionWithValueIsDeselected(String value, WebElement webElement) {
         List<WebElement> options = new Select(webElement).getOptions();
         for (WebElement option : options) {
             if (valueEquals(value, option) && isDeselected(option)) {
@@ -1388,36 +1428,36 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
     public static void assertHasOptionWithValue(String value, WebElement webElement) {
         if (hasNotOptionWithValue(value, webElement)) {
-            Assert.fail(describeTag(webElement) + "has no option with value \"" + value.trim() + "\"!");
+            Assert.fail(describeTag(webElement) + " has no option with value \"" + value.trim() + "\"!");
         }
     }
 
     public static void assertHasNotOptionWithValue(String value, WebElement webElement) {
         if (hasOptionWithValue(value, webElement)) {
-            Assert.fail(describeTag(webElement) + "has option with value \"" + value.trim() + "\" when it shouldn't!");
+            Assert.fail(describeTag(webElement) + " has option with value \"" + value.trim() + "\" when it shouldn't!");
         }
     }
 
-    public static void assertIsOptionWithValueEnabled(String value, WebElement webElement) {
-        if (isOptionWithValueDisabled(value, webElement)) {
+    public static void assertOptionWithValueIsEnabled(String value, WebElement webElement) {
+        if (optionWithValueIsDisabled(value, webElement)) {
             Assert.fail("Option with value \"" + value.trim() + "\" is not enabled!");
         }
     }
 
-    public static void assertIsOptionWithValueDisabled(String value, WebElement webElement) {
-        if (isOptionWithValueEnabled(value, webElement)) {
+    public static void assertOptionWithValueIsDisabled(String value, WebElement webElement) {
+        if (optionWithValueIsEnabled(value, webElement)) {
             Assert.fail("Option with value \"" + value.trim() + "\" is not disabled!");
         }
     }
 
-    public static void assertIsOptionWithValueSelected(String value, WebElement webElement) {
-        if (isOptionWithValueDeselected(value, webElement)) {
+    public static void assertOptionWithValueIsSelected(String value, WebElement webElement) {
+        if (optionWithValueIsDeselected(value, webElement)) {
             Assert.fail("Option with value \"" + value.trim() + "\" is not selected!");
         }
     }
 
-    public static void assertIsOptionWithValueDeselected(String value, WebElement webElement) {
-        if (isOptionWithValueSelected(value, webElement)) {
+    public static void assertOptionWithValueIsDeselected(String value, WebElement webElement) {
+        if (optionWithValueIsSelected(value, webElement)) {
             Assert.fail("Option with value \"" + value.trim() + "\" is not deselected!");
         }
     }
@@ -1436,7 +1476,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
         return !hasNotOptionWithIndex(index, webElement);
     }
 
-    public static boolean isOptionWithIndexEnabled(int index, WebElement webElement) {
+    public static boolean optionWithIndexIsEnabled(int index, WebElement webElement) {
         List<WebElement> options = new Select(webElement).getOptions();
         try {
             return isEnabled(options.get(index));
@@ -1445,7 +1485,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
         }
     }
 
-    public static boolean isOptionWithIndexDisabled(int index, WebElement webElement) {
+    public static boolean optionWithIndexIsDisabled(int index, WebElement webElement) {
         List<WebElement> options = new Select(webElement).getOptions();
         try {
             return isDisabled(options.get(index));
@@ -1454,7 +1494,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
         }
     }
 
-    public static boolean isOptionWithIndexSelected(int index, WebElement webElement) {
+    public static boolean optionWithIndexIsSelected(int index, WebElement webElement) {
         List<WebElement> options = new Select(webElement).getOptions();
         try {
             return isSelected(options.get(index));
@@ -1463,7 +1503,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
         }
     }
 
-    public static boolean isOptionWithIndexDeselected(int index, WebElement webElement) {
+    public static boolean optionWithIndexIsDeselected(int index, WebElement webElement) {
         List<WebElement> options = new Select(webElement).getOptions();
         try {
             return isDeselected(options.get(index));
@@ -1474,36 +1514,36 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
     public static void assertHasOptionWithIndex(int index, WebElement webElement) {
         if (hasNotOptionWithIndex(index, webElement)) {
-            Assert.fail(describeTag(webElement) + "has no option with index \"" + index + "\"!");
+            Assert.fail(describeTag(webElement) + " has no option with index \"" + index + "\"!");
         }
     }
 
     public static void assertHasNotOptionWithIndex(int index, WebElement webElement) {
         if (hasOptionWithIndex(index, webElement)) {
-            Assert.fail(describeTag(webElement) + "has option with index \"" + index + "\" when it shouldn't!");
+            Assert.fail(describeTag(webElement) + " has option with index \"" + index + "\" when it shouldn't!");
         }
     }
 
-    public static void assertIsOptionWithIndexEnabled(int index, WebElement webElement) {
-        if (isOptionWithIndexDisabled(index, webElement)) {
+    public static void assertOptionWithIndexIsEnabled(int index, WebElement webElement) {
+        if (optionWithIndexIsDisabled(index, webElement)) {
             Assert.fail("Option with index \"" + index + "\" is not enabled!");
         }
     }
 
-    public static void assertIsOptionWithIndexDisabled(int index, WebElement webElement) {
-        if (isOptionWithIndexEnabled(index, webElement)) {
+    public static void assertOptionWithIndexIsDisabled(int index, WebElement webElement) {
+        if (optionWithIndexIsEnabled(index, webElement)) {
             Assert.fail("Option with index \"" + index + "\" is not disabled!");
         }
     }
 
-    public static void assertIsOptionWithIndexSelected(int index, WebElement webElement) {
-        if (isOptionWithIndexDeselected(index, webElement)) {
+    public static void assertOptionWithIndexIsSelected(int index, WebElement webElement) {
+        if (optionWithIndexIsDeselected(index, webElement)) {
             Assert.fail("Option with index \"" + index + "\" is not selected!");
         }
     }
 
-    public static void assertIsOptionWithIndexDeselected(int index, WebElement webElement) {
-        if (isOptionWithIndexSelected(index, webElement)) {
+    public static void assertOptionWithIndexIsDeselected(int index, WebElement webElement) {
+        if (optionWithIndexIsSelected(index, webElement)) {
             Assert.fail("Option with index \"" + index + "\" is not deselected!");
         }
     }
