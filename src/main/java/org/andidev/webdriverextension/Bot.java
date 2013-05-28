@@ -766,12 +766,12 @@ public class Bot {
     }
 
     /* Number */
-    public static boolean hasNumber(WebElement webElement) {
-        return BotUtils.hasNumber(webElement);
+    public static boolean isNumber(WebElement webElement) {
+        return BotUtils.isNumber(webElement);
     }
 
-    public static boolean hasNotNumber(WebElement webElement) {
-        return BotUtils.hasNotNumber(webElement);
+    public static boolean isNotNumber(WebElement webElement) {
+        return BotUtils.isNotNumber(webElement);
     }
 
     public static boolean numberEquals(Double number, WebElement webElement) {
@@ -798,11 +798,11 @@ public class Bot {
         return BotUtils.numberGreaterThanOrEquals(number, webElement);
     }
 
-    public static void assertHasNumber(WebElement webElement) {
-        BotUtils.assertHasNumber(webElement);
+    public static void assertIsNumber(WebElement webElement) {
+        BotUtils.assertIsNumber(webElement);
     }
 
-    public static void assertHasNotNumber(WebElement webElement) {
+    public static void assertIsNotNumber(WebElement webElement) {
         BotUtils.assertHasNotNumber(webElement);
     }
 

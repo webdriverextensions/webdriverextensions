@@ -904,11 +904,11 @@ import org.openqa.selenium.support.ui.WebDriverWait;
     }
 
     /* Number */
-    public static boolean hasNumber(WebElement webElement) {
+    public static boolean isNumber(WebElement webElement) {
         return numberIn(webElement) != null;
     }
 
-    public static boolean hasNotNumber(WebElement webElement) {
+    public static boolean isNotNumber(WebElement webElement) {
         return numberIn(webElement) == null;
     }
 
@@ -936,15 +936,15 @@ import org.openqa.selenium.support.ui.WebDriverWait;
         return greaterThanOrEquals(number, numberIn(webElement));
     }
 
-    public static void assertHasNumber(WebElement webElement) {
-        if (hasNotNumber(webElement)) {
-            Assert.fail(describeTag(webElement) + " has no number!");
+    public static void assertIsNumber(WebElement webElement) {
+        if (isNotNumber(webElement)) {
+            Assert.fail(describeTag(webElement) + " is no number!");
         }
     }
 
     public static void assertHasNotNumber(WebElement webElement) {
-        if (hasNumber(webElement)) {
-            Assert.fail(describeTag(webElement) + " has number \"" + numberIn(webElement) + "\" when it shouldn't!");
+        if (isNumber(webElement)) {
+            Assert.fail(describeTag(webElement) + " is number \"" + numberIn(webElement) + "\" when it shouldn't!");
         }
     }
 
