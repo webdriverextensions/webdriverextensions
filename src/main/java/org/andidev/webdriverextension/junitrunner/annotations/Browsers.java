@@ -15,5 +15,5 @@ public @interface Browsers {
     public Opera[] opera() default {};
     public PhantomJS[] phantomJS() default {};
     public Safari[] safari() default {};
-    public CustomBrowser[] customBrowser() default {};
+    public Browser[] browser() default {};
 }

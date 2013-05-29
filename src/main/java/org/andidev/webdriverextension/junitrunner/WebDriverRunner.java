@@ -11,14 +11,14 @@ import org.andidev.webdriverextension.ThreadDriver;
 import org.andidev.webdriverextension.junitrunner.annotations.RemoteAddress;
 import org.andidev.webdriverextension.junitrunner.annotations.Android;
 import org.andidev.webdriverextension.junitrunner.annotations.Chrome;
-import org.andidev.webdriverextension.junitrunner.annotations.CustomBrowser;
+import org.andidev.webdriverextension.junitrunner.annotations.Browser;
 import org.andidev.webdriverextension.junitrunner.annotations.Firefox;
 import org.andidev.webdriverextension.junitrunner.annotations.HtmlUnit;
 import org.andidev.webdriverextension.junitrunner.annotations.IPad;
 import org.andidev.webdriverextension.junitrunner.annotations.IPhone;
 import org.andidev.webdriverextension.junitrunner.annotations.IgnoreAndroid;
 import org.andidev.webdriverextension.junitrunner.annotations.IgnoreChrome;
-import org.andidev.webdriverextension.junitrunner.annotations.IgnoreCustomBrowser;
+import org.andidev.webdriverextension.junitrunner.annotations.IgnoreBrowser;
 import org.andidev.webdriverextension.junitrunner.annotations.IgnoreFirefox;
 import org.andidev.webdriverextension.junitrunner.annotations.IgnoreHtmlUnit;
 import org.andidev.webdriverextension.junitrunner.annotations.IgnoreIPad;
@@ -88,7 +88,7 @@ public class WebDriverRunner extends BlockJUnit4ClassRunner {
         Opera.class,
         PhantomJS.class,
         Safari.class,
-        CustomBrowser.class
+        Browser.class
     });
     private static List<Class> ignoreBrowserAnnotationClasses = Arrays.asList(new Class[]{
         IgnoreAndroid.class,
@@ -101,7 +101,7 @@ public class WebDriverRunner extends BlockJUnit4ClassRunner {
         IgnoreOpera.class,
         IgnorePhantomJS.class,
         IgnoreSafari.class,
-        IgnoreCustomBrowser.class
+        IgnoreBrowser.class
     });
 
     public WebDriverRunner(Class<?> klass) throws InitializationError {
@@ -215,7 +215,7 @@ public class WebDriverRunner extends BlockJUnit4ClassRunner {
                     addBrowsersFromAnnotations(browsersAnnotation.opera());
                     addBrowsersFromAnnotations(browsersAnnotation.phantomJS());
                     addBrowsersFromAnnotations(browsersAnnotation.safari());
-                    addBrowsersFromAnnotations(browsersAnnotation.customBrowser());
+                    addBrowsersFromAnnotations(browsersAnnotation.browser());
                 } else if (annotation.annotationType().equals(org.andidev.webdriverextension.junitrunner.annotations.IgnoreBrowsers.class)) {
                     org.andidev.webdriverextension.junitrunner.annotations.IgnoreBrowsers ignoreBrowsersAnnotation = (org.andidev.webdriverextension.junitrunner.annotations.IgnoreBrowsers) annotation;
                     addIgnoreBrowsersFromAnnotations(ignoreBrowsersAnnotation.android());
@@ -228,7 +228,7 @@ public class WebDriverRunner extends BlockJUnit4ClassRunner {
                     addIgnoreBrowsersFromAnnotations(ignoreBrowsersAnnotation.opera());
                     addIgnoreBrowsersFromAnnotations(ignoreBrowsersAnnotation.phantomJS());
                     addIgnoreBrowsersFromAnnotations(ignoreBrowsersAnnotation.safari());
-                    addIgnoreBrowsersFromAnnotations(ignoreBrowsersAnnotation.customBrowser());
+                    addIgnoreBrowsersFromAnnotations(ignoreBrowsersAnnotation.browser());
                 }
             }
             return this;
@@ -338,8 +338,8 @@ public class WebDriverRunner extends BlockJUnit4ClassRunner {
             } else if (annotation.annotationType().equals(Safari.class)
                     || annotation.annotationType().equals(IgnoreSafari.class)) {
                 this.browserName = "safari";
-            } else if (annotation.annotationType().equals(CustomBrowser.class)
-                    || annotation.annotationType().equals(IgnoreCustomBrowser.class)) {
+            } else if (annotation.annotationType().equals(Browser.class)
+                    || annotation.annotationType().equals(IgnoreBrowser.class)) {
                 this.browserName = (String) AnnotationUtils.getValue(annotation, "browserName");
                 this.version = (String) AnnotationUtils.getValue(annotation, "version");
                 this.platformName = (String) AnnotationUtils.getValue(annotation, "platform");
@@ -416,7 +416,12 @@ public class WebDriverRunner extends BlockJUnit4ClassRunner {
         private Object getTestDescriptionSuffix() {
             String browserNameDescription = (browserName != null ? "[" + browserName + "]" : "[ANY]");
             String versionDescription = (version != null ? "[" + version + "]" : "[ANY]");
-            String platformDescription = (platform != Platform.ANY ? "[" + platform.toString() + "]" : "[ANY]");
+            String platformDescription;
+            if (platformName != null) {
+                platformDescription = "[" + platformName + "]";
+            } else {
+                platformDescription = (platform != Platform.ANY ? "[" + platform.toString() + "]" : "[ANY]");
+            }
 
             return browserNameDescription + versionDescription + platformDescription;
         }

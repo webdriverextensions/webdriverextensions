@@ -53,11 +53,11 @@ import org.openqa.selenium.Platform;
     @Safari(platform = Platform.WINDOWS),
     @Safari(platform = Platform.MAC)
 })
-//}, customBrowsers = {
-//    @CustomBrowser(browserName = "galaxytab", platform = Platform.ANDROID),
-//    @CustomBrowser(browserName = "nexusone", platform = Platform.ANDROID),
-//    @CustomBrowser(browserName = "nexuss", platform = Platform.ANDROID),
-//    @CustomBrowser(browserName = "htcdesire", platform = Platform.ANDROID)
+//}, browsers = {
+//    @Browser(browserName = "galaxytab", platform = Platform.ANDROID),
+//    @Browser(browserName = "nexusone", platform = Platform.ANDROID),
+//    @Browser(browserName = "nexuss", platform = Platform.ANDROID),
+//    @Browser(browserName = "htcdesire", platform = Platform.ANDROID)
 //})
 @Ignore
 public class TestingBotTest {

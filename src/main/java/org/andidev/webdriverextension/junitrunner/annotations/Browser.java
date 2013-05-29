@@ -4,7 +4,7 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
 @Retention(RetentionPolicy.RUNTIME)
-public @interface CustomBrowser {
+public @interface Browser {
     public String browserName();
     public String version() default "";
     public String platform() default "";
