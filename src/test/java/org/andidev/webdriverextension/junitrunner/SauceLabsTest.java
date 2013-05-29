@@ -31,8 +31,8 @@ import org.openqa.selenium.remote.RemoteWebDriver;
 //    @Chrome(platform = Platform.LINUX),
 //    @Chrome(platform = Platform.MAC)
 }, firefox = {
-    @Firefox(platform = Platform.WINDOWS, desiredCapabilities = "{}"),
-    @Firefox(platform = Platform.WIN8, javascriptEnabled = BooleanOption.TRUE),
+//    @Firefox(platform = Platform.WINDOWS, desiredCapabilities = "{}"),
+//    @Firefox(platform = Platform.WIN8, javascriptEnabled = BooleanOption.TRUE),
 //    @Firefox(platform = Platform.LINUX),
     @Firefox(platform = Platform.MAC, javascriptEnabled = BooleanOption.FALSE)})
 //}, iPhone = {
@@ -56,7 +56,6 @@ import org.openqa.selenium.remote.RemoteWebDriver;
 //    @CustomBrowser(browserName = "nexuss", platform = Platform.ANDROID),
 //    @CustomBrowser(browserName = "htcdesire", platform = Platform.ANDROID)
 //})
-@Ignore
 public class SauceLabsTest {
 
     @Test

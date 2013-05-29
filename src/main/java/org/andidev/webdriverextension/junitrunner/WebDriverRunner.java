@@ -60,9 +60,9 @@ public class WebDriverRunner extends BlockJUnit4ClassRunner {
 
     private static class WebDriverFrameworkMethod extends FrameworkMethod {
 
-        final private WebDriverRunner.Browser browser;
+        final private BrowserConfiguration browser;
 
-        public WebDriverFrameworkMethod(WebDriverRunner.Browser browser, FrameworkMethod method) {
+        public WebDriverFrameworkMethod(BrowserConfiguration browser, FrameworkMethod method) {
             super(method.getMethod());
             this.browser = browser;
         }
@@ -72,7 +72,7 @@ public class WebDriverRunner extends BlockJUnit4ClassRunner {
             return String.format("%s%s", super.getName(), browser.getTestDescriptionSuffix());
         }
 
-        private WebDriverRunner.Browser getBrowser() {
+        private BrowserConfiguration getBrowser() {
             return browser;
         }
     }
@@ -113,10 +113,10 @@ public class WebDriverRunner extends BlockJUnit4ClassRunner {
         List<FrameworkMethod> testAnnotatedMethods = getTestClass().getAnnotatedMethods(Test.class);
         List<FrameworkMethod> testMethods = new ArrayList<FrameworkMethod>();
         for (FrameworkMethod testAnnotatedMethod : testAnnotatedMethods) {
-            WebDriverRunner.Browsers browsers = new WebDriverRunner.Browsers().addBrowsersFromClassAnnotations(getTestClass()).addBrowsersFromMethodAnnotations(testAnnotatedMethod);
-            if (!browsers.getBrowsers().isEmpty()) {
-                for (WebDriverRunner.Browser browser : browsers.getBrowsers()) {
-                    testMethods.add(new WebDriverRunner.WebDriverFrameworkMethod(browser, testAnnotatedMethod));
+            BrowserConfigurations browserConfigurations = new BrowserConfigurations().addConfigurationsFromClassAnnotations(getTestClass()).addConfigurationsFromMethodAnnotations(testAnnotatedMethod);
+            if (!browserConfigurations.getBrowsers().isEmpty()) {
+                for (BrowserConfiguration browser : browserConfigurations.getBrowsers()) {
+                    testMethods.add(new WebDriverFrameworkMethod(browser, testAnnotatedMethod));
                 }
             } else {
                 // Not a Selenium Grid Anotated test, treat as normal test
@@ -128,18 +128,18 @@ public class WebDriverRunner extends BlockJUnit4ClassRunner {
 
     @Override
     protected void runChild(final FrameworkMethod method, RunNotifier notifier) {
-        if (method instanceof WebDriverRunner.WebDriverFrameworkMethod) {
-            WebDriverRunner.Browsers browsers = new WebDriverRunner.Browsers().addBrowsersFromClassAnnotations(getTestClass()).addBrowsersFromMethodAnnotations(method);
-            WebDriverRunner.Browser browser = ((WebDriverRunner.WebDriverFrameworkMethod) method).getBrowser();
+        if (method instanceof WebDriverFrameworkMethod) {
+            BrowserConfigurations browserConfigurations = new BrowserConfigurations().addConfigurationsFromClassAnnotations(getTestClass()).addConfigurationsFromMethodAnnotations(method);
+            BrowserConfiguration browserConfiguration = ((WebDriverFrameworkMethod) method).getBrowser();
             Description description = describeChild(method);
-            if (method.getAnnotation(Ignore.class) != null || browsers.isBrowserIgnored(browser)) {
+            if (method.getAnnotation(Ignore.class) != null || browserConfigurations.isBrowserIgnored(browserConfiguration)) {
                 long threadId = Thread.currentThread().getId();
                 notifier.fireTestIgnored(description);
             } else {
                 long threadId = Thread.currentThread().getId();
                 String remoteAddress = ((RemoteAddress) getTestClass().getJavaClass().getAnnotation(RemoteAddress.class)).value();
                 try {
-                    ThreadDriver.setDriver(browser.createDriver());
+                    ThreadDriver.setDriver(browserConfiguration.createDriver());
                 } catch (Exception ex) {
                     notifier.fireTestFailure(new Failure(description, ex));
                     return;
@@ -153,30 +153,51 @@ public class WebDriverRunner extends BlockJUnit4ClassRunner {
         }
     }
 
-    private class Browsers {
+    private class BrowserConfigurations {
 
-        TreeSet<WebDriverRunner.Browser> browsers = new TreeSet<WebDriverRunner.Browser>();
-        TreeSet<WebDriverRunner.Browser> ignoreBrowsers = new TreeSet<WebDriverRunner.Browser>();
+        TreeSet<BrowserConfiguration> browsers = new TreeSet<BrowserConfiguration>();
+        TreeSet<BrowserConfiguration> ignoreBrowsers = new TreeSet<BrowserConfiguration>();
 
-        public TreeSet<WebDriverRunner.Browser> getBrowsers() {
+        public TreeSet<BrowserConfiguration> getBrowsers() {
             return browsers;
         }
 
-        public TreeSet<WebDriverRunner.Browser> getIgnoreBrowsers() {
+        public TreeSet<BrowserConfiguration> getIgnoreBrowsers() {
             return ignoreBrowsers;
         }
 
-        public WebDriverRunner.Browsers addBrowsersFromClassAnnotations(TestClass clazz) {
+        public BrowserConfigurations addConfigurationsFromClassAnnotations(TestClass clazz) {
             addBrowsersFromAnnotations(clazz.getAnnotations());
             return this;
         }
 
-        public WebDriverRunner.Browsers addBrowsersFromMethodAnnotations(FrameworkMethod method) {
+        public BrowserConfigurations addConfigurationsFromMethodAnnotations(FrameworkMethod method) {
             addBrowsersFromAnnotations(method.getAnnotations());
             return this;
         }
 
-        public WebDriverRunner.Browsers addBrowsersFromAnnotations(Annotation[] annotations) {
+        public boolean isBrowserIgnored(BrowserConfiguration browser) {
+            if (ignoreBrowsers.contains(browser)) {
+                return true;
+            }
+            if (ignoreBrowsersContainsBrowserWithVersionAnyAndPlatformAny(browser.getBrowserName())) {
+                return true;
+            }
+            if (ignoreBrowsersContainsBrowserWithVersionAny(browser.getBrowserName(), browser.getPlatform())) {
+                return true;
+            }
+            if (ignoreBrowsersContainsBrowserWithPlatformAny(browser.getBrowserName(), browser.getVersion())) {
+                return true;
+            }
+            return false;
+        }
+
+        @Override
+        public String toString() {
+            return ToStringBuilder.reflectionToString(this, ToStringStyle.MULTI_LINE_STYLE);
+        }
+
+        private BrowserConfigurations addBrowsersFromAnnotations(Annotation[] annotations) {
             for (Annotation annotation : annotations) {
                 if (browserAnnotationClasses.contains(annotation.annotationType())) {
                     addBrowserFromAnnotation(annotation);
@@ -213,7 +234,7 @@ public class WebDriverRunner extends BlockJUnit4ClassRunner {
             return this;
         }
 
-        public WebDriverRunner.Browsers addIgnoreBrowsersFromAnnotations(Annotation[] annotations) {
+        private BrowserConfigurations addIgnoreBrowsersFromAnnotations(Annotation[] annotations) {
             for (Annotation annotation : annotations) {
                 if (browserAnnotationClasses.contains(annotation.annotationType())) {
                     addIgnoreBrowserFromAnnotation(annotation);
@@ -222,39 +243,18 @@ public class WebDriverRunner extends BlockJUnit4ClassRunner {
             return this;
         }
 
-        public WebDriverRunner.Browsers addBrowserFromAnnotation(Annotation annotation) {
-            browsers.add(new WebDriverRunner.Browser(annotation));
+        private BrowserConfigurations addBrowserFromAnnotation(Annotation annotation) {
+            browsers.add(new BrowserConfiguration(annotation));
             return this;
         }
 
-        public WebDriverRunner.Browsers addIgnoreBrowserFromAnnotation(Annotation annotation) {
-            ignoreBrowsers.add(new WebDriverRunner.Browser(annotation));
+        private BrowserConfigurations addIgnoreBrowserFromAnnotation(Annotation annotation) {
+            ignoreBrowsers.add(new BrowserConfiguration(annotation));
             return this;
-        }
-
-        @Override
-        public String toString() {
-            return ToStringBuilder.reflectionToString(this, ToStringStyle.MULTI_LINE_STYLE);
-        }
-
-        public boolean isBrowserIgnored(WebDriverRunner.Browser browser) {
-            if (ignoreBrowsers.contains(browser)) {
-                return true;
-            }
-            if (ignoreBrowsersContainsBrowserWithVersionAnyAndPlatformAny(browser.getBrowserName())) {
-                return true;
-            }
-            if (ignoreBrowsersContainsBrowserWithVersionAny(browser.getBrowserName(), browser.getPlatform())) {
-                return true;
-            }
-            if (ignoreBrowsersContainsBrowserWithPlatformAny(browser.getBrowserName(), browser.getVersion())) {
-                return true;
-            }
-            return false;
         }
 
         private boolean ignoreBrowsersContainsBrowserWithVersionAnyAndPlatformAny(String browserName) {
-            for (WebDriverRunner.Browser ignoreBrowser : ignoreBrowsers) {
+            for (BrowserConfiguration ignoreBrowser : ignoreBrowsers) {
                 if (ignoreBrowser.getBrowserName().equals(browserName)
                         && ignoreBrowser.getVersion().equals("")
                         && ignoreBrowser.getPlatform().equals(Platform.ANY)) {
@@ -265,7 +265,7 @@ public class WebDriverRunner extends BlockJUnit4ClassRunner {
         }
 
         private boolean ignoreBrowsersContainsBrowserWithVersionAny(String browserName, Platform platform) {
-            for (WebDriverRunner.Browser ignoreBrowser : ignoreBrowsers) {
+            for (BrowserConfiguration ignoreBrowser : ignoreBrowsers) {
                 if (ignoreBrowser.getBrowserName().equals(browserName)
                         && ignoreBrowser.getVersion().equals("")
                         && ignoreBrowser.getPlatform().equals(platform)) {
@@ -276,7 +276,7 @@ public class WebDriverRunner extends BlockJUnit4ClassRunner {
         }
 
         private boolean ignoreBrowsersContainsBrowserWithPlatformAny(String browserName, String version) {
-            for (WebDriverRunner.Browser ignoreBrowser : ignoreBrowsers) {
+            for (BrowserConfiguration ignoreBrowser : ignoreBrowsers) {
                 if (ignoreBrowser.getBrowserName().equals(browserName)
                         && ignoreBrowser.getVersion().equals(version)
                         && ignoreBrowser.getPlatform().equals(Platform.ANY)) {
@@ -287,26 +287,26 @@ public class WebDriverRunner extends BlockJUnit4ClassRunner {
         }
     }
 
-    public class Browser implements Comparable<WebDriverRunner.Browser> {
+    public class BrowserConfiguration implements Comparable<BrowserConfiguration> {
 
         private String browserName;
         private String version;
         private Platform platform;
         private String platformName;
 
-        public Browser(String browserName, String version, Platform platform) {
+        public BrowserConfiguration(String browserName, String version, Platform platform) {
             this.browserName = browserName;
             this.version = version;
             this.platform = platform;
         }
 
-        public Browser(RemoteWebDriver driver) {
+        public BrowserConfiguration(RemoteWebDriver driver) {
             this.browserName = driver.getCapabilities().getBrowserName();
             this.version = driver.getCapabilities().getVersion();
             this.platform = driver.getCapabilities().getPlatform();
         }
 
-        public Browser(Annotation annotation) {
+        public BrowserConfiguration(Annotation annotation) {
 
             if (annotation.annotationType().equals(Android.class)
                     || annotation.annotationType().equals(IgnoreAndroid.class)) {
@@ -422,7 +422,7 @@ public class WebDriverRunner extends BlockJUnit4ClassRunner {
         }
 
         @Override
-        public int compareTo(WebDriverRunner.Browser t) {
+        public int compareTo(BrowserConfiguration t) {
             if (StringUtils.equals(this.getBrowserName(), t.getBrowserName())
                     && StringUtils.equals(this.getVersion(), t.getVersion())
                     && this.getPlatform().equals(t.getPlatform())) {

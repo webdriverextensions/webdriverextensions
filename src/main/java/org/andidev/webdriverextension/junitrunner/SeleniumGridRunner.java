@@ -57,9 +57,9 @@ public class SeleniumGridRunner extends BlockJUnit4ClassRunner {
 
     private static class SeleniumGridFrameworkMethod extends FrameworkMethod {
 
-        final private Browser browser;
+        final private BrowserConfiguration browser;
 
-        public SeleniumGridFrameworkMethod(Browser browser, FrameworkMethod method) {
+        public SeleniumGridFrameworkMethod(BrowserConfiguration browser, FrameworkMethod method) {
             super(method.getMethod());
             this.browser = browser;
         }
@@ -69,7 +69,7 @@ public class SeleniumGridRunner extends BlockJUnit4ClassRunner {
             return String.format("%s%s", super.getName(), browser.getTestDescriptionSuffix());
         }
 
-        private Browser getBrowser() {
+        private BrowserConfiguration getBrowser() {
             return browser;
         }
     }
@@ -109,9 +109,9 @@ public class SeleniumGridRunner extends BlockJUnit4ClassRunner {
         List<FrameworkMethod> testAnnotatedMethods = getTestClass().getAnnotatedMethods(Test.class);
         List<FrameworkMethod> testMethods = new ArrayList<FrameworkMethod>();
         for (FrameworkMethod testAnnotatedMethod : testAnnotatedMethods) {
-            Browsers browsers = new Browsers().addBrowsersFromClassAnnotations(getTestClass()).addBrowsersFromMethodAnnotations(testAnnotatedMethod);
-            if (!browsers.getBrowsers().isEmpty()) {
-                for (Browser browser : browsers.getBrowsers()) {
+            BrowserConfigurations browserConfigurations = new BrowserConfigurations().addConfigurationsFromClassAnnotations(getTestClass()).addConfigurationsFromMethodAnnotations(testAnnotatedMethod);
+            if (!browserConfigurations.getBrowsers().isEmpty()) {
+                for (BrowserConfiguration browser : browserConfigurations.getBrowsers()) {
                     testMethods.add(new SeleniumGridFrameworkMethod(browser, testAnnotatedMethod));
                 }
             } else {
@@ -125,17 +125,17 @@ public class SeleniumGridRunner extends BlockJUnit4ClassRunner {
     @Override
     protected void runChild(final FrameworkMethod method, RunNotifier notifier) {
         if (method instanceof SeleniumGridFrameworkMethod) {
-            Browsers browsers = new Browsers().addBrowsersFromClassAnnotations(getTestClass()).addBrowsersFromMethodAnnotations(method);
-            Browser browser = ((SeleniumGridFrameworkMethod) method).getBrowser();
+            BrowserConfigurations browserConfigurations = new BrowserConfigurations().addConfigurationsFromClassAnnotations(getTestClass()).addConfigurationsFromMethodAnnotations(method);
+            BrowserConfiguration browserConfiguration = ((SeleniumGridFrameworkMethod) method).getBrowser();
             Description description = describeChild(method);
-            if (method.getAnnotation(Ignore.class) != null || browsers.isBrowserIgnored(browser)) {
+            if (method.getAnnotation(Ignore.class) != null || browserConfigurations.isBrowserIgnored(browserConfiguration)) {
                 long threadId = Thread.currentThread().getId();
                 notifier.fireTestIgnored(description);
             } else {
                 long threadId = Thread.currentThread().getId();
                 String remoteAddress = ((RemoteAddress) getTestClass().getJavaClass().getAnnotation(RemoteAddress.class)).value();
                 try {
-                    ThreadDriver.setDriver(browser.createDriver(new URL(remoteAddress)));
+                    ThreadDriver.setDriver(browserConfiguration.createDriver(new URL(remoteAddress)));
                 } catch (Exception ex) {
                     notifier.fireTestFailure(new Failure(description, ex));
                     return;
@@ -149,30 +149,44 @@ public class SeleniumGridRunner extends BlockJUnit4ClassRunner {
         }
     }
 
-    private class Browsers {
+    private class BrowserConfigurations {
 
-        List<Browser> browsers = new ArrayList<Browser>();
-        List<Browser> ignoreBrowsers = new ArrayList<Browser>();
+        List<BrowserConfiguration> browsers = new ArrayList<BrowserConfiguration>();
+        List<BrowserConfiguration> ignoreBrowsers = new ArrayList<BrowserConfiguration>();
 
-        public List<Browser> getBrowsers() {
+        public List<BrowserConfiguration> getBrowsers() {
             return browsers;
         }
 
-        public List<Browser> getIgnoreBrowsers() {
+        public List<BrowserConfiguration> getIgnoreBrowsers() {
             return ignoreBrowsers;
         }
 
-        public Browsers addBrowsersFromClassAnnotations(TestClass clazz) {
+        public BrowserConfigurations addConfigurationsFromClassAnnotations(TestClass clazz) {
             addBrowsersFromAnnotations(clazz.getAnnotations());
             return this;
         }
 
-        public Browsers addBrowsersFromMethodAnnotations(FrameworkMethod method) {
+        public BrowserConfigurations addConfigurationsFromMethodAnnotations(FrameworkMethod method) {
             addBrowsersFromAnnotations(method.getAnnotations());
             return this;
         }
 
-        public Browsers addBrowsersFromAnnotations(Annotation[] annotations) {
+        public boolean isBrowserIgnored(BrowserConfiguration browser) {
+            for (BrowserConfiguration ignoreBrowser : ignoreBrowsers) {
+                if (browser.matches(ignoreBrowser)) {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        @Override
+        public String toString() {
+            return ToStringBuilder.reflectionToString(this, ToStringStyle.MULTI_LINE_STYLE);
+        }
+
+        private BrowserConfigurations addBrowsersFromAnnotations(Annotation[] annotations) {
             for (Annotation annotation : annotations) {
                 if (browserAnnotationClasses.contains(annotation.annotationType())) {
                     addBrowserFromAnnotation(annotation);
@@ -209,7 +223,7 @@ public class SeleniumGridRunner extends BlockJUnit4ClassRunner {
             return this;
         }
 
-        public Browsers addIgnoreBrowsersFromAnnotations(Annotation[] annotations) {
+        private BrowserConfigurations addIgnoreBrowsersFromAnnotations(Annotation[] annotations) {
             for (Annotation annotation : annotations) {
                 if (browserAnnotationClasses.contains(annotation.annotationType())) {
                     addIgnoreBrowserFromAnnotation(annotation);
@@ -218,32 +232,18 @@ public class SeleniumGridRunner extends BlockJUnit4ClassRunner {
             return this;
         }
 
-        public Browsers addBrowserFromAnnotation(Annotation annotation) {
-            browsers.add(new Browser(annotation));
+        private BrowserConfigurations addBrowserFromAnnotation(Annotation annotation) {
+            browsers.add(new BrowserConfiguration(annotation));
             return this;
         }
 
-        public Browsers addIgnoreBrowserFromAnnotation(Annotation annotation) {
-            ignoreBrowsers.add(new Browser(annotation));
+        private BrowserConfigurations addIgnoreBrowserFromAnnotation(Annotation annotation) {
+            ignoreBrowsers.add(new BrowserConfiguration(annotation));
             return this;
-        }
-
-        @Override
-        public String toString() {
-            return ToStringBuilder.reflectionToString(this, ToStringStyle.MULTI_LINE_STYLE);
-        }
-
-        public boolean isBrowserIgnored(Browser browser) {
-            for (Browser ignoreBrowser : ignoreBrowsers) {
-                if (browser.matches(ignoreBrowser)) {
-                    return true;
-                }
-            }
-            return false;
         }
     }
 
-    public class Browser {
+    public class BrowserConfiguration {
 
         private String browserName;
         private String version;
@@ -252,19 +252,19 @@ public class SeleniumGridRunner extends BlockJUnit4ClassRunner {
         private BooleanOption javascriptEnabled;
         private Map<String, Object> desiredCapabilities;
 
-        public Browser(String browserName, String version, Platform platform) {
+        public BrowserConfiguration(String browserName, String version, Platform platform) {
             this.browserName = browserName;
             this.version = version;
             this.platform = platform;
         }
 
-        public Browser(RemoteWebDriver driver) {
+        public BrowserConfiguration(RemoteWebDriver driver) {
             this.browserName = driver.getCapabilities().getBrowserName();
             this.version = driver.getCapabilities().getVersion();
             this.platform = driver.getCapabilities().getPlatform();
         }
 
-        public Browser(Annotation annotation) {
+        public BrowserConfiguration(Annotation annotation) {
 
             if (annotation.annotationType().equals(Android.class)
                     || annotation.annotationType().equals(IgnoreAndroid.class)) {
@@ -384,7 +384,7 @@ public class SeleniumGridRunner extends BlockJUnit4ClassRunner {
         }
 
 
-        private boolean matches(Browser browser) {
+        private boolean matches(BrowserConfiguration browser) {
             if (!this.getBrowserName().equals(browser.getBrowserName())) {
                 return false;
             }
