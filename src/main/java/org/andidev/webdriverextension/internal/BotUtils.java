@@ -42,6 +42,10 @@ import org.openqa.selenium.support.ui.WebDriverWait;
         return driver.getCurrentUrl();
     }
 
+    public static String title(WebDriver driver) {
+        return driver.getTitle();
+    }
+
     public static String tagNameOf(WebElement webElement) {
         return webElement.getTagName();
     }
@@ -1067,6 +1071,71 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
     public static void assertUrlNotEndsWith(String suffix, WebDriver driver) {
         assertNotEndsWith("Url", suffix, url(driver));
+    }
+
+    /* Title */
+    public static boolean titleEquals(String title, WebDriver driver) {
+        return equals(title, title(driver));
+    }
+
+    public static boolean titleNotEquals(String title, WebDriver driver) {
+        return notEquals(title, title(driver));
+    }
+
+    public static boolean titleContains(String searchText, WebDriver driver) {
+        return contains(searchText, title(driver));
+    }
+
+    public static boolean titleNotContains(String searchText, WebDriver driver) {
+        return notContains(searchText, title(driver));
+    }
+
+    public static boolean titleStartsWith(String prefix, WebDriver driver) {
+        return startsWith(prefix, title(driver));
+    }
+
+    public static boolean titleNotStartsWith(String prefix, WebDriver driver) {
+        return notStartsWith(prefix, title(driver));
+    }
+
+    public static boolean titleEndsWith(String suffix, WebDriver driver) {
+        return endsWith(suffix, title(driver));
+    }
+
+    public static boolean titleNotEndsWith(String suffix, WebDriver driver) {
+        return notEndsWith(suffix, title(driver));
+    }
+
+    public static void assertTitleEquals(String title, WebDriver driver) {
+        assertEquals("Title", title, title(driver));
+    }
+
+    public static void assertTitleNotEquals(String title, WebDriver driver) {
+        assertNotEquals("Title", title, title(driver));
+    }
+
+    public static void assertTitleContains(String searchText, WebDriver driver) {
+        assertContains("Title", searchText, title(driver));
+    }
+
+    public static void assertTitleNotContains(String searchText, WebDriver driver) {
+        assertNotContains("Title", searchText, title(driver));
+    }
+
+    public static void assertTitleStartsWith(String prefix, WebDriver driver) {
+        assertStartsWith("Title", prefix, title(driver));
+    }
+
+    public static void assertTitleNotStartsWith(String prefix, WebDriver driver) {
+        assertNotStartsWith("Title", prefix, title(driver));
+    }
+
+    public static void assertTitleEndsWith(String suffix, WebDriver driver) {
+        assertEndsWith("Title", suffix, title(driver));
+    }
+
+    public static void assertTitleNotEndsWith(String suffix, WebDriver driver) {
+        assertNotEndsWith("Title", suffix, title(driver));
     }
 
     /* Open */

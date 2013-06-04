@@ -25,6 +25,10 @@ public class Bot {
         return BotUtils.url(ThreadDriver.getDriver());
     }
 
+    public static String title() {
+        return BotUtils.title(ThreadDriver.getDriver());
+    }
+
     public static String tagNameOf(WebElement webElement) {
         return BotUtils.tagNameOf(webElement);
     }
@@ -925,6 +929,71 @@ public class Bot {
 
     public static void assertUrlNotEndsWith(String suffix) {
         BotUtils.assertUrlNotEndsWith(suffix, ThreadDriver.getDriver());
+    }
+
+    /* Title */
+    public static boolean titleEquals(String title) {
+        return BotUtils.titleEquals(title, ThreadDriver.getDriver());
+    }
+
+    public static boolean titleNotEquals(String title) {
+        return BotUtils.titleNotEquals(title, ThreadDriver.getDriver());
+    }
+
+    public static boolean titleContains(String searchText) {
+        return BotUtils.titleContains(searchText, ThreadDriver.getDriver());
+    }
+
+    public static boolean titleNotContains(String searchText) {
+        return BotUtils.titleNotContains(searchText, ThreadDriver.getDriver());
+    }
+
+    public static boolean titleStartsWith(String prefix) {
+        return BotUtils.titleStartsWith(prefix, ThreadDriver.getDriver());
+    }
+
+    public static boolean titleNotStartsWith(String prefix) {
+        return BotUtils.titleNotStartsWith(prefix, ThreadDriver.getDriver());
+    }
+
+    public static boolean titleEndsWith(String suffix) {
+        return BotUtils.titleEndsWith(suffix, ThreadDriver.getDriver());
+    }
+
+    public static boolean titleNotEndsWith(String suffix) {
+        return BotUtils.titleNotEndsWith(suffix, ThreadDriver.getDriver());
+    }
+
+    public static void assertTitleEquals(String title) {
+        BotUtils.assertTitleEquals(title, ThreadDriver.getDriver());
+    }
+
+    public static void assertTitleNotEquals(String title) {
+        BotUtils.assertTitleNotEquals(title, ThreadDriver.getDriver());
+    }
+
+    public static void assertTitleContains(String searchText) {
+        BotUtils.assertTitleContains(searchText, ThreadDriver.getDriver());
+    }
+
+    public static void assertTitleNotContains(String searchText) {
+        BotUtils.assertTitleNotContains(searchText, ThreadDriver.getDriver());
+    }
+
+    public static void assertTitleStartsWith(String prefix) {
+        BotUtils.assertTitleStartsWith(prefix, ThreadDriver.getDriver());
+    }
+
+    public static void assertTitleNotStartsWith(String prefix) {
+        BotUtils.assertTitleNotStartsWith(prefix, ThreadDriver.getDriver());
+    }
+
+    public static void assertTitleEndsWith(String suffix) {
+        BotUtils.assertTitleEndsWith(suffix, ThreadDriver.getDriver());
+    }
+
+    public static void assertTitleNotEndsWith(String suffix) {
+        BotUtils.assertTitleNotEndsWith(suffix, ThreadDriver.getDriver());
     }
 
     /* Open */
