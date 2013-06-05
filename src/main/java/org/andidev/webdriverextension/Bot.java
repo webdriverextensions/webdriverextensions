@@ -243,6 +243,15 @@ public class Bot {
         return BotUtils.attributeNotEndsWith(name, suffix, webElement);
     }
 
+    public static boolean attributeMatches(String name, String regExp, WebElement webElement) {
+        return BotUtils.attributeMatches(name, regExp, webElement);
+    }
+
+    public static boolean attributeNotMatches(String name, String regExp, WebElement webElement) {
+        return BotUtils.attributeNotMatches(name, regExp, webElement);
+    }
+
+
     public static void assertHasAttribute(String name, WebElement webElement) {
         BotUtils.assertHasAttribute(name, webElement);
     }
@@ -281,6 +290,14 @@ public class Bot {
 
     public static void assertAttributeNotEndsWith(String name, String suffix, WebElement webElement) {
         BotUtils.assertAttributeNotEndsWith(name, suffix, webElement);
+    }
+
+    public static void assertAttributeMatches(String name, String regExp, WebElement webElement) {
+        BotUtils.assertAttributeMatches(name, regExp, webElement);
+    }
+
+    public static void assertAttributeNotMatches(String name, String regExp, WebElement webElement) {
+        BotUtils.assertAttributeNotMatches(name, regExp, webElement);
     }
 
     /* Id */
@@ -324,6 +341,14 @@ public class Bot {
         return BotUtils.idNotEndsWith(suffix, webElement);
     }
 
+    public static boolean idMatches(String regExp, WebElement webElement) {
+        return BotUtils.idMatches(regExp, webElement);
+    }
+
+    public static boolean idNotMatches(String regExp, WebElement webElement) {
+        return BotUtils.idNotMatches(regExp, webElement);
+    }
+
     public static void assertHasId(WebElement webElement) {
         BotUtils.assertHasId(webElement);
     }
@@ -362,6 +387,14 @@ public class Bot {
 
     public static void assertIdNotEndsWith(String suffix, WebElement webElement) {
         BotUtils.assertIdNotEndsWith(suffix, webElement);
+    }
+
+    public static void assertIdMatches(String regExp, WebElement webElement) {
+        BotUtils.assertIdMatches(regExp, webElement);
+    }
+
+    public static void assertIdNotMatches(String regExp, WebElement webElement) {
+        BotUtils.assertIdNotMatches(regExp, webElement);
     }
 
     /* Name */
@@ -405,6 +438,14 @@ public class Bot {
         return BotUtils.nameNotEndsWith(suffix, webElement);
     }
 
+    public static boolean nameMatches(String regExp, WebElement webElement) {
+        return BotUtils.nameMatches(regExp, webElement);
+    }
+
+    public static boolean nameNotMatches(String regExp, WebElement webElement) {
+        return BotUtils.nameNotMatches(regExp, webElement);
+    }
+
     public static void assertHasName(WebElement webElement) {
         BotUtils.assertHasName(webElement);
     }
@@ -443,6 +484,14 @@ public class Bot {
 
     public static void assertNameNotEndsWith(String suffix, WebElement webElement) {
         BotUtils.assertNameNotEndsWith(suffix, webElement);
+    }
+
+    public static void assertNameMatches(String regExp, WebElement webElement) {
+        BotUtils.assertNameMatches(regExp, webElement);
+    }
+
+    public static void assertNameNotMatches(String regExp, WebElement webElement) {
+        BotUtils.assertNameNotMatches(regExp, webElement);
     }
 
     /* Class */
@@ -486,6 +535,14 @@ public class Bot {
         return BotUtils.hasNotClassEndingWith(suffix, webElement);
     }
 
+    public static boolean hasClassMatching(String regExp, WebElement webElement) {
+        return BotUtils.hasClassMatching(regExp, webElement);
+    }
+
+    public static boolean hasNotClassMatching(String regExp, WebElement webElement) {
+        return BotUtils.hasNotClassMatching(regExp, webElement);
+    }
+
     public static void assertHasClass(WebElement webElement) {
         BotUtils.assertHasClass(webElement);
     }
@@ -524,6 +581,14 @@ public class Bot {
 
     public static void assertHasNotClassEndingWith(String suffix, WebElement webElement) {
         BotUtils.assertHasNotClassEndingWith(suffix, webElement);
+    }
+
+    public static void assertHasClassMatching(String regExp, WebElement webElement) {
+        BotUtils.assertHasClassMatching(regExp, webElement);
+    }
+
+    public static void assertHasNotClassMatching(String regExp, WebElement webElement) {
+        BotUtils.assertHasNotClassMatching(regExp, webElement);
     }
 
     /* Value */
@@ -567,6 +632,14 @@ public class Bot {
         return BotUtils.valueNotEndsWith(suffix, webElement);
     }
 
+    public static boolean valueMatches(String regExp, WebElement webElement) {
+        return BotUtils.valueMatches(regExp, webElement);
+    }
+
+    public static boolean valueNotMatches(String regExp, WebElement webElement) {
+        return BotUtils.valueNotMatches(regExp, webElement);
+    }
+
     public static void assertHasValue(WebElement webElement) {
         BotUtils.assertHasValue(webElement);
     }
@@ -605,6 +678,14 @@ public class Bot {
 
     public static void assertValueNotEndsWith(String suffix, WebElement webElement) {
         BotUtils.assertValueNotEndsWith(suffix, webElement);
+    }
+
+    public static void assertValueMatches(String regExp, WebElement webElement) {
+        BotUtils.assertValueMatches(regExp, webElement);
+    }
+
+    public static void assertValueNotMatches(String regExp, WebElement webElement) {
+        BotUtils.assertValueNotMatches(regExp, webElement);
     }
 
     /* Href */
@@ -648,6 +729,14 @@ public class Bot {
         return BotUtils.hrefNotEndsWith(suffix, webElement);
     }
 
+    public static boolean hrefMatches(String regExp, WebElement webElement) {
+        return BotUtils.hrefMatches(regExp, webElement);
+    }
+
+    public static boolean hrefNotMatches(String regExp, WebElement webElement) {
+        return BotUtils.hrefNotMatches(regExp, webElement);
+    }
+
     public static void assertHasHref(WebElement webElement) {
         BotUtils.assertHasHref(webElement);
     }
@@ -686,6 +775,14 @@ public class Bot {
 
     public static void assertHrefNotEndsWith(String suffix, WebElement webElement) {
         BotUtils.assertHrefNotEndsWith(suffix, webElement);
+    }
+
+    public static void assertHrefMatches(String regExp, WebElement webElement) {
+        BotUtils.assertHrefMatches(regExp, webElement);
+    }
+
+    public static void assertHrefNotMatches(String regExp, WebElement webElement) {
+        BotUtils.assertHrefNotMatches(regExp, webElement);
     }
 
     /* Text */
@@ -729,6 +826,14 @@ public class Bot {
         return BotUtils.textNotEndsWith(suffix, webElement);
     }
 
+    public static boolean textMatches(String regExp, WebElement webElement) {
+        return BotUtils.textMatches(regExp, webElement);
+    }
+
+    public static boolean textNotMatches(String regExp, WebElement webElement) {
+        return BotUtils.textNotMatches(regExp, webElement);
+    }
+
     public static void assertHasText(WebElement webElement) {
         BotUtils.assertHasText(webElement);
     }
@@ -767,6 +872,14 @@ public class Bot {
 
     public static void assertTextNotEndsWith(String suffix, WebElement webElement) {
         BotUtils.assertTextNotEndsWith(suffix, webElement);
+    }
+
+    public static void assertTextMatches(String regExp, WebElement webElement) {
+        BotUtils.assertTextMatches(regExp, webElement);
+    }
+
+    public static void assertTextNotMatches(String regExp, WebElement webElement) {
+        BotUtils.assertTextNotMatches(regExp, webElement);
     }
 
     /* Number */
@@ -843,22 +956,6 @@ public class Bot {
         return BotUtils.urlNotEquals(url, ThreadDriver.getDriver());
     }
 
-    public static boolean urlMatches(String regExp) {
-        return BotUtils.urlMatches(regExp, ThreadDriver.getDriver());
-    }
-
-    public static boolean urlNotMatches(String regExp) {
-        return BotUtils.urlNotMatches(regExp, ThreadDriver.getDriver());
-    }
-
-    public static boolean urlMatches(Openable openable) {
-        return BotUtils.urlMatches(openable, ThreadDriver.getDriver());
-    }
-
-    public static boolean urlNotMatches(Openable openable) {
-        return BotUtils.urlNotMatches(openable, ThreadDriver.getDriver());
-    }
-
     public static boolean urlContains(String searchText) {
         return BotUtils.urlContains(searchText, ThreadDriver.getDriver());
     }
@@ -883,28 +980,20 @@ public class Bot {
         return BotUtils.urlNotEndsWith(suffix, ThreadDriver.getDriver());
     }
 
+    public static boolean urlMatches(String regExp) {
+        return BotUtils.urlMatches(regExp, ThreadDriver.getDriver());
+    }
+
+    public static boolean urlNotMatches(String regExp) {
+        return BotUtils.urlNotMatches(regExp, ThreadDriver.getDriver());
+    }
+
     public static void assertUrlEquals(String url) {
         BotUtils.assertUrlEquals(url, ThreadDriver.getDriver());
     }
 
     public static void assertUrlNotEquals(String url) {
         BotUtils.assertUrlNotEquals(url, ThreadDriver.getDriver());
-    }
-
-    public static void assertUrlMatches(String regExp) {
-        BotUtils.assertUrlMatches(regExp, ThreadDriver.getDriver());
-    }
-
-    public static void assertUrlNotMatches(String regExp) {
-        BotUtils.assertUrlNotMatches(regExp, ThreadDriver.getDriver());
-    }
-
-    public static void assertUrlMatches(Openable openable) {
-        BotUtils.assertUrlMatches(openable, ThreadDriver.getDriver());
-    }
-
-    public static void assertUrlNotMatches(Openable openable) {
-        BotUtils.assertUrlNotMatches(openable, ThreadDriver.getDriver());
     }
 
     public static void assertUrlContains(String searchText) {
@@ -929,6 +1018,14 @@ public class Bot {
 
     public static void assertUrlNotEndsWith(String suffix) {
         BotUtils.assertUrlNotEndsWith(suffix, ThreadDriver.getDriver());
+    }
+
+    public static void assertUrlMatches(String regExp) {
+        BotUtils.assertUrlMatches(regExp, ThreadDriver.getDriver());
+    }
+
+    public static void assertUrlNotMatches(String regExp) {
+        BotUtils.assertUrlNotMatches(regExp, ThreadDriver.getDriver());
     }
 
     /* Title */
@@ -964,6 +1061,14 @@ public class Bot {
         return BotUtils.titleNotEndsWith(suffix, ThreadDriver.getDriver());
     }
 
+    public static boolean titleMatches(String regExp) {
+        return BotUtils.titleMatches(regExp, ThreadDriver.getDriver());
+    }
+
+    public static boolean titleNotMatches(String regExp) {
+        return BotUtils.titleNotMatches(regExp, ThreadDriver.getDriver());
+    }
+
     public static void assertTitleEquals(String title) {
         BotUtils.assertTitleEquals(title, ThreadDriver.getDriver());
     }
@@ -994,6 +1099,14 @@ public class Bot {
 
     public static void assertTitleNotEndsWith(String suffix) {
         BotUtils.assertTitleNotEndsWith(suffix, ThreadDriver.getDriver());
+    }
+
+    public static void assertTitleMatches(String regExp) {
+        BotUtils.assertTitleMatches(regExp, ThreadDriver.getDriver());
+    }
+
+    public static void assertTitleNotMatches(String regExp) {
+        BotUtils.assertTitleNotMatches(regExp, ThreadDriver.getDriver());
     }
 
     /* Open */

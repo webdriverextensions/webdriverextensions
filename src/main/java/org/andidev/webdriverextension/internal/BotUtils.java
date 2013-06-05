@@ -1,6 +1,5 @@
 package org.andidev.webdriverextension.internal;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
@@ -24,6 +23,8 @@ import org.openqa.selenium.support.ui.WebDriverWait;
     public class BotUtils {
 
     private static final org.slf4j.Logger log = org.slf4j.LoggerFactory.getLogger(BotUtils.class);
+
+
 
     /* Read */
     public static String textIn(WebElement webElement) {
@@ -78,15 +79,21 @@ import org.openqa.selenium.support.ui.WebDriverWait;
         return attributeIn("href", webElement);
     }
 
+
+
     /* Count */
     public static int sizeOf(Collection collection) {
         return collection.size();
     }
 
+
+
     /* Clear */
     public static void clear(WebElement webElement) {
         webElement.clear();
     }
+
+
 
     /* Type */
     public static void type(String text, WebElement webElement) {
@@ -103,6 +110,8 @@ import org.openqa.selenium.support.ui.WebDriverWait;
         type(toString(number), webElement);
     }
 
+
+
     /* Clear and Type */
     public static void clearAndType(String text, WebElement webElement) {
         clear(webElement);
@@ -114,6 +123,8 @@ import org.openqa.selenium.support.ui.WebDriverWait;
         typeNumber(number, webElement);
     }
 
+
+
     /* Press */
     public static void pressEnter(WebElement webElement) {
         pressKeys(webElement, Keys.ENTER);
@@ -123,10 +134,14 @@ import org.openqa.selenium.support.ui.WebDriverWait;
         webElement.sendKeys(keys);
     }
 
+
+
     /* Click */
     public static void click(WebElement webElement) {
         webElement.click();
     }
+
+
 
     /* Select */
     public static void select(WebElement webElement) {
@@ -140,6 +155,8 @@ import org.openqa.selenium.support.ui.WebDriverWait;
             webElement.click();
         }
     }
+
+
 
     /* Select Option */
     public static void selectOption(String text, WebElement webElement) {
@@ -162,6 +179,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
     }
 
 
+
     /* Select Option Value */
     public static void selectOptionWithValue(String value, WebElement webElement) {
         new Select(webElement).selectByValue(value);
@@ -171,6 +189,8 @@ import org.openqa.selenium.support.ui.WebDriverWait;
         new Select(webElement).deselectByValue(value);
     }
 
+
+
     /* Select Option Index */
     public static void selectOptionWithIndex(int index, WebElement webElement) {
         new Select(webElement).selectByIndex(index);
@@ -179,6 +199,8 @@ import org.openqa.selenium.support.ui.WebDriverWait;
     public static void deselectOptionWithIndex(int index, WebElement webElement) {
         new Select(webElement).selectByIndex(index);
     }
+
+
 
     /* Check */
     public static void check(WebElement webElement) {
@@ -193,6 +215,8 @@ import org.openqa.selenium.support.ui.WebDriverWait;
         }
     }
 
+
+
     /* Open */
     public static void open(String url, WebDriver driver) {
         driver.get(url);
@@ -201,6 +225,8 @@ import org.openqa.selenium.support.ui.WebDriverWait;
     public static void open(Openable openable) {
         openable.open();
     }
+
+
 
     /* Wait */
     public static void waitFor(double seconds) {
@@ -264,6 +290,8 @@ import org.openqa.selenium.support.ui.WebDriverWait;
         wait.until(ExpectedConditions.visibilityOf(webElement));
     }
 
+
+
     /* Debug */
     public static void debug(String str) {
         log.debug(str);
@@ -279,6 +307,8 @@ import org.openqa.selenium.support.ui.WebDriverWait;
             debug(webElement);
         }
     }
+
+
 
     /* Tag Name */
     public static boolean tagNameEquals(String value, WebElement webElement) {
@@ -296,6 +326,8 @@ import org.openqa.selenium.support.ui.WebDriverWait;
     public static void assertTagNameNotEquals(String value, WebElement webElement) {
         assertNotEquals("Tag name", value, tagNameOf(webElement));
     }
+
+
 
     /* Attribute */
     public static boolean hasAttribute(String name, WebElement webElement) {
@@ -336,6 +368,14 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
     public static boolean attributeNotEndsWith(String name, String suffix, WebElement webElement) {
         return notEndsWith(suffix, attributeIn(name, webElement));
+    }
+
+    public static boolean attributeMatches(String name, String regExp, WebElement webElement) {
+        return matches(regExp, attributeIn(name, webElement));
+    }
+
+    public static boolean attributeNotMatches(String name, String regExp, WebElement webElement) {
+        return notMatches(regExp, attributeIn(name, webElement));
     }
 
     public static void assertHasAttribute(String name, WebElement webElement) {
@@ -382,6 +422,16 @@ import org.openqa.selenium.support.ui.WebDriverWait;
         assertNotEndsWith(name, suffix, attributeIn(name, webElement));
     }
 
+    public static void assertAttributeMatches(String name, String regExp, WebElement webElement) {
+        assertMatches(name, regExp, attributeIn(name, webElement));
+    }
+
+    public static void assertAttributeNotMatches(String name, String regExp, WebElement webElement) {
+        assertNotMatches(name, regExp, attributeIn(name, webElement));
+    }
+
+
+
     /* Id */
     public static boolean hasId(WebElement webElement) {
         return hasAttribute("id", webElement);
@@ -420,7 +470,15 @@ import org.openqa.selenium.support.ui.WebDriverWait;
     }
 
     public static boolean idNotEndsWith(String suffix, WebElement webElement) {
-        return endsWith(suffix, idIn(webElement));
+        return notEndsWith(suffix, idIn(webElement));
+    }
+
+    public static boolean idMatches(String regExp, WebElement webElement) {
+        return matches(regExp, idIn(webElement));
+    }
+
+    public static boolean idNotMatches(String regExp, WebElement webElement) {
+        return notMatches(regExp, idIn(webElement));
     }
 
     public static void assertHasId(WebElement webElement) {
@@ -463,6 +521,16 @@ import org.openqa.selenium.support.ui.WebDriverWait;
         assertNotEndsWith("id", suffix, idIn(webElement));
     }
 
+    public static void assertIdMatches(String regExp, WebElement webElement) {
+        assertMatches("id", regExp, idIn(webElement));
+    }
+
+    public static void assertIdNotMatches(String regExp, WebElement webElement) {
+        assertNotMatches("id", regExp, idIn(webElement));
+    }
+
+
+
     /* Name */
     public static boolean hasName(WebElement webElement) {
         return hasAttribute("name", webElement);
@@ -501,7 +569,15 @@ import org.openqa.selenium.support.ui.WebDriverWait;
     }
 
     public static boolean nameNotEndsWith(String suffix, WebElement webElement) {
-        return endsWith(suffix, nameIn(webElement));
+        return notEndsWith(suffix, nameIn(webElement));
+    }
+
+    public static boolean nameMatches(String regExp, WebElement webElement) {
+        return matches(regExp, nameIn(webElement));
+    }
+
+    public static boolean nameNotMatches(String regExp, WebElement webElement) {
+        return notMatches(regExp, nameIn(webElement));
     }
 
     public static void assertHasName(WebElement webElement) {
@@ -543,6 +619,16 @@ import org.openqa.selenium.support.ui.WebDriverWait;
     public static void assertNameNotEndsWith(String suffix, WebElement webElement) {
         assertNotEndsWith("name", suffix, nameIn(webElement));
     }
+
+    public static void assertNameMatches(String regExp, WebElement webElement) {
+        assertMatches("name", regExp, nameIn(webElement));
+    }
+
+    public static void assertNameNotMatches(String regExp, WebElement webElement) {
+        assertNotMatches("name", regExp, nameIn(webElement));
+    }
+
+
 
     /* Class */
     public static boolean hasClass(WebElement webElement) {
@@ -603,6 +689,20 @@ import org.openqa.selenium.support.ui.WebDriverWait;
         return !hasClassEndingWith(suffix, webElement);
     }
 
+    public static boolean hasClassMatching(String regExp, WebElement webElement) {
+        List<String> classes = classesIn(webElement);
+        for (String clazz : classes) {
+            if (matches(regExp, clazz)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public static boolean hasNotClassMatching(String regExp, WebElement webElement) {
+        return !hasClassMatching(regExp, webElement);
+    }
+
     public static void assertHasClass(WebElement webElement) {
         assertHasAttribute("class", webElement);
     }
@@ -659,6 +759,20 @@ import org.openqa.selenium.support.ui.WebDriverWait;
         }
     }
 
+    public static void assertHasClassMatching(String regExp, WebElement webElement) {
+        if (hasNotClassMatching(regExp, webElement)) {
+            Assert.fail(describeTag(webElement) + " does not have class matching regExp " + regExp.trim() + "!");
+        }
+    }
+
+    public static void assertHasNotClassMatching(String regExp, WebElement webElement) {
+        if (hasClassMatching(regExp, webElement)) {
+            Assert.fail(describeTag(webElement) + " has class matching regExp " + regExp.trim() + " when it shouldn't!");
+        }
+    }
+
+
+
     /* Value */
     public static boolean hasValue(WebElement webElement) {
         return hasAttribute("value", webElement);
@@ -697,7 +811,15 @@ import org.openqa.selenium.support.ui.WebDriverWait;
     }
 
     public static boolean valueNotEndsWith(String suffix, WebElement webElement) {
-        return endsWith(suffix, valueIn(webElement));
+        return notEndsWith(suffix, valueIn(webElement));
+    }
+
+    public static boolean valueMatches(String regExp, WebElement webElement) {
+        return matches(regExp, valueIn(webElement));
+    }
+
+    public static boolean valueNotMatches(String regExp, WebElement webElement) {
+        return notMatches(regExp, valueIn(webElement));
     }
 
     public static void assertHasValue(WebElement webElement) {
@@ -740,6 +862,15 @@ import org.openqa.selenium.support.ui.WebDriverWait;
         assertNotEndsWith("value", suffix, valueIn(webElement));
     }
 
+    public static void assertValueMatches(String regExp, WebElement webElement) {
+        assertMatches("value", regExp, valueIn(webElement));
+    }
+
+    public static void assertValueNotMatches(String regExp, WebElement webElement) {
+        assertNotMatches("value", regExp, valueIn(webElement));
+    }
+
+
 
     /* Href */
     public static boolean hasHref(WebElement webElement) {
@@ -779,7 +910,15 @@ import org.openqa.selenium.support.ui.WebDriverWait;
     }
 
     public static boolean hrefNotEndsWith(String suffix, WebElement webElement) {
-        return endsWith(suffix, hrefIn(webElement));
+        return notEndsWith(suffix, hrefIn(webElement));
+    }
+
+    public static boolean hrefMatches(String regExp, WebElement webElement) {
+        return matches(regExp, hrefIn(webElement));
+    }
+
+    public static boolean hrefNotMatches(String regExp, WebElement webElement) {
+        return notMatches(regExp, hrefIn(webElement));
     }
 
     public static void assertHasHref(WebElement webElement) {
@@ -822,6 +961,16 @@ import org.openqa.selenium.support.ui.WebDriverWait;
         assertNotEndsWith("href", suffix, hrefIn(webElement));
     }
 
+    public static void assertHrefMatches(String regExp, WebElement webElement) {
+        assertMatches("href", regExp, hrefIn(webElement));
+    }
+
+    public static void assertHrefNotMatches(String regExp, WebElement webElement) {
+        assertNotMatches("href", regExp, hrefIn(webElement));
+    }
+
+
+
     /* Text */
     public static boolean hasText(WebElement webElement) {
         return notEquals("", textIn(webElement));
@@ -860,7 +1009,15 @@ import org.openqa.selenium.support.ui.WebDriverWait;
     }
 
     public static boolean textNotEndsWith(String suffix, WebElement webElement) {
-        return endsWith(suffix, textIn(webElement));
+        return notEndsWith(suffix, textIn(webElement));
+    }
+
+    public static boolean textMatches(String regExp, WebElement webElement) {
+        return matches(regExp, textIn(webElement));
+    }
+
+    public static boolean textNotMatches(String regExp, WebElement webElement) {
+        return notMatches(regExp, textIn(webElement));
     }
 
     public static void assertHasText(WebElement webElement) {
@@ -906,6 +1063,16 @@ import org.openqa.selenium.support.ui.WebDriverWait;
     public static void assertTextNotEndsWith(String suffix, WebElement webElement) {
         assertNotEndsWith("Text", suffix, textIn(webElement));
     }
+
+    public static void assertTextMatches(String regExp, WebElement webElement) {
+        assertMatches("Text", regExp, textIn(webElement));
+    }
+
+    public static void assertTextNotMatches(String regExp, WebElement webElement) {
+        assertNotMatches("Text", regExp, textIn(webElement));
+    }
+
+
 
     /* Number */
     public static boolean isNumber(WebElement webElement) {
@@ -976,6 +1143,8 @@ import org.openqa.selenium.support.ui.WebDriverWait;
         assertGreaterThanOrEquals("Number", number, numberIn(webElement));
     }
 
+
+
     /* Url */
     public static boolean urlEquals(String url, WebDriver driver) {
         return equals(url, url(driver));
@@ -983,22 +1152,6 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
     public static boolean urlNotEquals(String url, WebDriver driver) {
         return notEquals(url, url(driver));
-    }
-
-    public static boolean urlMatches(String regExp, WebDriver driver) {
-        return matches(regExp, url(driver));
-    }
-
-    public static boolean urlNotMatches(String regExp, WebDriver driver) {
-        return notMatches(regExp, url(driver));
-    }
-
-    public static boolean urlMatches(Openable openable, WebDriver driver) {
-        return matches(openable.getUrl(), url(driver));
-    }
-
-    public static boolean urlNotMatches(Openable openable, WebDriver driver) {
-        return notMatches(openable.getUrl(), url(driver));
     }
 
     public static boolean urlContains(String searchText, WebDriver driver) {
@@ -1025,28 +1178,20 @@ import org.openqa.selenium.support.ui.WebDriverWait;
         return notEndsWith(suffix, url(driver));
     }
 
+    public static boolean urlMatches(String regExp, WebDriver driver) {
+        return matches(regExp, url(driver));
+    }
+
+    public static boolean urlNotMatches(String regExp, WebDriver driver) {
+        return notMatches(regExp, url(driver));
+    }
+
     public static void assertUrlEquals(String url, WebDriver driver) {
         assertEquals("Url", url, url(driver));
     }
 
     public static void assertUrlNotEquals(String url, WebDriver driver) {
         assertNotEquals("Url", url, url(driver));
-    }
-
-    public static void assertUrlMatches(String regExp, WebDriver driver) {
-        assertMatches("Url", regExp, url(driver));
-    }
-
-    public static void assertUrlNotMatches(String regExp, WebDriver driver) {
-        assertNotMatches("Url", regExp, url(driver));
-    }
-
-    public static void assertUrlMatches(Openable openable, WebDriver driver) {
-        assertMatches("Url", openable.getUrl(), url(driver));
-    }
-
-    public static void assertUrlNotMatches(Openable openable, WebDriver driver) {
-        assertNotMatches("Url", openable.getUrl(), url(driver));
     }
 
     public static void assertUrlContains(String searchText, WebDriver driver) {
@@ -1072,6 +1217,16 @@ import org.openqa.selenium.support.ui.WebDriverWait;
     public static void assertUrlNotEndsWith(String suffix, WebDriver driver) {
         assertNotEndsWith("Url", suffix, url(driver));
     }
+
+    public static void assertUrlMatches(String regExp, WebDriver driver) {
+        assertMatches("Url", regExp, url(driver));
+    }
+
+    public static void assertUrlNotMatches(String regExp, WebDriver driver) {
+        assertNotMatches("Url", regExp, url(driver));
+    }
+
+
 
     /* Title */
     public static boolean titleEquals(String title, WebDriver driver) {
@@ -1106,6 +1261,14 @@ import org.openqa.selenium.support.ui.WebDriverWait;
         return notEndsWith(suffix, title(driver));
     }
 
+    public static boolean titleMatches(String regExp, WebDriver driver) {
+        return matches(regExp, title(driver));
+    }
+
+    public static boolean titleNotMatches(String regExp, WebDriver driver) {
+        return notMatches(regExp, title(driver));
+    }
+
     public static void assertTitleEquals(String title, WebDriver driver) {
         assertEquals("Title", title, title(driver));
     }
@@ -1138,6 +1301,16 @@ import org.openqa.selenium.support.ui.WebDriverWait;
         assertNotEndsWith("Title", suffix, title(driver));
     }
 
+    public static void assertTitleMatches(String regExp, WebDriver driver) {
+        assertMatches("Title", regExp, title(driver));
+    }
+
+    public static void assertTitleNotMatches(String regExp, WebDriver driver) {
+        assertNotMatches("Title", regExp, title(driver));
+    }
+
+
+
     /* Open */
     public static boolean isOpen(Openable openable) {
         return openable.isOpen();
@@ -1154,6 +1327,8 @@ import org.openqa.selenium.support.ui.WebDriverWait;
     public static void assertIsNotOpen(Openable openable) {
         openable.assertIsNotOpen();
     }
+
+
 
     /* Selected */
     public static boolean isSelected(WebElement webElement) {
@@ -1176,6 +1351,8 @@ import org.openqa.selenium.support.ui.WebDriverWait;
         }
     }
 
+
+
     /* Checked/Unchecked */
     public static boolean isChecked(WebElement webElement) {
         return webElement.isSelected();
@@ -1197,6 +1374,8 @@ import org.openqa.selenium.support.ui.WebDriverWait;
         }
     }
 
+
+
     /* Enabled/Disabled */
     public static boolean isEnabled(WebElement webElement) {
         return webElement.isEnabled();
@@ -1217,6 +1396,8 @@ import org.openqa.selenium.support.ui.WebDriverWait;
             Assert.fail(describeTag(webElement) + " is not disabled!");
         }
     }
+
+
 
     /* Display */
     public static boolean isDisplayed(WebElement webElement) {
@@ -1268,6 +1449,8 @@ import org.openqa.selenium.support.ui.WebDriverWait;
         }
     }
 
+
+
     /* Size */
     public static boolean sizeEquals(int number, Collection collection) {
         return equals((double) number, (double) collection.size());
@@ -1316,6 +1499,8 @@ import org.openqa.selenium.support.ui.WebDriverWait;
     public static void assertSizeGreaterThanOrEquals(int number, Collection collection) {
         assertGreaterThanOrEquals("Size", (double) number, (double) collection.size());
     }
+
+
 
     /* Option */
     public static boolean hasOption(String text, WebElement webElement) {
@@ -1440,6 +1625,8 @@ import org.openqa.selenium.support.ui.WebDriverWait;
         }
     }
 
+
+
     /* Option Value */
     public static boolean hasOptionWithValue(String value, WebElement webElement) {
         List<WebElement> options = new Select(webElement).getOptions();
@@ -1531,6 +1718,8 @@ import org.openqa.selenium.support.ui.WebDriverWait;
         }
     }
 
+
+
     /* Option Index */
     public static boolean hasOptionWithIndex(int index, WebElement webElement) {
         List<WebElement> options = new Select(webElement).getOptions();
@@ -1616,6 +1805,8 @@ import org.openqa.selenium.support.ui.WebDriverWait;
             Assert.fail("Option with index \"" + index + "\" is not deselected!");
         }
     }
+
+
 
     /* String Equals */
     public static boolean equals(String text1, String text2) {
@@ -1720,6 +1911,8 @@ import org.openqa.selenium.support.ui.WebDriverWait;
         }
     }
 
+
+
     /* Double Equals */
     public static boolean equals(Double comparedTo, Double number) {
         return number == comparedTo;
@@ -1780,6 +1973,8 @@ import org.openqa.selenium.support.ui.WebDriverWait;
             Assert.fail(name + ": " + number + " is not greater than or equal to " + comparedTo + " !");
         }
     }
+
+
 
     /* Describe */
     public static String describeTag(WebElement webElement) {
