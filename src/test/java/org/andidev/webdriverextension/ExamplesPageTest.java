@@ -1,6 +1,5 @@
 package org.andidev.webdriverextension;
 
-import org.andidev.webdriverextension.internal.WebDriverExtensionFieldDecorator;
 import static org.andidev.webdriverextension.Bot.*;
 import static org.andidev.webdriverextension.ThreadDriver.*;
 import org.andidev.webdriverextension.page.components.UserRow;
@@ -10,17 +9,14 @@ import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.support.PageFactory;
 
 public class ExamplesPageTest extends SiteAwareRepository {
 
     Double delayTime = 0.0;
 
     public ExamplesPageTest() {
-        setDriver(new FirefoxDriver());
-
-        // Instantiate Top Menu Object
-        PageFactory.initElements(new WebDriverExtensionFieldDecorator(getDriver(), getDriver()), this);
+        ThreadDriver.setDriver(new FirefoxDriver());
+        initElements(ThreadDriver.getDriver());
     }
 
     @Before

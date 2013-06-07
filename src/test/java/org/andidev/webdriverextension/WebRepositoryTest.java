@@ -1,6 +1,5 @@
 package org.andidev.webdriverextension;
 
-import org.andidev.webdriverextension.internal.WebDriverExtensionFieldDecorator;
 import static org.andidev.webdriverextension.Bot.*;
 import static org.andidev.webdriverextension.ThreadDriver.*;
 import org.andidev.webdriverextension.page.ExamplesPage;
@@ -11,7 +10,6 @@ import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
 
 public class WebRepositoryTest extends WebRepository {
 
@@ -23,11 +21,8 @@ public class WebRepositoryTest extends WebRepository {
     ExamplesPage examplesPage;
 
     public WebRepositoryTest() {
-        setDriver(new FirefoxDriver());
-
-        // Instantiate Top Menu Object
-        this.menu = new Menu();
-        PageFactory.initElements(new WebDriverExtensionFieldDecorator(getDriver(), getDriver()), this);
+        ThreadDriver.setDriver(new FirefoxDriver());
+        initElements(ThreadDriver.getDriver());
     }
 
     @Before
