@@ -640,7 +640,13 @@ import org.openqa.selenium.support.ui.WebDriverWait;
     }
 
     public static boolean hasClass(String className, WebElement webElement) {
-        return classIn(webElement).matches("(\\\"|\\s)" + className.trim() + "(\\\"|\\s)");
+        List<String> classes = classesIn(webElement);
+        for (String clazz : classes) {
+            if (equals(className, clazz)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     public static boolean hasNotClass(String className, WebElement webElement) {
