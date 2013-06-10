@@ -10,10 +10,6 @@ import org.openqa.selenium.support.FindBy;
 @Generate
 public class BotTestPage extends WebPage<WebDriverExtensionSite> {
 
-    // Attributes
-    @FindBy(css = "#prefixidsuffix")
-    public WebElement attributesSpan;
-
     // Texts
     @FindBy(css = "#text-span")
     public WebElement textSpan;
@@ -32,9 +28,15 @@ public class BotTestPage extends WebPage<WebDriverExtensionSite> {
     @FindBy(css = "#floatnumber-input")
     public WebElement floatNumberInput;
 
-    // Selects
+    // Select/Options
     @FindBy(css = "#select")
     public WebElement select;
+    @FindBy(css = "#select option:nth-child(1)")
+    public WebElement option1;
+    @FindBy(css = "#select option:nth-child(2)")
+    public WebElement option2;
+    @FindBy(css = "#select option:nth-child(3)")
+    public WebElement option3;
 
     // Checkboxes
     @FindBy(css = "#checkbox1")
@@ -51,6 +53,10 @@ public class BotTestPage extends WebPage<WebDriverExtensionSite> {
     public WebElement radiobutton2;
     @FindBy(css = "#radiobutton3")
     public WebElement radiobutton3;
+
+    // Attributes
+    @FindBy(css = "#prefixidsuffix")
+    public WebElement attributesSpan;
 
     @Override
     public void open() {

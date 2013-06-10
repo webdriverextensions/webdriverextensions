@@ -13,68 +13,28 @@ public class Bot {
 
     private static final org.slf4j.Logger log = org.slf4j.LoggerFactory.getLogger(Bot.class);
 
-    public static String textIn(WebElement webElement) {
-        return BotUtils.textIn(webElement);
+
+    /* Click */
+    public static void click(WebElement webElement) {
+        BotUtils.click(webElement);
     }
 
-    public static Double numberIn(WebElement webElement) {
-        return BotUtils.numberIn(webElement);
-    }
 
-    public static String url() {
-        return BotUtils.url(ThreadDriver.getDriver());
-    }
 
-    public static String title() {
-        return BotUtils.title(ThreadDriver.getDriver());
-    }
-
-    public static String tagNameOf(WebElement webElement) {
-        return BotUtils.tagNameOf(webElement);
-    }
-
-    public static String attributeIn(String name, WebElement webElement) {
-        return BotUtils.attributeIn(name, webElement);
-    }
-
-    public static String idIn(WebElement webElement) {
-        return BotUtils.idIn(webElement);
-    }
-
-    public static String nameIn(WebElement webElement) {
-        return BotUtils.nameIn(webElement);
-    }
-
-    public static String classIn(WebElement webElement) {
-        return BotUtils.classIn(webElement);
-    }
-
-    public static List<String> classesIn(WebElement webElement) {
-        return BotUtils.classesIn(webElement);
-    }
-
-    public static String valueIn(WebElement webElement) {
-        return BotUtils.valueIn(webElement);
-    }
-
-    public static String hrefIn(WebElement webElement) {
-        return BotUtils.hrefIn(webElement);
-    }
-
-    public static Integer sizeOf(Collection collection) {
-        return BotUtils.sizeOf(collection);
-    }
-
-    public static void clear(WebElement webElement) {
-        BotUtils.clear(webElement);
-    }
-
+    /* Type */
     public static void type(String text, WebElement webElement) {
         BotUtils.type(text, webElement);
     }
 
     public static void typeNumber(Double number, WebElement webElement) {
         BotUtils.typeNumber(number, webElement);
+    }
+
+
+
+    /* Clear */
+    public static void clear(WebElement webElement) {
+        BotUtils.clear(webElement);
     }
 
     public static void clearAndType(String text, WebElement webElement) {
@@ -85,6 +45,9 @@ public class Bot {
         BotUtils.clearAndTypeNumber(number, webElement);
     }
 
+
+
+    /* Press Keys */
     public static void pressEnter(WebElement webElement) {
         BotUtils.pressEnter(webElement);
     }
@@ -93,10 +56,9 @@ public class Bot {
         BotUtils.pressKeys(webElement, keys);
     }
 
-    public static void click(WebElement webElement) {
-        BotUtils.click(webElement);
-    }
 
+
+    /* Select/Deselect */
     public static void select(WebElement webElement) {
         BotUtils.select(webElement);
     }
@@ -137,6 +99,9 @@ public class Bot {
         BotUtils.deselectOptionWithIndex(index, webElement);
     }
 
+
+
+    /* Check/Uncheck */
     public static void check(WebElement webElement) {
         BotUtils.check(webElement);
     }
@@ -145,6 +110,9 @@ public class Bot {
         BotUtils.uncheck(webElement);
     }
 
+
+
+    /* Open */
     public static void open(String url) {
         BotUtils.open(url, ThreadDriver.getDriver());
     }
@@ -153,6 +121,9 @@ public class Bot {
         BotUtils.open(openable);
     }
 
+
+
+    /* Wait For */
     public static void waitFor(double seconds) {
         BotUtils.waitFor(seconds);
     }
@@ -173,6 +144,9 @@ public class Bot {
         BotUtils.waitForElementToDisplay(webElement, secondsToWait, sleepInMillis, ThreadDriver.getDriver());
     }
 
+
+
+    /* Debug */
     public static void debug(String str) {
         BotUtils.debug(str);
     }
@@ -185,7 +159,522 @@ public class Bot {
         BotUtils.debug(webElements);
     }
 
+
+
+    /* Open */
+    public static boolean isOpen(Openable openable) {
+        return BotUtils.isOpen(openable);
+    }
+
+    public static boolean isNotOpen(Openable openable) {
+        return BotUtils.isNotOpen(openable);
+    }
+
+    public static void assertIsOpen(Openable openable) {
+        BotUtils.assertIsOpen(openable);
+    }
+
+    public static void assertIsNotOpen(Openable openable) {
+        BotUtils.assertIsNotOpen(openable);
+    }
+
+
+
+    /* Selected */
+    public static boolean isSelected(WebElement webElement) {
+        return BotUtils.isSelected(webElement);
+    }
+
+    public static boolean isDeselected(WebElement webElement) {
+        return BotUtils.isDeselected(webElement);
+    }
+
+    public static void assertIsSelected(WebElement webElement) {
+        BotUtils.assertIsSelected(webElement);
+    }
+
+    public static void assertIsDeselected(WebElement webElement) {
+        BotUtils.assertIsDeselected(webElement);
+    }
+
+
+
+    /* Option */
+    public static boolean hasOption(String text, WebElement webElement) {
+        return BotUtils.hasOption(text, webElement);
+    }
+
+    public static boolean hasNotOption(String text, WebElement webElement) {
+        return BotUtils.hasNotOption(text, webElement);
+    }
+
+    public static boolean optionIsEnabled(String text, WebElement webElement) {
+        return BotUtils.optionIsEnabled(text, webElement);
+    }
+
+    public static boolean optionIsDisabled(String text, WebElement webElement) {
+        return BotUtils.optionIsDisabled(text, webElement);
+    }
+
+    public static boolean optionIsSelected(String text, WebElement webElement) {
+        return BotUtils.optionIsSelected(text, webElement);
+    }
+
+    public static boolean optionIsDeselected(String text, WebElement webElement) {
+        return BotUtils.optionIsDeselected(text, webElement);
+    }
+
+    public static boolean allOptionsAreSelected(WebElement webElement) {
+        return BotUtils.allOptionsAreSelected(webElement);
+    }
+
+    public static boolean noOptionIsSelected(WebElement webElement) {
+        return BotUtils.noOptionIsSelected(webElement);
+    }
+
+    public static void assertHasOption(String text, WebElement webElement) {
+        BotUtils.assertHasOption(text, webElement);
+    }
+
+    public static void assertHasNotOption(String text, WebElement webElement) {
+        BotUtils.assertHasNotOption(text, webElement);
+    }
+
+    public static void assertOptionIsEnabled(String text, WebElement webElement) {
+        BotUtils.assertOptionIsEnabled(text, webElement);
+    }
+
+    public static void assertOptionIsDisabled(String text, WebElement webElement) {
+        BotUtils.assertOptionIsDisabled(text, webElement);
+    }
+
+    public static void assertOptionIsSelected(String text, WebElement webElement) {
+        BotUtils.assertOptionIsSelected(text, webElement);
+    }
+
+    public static void assertOptionIsDeselected(String text, WebElement webElement) {
+        BotUtils.assertOptionIsDeselected(text, webElement);
+    }
+
+    public static void assertAllOptionsAreSelected(WebElement webElement) {
+        BotUtils.assertAllOptionsAreSelected(webElement);
+    }
+
+    public static void assertNoOptionIsSelected(WebElement webElement) {
+        BotUtils.assertNoOptionIsSelected(webElement);
+    }
+
+
+
+    /* Option Value */
+    public static boolean hasOptionWithValue(String value, WebElement webElement) {
+        return BotUtils.hasOptionWithValue(value, webElement);
+    }
+
+    public static boolean hasNotOptionWithValue(String value, WebElement webElement) {
+        return BotUtils.hasNotOptionWithValue(value, webElement);
+    }
+
+    public static boolean optionWithValueIsEnabled(String value, WebElement webElement) {
+        return BotUtils.optionWithValueIsEnabled(value, webElement);
+    }
+
+    public static boolean optionWithValueIsDisabled(String value, WebElement webElement) {
+        return BotUtils.optionWithValueIsDisabled(value, webElement);
+    }
+
+    public static boolean optionWithValueIsSelected(String value, WebElement webElement) {
+        return BotUtils.optionWithValueIsSelected(value, webElement);
+    }
+
+    public static boolean optionWithValueIsDeselected(String value, WebElement webElement) {
+        return BotUtils.optionWithValueIsDeselected(value, webElement);
+    }
+
+    public static void assertHasOptionWithValue(String value, WebElement webElement) {
+        BotUtils.assertHasOptionWithValue(value, webElement);
+    }
+
+    public static void assertHasNotOptionWithValue(String value, WebElement webElement) {
+        BotUtils.assertHasNotOptionWithValue(value, webElement);
+    }
+
+    public static void assertOptionWithValueIsEnabled(String value, WebElement webElement) {
+        BotUtils.assertOptionWithValueIsEnabled(value, webElement);
+    }
+
+    public static void assertOptionWithValueIsDisabled(String value, WebElement webElement) {
+        BotUtils.assertOptionWithValueIsDisabled(value, webElement);
+    }
+
+    public static void assertOptionWithValueIsSelected(String value, WebElement webElement) {
+        BotUtils.assertOptionWithValueIsSelected(value, webElement);
+    }
+
+    public static void assertOptionWithValueIsDeselected(String value, WebElement webElement) {
+        BotUtils.assertOptionWithValueIsDeselected(value, webElement);
+    }
+
+
+
+    /* Option Index */
+    public static boolean hasOptionWithIndex(int index, WebElement webElement) {
+        return BotUtils.hasOptionWithIndex(index, webElement);
+    }
+
+    public static boolean hasNotOptionWithIndex(int index, WebElement webElement) {
+        return BotUtils.hasNotOptionWithIndex(index, webElement);
+    }
+
+    public static boolean optionWithIndexIsEnabled(int index, WebElement webElement) {
+        return BotUtils.optionWithIndexIsEnabled(index, webElement);
+    }
+
+    public static boolean optionWithIndexIsDisabled(int index, WebElement webElement) {
+        return BotUtils.optionWithIndexIsDisabled(index, webElement);
+    }
+
+    public static boolean optionWithIndexIsSelected(int index, WebElement webElement) {
+        return BotUtils.optionWithIndexIsSelected(index, webElement);
+    }
+
+    public static boolean optionWithIndexIsDeselected(int index, WebElement webElement) {
+        return BotUtils.optionWithIndexIsDeselected(index, webElement);
+    }
+
+    public static void assertHasOptionWithIndex(int index, WebElement webElement) {
+        BotUtils.assertHasOptionWithIndex(index, webElement);
+    }
+
+    public static void assertHasNotOptionWithIndex(int index, WebElement webElement) {
+        BotUtils.assertHasNotOptionWithIndex(index, webElement);
+    }
+
+    public static void assertOptionWithIndexIsEnabled(int index, WebElement webElement) {
+        BotUtils.assertOptionWithIndexIsEnabled(index, webElement);
+    }
+
+    public static void assertOptionWithIndexIsDisabled(int index, WebElement webElement) {
+        BotUtils.assertOptionWithIndexIsDisabled(index, webElement);
+    }
+
+    public static void assertOptionWithIndexIsSelected(int index, WebElement webElement) {
+        BotUtils.assertOptionWithIndexIsSelected(index, webElement);
+    }
+
+    public static void assertOptionWithIndexIsDeselected(int index, WebElement webElement) {
+        BotUtils.assertOptionWithIndexIsDeselected(index, webElement);
+    }
+
+
+
+    /* Checked/Unchecked */
+    public static boolean isChecked(WebElement webElement) {
+        return BotUtils.isChecked(webElement);
+    }
+
+    public static boolean isUnchecked(WebElement webElement) {
+        return BotUtils.isUnchecked(webElement);
+    }
+
+    public static void assertIsChecked(WebElement webElement) {
+        BotUtils.assertIsChecked(webElement);
+    }
+
+    public static void assertIsUnchecked(WebElement webElement) {
+        BotUtils.assertIsUnchecked(webElement);
+    }
+
+
+
+    /* Enabled/Disabled */
+    public static boolean isEnabled(WebElement webElement) {
+        return BotUtils.isEnabled(webElement);
+    }
+
+    public static boolean isDisabled(WebElement webElement) {
+        return BotUtils.isDisabled(webElement);
+    }
+
+    public static void assertIsEnabled(WebElement webElement) {
+        BotUtils.assertIsEnabled(webElement);
+    }
+
+    public static void assertIsDisabled(WebElement webElement) {
+        BotUtils.assertIsDisabled(webElement);
+    }
+
+
+
+    /* Display */
+    public static boolean isDisplayed(WebElement webElement) {
+        return BotUtils.isDisplayed(webElement);
+    }
+
+    public static boolean isNotDisplayed(WebElement webElement) {
+        return BotUtils.isNotDisplayed(webElement);
+    }
+
+    public static boolean isDisplayed(WebElement webElement, long secondsToWait) {
+        return BotUtils.isDisplayed(webElement, secondsToWait, ThreadDriver.getDriver());
+    }
+
+    public static boolean isNotDisplayed(WebElement webElement, long secondsToWait) {
+        return BotUtils.isNotDisplayed(webElement, secondsToWait, ThreadDriver.getDriver());
+    }
+
+    public static void assertIsDisplayed(WebElement webElement) {
+        BotUtils.assertIsDisplayed(webElement);
+    }
+
+    public static void assertIsNotDisplayed(WebElement webElement) {
+        BotUtils.assertIsNotDisplayed(webElement);
+    }
+
+    public static void assertIsDisplayed(WebElement webElement, long secondsToWait) {
+        BotUtils.assertIsDisplayed(webElement, secondsToWait, ThreadDriver.getDriver());
+    }
+
+    public static void assertIsNotDisplayed(WebElement webElement, long secondsToWait) {
+        BotUtils.assertIsNotDisplayed(webElement, secondsToWait, ThreadDriver.getDriver());
+    }
+
+
+
+    /* Size */
+    public static Integer sizeOf(Collection collection) {
+        return BotUtils.sizeOf(collection);
+    }
+
+    public static boolean sizeEquals(int number, Collection collection) {
+        return BotUtils.sizeEquals(number, collection);
+    }
+
+    public static boolean sizeNotEquals(int number, Collection collection) {
+        return BotUtils.sizeNotEquals(number, collection);
+    }
+
+    public static boolean sizeLessThan(int number, Collection collection) {
+        return BotUtils.sizeLessThan(number, collection);
+    }
+
+    public static boolean sizeLessThanOrEquals(int number, Collection collection) {
+        return BotUtils.sizeLessThanOrEquals(number, collection);
+    }
+
+    public static boolean sizeGreaterThan(int number, Collection collection) {
+        return BotUtils.sizeGreaterThan(number, collection);
+    }
+
+    public static boolean sizeGreaterThanOrEquals(int number, Collection collection) {
+        return BotUtils.sizeGreaterThanOrEquals(number, collection);
+    }
+
+    public static void assertSizeEquals(int number, Collection collection) {
+        BotUtils.assertSizeEquals(number, collection);
+    }
+
+    public static void assertSizeNotEquals(int number, Collection collection) {
+        BotUtils.assertSizeNotEquals(number, collection);
+    }
+
+    public static void assertSizeLessThan(int number, Collection collection) {
+        BotUtils.assertSizeLessThan(number, collection);
+    }
+
+    public static void assertSizeLessThanOrEquals(int number, Collection collection) {
+        BotUtils.assertSizeLessThanOrEquals(number, collection);
+    }
+
+    public static void assertSizeGreaterThan(int number, Collection collection) {
+        BotUtils.assertSizeGreaterThan(number, collection);
+    }
+
+    public static void assertSizeGreaterThanOrEquals(int number, Collection collection) {
+        BotUtils.assertSizeGreaterThanOrEquals(number, collection);
+    }
+
+
+
+    /* Url */
+    public static String url() {
+        return BotUtils.url(ThreadDriver.getDriver());
+    }
+
+    public static boolean urlEquals(String url) {
+        return BotUtils.urlEquals(url, ThreadDriver.getDriver());
+    }
+
+    public static boolean urlNotEquals(String url) {
+        return BotUtils.urlNotEquals(url, ThreadDriver.getDriver());
+    }
+
+    public static boolean urlContains(String searchText) {
+        return BotUtils.urlContains(searchText, ThreadDriver.getDriver());
+    }
+
+    public static boolean urlNotContains(String searchText) {
+        return BotUtils.urlNotContains(searchText, ThreadDriver.getDriver());
+    }
+
+    public static boolean urlStartsWith(String prefix) {
+        return BotUtils.urlStartsWith(prefix, ThreadDriver.getDriver());
+    }
+
+    public static boolean urlNotStartsWith(String prefix) {
+        return BotUtils.urlNotStartsWith(prefix, ThreadDriver.getDriver());
+    }
+
+    public static boolean urlEndsWith(String suffix) {
+        return BotUtils.urlEndsWith(suffix, ThreadDriver.getDriver());
+    }
+
+    public static boolean urlNotEndsWith(String suffix) {
+        return BotUtils.urlNotEndsWith(suffix, ThreadDriver.getDriver());
+    }
+
+    public static boolean urlMatches(String regExp) {
+        return BotUtils.urlMatches(regExp, ThreadDriver.getDriver());
+    }
+
+    public static boolean urlNotMatches(String regExp) {
+        return BotUtils.urlNotMatches(regExp, ThreadDriver.getDriver());
+    }
+
+    public static void assertUrlEquals(String url) {
+        BotUtils.assertUrlEquals(url, ThreadDriver.getDriver());
+    }
+
+    public static void assertUrlNotEquals(String url) {
+        BotUtils.assertUrlNotEquals(url, ThreadDriver.getDriver());
+    }
+
+    public static void assertUrlContains(String searchText) {
+        BotUtils.assertUrlContains(searchText, ThreadDriver.getDriver());
+    }
+
+    public static void assertUrlNotContains(String searchText) {
+        BotUtils.assertUrlNotContains(searchText, ThreadDriver.getDriver());
+    }
+
+    public static void assertUrlStartsWith(String prefix) {
+        BotUtils.assertUrlStartsWith(prefix, ThreadDriver.getDriver());
+    }
+
+    public static void assertUrlNotStartsWith(String prefix) {
+        BotUtils.assertUrlNotStartsWith(prefix, ThreadDriver.getDriver());
+    }
+
+    public static void assertUrlEndsWith(String suffix) {
+        BotUtils.assertUrlEndsWith(suffix, ThreadDriver.getDriver());
+    }
+
+    public static void assertUrlNotEndsWith(String suffix) {
+        BotUtils.assertUrlNotEndsWith(suffix, ThreadDriver.getDriver());
+    }
+
+    public static void assertUrlMatches(String regExp) {
+        BotUtils.assertUrlMatches(regExp, ThreadDriver.getDriver());
+    }
+
+    public static void assertUrlNotMatches(String regExp) {
+        BotUtils.assertUrlNotMatches(regExp, ThreadDriver.getDriver());
+    }
+
+
+
+    /* Title */
+    public static String title() {
+        return BotUtils.title(ThreadDriver.getDriver());
+    }
+
+    public static boolean titleEquals(String title) {
+        return BotUtils.titleEquals(title, ThreadDriver.getDriver());
+    }
+
+    public static boolean titleNotEquals(String title) {
+        return BotUtils.titleNotEquals(title, ThreadDriver.getDriver());
+    }
+
+    public static boolean titleContains(String searchText) {
+        return BotUtils.titleContains(searchText, ThreadDriver.getDriver());
+    }
+
+    public static boolean titleNotContains(String searchText) {
+        return BotUtils.titleNotContains(searchText, ThreadDriver.getDriver());
+    }
+
+    public static boolean titleStartsWith(String prefix) {
+        return BotUtils.titleStartsWith(prefix, ThreadDriver.getDriver());
+    }
+
+    public static boolean titleNotStartsWith(String prefix) {
+        return BotUtils.titleNotStartsWith(prefix, ThreadDriver.getDriver());
+    }
+
+    public static boolean titleEndsWith(String suffix) {
+        return BotUtils.titleEndsWith(suffix, ThreadDriver.getDriver());
+    }
+
+    public static boolean titleNotEndsWith(String suffix) {
+        return BotUtils.titleNotEndsWith(suffix, ThreadDriver.getDriver());
+    }
+
+    public static boolean titleMatches(String regExp) {
+        return BotUtils.titleMatches(regExp, ThreadDriver.getDriver());
+    }
+
+    public static boolean titleNotMatches(String regExp) {
+        return BotUtils.titleNotMatches(regExp, ThreadDriver.getDriver());
+    }
+
+    public static void assertTitleEquals(String title) {
+        BotUtils.assertTitleEquals(title, ThreadDriver.getDriver());
+    }
+
+    public static void assertTitleNotEquals(String title) {
+        BotUtils.assertTitleNotEquals(title, ThreadDriver.getDriver());
+    }
+
+    public static void assertTitleContains(String searchText) {
+        BotUtils.assertTitleContains(searchText, ThreadDriver.getDriver());
+    }
+
+    public static void assertTitleNotContains(String searchText) {
+        BotUtils.assertTitleNotContains(searchText, ThreadDriver.getDriver());
+    }
+
+    public static void assertTitleStartsWith(String prefix) {
+        BotUtils.assertTitleStartsWith(prefix, ThreadDriver.getDriver());
+    }
+
+    public static void assertTitleNotStartsWith(String prefix) {
+        BotUtils.assertTitleNotStartsWith(prefix, ThreadDriver.getDriver());
+    }
+
+    public static void assertTitleEndsWith(String suffix) {
+        BotUtils.assertTitleEndsWith(suffix, ThreadDriver.getDriver());
+    }
+
+    public static void assertTitleNotEndsWith(String suffix) {
+        BotUtils.assertTitleNotEndsWith(suffix, ThreadDriver.getDriver());
+    }
+
+    public static void assertTitleMatches(String regExp) {
+        BotUtils.assertTitleMatches(regExp, ThreadDriver.getDriver());
+    }
+
+    public static void assertTitleNotMatches(String regExp) {
+        BotUtils.assertTitleNotMatches(regExp, ThreadDriver.getDriver());
+    }
+
+
+
     /* Tag Name */
+    public static String tagNameOf(WebElement webElement) {
+        return BotUtils.tagNameOf(webElement);
+    }
+
     public static boolean tagNameEquals(String value, WebElement webElement) {
         return BotUtils.tagNameEquals(value, webElement);
     }
@@ -202,7 +691,13 @@ public class Bot {
         BotUtils.assertTagNameNotEquals(value, webElement);
     }
 
+
+
     /* Attribute */
+    public static String attributeIn(String name, WebElement webElement) {
+        return BotUtils.attributeIn(name, webElement);
+    }
+
     public static boolean hasAttribute(String name, WebElement webElement) {
         return BotUtils.hasAttribute(name, webElement);
     }
@@ -250,7 +745,6 @@ public class Bot {
     public static boolean attributeNotMatches(String name, String regExp, WebElement webElement) {
         return BotUtils.attributeNotMatches(name, regExp, webElement);
     }
-
 
     public static void assertHasAttribute(String name, WebElement webElement) {
         BotUtils.assertHasAttribute(name, webElement);
@@ -300,7 +794,13 @@ public class Bot {
         BotUtils.assertAttributeNotMatches(name, regExp, webElement);
     }
 
+
+
     /* Id */
+    public static String idIn(WebElement webElement) {
+        return BotUtils.idIn(webElement);
+    }
+
     public static boolean hasId(WebElement webElement) {
         return BotUtils.hasId(webElement);
     }
@@ -397,7 +897,13 @@ public class Bot {
         BotUtils.assertIdNotMatches(regExp, webElement);
     }
 
+
+
     /* Name */
+    public static String nameIn(WebElement webElement) {
+        return BotUtils.nameIn(webElement);
+    }
+
     public static boolean hasName(WebElement webElement) {
         return BotUtils.hasName(webElement);
     }
@@ -494,7 +1000,17 @@ public class Bot {
         BotUtils.assertNameNotMatches(regExp, webElement);
     }
 
+
+
     /* Class */
+    public static String classIn(WebElement webElement) {
+        return BotUtils.classIn(webElement);
+    }
+
+    public static List<String> classesIn(WebElement webElement) {
+        return BotUtils.classesIn(webElement);
+    }
+
     public static boolean hasClass(WebElement webElement) {
         return BotUtils.hasClass(webElement);
     }
@@ -591,7 +1107,13 @@ public class Bot {
         BotUtils.assertHasNotClassMatching(regExp, webElement);
     }
 
+
+
     /* Value */
+    public static String valueIn(WebElement webElement) {
+        return BotUtils.valueIn(webElement);
+    }
+
     public static boolean hasValue(WebElement webElement) {
         return BotUtils.hasValue(webElement);
     }
@@ -688,7 +1210,13 @@ public class Bot {
         BotUtils.assertValueNotMatches(regExp, webElement);
     }
 
+
+
     /* Href */
+    public static String hrefIn(WebElement webElement) {
+        return BotUtils.hrefIn(webElement);
+    }
+
     public static boolean hasHref(WebElement webElement) {
         return BotUtils.hasHref(webElement);
     }
@@ -785,7 +1313,22 @@ public class Bot {
         BotUtils.assertHrefNotMatches(regExp, webElement);
     }
 
+
+
     /* Text */
+    /**
+     * Reads the text in a {@link org.openqa.selenium.WebElement}
+     *
+     * @param   webElement the {@link org.openqa.selenium.WebElement} to read the text from
+     * @return  the read text
+     *
+     * @see  org.openqa.selenium.WebElement#getText()
+     *
+     */
+    public static String textIn(WebElement webElement) {
+        return BotUtils.textIn(webElement);
+    }
+
     public static boolean hasText(WebElement webElement) {
         return BotUtils.hasText(webElement);
     }
@@ -882,7 +1425,13 @@ public class Bot {
         BotUtils.assertTextNotMatches(regExp, webElement);
     }
 
+
+
     /* Number */
+    public static Double numberIn(WebElement webElement) {
+        return BotUtils.numberIn(webElement);
+    }
+
     public static boolean isNumber(WebElement webElement) {
         return BotUtils.isNumber(webElement);
     }
@@ -947,480 +1496,7 @@ public class Bot {
         BotUtils.assertNumberGreaterThanOrEquals(number, webElement);
     }
 
-    /* Url */
-    public static boolean urlEquals(String url) {
-        return BotUtils.urlEquals(url, ThreadDriver.getDriver());
-    }
 
-    public static boolean urlNotEquals(String url) {
-        return BotUtils.urlNotEquals(url, ThreadDriver.getDriver());
-    }
-
-    public static boolean urlContains(String searchText) {
-        return BotUtils.urlContains(searchText, ThreadDriver.getDriver());
-    }
-
-    public static boolean urlNotContains(String searchText) {
-        return BotUtils.urlNotContains(searchText, ThreadDriver.getDriver());
-    }
-
-    public static boolean urlStartsWith(String prefix) {
-        return BotUtils.urlStartsWith(prefix, ThreadDriver.getDriver());
-    }
-
-    public static boolean urlNotStartsWith(String prefix) {
-        return BotUtils.urlNotStartsWith(prefix, ThreadDriver.getDriver());
-    }
-
-    public static boolean urlEndsWith(String suffix) {
-        return BotUtils.urlEndsWith(suffix, ThreadDriver.getDriver());
-    }
-
-    public static boolean urlNotEndsWith(String suffix) {
-        return BotUtils.urlNotEndsWith(suffix, ThreadDriver.getDriver());
-    }
-
-    public static boolean urlMatches(String regExp) {
-        return BotUtils.urlMatches(regExp, ThreadDriver.getDriver());
-    }
-
-    public static boolean urlNotMatches(String regExp) {
-        return BotUtils.urlNotMatches(regExp, ThreadDriver.getDriver());
-    }
-
-    public static void assertUrlEquals(String url) {
-        BotUtils.assertUrlEquals(url, ThreadDriver.getDriver());
-    }
-
-    public static void assertUrlNotEquals(String url) {
-        BotUtils.assertUrlNotEquals(url, ThreadDriver.getDriver());
-    }
-
-    public static void assertUrlContains(String searchText) {
-        BotUtils.assertUrlContains(searchText, ThreadDriver.getDriver());
-    }
-
-    public static void assertUrlNotContains(String searchText) {
-        BotUtils.assertUrlNotContains(searchText, ThreadDriver.getDriver());
-    }
-
-    public static void assertUrlStartsWith(String prefix) {
-        BotUtils.assertUrlStartsWith(prefix, ThreadDriver.getDriver());
-    }
-
-    public static void assertUrlNotStartsWith(String prefix) {
-        BotUtils.assertUrlNotStartsWith(prefix, ThreadDriver.getDriver());
-    }
-
-    public static void assertUrlEndsWith(String suffix) {
-        BotUtils.assertUrlEndsWith(suffix, ThreadDriver.getDriver());
-    }
-
-    public static void assertUrlNotEndsWith(String suffix) {
-        BotUtils.assertUrlNotEndsWith(suffix, ThreadDriver.getDriver());
-    }
-
-    public static void assertUrlMatches(String regExp) {
-        BotUtils.assertUrlMatches(regExp, ThreadDriver.getDriver());
-    }
-
-    public static void assertUrlNotMatches(String regExp) {
-        BotUtils.assertUrlNotMatches(regExp, ThreadDriver.getDriver());
-    }
-
-    /* Title */
-    public static boolean titleEquals(String title) {
-        return BotUtils.titleEquals(title, ThreadDriver.getDriver());
-    }
-
-    public static boolean titleNotEquals(String title) {
-        return BotUtils.titleNotEquals(title, ThreadDriver.getDriver());
-    }
-
-    public static boolean titleContains(String searchText) {
-        return BotUtils.titleContains(searchText, ThreadDriver.getDriver());
-    }
-
-    public static boolean titleNotContains(String searchText) {
-        return BotUtils.titleNotContains(searchText, ThreadDriver.getDriver());
-    }
-
-    public static boolean titleStartsWith(String prefix) {
-        return BotUtils.titleStartsWith(prefix, ThreadDriver.getDriver());
-    }
-
-    public static boolean titleNotStartsWith(String prefix) {
-        return BotUtils.titleNotStartsWith(prefix, ThreadDriver.getDriver());
-    }
-
-    public static boolean titleEndsWith(String suffix) {
-        return BotUtils.titleEndsWith(suffix, ThreadDriver.getDriver());
-    }
-
-    public static boolean titleNotEndsWith(String suffix) {
-        return BotUtils.titleNotEndsWith(suffix, ThreadDriver.getDriver());
-    }
-
-    public static boolean titleMatches(String regExp) {
-        return BotUtils.titleMatches(regExp, ThreadDriver.getDriver());
-    }
-
-    public static boolean titleNotMatches(String regExp) {
-        return BotUtils.titleNotMatches(regExp, ThreadDriver.getDriver());
-    }
-
-    public static void assertTitleEquals(String title) {
-        BotUtils.assertTitleEquals(title, ThreadDriver.getDriver());
-    }
-
-    public static void assertTitleNotEquals(String title) {
-        BotUtils.assertTitleNotEquals(title, ThreadDriver.getDriver());
-    }
-
-    public static void assertTitleContains(String searchText) {
-        BotUtils.assertTitleContains(searchText, ThreadDriver.getDriver());
-    }
-
-    public static void assertTitleNotContains(String searchText) {
-        BotUtils.assertTitleNotContains(searchText, ThreadDriver.getDriver());
-    }
-
-    public static void assertTitleStartsWith(String prefix) {
-        BotUtils.assertTitleStartsWith(prefix, ThreadDriver.getDriver());
-    }
-
-    public static void assertTitleNotStartsWith(String prefix) {
-        BotUtils.assertTitleNotStartsWith(prefix, ThreadDriver.getDriver());
-    }
-
-    public static void assertTitleEndsWith(String suffix) {
-        BotUtils.assertTitleEndsWith(suffix, ThreadDriver.getDriver());
-    }
-
-    public static void assertTitleNotEndsWith(String suffix) {
-        BotUtils.assertTitleNotEndsWith(suffix, ThreadDriver.getDriver());
-    }
-
-    public static void assertTitleMatches(String regExp) {
-        BotUtils.assertTitleMatches(regExp, ThreadDriver.getDriver());
-    }
-
-    public static void assertTitleNotMatches(String regExp) {
-        BotUtils.assertTitleNotMatches(regExp, ThreadDriver.getDriver());
-    }
-
-    /* Open */
-    public static boolean isOpen(Openable openable) {
-        return BotUtils.isOpen(openable);
-    }
-
-    public static boolean isNotOpen(Openable openable) {
-        return BotUtils.isNotOpen(openable);
-    }
-
-    public static void assertIsOpen(Openable openable) {
-        BotUtils.assertIsOpen(openable);
-    }
-
-    public static void assertIsNotOpen(Openable openable) {
-        BotUtils.assertIsNotOpen(openable);
-    }
-
-    /* Selected */
-    public static boolean isSelected(WebElement webElement) {
-        return BotUtils.isSelected(webElement);
-    }
-
-    public static boolean isDeselected(WebElement webElement) {
-        return BotUtils.isDeselected(webElement);
-    }
-
-    public static void assertIsSelected(WebElement webElement) {
-        BotUtils.assertIsSelected(webElement);
-    }
-
-    public static void assertIsDeselected(WebElement webElement) {
-        BotUtils.assertIsDeselected(webElement);
-    }
-
-    /* Checked/Unchecked */
-    public static boolean isChecked(WebElement webElement) {
-        return BotUtils.isChecked(webElement);
-    }
-
-    public static boolean isUnchecked(WebElement webElement) {
-        return BotUtils.isUnchecked(webElement);
-    }
-
-    public static void assertIsChecked(WebElement webElement) {
-        BotUtils.assertIsChecked(webElement);
-    }
-
-    public static void assertIsUnchecked(WebElement webElement) {
-        BotUtils.assertIsUnchecked(webElement);
-    }
-
-    /* Enabled/Disabled */
-    public static boolean isEnabled(WebElement webElement) {
-        return BotUtils.isEnabled(webElement);
-    }
-
-    public static boolean isDisabled(WebElement webElement) {
-        return BotUtils.isDisabled(webElement);
-    }
-
-    public static void assertIsEnabled(WebElement webElement) {
-        BotUtils.assertIsEnabled(webElement);
-    }
-
-    public static void assertIsDisabled(WebElement webElement) {
-        BotUtils.assertIsDisabled(webElement);
-    }
-
-    /* Display */
-    public static boolean isDisplayed(WebElement webElement) {
-        return BotUtils.isDisplayed(webElement);
-    }
-
-    public static boolean isNotDisplayed(WebElement webElement) {
-        return BotUtils.isNotDisplayed(webElement);
-    }
-
-    public static boolean isDisplayed(WebElement webElement, long secondsToWait) {
-        return BotUtils.isDisplayed(webElement, secondsToWait, ThreadDriver.getDriver());
-    }
-
-    public static boolean isNotDisplayed(WebElement webElement, long secondsToWait) {
-        return BotUtils.isNotDisplayed(webElement, secondsToWait, ThreadDriver.getDriver());
-    }
-
-    public static void assertIsDisplayed(WebElement webElement) {
-        BotUtils.assertIsDisplayed(webElement);
-    }
-
-    public static void assertIsNotDisplayed(WebElement webElement) {
-        BotUtils.assertIsNotDisplayed(webElement);
-    }
-
-    public static void assertIsDisplayed(WebElement webElement, long secondsToWait) {
-        BotUtils.assertIsDisplayed(webElement, secondsToWait, ThreadDriver.getDriver());
-    }
-
-    public static void assertIsNotDisplayed(WebElement webElement, long secondsToWait) {
-        BotUtils.assertIsNotDisplayed(webElement, secondsToWait, ThreadDriver.getDriver());
-    }
-
-    /* Size */
-    public static boolean sizeEquals(int number, Collection collection) {
-        return BotUtils.sizeEquals(number, collection);
-    }
-
-    public static boolean sizeNotEquals(int number, Collection collection) {
-        return BotUtils.sizeNotEquals(number, collection);
-    }
-
-    public static boolean sizeLessThan(int number, Collection collection) {
-        return BotUtils.sizeLessThan(number, collection);
-    }
-
-    public static boolean sizeLessThanOrEquals(int number, Collection collection) {
-        return BotUtils.sizeLessThanOrEquals(number, collection);
-    }
-
-    public static boolean sizeGreaterThan(int number, Collection collection) {
-        return BotUtils.sizeGreaterThan(number, collection);
-    }
-
-    public static boolean sizeGreaterThanOrEquals(int number, Collection collection) {
-        return BotUtils.sizeGreaterThanOrEquals(number, collection);
-    }
-
-    public static void assertSizeEquals(int number, Collection collection) {
-        BotUtils.assertSizeEquals(number, collection);
-    }
-
-    public static void assertSizeNotEquals(int number, Collection collection) {
-        BotUtils.assertSizeNotEquals(number, collection);
-    }
-
-    public static void assertSizeLessThan(int number, Collection collection) {
-        BotUtils.assertSizeLessThan(number, collection);
-    }
-
-    public static void assertSizeLessThanOrEquals(int number, Collection collection) {
-        BotUtils.assertSizeLessThanOrEquals(number, collection);
-    }
-
-    public static void assertSizeGreaterThan(int number, Collection collection) {
-        BotUtils.assertSizeGreaterThan(number, collection);
-    }
-
-    public static void assertSizeGreaterThanOrEquals(int number, Collection collection) {
-        BotUtils.assertSizeGreaterThanOrEquals(number, collection);
-    }
-
-    /* Option */
-    public static boolean hasOption(String text, WebElement webElement) {
-        return BotUtils.hasOption(text, webElement);
-    }
-
-    public static boolean hasNotOption(String text, WebElement webElement) {
-        return BotUtils.hasNotOption(text, webElement);
-    }
-
-    public static boolean optionIsEnabled(String text, WebElement webElement) {
-        return BotUtils.optionIsEnabled(text, webElement);
-    }
-
-    public static boolean optionIsDisabled(String text, WebElement webElement) {
-        return BotUtils.optionIsDisabled(text, webElement);
-    }
-
-    public static boolean optionIsSelected(String text, WebElement webElement) {
-        return BotUtils.optionIsSelected(text, webElement);
-    }
-
-    public static boolean optionIsDeselected(String text, WebElement webElement) {
-        return BotUtils.optionIsDeselected(text, webElement);
-    }
-
-    public static boolean allOptionsAreSelected(WebElement webElement) {
-        return BotUtils.allOptionsAreSelected(webElement);
-    }
-
-    public static boolean noOptionIsSelected(WebElement webElement) {
-        return BotUtils.noOptionIsSelected(webElement);
-    }
-
-    public static void assertHasOption(String text, WebElement webElement) {
-        BotUtils.assertHasOption(text, webElement);
-    }
-
-    public static void assertHasNotOption(String text, WebElement webElement) {
-        BotUtils.assertHasNotOption(text, webElement);
-    }
-
-    public static void assertOptionIsEnabled(String text, WebElement webElement) {
-        BotUtils.assertOptionIsEnabled(text, webElement);
-    }
-
-    public static void assertOptionIsDisabled(String text, WebElement webElement) {
-        BotUtils.assertOptionIsDisabled(text, webElement);
-    }
-
-    public static void assertOptionIsSelected(String text, WebElement webElement) {
-        BotUtils.assertOptionIsSelected(text, webElement);
-    }
-
-    public static void assertOptionIsDeselected(String text, WebElement webElement) {
-        BotUtils.assertOptionIsDeselected(text, webElement);
-    }
-
-    public static void assertAllOptionsAreSelected(WebElement webElement) {
-        BotUtils.assertAllOptionsAreSelected(webElement);
-    }
-
-    public static void assertNoOptionIsSelected(WebElement webElement) {
-        BotUtils.assertNoOptionIsSelected(webElement);
-    }
-
-    /* Option Value */
-    public static boolean hasOptionWithValue(String value, WebElement webElement) {
-        return BotUtils.hasOptionWithValue(value, webElement);
-    }
-
-    public static boolean hasNotOptionWithValue(String value, WebElement webElement) {
-        return BotUtils.hasNotOptionWithValue(value, webElement);
-    }
-
-    public static boolean optionWithValueIsEnabled(String value, WebElement webElement) {
-        return BotUtils.optionWithValueIsEnabled(value, webElement);
-    }
-
-    public static boolean optionWithValueIsDisabled(String value, WebElement webElement) {
-        return BotUtils.optionWithValueIsDisabled(value, webElement);
-    }
-
-    public static boolean optionWithValueIsSelected(String value, WebElement webElement) {
-        return BotUtils.optionWithValueIsSelected(value, webElement);
-    }
-
-    public static boolean optionWithValueIsDeselected(String value, WebElement webElement) {
-        return BotUtils.optionWithValueIsDeselected(value, webElement);
-    }
-
-    public static void assertHasOptionWithValue(String value, WebElement webElement) {
-        BotUtils.assertHasOptionWithValue(value, webElement);
-    }
-
-    public static void assertHasNotOptionWithValue(String value, WebElement webElement) {
-        BotUtils.assertHasNotOptionWithValue(value, webElement);
-    }
-
-    public static void assertOptionWithValueIsEnabled(String value, WebElement webElement) {
-        BotUtils.assertOptionWithValueIsEnabled(value, webElement);
-    }
-
-    public static void assertOptionWithValueIsDisabled(String value, WebElement webElement) {
-        BotUtils.assertOptionWithValueIsDisabled(value, webElement);
-    }
-
-    public static void assertOptionWithValueIsSelected(String value, WebElement webElement) {
-        BotUtils.assertOptionWithValueIsSelected(value, webElement);
-    }
-
-    public static void assertOptionWithValueIsDeselected(String value, WebElement webElement) {
-        BotUtils.assertOptionWithValueIsDeselected(value, webElement);
-    }
-
-    /* Option Index */
-    public static boolean hasOptionWithIndex(int index, WebElement webElement) {
-        return BotUtils.hasOptionWithIndex(index, webElement);
-    }
-
-    public static boolean hasNotOptionWithIndex(int index, WebElement webElement) {
-        return BotUtils.hasNotOptionWithIndex(index, webElement);
-    }
-
-    public static boolean optionWithIndexIsEnabled(int index, WebElement webElement) {
-        return BotUtils.optionWithIndexIsEnabled(index, webElement);
-    }
-
-    public static boolean optionWithIndexIsDisabled(int index, WebElement webElement) {
-        return BotUtils.optionWithIndexIsDisabled(index, webElement);
-    }
-
-    public static boolean optionWithIndexIsSelected(int index, WebElement webElement) {
-        return BotUtils.optionWithIndexIsSelected(index, webElement);
-    }
-
-    public static boolean optionWithIndexIsDeselected(int index, WebElement webElement) {
-        return BotUtils.optionWithIndexIsDeselected(index, webElement);
-    }
-
-    public static void assertHasOptionWithIndex(int index, WebElement webElement) {
-        BotUtils.assertHasOptionWithIndex(index, webElement);
-    }
-
-    public static void assertHasNotOptionWithIndex(int index, WebElement webElement) {
-        BotUtils.assertHasNotOptionWithIndex(index, webElement);
-    }
-
-    public static void assertOptionWithIndexIsEnabled(int index, WebElement webElement) {
-        BotUtils.assertOptionWithIndexIsEnabled(index, webElement);
-    }
-
-    public static void assertOptionWithIndexIsDisabled(int index, WebElement webElement) {
-        BotUtils.assertOptionWithIndexIsDisabled(index, webElement);
-    }
-
-    public static void assertOptionWithIndexIsSelected(int index, WebElement webElement) {
-        BotUtils.assertOptionWithIndexIsSelected(index, webElement);
-    }
-
-    public static void assertOptionWithIndexIsDeselected(int index, WebElement webElement) {
-        BotUtils.assertOptionWithIndexIsDeselected(index, webElement);
-    }
 
     /* Hamcrest */
     public static <T extends Object> boolean is(T actual, Matcher<? super T> matcher) {
