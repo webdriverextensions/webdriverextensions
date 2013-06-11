@@ -990,12 +990,12 @@ public class Bot {
         return BotUtils.valueInAsNumber(webElement);
     }
 
-    public static boolean isValueNumber(WebElement webElement) {
-        return BotUtils.isValueNumber(webElement);
+    public static boolean valueIsNumber(WebElement webElement) {
+        return BotUtils.valueIsNumber(webElement);
     }
 
-    public static boolean isValueNotNumber(WebElement webElement) {
-        return BotUtils.isValueNotNumber(webElement);
+    public static boolean valueIsNotNumber(WebElement webElement) {
+        return BotUtils.valueIsNotNumber(webElement);
     }
 
     public static boolean valueEquals(Double number, WebElement webElement) {
@@ -1022,12 +1022,12 @@ public class Bot {
         return BotUtils.valueGreaterThanOrEquals(number, webElement);
     }
 
-    public static void assertIsValueNumber(WebElement webElement) {
-        BotUtils.assertIsValueNumber(webElement);
+    public static void assertValueIsNumber(WebElement webElement) {
+        BotUtils.assertValueIsNumber(webElement);
     }
 
-    public static void assertIsValueNotNumber(WebElement webElement) {
-        BotUtils.assertIsValueNotNumber(webElement);
+    public static void assertValueIsNotNumber(WebElement webElement) {
+        BotUtils.assertValueIsNotNumber(webElement);
     }
 
     public static void assertValueEquals(Double number, WebElement webElement) {
@@ -1276,12 +1276,12 @@ public class Bot {
         return BotUtils.textInAsNumber(webElement);
     }
 
-    public static boolean isTextNumber(WebElement webElement) {
-        return BotUtils.isTextNumber(webElement);
+    public static boolean textIsNumber(WebElement webElement) {
+        return BotUtils.textIsNumber(webElement);
     }
 
-    public static boolean isTextNotNumber(WebElement webElement) {
-        return BotUtils.isTextNotNumber(webElement);
+    public static boolean textIsNotNumber(WebElement webElement) {
+        return BotUtils.textIsNotNumber(webElement);
     }
 
     public static boolean textEquals(Double number, WebElement webElement) {
@@ -1308,12 +1308,12 @@ public class Bot {
         return BotUtils.textGreaterThanOrEquals(number, webElement);
     }
 
-    public static void assertIsTextNumber(WebElement webElement) {
-        BotUtils.assertIsTextNumber(webElement);
+    public static void assertTextIsNumber(WebElement webElement) {
+        BotUtils.assertTextIsNumber(webElement);
     }
 
-    public static void assertIsTextNotNumber(WebElement webElement) {
-        BotUtils.assertIsTextNotNumber(webElement);
+    public static void assertTextIsNotNumber(WebElement webElement) {
+        BotUtils.assertTextIsNotNumber(webElement);
     }
 
     public static void assertTextEquals(Double number, WebElement webElement) {

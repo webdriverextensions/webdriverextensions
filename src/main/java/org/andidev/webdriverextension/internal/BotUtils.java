@@ -1138,11 +1138,11 @@ import org.openqa.selenium.support.ui.WebDriverWait;
         }
     }
 
-    public static boolean isValueNumber(WebElement webElement) {
+    public static boolean valueIsNumber(WebElement webElement) {
         return valueInAsNumber(webElement) != null;
     }
 
-    public static boolean isValueNotNumber(WebElement webElement) {
+    public static boolean valueIsNotNumber(WebElement webElement) {
         return valueInAsNumber(webElement) == null;
     }
 
@@ -1170,14 +1170,14 @@ import org.openqa.selenium.support.ui.WebDriverWait;
         return greaterThanOrEquals(number, valueInAsNumber(webElement));
     }
 
-    public static void assertIsValueNumber(WebElement webElement) {
-        if (isValueNotNumber(webElement)) {
+    public static void assertValueIsNumber(WebElement webElement) {
+        if (valueIsNotNumber(webElement)) {
             Assert.fail("value: " + valueInAsNumber(webElement) + " is no number!");
         }
     }
 
-    public static void assertIsValueNotNumber(WebElement webElement) {
-        if (isValueNumber(webElement)) {
+    public static void assertValueIsNotNumber(WebElement webElement) {
+        if (valueIsNumber(webElement)) {
             Assert.fail("value: " + valueInAsNumber(webElement) + " is number when it shouldn't!");
         }
     }
@@ -1427,11 +1427,11 @@ import org.openqa.selenium.support.ui.WebDriverWait;
         }
     }
 
-    public static boolean isTextNumber(WebElement webElement) {
+    public static boolean textIsNumber(WebElement webElement) {
         return textInAsNumber(webElement) != null;
     }
 
-    public static boolean isTextNotNumber(WebElement webElement) {
+    public static boolean textIsNotNumber(WebElement webElement) {
         return textInAsNumber(webElement) == null;
     }
 
@@ -1459,14 +1459,14 @@ import org.openqa.selenium.support.ui.WebDriverWait;
         return greaterThanOrEquals(number, textInAsNumber(webElement));
     }
 
-    public static void assertIsTextNumber(WebElement webElement) {
-        if (isTextNotNumber(webElement)) {
+    public static void assertTextIsNumber(WebElement webElement) {
+        if (textIsNotNumber(webElement)) {
             Assert.fail("Text: " + textInAsNumber(webElement) + " is no number!");
         }
     }
 
-    public static void assertIsTextNotNumber(WebElement webElement) {
-        if (isTextNumber(webElement)) {
+    public static void assertTextIsNotNumber(WebElement webElement) {
+        if (textIsNumber(webElement)) {
             Assert.fail("Text: " + textInAsNumber(webElement) + " is number when it shouldn't!");
         }
     }
