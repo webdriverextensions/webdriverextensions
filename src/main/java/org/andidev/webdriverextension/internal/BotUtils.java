@@ -1339,8 +1339,8 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 
 
-    /* Number */
-    public static Double numberIn(WebElement webElement) {
+    /* Text Number */
+    public static Double textInAsNumber(WebElement webElement) {
         try {
             return NumberUtils.createDouble(webElement.getText());
         } catch (NumberFormatException e) {
@@ -1348,72 +1348,72 @@ import org.openqa.selenium.support.ui.WebDriverWait;
         }
     }
 
-    public static boolean isNumber(WebElement webElement) {
-        return numberIn(webElement) != null;
+    public static boolean isTextNumber(WebElement webElement) {
+        return textInAsNumber(webElement) != null;
     }
 
-    public static boolean isNotNumber(WebElement webElement) {
-        return numberIn(webElement) == null;
+    public static boolean isTextNotNumber(WebElement webElement) {
+        return textInAsNumber(webElement) == null;
     }
 
-    public static boolean numberEquals(Double number, WebElement webElement) {
-        return equals(number, numberIn(webElement));
+    public static boolean textEquals(Double number, WebElement webElement) {
+        return equals(number, textInAsNumber(webElement));
     }
 
-    public static boolean numberNotEquals(Double number, WebElement webElement) {
-        return notEquals(number, numberIn(webElement));
+    public static boolean textNotEquals(Double number, WebElement webElement) {
+        return notEquals(number, textInAsNumber(webElement));
     }
 
-    public static boolean numberLessThan(Double number, WebElement webElement) {
-        return lessThan(number, numberIn(webElement));
+    public static boolean textLessThan(Double number, WebElement webElement) {
+        return lessThan(number, textInAsNumber(webElement));
     }
 
-    public static boolean numberLessThanOrEquals(Double number, WebElement webElement) {
-        return lessThanOrEquals(number, numberIn(webElement));
+    public static boolean textLessThanOrEquals(Double number, WebElement webElement) {
+        return lessThanOrEquals(number, textInAsNumber(webElement));
     }
 
-    public static boolean numberGreaterThan(Double number, WebElement webElement) {
-        return greaterThan(number, numberIn(webElement));
+    public static boolean textGreaterThan(Double number, WebElement webElement) {
+        return greaterThan(number, textInAsNumber(webElement));
     }
 
-    public static boolean numberGreaterThanOrEquals(Double number, WebElement webElement) {
-        return greaterThanOrEquals(number, numberIn(webElement));
+    public static boolean textGreaterThanOrEquals(Double number, WebElement webElement) {
+        return greaterThanOrEquals(number, textInAsNumber(webElement));
     }
 
-    public static void assertIsNumber(WebElement webElement) {
-        if (isNotNumber(webElement)) {
+    public static void assertIsTextNumber(WebElement webElement) {
+        if (isTextNotNumber(webElement)) {
             Assert.fail(describeTag(webElement) + " is no number!");
         }
     }
 
-    public static void assertHasNotNumber(WebElement webElement) {
-        if (isNumber(webElement)) {
-            Assert.fail(describeTag(webElement) + " is number \"" + numberIn(webElement) + "\" when it shouldn't!");
+    public static void assertIsTextNotNumber(WebElement webElement) {
+        if (isTextNumber(webElement)) {
+            Assert.fail(describeTag(webElement) + " is number \"" + textInAsNumber(webElement) + "\" when it shouldn't!");
         }
     }
 
-    public static void assertNumberEquals(Double number, WebElement webElement) {
-        assertEquals("Number", number, numberIn(webElement));
+    public static void assertTextEquals(Double number, WebElement webElement) {
+        assertEquals("Number", number, textInAsNumber(webElement));
     }
 
-    public static void assertNumberNotEquals(Double number, WebElement webElement) {
-        assertNotEequals("Number", number, numberIn(webElement));
+    public static void assertTextNotEquals(Double number, WebElement webElement) {
+        assertNotEequals("Number", number, textInAsNumber(webElement));
     }
 
-    public static void assertNumberLessThan(Double number, WebElement webElement) {
-        assertLessThan("Number", number, numberIn(webElement));
+    public static void assertTextLessThan(Double number, WebElement webElement) {
+        assertLessThan("Number", number, textInAsNumber(webElement));
     }
 
-    public static void assertNumberLessThanOrEquals(Double number, WebElement webElement) {
-        assertLessThanOrEquals("Number", number, numberIn(webElement));
+    public static void assertTextLessThanOrEquals(Double number, WebElement webElement) {
+        assertLessThanOrEquals("Number", number, textInAsNumber(webElement));
     }
 
-    public static void assertNumberGreaterThan(Double number, WebElement webElement) {
-        assertGreaterThan("Number", number, numberIn(webElement));
+    public static void assertTextGreaterThan(Double number, WebElement webElement) {
+        assertGreaterThan("Number", number, textInAsNumber(webElement));
     }
 
-    public static void assertNumberGreaterThanOrEquals(Double number, WebElement webElement) {
-        assertGreaterThanOrEquals("Number", number, numberIn(webElement));
+    public static void assertTextGreaterThanOrEquals(Double number, WebElement webElement) {
+        assertGreaterThanOrEquals("Number", number, textInAsNumber(webElement));
     }
 
 

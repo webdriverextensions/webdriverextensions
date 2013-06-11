@@ -1200,73 +1200,73 @@ public class Bot {
 
 
 
-    /* Number */
-    public static Double numberIn(WebElement webElement) {
-        return BotUtils.numberIn(webElement);
+    /* Text Number */
+    public static Double textInAsNumber(WebElement webElement) {
+        return BotUtils.textInAsNumber(webElement);
     }
 
-    public static boolean isNumber(WebElement webElement) {
-        return BotUtils.isNumber(webElement);
+    public static boolean isTextNumber(WebElement webElement) {
+        return BotUtils.isTextNumber(webElement);
     }
 
-    public static boolean isNotNumber(WebElement webElement) {
-        return BotUtils.isNotNumber(webElement);
+    public static boolean isTextNotNumber(WebElement webElement) {
+        return BotUtils.isTextNotNumber(webElement);
     }
 
-    public static boolean numberEquals(Double number, WebElement webElement) {
-        return BotUtils.numberEquals(number, webElement);
+    public static boolean textEquals(Double number, WebElement webElement) {
+        return BotUtils.textEquals(number, webElement);
     }
 
-    public static boolean numberNotEquals(Double number, WebElement webElement) {
-        return BotUtils.numberNotEquals(number, webElement);
+    public static boolean textNotEquals(Double number, WebElement webElement) {
+        return BotUtils.textNotEquals(number, webElement);
     }
 
-    public static boolean numberLessThan(Double number, WebElement webElement) {
-        return BotUtils.numberLessThan(number, webElement);
+    public static boolean textLessThan(Double number, WebElement webElement) {
+        return BotUtils.textLessThan(number, webElement);
     }
 
-    public static boolean numberLessThanOrEquals(Double number, WebElement webElement) {
-        return BotUtils.numberLessThanOrEquals(number, webElement);
+    public static boolean textLessThanOrEquals(Double number, WebElement webElement) {
+        return BotUtils.textLessThanOrEquals(number, webElement);
     }
 
-    public static boolean numberGreaterThan(Double number, WebElement webElement) {
-        return BotUtils.numberGreaterThan(number, webElement);
+    public static boolean textGreaterThan(Double number, WebElement webElement) {
+        return BotUtils.textGreaterThan(number, webElement);
     }
 
-    public static boolean numberGreaterThanOrEquals(Double number, WebElement webElement) {
-        return BotUtils.numberGreaterThanOrEquals(number, webElement);
+    public static boolean textGreaterThanOrEquals(Double number, WebElement webElement) {
+        return BotUtils.textGreaterThanOrEquals(number, webElement);
     }
 
-    public static void assertIsNumber(WebElement webElement) {
-        BotUtils.assertIsNumber(webElement);
+    public static void assertIsTextNumber(WebElement webElement) {
+        BotUtils.assertIsTextNumber(webElement);
     }
 
-    public static void assertIsNotNumber(WebElement webElement) {
-        BotUtils.assertHasNotNumber(webElement);
+    public static void assertIsTextNotNumber(WebElement webElement) {
+        BotUtils.assertIsTextNotNumber(webElement);
     }
 
-    public static void assertNumberEquals(Double number, WebElement webElement) {
-        BotUtils.assertNumberEquals(number, webElement);
+    public static void assertTextEquals(Double number, WebElement webElement) {
+        BotUtils.assertTextEquals(number, webElement);
     }
 
-    public static void assertNumberNotEquals(Double number, WebElement webElement) {
-        BotUtils.assertNumberNotEquals(number, webElement);
+    public static void assertTextNotEquals(Double number, WebElement webElement) {
+        BotUtils.assertTextNotEquals(number, webElement);
     }
 
-    public static void assertNumberLessThan(Double number, WebElement webElement) {
-        BotUtils.assertNumberLessThan(number, webElement);
+    public static void assertTextLessThan(Double number, WebElement webElement) {
+        BotUtils.assertTextLessThan(number, webElement);
     }
 
-    public static void assertNumberLessThanOrEquals(Double number, WebElement webElement) {
-        BotUtils.assertNumberLessThanOrEquals(number, webElement);
+    public static void assertTextLessThanOrEquals(Double number, WebElement webElement) {
+        BotUtils.assertTextLessThanOrEquals(number, webElement);
     }
 
-    public static void assertNumberGreaterThan(Double number, WebElement webElement) {
-        BotUtils.assertNumberGreaterThan(number, webElement);
+    public static void assertTextGreaterThan(Double number, WebElement webElement) {
+        BotUtils.assertTextGreaterThan(number, webElement);
     }
 
-    public static void assertNumberGreaterThanOrEquals(Double number, WebElement webElement) {
-        BotUtils.assertNumberGreaterThanOrEquals(number, webElement);
+    public static void assertTextGreaterThanOrEquals(Double number, WebElement webElement) {
+        BotUtils.assertTextGreaterThanOrEquals(number, webElement);
     }
 
 
