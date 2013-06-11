@@ -24,73 +24,9 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
     private static final org.slf4j.Logger log = org.slf4j.LoggerFactory.getLogger(BotUtils.class);
 
-
-
-    /* Read */
-    public static String textIn(WebElement webElement) {
-        return webElement.getText();
-    }
-
-    public static Double numberIn(WebElement webElement) {
-        try {
-            return NumberUtils.createDouble(webElement.getText());
-        } catch (NumberFormatException e) {
-            return null;
-        }
-    }
-
-    public static String url(WebDriver driver) {
-        return driver.getCurrentUrl();
-    }
-
-    public static String title(WebDriver driver) {
-        return driver.getTitle();
-    }
-
-    public static String tagNameOf(WebElement webElement) {
-        return webElement.getTagName();
-    }
-
-    public static String attributeIn(String name, WebElement webElement) {
-        return webElement.getAttribute(name);
-    }
-
-    public static String idIn(WebElement webElement) {
-        return attributeIn("id", webElement);
-    }
-
-    public static String nameIn(WebElement webElement) {
-        return attributeIn("name", webElement);
-    }
-
-    public static String classIn(WebElement webElement) {
-        return attributeIn("class", webElement);
-    }
-
-    public static List<String> classesIn(WebElement webElement) {
-        return Arrays.asList(StringUtils.split(classIn(webElement)));
-    }
-
-    public static String valueIn(WebElement webElement) {
-        return attributeIn("value", webElement);
-    }
-
-    public static String hrefIn(WebElement webElement) {
-        return attributeIn("href", webElement);
-    }
-
-
-
-    /* Count */
-    public static int sizeOf(Collection collection) {
-        return collection.size();
-    }
-
-
-
-    /* Clear */
-    public static void clear(WebElement webElement) {
-        webElement.clear();
+    /* Click */
+    public static void click(WebElement webElement) {
+        webElement.click();
     }
 
 
@@ -112,7 +48,11 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 
 
-    /* Clear and Type */
+    /* Clear */
+    public static void clear(WebElement webElement) {
+        webElement.clear();
+    }
+
     public static void clearAndType(String text, WebElement webElement) {
         clear(webElement);
         type(text, webElement);
@@ -125,7 +65,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 
 
-    /* Press */
+    /* Press Keys */
     public static void pressEnter(WebElement webElement) {
         pressKeys(webElement, Keys.ENTER);
     }
@@ -136,14 +76,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 
 
-    /* Click */
-    public static void click(WebElement webElement) {
-        webElement.click();
-    }
-
-
-
-    /* Select */
+    /* Select/Deselect */
     public static void select(WebElement webElement) {
         if (isDeselected(webElement)) {
             webElement.click();
@@ -156,9 +89,6 @@ import org.openqa.selenium.support.ui.WebDriverWait;
         }
     }
 
-
-
-    /* Select Option */
     public static void selectOption(String text, WebElement webElement) {
         new Select(webElement).selectByVisibleText(text);
     }
@@ -178,9 +108,6 @@ import org.openqa.selenium.support.ui.WebDriverWait;
         new Select(webElement).deselectAll();
     }
 
-
-
-    /* Select Option Value */
     public static void selectOptionWithValue(String value, WebElement webElement) {
         new Select(webElement).selectByValue(value);
     }
@@ -189,9 +116,6 @@ import org.openqa.selenium.support.ui.WebDriverWait;
         new Select(webElement).deselectByValue(value);
     }
 
-
-
-    /* Select Option Index */
     public static void selectOptionWithIndex(int index, WebElement webElement) {
         new Select(webElement).selectByIndex(index);
     }
@@ -202,7 +126,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 
 
-    /* Check */
+    /* Check/Uncheck */
     public static void check(WebElement webElement) {
         if (isUnchecked(webElement)) {
             click(webElement);
@@ -228,7 +152,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 
 
-    /* Wait */
+    /* Wait For */
     public static void waitFor(double seconds) {
         long nanos = (long) (seconds * 1000000000);
         if (seconds > 0) {
@@ -310,7 +234,310 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 
 
+    /* Open */
+    public static boolean isOpen(Openable openable) {
+        return openable.isOpen();
+    }
+
+    public static boolean isNotOpen(Openable openable) {
+        return openable.isNotOpen();
+    }
+
+    public static void assertIsOpen(Openable openable) {
+        openable.assertIsOpen();
+    }
+
+    public static void assertIsNotOpen(Openable openable) {
+        openable.assertIsNotOpen();
+    }
+
+
+
+    /* Display */
+    public static boolean isDisplayed(WebElement webElement) {
+        try {
+            return webElement.isDisplayed();
+        } catch (NoSuchElementException e) {
+            return false;
+        }
+    }
+
+    public static boolean isNotDisplayed(WebElement webElement) {
+        return !isDisplayed(webElement);
+    }
+
+    public static boolean isDisplayed(WebElement webElement, long secondsToWait, WebDriver driver) {
+        WebElement foundWebElement = new WebDriverWait(driver, secondsToWait).until(ExpectedConditions.visibilityOf(webElement));
+        if (foundWebElement != null) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public static boolean isNotDisplayed(WebElement webElement, long secondsToWait, WebDriver driver) {
+        return !isDisplayed(webElement, secondsToWait, driver);
+    }
+
+    public static void assertIsDisplayed(WebElement webElement) {
+        if (isNotDisplayed(webElement)) {
+            Assert.fail("WebElement is not displayed!");
+        }
+    }
+
+    public static void assertIsNotDisplayed(WebElement webElement) {
+        if (isDisplayed(webElement)) {
+            Assert.fail("WebElement is displayed when it shouldn't!");
+        }
+    }
+
+    public static void assertIsDisplayed(WebElement webElement, long secondsToWait , WebDriver driver) {
+        if (isNotDisplayed(webElement, secondsToWait , driver)) {
+            Assert.fail("WebElement is not displayed within " + secondsToWait + " seconds!");
+        }
+    }
+
+    public static void assertIsNotDisplayed(WebElement webElement, long secondsToWait , WebDriver driver) {
+        if (isDisplayed(webElement, secondsToWait , driver)) {
+            Assert.fail("WebElement is displayed within " + secondsToWait + " seconds when it shouldn't!");
+        }
+    }
+
+
+
+    /* Size */
+    public static int sizeOf(Collection collection) {
+        return collection.size();
+    }
+
+    public static boolean sizeEquals(int number, Collection collection) {
+        return equals((double) number, (double) collection.size());
+    }
+
+    public static boolean sizeNotEquals(int number, Collection collection) {
+        return notEquals((double) number, (double) collection.size());
+    }
+
+    public static boolean sizeLessThan(int number, Collection collection) {
+        return lessThan((double) number, (double) collection.size());
+    }
+
+    public static boolean sizeLessThanOrEquals(int number, Collection collection) {
+        return lessThanOrEquals((double) number, (double) collection.size());
+    }
+
+    public static boolean sizeGreaterThan(int number, Collection collection) {
+        return greaterThan((double) number, (double) collection.size());
+    }
+
+    public static boolean sizeGreaterThanOrEquals(int number, Collection collection) {
+        return greaterThanOrEquals((double) number, (double) collection.size());
+    }
+
+    public static void assertSizeEquals(int number, Collection collection) {
+        assertEquals("Size", (double) number, (double) collection.size());
+    }
+
+    public static void assertSizeNotEquals(int number, Collection collection) {
+        assertNotEequals("Size", (double) number, (double) collection.size());
+    }
+
+    public static void assertSizeLessThan(int number, Collection collection) {
+        assertLessThan("Size", (double) number, (double) collection.size());
+    }
+
+    public static void assertSizeLessThanOrEquals(int number, Collection collection) {
+        assertLessThanOrEquals("Size", (double) number, (double) collection.size());
+    }
+
+    public static void assertSizeGreaterThan(int number, Collection collection) {
+        assertGreaterThan("Size", (double) number, (double) collection.size());
+    }
+
+    public static void assertSizeGreaterThanOrEquals(int number, Collection collection) {
+        assertGreaterThanOrEquals("Size", (double) number, (double) collection.size());
+    }
+
+
+    /* Url */
+    public static String url(WebDriver driver) {
+        return driver.getCurrentUrl();
+    }
+
+    public static boolean urlEquals(String url, WebDriver driver) {
+        return equals(url, url(driver));
+    }
+
+    public static boolean urlNotEquals(String url, WebDriver driver) {
+        return notEquals(url, url(driver));
+    }
+
+    public static boolean urlContains(String searchText, WebDriver driver) {
+        return contains(searchText, url(driver));
+    }
+
+    public static boolean urlNotContains(String searchText, WebDriver driver) {
+        return notContains(searchText, url(driver));
+    }
+
+    public static boolean urlStartsWith(String prefix, WebDriver driver) {
+        return startsWith(prefix, url(driver));
+    }
+
+    public static boolean urlNotStartsWith(String prefix, WebDriver driver) {
+        return notStartsWith(prefix, url(driver));
+    }
+
+    public static boolean urlEndsWith(String suffix, WebDriver driver) {
+        return endsWith(suffix, url(driver));
+    }
+
+    public static boolean urlNotEndsWith(String suffix, WebDriver driver) {
+        return notEndsWith(suffix, url(driver));
+    }
+
+    public static boolean urlMatches(String regExp, WebDriver driver) {
+        return matches(regExp, url(driver));
+    }
+
+    public static boolean urlNotMatches(String regExp, WebDriver driver) {
+        return notMatches(regExp, url(driver));
+    }
+
+    public static void assertUrlEquals(String url, WebDriver driver) {
+        assertEquals("Url", url, url(driver));
+    }
+
+    public static void assertUrlNotEquals(String url, WebDriver driver) {
+        assertNotEquals("Url", url, url(driver));
+    }
+
+    public static void assertUrlContains(String searchText, WebDriver driver) {
+        assertContains("Url", searchText, url(driver));
+    }
+
+    public static void assertUrlNotContains(String searchText, WebDriver driver) {
+        assertNotContains("Url", searchText, url(driver));
+    }
+
+    public static void assertUrlStartsWith(String prefix, WebDriver driver) {
+        assertStartsWith("Url", prefix, url(driver));
+    }
+
+    public static void assertUrlNotStartsWith(String prefix, WebDriver driver) {
+        assertNotStartsWith("Url", prefix, url(driver));
+    }
+
+    public static void assertUrlEndsWith(String suffix, WebDriver driver) {
+        assertEndsWith("Url", suffix, url(driver));
+    }
+
+    public static void assertUrlNotEndsWith(String suffix, WebDriver driver) {
+        assertNotEndsWith("Url", suffix, url(driver));
+    }
+
+    public static void assertUrlMatches(String regExp, WebDriver driver) {
+        assertMatches("Url", regExp, url(driver));
+    }
+
+    public static void assertUrlNotMatches(String regExp, WebDriver driver) {
+        assertNotMatches("Url", regExp, url(driver));
+    }
+
+
+
+    /* Title */
+    public static String title(WebDriver driver) {
+        return driver.getTitle();
+    }
+
+    public static boolean titleEquals(String title, WebDriver driver) {
+        return equals(title, title(driver));
+    }
+
+    public static boolean titleNotEquals(String title, WebDriver driver) {
+        return notEquals(title, title(driver));
+    }
+
+    public static boolean titleContains(String searchText, WebDriver driver) {
+        return contains(searchText, title(driver));
+    }
+
+    public static boolean titleNotContains(String searchText, WebDriver driver) {
+        return notContains(searchText, title(driver));
+    }
+
+    public static boolean titleStartsWith(String prefix, WebDriver driver) {
+        return startsWith(prefix, title(driver));
+    }
+
+    public static boolean titleNotStartsWith(String prefix, WebDriver driver) {
+        return notStartsWith(prefix, title(driver));
+    }
+
+    public static boolean titleEndsWith(String suffix, WebDriver driver) {
+        return endsWith(suffix, title(driver));
+    }
+
+    public static boolean titleNotEndsWith(String suffix, WebDriver driver) {
+        return notEndsWith(suffix, title(driver));
+    }
+
+    public static boolean titleMatches(String regExp, WebDriver driver) {
+        return matches(regExp, title(driver));
+    }
+
+    public static boolean titleNotMatches(String regExp, WebDriver driver) {
+        return notMatches(regExp, title(driver));
+    }
+
+    public static void assertTitleEquals(String title, WebDriver driver) {
+        assertEquals("Title", title, title(driver));
+    }
+
+    public static void assertTitleNotEquals(String title, WebDriver driver) {
+        assertNotEquals("Title", title, title(driver));
+    }
+
+    public static void assertTitleContains(String searchText, WebDriver driver) {
+        assertContains("Title", searchText, title(driver));
+    }
+
+    public static void assertTitleNotContains(String searchText, WebDriver driver) {
+        assertNotContains("Title", searchText, title(driver));
+    }
+
+    public static void assertTitleStartsWith(String prefix, WebDriver driver) {
+        assertStartsWith("Title", prefix, title(driver));
+    }
+
+    public static void assertTitleNotStartsWith(String prefix, WebDriver driver) {
+        assertNotStartsWith("Title", prefix, title(driver));
+    }
+
+    public static void assertTitleEndsWith(String suffix, WebDriver driver) {
+        assertEndsWith("Title", suffix, title(driver));
+    }
+
+    public static void assertTitleNotEndsWith(String suffix, WebDriver driver) {
+        assertNotEndsWith("Title", suffix, title(driver));
+    }
+
+    public static void assertTitleMatches(String regExp, WebDriver driver) {
+        assertMatches("Title", regExp, title(driver));
+    }
+
+    public static void assertTitleNotMatches(String regExp, WebDriver driver) {
+        assertNotMatches("Title", regExp, title(driver));
+    }
+
+
+
     /* Tag Name */
+    public static String tagNameOf(WebElement webElement) {
+        return webElement.getTagName();
+    }
+
     public static boolean tagNameEquals(String value, WebElement webElement) {
         return equals(value, tagNameOf(webElement));
     }
@@ -330,6 +557,10 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 
     /* Attribute */
+    public static String attributeIn(String name, WebElement webElement) {
+        return webElement.getAttribute(name);
+    }
+
     public static boolean hasAttribute(String name, WebElement webElement) {
         return webElement.getAttribute(name) != null;
     }
@@ -433,6 +664,10 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 
     /* Id */
+    public static String idIn(WebElement webElement) {
+        return attributeIn("id", webElement);
+    }
+
     public static boolean hasId(WebElement webElement) {
         return hasAttribute("id", webElement);
     }
@@ -532,6 +767,10 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 
     /* Name */
+    public static String nameIn(WebElement webElement) {
+        return attributeIn("name", webElement);
+    }
+
     public static boolean hasName(WebElement webElement) {
         return hasAttribute("name", webElement);
     }
@@ -631,6 +870,14 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 
     /* Class */
+    public static String classIn(WebElement webElement) {
+        return attributeIn("class", webElement);
+    }
+
+    public static List<String> classesIn(WebElement webElement) {
+        return Arrays.asList(StringUtils.split(classIn(webElement)));
+    }
+
     public static boolean hasClass(WebElement webElement) {
         return hasAttribute("class", webElement);
     }
@@ -780,6 +1027,10 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 
     /* Value */
+    public static String valueIn(WebElement webElement) {
+        return attributeIn("value", webElement);
+    }
+
     public static boolean hasValue(WebElement webElement) {
         return hasAttribute("value", webElement);
     }
@@ -879,6 +1130,10 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 
     /* Href */
+    public static String hrefIn(WebElement webElement) {
+        return attributeIn("href", webElement);
+    }
+
     public static boolean hasHref(WebElement webElement) {
         return hasAttribute("href", webElement);
     }
@@ -978,6 +1233,10 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 
     /* Text */
+    public static String textIn(WebElement webElement) {
+        return webElement.getText();
+    }
+
     public static boolean hasText(WebElement webElement) {
         return notEquals("", textIn(webElement));
     }
@@ -1081,6 +1340,14 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 
     /* Number */
+    public static Double numberIn(WebElement webElement) {
+        try {
+            return NumberUtils.createDouble(webElement.getText());
+        } catch (NumberFormatException e) {
+            return null;
+        }
+    }
+
     public static boolean isNumber(WebElement webElement) {
         return numberIn(webElement) != null;
     }
@@ -1151,192 +1418,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 
 
-    /* Url */
-    public static boolean urlEquals(String url, WebDriver driver) {
-        return equals(url, url(driver));
-    }
-
-    public static boolean urlNotEquals(String url, WebDriver driver) {
-        return notEquals(url, url(driver));
-    }
-
-    public static boolean urlContains(String searchText, WebDriver driver) {
-        return contains(searchText, url(driver));
-    }
-
-    public static boolean urlNotContains(String searchText, WebDriver driver) {
-        return notContains(searchText, url(driver));
-    }
-
-    public static boolean urlStartsWith(String prefix, WebDriver driver) {
-        return startsWith(prefix, url(driver));
-    }
-
-    public static boolean urlNotStartsWith(String prefix, WebDriver driver) {
-        return notStartsWith(prefix, url(driver));
-    }
-
-    public static boolean urlEndsWith(String suffix, WebDriver driver) {
-        return endsWith(suffix, url(driver));
-    }
-
-    public static boolean urlNotEndsWith(String suffix, WebDriver driver) {
-        return notEndsWith(suffix, url(driver));
-    }
-
-    public static boolean urlMatches(String regExp, WebDriver driver) {
-        return matches(regExp, url(driver));
-    }
-
-    public static boolean urlNotMatches(String regExp, WebDriver driver) {
-        return notMatches(regExp, url(driver));
-    }
-
-    public static void assertUrlEquals(String url, WebDriver driver) {
-        assertEquals("Url", url, url(driver));
-    }
-
-    public static void assertUrlNotEquals(String url, WebDriver driver) {
-        assertNotEquals("Url", url, url(driver));
-    }
-
-    public static void assertUrlContains(String searchText, WebDriver driver) {
-        assertContains("Url", searchText, url(driver));
-    }
-
-    public static void assertUrlNotContains(String searchText, WebDriver driver) {
-        assertNotContains("Url", searchText, url(driver));
-    }
-
-    public static void assertUrlStartsWith(String prefix, WebDriver driver) {
-        assertStartsWith("Url", prefix, url(driver));
-    }
-
-    public static void assertUrlNotStartsWith(String prefix, WebDriver driver) {
-        assertNotStartsWith("Url", prefix, url(driver));
-    }
-
-    public static void assertUrlEndsWith(String suffix, WebDriver driver) {
-        assertEndsWith("Url", suffix, url(driver));
-    }
-
-    public static void assertUrlNotEndsWith(String suffix, WebDriver driver) {
-        assertNotEndsWith("Url", suffix, url(driver));
-    }
-
-    public static void assertUrlMatches(String regExp, WebDriver driver) {
-        assertMatches("Url", regExp, url(driver));
-    }
-
-    public static void assertUrlNotMatches(String regExp, WebDriver driver) {
-        assertNotMatches("Url", regExp, url(driver));
-    }
-
-
-
-    /* Title */
-    public static boolean titleEquals(String title, WebDriver driver) {
-        return equals(title, title(driver));
-    }
-
-    public static boolean titleNotEquals(String title, WebDriver driver) {
-        return notEquals(title, title(driver));
-    }
-
-    public static boolean titleContains(String searchText, WebDriver driver) {
-        return contains(searchText, title(driver));
-    }
-
-    public static boolean titleNotContains(String searchText, WebDriver driver) {
-        return notContains(searchText, title(driver));
-    }
-
-    public static boolean titleStartsWith(String prefix, WebDriver driver) {
-        return startsWith(prefix, title(driver));
-    }
-
-    public static boolean titleNotStartsWith(String prefix, WebDriver driver) {
-        return notStartsWith(prefix, title(driver));
-    }
-
-    public static boolean titleEndsWith(String suffix, WebDriver driver) {
-        return endsWith(suffix, title(driver));
-    }
-
-    public static boolean titleNotEndsWith(String suffix, WebDriver driver) {
-        return notEndsWith(suffix, title(driver));
-    }
-
-    public static boolean titleMatches(String regExp, WebDriver driver) {
-        return matches(regExp, title(driver));
-    }
-
-    public static boolean titleNotMatches(String regExp, WebDriver driver) {
-        return notMatches(regExp, title(driver));
-    }
-
-    public static void assertTitleEquals(String title, WebDriver driver) {
-        assertEquals("Title", title, title(driver));
-    }
-
-    public static void assertTitleNotEquals(String title, WebDriver driver) {
-        assertNotEquals("Title", title, title(driver));
-    }
-
-    public static void assertTitleContains(String searchText, WebDriver driver) {
-        assertContains("Title", searchText, title(driver));
-    }
-
-    public static void assertTitleNotContains(String searchText, WebDriver driver) {
-        assertNotContains("Title", searchText, title(driver));
-    }
-
-    public static void assertTitleStartsWith(String prefix, WebDriver driver) {
-        assertStartsWith("Title", prefix, title(driver));
-    }
-
-    public static void assertTitleNotStartsWith(String prefix, WebDriver driver) {
-        assertNotStartsWith("Title", prefix, title(driver));
-    }
-
-    public static void assertTitleEndsWith(String suffix, WebDriver driver) {
-        assertEndsWith("Title", suffix, title(driver));
-    }
-
-    public static void assertTitleNotEndsWith(String suffix, WebDriver driver) {
-        assertNotEndsWith("Title", suffix, title(driver));
-    }
-
-    public static void assertTitleMatches(String regExp, WebDriver driver) {
-        assertMatches("Title", regExp, title(driver));
-    }
-
-    public static void assertTitleNotMatches(String regExp, WebDriver driver) {
-        assertNotMatches("Title", regExp, title(driver));
-    }
-
-
-
-    /* Open */
-    public static boolean isOpen(Openable openable) {
-        return openable.isOpen();
-    }
-
-    public static boolean isNotOpen(Openable openable) {
-        return openable.isNotOpen();
-    }
-
-    public static void assertIsOpen(Openable openable) {
-        openable.assertIsOpen();
-    }
-
-    public static void assertIsNotOpen(Openable openable) {
-        openable.assertIsNotOpen();
-    }
-
-
-
-    /* Selected */
+    /* Selected/Deselected */
     public static boolean isSelected(WebElement webElement) {
         return webElement.isSelected();
     }
@@ -1356,6 +1438,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
             Assert.fail(describeTag(webElement) + " is not deselected!");
         }
     }
+
 
 
 
@@ -1401,109 +1484,6 @@ import org.openqa.selenium.support.ui.WebDriverWait;
         if (isEnabled(webElement)) {
             Assert.fail(describeTag(webElement) + " is not disabled!");
         }
-    }
-
-
-
-    /* Display */
-    public static boolean isDisplayed(WebElement webElement) {
-        try {
-            return webElement.isDisplayed();
-        } catch (NoSuchElementException e) {
-            return false;
-        }
-    }
-
-    public static boolean isNotDisplayed(WebElement webElement) {
-        return !isDisplayed(webElement);
-    }
-
-    public static boolean isDisplayed(WebElement webElement, long secondsToWait, WebDriver driver) {
-        WebElement foundWebElement = new WebDriverWait(driver, secondsToWait).until(ExpectedConditions.visibilityOf(webElement));
-        if (foundWebElement != null) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    public static boolean isNotDisplayed(WebElement webElement, long secondsToWait, WebDriver driver) {
-        return !isDisplayed(webElement, secondsToWait, driver);
-    }
-
-    public static void assertIsDisplayed(WebElement webElement) {
-        if (isNotDisplayed(webElement)) {
-            Assert.fail("WebElement is not displayed!");
-        }
-    }
-
-    public static void assertIsNotDisplayed(WebElement webElement) {
-        if (isDisplayed(webElement)) {
-            Assert.fail("WebElement is displayed when it shouldn't!");
-        }
-    }
-
-    public static void assertIsDisplayed(WebElement webElement, long secondsToWait , WebDriver driver) {
-        if (isNotDisplayed(webElement, secondsToWait , driver)) {
-            Assert.fail("WebElement is not displayed within " + secondsToWait + " seconds!");
-        }
-    }
-
-    public static void assertIsNotDisplayed(WebElement webElement, long secondsToWait , WebDriver driver) {
-        if (isDisplayed(webElement, secondsToWait , driver)) {
-            Assert.fail("WebElement is displayed within " + secondsToWait + " seconds when it shouldn't!");
-        }
-    }
-
-
-
-    /* Size */
-    public static boolean sizeEquals(int number, Collection collection) {
-        return equals((double) number, (double) collection.size());
-    }
-
-    public static boolean sizeNotEquals(int number, Collection collection) {
-        return notEquals((double) number, (double) collection.size());
-    }
-
-    public static boolean sizeLessThan(int number, Collection collection) {
-        return lessThan((double) number, (double) collection.size());
-    }
-
-    public static boolean sizeLessThanOrEquals(int number, Collection collection) {
-        return lessThanOrEquals((double) number, (double) collection.size());
-    }
-
-    public static boolean sizeGreaterThan(int number, Collection collection) {
-        return greaterThan((double) number, (double) collection.size());
-    }
-
-    public static boolean sizeGreaterThanOrEquals(int number, Collection collection) {
-        return greaterThanOrEquals((double) number, (double) collection.size());
-    }
-
-    public static void assertSizeEquals(int number, Collection collection) {
-        assertEquals("Size", (double) number, (double) collection.size());
-    }
-
-    public static void assertSizeNotEquals(int number, Collection collection) {
-        assertNotEequals("Size", (double) number, (double) collection.size());
-    }
-
-    public static void assertSizeLessThan(int number, Collection collection) {
-        assertLessThan("Size", (double) number, (double) collection.size());
-    }
-
-    public static void assertSizeLessThanOrEquals(int number, Collection collection) {
-        assertLessThanOrEquals("Size", (double) number, (double) collection.size());
-    }
-
-    public static void assertSizeGreaterThan(int number, Collection collection) {
-        assertGreaterThan("Size", (double) number, (double) collection.size());
-    }
-
-    public static void assertSizeGreaterThanOrEquals(int number, Collection collection) {
-        assertGreaterThanOrEquals("Size", (double) number, (double) collection.size());
     }
 
 

@@ -13,7 +13,6 @@ public class Bot {
 
     private static final org.slf4j.Logger log = org.slf4j.LoggerFactory.getLogger(Bot.class);
 
-
     /* Click */
     public static void click(WebElement webElement) {
         BotUtils.click(webElement);
@@ -176,232 +175,6 @@ public class Bot {
 
     public static void assertIsNotOpen(Openable openable) {
         BotUtils.assertIsNotOpen(openable);
-    }
-
-
-
-    /* Selected */
-    public static boolean isSelected(WebElement webElement) {
-        return BotUtils.isSelected(webElement);
-    }
-
-    public static boolean isDeselected(WebElement webElement) {
-        return BotUtils.isDeselected(webElement);
-    }
-
-    public static void assertIsSelected(WebElement webElement) {
-        BotUtils.assertIsSelected(webElement);
-    }
-
-    public static void assertIsDeselected(WebElement webElement) {
-        BotUtils.assertIsDeselected(webElement);
-    }
-
-
-
-    /* Option */
-    public static boolean hasOption(String text, WebElement webElement) {
-        return BotUtils.hasOption(text, webElement);
-    }
-
-    public static boolean hasNotOption(String text, WebElement webElement) {
-        return BotUtils.hasNotOption(text, webElement);
-    }
-
-    public static boolean optionIsEnabled(String text, WebElement webElement) {
-        return BotUtils.optionIsEnabled(text, webElement);
-    }
-
-    public static boolean optionIsDisabled(String text, WebElement webElement) {
-        return BotUtils.optionIsDisabled(text, webElement);
-    }
-
-    public static boolean optionIsSelected(String text, WebElement webElement) {
-        return BotUtils.optionIsSelected(text, webElement);
-    }
-
-    public static boolean optionIsDeselected(String text, WebElement webElement) {
-        return BotUtils.optionIsDeselected(text, webElement);
-    }
-
-    public static boolean allOptionsAreSelected(WebElement webElement) {
-        return BotUtils.allOptionsAreSelected(webElement);
-    }
-
-    public static boolean noOptionIsSelected(WebElement webElement) {
-        return BotUtils.noOptionIsSelected(webElement);
-    }
-
-    public static void assertHasOption(String text, WebElement webElement) {
-        BotUtils.assertHasOption(text, webElement);
-    }
-
-    public static void assertHasNotOption(String text, WebElement webElement) {
-        BotUtils.assertHasNotOption(text, webElement);
-    }
-
-    public static void assertOptionIsEnabled(String text, WebElement webElement) {
-        BotUtils.assertOptionIsEnabled(text, webElement);
-    }
-
-    public static void assertOptionIsDisabled(String text, WebElement webElement) {
-        BotUtils.assertOptionIsDisabled(text, webElement);
-    }
-
-    public static void assertOptionIsSelected(String text, WebElement webElement) {
-        BotUtils.assertOptionIsSelected(text, webElement);
-    }
-
-    public static void assertOptionIsDeselected(String text, WebElement webElement) {
-        BotUtils.assertOptionIsDeselected(text, webElement);
-    }
-
-    public static void assertAllOptionsAreSelected(WebElement webElement) {
-        BotUtils.assertAllOptionsAreSelected(webElement);
-    }
-
-    public static void assertNoOptionIsSelected(WebElement webElement) {
-        BotUtils.assertNoOptionIsSelected(webElement);
-    }
-
-
-
-    /* Option Value */
-    public static boolean hasOptionWithValue(String value, WebElement webElement) {
-        return BotUtils.hasOptionWithValue(value, webElement);
-    }
-
-    public static boolean hasNotOptionWithValue(String value, WebElement webElement) {
-        return BotUtils.hasNotOptionWithValue(value, webElement);
-    }
-
-    public static boolean optionWithValueIsEnabled(String value, WebElement webElement) {
-        return BotUtils.optionWithValueIsEnabled(value, webElement);
-    }
-
-    public static boolean optionWithValueIsDisabled(String value, WebElement webElement) {
-        return BotUtils.optionWithValueIsDisabled(value, webElement);
-    }
-
-    public static boolean optionWithValueIsSelected(String value, WebElement webElement) {
-        return BotUtils.optionWithValueIsSelected(value, webElement);
-    }
-
-    public static boolean optionWithValueIsDeselected(String value, WebElement webElement) {
-        return BotUtils.optionWithValueIsDeselected(value, webElement);
-    }
-
-    public static void assertHasOptionWithValue(String value, WebElement webElement) {
-        BotUtils.assertHasOptionWithValue(value, webElement);
-    }
-
-    public static void assertHasNotOptionWithValue(String value, WebElement webElement) {
-        BotUtils.assertHasNotOptionWithValue(value, webElement);
-    }
-
-    public static void assertOptionWithValueIsEnabled(String value, WebElement webElement) {
-        BotUtils.assertOptionWithValueIsEnabled(value, webElement);
-    }
-
-    public static void assertOptionWithValueIsDisabled(String value, WebElement webElement) {
-        BotUtils.assertOptionWithValueIsDisabled(value, webElement);
-    }
-
-    public static void assertOptionWithValueIsSelected(String value, WebElement webElement) {
-        BotUtils.assertOptionWithValueIsSelected(value, webElement);
-    }
-
-    public static void assertOptionWithValueIsDeselected(String value, WebElement webElement) {
-        BotUtils.assertOptionWithValueIsDeselected(value, webElement);
-    }
-
-
-
-    /* Option Index */
-    public static boolean hasOptionWithIndex(int index, WebElement webElement) {
-        return BotUtils.hasOptionWithIndex(index, webElement);
-    }
-
-    public static boolean hasNotOptionWithIndex(int index, WebElement webElement) {
-        return BotUtils.hasNotOptionWithIndex(index, webElement);
-    }
-
-    public static boolean optionWithIndexIsEnabled(int index, WebElement webElement) {
-        return BotUtils.optionWithIndexIsEnabled(index, webElement);
-    }
-
-    public static boolean optionWithIndexIsDisabled(int index, WebElement webElement) {
-        return BotUtils.optionWithIndexIsDisabled(index, webElement);
-    }
-
-    public static boolean optionWithIndexIsSelected(int index, WebElement webElement) {
-        return BotUtils.optionWithIndexIsSelected(index, webElement);
-    }
-
-    public static boolean optionWithIndexIsDeselected(int index, WebElement webElement) {
-        return BotUtils.optionWithIndexIsDeselected(index, webElement);
-    }
-
-    public static void assertHasOptionWithIndex(int index, WebElement webElement) {
-        BotUtils.assertHasOptionWithIndex(index, webElement);
-    }
-
-    public static void assertHasNotOptionWithIndex(int index, WebElement webElement) {
-        BotUtils.assertHasNotOptionWithIndex(index, webElement);
-    }
-
-    public static void assertOptionWithIndexIsEnabled(int index, WebElement webElement) {
-        BotUtils.assertOptionWithIndexIsEnabled(index, webElement);
-    }
-
-    public static void assertOptionWithIndexIsDisabled(int index, WebElement webElement) {
-        BotUtils.assertOptionWithIndexIsDisabled(index, webElement);
-    }
-
-    public static void assertOptionWithIndexIsSelected(int index, WebElement webElement) {
-        BotUtils.assertOptionWithIndexIsSelected(index, webElement);
-    }
-
-    public static void assertOptionWithIndexIsDeselected(int index, WebElement webElement) {
-        BotUtils.assertOptionWithIndexIsDeselected(index, webElement);
-    }
-
-
-
-    /* Checked/Unchecked */
-    public static boolean isChecked(WebElement webElement) {
-        return BotUtils.isChecked(webElement);
-    }
-
-    public static boolean isUnchecked(WebElement webElement) {
-        return BotUtils.isUnchecked(webElement);
-    }
-
-    public static void assertIsChecked(WebElement webElement) {
-        BotUtils.assertIsChecked(webElement);
-    }
-
-    public static void assertIsUnchecked(WebElement webElement) {
-        BotUtils.assertIsUnchecked(webElement);
-    }
-
-
-
-    /* Enabled/Disabled */
-    public static boolean isEnabled(WebElement webElement) {
-        return BotUtils.isEnabled(webElement);
-    }
-
-    public static boolean isDisabled(WebElement webElement) {
-        return BotUtils.isDisabled(webElement);
-    }
-
-    public static void assertIsEnabled(WebElement webElement) {
-        BotUtils.assertIsEnabled(webElement);
-    }
-
-    public static void assertIsDisabled(WebElement webElement) {
-        BotUtils.assertIsDisabled(webElement);
     }
 
 
@@ -1494,6 +1267,232 @@ public class Bot {
 
     public static void assertNumberGreaterThanOrEquals(Double number, WebElement webElement) {
         BotUtils.assertNumberGreaterThanOrEquals(number, webElement);
+    }
+
+
+
+    /* Selected/Deselected */
+    public static boolean isSelected(WebElement webElement) {
+        return BotUtils.isSelected(webElement);
+    }
+
+    public static boolean isDeselected(WebElement webElement) {
+        return BotUtils.isDeselected(webElement);
+    }
+
+    public static void assertIsSelected(WebElement webElement) {
+        BotUtils.assertIsSelected(webElement);
+    }
+
+    public static void assertIsDeselected(WebElement webElement) {
+        BotUtils.assertIsDeselected(webElement);
+    }
+
+
+
+    /* Checked/Unchecked */
+    public static boolean isChecked(WebElement webElement) {
+        return BotUtils.isChecked(webElement);
+    }
+
+    public static boolean isUnchecked(WebElement webElement) {
+        return BotUtils.isUnchecked(webElement);
+    }
+
+    public static void assertIsChecked(WebElement webElement) {
+        BotUtils.assertIsChecked(webElement);
+    }
+
+    public static void assertIsUnchecked(WebElement webElement) {
+        BotUtils.assertIsUnchecked(webElement);
+    }
+
+
+
+    /* Enabled/Disabled */
+    public static boolean isEnabled(WebElement webElement) {
+        return BotUtils.isEnabled(webElement);
+    }
+
+    public static boolean isDisabled(WebElement webElement) {
+        return BotUtils.isDisabled(webElement);
+    }
+
+    public static void assertIsEnabled(WebElement webElement) {
+        BotUtils.assertIsEnabled(webElement);
+    }
+
+    public static void assertIsDisabled(WebElement webElement) {
+        BotUtils.assertIsDisabled(webElement);
+    }
+
+
+
+    /* Option */
+    public static boolean hasOption(String text, WebElement webElement) {
+        return BotUtils.hasOption(text, webElement);
+    }
+
+    public static boolean hasNotOption(String text, WebElement webElement) {
+        return BotUtils.hasNotOption(text, webElement);
+    }
+
+    public static boolean optionIsEnabled(String text, WebElement webElement) {
+        return BotUtils.optionIsEnabled(text, webElement);
+    }
+
+    public static boolean optionIsDisabled(String text, WebElement webElement) {
+        return BotUtils.optionIsDisabled(text, webElement);
+    }
+
+    public static boolean optionIsSelected(String text, WebElement webElement) {
+        return BotUtils.optionIsSelected(text, webElement);
+    }
+
+    public static boolean optionIsDeselected(String text, WebElement webElement) {
+        return BotUtils.optionIsDeselected(text, webElement);
+    }
+
+    public static boolean allOptionsAreSelected(WebElement webElement) {
+        return BotUtils.allOptionsAreSelected(webElement);
+    }
+
+    public static boolean noOptionIsSelected(WebElement webElement) {
+        return BotUtils.noOptionIsSelected(webElement);
+    }
+
+    public static void assertHasOption(String text, WebElement webElement) {
+        BotUtils.assertHasOption(text, webElement);
+    }
+
+    public static void assertHasNotOption(String text, WebElement webElement) {
+        BotUtils.assertHasNotOption(text, webElement);
+    }
+
+    public static void assertOptionIsEnabled(String text, WebElement webElement) {
+        BotUtils.assertOptionIsEnabled(text, webElement);
+    }
+
+    public static void assertOptionIsDisabled(String text, WebElement webElement) {
+        BotUtils.assertOptionIsDisabled(text, webElement);
+    }
+
+    public static void assertOptionIsSelected(String text, WebElement webElement) {
+        BotUtils.assertOptionIsSelected(text, webElement);
+    }
+
+    public static void assertOptionIsDeselected(String text, WebElement webElement) {
+        BotUtils.assertOptionIsDeselected(text, webElement);
+    }
+
+    public static void assertAllOptionsAreSelected(WebElement webElement) {
+        BotUtils.assertAllOptionsAreSelected(webElement);
+    }
+
+    public static void assertNoOptionIsSelected(WebElement webElement) {
+        BotUtils.assertNoOptionIsSelected(webElement);
+    }
+
+
+
+    /* Option Value */
+    public static boolean hasOptionWithValue(String value, WebElement webElement) {
+        return BotUtils.hasOptionWithValue(value, webElement);
+    }
+
+    public static boolean hasNotOptionWithValue(String value, WebElement webElement) {
+        return BotUtils.hasNotOptionWithValue(value, webElement);
+    }
+
+    public static boolean optionWithValueIsEnabled(String value, WebElement webElement) {
+        return BotUtils.optionWithValueIsEnabled(value, webElement);
+    }
+
+    public static boolean optionWithValueIsDisabled(String value, WebElement webElement) {
+        return BotUtils.optionWithValueIsDisabled(value, webElement);
+    }
+
+    public static boolean optionWithValueIsSelected(String value, WebElement webElement) {
+        return BotUtils.optionWithValueIsSelected(value, webElement);
+    }
+
+    public static boolean optionWithValueIsDeselected(String value, WebElement webElement) {
+        return BotUtils.optionWithValueIsDeselected(value, webElement);
+    }
+
+    public static void assertHasOptionWithValue(String value, WebElement webElement) {
+        BotUtils.assertHasOptionWithValue(value, webElement);
+    }
+
+    public static void assertHasNotOptionWithValue(String value, WebElement webElement) {
+        BotUtils.assertHasNotOptionWithValue(value, webElement);
+    }
+
+    public static void assertOptionWithValueIsEnabled(String value, WebElement webElement) {
+        BotUtils.assertOptionWithValueIsEnabled(value, webElement);
+    }
+
+    public static void assertOptionWithValueIsDisabled(String value, WebElement webElement) {
+        BotUtils.assertOptionWithValueIsDisabled(value, webElement);
+    }
+
+    public static void assertOptionWithValueIsSelected(String value, WebElement webElement) {
+        BotUtils.assertOptionWithValueIsSelected(value, webElement);
+    }
+
+    public static void assertOptionWithValueIsDeselected(String value, WebElement webElement) {
+        BotUtils.assertOptionWithValueIsDeselected(value, webElement);
+    }
+
+
+
+    /* Option Index */
+    public static boolean hasOptionWithIndex(int index, WebElement webElement) {
+        return BotUtils.hasOptionWithIndex(index, webElement);
+    }
+
+    public static boolean hasNotOptionWithIndex(int index, WebElement webElement) {
+        return BotUtils.hasNotOptionWithIndex(index, webElement);
+    }
+
+    public static boolean optionWithIndexIsEnabled(int index, WebElement webElement) {
+        return BotUtils.optionWithIndexIsEnabled(index, webElement);
+    }
+
+    public static boolean optionWithIndexIsDisabled(int index, WebElement webElement) {
+        return BotUtils.optionWithIndexIsDisabled(index, webElement);
+    }
+
+    public static boolean optionWithIndexIsSelected(int index, WebElement webElement) {
+        return BotUtils.optionWithIndexIsSelected(index, webElement);
+    }
+
+    public static boolean optionWithIndexIsDeselected(int index, WebElement webElement) {
+        return BotUtils.optionWithIndexIsDeselected(index, webElement);
+    }
+
+    public static void assertHasOptionWithIndex(int index, WebElement webElement) {
+        BotUtils.assertHasOptionWithIndex(index, webElement);
+    }
+
+    public static void assertHasNotOptionWithIndex(int index, WebElement webElement) {
+        BotUtils.assertHasNotOptionWithIndex(index, webElement);
+    }
+
+    public static void assertOptionWithIndexIsEnabled(int index, WebElement webElement) {
+        BotUtils.assertOptionWithIndexIsEnabled(index, webElement);
+    }
+
+    public static void assertOptionWithIndexIsDisabled(int index, WebElement webElement) {
+        BotUtils.assertOptionWithIndexIsDisabled(index, webElement);
+    }
+
+    public static void assertOptionWithIndexIsSelected(int index, WebElement webElement) {
+        BotUtils.assertOptionWithIndexIsSelected(index, webElement);
+    }
+
+    public static void assertOptionWithIndexIsDeselected(int index, WebElement webElement) {
+        BotUtils.assertOptionWithIndexIsDeselected(index, webElement);
     }
 
 
