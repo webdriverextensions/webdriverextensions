@@ -104,6 +104,18 @@ public class BotTest extends SiteAwareRepository {
     }
 
     @Test
+    public void valueNumberTest() {
+        assertValueIsNumber(botTestPage.floatNumberInput);
+        assertValueIsNotNumber(botTestPage.textInput);
+        assertValueEquals(42.0, botTestPage.floatNumberInput);
+        assertValueNotEquals(42.0, botTestPage.floatNumberInput);
+        assertValueLessThan(43.0, botTestPage.floatNumberInput);
+        assertValueLessThanOrEquals(42.0, botTestPage.floatNumberInput);
+        assertValueGreaterThan(41.0, botTestPage.floatNumberInput);
+        assertValueGreaterThanOrEquals(42.0, botTestPage.floatNumberInput);
+    }
+
+    @Test
     public void hrefTest() {
         assertHrefEquals("prefixhrefsuffix", botTestPage.attributesSpan);
         assertHrefNotEquals("xxx", botTestPage.attributesSpan);
@@ -115,5 +127,31 @@ public class BotTest extends SiteAwareRepository {
         assertHrefNotEndsWith("xxx", botTestPage.attributesSpan);
         assertHrefMatches(".*href.*", botTestPage.attributesSpan);
         assertHrefNotMatches(".*xxx.*", botTestPage.attributesSpan);
+    }
+
+    @Test
+    public void textTest() {
+        assertTextEquals("prefixtextsuffix", botTestPage.textSpan);
+        assertTextNotEquals("xxx", botTestPage.textSpan);
+        assertTextContains("text", botTestPage.textSpan);
+        assertTextNotContains("xxx", botTestPage.textSpan);
+        assertTextStartsWith("prefixtext", botTestPage.textSpan);
+        assertTextNotStartsWith("xxx", botTestPage.textSpan);
+        assertTextEndsWith("textsuffix", botTestPage.textSpan);
+        assertTextNotEndsWith("xxx", botTestPage.textSpan);
+        assertTextMatches(".*text.*", botTestPage.textSpan);
+        assertTextNotMatches(".*xxx.*", botTestPage.textSpan);
+    }
+
+    @Test
+    public void textNumberTest() {
+        assertTextIsNumber(botTestPage.floatNumberSpan);
+        assertTextIsNotNumber(botTestPage.textSpan);
+        assertTextEquals(42.0, botTestPage.floatNumberSpan);
+        assertTextNotEquals(42.0, botTestPage.floatNumberSpan);
+        assertTextLessThan(43.0, botTestPage.floatNumberSpan);
+        assertTextLessThanOrEquals(42.0, botTestPage.floatNumberSpan);
+        assertTextGreaterThan(41.0, botTestPage.floatNumberSpan);
+        assertTextGreaterThanOrEquals(42.0, botTestPage.floatNumberSpan);
     }
 }
