@@ -1382,38 +1382,38 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
     public static void assertIsTextNumber(WebElement webElement) {
         if (isTextNotNumber(webElement)) {
-            Assert.fail(describeTag(webElement) + " is no number!");
+            Assert.fail("Text: " + textInAsNumber(webElement) + " is no number!");
         }
     }
 
     public static void assertIsTextNotNumber(WebElement webElement) {
         if (isTextNumber(webElement)) {
-            Assert.fail(describeTag(webElement) + " is number \"" + textInAsNumber(webElement) + "\" when it shouldn't!");
+            Assert.fail("Text: " + textInAsNumber(webElement) + " is number when it shouldn't!");
         }
     }
 
     public static void assertTextEquals(Double number, WebElement webElement) {
-        assertEquals("Number", number, textInAsNumber(webElement));
+        assertEquals("Text", number, textInAsNumber(webElement));
     }
 
     public static void assertTextNotEquals(Double number, WebElement webElement) {
-        assertNotEequals("Number", number, textInAsNumber(webElement));
+        assertNotEequals("Text", number, textInAsNumber(webElement));
     }
 
     public static void assertTextLessThan(Double number, WebElement webElement) {
-        assertLessThan("Number", number, textInAsNumber(webElement));
+        assertLessThan("Text", number, textInAsNumber(webElement));
     }
 
     public static void assertTextLessThanOrEquals(Double number, WebElement webElement) {
-        assertLessThanOrEquals("Number", number, textInAsNumber(webElement));
+        assertLessThanOrEquals("Text", number, textInAsNumber(webElement));
     }
 
     public static void assertTextGreaterThan(Double number, WebElement webElement) {
-        assertGreaterThan("Number", number, textInAsNumber(webElement));
+        assertGreaterThan("Text", number, textInAsNumber(webElement));
     }
 
     public static void assertTextGreaterThanOrEquals(Double number, WebElement webElement) {
-        assertGreaterThanOrEquals("Number", number, textInAsNumber(webElement));
+        assertGreaterThanOrEquals("Text", number, textInAsNumber(webElement));
     }
 
 
