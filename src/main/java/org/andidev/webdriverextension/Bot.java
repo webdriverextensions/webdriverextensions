@@ -1581,4 +1581,8 @@ public class Bot {
     public static <T extends Object> void assertThat(T actual, Matcher<? super T> matcher) {
         MatcherAssert.assertThat(actual, matcher);
     }
+
+    public static <T extends Object> void assertThat(String reason, T actual, Matcher<? super T> matcher) {
+        MatcherAssert.assertThat(reason, actual, matcher);
+    }
 }
