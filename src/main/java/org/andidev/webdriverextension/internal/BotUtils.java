@@ -39,7 +39,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
         webElement.sendKeys(text);
     }
 
-    public static void typeNumber(Double number, WebElement webElement) {
+    public static void type(Double number, WebElement webElement) {
         if (number == null) {
             return;
         }
@@ -58,9 +58,9 @@ import org.openqa.selenium.support.ui.WebDriverWait;
         type(text, webElement);
     }
 
-    public static void clearAndTypeNumber(Double number, WebElement webElement) {
+    public static void clearAndType(Double number, WebElement webElement) {
         clear(webElement);
-        typeNumber(number, webElement);
+        type(number, webElement);
     }
 
 

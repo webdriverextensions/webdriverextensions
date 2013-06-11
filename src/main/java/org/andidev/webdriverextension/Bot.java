@@ -25,8 +25,8 @@ public class Bot {
         BotUtils.type(text, webElement);
     }
 
-    public static void typeNumber(Double number, WebElement webElement) {
-        BotUtils.typeNumber(number, webElement);
+    public static void type(Double number, WebElement webElement) {
+        BotUtils.type(number, webElement);
     }
 
 
@@ -40,8 +40,8 @@ public class Bot {
         BotUtils.clearAndType(text, webElement);
     }
 
-    public static void clearAndTypeNumber(Double number, WebElement webElement) {
-        BotUtils.clearAndTypeNumber(number, webElement);
+    public static void clearAndType(Double number, WebElement webElement) {
+        BotUtils.clearAndType(number, webElement);
     }
 
 
