@@ -1129,6 +1129,85 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 
 
+    /* Value Number */
+    public static Double valueInAsNumber(WebElement webElement) {
+        try {
+            return NumberUtils.createDouble(valueIn(webElement));
+        } catch (NumberFormatException e) {
+            return null;
+        }
+    }
+
+    public static boolean isValueNumber(WebElement webElement) {
+        return valueInAsNumber(webElement) != null;
+    }
+
+    public static boolean isValueNotNumber(WebElement webElement) {
+        return valueInAsNumber(webElement) == null;
+    }
+
+    public static boolean valueEquals(Double number, WebElement webElement) {
+        return equals(number, valueInAsNumber(webElement));
+    }
+
+    public static boolean valueNotEquals(Double number, WebElement webElement) {
+        return notEquals(number, valueInAsNumber(webElement));
+    }
+
+    public static boolean valueLessThan(Double number, WebElement webElement) {
+        return lessThan(number, valueInAsNumber(webElement));
+    }
+
+    public static boolean valueLessThanOrEquals(Double number, WebElement webElement) {
+        return lessThanOrEquals(number, valueInAsNumber(webElement));
+    }
+
+    public static boolean valueGreaterThan(Double number, WebElement webElement) {
+        return greaterThan(number, valueInAsNumber(webElement));
+    }
+
+    public static boolean valueGreaterThanOrEquals(Double number, WebElement webElement) {
+        return greaterThanOrEquals(number, valueInAsNumber(webElement));
+    }
+
+    public static void assertIsValueNumber(WebElement webElement) {
+        if (isValueNotNumber(webElement)) {
+            Assert.fail("value: " + valueInAsNumber(webElement) + " is no number!");
+        }
+    }
+
+    public static void assertIsValueNotNumber(WebElement webElement) {
+        if (isValueNumber(webElement)) {
+            Assert.fail("value: " + valueInAsNumber(webElement) + " is number when it shouldn't!");
+        }
+    }
+
+    public static void assertValueEquals(Double number, WebElement webElement) {
+        assertEquals("value", number, valueInAsNumber(webElement));
+    }
+
+    public static void assertValueNotEquals(Double number, WebElement webElement) {
+        assertNotEequals("value", number, valueInAsNumber(webElement));
+    }
+
+    public static void assertValueLessThan(Double number, WebElement webElement) {
+        assertLessThan("value", number, valueInAsNumber(webElement));
+    }
+
+    public static void assertValueLessThanOrEquals(Double number, WebElement webElement) {
+        assertLessThanOrEquals("value", number, valueInAsNumber(webElement));
+    }
+
+    public static void assertValueGreaterThan(Double number, WebElement webElement) {
+        assertGreaterThan("value", number, valueInAsNumber(webElement));
+    }
+
+    public static void assertValueGreaterThanOrEquals(Double number, WebElement webElement) {
+        assertGreaterThanOrEquals("value", number, valueInAsNumber(webElement));
+    }
+
+
+
     /* Href */
     public static String hrefIn(WebElement webElement) {
         return attributeIn("href", webElement);

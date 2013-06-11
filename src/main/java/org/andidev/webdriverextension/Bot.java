@@ -985,6 +985,77 @@ public class Bot {
 
 
 
+    /* Value Number */
+    public static Double valueInAsNumber(WebElement webElement) {
+        return BotUtils.valueInAsNumber(webElement);
+    }
+
+    public static boolean isValueNumber(WebElement webElement) {
+        return BotUtils.isValueNumber(webElement);
+    }
+
+    public static boolean isValueNotNumber(WebElement webElement) {
+        return BotUtils.isValueNotNumber(webElement);
+    }
+
+    public static boolean valueEquals(Double number, WebElement webElement) {
+        return BotUtils.valueEquals(number, webElement);
+    }
+
+    public static boolean valueNotEquals(Double number, WebElement webElement) {
+        return BotUtils.valueNotEquals(number, webElement);
+    }
+
+    public static boolean valueLessThan(Double number, WebElement webElement) {
+        return BotUtils.valueLessThan(number, webElement);
+    }
+
+    public static boolean valueLessThanOrEquals(Double number, WebElement webElement) {
+        return BotUtils.valueLessThanOrEquals(number, webElement);
+    }
+
+    public static boolean valueGreaterThan(Double number, WebElement webElement) {
+        return BotUtils.valueGreaterThan(number, webElement);
+    }
+
+    public static boolean valueGreaterThanOrEquals(Double number, WebElement webElement) {
+        return BotUtils.valueGreaterThanOrEquals(number, webElement);
+    }
+
+    public static void assertIsValueNumber(WebElement webElement) {
+        BotUtils.assertIsValueNumber(webElement);
+    }
+
+    public static void assertIsValueNotNumber(WebElement webElement) {
+        BotUtils.assertIsValueNotNumber(webElement);
+    }
+
+    public static void assertValueEquals(Double number, WebElement webElement) {
+        BotUtils.assertValueEquals(number, webElement);
+    }
+
+    public static void assertValueNotEquals(Double number, WebElement webElement) {
+        BotUtils.assertValueNotEquals(number, webElement);
+    }
+
+    public static void assertValueLessThan(Double number, WebElement webElement) {
+        BotUtils.assertValueLessThan(number, webElement);
+    }
+
+    public static void assertValueLessThanOrEquals(Double number, WebElement webElement) {
+        BotUtils.assertValueLessThanOrEquals(number, webElement);
+    }
+
+    public static void assertValueGreaterThan(Double number, WebElement webElement) {
+        BotUtils.assertValueGreaterThan(number, webElement);
+    }
+
+    public static void assertValueGreaterThanOrEquals(Double number, WebElement webElement) {
+        BotUtils.assertValueGreaterThanOrEquals(number, webElement);
+    }
+
+
+
     /* Href */
     public static String hrefIn(WebElement webElement) {
         return BotUtils.hrefIn(webElement);
