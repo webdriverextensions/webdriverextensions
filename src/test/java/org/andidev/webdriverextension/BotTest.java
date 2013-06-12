@@ -28,65 +28,65 @@ public class BotTest extends SiteAwareRepository {
     }
 
 
-    /* Click */
-    @Test
-    public void clickTest() {
-    }
-
-    /* Type */
-    @Test
-    public void typeTest() {
-    }
-
-    /* Clear */
-    @Test
-    public void clearTest() {
-    }
-
-    /* Press Keys */
-    @Test
-    public void pressKeysTest() {
-    }
-
-    /* Select/Deselect */
-    @Test
-    public void selectDeselectTest() {
-    }
-
-    /* Check/Uncheck */
-    @Test
-    public void checkUncheckTest() {
-    }
-
-    /* Open */
-    @Test
-    public void openTest() {
-    }
-
-    /* Wait For */
-    @Test
-    public void waitForTest() {
-    }
-
-    /* Debug */
-    @Test
-    public void debugTest() {
-    }
-
-    /* Is Open */
-    @Test
-    public void isOpenTest() {
-    }
-
-    /* Is Display */
-    @Test
-    public void isDisplayedTest() {
-    }
-
-    /* Size */
-    @Test
-    public void sizeTest() {
-    }
+//    /* Click */
+//    @Test
+//    public void clickTest() {
+//    }
+//
+//    /* Type */
+//    @Test
+//    public void typeTest() {
+//    }
+//
+//    /* Clear */
+//    @Test
+//    public void clearTest() {
+//    }
+//
+//    /* Press Keys */
+//    @Test
+//    public void pressKeysTest() {
+//    }
+//
+//    /* Select/Deselect */
+//    @Test
+//    public void selectDeselectTest() {
+//    }
+//
+//    /* Check/Uncheck */
+//    @Test
+//    public void checkUncheckTest() {
+//    }
+//
+//    /* Open */
+//    @Test
+//    public void openTest() {
+//    }
+//
+//    /* Wait For */
+//    @Test
+//    public void waitForTest() {
+//    }
+//
+//    /* Debug */
+//    @Test
+//    public void debugTest() {
+//    }
+//
+//    /* Is Open */
+//    @Test
+//    public void isOpenTest() {
+//    }
+//
+//    /* Is Display */
+//    @Test
+//    public void isDisplayedTest() {
+//    }
+//
+//    /* Size */
+//    @Test
+//    public void sizeTest() {
+//    }
 
     /* Url */
     @Test
@@ -202,6 +202,7 @@ public class BotTest extends SiteAwareRepository {
     /* Value Number */
     @Test
     public void valueNumberTest() {
+        // floatNumberInput
         assertValueIsNumber(botTestPage.floatNumberInput);
         assertValueIsNotNumber(botTestPage.textInput);
         assertValueEquals(42.0, botTestPage.floatNumberInput);
@@ -210,6 +211,16 @@ public class BotTest extends SiteAwareRepository {
         assertValueLessThanOrEquals(42.0, botTestPage.floatNumberInput);
         assertValueGreaterThan(41.0, botTestPage.floatNumberInput);
         assertValueGreaterThanOrEquals(42.0, botTestPage.floatNumberInput);
+
+        // intNumberInput
+        assertValueIsNumber(botTestPage.intNumberInput);
+        assertValueIsNotNumber(botTestPage.textInput);
+        assertValueEquals(42.0, botTestPage.intNumberInput);
+        assertValueNotEquals(42.0, botTestPage.intNumberInput);
+        assertValueLessThan(43.0, botTestPage.intNumberInput);
+        assertValueLessThanOrEquals(42.0, botTestPage.intNumberInput);
+        assertValueGreaterThan(41.0, botTestPage.intNumberInput);
+        assertValueGreaterThanOrEquals(42.0, botTestPage.intNumberInput);
     }
 
     /* Href */
@@ -245,6 +256,7 @@ public class BotTest extends SiteAwareRepository {
     /* Text Number */
     @Test
     public void textNumberTest() {
+        // floatNumberSpan
         assertTextIsNumber(botTestPage.floatNumberSpan);
         assertTextIsNotNumber(botTestPage.textSpan);
         assertTextEquals(42.0, botTestPage.floatNumberSpan);
@@ -253,35 +265,45 @@ public class BotTest extends SiteAwareRepository {
         assertTextLessThanOrEquals(42.0, botTestPage.floatNumberSpan);
         assertTextGreaterThan(41.0, botTestPage.floatNumberSpan);
         assertTextGreaterThanOrEquals(42.0, botTestPage.floatNumberSpan);
+
+        // intNumberSpan
+        assertTextIsNumber(botTestPage.intNumberSpan);
+        assertTextIsNotNumber(botTestPage.textSpan);
+        assertTextEquals(42.0, botTestPage.intNumberSpan);
+        assertTextNotEquals(42.0, botTestPage.intNumberSpan);
+        assertTextLessThan(43.0, botTestPage.intNumberSpan);
+        assertTextLessThanOrEquals(42.0, botTestPage.intNumberSpan);
+        assertTextGreaterThan(41.0, botTestPage.intNumberSpan);
+        assertTextGreaterThanOrEquals(42.0, botTestPage.intNumberSpan);
     }
 
-    /* Selected/Deselected */
-    @Test
-    public void selectedDeselectedTest() {
-    }
-
-    /* Checked/Unchecked */
-    @Test
-    public void checkedUncheckedTest() {
-    }
-
-    /* Enabled/Disabled */
-    @Test
-    public void enabledDisabledTest() {
-    }
-
-    /* Option */
-    @Test
-    public void optionTest() {
-    }
-
-    /* Option Value */
-    @Test
-    public void optionValueTest() {
-    }
-
-    /* Option Index */
-    @Test
-    public void optionIndexTest() {
-    }
+//    /* Selected/Deselected */
+//    @Test
+//    public void selectedDeselectedTest() {
+//    }
+//
+//    /* Checked/Unchecked */
+//    @Test
+//    public void checkedUncheckedTest() {
+//    }
+//
+//    /* Enabled/Disabled */
+//    @Test
+//    public void enabledDisabledTest() {
+//    }
+//
+//    /* Option */
+//    @Test
+//    public void optionTest() {
+//    }
+//
+//    /* Option Value */
+//    @Test
+//    public void optionValueTest() {
+//    }
+//
+//    /* Option Index */
+//    @Test
+//    public void optionIndexTest() {
+//    }
 }
