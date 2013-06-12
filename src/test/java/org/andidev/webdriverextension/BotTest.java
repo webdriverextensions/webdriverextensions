@@ -19,8 +19,7 @@ public class BotTest extends SiteAwareRepository {
 
     @Before
     public void before() {
-        open(site);
-        open(botTestPage);
+       open(botTestPage);
     }
 
     @After
@@ -28,12 +27,105 @@ public class BotTest extends SiteAwareRepository {
         getDriver().close();
     }
 
+
+    /* Click */
+    @Test
+    public void clickTest() {
+    }
+
+    /* Type */
+    @Test
+    public void typeTest() {
+    }
+
+    /* Clear */
+    @Test
+    public void clearTest() {
+    }
+
+    /* Press Keys */
+    @Test
+    public void pressKeysTest() {
+    }
+
+    /* Select/Deselect */
+    @Test
+    public void selectDeselectTest() {
+    }
+
+    /* Check/Uncheck */
+    @Test
+    public void checkUncheckTest() {
+    }
+
+    /* Open */
+    @Test
+    public void openTest() {
+    }
+
+    /* Wait For */
+    @Test
+    public void waitForTest() {
+    }
+
+    /* Debug */
+    @Test
+    public void debugTest() {
+    }
+
+    /* Is Open */
+    @Test
+    public void isOpenTest() {
+    }
+
+    /* Is Display */
+    @Test
+    public void isDisplayedTest() {
+    }
+
+    /* Size */
+    @Test
+    public void sizeTest() {
+    }
+
+    /* Url */
+    @Test
+    public void urlTest() {
+        assertUrlEquals("http://andidev.github.io/webdriver-extension/bot-test.html");
+        assertUrlNotEquals("xxx");
+        assertUrlContains("webdriver-extension");
+        assertUrlNotContains("xxx");
+        assertUrlStartsWith("http://andidev.github.io");
+        assertUrlNotStartsWith("xxx");
+        assertUrlEndsWith("webdriver-extension/bot-test.html");
+        assertUrlNotEndsWith("xxx");
+        assertUrlMatches(".*webdriver-extension.*");
+        assertUrlNotMatches(".*xxx.*");
+    }
+
+    /* Title */
+    @Test
+    public void titleTest() {
+        assertTitleEquals("prefixtitlesuffix");
+        assertTitleNotEquals("xxx");
+        assertTitleContains("title");
+        assertTitleNotContains("xxx");
+        assertTitleStartsWith("prefixtitle");
+        assertTitleNotStartsWith("xxx");
+        assertTitleEndsWith("titlesuffix");
+        assertTitleNotEndsWith("xxx");
+        assertTitleMatches(".*title.*");
+        assertTitleNotMatches(".*xxx.*");
+    }
+
+    /* Tag Name */
     @Test
     public void tagNameTest() {
         assertTagNameEquals("span", botTestPage.attributesSpan);
         assertTagNameNotEquals("xxx", botTestPage.attributesSpan);
     }
 
+    /* Attribute */
     @Test
     public void attributeTest() {
         assertAttributeEquals("id", "prefixidsuffix", botTestPage.attributesSpan);
@@ -48,6 +140,7 @@ public class BotTest extends SiteAwareRepository {
         assertAttributeNotMatches("id", ".*xxx.*", botTestPage.attributesSpan);
     }
 
+    /* Id */
     @Test
     public void idTest() {
         assertIdEquals("prefixidsuffix", botTestPage.attributesSpan);
@@ -62,6 +155,7 @@ public class BotTest extends SiteAwareRepository {
         assertIdNotMatches(".*xxx.*", botTestPage.attributesSpan);
     }
 
+    /* Name */
     @Test
     public void nameTest() {
         assertNameEquals("prefixnamesuffix", botTestPage.attributesSpan);
@@ -76,6 +170,7 @@ public class BotTest extends SiteAwareRepository {
         assertNameNotMatches(".*xxx.*", botTestPage.attributesSpan);
     }
 
+    /* Class */
     @Test
     public void classTest() {
         assertHasClass("prefixclass1suffix", botTestPage.attributesSpan);
@@ -89,6 +184,7 @@ public class BotTest extends SiteAwareRepository {
         Assert.assertThat(classes, hasItem("prefixclass3suffix"));
     }
 
+    /* Value */
     @Test
     public void valueTest() {
         assertValueEquals("prefixvaluesuffix", botTestPage.attributesSpan);
@@ -103,6 +199,7 @@ public class BotTest extends SiteAwareRepository {
         assertValueNotMatches(".*xxx.*", botTestPage.attributesSpan);
     }
 
+    /* Value Number */
     @Test
     public void valueNumberTest() {
         assertValueIsNumber(botTestPage.floatNumberInput);
@@ -115,6 +212,7 @@ public class BotTest extends SiteAwareRepository {
         assertValueGreaterThanOrEquals(42.0, botTestPage.floatNumberInput);
     }
 
+    /* Href */
     @Test
     public void hrefTest() {
         assertHrefEquals("prefixhrefsuffix", botTestPage.attributesSpan);
@@ -129,6 +227,7 @@ public class BotTest extends SiteAwareRepository {
         assertHrefNotMatches(".*xxx.*", botTestPage.attributesSpan);
     }
 
+    /* Text */
     @Test
     public void textTest() {
         assertTextEquals("prefixtextsuffix", botTestPage.textSpan);
@@ -143,6 +242,7 @@ public class BotTest extends SiteAwareRepository {
         assertTextNotMatches(".*xxx.*", botTestPage.textSpan);
     }
 
+    /* Text Number */
     @Test
     public void textNumberTest() {
         assertTextIsNumber(botTestPage.floatNumberSpan);
@@ -153,5 +253,35 @@ public class BotTest extends SiteAwareRepository {
         assertTextLessThanOrEquals(42.0, botTestPage.floatNumberSpan);
         assertTextGreaterThan(41.0, botTestPage.floatNumberSpan);
         assertTextGreaterThanOrEquals(42.0, botTestPage.floatNumberSpan);
+    }
+
+    /* Selected/Deselected */
+    @Test
+    public void selectedDeselectedTest() {
+    }
+
+    /* Checked/Unchecked */
+    @Test
+    public void checkedUncheckedTest() {
+    }
+
+    /* Enabled/Disabled */
+    @Test
+    public void enabledDisabledTest() {
+    }
+
+    /* Option */
+    @Test
+    public void optionTest() {
+    }
+
+    /* Option Value */
+    @Test
+    public void optionValueTest() {
+    }
+
+    /* Option Index */
+    @Test
+    public void optionIndexTest() {
     }
 }

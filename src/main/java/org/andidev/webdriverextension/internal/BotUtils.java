@@ -234,7 +234,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 
 
-    /* Open */
+    /* Is Open */
     public static boolean isOpen(Openable openable) {
         return openable.isOpen();
     }
@@ -253,7 +253,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 
 
-    /* Display */
+    /* Is Displayed */
     public static boolean isDisplayed(WebElement webElement) {
         try {
             return webElement.isDisplayed();

@@ -160,7 +160,7 @@ public class Bot {
 
 
 
-    /* Open */
+    /* Is Open */
     public static boolean isOpen(Openable openable) {
         return BotUtils.isOpen(openable);
     }
@@ -179,7 +179,7 @@ public class Bot {
 
 
 
-    /* Display */
+    /* Is Displayed */
     public static boolean isDisplayed(WebElement webElement) {
         return BotUtils.isDisplayed(webElement);
     }
