@@ -1,6 +1,7 @@
 package org.andidev.webdriverextension;
 
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 import static org.andidev.webdriverextension.Bot.*;
 import static org.andidev.webdriverextension.ThreadDriver.*;
 import org.junit.After;
@@ -19,7 +20,7 @@ public class BotTest extends SiteAwareRepository {
 
     @Before
     public void before() {
-       open(botTestPage);
+        getDriver().get("http://andidev.github.com/webdriver-extension/bot-test.html");
     }
 
     @After
@@ -27,66 +28,125 @@ public class BotTest extends SiteAwareRepository {
         getDriver().close();
     }
 
+    /* Click */
+    @Test
+    public void clickTest() {
+        click(botTestPage.checkbox2);
+        assertIsChecked(botTestPage.checkbox2);
+    }
 
-//    /* Click */
-//    @Test
-//    public void clickTest() {
-//    }
-//
-//    /* Type */
-//    @Test
-//    public void typeTest() {
-//    }
-//
-//    /* Clear */
-//    @Test
-//    public void clearTest() {
-//    }
-//
-//    /* Press Keys */
-//    @Test
-//    public void pressKeysTest() {
-//    }
-//
-//    /* Select/Deselect */
-//    @Test
-//    public void selectDeselectTest() {
-//    }
-//
-//    /* Check/Uncheck */
-//    @Test
-//    public void checkUncheckTest() {
-//    }
-//
-//    /* Open */
-//    @Test
-//    public void openTest() {
-//    }
-//
-//    /* Wait For */
-//    @Test
-//    public void waitForTest() {
-//    }
-//
-//    /* Debug */
-//    @Test
-//    public void debugTest() {
-//    }
-//
-//    /* Is Open */
-//    @Test
-//    public void isOpenTest() {
-//    }
-//
-//    /* Is Display */
-//    @Test
-//    public void isDisplayedTest() {
-//    }
-//
-//    /* Size */
-//    @Test
-//    public void sizeTest() {
-//    }
+    /* Type */
+    @Test
+    public void typeTest() {
+        clear(botTestPage.textInput);
+        type("text", botTestPage.textInput);
+        assertValueEquals("text", botTestPage.textInput);
+        clear(botTestPage.textInput);
+        type(42.0, botTestPage.textInput);
+        assertValueEquals(42.0, botTestPage.textInput);
+    }
+
+    /* Clear */
+    @Test
+    public void clearTest() {
+        clear(botTestPage.textInput);
+        assertValueEquals("", botTestPage.textInput);
+        clearAndType("text", botTestPage.textInput);
+        assertValueEquals("text", botTestPage.textInput);
+        clearAndType(42.0, botTestPage.textInput);
+        assertValueEquals(42.0, botTestPage.textInput);
+    }
+
+    /* Press Keys */
+    @Test
+    public void pressKeysTest() {
+        clear(botTestPage.textInput);
+        pressKeys(botTestPage.textInput, "t");
+        assertValueEquals("t", botTestPage.textInput);
+        pressKeys(botTestPage.textInput, "e");
+        assertValueEquals("te", botTestPage.textInput);
+        pressKeys(botTestPage.textInput, "x");
+        assertValueEquals("tex", botTestPage.textInput);
+        pressKeys(botTestPage.textInput, "t");
+        assertValueEquals("text", botTestPage.textInput);
+    }
+
+    /* Select/Deselect */
+    @Test
+    public void selectDeselectTest() {
+        select(botTestPage.multipleSelectOption2);
+        assertIsSelected(botTestPage.multipleSelectOption2);
+        deselect(botTestPage.multipleSelectOption1);
+        assertIsDeselected(botTestPage.multipleSelectOption1);
+    }
+
+    /* Check/Uncheck */
+    @Test
+    public void checkUncheckTest() {
+        check(botTestPage.checkbox2);
+        assertIsChecked(botTestPage.checkbox2);
+        uncheck(botTestPage.checkbox1);
+        assertIsUnchecked(botTestPage.checkbox1);
+    }
+
+    /* Open */
+    @Test
+    public void openTest() {
+        open(botTestPage);
+        assertIsOpen(botTestPage);
+    }
+
+    /* Wait For */
+    @Test
+    public void waitForTest() {
+        waitForElementToDisplay(botTestPage.firstAppendedSpan);
+        assertIsDisplayed(botTestPage.firstAppendedSpan);
+        assertIsNotDisplayed(botTestPage.secondAppendedSpan, 0);
+        waitFor(0.8);
+        waitFor(0.2 / 24 / 60 / 60, TimeUnit.DAYS);
+        waitFor(0.2 / 60 / 60, TimeUnit.HOURS);
+        waitFor(0.2 / 60, TimeUnit.MINUTES);
+        waitFor(0.2, TimeUnit.SECONDS);
+        waitFor(0.2 * 1000, TimeUnit.MILLISECONDS);
+        waitFor(0.2 * 1000 * 1000, TimeUnit.MICROSECONDS);
+        assertIsDisplayed(botTestPage.firstAppendedSpan);
+        assertIsDisplayed(botTestPage.secondAppendedSpan);
+    }
+
+    /* Debug */
+    @Test
+    public void debugTest() {
+        debug("Text to debug");
+        debug(botTestPage.attributesSpan);
+        debug(botTestPage.selectAllOption);
+    }
+
+    /* Is Open */
+    @Test
+    public void isOpenTest() {
+        assertIsOpen(botTestPage);
+        assertIsNotOpen(site);
+    }
+
+    /* Is Display */
+    @Test
+    public void isDisplayedTest() {
+        assertIsDisplayed(botTestPage.textSpan);
+        assertIsDisplayed(botTestPage.firstAppendedSpan, 2);
+        assertIsNotDisplayed(botTestPage.secondAppendedSpan);
+        assertIsDisplayed(botTestPage.secondAppendedSpan, 2);
+    }
+
+    /* Size */
+    @Test
+    public void sizeTest() {
+        assertSizeEquals(3, botTestPage.selectAllOption);
+        assertSizeNotEquals(0, botTestPage.selectAllOption);
+        assertSizeLessThan(4, botTestPage.selectAllOption);
+        assertSizeLessThanOrEquals(3, botTestPage.selectAllOption);
+        assertSizeGreaterThan(2, botTestPage.selectAllOption);
+        assertSizeGreaterThanOrEquals(3, botTestPage.selectAllOption);
+    }
 
     /* Url */
     @Test
@@ -277,33 +337,72 @@ public class BotTest extends SiteAwareRepository {
         assertTextGreaterThanOrEquals(42.0, botTestPage.intNumberSpan);
     }
 
-//    /* Selected/Deselected */
-//    @Test
-//    public void selectedDeselectedTest() {
-//    }
-//
-//    /* Checked/Unchecked */
-//    @Test
-//    public void checkedUncheckedTest() {
-//    }
-//
-//    /* Enabled/Disabled */
-//    @Test
-//    public void enabledDisabledTest() {
-//    }
-//
-//    /* Option */
-//    @Test
-//    public void optionTest() {
-//    }
-//
-//    /* Option Value */
-//    @Test
-//    public void optionValueTest() {
-//    }
-//
-//    /* Option Index */
-//    @Test
-//    public void optionIndexTest() {
-//    }
+    /* Selected/Deselected */
+    @Test
+    public void selectedDeselectedTest() {
+        assertIsSelected(botTestPage.selectOption1);
+        assertIsDeselected(botTestPage.selectOption2);
+    }
+
+    /* Checked/Unchecked */
+    @Test
+    public void checkedUncheckedTest() {
+        // checkboxes
+        assertIsChecked(botTestPage.checkbox1);
+        assertIsUnchecked(botTestPage.checkbox2);
+
+        // radiobuttons
+        assertIsChecked(botTestPage.radiobutton1);
+        assertIsUnchecked(botTestPage.radiobutton2);
+    }
+
+    /* Enabled/Disabled */
+    @Test
+    public void enabledDisabledTest() {
+        assertIsEnabled(botTestPage.selectOption1);
+        assertIsEnabled(botTestPage.selectOption2);
+        assertIsDisabled(botTestPage.selectOption3);
+    }
+
+    /* Option */
+    @Test
+    public void optionTest() {
+        // Selected/Deselected
+        assertOptionIsSelected("Option 1", botTestPage.select);
+        assertOptionIsDeselected("Option 2", botTestPage.select);
+        assertOptionIsDeselected("Option 3", botTestPage.select);
+
+        // Enabled/Disabled
+        assertOptionIsEnabled("Option 1", botTestPage.select);
+        assertOptionIsEnabled("Option 2", botTestPage.select);
+        assertOptionIsDisabled("Option 3", botTestPage.select);
+    }
+
+    /* Option Value */
+    @Test
+    public void optionValueTest() {
+        // Selected/Deselected
+        assertOptionWithValueIsSelected("option1value", botTestPage.select);
+        assertOptionWithValueIsDeselected("option2value", botTestPage.select);
+        assertOptionWithValueIsDeselected("option3value", botTestPage.select);
+
+        // Enabled/Disabled
+        assertOptionWithValueIsEnabled("option1value", botTestPage.select);
+        assertOptionWithValueIsEnabled("option2value", botTestPage.select);
+        assertOptionWithValueIsDisabled("option3value", botTestPage.select);
+    }
+
+    /* Option Index */
+    @Test
+    public void optionIndexTest() {
+        // Selected/Deselected
+        assertOptionWithIndexIsSelected(0, botTestPage.select);
+        assertOptionWithIndexIsDeselected(1, botTestPage.select);
+        assertOptionWithIndexIsDeselected(2, botTestPage.select);
+
+        // Enabled/Disabled
+        assertOptionWithIndexIsEnabled(0, botTestPage.select);
+        assertOptionWithIndexIsEnabled(1, botTestPage.select);
+        assertOptionWithIndexIsDisabled(2, botTestPage.select);
+    }
 }

@@ -1,5 +1,7 @@
 package org.andidev.webdriverextension.page;
 
+import java.util.List;
+import static org.andidev.webdriverextension.Bot.assertIsDisplayed;
 import static org.andidev.webdriverextension.ThreadDriver.*;
 import org.andidev.webdriverextension.WebPage;
 import org.andidev.webdriverextension.generator.annotations.Generate;
@@ -32,31 +34,44 @@ public class BotTestPage extends WebPage<WebDriverExtensionSite> {
     @FindBy(css = "#select")
     public WebElement select;
     @FindBy(css = "#select option:nth-child(1)")
-    public WebElement option1;
+    public WebElement selectOption1;
     @FindBy(css = "#select option:nth-child(2)")
-    public WebElement option2;
+    public WebElement selectOption2;
     @FindBy(css = "#select option:nth-child(3)")
-    public WebElement option3;
+    public WebElement selectOption3;
+    @FindBy(css = "#select option")
+    public List<WebElement> selectAllOption;
+
+    @FindBy(css = "#multiple-select")
+    public WebElement multipleSelect;
+    @FindBy(css = "#multiple-select option:nth-child(1)")
+    public WebElement multipleSelectOption1;
+    @FindBy(css = "#multiple-select option:nth-child(2)")
+    public WebElement multipleSelectOption2;
+    @FindBy(css = "#multiple-select option:nth-child(3)")
+    public WebElement multipleSelectOption3;
 
     // Checkboxes
     @FindBy(css = "#checkbox1")
     public WebElement checkbox1;
     @FindBy(css = "#checkbox2")
     public WebElement checkbox2;
-    @FindBy(css = "#checkbox3")
-    public WebElement checkbox3;
 
     // Radiobuttons
     @FindBy(css = "#radiobutton1")
     public WebElement radiobutton1;
     @FindBy(css = "#radiobutton2")
     public WebElement radiobutton2;
-    @FindBy(css = "#radiobutton3")
-    public WebElement radiobutton3;
 
     // Attributes
     @FindBy(css = "#prefixidsuffix")
     public WebElement attributesSpan;
+
+    // Appended Span
+    @FindBy(css = "#firstappended-span")
+    public WebElement firstAppendedSpan;
+    @FindBy(css = "#secondappended-span")
+    public WebElement secondAppendedSpan;
 
     @Override
     public void open() {
@@ -65,5 +80,20 @@ public class BotTestPage extends WebPage<WebDriverExtensionSite> {
 
     @Override
     public void assertIsOpen() throws Error {
+        assertIsDisplayed(textSpan);
+        assertIsDisplayed(textInput);
+        assertIsDisplayed(intNumberSpan);
+        assertIsDisplayed(intNumberInput);
+        assertIsDisplayed(floatNumberSpan);
+        assertIsDisplayed(floatNumberInput);
+        assertIsDisplayed(select);
+        assertIsDisplayed(selectOption1);
+        assertIsDisplayed(selectOption2);
+        assertIsDisplayed(selectOption3);
+        assertIsDisplayed(checkbox1);
+        assertIsDisplayed(checkbox2);
+        assertIsDisplayed(radiobutton1);
+        assertIsDisplayed(radiobutton2);
+        assertIsDisplayed(attributesSpan);
     }
 }
