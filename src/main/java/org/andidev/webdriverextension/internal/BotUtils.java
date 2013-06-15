@@ -17,6 +17,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -267,10 +268,14 @@ import org.openqa.selenium.support.ui.WebDriverWait;
     }
 
     public static boolean isDisplayed(WebElement webElement, long secondsToWait, WebDriver driver) {
-        WebElement foundWebElement = new WebDriverWait(driver, secondsToWait).until(ExpectedConditions.visibilityOf(webElement));
-        if (foundWebElement != null) {
-            return true;
-        } else {
+        try {
+            WebElement foundWebElement = new WebDriverWait(driver, secondsToWait).until(ExpectedConditions.visibilityOf(webElement));
+            if (foundWebElement != null) {
+                return true;
+            } else {
+                return false;
+            }
+        } catch (RuntimeException e) {
             return false;
         }
     }
