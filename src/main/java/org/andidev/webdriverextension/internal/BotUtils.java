@@ -1655,24 +1655,28 @@ import org.openqa.selenium.support.ui.WebDriverWait;
     }
 
     public static void assertOptionIsEnabled(String text, WebElement webElement) {
+        assertHasOption(text, webElement);
         if (optionIsDisabled(text, webElement)) {
             Assert.fail("Option \"" + text.trim() + "\" is not enabled!");
         }
     }
 
     public static void assertOptionIsDisabled(String text, WebElement webElement) {
+        assertHasOption(text, webElement);
         if (optionIsEnabled(text, webElement)) {
             Assert.fail("Option \"" + text.trim() + "\" is not disabled!");
         }
     }
 
     public static void assertOptionIsSelected(String text, WebElement webElement) {
+        assertHasOption(text, webElement);
         if (optionIsDeselected(text, webElement)) {
             Assert.fail("Option \"" + text.trim() + "\" is not selected!");
         }
     }
 
     public static void assertOptionIsDeselected(String text, WebElement webElement) {
+        assertHasOption(text, webElement);
         if (optionIsSelected(text, webElement)) {
             Assert.fail("Option \"" + text.trim() + "\" is not deselected!");
         }
@@ -1760,24 +1764,28 @@ import org.openqa.selenium.support.ui.WebDriverWait;
     }
 
     public static void assertOptionWithValueIsEnabled(String value, WebElement webElement) {
+        assertHasOptionWithValue(value, webElement);
         if (optionWithValueIsDisabled(value, webElement)) {
             Assert.fail("Option with value \"" + value.trim() + "\" is not enabled!");
         }
     }
 
     public static void assertOptionWithValueIsDisabled(String value, WebElement webElement) {
+        assertHasOptionWithValue(value, webElement);
         if (optionWithValueIsEnabled(value, webElement)) {
             Assert.fail("Option with value \"" + value.trim() + "\" is not disabled!");
         }
     }
 
     public static void assertOptionWithValueIsSelected(String value, WebElement webElement) {
+        assertHasOptionWithValue(value, webElement);
         if (optionWithValueIsDeselected(value, webElement)) {
             Assert.fail("Option with value \"" + value.trim() + "\" is not selected!");
         }
     }
 
     public static void assertOptionWithValueIsDeselected(String value, WebElement webElement) {
+        assertHasOptionWithValue(value, webElement);
         if (optionWithValueIsSelected(value, webElement)) {
             Assert.fail("Option with value \"" + value.trim() + "\" is not deselected!");
         }
@@ -1796,7 +1804,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
     }
 
     public static boolean hasNotOptionWithIndex(int index, WebElement webElement) {
-        return !hasNotOptionWithIndex(index, webElement);
+        return !hasOptionWithIndex(index, webElement);
     }
 
     public static boolean optionWithIndexIsEnabled(int index, WebElement webElement) {
@@ -1848,24 +1856,28 @@ import org.openqa.selenium.support.ui.WebDriverWait;
     }
 
     public static void assertOptionWithIndexIsEnabled(int index, WebElement webElement) {
+        assertHasOptionWithIndex(index, webElement);
         if (optionWithIndexIsDisabled(index, webElement)) {
             Assert.fail("Option with index \"" + index + "\" is not enabled!");
         }
     }
 
     public static void assertOptionWithIndexIsDisabled(int index, WebElement webElement) {
+        assertHasOptionWithIndex(index, webElement);
         if (optionWithIndexIsEnabled(index, webElement)) {
             Assert.fail("Option with index \"" + index + "\" is not disabled!");
         }
     }
 
     public static void assertOptionWithIndexIsSelected(int index, WebElement webElement) {
+        assertHasOptionWithIndex(index, webElement);
         if (optionWithIndexIsDeselected(index, webElement)) {
             Assert.fail("Option with index \"" + index + "\" is not selected!");
         }
     }
 
     public static void assertOptionWithIndexIsDeselected(int index, WebElement webElement) {
+        assertHasOptionWithIndex(index, webElement);
         if (optionWithIndexIsSelected(index, webElement)) {
             Assert.fail("Option with index \"" + index + "\" is not deselected!");
         }
