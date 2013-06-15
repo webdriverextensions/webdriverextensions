@@ -222,7 +222,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
     }
 
     public static void debug(WebElement webElement) {
-        log.debug("Tag {} has text = \"{}\"", describeTag(webElement), textIn(webElement));
+        log.debug("{} has text = \"{}\"", describeTag(webElement), textIn(webElement));
     }
 
     public static void debug(List<? extends WebElement> webElements) {
