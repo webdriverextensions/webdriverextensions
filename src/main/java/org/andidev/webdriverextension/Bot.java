@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 import org.andidev.webdriverextension.internal.BotUtils;
 import org.andidev.webdriverextension.internal.Openable;
-import org.apache.commons.lang3.StringUtils;
 import org.hamcrest.Matcher;
 import org.hamcrest.MatcherAssert;
 import org.openqa.selenium.WebElement;
@@ -1205,8 +1204,6 @@ public class Bot {
      * @return  true if the webElement has any text in it, otherwise false
      */
     public static boolean hasText(WebElement webElement) {
-//        StringUtils.tri
-        textI
         return BotUtils.hasText(webElement);
     }
 
