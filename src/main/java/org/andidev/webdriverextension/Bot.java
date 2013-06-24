@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 import org.andidev.webdriverextension.internal.BotUtils;
 import org.andidev.webdriverextension.internal.Openable;
+import org.apache.commons.lang3.StringUtils;
 import org.hamcrest.Matcher;
 import org.hamcrest.MatcherAssert;
 import org.openqa.selenium.WebElement;
@@ -1161,9 +1162,33 @@ public class Bot {
 
     /* Text */
     /**
-     * Reads the text in a {@link org.openqa.selenium.WebElement}
+     * Reads the visible text in a {@link org.openqa.selenium.WebElement}.
      *
-     * @param   webElement the {@link org.openqa.selenium.WebElement} to read the text from
+     * <p>All spaces and other control characters are removed from the beginning
+     * and the end of the {@link org.openqa.selenium.WebElement}'s text.
+     * If the {@link org.openqa.selenium.WebElement}
+     * does not exist in page {@code null} will be returned. The text is read using
+     * {@link org.openqa.selenium.WebElement#getText()}.</p>
+     *
+     * <p>
+     * <b>Examples:</b>
+     * <pre>
+     * {@code
+     * <span>Some text</span>
+     * textIn(span) = "Some text"
+     *
+     * <span>
+     *     Some text containing <b>html</b>
+     * </span>
+     * textIn(span) = "Some text containing html"
+     *
+     * <span style="display: none">Some invisible text</span>
+     * textIn(span) = ""
+     *
+     * no span in html
+     * textIn(span) = null}</pre>
+     * </p>
+     * @param   webElement the {@link org.openqa.selenium.WebElement} that contains the text to read
      * @return  the read text
      *
      * @see  org.openqa.selenium.WebElement#getText()
@@ -1173,98 +1198,231 @@ public class Bot {
         return BotUtils.textIn(webElement);
     }
 
+    /**
+     * Checks if there is any visible text in a {@link org.openqa.selenium.WebElement}.
+     *
+     * @param   webElement
+     * @return  true if the webElement has any text in it, otherwise false
+     */
     public static boolean hasText(WebElement webElement) {
+//        StringUtils.tri
+        textI
         return BotUtils.hasText(webElement);
     }
 
+    /**
+     * Checks if there is no visible text in a {@link org.openqa.selenium.WebElement}.
+     *
+     * @param   webElement
+     * @return  true if the webElement has any text in it, otherwise false
+     */
     public static boolean hasNotText(WebElement webElement) {
         return BotUtils.hasNotText(webElement);
     }
 
+    /**
+     *  Checks if the text in a {@link org.openqa.selenium.WebElement} equals a text.
+     *
+     * @param text
+     * @param webElement
+     * @return
+     */
     public static boolean textEquals(String text, WebElement webElement) {
         return BotUtils.textEquals(text, webElement);
     }
 
+    /**
+     *
+     * @param text
+     * @param webElement
+     * @return
+     */
     public static boolean textNotEquals(String text, WebElement webElement) {
         return BotUtils.textNotEquals(text, webElement);
     }
 
+    /**
+     *
+     * @param searchText
+     * @param webElement
+     * @return
+     */
     public static boolean textContains(String searchText, WebElement webElement) {
         return BotUtils.textContains(searchText, webElement);
     }
 
+    /**
+     *
+     * @param searchText
+     * @param webElement
+     * @return
+     */
     public static boolean textNotContains(String searchText, WebElement webElement) {
         return BotUtils.textNotContains(searchText, webElement);
     }
 
+    /**
+     *
+     * @param prefix
+     * @param webElement
+     * @return
+     */
     public static boolean textStartsWith(String prefix, WebElement webElement) {
         return BotUtils.textStartsWith(prefix, webElement);
     }
 
+    /**
+     *
+     * @param prefix
+     * @param webElement
+     * @return
+     */
     public static boolean textNotStartsWith(String prefix, WebElement webElement) {
         return BotUtils.textNotStartsWith(prefix, webElement);
     }
 
+    /**
+     *
+     * @param suffix
+     * @param webElement
+     * @return
+     */
     public static boolean textEndsWith(String suffix, WebElement webElement) {
         return BotUtils.textEndsWith(suffix, webElement);
     }
 
+    /**
+     *
+     * @param suffix
+     * @param webElement
+     * @return
+     */
     public static boolean textNotEndsWith(String suffix, WebElement webElement) {
         return BotUtils.textNotEndsWith(suffix, webElement);
     }
 
+    /**
+     *
+     * @param regExp
+     * @param webElement
+     * @return
+     */
     public static boolean textMatches(String regExp, WebElement webElement) {
         return BotUtils.textMatches(regExp, webElement);
     }
 
+    /**
+     *
+     * @param regExp
+     * @param webElement
+     * @return
+     */
     public static boolean textNotMatches(String regExp, WebElement webElement) {
         return BotUtils.textNotMatches(regExp, webElement);
     }
 
+    /**
+     *
+     * @param webElement
+     */
     public static void assertHasText(WebElement webElement) {
         BotUtils.assertHasText(webElement);
     }
 
+    /**
+     *
+     * @param webElement
+     */
     public static void assertHasNotText(WebElement webElement) {
         BotUtils.assertHasNotText(webElement);
     }
 
+    /**
+     *
+     * @param text
+     * @param webElement
+     */
     public static void assertTextEquals(String text, WebElement webElement) {
         BotUtils.assertTextEquals(text, webElement);
     }
 
+    /**
+     *
+     * @param text
+     * @param webElement
+     */
     public static void assertTextNotEquals(String text, WebElement webElement) {
         BotUtils.assertTextNotEquals(text, webElement);
     }
 
+    /**
+     *
+     * @param searchText
+     * @param webElement
+     */
     public static void assertTextContains(String searchText, WebElement webElement) {
         BotUtils.assertTextContains(searchText, webElement);
     }
 
+    /**
+     *
+     * @param searchText
+     * @param webElement
+     */
     public static void assertTextNotContains(String searchText, WebElement webElement) {
         BotUtils.assertTextNotContains(searchText, webElement);
     }
 
+    /**
+     *
+     * @param prefix
+     * @param webElement
+     */
     public static void assertTextStartsWith(String prefix, WebElement webElement) {
         BotUtils.assertTextStartsWith(prefix, webElement);
     }
 
+    /**
+     *
+     * @param prefix
+     * @param webElement
+     */
     public static void assertTextNotStartsWith(String prefix, WebElement webElement) {
         BotUtils.assertTextNotStartsWith(prefix, webElement);
     }
 
+    /**
+     *
+     * @param suffix
+     * @param webElement
+     */
     public static void assertTextEndsWith(String suffix, WebElement webElement) {
         BotUtils.assertTextEndsWith(suffix, webElement);
     }
 
+    /**
+     *
+     * @param suffix
+     * @param webElement
+     */
     public static void assertTextNotEndsWith(String suffix, WebElement webElement) {
         BotUtils.assertTextNotEndsWith(suffix, webElement);
     }
 
+    /**
+     *
+     * @param regExp
+     * @param webElement
+     */
     public static void assertTextMatches(String regExp, WebElement webElement) {
         BotUtils.assertTextMatches(regExp, webElement);
     }
 
+    /**
+     *
+     * @param regExp
+     * @param webElement
+     */
     public static void assertTextNotMatches(String regExp, WebElement webElement) {
         BotUtils.assertTextNotMatches(regExp, webElement);
     }
