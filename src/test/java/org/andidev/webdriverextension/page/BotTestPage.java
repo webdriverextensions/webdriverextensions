@@ -12,6 +12,13 @@ import org.openqa.selenium.support.FindBy;
 @Generate
 public class BotTestPage extends WebPage<WebDriverExtensionSite> {
 
+    @FindBy(css = "#test0")
+    public WebElement test0;
+    @FindBy(css = "#test1")
+    public WebElement test1;
+    @FindBy(css = "#test2")
+    public WebElement test2;
+
     // Texts
     @FindBy(css = "#text-span")
     public WebElement textSpan;

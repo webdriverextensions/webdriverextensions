@@ -20,7 +20,7 @@ public class BotTest extends SiteAwareRepository {
 
     @Before
     public void before() {
-        getDriver().get("http://andidev.github.com/webdriver-extension/bot-test.html");
+        getDriver().get("file://localhost/Users/anders/Temp/new.html");
     }
 
     @After
@@ -116,9 +116,10 @@ public class BotTest extends SiteAwareRepository {
     /* Debug */
     @Test
     public void debugTest() {
-        debug("Text to debug");
-        debug(botTestPage.attributesSpan);
-        debug(botTestPage.selectAllOption);
+        debug(botTestPage.test0);
+        debug(botTestPage.test1);
+        debug(botTestPage.test2);
+        debug(valueIn(botTestPage.test2));
     }
 //
 //    /* Is Open */

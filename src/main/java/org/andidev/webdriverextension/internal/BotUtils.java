@@ -186,7 +186,7 @@ import org.openqa.selenium.WebElement;
             return "WebElement";
         }
         boolean printExtraAttribute = extraAttribute != null && !ArrayUtils.contains(new String[]{"id", "name", "name", "class", "value", "disabled", "selected", "checked"}, extraAttribute);
-        return "Tag <" + Bot.tagNameOf(webElement)
+        return "Tag <" + Bot.tagNameOf(webElement) + " "
                 + describeId(webElement)
                 + describeName(webElement)
                 + describeClass(webElement)

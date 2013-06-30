@@ -670,6 +670,28 @@ public class Bot {
 
 
     /* Id */
+    /**
+     * Returns the {@link org.openqa.selenium.WebElement} id attribute.
+     *
+     * <p>If the {@link org.openqa.selenium.WebElement} does not exist in the
+     * html a {@code org.openqa.selenium.NoSuchElementException} will be
+     * thrown.</p>
+     *
+     * <p>
+     * <b>Examples:</b>
+     * <pre>
+     * {@code
+     * <input id="some-id"/>
+     * idIn(input) = "some-id"
+     *
+     * no input in html
+     * idIn(input) throws org.openqa.selenium.NoSuchElementException}</pre>
+     * </p>
+     *
+     * @param webElement the {@link org.openqa.selenium.WebElement} containing
+     * an id attribute
+     * @return the id attribute
+     */
     public static String idIn(WebElement webElement) {
         return attributeIn("id", webElement);
     }
@@ -773,6 +795,28 @@ public class Bot {
 
 
     /* Name */
+    /**
+     * Returns the {@link org.openqa.selenium.WebElement} name attribute.
+     *
+     * <p>If the {@link org.openqa.selenium.WebElement} does not exist in the
+     * html a {@code org.openqa.selenium.NoSuchElementException} will be
+     * thrown.</p>
+     *
+     * <p>
+     * <b>Examples:</b>
+     * <pre>
+     * {@code
+     * <input name="some-name"/>
+     * nameIn(input) = "some-name"
+     *
+     * no input in html
+     * nameIn(input) throws org.openqa.selenium.NoSuchElementException}</pre>
+     * </p>
+     *
+     * @param webElement the {@link org.openqa.selenium.WebElement} containing
+     * a name attribute
+     * @return the name attribute
+     */
     public static String nameIn(WebElement webElement) {
         return attributeIn("name", webElement);
     }
@@ -876,10 +920,55 @@ public class Bot {
 
 
     /* Class */
+    /**
+     * Returns the {@link org.openqa.selenium.WebElement} class attribute.
+     *
+     * <p>If the {@link org.openqa.selenium.WebElement} does not exist in the
+     * html a {@code org.openqa.selenium.NoSuchElementException} will be
+     * thrown.</p>
+     *
+     * <p>
+     * <b>Examples:</b>
+     * <pre>
+     * {@code
+     * <input class="a-class another-class"/>
+     * classIn(input) = "a-class another-class"
+     *
+     * no input in html
+     * classIn(input) throws org.openqa.selenium.NoSuchElementException}</pre>
+     * </p>
+     *
+     * @param webElement the {@link org.openqa.selenium.WebElement} containing
+     * a class attribute
+     * @return the class attribute
+     */
     public static String classIn(WebElement webElement) {
         return attributeIn("class", webElement);
     }
 
+    /**
+     * Returns the classes in the {@link org.openqa.selenium.WebElement} class
+     * attribute.
+     *
+     * <p>If the {@link org.openqa.selenium.WebElement} does not exist in the
+     * html a {@code org.openqa.selenium.NoSuchElementException} will be
+     * thrown.</p>
+     *
+     * <p>
+     * <b>Examples:</b>
+     * <pre>
+     * {@code
+     * <input class=" a-class   another-class "/>
+     * classesIn(input) = "a-class", "another-class"
+     *
+     * no input in html
+     * classIn(input) throws org.openqa.selenium.NoSuchElementException}</pre>
+     * </p>
+     *
+     * @param webElement the {@link org.openqa.selenium.WebElement} containing
+     * a class attribute
+     * @return the classes in the class attribute
+     */
     public static List<String> classesIn(WebElement webElement) {
         return Arrays.asList(StringUtils.split(classIn(webElement)));
     }
@@ -1033,6 +1122,28 @@ public class Bot {
 
 
     /* Value */
+    /**
+     * Returns the {@link org.openqa.selenium.WebElement} value attribute.
+     *
+     * <p>If the {@link org.openqa.selenium.WebElement} does not exist in the
+     * html a {@code org.openqa.selenium.NoSuchElementException} will be
+     * thrown.</p>
+     *
+     * <p>
+     * <b>Examples:</b>
+     * <pre>
+     * {@code
+     * <input value="Some value"/>
+     * valueIn(input) = "Some value"
+     *
+     * no input in html
+     * valueIn(input) throws org.openqa.selenium.NoSuchElementException}</pre>
+     * </p>
+     *
+     * @param webElement the {@link org.openqa.selenium.WebElement} containing
+     * a value attribute
+     * @return the value attribute
+     */
     public static String valueIn(WebElement webElement) {
         return attributeIn("value", webElement);
     }
@@ -1140,34 +1251,32 @@ public class Bot {
      * Returns the {@link org.openqa.selenium.WebElement} value attribute as a
      * number.
      *
-     * <p>If the {@link org.openqa.selenium.WebElement} does not exist on the
-     * page a {@code org.openqa.selenium.NoSuchElementException} will be thrown.
-     * {@link org.openqa.selenium.WebElement#getText()} is used to get the text.</p>
+     * <p>If the value attribute in the {@link org.openqa.selenium.WebElement}
+     * does not contain a valid number a {@code java.util.NumberFormatException}
+     * will be thrown. If the {@link org.openqa.selenium.WebElement} does not
+     * exist in the html a {@code org.openqa.selenium.NoSuchElementException}
+     * will be thrown.</p>
      *
      * <p>
      * <b>Examples:</b>
      * <pre>
      * {@code
-     * <span>42</span>
-     * textInAsNumber(span) = 42.0
+     * <input value="42"/>
+     * valueInAsNumber(input) = 42.0
      *
-     * <span>
-     *     42
-     * </span>
-     * textInAsNumber(span) = 42.0
+     * <input value="Some value"/>
+     * valueInAsNumber(input) throws java.util.NumberFormatException
      *
-     * <span style="display: none">42</span>
-     * textInAsNumber(span) throws java.util.NumberFormatException
+     * <input value=""/>
+     * valueInAsNumber(input) throws java.util.NumberFormatException
      *
-     * no span in html
-     * textInAsNumber(span) throws org.openqa.selenium.NoSuchElementException}</pre>
+     * no input in html
+     * valueInAsNumber(input) throws org.openqa.selenium.NoSuchElementException}</pre>
      * </p>
      *
      * @param webElement the {@link org.openqa.selenium.WebElement} containing
-     * the number
-     * @return the visible number
-     *
-     * @see org.openqa.selenium.WebElement#getText()
+     * a value attribute with a number
+     * @return the value attribute as a number
      */
     public static double valueInAsNumber(WebElement webElement) {
         return NumberUtils.createDouble(valueIn(webElement));
@@ -1249,6 +1358,28 @@ public class Bot {
 
 
     /* Href */
+    /**
+     * Returns the {@link org.openqa.selenium.WebElement} href attribute.
+     *
+     * <p>If the {@link org.openqa.selenium.WebElement} does not exist in the
+     * html a {@code org.openqa.selenium.NoSuchElementException} will be
+     * thrown.</p>
+     *
+     * <p>
+     * <b>Examples:</b>
+     * <pre>
+     * {@code
+     * <input href="www.href.com"/>
+     * hrefIn(input) = "www.href.com"
+     *
+     * no input in html
+     * hrefIn(input) throws org.openqa.selenium.NoSuchElementException}</pre>
+     * </p>
+     *
+     * @param webElement the {@link org.openqa.selenium.WebElement} containing
+     * a href attribute
+     * @return the href attribute
+     */
     public static String hrefIn(WebElement webElement) {
         return attributeIn("href", webElement);
     }
@@ -1353,13 +1484,10 @@ public class Bot {
 
     /* Text */
     /**
-     * Returns the text in a {@link org.openqa.selenium.WebElement} as it is
-     * displayed in the browser.
+     * Returns the visible text in a {@link org.openqa.selenium.WebElement}.
      *
-     * <p>If the {@link org.openqa.selenium.WebElement} does not exist on the
-     * page a {@code org.openqa.selenium.NoSuchElementException} will be thrown.
-     * This is a simple wrapper method calling
-     * {@link org.openqa.selenium.WebElement#getText()} to return the text.</p>
+     * <p>If the {@link org.openqa.selenium.WebElement} does not exist in the
+     * html a {@code org.openqa.selenium.NoSuchElementException} will be thrown.</p>
      *
      * <p>
      * <b>Examples:</b>
@@ -1383,8 +1511,6 @@ public class Bot {
      * @param webElement the {@link org.openqa.selenium.WebElement} containing
      * the text
      * @return the visible text
-     *
-     * @see org.openqa.selenium.WebElement#getText()
      */
     public static String textIn(WebElement webElement) {
         return webElement.getText();
@@ -1494,13 +1620,14 @@ public class Bot {
 
     /* Text as Number */
     /**
-     * Returns the text in a {@link org.openqa.selenium.WebElement} as a number
-     * if it is displayed in the browser.
+     * Returns the visible text in a {@link org.openqa.selenium.WebElement} as a
+     * number.
      *
-     * <p>If the {@link org.openqa.selenium.WebElement} does not exist on the
-     * page a {@code org.openqa.selenium.NoSuchElementException} will be thrown.
-     * {@link org.openqa.selenium.WebElement#getText()} is used to get the
-     * text.</p>
+     * <p>If the text in the {@link org.openqa.selenium.WebElement} does not
+     * contain a valid number a {@code java.util.NumberFormatException} will be
+     * thrown. If the {@link org.openqa.selenium.WebElement} does not exist in
+     * the html a {@code org.openqa.selenium.NoSuchElementException} will be
+     * thrown.</p>
      *
      * <p>
      * <b>Examples:</b>
@@ -1514,6 +1641,9 @@ public class Bot {
      * </span>
      * textInAsNumber(span) = 42.0
      *
+     * <span>Some text</span>
+     * textInAsNumber(span) throws java.util.NumberFormatException
+     *
      * <span style="display: none">42</span>
      * textInAsNumber(span) throws java.util.NumberFormatException
      *
@@ -1522,10 +1652,8 @@ public class Bot {
      * </p>
      *
      * @param webElement the {@link org.openqa.selenium.WebElement} containing
-     * the number
-     * @return the visible number
-     *
-     * @see org.openqa.selenium.WebElement#getText()
+     * a text with a number
+     * @return the visible text as a number
      */
      public static double textInAsNumber(WebElement webElement) {
         return NumberUtils.createDouble(webElement.getText());
