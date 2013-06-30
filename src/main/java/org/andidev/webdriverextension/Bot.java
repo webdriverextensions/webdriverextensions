@@ -44,10 +44,7 @@ public class Bot {
         webElement.sendKeys(text);
     }
 
-    public static void type(Double number, WebElement webElement) {
-        if (number == null) {
-            return;
-        }
+    public static void type(double number, WebElement webElement) {
         type(BotUtils.toString(number), webElement);
     }
 
@@ -63,7 +60,7 @@ public class Bot {
         type(text, webElement);
     }
 
-    public static void clearAndType(Double number, WebElement webElement) {
+    public static void clearAndType(double number, WebElement webElement) {
         clear(webElement);
         type(number, webElement);
     }
@@ -1138,44 +1135,78 @@ public class Bot {
 
 
 
-    /* Value Number */
-    public static Double valueInAsNumber(WebElement webElement) {
-        try {
-            return NumberUtils.createDouble(valueIn(webElement));
-        } catch (NumberFormatException e) {
-            return null;
-        }
+    /* Value as Number */
+    /**
+     * Returns the {@link org.openqa.selenium.WebElement} value attribute as a
+     * number.
+     *
+     * <p>If the {@link org.openqa.selenium.WebElement} does not exist on the
+     * page a {@code org.openqa.selenium.NoSuchElementException} will be thrown.
+     * {@link org.openqa.selenium.WebElement#getText()} is used to get the text.</p>
+     *
+     * <p>
+     * <b>Examples:</b>
+     * <pre>
+     * {@code
+     * <span>42</span>
+     * textInAsNumber(span) = 42.0
+     *
+     * <span>
+     *     42
+     * </span>
+     * textInAsNumber(span) = 42.0
+     *
+     * <span style="display: none">42</span>
+     * textInAsNumber(span) throws java.util.NumberFormatException
+     *
+     * no span in html
+     * textInAsNumber(span) throws org.openqa.selenium.NoSuchElementException}</pre>
+     * </p>
+     *
+     * @param webElement the {@link org.openqa.selenium.WebElement} containing
+     * the number
+     * @return the visible number
+     *
+     * @see org.openqa.selenium.WebElement#getText()
+     */
+    public static double valueInAsNumber(WebElement webElement) {
+        return NumberUtils.createDouble(valueIn(webElement));
     }
 
     public static boolean valueIsNumber(WebElement webElement) {
-        return valueInAsNumber(webElement) != null;
+        try {
+            valueInAsNumber(webElement);
+            return true;
+        } catch (NumberFormatException e) {
+            return false;
+        }
     }
 
     public static boolean valueIsNotNumber(WebElement webElement) {
-        return valueInAsNumber(webElement) == null;
+        return !valueIsNumber(webElement);
     }
 
-    public static boolean valueEquals(Double number, WebElement webElement) {
+    public static boolean valueEquals(double number, WebElement webElement) {
         return BotUtils.equals(number, valueInAsNumber(webElement));
     }
 
-    public static boolean valueNotEquals(Double number, WebElement webElement) {
+    public static boolean valueNotEquals(double number, WebElement webElement) {
         return BotUtils.notEquals(number, valueInAsNumber(webElement));
     }
 
-    public static boolean valueLessThan(Double number, WebElement webElement) {
+    public static boolean valueLessThan(double number, WebElement webElement) {
         return BotUtils.lessThan(number, valueInAsNumber(webElement));
     }
 
-    public static boolean valueLessThanOrEquals(Double number, WebElement webElement) {
+    public static boolean valueLessThanOrEquals(double number, WebElement webElement) {
         return BotUtils.lessThanOrEquals(number, valueInAsNumber(webElement));
     }
 
-    public static boolean valueGreaterThan(Double number, WebElement webElement) {
+    public static boolean valueGreaterThan(double number, WebElement webElement) {
         return BotUtils.greaterThan(number, valueInAsNumber(webElement));
     }
 
-    public static boolean valueGreaterThanOrEquals(Double number, WebElement webElement) {
+    public static boolean valueGreaterThanOrEquals(double number, WebElement webElement) {
         return BotUtils.greaterThanOrEquals(number, valueInAsNumber(webElement));
     }
 
@@ -1191,27 +1222,27 @@ public class Bot {
         }
     }
 
-    public static void assertValueEquals(Double number, WebElement webElement) {
+    public static void assertValueEquals(double number, WebElement webElement) {
         BotUtils.assertEquals("value", number, valueInAsNumber(webElement));
     }
 
-    public static void assertValueNotEquals(Double number, WebElement webElement) {
+    public static void assertValueNotEquals(double number, WebElement webElement) {
         BotUtils.assertNotEequals("value", number, valueInAsNumber(webElement));
     }
 
-    public static void assertValueLessThan(Double number, WebElement webElement) {
+    public static void assertValueLessThan(double number, WebElement webElement) {
         BotUtils.assertLessThan("value", number, valueInAsNumber(webElement));
     }
 
-    public static void assertValueLessThanOrEquals(Double number, WebElement webElement) {
+    public static void assertValueLessThanOrEquals(double number, WebElement webElement) {
         BotUtils.assertLessThanOrEquals("value", number, valueInAsNumber(webElement));
     }
 
-    public static void assertValueGreaterThan(Double number, WebElement webElement) {
+    public static void assertValueGreaterThan(double number, WebElement webElement) {
         BotUtils.assertGreaterThan("value", number, valueInAsNumber(webElement));
     }
 
-    public static void assertValueGreaterThanOrEquals(Double number, WebElement webElement) {
+    public static void assertValueGreaterThanOrEquals(double number, WebElement webElement) {
         BotUtils.assertGreaterThanOrEquals("value", number, valueInAsNumber(webElement));
     }
 
@@ -1325,9 +1356,9 @@ public class Bot {
      * Returns the text in a {@link org.openqa.selenium.WebElement} as it is
      * displayed in the browser.
      *
-     * <p>If the {@link org.openqa.selenium.WebElement} does not exist in page a
-     * {@code org.openqa.selenium.NoSuchElementException} will be thrown. This
-     * is a simple wrapper method calling
+     * <p>If the {@link org.openqa.selenium.WebElement} does not exist on the
+     * page a {@code org.openqa.selenium.NoSuchElementException} will be thrown.
+     * This is a simple wrapper method calling
      * {@link org.openqa.selenium.WebElement#getText()} to return the text.</p>
      *
      * <p>
@@ -1461,44 +1492,79 @@ public class Bot {
 
 
 
-    /* Text Number */
-    public static Double textInAsNumber(WebElement webElement) {
-        try {
-            return NumberUtils.createDouble(webElement.getText());
-        } catch (NumberFormatException e) {
-            return null;
-        }
+    /* Text as Number */
+    /**
+     * Returns the text in a {@link org.openqa.selenium.WebElement} as a number
+     * if it is displayed in the browser.
+     *
+     * <p>If the {@link org.openqa.selenium.WebElement} does not exist on the
+     * page a {@code org.openqa.selenium.NoSuchElementException} will be thrown.
+     * {@link org.openqa.selenium.WebElement#getText()} is used to get the
+     * text.</p>
+     *
+     * <p>
+     * <b>Examples:</b>
+     * <pre>
+     * {@code
+     * <span>42</span>
+     * textInAsNumber(span) = 42.0
+     *
+     * <span>
+     *     42
+     * </span>
+     * textInAsNumber(span) = 42.0
+     *
+     * <span style="display: none">42</span>
+     * textInAsNumber(span) throws java.util.NumberFormatException
+     *
+     * no span in html
+     * textInAsNumber(span) throws org.openqa.selenium.NoSuchElementException}</pre>
+     * </p>
+     *
+     * @param webElement the {@link org.openqa.selenium.WebElement} containing
+     * the number
+     * @return the visible number
+     *
+     * @see org.openqa.selenium.WebElement#getText()
+     */
+     public static double textInAsNumber(WebElement webElement) {
+        return NumberUtils.createDouble(webElement.getText());
     }
 
     public static boolean textIsNumber(WebElement webElement) {
-        return textInAsNumber(webElement) != null;
+        try {
+            textInAsNumber(webElement);
+            return true;
+        } catch (NumberFormatException e) {
+            return false;
+        }
     }
 
     public static boolean textIsNotNumber(WebElement webElement) {
-        return textInAsNumber(webElement) == null;
+        return !textIsNumber(webElement);
     }
 
-    public static boolean textEquals(Double number, WebElement webElement) {
+    public static boolean textEquals(double number, WebElement webElement) {
         return BotUtils.equals(number, textInAsNumber(webElement));
     }
 
-    public static boolean textNotEquals(Double number, WebElement webElement) {
+    public static boolean textNotEquals(double number, WebElement webElement) {
         return BotUtils.notEquals(number, textInAsNumber(webElement));
     }
 
-    public static boolean textLessThan(Double number, WebElement webElement) {
+    public static boolean textLessThan(double number, WebElement webElement) {
         return BotUtils.lessThan(number, textInAsNumber(webElement));
     }
 
-    public static boolean textLessThanOrEquals(Double number, WebElement webElement) {
+    public static boolean textLessThanOrEquals(double number, WebElement webElement) {
         return BotUtils.lessThanOrEquals(number, textInAsNumber(webElement));
     }
 
-    public static boolean textGreaterThan(Double number, WebElement webElement) {
+    public static boolean textGreaterThan(double number, WebElement webElement) {
         return BotUtils.greaterThan(number, textInAsNumber(webElement));
     }
 
-    public static boolean textGreaterThanOrEquals(Double number, WebElement webElement) {
+    public static boolean textGreaterThanOrEquals(double number, WebElement webElement) {
         return BotUtils.greaterThanOrEquals(number, textInAsNumber(webElement));
     }
 
@@ -1514,27 +1580,27 @@ public class Bot {
         }
     }
 
-    public static void assertTextEquals(Double number, WebElement webElement) {
+    public static void assertTextEquals(double number, WebElement webElement) {
         BotUtils.assertEquals("Text", number, textInAsNumber(webElement));
     }
 
-    public static void assertTextNotEquals(Double number, WebElement webElement) {
+    public static void assertTextNotEquals(double number, WebElement webElement) {
         BotUtils.assertNotEequals("Text", number, textInAsNumber(webElement));
     }
 
-    public static void assertTextLessThan(Double number, WebElement webElement) {
+    public static void assertTextLessThan(double number, WebElement webElement) {
         BotUtils.assertLessThan("Text", number, textInAsNumber(webElement));
     }
 
-    public static void assertTextLessThanOrEquals(Double number, WebElement webElement) {
+    public static void assertTextLessThanOrEquals(double number, WebElement webElement) {
         BotUtils.assertLessThanOrEquals("Text", number, textInAsNumber(webElement));
     }
 
-    public static void assertTextGreaterThan(Double number, WebElement webElement) {
+    public static void assertTextGreaterThan(double number, WebElement webElement) {
         BotUtils.assertGreaterThan("Text", number, textInAsNumber(webElement));
     }
 
-    public static void assertTextGreaterThanOrEquals(Double number, WebElement webElement) {
+    public static void assertTextGreaterThanOrEquals(double number, WebElement webElement) {
         BotUtils.assertGreaterThanOrEquals("Text", number, textInAsNumber(webElement));
     }
 

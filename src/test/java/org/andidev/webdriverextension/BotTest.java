@@ -266,7 +266,7 @@ public class BotTest extends SiteAwareRepository {
 //        assertValueIsNumber(botTestPage.floatNumberInput);
 //        assertValueIsNotNumber(botTestPage.textInput);
 //        assertValueEquals(42.0, botTestPage.floatNumberInput);
-//        assertValueNotEquals(42.0, botTestPage.floatNumberInput);
+//        assertValueNotEquals(43.0, botTestPage.floatNumberInput);
 //        assertValueLessThan(43.0, botTestPage.floatNumberInput);
 //        assertValueLessThanOrEquals(42.0, botTestPage.floatNumberInput);
 //        assertValueGreaterThan(41.0, botTestPage.floatNumberInput);
@@ -276,7 +276,7 @@ public class BotTest extends SiteAwareRepository {
 //        assertValueIsNumber(botTestPage.intNumberInput);
 //        assertValueIsNotNumber(botTestPage.textInput);
 //        assertValueEquals(42.0, botTestPage.intNumberInput);
-//        assertValueNotEquals(42.0, botTestPage.intNumberInput);
+//        assertValueNotEquals(43.0, botTestPage.intNumberInput);
 //        assertValueLessThan(43.0, botTestPage.intNumberInput);
 //        assertValueLessThanOrEquals(42.0, botTestPage.intNumberInput);
 //        assertValueGreaterThan(41.0, botTestPage.intNumberInput);
@@ -320,7 +320,7 @@ public class BotTest extends SiteAwareRepository {
 //        assertTextIsNumber(botTestPage.floatNumberSpan);
 //        assertTextIsNotNumber(botTestPage.textSpan);
 //        assertTextEquals(42.0, botTestPage.floatNumberSpan);
-//        assertTextNotEquals(42.0, botTestPage.floatNumberSpan);
+//        assertTextNotEquals(43.0, botTestPage.floatNumberSpan);
 //        assertTextLessThan(43.0, botTestPage.floatNumberSpan);
 //        assertTextLessThanOrEquals(42.0, botTestPage.floatNumberSpan);
 //        assertTextGreaterThan(41.0, botTestPage.floatNumberSpan);
@@ -330,7 +330,7 @@ public class BotTest extends SiteAwareRepository {
 //        assertTextIsNumber(botTestPage.intNumberSpan);
 //        assertTextIsNotNumber(botTestPage.textSpan);
 //        assertTextEquals(42.0, botTestPage.intNumberSpan);
-//        assertTextNotEquals(42.0, botTestPage.intNumberSpan);
+//        assertTextNotEquals(43.0, botTestPage.intNumberSpan);
 //        assertTextLessThan(43.0, botTestPage.intNumberSpan);
 //        assertTextLessThanOrEquals(42.0, botTestPage.intNumberSpan);
 //        assertTextGreaterThan(41.0, botTestPage.intNumberSpan);

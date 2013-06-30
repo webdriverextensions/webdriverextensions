@@ -114,7 +114,7 @@ import org.openqa.selenium.WebElement;
 
 
     /* Double Equals */
-    public static boolean equals(Double comparedTo, Double number) {
+    public static boolean equals(double comparedTo, double number) {
         return number == comparedTo;
     }
 
@@ -122,7 +122,7 @@ import org.openqa.selenium.WebElement;
         return number != comparedTo;
     }
 
-    public static boolean lessThan(Double comparedTo, Double number) {
+    public static boolean lessThan(double comparedTo, double number) {
         return number < comparedTo;
     }
 
