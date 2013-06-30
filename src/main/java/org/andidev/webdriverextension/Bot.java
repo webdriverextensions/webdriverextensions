@@ -1322,13 +1322,13 @@ public class Bot {
 
     /* Text */
     /**
-     * Reads the visible text in a {@link org.openqa.selenium.WebElement}.
+     * Returns the text in a {@link org.openqa.selenium.WebElement} as it is
+     * displayed in the browser.
      *
-     * <p>All spaces and other control characters are removed from the beginning
-     * and the end of the {@link org.openqa.selenium.WebElement}'s text.
-     * If the {@link org.openqa.selenium.WebElement}
-     * does not exist in page {@code null} will be returned. The text is read using
-     * {@link org.openqa.selenium.WebElement#getText()}.</p>
+     * <p>If the {@link org.openqa.selenium.WebElement} does not exist in page a
+     * {@code org.openqa.selenium.NoSuchElementException} will be thrown. This
+     * is a simple wrapper method calling
+     * {@link org.openqa.selenium.WebElement#getText()} to return the text.</p>
      *
      * <p>
      * <b>Examples:</b>
@@ -1346,13 +1346,14 @@ public class Bot {
      * textIn(span) = ""
      *
      * no span in html
-     * textIn(span) = null}</pre>
+     * textIn(span) throws org.openqa.selenium.NoSuchElementException}</pre>
      * </p>
-     * @param   webElement the {@link org.openqa.selenium.WebElement} that contains the text to read
-     * @return  the read text
      *
-     * @see  org.openqa.selenium.WebElement#getText()
+     * @param webElement the {@link org.openqa.selenium.WebElement} containing
+     * the text
+     * @return the visible text
      *
+     * @see org.openqa.selenium.WebElement#getText()
      */
     public static String textIn(WebElement webElement) {
         return webElement.getText();
