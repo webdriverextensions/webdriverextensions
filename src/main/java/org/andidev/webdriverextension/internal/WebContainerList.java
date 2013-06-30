@@ -1,6 +1,5 @@
 package org.andidev.webdriverextension.internal;
 
-import org.andidev.webdriverextension.internal.DefaultWebContainerFactory;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
