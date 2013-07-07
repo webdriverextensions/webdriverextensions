@@ -1,6 +1,5 @@
 package org.andidev.webdriverextension;
 
-import org.andidev.webdriverextension.internal.WebDriverExtensionFieldDecorator;
 import org.andidev.webdriverextension.internal.Openable;
 import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
@@ -9,20 +8,20 @@ import org.openqa.selenium.support.pagefactory.FieldDecorator;
 
 public abstract class WebSite implements Openable {
 
-    private WebDriver driver;
+    private WebDriver internalDriver;
 
     public void initElements() {
-        driver = ThreadDriver.getDriver();
-        PageFactory.initElements(new WebDriverExtensionFieldDecorator(ThreadDriver.getDriver(), ThreadDriver.getDriver()), this);
+        internalDriver = ThreadDriver.getDriver();
+        PageFactory.initElements(new WebDriverExtensionFieldDecorator(ThreadDriver.getDriver()), this);
     }
 
     public void initElements(WebDriver driver) {
-        this.driver = driver;
-        PageFactory.initElements(new WebDriverExtensionFieldDecorator(driver, driver), this);
+        this.internalDriver = driver;
+        PageFactory.initElements(new WebDriverExtensionFieldDecorator(driver), this);
     }
 
     public void initElements(WebDriver driver, FieldDecorator decorator) {
-        this.driver = driver;
+        this.internalDriver = driver;
         PageFactory.initElements(decorator, this);
     }
 
@@ -31,7 +30,7 @@ public abstract class WebSite implements Openable {
 
     @Override
     public void open() {
-        driver.get(getUrl());
+        internalDriver.get(getUrl());
     }
 
     @Override

@@ -1,15 +1,17 @@
-package org.andidev.webdriverextension.internal;
+package org.andidev.webdriverextension;
 
-import org.andidev.webdriverextension.internal.DefaultWebContainerFactory;
-import static org.andidev.webdriverextension.internal.WebDriverExtensionAnnotations.getDelagate;
+import org.andidev.webdriverextension.internal.WebDriverExtensionAnnotations;
 import java.lang.reflect.Field;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.util.List;
-import org.andidev.webdriverextension.WebContainer;
-import org.andidev.webdriverextension.WebPage;
-import org.andidev.webdriverextension.WebRepository;
-import org.andidev.webdriverextension.WebSite;
+import org.andidev.webdriverextension.internal.DefaultWebContainerFactory;
+import org.andidev.webdriverextension.internal.DefaultWebContainerListFactory;
+import org.andidev.webdriverextension.internal.ReflectionUtils;
+import org.andidev.webdriverextension.internal.SiteAndPageObjectPool;
+import org.andidev.webdriverextension.internal.WebContainerFactory;
+import org.andidev.webdriverextension.internal.WebContainerListFactory;
+import org.andidev.webdriverextension.internal.WebDriverExtensionElementLocatorFactory;
 import org.openqa.selenium.SearchContext;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -25,6 +27,14 @@ public class WebDriverExtensionFieldDecorator extends DefaultFieldDecorator {
     private SiteAndPageObjectPool pool;
     private WebContainerFactory webContainerFactory;
     private WebContainerListFactory webContainerListFactory;
+
+    public WebDriverExtensionFieldDecorator(final WebDriver driver) {
+        super(new WebDriverExtensionElementLocatorFactory(driver, driver));
+        this.driver = driver;
+        this.pool = new SiteAndPageObjectPool(driver);
+        this.webContainerFactory = new DefaultWebContainerFactory();
+        this.webContainerListFactory = new DefaultWebContainerListFactory(webContainerFactory);
+    }
 
     public WebDriverExtensionFieldDecorator(final SearchContext searchContext, final WebDriver driver) {
         super(new WebDriverExtensionElementLocatorFactory(searchContext, driver));
@@ -124,7 +134,7 @@ public class WebDriverExtensionFieldDecorator extends DefaultFieldDecorator {
         final WebElement webElement = proxyForLocator(loader, locator);
         final WebContainer webContainer = webContainerFactory.create(type, webElement);
         PageFactory.initElements(new WebDriverExtensionFieldDecorator(webElement, driver), webContainer);
-        webContainer.delegateWebElement = getDelagate(webContainer);
+        webContainer.delegateWebElement = WebDriverExtensionAnnotations.getDelagate(webContainer);
         return webContainer;
     }
 

@@ -1,5 +1,6 @@
 package org.andidev.webdriverextension.internal;
 
+import org.andidev.webdriverextension.WebDriverExtensionFieldDecorator;
 import com.google.common.base.Objects;
 import java.lang.reflect.Field;
 import java.lang.reflect.ParameterizedType;

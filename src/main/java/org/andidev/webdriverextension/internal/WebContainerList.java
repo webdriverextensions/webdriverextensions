@@ -1,5 +1,6 @@
 package org.andidev.webdriverextension.internal;
 
+import org.andidev.webdriverextension.WebDriverExtensionFieldDecorator;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;

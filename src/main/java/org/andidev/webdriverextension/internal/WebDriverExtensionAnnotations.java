@@ -7,7 +7,7 @@ import org.andidev.webdriverextension.annotations.ResetSearchContext;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.pagefactory.Annotations;
 
-class WebDriverExtensionAnnotations extends Annotations {
+public class WebDriverExtensionAnnotations extends Annotations {
 
     private Field field;
 
