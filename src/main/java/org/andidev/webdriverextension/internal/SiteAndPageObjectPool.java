@@ -131,8 +131,7 @@ public class SiteAndPageObjectPool {
         private static Key createSiteObjectKey(Field field) {
             if (WebSite.class.isAssignableFrom(field.getType())) {
                 Type siteObjectType = field.getType();
-                String name = field.getName();
-                return new Key(name, siteObjectType);
+                return new Key("site", siteObjectType);
             }
             throw new WebDriverExtensionException();
         }
@@ -140,8 +139,7 @@ public class SiteAndPageObjectPool {
         private static Key createSiteObjectKeyFromPageObjectField(Field field) {
             if (WebPage.class.isAssignableFrom(field.getType())) {
                 Type siteObjectType = getSiteObjectTypeFromGenerics(field.getType());
-                String name = StringUtils.uncapitalize(((Class) siteObjectType).getName());
-                return new Key(name, siteObjectType);
+                return new Key("site", siteObjectType);
             }
             throw new WebDriverExtensionException();
         }
