@@ -18,6 +18,8 @@ public class BotTestPage extends WebPage<WebDriverExtensionSite> {
     public WebElement test1;
     @FindBy(css = "#test2")
     public WebElement test2;
+    @FindBy(css = "#test3")
+    public WebElement test3;
 
     // Texts
     @FindBy(css = "#text-span")

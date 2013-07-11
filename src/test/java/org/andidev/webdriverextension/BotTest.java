@@ -116,10 +116,12 @@ public class BotTest extends SiteAwareRepository {
     /* Debug */
     @Test
     public void debugTest() {
-        debug(botTestPage.test0);
-        debug(botTestPage.test1);
-        debug(botTestPage.test2);
-        debug(valueIn(botTestPage.test2));
+        debug(attributeIn("title", botTestPage.test0));
+        debug(attributeIn("title", botTestPage.test1));
+        debug(attributeIn("disabled", botTestPage.test0));
+        debug(attributeIn("disabled", botTestPage.test1));
+        debug(attributeIn("disabled", botTestPage.test2));
+        debug(attributeIn("disabled", botTestPage.test3));
     }
 //
 //    /* Is Open */
