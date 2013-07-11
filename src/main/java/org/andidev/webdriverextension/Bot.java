@@ -563,6 +563,28 @@ public class Bot {
 
 
     /* Attribute */
+    /**
+     * Returns a {@link org.openqa.selenium.WebElement} attribute value.
+     *
+     * <p>If the {@link org.openqa.selenium.WebElement} does not exist in the
+     * html a {@code org.openqa.selenium.NoSuchElementException} will be
+     * thrown.</p>
+     *
+     * <p>
+     * <b>Examples:</b>
+     * <pre>
+     * {@code
+     * <input title="Some title"/>
+     * attributeIn("title", input) = "Some title"
+     *
+     * no input in html
+     * attributeIn("title", "input) throws org.openqa.selenium.NoSuchElementException}</pre>
+     * </p>
+     *
+     * @param webElement the {@link org.openqa.selenium.WebElement} containing
+     * an attribute to return
+     * @return the id attribute
+     */
     public static String attributeIn(String name, WebElement webElement) {
         return webElement.getAttribute(name);
     }
