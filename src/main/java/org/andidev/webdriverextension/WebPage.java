@@ -43,7 +43,10 @@ public abstract class WebPage<S> implements Openable {
     }
 
     @Override
-    public void assertIsNotOpen() throws Error {
+    public abstract void assertIsOpen() throws AssertionError;
+
+    @Override
+    public void assertIsNotOpen() throws AssertionError {
         if (isNotOpen()) {
             Assert.fail(this.getClass().getSimpleName() + " is open when it shouldn't!");
         }
@@ -61,11 +64,11 @@ public abstract class WebPage<S> implements Openable {
         return openable.isNotOpen();
     }
 
-    public void assertIsOpen(Openable openable) throws Error {
+    public void assertIsOpen(Openable openable) throws AssertionError {
         openable.assertIsOpen();
     }
 
-    public void assertIsNotOpen(Openable openable) throws Error {
+    public void assertIsNotOpen(Openable openable) throws AssertionError {
         openable.assertIsNotOpen();
     }
 }

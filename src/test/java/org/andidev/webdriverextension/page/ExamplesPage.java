@@ -50,7 +50,7 @@ public class ExamplesPage extends WebPage<WebDriverExtensionSite> {
     }
 
     @Override
-    public void assertIsOpen() throws Error {
+    public void assertIsOpen() throws AssertionError {
 //        assertIsDisplayed(searchQuery);
 //        assertIsDisplayed(search);
 //        assertIsDisplayed(menu);

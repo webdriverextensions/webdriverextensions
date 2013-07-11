@@ -11,7 +11,7 @@ public class AnotherSite extends AbstractAnotherSite {
     }
 
     @Override
-    public void assertIsOpen() throws Error {
+    public void assertIsOpen() throws AssertionError {
         examplesPage2.assertIsOpen();
     }
 

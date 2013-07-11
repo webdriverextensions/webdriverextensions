@@ -20,7 +20,7 @@ public class HomePage extends WebPage<WebDriverExtensionSite> {
     }
 
     @Override
-    public void assertIsOpen() throws Error {
+    public void assertIsOpen() throws AssertionError {
         assertIsDisplayed(examples);
     }
 }

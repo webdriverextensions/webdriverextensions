@@ -11,7 +11,7 @@ public class WebDriverExtensionSite extends AbstractSite {
     }
 
     @Override
-    public void assertIsOpen() throws Error {
+    public void assertIsOpen() throws AssertionError {
         examplesPage.assertIsOpen();
     }
 

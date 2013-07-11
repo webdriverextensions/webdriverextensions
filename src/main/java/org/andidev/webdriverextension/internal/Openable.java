@@ -8,9 +8,9 @@ public interface Openable {
 
     public boolean isNotOpen();
 
-    public void assertIsOpen() throws Error;
+    public void assertIsOpen() throws AssertionError;
 
-    public void assertIsNotOpen() throws Error;
+    public void assertIsNotOpen() throws AssertionError;
 
     public String getUrl();
 }

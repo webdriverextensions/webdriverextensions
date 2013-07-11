@@ -88,7 +88,7 @@ public class BotTestPage extends WebPage<WebDriverExtensionSite> {
     }
 
     @Override
-    public void assertIsOpen() throws Error {
+    public void assertIsOpen() throws AssertionError {
         assertIsDisplayed(textSpan);
         assertIsDisplayed(textInput);
         assertIsDisplayed(intNumberSpan);
