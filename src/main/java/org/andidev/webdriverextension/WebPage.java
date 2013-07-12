@@ -52,6 +52,10 @@ public abstract class WebPage<S> implements Openable {
         }
     }
 
+    public static void open(String url) {
+        ThreadDriver.getDriver().get(url);
+    }
+    
     public void open(Openable openable) {
         openable.open();
     }

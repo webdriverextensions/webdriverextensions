@@ -58,6 +58,10 @@ public abstract class WebSite implements Openable {
         }
     }
 
+    public void open(String url) {
+        internalDriver.get(url);
+    }
+
     public void open(Openable openable) {
         openable.open();
     }
