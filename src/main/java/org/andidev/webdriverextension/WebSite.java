@@ -1,7 +1,6 @@
 package org.andidev.webdriverextension;
 
 import org.andidev.webdriverextension.internal.Openable;
-import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.pagefactory.FieldDecorator;
@@ -54,7 +53,7 @@ public abstract class WebSite implements Openable {
     @Override
     public void assertIsNotOpen() throws AssertionError {
         if (isNotOpen()) {
-            Assert.fail(this.getClass().getSimpleName() + " is open when it shouldn't!");
+            throw new AssertionError(this.getClass().getSimpleName() + " is open when it shouldn't!");
         }
     }
 

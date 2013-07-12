@@ -3,7 +3,6 @@ package org.andidev.webdriverextension.internal;
 import org.andidev.webdriverextension.Bot;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
-import org.junit.Assert;
 import org.openqa.selenium.WebElement;
 
     public class BotUtils {
@@ -56,58 +55,63 @@ import org.openqa.selenium.WebElement;
     }
 
     public static void assertEquals(String name, String expected, String actual) {
-        Assert.assertEquals(name + " is not equal to " + expected + "!", expected, actual);
+        if (notEquals(expected, actual)) {
+            throw new AssertionError(name + ": " + actual + " is not equal to " + expected + "!");
+        }
+
     }
 
     public static void assertNotEquals(String name, String notExpected, String actual) {
-        Assert.assertNotEquals(name + " is equal to" + notExpected + " when it shouldn't!", notExpected, actual);
+        if (equals(notExpected, actual)) {
+            throw new AssertionError(name + ": " + actual + " is equal to" + notExpected + " when it shouldn't!");
+        }
     }
 
     public static void assertMatches(String name, String regExp, String actual) {
         if (notMatches(regExp, actual)) {
-            Assert.fail(name + ": " + actual + " is not matching " + regExp + "!");
+            throw new AssertionError(name + ": " + actual + " is not matching " + regExp + "!");
         }
     }
 
     public static void assertNotMatches(String name, String regExp, String actual) {
         if (matches(regExp, actual)) {
-            Assert.fail(name + ": " + actual + " is matching " + regExp + " when it shouldn't!");
+            throw new AssertionError(name + ": " + actual + " is matching " + regExp + " when it shouldn't!");
         }
     }
 
     public static void assertContains(String name, String searchText, String actual) {
         if (notContains(searchText, actual)) {
-            Assert.fail(name + ": " + actual + " is not containing " + searchText);
+            throw new AssertionError(name + ": " + actual + " is not containing " + searchText);
         }
     }
 
     public static void assertNotContains(String name, String searchText, String actual) {
         if (contains(searchText, actual)) {
-            Assert.fail(name + ": " + actual + " is containing " + searchText + " when it shouldn't!");
+            throw new AssertionError(name + ": " + actual + " is containing " + searchText + " when it shouldn't!");
         }
     }
 
     public static void assertStartsWith(String name, String prefix, String actual) {
         if (notStartsWith(prefix, actual)) {
-            Assert.fail(name + ": " + actual + " is not starting with " + prefix);
+            throw new AssertionError(name + ": " + actual + " is not starting with " + prefix);
         }
     }
 
     public static void assertNotStartsWith(String name, String prefix, String actual) {
         if (startsWith(prefix, actual)) {
-            Assert.fail(name + ": " + actual + " is starting with " + prefix + " when it shouldn't!");
+            throw new AssertionError(name + ": " + actual + " is starting with " + prefix + " when it shouldn't!");
         }
     }
 
     public static void assertEndsWith(String name, String suffix, String actual) {
         if (notEndsWith(suffix, actual)) {
-            Assert.fail(name + ": " + actual + " is not ending with " + suffix);
+            throw new AssertionError(name + ": " + actual + " is not ending with " + suffix);
         }
     }
 
     public static void assertNotEndsWith(String name, String suffix, String actual) {
         if (endsWith(suffix, actual)) {
-            Assert.fail(name + ": " + actual + " is ending with " + suffix + " when it shouldn't!");
+            throw new AssertionError(name + ": " + actual + " is ending with " + suffix + " when it shouldn't!");
         }
     }
 
@@ -140,37 +144,37 @@ import org.openqa.selenium.WebElement;
 
     public static void assertEquals(String name, double comparedTo, double number) {
         if (notEquals(comparedTo, number)) {
-            Assert.fail(name + ": " + number + " is not equal to " + comparedTo + " !");
+            throw new AssertionError(name + ": " + number + " is not equal to " + comparedTo + " !");
         }
     }
 
     public static void assertNotEequals(String name, double comparedTo, double number) {
         if (equals(comparedTo, number)) {
-            Assert.fail(name + ": " + number + " is equal to " + comparedTo + " when it shouldn't!");
+            throw new AssertionError(name + ": " + number + " is equal to " + comparedTo + " when it shouldn't!");
         }
     }
 
     public static void assertLessThan(String name, double comparedTo, double number) {
         if (greaterThanOrEquals(comparedTo, number)) {
-            Assert.fail(name + ": " + number + " is not less than " + comparedTo + " !");
+            throw new AssertionError(name + ": " + number + " is not less than " + comparedTo + " !");
         }
     }
 
     public static void assertLessThanOrEquals(String name, double comparedTo, double number) {
         if (greaterThan(comparedTo, number)) {
-            Assert.fail(name + ": " + number + " is not less than or equal to " + comparedTo + " !");
+            throw new AssertionError(name + ": " + number + " is not less than or equal to " + comparedTo + " !");
         }
     }
 
     public static void assertGreaterThan(String name, double comparedTo, double number) {
         if (lessThanOrEquals(comparedTo, number)) {
-            Assert.fail(name + ": " + number + " is not greater than " + comparedTo + " !");
+            throw new AssertionError(name + ": " + number + " is not greater than " + comparedTo + " !");
         }
     }
 
     public static void assertGreaterThanOrEquals(String name, double comparedTo, double number) {
         if (lessThan(comparedTo, number)) {
-            Assert.fail(name + ": " + number + " is not greater than or equal to " + comparedTo + " !");
+            throw new AssertionError(name + ": " + number + " is not greater than or equal to " + comparedTo + " !");
         }
     }
 
