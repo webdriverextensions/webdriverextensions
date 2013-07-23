@@ -11,6 +11,4 @@ public interface Openable {
     public void assertIsOpen() throws AssertionError;
 
     public void assertIsNotOpen() throws AssertionError;
-
-    public String getUrl();
 }

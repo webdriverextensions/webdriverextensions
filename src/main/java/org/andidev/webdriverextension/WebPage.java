@@ -22,11 +22,6 @@ public abstract class WebPage<S> implements Openable {
     }
 
     @Override
-    public String getUrl() {
-        return null;
-    }
-
-    @Override
     public boolean isOpen() {
         try {
             assertIsOpen();

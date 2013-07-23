@@ -25,14 +25,6 @@ public abstract class WebSite implements Openable {
     }
 
     @Override
-    public abstract String getUrl();
-
-    @Override
-    public void open() {
-        internalDriver.get(getUrl());
-    }
-
-    @Override
     public boolean isOpen() {
         try {
             assertIsOpen();
