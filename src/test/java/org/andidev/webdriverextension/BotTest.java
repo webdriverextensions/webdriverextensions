@@ -151,16 +151,16 @@ public class BotTest extends SiteAwareRepository {
     /* Url */
     @Test
     public void urlTest() {
-        assertUrlEquals("http://andidev.github.io/webdriver-extension/bot-test.html");
-        assertUrlNotEquals("xxx");
-        assertUrlContains("webdriver-extension");
-        assertUrlNotContains("xxx");
-        assertUrlStartsWith("http://andidev.github.io");
-        assertUrlNotStartsWith("xxx");
-        assertUrlEndsWith("webdriver-extension/bot-test.html");
-        assertUrlNotEndsWith("xxx");
-        assertUrlMatches(".*webdriver-extension.*");
-        assertUrlNotMatches(".*xxx.*");
+        assertCurrentUrlEquals("http://andidev.github.io/webdriver-extension/bot-test.html");
+        assertCurrentUrlNotEquals("xxx");
+        assertCurrentUrlContains("webdriver-extension");
+        assertCurrentUrlNotContains("xxx");
+        assertCurrentUrlStartsWith("http://andidev.github.io");
+        assertCurrentUrlNotStartsWith("xxx");
+        assertCurrentUrlEndsWith("webdriver-extension/bot-test.html");
+        assertCurrentUrlNotEndsWith("xxx");
+        assertCurrentUrlMatches(".*webdriver-extension.*");
+        assertCurrentUrlNotMatches(".*xxx.*");
     }
 
     /* Title */

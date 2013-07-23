@@ -23,7 +23,7 @@ public class ExamplesPageTest extends SiteAwareRepository {
     public void before() {
         open(site.url);
         open(examplesPage);
-        assertUrlEndsWith("/webdriver-extension/index.html");
+        assertCurrentUrlEndsWith("/webdriver-extension/index.html");
     }
 
     @After

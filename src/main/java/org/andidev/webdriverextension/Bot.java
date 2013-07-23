@@ -364,89 +364,89 @@ public class Bot {
     }
 
 
-    /* Url */
-    public static String url() {
+    /* Current Url */
+    public static String currentUrl() {
         return ThreadDriver.getDriver().getCurrentUrl();
     }
 
-    public static boolean urlEquals(String url) {
-        return BotUtils.equals(url, url());
+    public static boolean currentUrlEquals(String url) {
+        return BotUtils.equals(url, currentUrl());
     }
 
-    public static boolean urlNotEquals(String url) {
-        return BotUtils.notEquals(url, url());
+    public static boolean currentUrlNotEquals(String url) {
+        return BotUtils.notEquals(url, currentUrl());
     }
 
-    public static boolean urlContains(String searchText) {
-        return BotUtils.contains(searchText, url());
+    public static boolean currentUrlContains(String searchText) {
+        return BotUtils.contains(searchText, currentUrl());
     }
 
-    public static boolean urlNotContains(String searchText) {
-        return BotUtils.notContains(searchText, url());
+    public static boolean currentUrlNotContains(String searchText) {
+        return BotUtils.notContains(searchText, currentUrl());
     }
 
-    public static boolean urlStartsWith(String prefix) {
-        return BotUtils.startsWith(prefix, url());
+    public static boolean currentUrlStartsWith(String prefix) {
+        return BotUtils.startsWith(prefix, currentUrl());
     }
 
-    public static boolean urlNotStartsWith(String prefix) {
-        return BotUtils.notStartsWith(prefix, url());
+    public static boolean currentUrlNotStartsWith(String prefix) {
+        return BotUtils.notStartsWith(prefix, currentUrl());
     }
 
-    public static boolean urlEndsWith(String suffix) {
-        return BotUtils.endsWith(suffix, url());
+    public static boolean currentUrlEndsWith(String suffix) {
+        return BotUtils.endsWith(suffix, currentUrl());
     }
 
-    public static boolean urlNotEndsWith(String suffix) {
-        return BotUtils.notEndsWith(suffix, url());
+    public static boolean currentUrlNotEndsWith(String suffix) {
+        return BotUtils.notEndsWith(suffix, currentUrl());
     }
 
-    public static boolean urlMatches(String regExp) {
-        return BotUtils.matches(regExp, url());
+    public static boolean currentUrlMatches(String regExp) {
+        return BotUtils.matches(regExp, currentUrl());
     }
 
-    public static boolean urlNotMatches(String regExp) {
-        return BotUtils.notMatches(regExp, url());
+    public static boolean currentUrlNotMatches(String regExp) {
+        return BotUtils.notMatches(regExp, currentUrl());
     }
 
-    public static void assertUrlEquals(String url) {
-        BotUtils.assertEquals("Url", url, url());
+    public static void assertCurrentUrlEquals(String url) {
+        BotUtils.assertEquals("Current url", url, currentUrl());
     }
 
-    public static void assertUrlNotEquals(String url) {
-        BotUtils.assertNotEquals("Url", url, url());
+    public static void assertCurrentUrlNotEquals(String url) {
+        BotUtils.assertNotEquals("Current url", url, currentUrl());
     }
 
-    public static void assertUrlContains(String searchText) {
-        BotUtils.assertContains("Url", searchText, url());
+    public static void assertCurrentUrlContains(String searchText) {
+        BotUtils.assertContains("Current url", searchText, currentUrl());
     }
 
-    public static void assertUrlNotContains(String searchText) {
-        BotUtils.assertNotContains("Url", searchText, url());
+    public static void assertCurrentUrlNotContains(String searchText) {
+        BotUtils.assertNotContains("Current url", searchText, currentUrl());
     }
 
-    public static void assertUrlStartsWith(String prefix) {
-        BotUtils.assertStartsWith("Url", prefix, url());
+    public static void assertCurrentUrlStartsWith(String prefix) {
+        BotUtils.assertStartsWith("Current url", prefix, currentUrl());
     }
 
-    public static void assertUrlNotStartsWith(String prefix) {
-        BotUtils.assertNotStartsWith("Url", prefix, url());
+    public static void assertCurrentUrlNotStartsWith(String prefix) {
+        BotUtils.assertNotStartsWith("Current url", prefix, currentUrl());
     }
 
-    public static void assertUrlEndsWith(String suffix) {
-        BotUtils.assertEndsWith("Url", suffix, url());
+    public static void assertCurrentUrlEndsWith(String suffix) {
+        BotUtils.assertEndsWith("Current url", suffix, currentUrl());
     }
 
-    public static void assertUrlNotEndsWith(String suffix) {
-        BotUtils.assertNotEndsWith("Url", suffix, url());
+    public static void assertCurrentUrlNotEndsWith(String suffix) {
+        BotUtils.assertNotEndsWith("Current url", suffix, currentUrl());
     }
 
-    public static void assertUrlMatches(String regExp) {
-        BotUtils.assertMatches("Url", regExp, url());
+    public static void assertCurrentUrlMatches(String regExp) {
+        BotUtils.assertMatches("Current url", regExp, currentUrl());
     }
 
-    public static void assertUrlNotMatches(String regExp) {
-        BotUtils.assertNotMatches("Url", regExp, url());
+    public static void assertCurrentUrlNotMatches(String regExp) {
+        BotUtils.assertNotMatches("Current url", regExp, currentUrl());
     }
 
 
