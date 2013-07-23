@@ -1,15 +1,22 @@
 package org.andidev.webdriverextension.internal.generator;
 
+import static com.google.common.base.Preconditions.checkNotNull;
+import java.lang.annotation.Annotation;
 import java.util.Set;
 import java.util.LinkedHashSet;
+import javax.annotation.processing.AbstractProcessor;
+import javax.annotation.processing.Messager;
 import javax.annotation.processing.RoundEnvironment;
 import javax.annotation.processing.SupportedAnnotationTypes;
 import javax.annotation.processing.SupportedSourceVersion;
 import javax.lang.model.SourceVersion;
 import javax.lang.model.element.Element;
+import javax.lang.model.element.ElementKind;
 import javax.lang.model.element.TypeElement;
 import javax.lang.model.type.TypeMirror;
-import org.andidev.annotationprocessorutils.AbstractExtendedProcessor;
+import javax.lang.model.util.Elements;
+import javax.lang.model.util.Types;
+import javax.tools.Diagnostic;
 import org.andidev.webdriverextension.WebPage;
 import org.andidev.webdriverextension.generator.annotations.Generate;
 import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
@@ -17,12 +24,24 @@ import org.apache.commons.lang3.builder.ToStringStyle;
 
 @SupportedAnnotationTypes({"org.andidev.webdriverextension.generator.annotations.Generate"})
 @SupportedSourceVersion(SourceVersion.RELEASE_6)
-public abstract class AbstractGeneratorProcessor extends AbstractExtendedProcessor {
+public abstract class AbstractGeneratorProcessor extends AbstractProcessor {
 
+    protected RoundEnvironment roundEnvironment;
+    protected Types typeUtils = null;
+    protected Elements elementUtils = null;
+    protected Messager messager;
+    protected boolean debug = true;
     private Set<TypeElement> annotatedClasses;
     private Set<TypeElement> annotatedSiteClasses;
     private Set<TypeElement> annotatedPageClasses;
     private boolean generated = false;
+
+    protected void init(RoundEnvironment roundEnvironment) {
+        this.roundEnvironment = roundEnvironment;
+        this.typeUtils = processingEnv.getTypeUtils();
+        this.elementUtils = processingEnv.getElementUtils();
+        this.messager = processingEnv.getMessager();
+    }
 
     public Set<TypeElement> getAnnotatedClasses() {
         if (annotatedClasses == null) {
@@ -65,7 +84,7 @@ public abstract class AbstractGeneratorProcessor extends AbstractExtendedProcess
     @Override
     public boolean process(Set<? extends TypeElement> annotations, RoundEnvironment roundEnvironment) {
         if (!generated) {
-            super.init(roundEnvironment);
+            init(roundEnvironment);
 //            for (Element element : roundEnvironment.getRootElements()) {
 //                System.out.println("Processing element " + ReflectionToStringBuilder.reflectionToString(element, ToStringStyle.MULTI_LINE_STYLE));
 //            }
@@ -192,5 +211,57 @@ public abstract class AbstractGeneratorProcessor extends AbstractExtendedProcess
     private TypeElement getGenericSiteClass(TypeElement pageClass) {
         System.out.println(ReflectionToStringBuilder.reflectionToString(pageClass, ToStringStyle.MULTI_LINE_STYLE));
         return (TypeElement) pageClass.getTypeParameters().iterator().next();
+    }
+
+    private Set<? extends Element> getClassElementsAnnotatedWith(Class<? extends Annotation> annotation) {
+        Set<ElementKind> elementKinds = new LinkedHashSet();
+        elementKinds.add(ElementKind.CLASS);
+        return getElementsAnnotatedWith(annotation, elementKinds);
+    }
+
+    private Set<? extends Element> getElementsAnnotatedWith(Class<? extends Annotation> annotation, Set<ElementKind> elementKinds) {
+        checkNotNull(annotation);
+        checkNotNull(elementKinds);
+        Set<? extends Element> elements = roundEnvironment.getElementsAnnotatedWith(annotation);
+        Set<Element> interfaceElements = new LinkedHashSet<Element>();
+        for (Element element : elements) {
+            if (elementKinds.contains(ElementKind.CLASS) && ElementUtils.isClass(element)) {
+                interfaceElements.add((TypeElement) element);
+            }
+            if (elementKinds.contains(ElementKind.CONSTRUCTOR) && ElementUtils.isConstructor(element)) {
+                interfaceElements.add((TypeElement) element);
+            }
+            if (elementKinds.contains(ElementKind.ENUM) && ElementUtils.isEnum(element)) {
+                interfaceElements.add((TypeElement) element);
+            }
+            if (elementKinds.contains(ElementKind.FIELD) && ElementUtils.isField(element)) {
+                interfaceElements.add((TypeElement) element);
+            }
+            if (elementKinds.contains(ElementKind.INTERFACE) && ElementUtils.isInterface(element)) {
+                interfaceElements.add((TypeElement) element);
+            }
+            if (elementKinds.contains(ElementKind.METHOD) && ElementUtils.isMethod(element)) {
+                interfaceElements.add((TypeElement) element);
+            }
+        }
+        return interfaceElements;
+    }
+
+    protected void error(String msg) {
+        messager.printMessage(Diagnostic.Kind.ERROR, prefixClassName(msg));
+    }
+
+    protected void warn(String msg) {
+        messager.printMessage(Diagnostic.Kind.WARNING, prefixClassName(msg));
+    }
+
+    protected void debug(String msg) {
+        if (debug) {
+            messager.printMessage(Diagnostic.Kind.NOTE, prefixClassName(msg));
+        }
+    }
+
+    private CharSequence prefixClassName(String msg) {
+        return this.getClass().getSimpleName() + ":" + msg;
     }
 }

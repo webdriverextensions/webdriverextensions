@@ -71,14 +71,6 @@
     </properties>
 
     <dependencies>
-        <!-- Annotation Processor Utils -->
-        <dependency>
-            <groupId>org.andidev</groupId>
-            <artifactId>annotation-processor-utils</artifactId>
-            <version>${annotation-processor-utils.version}</version>
-            <!--                <scope>compile</scope>-->
-        </dependency>
-
         <!-- CodeModel -->
         <dependency>
             <groupId>com.sun.codemodel</groupId>

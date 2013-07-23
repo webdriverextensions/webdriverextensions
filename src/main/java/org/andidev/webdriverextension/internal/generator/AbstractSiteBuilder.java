@@ -16,8 +16,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.annotation.processing.ProcessingEnvironment;
 import javax.lang.model.element.TypeElement;
-import static org.andidev.annotationprocessorutils.ElementUtils.*;
-import org.andidev.annotationprocessorutils.ProcessingEnvironmentCodeWriter;
 import org.andidev.webdriverextension.internal.GeneratorUtils;
 import org.andidev.webdriverextension.WebSite;
 import org.apache.commons.lang3.StringUtils;
@@ -63,7 +61,7 @@ public class AbstractSiteBuilder implements Builder<Boolean> {
 
     private void init() throws JClassAlreadyExistsException {
         codeModel = new JCodeModel();
-        abstractSiteClass = codeModel._class(JMod.PUBLIC | JMod.ABSTRACT, getPackageName(siteObjectElement) + ".Abstract" + StringUtils.capitalize(GeneratorUtils.getName(siteObjectElement)), ClassType.CLASS);
+        abstractSiteClass = codeModel._class(JMod.PUBLIC | JMod.ABSTRACT, ElementUtils.getPackageName(siteObjectElement) + ".Abstract" + StringUtils.capitalize(GeneratorUtils.getName(siteObjectElement)), ClassType.CLASS);
         abstractSiteClass._extends(codeModel.ref(WebSite.class));
         pageObjectClasses = getCodeModelRefs(pageObjectElements);
     }

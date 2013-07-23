@@ -12,8 +12,6 @@ import java.util.Set;
 import java.util.LinkedHashSet;
 import javax.annotation.processing.ProcessingEnvironment;
 import javax.lang.model.element.TypeElement;
-import static org.andidev.annotationprocessorutils.ElementUtils.*;
-import org.andidev.annotationprocessorutils.ProcessingEnvironmentCodeWriter;
 import org.andidev.webdriverextension.WebRepository;
 import org.andidev.webdriverextension.internal.GeneratorUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -67,7 +65,7 @@ public class SiteAwareBuilder implements Builder<Boolean> {
 
     private void init() throws JClassAlreadyExistsException {
         codeModel = new JCodeModel();
-        siteAwareRepositoryClass = codeModel._class(JMod.PUBLIC | JMod.ABSTRACT, getPackageName(siteObjectElement) + "." + StringUtils.capitalize(GeneratorUtils.getName(siteObjectElement)) + "AwareRepository", ClassType.CLASS);
+        siteAwareRepositoryClass = codeModel._class(JMod.PUBLIC | JMod.ABSTRACT, ElementUtils.getPackageName(siteObjectElement) + "." + StringUtils.capitalize(GeneratorUtils.getName(siteObjectElement)) + "AwareRepository", ClassType.CLASS);
         siteAwareRepositoryClass._extends(codeModel.ref(WebRepository.class));
         siteObjectClasses = getCodeModelRefs(siteObjectElements);
         pageObjectClasses = getCodeModelRefs(pageObjectElements);
