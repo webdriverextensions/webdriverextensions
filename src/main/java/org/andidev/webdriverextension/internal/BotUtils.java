@@ -1,11 +1,51 @@
 package org.andidev.webdriverextension.internal;
 
 import org.andidev.webdriverextension.Bot;
-import org.apache.commons.lang3.ArrayUtils;
+import org.andidev.webdriverextension.ThreadDriver;
 import org.apache.commons.lang3.StringUtils;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 
     public class BotUtils {
+
+    /* Tag */
+    public static String tagIn(WebElement webElement) {
+        if (webElement == null) {
+            return "WebElement";
+        }
+        return "<" + Bot.tagNameOf(webElement) + attributesInAsString(webElement) + ">"
+                + innerHtmlOf(webElement)
+                + "</" + Bot.tagNameOf(webElement) + ">";
+    }
+
+    public static String tagInWithoutHtml(WebElement webElement) {
+        if (webElement == null) {
+            return "WebElement";
+        }
+        return "<" + Bot.tagNameOf(webElement) + attributesInAsString(webElement) + ">...</" + Bot.tagNameOf(webElement) + ">";
+    }
+
+
+
+    /* Inner Html */
+    public static String innerHtmlOf(WebElement webElement) {
+        return (String) ((JavascriptExecutor) ThreadDriver.getDriver()).executeScript("return arguments[0].innerHTML;", webElement);
+    }
+
+
+
+    /* Attributes */
+    public static String attributesInAsString(WebElement webElement) {
+        return (String) ((JavascriptExecutor) ThreadDriver.getDriver()).executeScript(
+                "var attrsString = '';"
+                + "for (var attr, i=0, attrs=arguments[0].attributes, l=attrs.length; i<l; i++){"
+                + "    attr = attrs.item(i);"
+                + "    attrsString = attrsString + ' ' + attr.nodeName + '=\"' + attr.nodeValue + '\"';"
+                + "}"
+                + "return attrsString;", webElement);
+    }
+
+
 
     /* String Equals */
     public static boolean equals(String text1, String text2) {
@@ -180,48 +220,7 @@ import org.openqa.selenium.WebElement;
 
 
 
-    /* Describe */
-    public static String describeTag(WebElement webElement) {
-        return describeTag(webElement, null);
-    }
-
-    public static String describeTag(WebElement webElement, String extraAttribute) {
-        if (webElement == null) {
-            return "WebElement";
-        }
-        boolean printExtraAttribute = extraAttribute != null && !ArrayUtils.contains(new String[]{"id", "name", "name", "class", "value", "disabled", "selected", "checked"}, extraAttribute);
-        return "Tag <" + Bot.tagNameOf(webElement) + " "
-                + describeId(webElement)
-                + describeName(webElement)
-                + describeClass(webElement)
-                + describeValue(webElement)
-                + describeAttribute("disabled", webElement)
-                + describeAttribute("selected", webElement)
-                + describeAttribute("checked", webElement)
-                + (printExtraAttribute ? describeAttribute(extraAttribute, webElement) : "")
-                + ">";
-    }
-
-    public static String describeAttribute(String attributeName, WebElement webElement) {
-        return Bot.hasAttribute(attributeName, webElement) ? attributeName + " = '" + Bot.attributeIn(attributeName, webElement) + "' " : "";
-    }
-
-    public static String describeId(WebElement webElement) {
-        return Bot.hasId(webElement) ? "id = '" + Bot.idIn(webElement) + "' " : "";
-    }
-
-    public static String describeName(WebElement webElement) {
-        return Bot.hasName(webElement) ? "name = '" + Bot.nameIn(webElement) + "' " : "";
-    }
-
-    public static String describeClass(WebElement webElement) {
-        return Bot.hasClass(webElement) ? "class = '" + Bot.classIn(webElement) + "' " : "";
-    }
-
-    public static String describeValue(WebElement webElement) {
-        return Bot.hasValue(webElement) ? "value = '" + Bot.valueIn(webElement) + "' " : "";
-    }
-
+    /* Other */
     public static String toString(double number) {
         if (number == (int) number) {
             return String.format("%d", (int) number);
