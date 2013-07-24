@@ -17,14 +17,13 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.math.NumberUtils;
 import org.hamcrest.Matcher;
 import org.hamcrest.MatcherAssert;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import static org.andidev.webdriverextension.internal.utils.StringUtils.*;
 
 public class Bot {
 
@@ -225,11 +224,12 @@ public class Bot {
     }
 
     public static void debug(WebElement webElement) {
-        log.debug("Tag " + BotUtils.tagIn(webElement));
+        String tag = BotUtils.tagIn(webElement);
+        log.debug("Tag:" + appendNewLineIfContainsNewLine(BotUtils.tagIn(webElement)));
     }
 
     public static void debug(List<? extends WebElement> webElements) {
-        log.debug("List contains the following {} tags", sizeOf(webElements));
+        log.debug("List contains the following {} tags:", sizeOf(webElements));
         for (WebElement webElement : webElements) {
             debug(webElement);
         }

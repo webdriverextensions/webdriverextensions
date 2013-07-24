@@ -12,6 +12,9 @@ import org.openqa.selenium.support.FindBy;
 @Generate
 public class BotTestPage extends WebPage<WebDriverExtensionSite> {
 
+    @FindBy(css = "body")
+    public WebElement body;
+
     @FindBy(css = "#test0")
     public WebElement test0;
     @FindBy(css = "#test1")

@@ -119,6 +119,7 @@ public class BotTest extends SiteAwareRepository {
         debug("Text to debug");
         debug(botTestPage.attributesSpan);
         debug(botTestPage.selectAllOption);
+        debug(botTestPage.body);
     }
 
     /* Is Open */

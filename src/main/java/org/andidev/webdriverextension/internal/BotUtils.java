@@ -2,6 +2,7 @@ package org.andidev.webdriverextension.internal;
 
 import org.andidev.webdriverextension.Bot;
 import org.andidev.webdriverextension.ThreadDriver;
+import static org.andidev.webdriverextension.internal.utils.StringUtils.*;
 import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
@@ -13,8 +14,8 @@ import org.openqa.selenium.WebElement;
         if (webElement == null) {
             return "WebElement";
         }
-        return "<" + Bot.tagNameOf(webElement) + attributesInAsString(webElement) + ">"
-                + innerHtmlOf(webElement)
+        return "<" + Bot.tagNameOf(webElement) + prependSpaceIfNotBlank(attributesIn(webElement)) + ">"
+                + appendNewLineIfStartsWithNewLine(innerHtmlOf(webElement))
                 + "</" + Bot.tagNameOf(webElement) + ">";
     }
 
@@ -22,7 +23,7 @@ import org.openqa.selenium.WebElement;
         if (webElement == null) {
             return "WebElement";
         }
-        return "<" + Bot.tagNameOf(webElement) + attributesInAsString(webElement) + ">...</" + Bot.tagNameOf(webElement) + ">";
+        return "<" + Bot.tagNameOf(webElement) + prependSpaceIfNotBlank(attributesIn(webElement)) + ">...</" + Bot.tagNameOf(webElement) + ">";
     }
 
 
@@ -35,12 +36,15 @@ import org.openqa.selenium.WebElement;
 
 
     /* Attributes */
-    public static String attributesInAsString(WebElement webElement) {
+    public static String attributesIn(WebElement webElement) {
         return (String) ((JavascriptExecutor) ThreadDriver.getDriver()).executeScript(
                 "var attrsString = '';"
-                + "for (var attr, i=0, attrs=arguments[0].attributes, l=attrs.length; i<l; i++){"
-                + "    attr = attrs.item(i);"
-                + "    attrsString = attrsString + ' ' + attr.nodeName + '=\"' + attr.nodeValue + '\"';"
+                + "for (var attr, i=0, attrs=arguments[0].attributes, l=attrs.length; i<l; i++) {"
+                + "    var attr = attrs.item(i);"
+                + "    if (i != 0) {"
+                + "        attrsString = attrsString + ' ';"
+                + "    }"
+                + "    attrsString = attrsString + attr.nodeName + '=\"' + attr.nodeValue + '\"';"
                 + "}"
                 + "return attrsString;", webElement);
     }
