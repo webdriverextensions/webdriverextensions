@@ -221,15 +221,4 @@ import org.openqa.selenium.WebElement;
             throw new AssertionError(name + ": " + number + " is not greater than or equal to " + comparedTo + " !");
         }
     }
-
-
-
-    /* Other */
-    public static String toString(double number) {
-        if (number == (int) number) {
-            return String.format("%d", (int) number);
-        } else {
-            return String.format("%s", number);
-        }
-    }
 }

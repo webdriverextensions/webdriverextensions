@@ -14,7 +14,7 @@ import static java.util.concurrent.TimeUnit.SECONDS;
 import org.andidev.webdriverextension.internal.BotUtils;
 import org.andidev.webdriverextension.internal.Openable;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.math.NumberUtils;
+import static org.apache.commons.lang3.math.NumberUtils.*;
 import org.hamcrest.Matcher;
 import org.hamcrest.MatcherAssert;
 import org.openqa.selenium.Keys;
@@ -24,6 +24,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import static org.andidev.webdriverextension.internal.utils.StringUtils.*;
+import org.andidev.webdriverextension.internal.utils.NumberUtils;
 
 public class Bot {
 
@@ -45,7 +46,7 @@ public class Bot {
     }
 
     public static void type(double number, WebElement webElement) {
-        type(BotUtils.toString(number), webElement);
+        type(NumberUtils.toString(number), webElement);
     }
 
 
@@ -1302,7 +1303,7 @@ public class Bot {
      * @return the value attribute as a number
      */
     public static double valueInAsNumber(WebElement webElement) {
-        return NumberUtils.createDouble(valueIn(webElement));
+        return createDouble(valueIn(webElement));
     }
 
     public static boolean valueIsNumber(WebElement webElement) {
@@ -1679,7 +1680,7 @@ public class Bot {
      * @return the visible text as a number
      */
      public static double textInAsNumber(WebElement webElement) {
-        return NumberUtils.createDouble(webElement.getText());
+        return createDouble(webElement.getText());
     }
 
     public static boolean textIsNumber(WebElement webElement) {
