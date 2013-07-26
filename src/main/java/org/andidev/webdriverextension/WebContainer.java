@@ -149,15 +149,15 @@ public class WebContainer implements org.openqa.selenium.WebElement, org.openqa.
         }
     }
 
-    public void click(WebContainer webElement) {
+    public void click(WebElement webElement) {
         webElement.click();
     }
 
-    public void clear(WebContainer webElement) {
+    public void clear(WebElement webElement) {
         webElement.clear();
     }
 
-    public boolean isDisplayed(WebContainer webElement) {
+    public boolean isDisplayed(WebElement webElement) {
         return webElement.isDisplayed();
     }
 
