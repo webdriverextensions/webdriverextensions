@@ -393,16 +393,20 @@ public class SeleniumGridRunner extends BlockJUnit4ClassRunner {
             if (!this.getBrowserName().equals(browser.getBrowserName())) {
                 return false;
             }
-            if (this.isVersionProvided() && !this.getVersion().equals(browser.getVersion())) {
+            if (this.isVersionProvided()
+                    && (browser.isVersionProvided() && !this.getVersion().equals(browser.getVersion()))) {
                 return false;
             }
-            if (this.isPlatformProvided() && !this.getPlatform().equals(browser.getPlatform())) {
+            if (this.isPlatformProvided()
+                    && (browser.isPlatformProvided() && !this.getPlatform().equals(browser.getPlatform()))) {
                 return false;
             }
-            if (this.isJavascriptEnabledProvided() && !this.getJavascriptEnabled().equals(browser.getJavascriptEnabled())) {
+            if (this.isJavascriptEnabledProvided()
+                    && (browser.isJavascriptEnabledProvided() && !this.getJavascriptEnabled().equals(browser.getJavascriptEnabled()))) {
                 return false;
             }
-            if (this.isDesiredCapabilitiesProvided() && !this.getDesiredCapabilitiesMap().equals(browser.getDesiredCapabilitiesMap())) {
+            if (this.isDesiredCapabilitiesProvided()
+                    && (browser.isDesiredCapabilitiesProvided() && !this.getDesiredCapabilitiesMap().equals(browser.getDesiredCapabilitiesMap()))) {
                 return false;
             }
             return true;
@@ -417,7 +421,7 @@ public class SeleniumGridRunner extends BlockJUnit4ClassRunner {
         }
 
         private boolean isJavascriptEnabledProvided() {
-            return true;
+            return !BooleanOption.ANY.equals(javascriptEnabled);
         }
 
         private boolean isDesiredCapabilitiesProvided() {
