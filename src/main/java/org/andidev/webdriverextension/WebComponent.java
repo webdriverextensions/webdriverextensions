@@ -247,16 +247,6 @@ public class WebComponent implements org.openqa.selenium.WebElement, org.openqa.
     }
 
     @Override
-    @Deprecated
-    public Point getLocationOnScreenOnceScrolledIntoView() {
-        if (delegateWebElement != null) {
-            return ((org.openqa.selenium.internal.Locatable) delegateWebElement).getLocationOnScreenOnceScrolledIntoView();
-        } else {
-            return ((org.openqa.selenium.internal.Locatable) wrappedWebElement).getLocationOnScreenOnceScrolledIntoView();
-        }
-    }
-
-    @Override
     public Coordinates getCoordinates() {
         if (delegateWebElement != null) {
             return ((org.openqa.selenium.internal.Locatable) delegateWebElement).getCoordinates();
