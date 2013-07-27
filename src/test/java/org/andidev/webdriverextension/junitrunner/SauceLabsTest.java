@@ -23,17 +23,16 @@ import org.openqa.selenium.remote.RemoteWebDriver;
 
 @RunWith(SeleniumGridRunner.class)
 @RemoteAddress("http://andidev:80b7768e-dc06-4d5b-b793-5b3b83f0e24c@ondemand.saucelabs.com:80/wd/hub")
-@Browsers(android = {
-//    @Android(platform = Platform.LINUX)
+@Browsers(android = { //    @Android(platform = Platform.LINUX)
 //}, chrome = {
 //    @Chrome(platform = Platform.WINDOWS),
 //    @Chrome(platform = Platform.WIN8),
 //    @Chrome(platform = Platform.LINUX),
 //    @Chrome(platform = Platform.MAC)
 }, firefox = {
-//    @Firefox(platform = Platform.WINDOWS, desiredCapabilities = "{}"),
-//    @Firefox(platform = Platform.WIN8, javascriptEnabled = BooleanOption.TRUE),
-//    @Firefox(platform = Platform.LINUX),
+    //    @Firefox(platform = Platform.WINDOWS, desiredCapabilities = "{}"),
+    //    @Firefox(platform = Platform.WIN8, javascriptEnabled = BooleanOption.TRUE),
+    //    @Firefox(platform = Platform.LINUX),
     @Firefox(platform = Platform.MAC, javascriptEnabled = BooleanOption.FALSE)})
 //}, iPhone = {
 //    @IPhone(platform = Platform.MAC)
@@ -60,9 +59,10 @@ public class SauceLabsTest {
 
     @Test
     @IgnoreBrowsers(firefox = {
-    @Firefox(platform = Platform.WIN8),
-@Firefox(platform = Platform.LINUX),
-@Firefox(platform = Platform.MAC)}, safari = @Safari(platform = Platform.WINDOWS, desiredCapabilities = "{ }"))
+        @Firefox(platform = Platform.WIN8),
+        @Firefox(platform = Platform.LINUX),
+        @Firefox(platform = Platform.MAC)}, safari =
+            @Safari(platform = Platform.WINDOWS, desiredCapabilities = "{ }"))
     public void test1() throws InterruptedException {
         System.out.println("browserName = " + ((RemoteWebDriver) ThreadDriver.getDriver()).getCapabilities().getBrowserName());
         System.out.println("browserVersion = " + ((RemoteWebDriver) ThreadDriver.getDriver()).getCapabilities().getVersion());
@@ -71,7 +71,6 @@ public class SauceLabsTest {
         ThreadDriver.getDriver().get("http://www.google.com");
         Assert.assertEquals("Google", ThreadDriver.getDriver().getTitle());
     }
-
 //    @Test
 //    public void test2() {
 //        System.out.println("browserName = " + ((RemoteWebDriver) ThreadDriver.getDriver()).getCapabilities().getBrowserName());
