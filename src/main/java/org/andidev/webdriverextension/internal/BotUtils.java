@@ -1,5 +1,7 @@
 package org.andidev.webdriverextension.internal;
 
+import java.net.MalformedURLException;
+import java.net.URL;
 import org.andidev.webdriverextension.Bot;
 import org.andidev.webdriverextension.ThreadDriver;
 import static org.andidev.webdriverextension.internal.utils.StringUtils.*;
@@ -8,6 +10,17 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 
     public class BotUtils {
+
+    /* Normalizations */
+    public static String normalizeUrl(String url) {
+        URL urlHelper;
+        try {
+            urlHelper = new URL(url);
+        } catch (MalformedURLException ex) {
+            throw new WebDriverExtensionException(url, ex);
+        }
+        return urlHelper.getProtocol() + "://" + urlHelper.getHost();
+    }
 
     /* Tag */
     public static String tagIn(WebElement webElement) {
