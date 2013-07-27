@@ -65,7 +65,7 @@
         <lambdaj.version>2.3.3</lambdaj.version>
         <logback.version>1.0.9</logback.version>
         <lombok.version>0.11.6</lombok.version>
-        <selenium.version>2.31.0</selenium.version>
+        <selenium.version>[2.33.0,)</selenium.version>
         <operadriver.version>1.2</operadriver.version>
         <phantomjsdriver.version>1.0.3</phantomjsdriver.version>
     </properties>
