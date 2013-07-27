@@ -1,10 +1,10 @@
 package org.andidev.webdriverextension.page.components;
 
-import org.andidev.webdriverextension.WebContainer;
+import org.andidev.webdriverextension.WebComponent;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-public class Parent extends WebContainer {
+public class Parent extends WebComponent {
 
     @FindBy(css = ".row")
     public WebElement row;

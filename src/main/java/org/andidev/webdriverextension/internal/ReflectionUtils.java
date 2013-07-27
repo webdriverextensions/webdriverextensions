@@ -7,7 +7,7 @@ import java.lang.reflect.Type;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
-import org.andidev.webdriverextension.WebContainer;
+import org.andidev.webdriverextension.WebComponent;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.pagefactory.ElementLocator;
 
@@ -27,10 +27,10 @@ public class ReflectionUtils {
         }
     }
 
-    public static Class<? extends WebContainer> getListType(Field field) {
+    public static Class<? extends WebComponent> getListType(Field field) {
         Type genericType = field.getGenericType();
         Type listType = ((ParameterizedType) genericType).getActualTypeArguments()[0];
-        return (Class<? extends WebContainer>) listType;
+        return (Class<? extends WebComponent>) listType;
     }
 
     public static Field[] getAnnotatedDeclaredFields(Class clazz,

@@ -1,9 +1,9 @@
 package org.andidev.webdriverextension.page.components;
 
-import org.andidev.webdriverextension.WebContainer;
+import org.andidev.webdriverextension.WebComponent;
 import org.openqa.selenium.support.FindBy;
 
-public class HtmlContainer extends WebContainer {
+public class HtmlComponent extends WebComponent {
 
     @FindBy(css = ".btn-group")
     public Menu menu;

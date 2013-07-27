@@ -4,7 +4,7 @@ import static org.andidev.webdriverextension.Bot.*;
 import static org.andidev.webdriverextension.ThreadDriver.*;
 import org.andidev.webdriverextension.page.ExamplesPage;
 import org.andidev.webdriverextension.page.components.Menu;
-import org.andidev.webdriverextension.page.components.HtmlContainer;
+import org.andidev.webdriverextension.page.components.HtmlComponent;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -17,7 +17,7 @@ public class WebRepositoryTest extends WebRepository {
     @FindBy(css = "div.btn-group")
     Menu menu;
     @FindBy(css = "html")
-    HtmlContainer html;
+    HtmlComponent html;
     ExamplesPage examplesPage;
 
     public WebRepositoryTest() {

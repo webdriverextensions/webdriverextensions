@@ -5,7 +5,7 @@ import static org.andidev.webdriverextension.Bot.*;
 import static org.andidev.webdriverextension.ThreadDriver.*;
 import org.andidev.webdriverextension.WebPage;
 import org.andidev.webdriverextension.generator.annotations.Generate;
-import org.andidev.webdriverextension.page.components.HtmlContainer;
+import org.andidev.webdriverextension.page.components.HtmlComponent;
 import org.andidev.webdriverextension.page.components.Menu;
 import org.andidev.webdriverextension.page.components.MenuButtonGroup;
 import org.andidev.webdriverextension.page.components.UserRow;
@@ -42,7 +42,7 @@ public class LoginPage extends WebPage<AnotherSite> {
 //    @FindBy(css = "#user-table")
 //    public UserTable userTable;
     @FindBy(css = "html")
-    public HtmlContainer html;
+    public HtmlComponent html;
 
     @Override
     public void open() {

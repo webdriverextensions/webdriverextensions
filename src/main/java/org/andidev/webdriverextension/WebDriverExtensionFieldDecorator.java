@@ -5,12 +5,12 @@ import java.lang.reflect.Field;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.util.List;
-import org.andidev.webdriverextension.internal.DefaultWebContainerFactory;
-import org.andidev.webdriverextension.internal.DefaultWebContainerListFactory;
+import org.andidev.webdriverextension.internal.DefaultWebComponentFactory;
+import org.andidev.webdriverextension.internal.DefaultWebComponentListFactory;
 import org.andidev.webdriverextension.internal.ReflectionUtils;
 import org.andidev.webdriverextension.internal.SiteAndPageObjectPool;
-import org.andidev.webdriverextension.internal.WebContainerFactory;
-import org.andidev.webdriverextension.internal.WebContainerListFactory;
+import org.andidev.webdriverextension.internal.WebComponentFactory;
+import org.andidev.webdriverextension.internal.WebComponentListFactory;
 import org.andidev.webdriverextension.internal.WebDriverExtensionElementLocatorFactory;
 import org.openqa.selenium.SearchContext;
 import org.openqa.selenium.WebDriver;
@@ -25,32 +25,32 @@ public class WebDriverExtensionFieldDecorator extends DefaultFieldDecorator {
 
     private WebDriver driver;
     private SiteAndPageObjectPool pool;
-    private WebContainerFactory webContainerFactory;
-    private WebContainerListFactory webContainerListFactory;
+    private WebComponentFactory webComponentFactory;
+    private WebComponentListFactory webComponentListFactory;
 
     public WebDriverExtensionFieldDecorator(final WebDriver driver) {
         super(new WebDriverExtensionElementLocatorFactory(driver, driver));
         this.driver = driver;
         this.pool = new SiteAndPageObjectPool(driver);
-        this.webContainerFactory = new DefaultWebContainerFactory();
-        this.webContainerListFactory = new DefaultWebContainerListFactory(webContainerFactory);
+        this.webComponentFactory = new DefaultWebComponentFactory();
+        this.webComponentListFactory = new DefaultWebComponentListFactory(webComponentFactory);
     }
 
     public WebDriverExtensionFieldDecorator(final SearchContext searchContext, final WebDriver driver) {
         super(new WebDriverExtensionElementLocatorFactory(searchContext, driver));
         this.driver = driver;
         this.pool = new SiteAndPageObjectPool(driver);
-        this.webContainerFactory = new DefaultWebContainerFactory();
-        this.webContainerListFactory = new DefaultWebContainerListFactory(webContainerFactory);
+        this.webComponentFactory = new DefaultWebComponentFactory();
+        this.webComponentListFactory = new DefaultWebComponentListFactory(webComponentFactory);
     }
 
     @Override
     public Object decorate(ClassLoader loader, Field field) {
-        if (isDecoratableWebContainer(field)) {
-            return decorateWebContainer(loader, field);
+        if (isDecoratableWebComponent(field)) {
+            return decorateWebComponent(loader, field);
         }
-        if (isDecoratableWebContainerList(field)) {
-            return decorateWebContainerList(loader, field);
+        if (isDecoratableWebComponentList(field)) {
+            return decorateWebComponentList(loader, field);
         }
         if (isDecoratableSiteObject(field)) {
             return pool.getSiteObject(field, this);
@@ -70,15 +70,15 @@ public class WebDriverExtensionFieldDecorator extends DefaultFieldDecorator {
         return super.decorate(loader, field);
     }
 
-    private boolean isDecoratableWebContainer(Field field) {
-        if (!WebContainer.class.isAssignableFrom(field.getType())) {
+    private boolean isDecoratableWebComponent(Field field) {
+        if (!WebComponent.class.isAssignableFrom(field.getType())) {
             return false;
         }
 
         return true;
     }
 
-    private boolean isDecoratableWebContainerList(Field field) {
+    private boolean isDecoratableWebComponentList(Field field) {
         if (!List.class.isAssignableFrom(field.getType())) {
             return false;
         }
@@ -92,7 +92,7 @@ public class WebDriverExtensionFieldDecorator extends DefaultFieldDecorator {
 
         Type listType = ((ParameterizedType) genericType).getActualTypeArguments()[0];
 
-        if (!WebContainer.class.isAssignableFrom((Class) listType)) {
+        if (!WebComponent.class.isAssignableFrom((Class) listType)) {
             return false;
         }
 
@@ -128,21 +128,21 @@ public class WebDriverExtensionFieldDecorator extends DefaultFieldDecorator {
         return true;
     }
 
-    private Object decorateWebContainer(final ClassLoader loader, final Field field) {
+    private Object decorateWebComponent(final ClassLoader loader, final Field field) {
         ElementLocator locator = factory.createLocator(field);
-        Class type = (Class<? extends WebContainer>) field.getType();
+        Class type = (Class<? extends WebComponent>) field.getType();
         final WebElement webElement = proxyForLocator(loader, locator);
-        final WebContainer webContainer = webContainerFactory.create(type, webElement);
-        PageFactory.initElements(new WebDriverExtensionFieldDecorator(webElement, driver), webContainer);
-        webContainer.delegateWebElement = WebDriverExtensionAnnotations.getDelagate(webContainer);
-        return webContainer;
+        final WebComponent webComponent = webComponentFactory.create(type, webElement);
+        PageFactory.initElements(new WebDriverExtensionFieldDecorator(webElement, driver), webComponent);
+        webComponent.delegateWebElement = WebDriverExtensionAnnotations.getDelagate(webComponent);
+        return webComponent;
     }
 
-    private Object decorateWebContainerList(final ClassLoader loader, final Field field) {
+    private Object decorateWebComponentList(final ClassLoader loader, final Field field) {
         ElementLocator locator = factory.createLocator(field);
         Class listType = ReflectionUtils.getListType(field);
         List<WebElement> webElements = proxyForListLocator(loader, locator);
-        final List<? extends WebContainer> webContainerList = webContainerListFactory.create(listType, webElements, driver);
-        return webContainerList;
+        final List<? extends WebComponent> webComponentList = webComponentListFactory.create(listType, webElements, driver);
+        return webComponentList;
     }
 }

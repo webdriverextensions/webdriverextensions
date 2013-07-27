@@ -87,7 +87,7 @@ public class ExamplesPageTest extends SiteAwareRepository {
     }
 
     @Test
-    public void doubleWrappedContainers() {
+    public void doubleWrappedComponents() {
         click(examplesPage.html);
         click(examplesPage.html.menu);
         waitFor(delayTime);

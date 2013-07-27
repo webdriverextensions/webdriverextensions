@@ -6,34 +6,34 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
-import org.andidev.webdriverextension.WebContainer;
+import org.andidev.webdriverextension.WebComponent;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 
-public class WebContainerList<T extends WebContainer> implements List<T> {
+public class WebComponentList<T extends WebComponent> implements List<T> {
 
-    private Class<T> webContainerClass;
+    private Class<T> webComponentClass;
     private List<WebElement> wrappedWebElements;
-    private List<T> webContainers;
-    private WebContainerFactory webContainerFactory = new DefaultWebContainerFactory();
+    private List<T> webComponents;
+    private WebComponentFactory webComponentFactory = new DefaultWebComponentFactory();
     private WebDriver driver;
 
-    public WebContainerList(Class<T> webContainerClass, List<WebElement> webElements, WebContainerFactory webContainerFactory, WebDriver driver) {
-        this.webContainerClass = webContainerClass;
+    public WebComponentList(Class<T> webComponentClass, List<WebElement> webElements, WebComponentFactory webComponentFactory, WebDriver driver) {
+        this.webComponentClass = webComponentClass;
         this.wrappedWebElements = webElements;
-        this.webContainerFactory = webContainerFactory;
+        this.webComponentFactory = webComponentFactory;
         this.driver = driver;
     }
 
-    public void createWebContainers() {
-        webContainers = new ArrayList<T>();
+    public void createWebComponents() {
+        webComponents = new ArrayList<T>();
         for (WebElement webElement : wrappedWebElements) {
             try {
-                // Create web container and add it to list
-                T webContainer = webContainerFactory.create(webContainerClass, webElement);
-                PageFactory.initElements(new WebDriverExtensionFieldDecorator(webElement, driver), webContainer);
-                webContainers.add(webContainer);
+                // Create web component and add it to list
+                T webComponent = webComponentFactory.create(webComponentClass, webElement);
+                PageFactory.initElements(new WebDriverExtensionFieldDecorator(webElement, driver), webComponent);
+                webComponents.add(webComponent);
             } catch (Exception e) {
                 throw new RuntimeException(e);
             }
@@ -42,38 +42,38 @@ public class WebContainerList<T extends WebContainer> implements List<T> {
 
     @Override
     public int size() {
-        createWebContainers();
-        return webContainers.size();
+        createWebComponents();
+        return webComponents.size();
     }
 
     @Override
     public boolean isEmpty() {
-        createWebContainers();
-        return webContainers.isEmpty();
+        createWebComponents();
+        return webComponents.isEmpty();
     }
 
     @Override
     public boolean contains(Object o) {
-        createWebContainers();
-        return webContainers.contains(o);
+        createWebComponents();
+        return webComponents.contains(o);
     }
 
     @Override
     public Iterator<T> iterator() {
-        createWebContainers();
-        return webContainers.iterator();
+        createWebComponents();
+        return webComponents.iterator();
     }
 
     @Override
     public Object[] toArray() {
-        createWebContainers();
-        return webContainers.toArray();
+        createWebComponents();
+        return webComponents.toArray();
     }
 
     @Override
     public <T> T[] toArray(T[] ts) {
-        createWebContainers();
-        return webContainers.toArray(ts);
+        createWebComponents();
+        return webComponents.toArray(ts);
     }
 
     @Override
@@ -88,8 +88,8 @@ public class WebContainerList<T extends WebContainer> implements List<T> {
 
     @Override
     public boolean containsAll(Collection<?> clctn) {
-        createWebContainers();
-        return webContainers.containsAll(clctn);
+        createWebComponents();
+        return webComponents.containsAll(clctn);
     }
 
     @Override
@@ -119,8 +119,8 @@ public class WebContainerList<T extends WebContainer> implements List<T> {
 
     @Override
     public T get(int i) {
-        createWebContainers();
-        return webContainers.get(i);
+        createWebComponents();
+        return webComponents.get(i);
     }
 
     @Override
@@ -140,31 +140,31 @@ public class WebContainerList<T extends WebContainer> implements List<T> {
 
     @Override
     public int indexOf(Object o) {
-        createWebContainers();
-        return webContainers.indexOf(o);
+        createWebComponents();
+        return webComponents.indexOf(o);
     }
 
     @Override
     public int lastIndexOf(Object o) {
-        createWebContainers();
-        return webContainers.lastIndexOf(o);
+        createWebComponents();
+        return webComponents.lastIndexOf(o);
     }
 
     @Override
     public ListIterator<T> listIterator() {
-        createWebContainers();
-        return webContainers.listIterator();
+        createWebComponents();
+        return webComponents.listIterator();
     }
 
     @Override
     public ListIterator<T> listIterator(int i) {
-        createWebContainers();
-        return webContainers.listIterator();
+        createWebComponents();
+        return webComponents.listIterator();
     }
 
     @Override
     public List<T> subList(int i, int i1) {
-        createWebContainers();
-        return webContainers.subList(i, i1);
+        createWebComponents();
+        return webComponents.subList(i, i1);
     }
 }

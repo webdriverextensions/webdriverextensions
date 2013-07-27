@@ -1,7 +1,7 @@
 package org.andidev.webdriverextension.internal;
 
 import java.lang.reflect.Field;
-import org.andidev.webdriverextension.WebContainer;
+import org.andidev.webdriverextension.WebComponent;
 import org.andidev.webdriverextension.annotations.Delegate;
 import org.andidev.webdriverextension.annotations.ResetSearchContext;
 import org.openqa.selenium.WebElement;
@@ -20,8 +20,8 @@ public class WebDriverExtensionAnnotations extends Annotations {
         return (field.getAnnotation(ResetSearchContext.class) != null);
     }
 
-    public static WebElement getDelagate(WebContainer webContainer) {
-        Field[] fields = ReflectionUtils.getAnnotatedDeclaredFields(webContainer.getClass(), Delegate.class);
+    public static WebElement getDelagate(WebComponent webComponent) {
+        Field[] fields = ReflectionUtils.getAnnotatedDeclaredFields(webComponent.getClass(), Delegate.class);
         if (fields.length == 0) {
             return null;
         }
@@ -30,7 +30,7 @@ public class WebDriverExtensionAnnotations extends Annotations {
         }
         WebElement delegate;
         try {
-            delegate = (WebElement) fields[0].get(webContainer);
+            delegate = (WebElement) fields[0].get(webComponent);
         } catch (IllegalArgumentException e) {
             throw new RuntimeException(e);
         } catch (IllegalAccessException e) {

@@ -1,11 +1,11 @@
 package org.andidev.webdriverextension.page.components;
 
-import org.andidev.webdriverextension.WebContainer;
+import org.andidev.webdriverextension.WebComponent;
 import org.andidev.webdriverextension.annotations.Delegate;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-public class Menu extends WebContainer {
+public class Menu extends WebComponent {
 
     @Delegate
     @FindBy(css = "#menu")
