@@ -36,3 +36,4 @@ target/
 # NetBeans #
 ############
 nbproject/private/
+/nb-configuration.xml
