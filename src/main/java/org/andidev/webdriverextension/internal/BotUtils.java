@@ -205,7 +205,7 @@ import org.openqa.selenium.WebElement;
         }
     }
 
-    public static void assertNotEequals(String name, double comparedTo, double number) {
+    public static void assertNotEquals(String name, double comparedTo, double number) {
         if (equals(comparedTo, number)) {
             throw new AssertionError(name + ": " + number + " is equal to " + comparedTo + " when it shouldn't!");
         }

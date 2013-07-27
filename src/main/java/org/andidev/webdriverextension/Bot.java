@@ -347,7 +347,7 @@ public class Bot {
     }
 
     public static void assertSizeNotEquals(int number, Collection collection) {
-        BotUtils.assertNotEequals("Size", (double) number, (double) collection.size());
+        BotUtils.assertNotEquals("Size", (double) number, (double) collection.size());
     }
 
     public static void assertSizeLessThan(int number, Collection collection) {
@@ -1360,7 +1360,7 @@ public class Bot {
     }
 
     public static void assertValueNotEquals(double number, WebElement webElement) {
-        BotUtils.assertNotEequals("value", number, valueInAsNumber(webElement));
+        BotUtils.assertNotEquals("value", number, valueInAsNumber(webElement));
     }
 
     public static void assertValueLessThan(double number, WebElement webElement) {
@@ -1737,7 +1737,7 @@ public class Bot {
     }
 
     public static void assertTextNotEquals(double number, WebElement webElement) {
-        BotUtils.assertNotEequals("Text", number, textInAsNumber(webElement));
+        BotUtils.assertNotEquals("Text", number, textInAsNumber(webElement));
     }
 
     public static void assertTextLessThan(double number, WebElement webElement) {
