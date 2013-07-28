@@ -155,6 +155,19 @@ public class Bot {
 
 
 
+    /* Navigation */
+    public static void navigateBack() {
+        ThreadDriver.getDriver().navigate().back();
+    }
+    public static void navigateForward() {
+        ThreadDriver.getDriver().navigate().forward();
+    }
+    public static void navigateRefresh() {
+        ThreadDriver.getDriver().navigate().refresh();
+    }
+
+
+
     /* Wait For */
     public static void waitFor(double seconds) {
         long nanos = (long) (seconds * 1000000000);
