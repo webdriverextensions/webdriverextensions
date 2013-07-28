@@ -11,17 +11,6 @@ import org.openqa.selenium.WebElement;
 
     public class BotUtils {
 
-    /* Normalizations */
-    public static String normalizeUrl(String url) {
-        URL urlHelper;
-        try {
-            urlHelper = new URL(url);
-        } catch (MalformedURLException ex) {
-            throw new WebDriverExtensionException(url, ex);
-        }
-        return urlHelper.getProtocol() + "://" + urlHelper.getHost();
-    }
-
     /* Tag */
     public static String tagIn(WebElement webElement) {
         if (webElement == null) {
