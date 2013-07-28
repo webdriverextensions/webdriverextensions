@@ -4,6 +4,7 @@ import com.opera.core.systems.OperaDriver;
 import org.andidev.webdriverextension.ThreadDriver;
 import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.Platform;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
@@ -15,7 +16,15 @@ import org.openqa.selenium.safari.SafariDriver;
 
 public class ExperimentalBot {
 
-    /* Browser Type */
+    /* Browser */
+    public static String browser() {
+        if (ThreadDriver.getDriver() instanceof RemoteWebDriver) {
+            return ((RemoteWebDriver) ThreadDriver.getDriver()).getCapabilities().getBrowserName();
+        }
+        throw new WebDriverExtensionException("Sorry! browser() is only "
+                + "implemented for RemoteWebDriver at the moment.");
+    }
+
     public static boolean browserIs(String browserName) {
         if (ThreadDriver.getDriver() instanceof RemoteWebDriver) {
             return isRemoteWebdriverBrowser(browserName);
@@ -111,6 +120,32 @@ public class ExperimentalBot {
         }
         return false;
     }
+
+    /* Browser Version */
+    public static String browserVersion() {
+        if (ThreadDriver.getDriver() instanceof RemoteWebDriver) {
+            return ((RemoteWebDriver) ThreadDriver.getDriver()).getCapabilities().getVersion();
+        }
+        throw new WebDriverExtensionException("Sorry! browserVersion() is only "
+                + "implemented for RemoteWebDriver at the moment.");
+    }
+
+    /* Platform */
+    public static Platform platform() {
+        if (ThreadDriver.getDriver() instanceof RemoteWebDriver) {
+            return ((RemoteWebDriver) ThreadDriver.getDriver()).getCapabilities().getPlatform();
+        }
+        throw new WebDriverExtensionException("Sorry! platform() is only "
+                + "implemented for RemoteWebDriver at the moment.");
+    }
+    public static String platformAsString() {
+        if (ThreadDriver.getDriver() instanceof RemoteWebDriver) {
+            return ((RemoteWebDriver) ThreadDriver.getDriver()).getCapabilities().getPlatform().toString();
+        }
+        throw new WebDriverExtensionException("Sorry! platformAsString() is only "
+                + "implemented for RemoteWebDriver at the moment.");
+    }
+
 
     /* JavaScript */
     public static Object executeJavaScript(String script, Object... args) {
