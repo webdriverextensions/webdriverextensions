@@ -25,4 +25,8 @@ public class StringUtils {
         }
         return string;
     }
+
+    public static String quote(String text) {
+        return "\"" + text + "\"";
+    }
 }
