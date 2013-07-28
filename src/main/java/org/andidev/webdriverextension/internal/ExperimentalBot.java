@@ -147,7 +147,7 @@ public class ExperimentalBot {
     }
 
 
-    /* JavaScript */
+    /* Execute JavaScript */
     public static Object executeJavaScript(String script, Object... args) {
         return ((JavascriptExecutor) ThreadDriver.getDriver()).executeScript(script, args);
     }
