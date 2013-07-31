@@ -4,7 +4,26 @@ WebDriver Extension
 WebDriver Extension is a framework that extends the WebDriver framework with components that makes it easier to apply the PageObject pattern and Bot Style testing pattern
 
 ### Under Development
-This project is under development and therefore not recomended to use yet, though the development in its final stages. Once the [Milestone 1.0.0](https://github.com/andidev/webdriver-extension/issues?milestone=1&page=1&sort=created&state=open) is released the framework will be fully functional.
+This project is under development and therefore not recomended to use yet, though the development in its final stages. Once the [Milestone 1.0](https://github.com/andidev/webdriver-extension/issues?milestone=1&page=1&sort=created&state=open) is released the framework will be fully functional and ready for community feedback.
+
+### Still Want to Try It?
+Add the Sonatype OSS Snapshot Repository...
+```xml
+ <repository>
+     <id>sonatype-oss-snapshot</id>
+     <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+ </repository>
+```
+
+...and the snapshot version of the Webdriver Extension to your pom.xml
+```xml
+ <dependency>
+     <groupId>org.andidev</groupId>
+     <artifactId>webdriver-extension</artifactId>
+     <version>1.0-SNAPSHOT</version>
+ </dependency>
+```
+
 
 ### <a href="http://testingbot.com" target="_blank">TestingBot</a> is now supporting this project by giving it a Free account!
 
