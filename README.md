@@ -14,8 +14,7 @@ Add the Sonatype OSS Snapshot Repository...
      <url>https://oss.sonatype.org/content/repositories/snapshots</url>
  </repository>
 ```
-
-...and the snapshot version of the Webdriver Extension to your pom.xml
+...and the snapshot version of the Webdriver Extension Dependency to your pom.xml
 ```xml
  <dependency>
      <groupId>org.andidev</groupId>
@@ -23,7 +22,20 @@ Add the Sonatype OSS Snapshot Repository...
      <version>1.0-SNAPSHOT</version>
  </dependency>
 ```
+###Using the Bot
+TODO
 
+###Creating a WebSite
+TODO
+
+###Creating WebPages
+TODO
+
+###Creating WebComponents
+TODO
+
+###Using JUnit Annotation Runners 
+TODO
 
 ### <a href="http://testingbot.com" target="_blank">TestingBot</a> is now supporting this project by giving it a Free account!
 
