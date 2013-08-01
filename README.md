@@ -10,16 +10,17 @@ This project is under development and therefore not recomended to use yet, thoug
 Add the Sonatype OSS Snapshot Repository...
 ```xml
  <repository>
-     <id>sonatype-oss-snapshot</id>
-     <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+ 		 <id>sonatype-nexus-snapshots</id> 
+			 <name>Sonatype Nexus Snapshots</name>
+    <url>https://oss.sonatype.org/content/repositories/snapshots</url>
  </repository>
 ```
-...and the snapshot version of the Webdriver Extension Dependency to your pom.xml
+...and the Webdriver Extension Snapshot Dependency to your pom.xml
 ```xml
  <dependency>
-     <groupId>org.andidev</groupId>
-     <artifactId>webdriver-extension</artifactId>
-     <version>1.0-SNAPSHOT</version>
+    <groupId>org.andidev</groupId>
+    <artifactId>webdriver-extension</artifactId>
+    <version>1.0.M1-SNAPSHOT</version>
  </dependency>
 ```
 ###Using the Bot
