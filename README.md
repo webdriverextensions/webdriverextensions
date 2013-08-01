@@ -17,11 +17,11 @@ Add the Sonatype OSS Snapshot Repository...
 ```
 ...and the Webdriver Extension Snapshot Dependency to your pom.xml
 ```xml
- <dependency>
+<dependency>
     <groupId>org.andidev</groupId>
     <artifactId>webdriver-extension</artifactId>
     <version>1.0.M1-SNAPSHOT</version>
- </dependency>
+</dependency>
 ```
 ###Using the Bot
 TODO
