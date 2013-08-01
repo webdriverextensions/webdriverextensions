@@ -9,11 +9,11 @@ This project is under development and therefore not recomended to use yet, thoug
 ### Still Want to Try It?
 Add the Sonatype OSS Snapshot Repository...
 ```xml
- <repository>
- 		 <id>sonatype-nexus-snapshots</id> 
-			 <name>Sonatype Nexus Snapshots</name>
+<repository>
+    <id>sonatype-nexus-snapshots</id>
+    <name>Sonatype Nexus Snapshots</name>
     <url>https://oss.sonatype.org/content/repositories/snapshots</url>
- </repository>
+</repository>
 ```
 ...and the Webdriver Extension Snapshot Dependency to your pom.xml
 ```xml
