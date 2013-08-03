@@ -4,7 +4,7 @@ WebDriver Extension
 WebDriver Extension is a framework that extends the WebDriver framework with components that makes it easier to apply the PageObject pattern and Bot Style testing pattern
 
 ### Under Development
-This project is under development and therefore not recomended to use yet, though the development in its final stages. Once the [Milestone 1.0](https://github.com/andidev/webdriver-extension/issues?milestone=1&page=1&sort=created&state=open) is released the framework will be fully functional and ready for community feedback.
+This project is under development and therefore not recomended to use yet, though the development is in its final stages. Once the [Milestone 1.0](https://github.com/andidev/webdriver-extension/issues?milestone=1&page=1&sort=created&state=open) is released the framework will be fully functional and ready for community feedback.
 
 ### Want to Try It?
 Add the Sonatype OSS Snapshot Repository
@@ -53,16 +53,41 @@ ThreadDriver.setDriver(yourDriver);
 ```
 
 ###Model Your Components
-TODO
+TOWRITE
+```java
+public class Menu extends WebComponent {
+    @Delegate
+    @FindBy(css = "#menu")
+    public WebElement menu;
+    
+    @FindBy(css = "#menu-create")
+    public WebElement create;
+    
+    @FindBy(css = "#menu-update")
+    public WebElement update;
+    
+    @FindBy(css = "#menu-delete")
+    public WebElement delete;
+}
+```
 
 ###Model Your Pages
-TODO
+TOWRITE
+```java
+ThreadDriver.setDriver(yourDriver);
+```
 
 ###Model Your Site
-TODO
+TOWRITE
+```java
+ThreadDriver.setDriver(yourDriver);
+```
 
 ###Create Your Tests
-TODO
+TOWRITE
+```java
+ThreadDriver.setDriver(yourDriver);
+```
 
 ### <a href="http://testingbot.com" target="_blank">TestingBot</a> is now supporting this project by giving it a Free account!
 
