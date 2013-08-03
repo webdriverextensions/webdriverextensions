@@ -82,46 +82,65 @@ public class Interaction extends WebComponent {
 TOWRITE
 ```java
 public class MainPage extends WebPage<WikipediaSite> {
+    // Search
+    @FindBy(css = "input[name='wpName']")
+    public WebElement search;
+
+    @FindBy(css = "input[name='wpName']")
+    public WebElement searchButton;
+
     // Side Menu
     @FindBy(css = "input[name='wpName']")
-    public WebElement username;
+    public WebElement mainPage;
     
     @FindBy(css = "input[name='wpPassword']")
-    public WebElement password;
+    public WebElement contents;
     
     @FindBy(css = "input[name='wpRemember']")
-    public WebElement keepMeLoggedInCheckbox;    
+    public WebElement featuredContent;    
     
     @FindBy(css = "input#wpLoginAttempt")
-    public WebElement loginButton;
+    public WebElement currentEvents;
+    
+    @FindBy(css = "input#wpLoginAttempt")
+    public WebElement randomArticle;
+    
+    @FindBy(css = "input#wpLoginAttempt")
+    public WebElement donateToWikipedia;
+    
+    @FindBy(css = "input#wpLoginAttempt")
+    public Interaction interaction;
+    
+    //...and so the story goes on and on
 
     @Override
     public void open() {
-        if() {    
-            open(site.mainPage);
-            site.mainPage.assertIsNotLoggedIn();        
-            click(site.mainPage.login);
-        }
+        open("http://en.wikipedia.org/wiki/Main_Page");
+        assertIsOpen();
     }
 
     @Override
     public void assertIsOpen() throws AssertionError {
         assertIsOpen(site);
-        assertIsDisplayed(username);
-        assertIsDisplayed(password);
-        assertIsDisplayed(keepMeLoggedInCheckbox);
-        assertIsDisplayed(loginButton);
+
+        // Assert Search is displayed
+        assertIsDisplayed(search);
+        assertIsDisplayed(searchButton);
+
+        // Assert Site Menu is displayed
+        assertIsDisplayed(mainPage);
+        assertIsDisplayed(contents);
+        assertIsDisplayed(featuredContent);
+        assertIsDisplayed(currentEvents);
+        assertIsDisplayed(randomArticle);
+        assertIsDisplayed(donateToWikipedia);
+        assertIsDisplayed(interaction);
+        //...and so the story goes on and on
     }
 
-    public void login(String username, String password, boolean keepMeLoggedIn) {
-        clearAndType(username, this.username);
-        clearAndType(password, this.password);
-        if (keepMeLoggedIn) {
-            check(this.keepMeLoggedInCheckbox);
-        } else {
-            uncheck(this.keepMeLoggedInCheckbox);
-        }
-        click(this.loginButton);
+    public void search(String query) {
+        clearAndType(query, search);
+        click(searchButton);
     }
 }
 ```
