@@ -32,9 +32,10 @@ import static org.andidev.webdriverextension.Bot.*;
 ```java
 type("frank", username);
 type("bobbybrown", password);
+check(keepMeLoggedInCheckbox);
 click(loginButton);
 ```
-...or assert values in them
+...or assert values
 ```java
 assertUrlStartsWith("http://en.wikipedia.org/wiki");
 assertTitleEquals("Wikipedia, the free encyclopedia");
