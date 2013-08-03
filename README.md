@@ -46,7 +46,7 @@ assertHasClass("selected", mainPageTab);
 ...and conditional statements
 ```java
 if (hasClass("selected", mainPageTab)) {
-    ...do something
+    // ...do something
 }
 ```
 If you won't run your tests in the Webdriver Extensions JUnit Runners make sure you set the thread driver before using the Bot
@@ -112,7 +112,7 @@ public class MainPage extends WebPage<WikipediaSite> {
     @FindBy(css = "input#wpLoginAttempt")
     public Interaction interaction;
     
-    //...and so the story goes on and on
+    // ...and so the story goes on and on
 
     @Override
     public void open() {
@@ -136,7 +136,7 @@ public class MainPage extends WebPage<WikipediaSite> {
         assertIsDisplayed(randomArticle);
         assertIsDisplayed(donateToWikipedia);
         assertIsDisplayed(interaction);
-        //...and so the story goes on and on
+        // ...and so the story goes on and on
     }
 
     public void search(String query) {
