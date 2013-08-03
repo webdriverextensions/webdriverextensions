@@ -30,21 +30,21 @@ import static org.andidev.webdriverextension.Bot.*;
 ```
 ...and start interacting with your WebElements
 ```java
-type("frank", username);
-type("bobbybrown", password);
-check(keepMeLoggedInCheckbox);
+type("testuser", username);
+type("ai78cGsT", password);
+uncheck(keepMeLoggedInCheckbox);
 click(loginButton);
 ```
 ...and write your asserts
 ```java
-assertTextEquals("frank", currentUser);
+assertTextEquals("testuser", currentUser);
 assertTitleEndsWith(" - Wikipedia, the free encyclopedia");
 assertUrlMatches("http://[a-z]{2,3}.wikipedia.org/.*");
 // ...type assert then bring up the list of all supported asserts with your IDE's autocompletion
 ```
 ...and conditional statements
 ```java
-if(hasClass("selected", mainPageTab)) {
+if (hasClass("selected", mainPageTab)) {
     ...do something
 }
 ```
@@ -81,30 +81,32 @@ public class Interaction extends WebComponent {
 ###Model Your Pages
 TOWRITE
 ```java
-public class LoginPage extends WebPage<WikipediaSite> {
-
-    // Url
-    public static String url = WikipediaSite.url + "/login";
-
-    // WebElements
+public class MainPage extends WebPage<WikipediaSite> {
+    // Side Menu
     @FindBy(css = "input[name='wpName']")
     public WebElement username;
+    
     @FindBy(css = "input[name='wpPassword']")
     public WebElement password;
+    
     @FindBy(css = "input[name='wpRemember']")
     public WebElement keepMeLoggedInCheckbox;    
+    
     @FindBy(css = "input#wpLoginAttempt")
     public WebElement loginButton;
 
     @Override
     public void open() {
-        open(url);
-        assertIsOpen();
+        if() {    
+            open(site.mainPage);
+            site.mainPage.assertIsNotLoggedIn();        
+            click(site.mainPage.login);
+        }
     }
 
     @Override
     public void assertIsOpen() throws AssertionError {
-        assertCurrentUrlEquals(url);
+        assertIsOpen(site);
         assertIsDisplayed(username);
         assertIsDisplayed(password);
         assertIsDisplayed(keepMeLoggedInCheckbox);
