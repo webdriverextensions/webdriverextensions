@@ -24,7 +24,29 @@ Add the Sonatype OSS Snapshot Repository
 </dependency>
 ```
 ###Start Using the Bot
-If you don't use any of Webdriver Extensions JUnit Runners to run your tests make sure you set the thread driver before using the Bot
+Import the static Bot methods
+```java
+import static org.andidev.webdriverextension.Bot.*;
+```
+...and start interacting with your WebElements
+```java
+type("andidev", username);
+type("mypassword", password);
+click(loginButton);
+```
+...and asserting
+```java
+assertUrlStartsWith("http://www.andidev.org");
+assertTitleEquals("Welcome!");
+assertTextEquals("andidev", usernameLabel);
+```
+...or checking conditions
+```java
+if(hasClass("active")) {
+    ...do something
+}
+```
+If you won't run your tests in the Webdriver Extensions JUnit Runners make sure you set the thread driver before using the Bot
 ```java
 ThreadDriver.setDriver(yourDriver);
 ```
