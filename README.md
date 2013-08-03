@@ -40,7 +40,7 @@ click(loginButton);
 assertTextEquals("frank", currentUser);
 assertTitleEndsWith(" - Wikipedia, the free encyclopedia");
 assertUrlMatches("http://[a-z]{2,3}.wikipedia.org/.*");
-assertIsNotChecked(keepMeLoggedIn);
+// Type assert then bring up the list of all supported asserts with your IDE's autocompletion
 ```
 ...and conditional statements
 ```java
