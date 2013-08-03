@@ -35,13 +35,13 @@ type("bobbybrown", password);
 check(keepMeLoggedInCheckbox);
 click(loginButton);
 ```
-...or assert them
+...and write your asserts
 ```java
 assertUrlStartsWith("http://en.wikipedia.org/wiki");
 assertTitleEquals("Wikipedia, the free encyclopedia");
 assertTextEquals("frank", currentUser);
 ```
-...or use them in conditional statements
+...and conditional statements
 ```java
 if(hasClass("selected", mainPageTab)) {
     ...do something
@@ -51,7 +51,6 @@ If you won't run your tests in the Webdriver Extensions JUnit Runners make sure 
 ```java
 ThreadDriver.setDriver(yourDriver);
 ```
-
 
 ###Model Your Components
 TODO
