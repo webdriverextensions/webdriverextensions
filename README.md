@@ -40,6 +40,7 @@ click(loginButton);
 assertTextEquals("testuser", currentUser);
 assertTitleEndsWith(" - Wikipedia, the free encyclopedia");
 assertUrlMatches("http://[a-z]{2,3}.wikipedia.org/.*");
+assertHasClass("selected", mainPageTab);
 // ...type assert then bring up the list of all supported asserts with your IDE's autocompletion
 ```
 ...and conditional statements
@@ -83,10 +84,10 @@ TOWRITE
 ```java
 public class MainPage extends WebPage<WikipediaSite> {
     // Search
-    @FindBy(css = "input[name='wpName']")
+    @FindBy(css = "input#searchInput")
     public WebElement search;
 
-    @FindBy(css = "input[name='wpName']")
+    @FindBy(css = "input#searchButton")
     public WebElement searchButton;
 
     // Side Menu
