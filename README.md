@@ -28,21 +28,21 @@ Import the static Bot methods
 ```java
 import static org.andidev.webdriverextension.Bot.*;
 ```
-...and start interacting with your WebElements
+...and interact with your WebElements
 ```java
-type("andidev", username);
-type("mypassword", password);
+type("frank", username);
+type("bobbybrown", password);
 click(loginButton);
 ```
-...and asserting
+...or assert values in them
 ```java
-assertUrlStartsWith("http://www.andidev.org");
-assertTitleEquals("Welcome!");
-assertTextEquals("andidev", usernameLabel);
+assertUrlStartsWith("http://en.wikipedia.org/wiki");
+assertTitleEquals("Wikipedia, the free encyclopedia");
+assertTextEquals("frank", currentUser);
 ```
-...or checking conditions
+...or check conditions
 ```java
-if(hasClass("active")) {
+if(hasClass("selected", mainPageTab)) {
     ...do something
 }
 ```
