@@ -23,7 +23,7 @@ Add the Sonatype OSS Snapshot Repository
     <version>1.0.M1-SNAPSHOT</version>
 </dependency>
 ```
-###Start Using the Bot
+###Start Using the Bot methods
 Just import the static Bot
 ```java
 import static org.andidev.webdriverextension.Bot.*;
