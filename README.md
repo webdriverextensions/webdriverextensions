@@ -6,7 +6,7 @@ WebDriver Extension is a framework that extends the WebDriver framework with com
 ### Under Development
 This project is under development and therefore not recomended to use yet, though the development in its final stages. Once the [Milestone 1.0](https://github.com/andidev/webdriver-extension/issues?milestone=1&page=1&sort=created&state=open) is released the framework will be fully functional and ready for community feedback.
 
-### Still Want to Try It?
+### Want to Try It?
 Add the Sonatype OSS Snapshot Repository
 ```xml
 <repository>
@@ -24,24 +24,24 @@ Add the Sonatype OSS Snapshot Repository
 </dependency>
 ```
 ###Start Using the Bot
-Import the static Bot methods
+Just import the static Bot
 ```java
 import static org.andidev.webdriverextension.Bot.*;
 ```
-...and interact with your WebElements
+...and start interacting with your WebElements
 ```java
 type("frank", username);
 type("bobbybrown", password);
 check(keepMeLoggedInCheckbox);
 click(loginButton);
 ```
-...or assert values
+...or assert them
 ```java
 assertUrlStartsWith("http://en.wikipedia.org/wiki");
 assertTitleEquals("Wikipedia, the free encyclopedia");
 assertTextEquals("frank", currentUser);
 ```
-...or check conditions
+...or use them in conditional statements
 ```java
 if(hasClass("selected", mainPageTab)) {
     ...do something
