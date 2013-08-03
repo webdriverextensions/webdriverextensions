@@ -39,7 +39,7 @@ click(loginButton);
 ```java
 assertTextEquals("testuser", currentUser);
 assertTitleEndsWith(" - Wikipedia, the free encyclopedia");
-assertUrlMatches("http://[a-z]{2,3}.wikipedia.org/.*");
+assertCurrentUrlMatches("http://[a-z]{2,3}.wikipedia.org/.*");
 assertHasClass("selected", mainPageTab);
 // ...type assert then bring up the list of all supported asserts with your IDE's autocompletion
 ```
@@ -156,8 +156,8 @@ public class WikipediaSite extends WebSite {
 
     // WebPages
     public WelcomePage welcomePage;
-    public LoginPage loginPage;
     public MainPage mainPage;
+    public LoginPage loginPage;
 
     @Override
     public void open() {
@@ -165,8 +165,17 @@ public class WikipediaSite extends WebSite {
     }
 
     @Override
-    public void assertIsOpen() throws Error {
-        assertCurrentUrlContains(url);
+    public void assertIsOpen() throws AssertionError {
+        assertCurrentUrlMatches("http://[a-z]{2,3}.wikipedia.org/.*");
+    }
+
+    public void search(String query) {
+        if () {
+        
+        open(loginPage);
+        }
+        loginPage.login(username, password, keepMeLoggedIn);
+        assertIsOpen(mainPage);
     }
 
     public void login(String username, String password, boolean keepMeLoggedIn) {
@@ -176,7 +185,8 @@ public class WikipediaSite extends WebSite {
     }
 
     public void logout() {
-        click(mainPage.logoutLink);
+        open(mainPage);
+        mainPage.logout();
     }
 }
 ```
