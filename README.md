@@ -74,13 +74,82 @@ public class Menu extends WebComponent {
 ###Model Your Pages
 TOWRITE
 ```java
-ThreadDriver.setDriver(yourDriver);
+public class LoginPage extends WebPage<WikipediaSite> {
+
+    // Url
+    public static String url = WikipediaSite.url + "/login";
+
+    // WebElements
+    @FindBy(css = "input[name='wpName']")
+    public WebElement username;
+    @FindBy(css = "input[name='wpPassword']")
+    public WebElement password;
+    @FindBy(css = "input[name='wpRemember']")
+    public WebElement keepMeLoggedInCheckbox;    
+    @FindBy(css = "input#wpLoginAttempt")
+    public WebElement loginButton;
+
+    @Override
+    public void open() {
+        open(url);
+        assertIsOpen();
+    }
+
+    @Override
+    public void assertIsOpen() throws AssertionError {
+        assertCurrentUrlEquals(url);
+        assertIsDisplayed(username);
+        assertIsDisplayed(password);
+        assertIsDisplayed(keepMeLoggedInCheckbox);
+        assertIsDisplayed(loginButton);
+    }
+
+    public void login(String username, String password, boolean keepMeLoggedIn) {
+        clearAndType(username, this.username);
+        clearAndType(password, this.password);
+        if (keepMeLoggedIn) {
+            check(this.keepMeLoggedInCheckbox);
+        } else {
+            uncheck(this.keepMeLoggedInCheckbox);
+        }
+        click(this.loginButton);
+    }
+}
 ```
 
 ###Model Your Site
 TOWRITE
 ```java
-ThreadDriver.setDriver(yourDriver);
+public class WikipediaSite extends WebSite {
+
+    // Url
+    public static String url = "http://www.wikipedia.org/";
+
+    // WebPages
+    public WelcomePage welcomePage;
+    public LoginPage loginPage;
+    public MainPage mainPage;
+
+    @Override
+    public void open() {
+        open(url);
+    }
+
+    @Override
+    public void assertIsOpen() throws Error {
+        assertCurrentUrlContains(url);
+    }
+
+    public void login(String username, String password, boolean keepMeLoggedIn) {
+        open(loginPage);
+        loginPage.login(username, password, keepMeLoggedIn);
+        assertIsOpen(mainPage);
+    }
+
+    public void logout() {
+        click(mainPage.logoutLink);
+    }
+}
 ```
 
 ###Create Your Tests
