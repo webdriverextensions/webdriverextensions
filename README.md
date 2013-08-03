@@ -37,9 +37,10 @@ click(loginButton);
 ```
 ...and write your asserts
 ```java
-assertUrlStartsWith("http://en.wikipedia.org/wiki");
-assertTitleEquals("Wikipedia, the free encyclopedia");
 assertTextEquals("frank", currentUser);
+assertTitleEndsWith(" - Wikipedia, the free encyclopedia");
+assertUrlMatches("http://[a-z]{2,3}.wikipedia.org/.*");
+assertIsNotChecked(keepMeLoggedIn);
 ```
 ...and conditional statements
 ```java
