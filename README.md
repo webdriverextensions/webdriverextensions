@@ -40,7 +40,7 @@ click(loginButton);
 assertTextEquals("frank", currentUser);
 assertTitleEndsWith(" - Wikipedia, the free encyclopedia");
 assertUrlMatches("http://[a-z]{2,3}.wikipedia.org/.*");
-// Type assert then bring up the list of all supported asserts with your IDE's autocompletion
+// ...type assert then bring up the list of all supported asserts with your IDE's autocompletion
 ```
 ...and conditional statements
 ```java
@@ -56,19 +56,25 @@ ThreadDriver.setDriver(yourDriver);
 ###Model Your Components
 TOWRITE
 ```java
-public class Menu extends WebComponent {
+public class Interaction extends WebComponent {
+    @FindBy(css = "h3 a")
     @Delegate
-    @FindBy(css = "#menu")
-    public WebElement menu;
+    private WebElement interactionDelegate;
     
-    @FindBy(css = "#menu-create")
-    public WebElement create;
+    @FindBy(css = "#n-help a")
+    public WebElement help;
     
-    @FindBy(css = "#menu-update")
-    public WebElement update;
+    @FindBy(css = "#n-aboutsite a")
+    public WebElement aboutWikipedia;
     
-    @FindBy(css = "#menu-delete")
-    public WebElement delete;
+    @FindBy(css = "#n-portal a")
+    public WebElement communityPortal;
+    
+    @FindBy(css = "#n-recentchanges a")
+    public WebElement recentChanges;
+
+    @FindBy(css = "#n-contactpage a")
+    public WebElement contactPage;
 }
 ```
 
