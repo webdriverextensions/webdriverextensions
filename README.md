@@ -23,19 +23,23 @@ Add the Sonatype OSS Snapshot Repository
     <version>1.0.M1-SNAPSHOT</version>
 </dependency>
 ```
-###Using the Bot
+###Start Using the Bot
+If you don't use any of Webdriver Extensions JUnit Runners to run your tests make sure you set the thread driver before using the Bot
+```java
+ThreadDriver.setDriver(yourDriver);
+```
+
+
+###Model Your Components
 TODO
 
-###Creating a WebSite
+###Model Your Pages
 TODO
 
-###Creating WebPages
+###Model Your Site
 TODO
 
-###Creating WebComponents
-TODO
-
-###Using JUnit Annotation Runners 
+###Create Your Tests
 TODO
 
 ### <a href="http://testingbot.com" target="_blank">TestingBot</a> is now supporting this project by giving it a Free account!
