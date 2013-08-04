@@ -78,6 +78,11 @@ public class Interaction extends WebComponent {
     public WebElement contactPage;
 }
 ```
+```java
+public class RepositoriesSearchResult extends WebComponent {
+
+}
+```
 
 ###Model Your Pages
 TOWRITE
