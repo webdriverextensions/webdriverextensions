@@ -83,6 +83,11 @@ public class Interaction extends WebComponent {
 TOWRITE
 ```java
 public class MainPage extends WebPage<WikipediaSite> {
+    // Top Menu
+    // ...
+    @FindBy(css = "#pt-logout a")
+    public WebElement logout;
+
     // Search
     @FindBy(css = "input#searchInput")
     public WebElement search;
@@ -91,33 +96,35 @@ public class MainPage extends WebPage<WikipediaSite> {
     public WebElement searchButton;
 
     // Side Menu
-    @FindBy(css = "input[name='wpName']")
+    @FindBy(css = "#n-mainpage-description a")
     public WebElement mainPage;
     
-    @FindBy(css = "input[name='wpPassword']")
+    @FindBy(css = "#n-contents a")
     public WebElement contents;
     
-    @FindBy(css = "input[name='wpRemember']")
+    @FindBy(css = "#n-featuredcontent a")
     public WebElement featuredContent;    
     
-    @FindBy(css = "input#wpLoginAttempt")
+    @FindBy(css = "#n-currentevents a")
     public WebElement currentEvents;
     
-    @FindBy(css = "input#wpLoginAttempt")
+    @FindBy(css = "#n-randompage a")
     public WebElement randomArticle;
     
-    @FindBy(css = "input#wpLoginAttempt")
+    @FindBy(css = "#n-sitesupport a")
     public WebElement donateToWikipedia;
     
-    @FindBy(css = "input#wpLoginAttempt")
+    @FindBy(css = "#p-interaction")
     public Interaction interaction;
     
-    // ...and so the story goes on and on
+    // ...other components
 
     @Override
     public void open() {
-        open("http://en.wikipedia.org/wiki/Main_Page");
-        assertIsOpen();
+        if (isNotOpen()) {        
+            open("http://en.wikipedia.org/wiki/Main_Page");
+            assertIsOpen();
+        }    
     }
 
     @Override
@@ -136,12 +143,16 @@ public class MainPage extends WebPage<WikipediaSite> {
         assertIsDisplayed(randomArticle);
         assertIsDisplayed(donateToWikipedia);
         assertIsDisplayed(interaction);
-        // ...and so the story goes on and on
+        // ...other asserts
     }
 
     public void search(String query) {
         clearAndType(query, search);
         click(searchButton);
+    }
+
+    public void logout() {
+        click(logoutButton);
     }
 }
 ```
@@ -157,7 +168,9 @@ public class WikipediaSite extends WebSite {
     // WebPages
     public WelcomePage welcomePage;
     public MainPage mainPage;
+    public SearchResultPage searchResultPage;
     public LoginPage loginPage;
+    // ...other pages
 
     @Override
     public void open() {
@@ -169,20 +182,17 @@ public class WikipediaSite extends WebSite {
         assertCurrentUrlMatches("http://[a-z]{2,3}.wikipedia.org/.*");
     }
 
-    public void search(String query) {
-        if () {
-        
-        open(loginPage);
-        }
-        loginPage.login(username, password, keepMeLoggedIn);
-        assertIsOpen(mainPage);
+    public List<SearchResultRow> search(String query) {
+        open(mainPage);
+        mainPage.search(query);
+        assertIsOpen(searchResultPage);
+        return searchResultPage.getSearchResultRows();
     }
 
     public void login(String username, String password, boolean keepMeLoggedIn) {
         open(loginPage);
         loginPage.login(username, password, keepMeLoggedIn);
-        assertIsOpen(mainPage);
-    }
+url    }
 
     public void logout() {
         open(mainPage);
