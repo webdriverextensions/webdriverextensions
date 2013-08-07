@@ -115,7 +115,7 @@ public class SeleniumGridRunner extends BlockJUnit4ClassRunner {
                     testMethods.add(new SeleniumGridFrameworkMethod(browser, testAnnotatedMethod));
                 }
             } else {
-                // Not a Selenium Grid Anotated test, treat as normal test
+                // Not a Selenium Grid Annotated test, treat as normal test
                 testMethods.add(testAnnotatedMethod);
             }
         }
@@ -252,18 +252,6 @@ public class SeleniumGridRunner extends BlockJUnit4ClassRunner {
         private BooleanOption javascriptEnabled;
         private Map<String, Object> desiredCapabilities;
 
-        public BrowserConfiguration(String browserName, String version, Platform platform) {
-            this.browserName = browserName;
-            this.version = version;
-            this.platform = platform;
-        }
-
-        public BrowserConfiguration(RemoteWebDriver driver) {
-            this.browserName = driver.getCapabilities().getBrowserName();
-            this.version = driver.getCapabilities().getVersion();
-            this.platform = driver.getCapabilities().getPlatform();
-        }
-
         public BrowserConfiguration(Annotation annotation) {
 
             if (annotation.annotationType().equals(Android.class)
@@ -387,7 +375,6 @@ public class SeleniumGridRunner extends BlockJUnit4ClassRunner {
         public String toString() {
             return "Browser{" + "browserName=" + browserName + ", version=" + version + ", platform=" + platform + ", javascriptEnabled=" + javascriptEnabled + ", desiredCapabilitiesMap=" + desiredCapabilities + '}';
         }
-
 
         private boolean matches(BrowserConfiguration browser) {
             if (!this.getBrowserName().equals(browser.getBrowserName())) {

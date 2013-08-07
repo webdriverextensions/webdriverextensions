@@ -1,10 +1,15 @@
 package org.andidev.webdriverextension.junitrunner;
 
+import com.google.common.base.Objects;
+import com.google.gson.Gson;
 import com.opera.core.systems.OperaDriver;
 import java.lang.annotation.Annotation;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 import java.util.TreeSet;
 import org.andidev.webdriverextension.internal.junitrunner.AnnotationUtils;
 import org.andidev.webdriverextension.ThreadDriver;
@@ -32,6 +37,8 @@ import org.andidev.webdriverextension.junitrunner.annotations.Opera;
 import org.andidev.webdriverextension.junitrunner.annotations.PhantomJS;
 import org.andidev.webdriverextension.junitrunner.annotations.Safari;
 import org.andidev.webdriverextension.internal.WebDriverExtensionException;
+import org.andidev.webdriverextension.internal.utils.PropertyUtils;
+import org.andidev.webdriverextension.junitrunner.annotations.BooleanOption;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
@@ -53,6 +60,7 @@ import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.iphone.IPhoneDriver;
 import org.openqa.selenium.phantomjs.PhantomJSDriver;
+import org.openqa.selenium.remote.BrowserType;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.safari.SafariDriver;
 
@@ -119,7 +127,7 @@ public class WebDriverRunner extends BlockJUnit4ClassRunner {
                     testMethods.add(new WebDriverFrameworkMethod(browser, testAnnotatedMethod));
                 }
             } else {
-                // Not a Selenium Grid Anotated test, treat as normal test
+                // Not a WebDriver Annotated test, treat as normal test
                 testMethods.add(testAnnotatedMethod);
             }
         }
@@ -155,14 +163,14 @@ public class WebDriverRunner extends BlockJUnit4ClassRunner {
 
     private class BrowserConfigurations {
 
-        TreeSet<BrowserConfiguration> browsers = new TreeSet<BrowserConfiguration>();
-        TreeSet<BrowserConfiguration> ignoreBrowsers = new TreeSet<BrowserConfiguration>();
+        Set<BrowserConfiguration> browsers = new LinkedHashSet<BrowserConfiguration>();
+        Set<BrowserConfiguration> ignoreBrowsers = new LinkedHashSet<BrowserConfiguration>();
 
-        public TreeSet<BrowserConfiguration> getBrowsers() {
+        public Set<BrowserConfiguration> getBrowsers() {
             return browsers;
         }
 
-        public TreeSet<BrowserConfiguration> getIgnoreBrowsers() {
+        public Set<BrowserConfiguration> getIgnoreBrowsers() {
             return ignoreBrowsers;
         }
 
@@ -177,17 +185,10 @@ public class WebDriverRunner extends BlockJUnit4ClassRunner {
         }
 
         public boolean isBrowserIgnored(BrowserConfiguration browser) {
-            if (ignoreBrowsers.contains(browser)) {
-                return true;
-            }
-            if (ignoreBrowsersContainsBrowserWithVersionAnyAndPlatformAny(browser.getBrowserName())) {
-                return true;
-            }
-            if (ignoreBrowsersContainsBrowserWithVersionAny(browser.getBrowserName(), browser.getPlatform())) {
-                return true;
-            }
-            if (ignoreBrowsersContainsBrowserWithPlatformAny(browser.getBrowserName(), browser.getVersion())) {
-                return true;
+            for (BrowserConfiguration ignoreBrowser : ignoreBrowsers) {
+                if (browser.matches(ignoreBrowser)) {
+                    return true;
+                }
             }
             return false;
         }
@@ -252,101 +253,64 @@ public class WebDriverRunner extends BlockJUnit4ClassRunner {
             ignoreBrowsers.add(new BrowserConfiguration(annotation));
             return this;
         }
-
-        private boolean ignoreBrowsersContainsBrowserWithVersionAnyAndPlatformAny(String browserName) {
-            for (BrowserConfiguration ignoreBrowser : ignoreBrowsers) {
-                if (ignoreBrowser.getBrowserName().equals(browserName)
-                        && ignoreBrowser.getVersion().equals("")
-                        && ignoreBrowser.getPlatform().equals(Platform.ANY)) {
-                    return true;
-                }
-            }
-            return false;
-        }
-
-        private boolean ignoreBrowsersContainsBrowserWithVersionAny(String browserName, Platform platform) {
-            for (BrowserConfiguration ignoreBrowser : ignoreBrowsers) {
-                if (ignoreBrowser.getBrowserName().equals(browserName)
-                        && ignoreBrowser.getVersion().equals("")
-                        && ignoreBrowser.getPlatform().equals(platform)) {
-                    return true;
-                }
-            }
-            return false;
-        }
-
-        private boolean ignoreBrowsersContainsBrowserWithPlatformAny(String browserName, String version) {
-            for (BrowserConfiguration ignoreBrowser : ignoreBrowsers) {
-                if (ignoreBrowser.getBrowserName().equals(browserName)
-                        && ignoreBrowser.getVersion().equals(version)
-                        && ignoreBrowser.getPlatform().equals(Platform.ANY)) {
-                    return true;
-                }
-            }
-            return false;
-        }
     }
 
-    public class BrowserConfiguration implements Comparable<BrowserConfiguration> {
+    public class BrowserConfiguration {
 
         private String browserName;
         private String version;
         private Platform platform;
         private String platformName;
-
-        public BrowserConfiguration(String browserName, String version, Platform platform) {
-            this.browserName = browserName;
-            this.version = version;
-            this.platform = platform;
-        }
-
-        public BrowserConfiguration(RemoteWebDriver driver) {
-            this.browserName = driver.getCapabilities().getBrowserName();
-            this.version = driver.getCapabilities().getVersion();
-            this.platform = driver.getCapabilities().getPlatform();
-        }
+        private BooleanOption javascriptEnabled;
+        private Map<String, Object> desiredCapabilities;
 
         public BrowserConfiguration(Annotation annotation) {
 
             if (annotation.annotationType().equals(Android.class)
                     || annotation.annotationType().equals(IgnoreAndroid.class)) {
-                this.browserName = "android";
+                this.browserName = BrowserType.ANDROID;
             } else if (annotation.annotationType().equals(Chrome.class)
                     || annotation.annotationType().equals(IgnoreChrome.class)) {
-                this.browserName = "chrome";
+                this.browserName = BrowserType.CHROME;
             } else if (annotation.annotationType().equals(Firefox.class)
                     || annotation.annotationType().equals(IgnoreFirefox.class)) {
-                this.browserName = "firefox";
+                this.browserName = BrowserType.FIREFOX;
             } else if (annotation.annotationType().equals(HtmlUnit.class)
                     || annotation.annotationType().equals(IgnoreHtmlUnit.class)) {
-                this.browserName = "htmlunit";
+                this.browserName = BrowserType.HTMLUNIT;
             } else if (annotation.annotationType().equals(IPhone.class)
                     || annotation.annotationType().equals(IgnoreIPhone.class)) {
-                this.browserName = "iPhone";
+                this.browserName = BrowserType.IPHONE;
             } else if (annotation.annotationType().equals(IPad.class)
                     || annotation.annotationType().equals(IgnoreIPad.class)) {
-                this.browserName = "iPad";
+                this.browserName = BrowserType.IPAD;
             } else if (annotation.annotationType().equals(InternetExplorer.class)
                     || annotation.annotationType().equals(IgnoreInternetExplorer.class)) {
-                this.browserName = "internet explorer";
+                this.browserName = BrowserType.IE;
             } else if (annotation.annotationType().equals(Opera.class)
                     || annotation.annotationType().equals(IgnoreOpera.class)) {
-                this.browserName = "opera";
+                this.browserName = BrowserType.OPERA;
             } else if (annotation.annotationType().equals(PhantomJS.class)
                     || annotation.annotationType().equals(IgnorePhantomJS.class)) {
-                this.browserName = "phantomjs";
+                this.browserName = BrowserType.PHANTOMJS;
             } else if (annotation.annotationType().equals(Safari.class)
                     || annotation.annotationType().equals(IgnoreSafari.class)) {
-                this.browserName = "safari";
+                this.browserName = BrowserType.SAFARI;
             } else if (annotation.annotationType().equals(Browser.class)
                     || annotation.annotationType().equals(IgnoreBrowser.class)) {
                 this.browserName = (String) AnnotationUtils.getValue(annotation, "browserName");
-                this.version = (String) AnnotationUtils.getValue(annotation, "version");
-                this.platformName = (String) AnnotationUtils.getValue(annotation, "platform");
-                return;
             }
             this.version = (String) AnnotationUtils.getValue(annotation, "version");
-            this.platform = (Platform) AnnotationUtils.getValue(annotation, "platform");
+            if (AnnotationUtils.getValue(annotation, "platform") instanceof String) {
+                this.platformName = (String) AnnotationUtils.getValue(annotation, "platform");
+            } else if (AnnotationUtils.getValue(annotation, "platform") instanceof Platform) {
+                this.platform = (Platform) AnnotationUtils.getValue(annotation, "platform");
+            }
+            this.javascriptEnabled = (BooleanOption) AnnotationUtils.getValue(annotation, "javascriptEnabled");
+            String desiredCapabilitiesString = (String) AnnotationUtils.getValue(annotation, "desiredCapabilities");
+            if (desiredCapabilitiesString != null) {
+                this.desiredCapabilities = new Gson().fromJson(desiredCapabilitiesString, Map.class);
+            }
         }
 
         public String getBrowserName() {
@@ -365,48 +329,62 @@ public class WebDriverRunner extends BlockJUnit4ClassRunner {
             return platform.toString();
         }
 
+        public BooleanOption getJavascriptEnabled() {
+            return javascriptEnabled;
+        }
 
+        public void setJavascriptEnabled(BooleanOption javascriptEnabled) {
+            this.javascriptEnabled = javascriptEnabled;
+        }
+
+        public Map<String, Object> getDesiredCapabilitiesMap() {
+            return desiredCapabilities;
+        }
+
+        public void setDesiredCapabilitiesMap(Map<String, Object> desiredCapabilitiesMap) {
+            this.desiredCapabilities = desiredCapabilitiesMap;
+        }
 
         private WebDriver createDriver() throws Exception {
-            if ("android".equals(browserName)) {
+            if (BrowserType.ANDROID.equals(browserName)) {
                 return new AndroidDriver();
             }
 
-            if ("chrome".equals(browserName)) {
-                System.setProperty("webdriver.chrome.driver", "/Users/anders/.bin/chromedriver");
+            if (BrowserType.CHROME.equals(browserName)) {
+                PropertyUtils.setPropertyIfNotExists("webdriver.chrome.driver", "~/.bin/chromedriver");
                 return new ChromeDriver();
             }
 
-            if ("firefox".equals(browserName)) {
+            if (BrowserType.FIREFOX.equals(browserName)) {
                 return new FirefoxDriver();
             }
 
-            if ("htmlunit".equals(browserName)) {
+            if (BrowserType.HTMLUNIT.equals(browserName)) {
                 return new HtmlUnitDriver();
             }
 
-            if ("iPad".equals(browserName)) {
+            if (BrowserType.IPHONE.equals(browserName)) {
                 return new IPhoneDriver();
             }
 
-            if ("iPhone".equals(browserName)) {
+            if (BrowserType.IPAD.equals(browserName)) {
                 return new IPhoneDriver();
             }
 
-            if ("internet explorer".equals(browserName)) {
-                System.setProperty("webdriver.ie.driver", "/Users/anders/.bin/internetexplorerdriver");
+            if (BrowserType.IE.equals(browserName)) {
+                PropertyUtils.setPropertyIfNotExists("webdriver.ie.driver", "c:/drivers/internetexplorerdriver");
                 return new InternetExplorerDriver();
             }
 
-            if ("opera".equals(browserName)) {
+            if (BrowserType.OPERA.equals(browserName)) {
                 return new OperaDriver();
             }
 
-            if ("phantomjs".equals(browserName)) {
+            if (BrowserType.PHANTOMJS.equals(browserName)) {
                 return new PhantomJSDriver(null);
             }
 
-            if ("safari".equals(browserName)) {
+            if (BrowserType.SAFARI.equals(browserName)) {
                 return new SafariDriver();
             }
 
@@ -415,31 +393,80 @@ public class WebDriverRunner extends BlockJUnit4ClassRunner {
 
         private Object getTestDescriptionSuffix() {
             String browserNameDescription = (browserName != null ? "[" + browserName + "]" : "[ANY]");
-            String versionDescription = (version != null ? "[" + version + "]" : "[ANY]");
-            String platformDescription;
-            if (platformName != null) {
-                platformDescription = "[" + platformName + "]";
-            } else {
-                platformDescription = (platform != Platform.ANY ? "[" + platform.toString() + "]" : "[ANY]");
-            }
+            String javascriptEnabledDescription = (javascriptEnabled != BooleanOption.ANY ? "[" + javascriptEnabled.getValue() + "]" : "[ANY]");
+            String desiredCapabilitiesDescription = (desiredCapabilities != null ? "[" + desiredCapabilities + "]" : "[NONE]");
 
-            return browserNameDescription + versionDescription + platformDescription;
-        }
-
-        @Override
-        public int compareTo(BrowserConfiguration t) {
-            if (StringUtils.equals(this.getBrowserName(), t.getBrowserName())
-                    && StringUtils.equals(this.getVersion(), t.getVersion())
-                    && this.getPlatform().equals(t.getPlatform())) {
-                return 0;
-            } else {
-                return 1;
-            }
+            return browserNameDescription + javascriptEnabledDescription + desiredCapabilitiesDescription;
         }
 
         @Override
         public String toString() {
-            return "Browser{" + "browserName=" + browserName + ", version=" + version + ", platform=" + platform + '}';
+            return "Browser{" + "browserName=" + browserName + ", version=" + version + ", platform=" + platform + ", javascriptEnabled=" + javascriptEnabled + ", desiredCapabilitiesMap=" + desiredCapabilities + '}';
+        }
+
+        private boolean matches(BrowserConfiguration browser) {
+            if (!this.getBrowserName().equals(browser.getBrowserName())) {
+                return false;
+            }
+            if (this.isVersionProvided()
+                    && (browser.isVersionProvided() && !this.getVersion().equals(browser.getVersion()))) {
+                return false;
+            }
+            if (this.isPlatformProvided()
+                    && (browser.isPlatformProvided() && !this.getPlatform().equals(browser.getPlatform()))) {
+                return false;
+            }
+            if (this.isJavascriptEnabledProvided()
+                    && (browser.isJavascriptEnabledProvided() && !this.getJavascriptEnabled().equals(browser.getJavascriptEnabled()))) {
+                return false;
+            }
+            if (this.isDesiredCapabilitiesProvided()
+                    && (browser.isDesiredCapabilitiesProvided() && !this.getDesiredCapabilitiesMap().equals(browser.getDesiredCapabilitiesMap()))) {
+                return false;
+            }
+            return true;
+        }
+
+        private boolean isVersionProvided() {
+            return !StringUtils.isBlank(version);
+        }
+
+        private boolean isPlatformProvided() {
+            return !Platform.ANY.equals(platform);
+        }
+
+        private boolean isJavascriptEnabledProvided() {
+            return !BooleanOption.ANY.equals(javascriptEnabled);
+        }
+
+        private boolean isDesiredCapabilitiesProvided() {
+            return desiredCapabilities != null;
+        }
+
+        @Override
+        public boolean equals(Object object) {
+            if (object instanceof BrowserConfiguration) {
+                final BrowserConfiguration browser = (BrowserConfiguration) object;
+                if (!this.getBrowserName().equals(browser.getBrowserName())) {
+                    return false;
+                }
+                if (this.isJavascriptEnabledProvided()
+                        && (browser.isJavascriptEnabledProvided() && !this.getJavascriptEnabled().equals(browser.getJavascriptEnabled()))) {
+                    return false;
+                }
+                if (this.isDesiredCapabilitiesProvided()
+                        && (browser.isDesiredCapabilitiesProvided() && !this.getDesiredCapabilitiesMap().equals(browser.getDesiredCapabilitiesMap()))) {
+                    return false;
+                }
+                return true;
+            } else {
+                return false;
+            }
+        }
+
+        @Override
+        public int hashCode() {
+            return Objects.hashCode(browserName, javascriptEnabled, desiredCapabilities);
         }
     }
 }
