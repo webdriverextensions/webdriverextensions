@@ -10,7 +10,6 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import java.util.TreeSet;
 import org.andidev.webdriverextension.internal.junitrunner.AnnotationUtils;
 import org.andidev.webdriverextension.ThreadDriver;
 import org.andidev.webdriverextension.junitrunner.annotations.RemoteAddress;
@@ -37,8 +36,10 @@ import org.andidev.webdriverextension.junitrunner.annotations.Opera;
 import org.andidev.webdriverextension.junitrunner.annotations.PhantomJS;
 import org.andidev.webdriverextension.junitrunner.annotations.Safari;
 import org.andidev.webdriverextension.internal.WebDriverExtensionException;
-import org.andidev.webdriverextension.internal.utils.PropertyUtils;
+import org.andidev.webdriverextension.internal.junitrunner.DriverPathLoader;
+import org.andidev.webdriverextension.internal.utils.OsUtils;
 import org.andidev.webdriverextension.junitrunner.annotations.BooleanOption;
+import org.andidev.webdriverextension.junitrunner.annotations.DriverPaths;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
@@ -61,7 +62,6 @@ import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.iphone.IPhoneDriver;
 import org.openqa.selenium.phantomjs.PhantomJSDriver;
 import org.openqa.selenium.remote.BrowserType;
-import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.safari.SafariDriver;
 
 public class WebDriverRunner extends BlockJUnit4ClassRunner {
@@ -84,7 +84,6 @@ public class WebDriverRunner extends BlockJUnit4ClassRunner {
             return browser;
         }
     }
-
     private static List<Class> browserAnnotationClasses = Arrays.asList(new Class[]{
         Android.class,
         Chrome.class,
@@ -114,6 +113,7 @@ public class WebDriverRunner extends BlockJUnit4ClassRunner {
 
     public WebDriverRunner(Class<?> klass) throws InitializationError {
         super(klass);
+        DriverPathLoader.loadDriverPaths(getTestClass().getJavaClass().getAnnotation(DriverPaths.class));
     }
 
     @Override
@@ -140,7 +140,10 @@ public class WebDriverRunner extends BlockJUnit4ClassRunner {
             BrowserConfigurations browserConfigurations = new BrowserConfigurations().addConfigurationsFromClassAnnotations(getTestClass()).addConfigurationsFromMethodAnnotations(method);
             BrowserConfiguration browserConfiguration = ((WebDriverFrameworkMethod) method).getBrowser();
             Description description = describeChild(method);
-            if (method.getAnnotation(Ignore.class) != null || browserConfigurations.isBrowserIgnored(browserConfiguration)) {
+            if (method.getAnnotation(Ignore.class) != null
+                    || browserConfigurations.isBrowserIgnored(browserConfiguration)
+                    || (BrowserType.IE.equals(browserConfiguration.getBrowserName()) && !OsUtils.isWindows())
+                    || (BrowserType.IEXPLORE.equals(browserConfiguration.getBrowserName()) && !OsUtils.isWindows())) {
                 long threadId = Thread.currentThread().getId();
                 notifier.fireTestIgnored(description);
             } else {
@@ -351,7 +354,6 @@ public class WebDriverRunner extends BlockJUnit4ClassRunner {
             }
 
             if (BrowserType.CHROME.equals(browserName)) {
-                PropertyUtils.setPropertyIfNotExists("webdriver.chrome.driver", "~/.bin/chromedriver");
                 return new ChromeDriver();
             }
 
@@ -372,7 +374,6 @@ public class WebDriverRunner extends BlockJUnit4ClassRunner {
             }
 
             if (BrowserType.IE.equals(browserName)) {
-                PropertyUtils.setPropertyIfNotExists("webdriver.ie.driver", "c:/drivers/internetexplorerdriver");
                 return new InternetExplorerDriver();
             }
 
