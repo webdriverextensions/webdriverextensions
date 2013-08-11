@@ -237,7 +237,7 @@ TOWRITE
 @Firefox
 @Chrome
 @InternetExplorer
-public class MainPageTest extends SiteNameSiteTest {
+public class MainPageTest {
 
     @Test
     public void openMainPageTest() throws Exception {
