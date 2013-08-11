@@ -12,7 +12,6 @@ import java.util.Map;
 import java.util.Set;
 import org.andidev.webdriverextension.internal.junitrunner.AnnotationUtils;
 import org.andidev.webdriverextension.ThreadDriver;
-import org.andidev.webdriverextension.junitrunner.annotations.RemoteAddress;
 import org.andidev.webdriverextension.junitrunner.annotations.Android;
 import org.andidev.webdriverextension.junitrunner.annotations.Chrome;
 import org.andidev.webdriverextension.junitrunner.annotations.Browser;
@@ -144,11 +143,9 @@ public class WebDriverRunner extends BlockJUnit4ClassRunner {
                     || browserConfigurations.isBrowserIgnored(browserConfiguration)
                     || (BrowserType.IE.equals(browserConfiguration.getBrowserName()) && !OsUtils.isWindows())
                     || (BrowserType.IEXPLORE.equals(browserConfiguration.getBrowserName()) && !OsUtils.isWindows())) {
-                long threadId = Thread.currentThread().getId();
                 notifier.fireTestIgnored(description);
             } else {
                 long threadId = Thread.currentThread().getId();
-                String remoteAddress = ((RemoteAddress) getTestClass().getJavaClass().getAnnotation(RemoteAddress.class)).value();
                 try {
                     ThreadDriver.setDriver(browserConfiguration.createDriver());
                 } catch (Exception ex) {

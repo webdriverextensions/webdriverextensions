@@ -129,7 +129,6 @@ public class SeleniumGridRunner extends BlockJUnit4ClassRunner {
             BrowserConfiguration browserConfiguration = ((SeleniumGridFrameworkMethod) method).getBrowser();
             Description description = describeChild(method);
             if (method.getAnnotation(Ignore.class) != null || browserConfigurations.isBrowserIgnored(browserConfiguration)) {
-                long threadId = Thread.currentThread().getId();
                 notifier.fireTestIgnored(description);
             } else {
                 long threadId = Thread.currentThread().getId();
