@@ -7,7 +7,30 @@ WebDriver Extension is a framework that extends the WebDriver framework with com
 This project is under development and therefore not recomended to use yet, though the development is in its final stages. Once the [Milestone 1.0](https://github.com/andidev/webdriver-extension/issues?milestone=1&page=1&sort=created&state=open) is released the framework will be fully functional and ready for community feedback.
 
 ### Want to Try It?
-Add the Sonatype OSS Snapshot Repository
+Use the archetyoe to create a new project
+```sh
+mvn archetype:generate                                                                             \
+  -DgroupId=com.github                                                                             \
+  -DartifactId=github                                                                              \
+  -Dversion=1.0-SNAPSHOT                                                                           \
+  -DsiteName=GitHub                                                                                \
+  -DsiteUrl=https://github.com                                                                     \
+  -DarchetypeGroupId=org.andidev                                                                   \
+  -DarchetypeArtifactId=webdriver-extension-archetype-quickstart                                   \
+  -DarchetypeVersion=1.0-SNAPSHOT                                                                  \
+  -DarchetypeCatalog=https://oss.sonatype.org/content/repositories/snapshots/archetype-catalog.xml
+```
+
+... and download the latest drivers
+```sh
+mvn archetype:generate                                                                             \
+  -DarchetypeGroupId=org.andidev                                                                   \
+  -DarchetypeArtifactId=webdriver-extension-archetype-drivers                                      \
+  -DarchetypeVersion=1.0-SNAPSHOT                                                                  \
+  -DarchetypeCatalog=https://oss.sonatype.org/content/repositories/snapshots/archetype-catalog.xml
+```
+
+Or if you want to use it in a current project add the Sonatype OSS Snapshot Repository
 ```xml
 <repository>
     <id>sonatype-nexus-snapshots</id>
@@ -23,6 +46,7 @@ Add the Sonatype OSS Snapshot Repository
     <version>1.0.M1-SNAPSHOT</version>
 </dependency>
 ```
+
 ###Start Using the Bot methods
 Just import the static Bot
 ```java
