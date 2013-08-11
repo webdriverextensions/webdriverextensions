@@ -56,7 +56,7 @@ import static org.andidev.webdriverextension.Bot.*;
 ```java
 type("testuser", username);
 type("ai78cGsT", password);
-uncheck(keepMeLoggedInCheckbox);
+uncheck(rememberMeCheckbox);
 click(loginButton);
 ```
 ...and write your asserts
@@ -233,7 +233,18 @@ url    }
 ###Create Your Tests
 TOWRITE
 ```java
-ThreadDriver.setDriver(yourDriver);
+@RunWith(WebDriverRunner.class)
+@Firefox
+@Chrome
+@InternetExplorer
+public class MainPageTest extends SiteNameSiteTest {
+
+    @Test
+    public void openMainPageTest() throws Exception {
+        open(site);
+        assertIsOpen(mainPage);
+    }
+}
 ```
 
 ### <a href="http://testingbot.com" target="_blank">TestingBot</a> is now supporting this project by giving it a Free account!
