@@ -48,7 +48,7 @@ Or if you want to use it in a current project add the Sonatype OSS Snapshot Repo
 ```
 
 ###Start Using the Bot methods
-Just import the static Bot
+Just import the static Bot where you want to use it
 ```java
 import static org.andidev.webdriverextension.Bot.*;
 ```
