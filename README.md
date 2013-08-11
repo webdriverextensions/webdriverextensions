@@ -15,7 +15,7 @@ mvn archetype:generate                                                          
   -Dversion=1.0-SNAPSHOT                                                                           \
   -DsiteName=GitHub                                                                                \
   -DsiteUrl=https://github.com                                                                     \
-  -DarchetypeGroupId=org.andidev                                                                   \
+  -DarchetypeGroupId=org.andidev.webdriverextension                                                \
   -DarchetypeArtifactId=webdriver-extension-archetype-quickstart                                   \
   -DarchetypeVersion=1.0-SNAPSHOT                                                                  \
   -DarchetypeCatalog=https://oss.sonatype.org/content/repositories/snapshots/archetype-catalog.xml
@@ -24,12 +24,11 @@ mvn archetype:generate                                                          
 ... and download the latest drivers
 ```sh
 mvn archetype:generate                                                                             \
-  -DarchetypeGroupId=org.andidev                                                                   \
+  -DarchetypeGroupId=org.andidev.webdriverextension                                                \
   -DarchetypeArtifactId=webdriver-extension-archetype-drivers                                      \
   -DarchetypeVersion=1.0-SNAPSHOT                                                                  \
   -DarchetypeCatalog=https://oss.sonatype.org/content/repositories/snapshots/archetype-catalog.xml
 ```
-The driver are added to your projects root in the drivers folder. Don't forget to make them executable if you are using mac or linux.
 
 Or if you want to use it in a current project add the Sonatype OSS Snapshot Repository
 ```xml
