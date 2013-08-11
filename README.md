@@ -29,6 +29,7 @@ mvn archetype:generate                                                          
   -DarchetypeVersion=1.0-SNAPSHOT                                                                  \
   -DarchetypeCatalog=https://oss.sonatype.org/content/repositories/snapshots/archetype-catalog.xml
 ```
+The driver are added to your projects root in the drivers folder. Don't forget to make them executable if you are using mac or linux.
 
 Or if you want to use it in a current project add the Sonatype OSS Snapshot Repository
 ```xml
