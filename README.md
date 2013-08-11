@@ -7,7 +7,7 @@ WebDriver Extension is a framework that extends the WebDriver framework with com
 This project is under development and therefore not recomended to use yet, though the development is in its final stages. Once the [Milestone 1.0](https://github.com/andidev/webdriver-extension/issues?milestone=1&page=1&sort=created&state=open) is released the framework will be fully functional and ready for community feedback.
 
 ### Want to Try It?
-Use the archetyoe to create a new project
+Use the archetype to create a new project
 ```sh
 mvn archetype:generate                                                                             \
   -DgroupId=com.github                                                                             \
