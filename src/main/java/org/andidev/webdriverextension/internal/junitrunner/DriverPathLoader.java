@@ -48,7 +48,11 @@ public class DriverPathLoader {
         } else if (OsUtils.isMac()) {
             return "drivers/mac/chromedriver";
         } else if (OsUtils.isLinux()) {
-            return "drivers/linux/chromedriver";
+            if (OsUtils.is64Bit()) {
+                return "drivers/linux/chromedriver64bit";
+            } else {
+                return "drivers/linux/chromedriver";
+            }
         }
         throw new WebDriverExtensionException("You are using an unsuported platform. Platform = " + OsUtils.getOsName()  + ", Version = " + OsUtils.getOsVersion());
     }
