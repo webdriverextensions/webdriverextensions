@@ -50,7 +50,7 @@ public class DriverPathLoader {
         } else if (OsUtils.isLinux()) {
             return "drivers/linux/chromedriver";
         }
-        throw new WebDriverExtensionException("You are using an unsuported platform. Platform = " + OsUtils.getOsName());
+        throw new WebDriverExtensionException("You are using an unsuported platform. Platform = " + OsUtils.getOsName()  + ", Version = " + OsUtils.getOsVersion());
     }
 
     private static String getInternetExplorerDriverDefaultPath() {

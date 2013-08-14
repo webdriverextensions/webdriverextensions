@@ -10,6 +10,10 @@ public class OsUtils {
         return System.getProperty("os.name");
     }
 
+    public static String getOsVersion() {
+        return System.getProperty("os.version");
+    }
+
     public static boolean isWindows() {
         return (OS.indexOf("win") >= 0);
     }
