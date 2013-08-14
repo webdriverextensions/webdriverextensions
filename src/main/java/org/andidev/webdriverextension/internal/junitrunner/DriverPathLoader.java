@@ -1,6 +1,7 @@
 package org.andidev.webdriverextension.internal.junitrunner;
 
 import org.andidev.webdriverextension.internal.WebDriverExtensionException;
+import org.andidev.webdriverextension.internal.utils.FileUtils;
 import org.andidev.webdriverextension.internal.utils.OsUtils;
 import org.andidev.webdriverextension.junitrunner.annotations.DriverPaths;
 import org.apache.commons.lang3.StringUtils;
@@ -14,6 +15,7 @@ public class DriverPathLoader {
     public static void loadDriverPaths(DriverPaths driverPaths) {
         setChromeDriverDriverPath(driverPaths != null ? driverPaths.chrome() : "");
         setInternetExplorerDriverPath(driverPaths != null ? driverPaths.internetExplorer() : "");
+        makeSureDriversAreExecutable();
     }
 
     private static void setChromeDriverDriverPath(String path) {
@@ -42,6 +44,11 @@ public class DriverPathLoader {
         System.setProperty(INTERNET_EXPLORER_DRIVER_PROPERTY_KEY, getInternetExplorerDriverDefaultPath());
     }
 
+    private static void makeSureDriversAreExecutable() {
+        FileUtils.makeExecutable(System.getProperty(CHROME_DRIVER_PROPERTY_KEY));
+        FileUtils.makeExecutable(System.getProperty(INTERNET_EXPLORER_DRIVER_PROPERTY_KEY));
+    }
+
     private static String getChromeDriverDefaultPath() {
         if (OsUtils.isWindows()) {
             return "drivers/windows/chromedriver.exe";
@@ -54,7 +61,7 @@ public class DriverPathLoader {
                 return "drivers/linux/chromedriver";
             }
         }
-        throw new WebDriverExtensionException("You are using an unsuported platform. Platform = " + OsUtils.getOsName()  + ", Version = " + OsUtils.getOsVersion());
+        throw new WebDriverExtensionException("You are using an unsuported platform. Platform = " + OsUtils.getOsName() + ", Version = " + OsUtils.getOsVersion());
     }
 
     private static String getInternetExplorerDriverDefaultPath() {
