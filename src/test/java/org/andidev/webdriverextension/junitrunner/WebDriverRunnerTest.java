@@ -1,66 +1,24 @@
 package org.andidev.webdriverextension.junitrunner;
 
-import org.andidev.webdriverextension.junitrunner.annotations.Browsers;
 import org.andidev.webdriverextension.junitrunner.annotations.Chrome;
 import org.andidev.webdriverextension.junitrunner.annotations.Firefox;
-import org.andidev.webdriverextension.junitrunner.annotations.IgnoreBrowsers;
-import org.andidev.webdriverextension.junitrunner.annotations.IgnoreFirefox;
-import org.junit.Assert;
-import org.junit.Ignore;
+import org.andidev.webdriverextension.junitrunner.annotations.HtmlUnit;
+import org.andidev.webdriverextension.junitrunner.annotations.InternetExplorer;
+import org.andidev.webdriverextension.junitrunner.annotations.Safari;
+import static org.andidev.webdriverextension.Bot.*;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.openqa.selenium.Platform;
 
-//@RunWith(SeleniumGridRunner.class)
-@Browsers(firefox =
-    @Firefox(version = "20"))
-@Ignore
+@RunWith(WebDriverRunner.class)
+@Firefox
+@Chrome
+@InternetExplorer
+@HtmlUnit
+@Safari
 public class WebDriverRunnerTest {
-
-//    @Test
-//    public void testSetDriverByDriver() {
-//        System.out.println("browserName = " + ((RemoteWebDriver) ThreadDriver.getDriver()).getCapabilities().getBrowserName());
-//        System.out.println("browserVersion = " + ((RemoteWebDriver) ThreadDriver.getDriver()).getCapabilities().getVersion());
-//        System.out.println("platformName = " + ((RemoteWebDriver) ThreadDriver.getDriver()).getCapabilities().getPlatform().toString());
-//    }
-//
-//    @Test
-//    @IgnoreChrome
-//    public void testSetDriverByDriver2() {
-//        System.out.println("browserName = " + ((RemoteWebDriver) ThreadDriver.getDriver()).getCapabilities().getBrowserName());
-//        System.out.println("browserVersion = " + ((RemoteWebDriver) ThreadDriver.getDriver()).getCapabilities().getVersion());
-//        System.out.println("platformName = " + ((RemoteWebDriver) ThreadDriver.getDriver()).getCapabilities().getPlatform().toString());
-//    }
     @Test
-    @IgnoreFirefox
     public void successfulTest() {
-        System.out.println("Running successfulTest");
+        open("https://github.com");
+        assertCurrentUrlStartsWith("https://github.com");
     }
-    @Test
-    @IgnoreFirefox
-    public void successfulTest2() {
-        System.out.println("Running successfulTest");
-    }
-    @Test
-    @IgnoreFirefox
-    public void successfulTest3() {
-        System.out.println("Running successfulTest");
-    }
-//    @Test
-//    @Ignore
-//    public void ignoredTest() {
-//        System.out.println("Running ignoredTest");
-//    }
-//
-//    @Test
-//    public void failingTest() {
-//        System.out.println("Running failingTest");
-//        Assert.fail("Failing test!");
-//    }
-//
-//    @Test
-//    public void throwingExceptionTest() {
-//        System.out.println("Running throwingExceptionTest");
-//        throw new RuntimeException("Throwing exception from test");
-//    }
 }
