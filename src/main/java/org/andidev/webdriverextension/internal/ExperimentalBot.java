@@ -1,6 +1,5 @@
 package org.andidev.webdriverextension.internal;
 
-import com.opera.core.systems.OperaDriver;
 import org.andidev.webdriverextension.ThreadDriver;
 import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.JavascriptExecutor;
@@ -9,7 +8,6 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
-import org.openqa.selenium.phantomjs.PhantomJSDriver;
 import org.openqa.selenium.remote.BrowserType;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.safari.SafariDriver;
@@ -88,19 +86,17 @@ public class ExperimentalBot {
     public static boolean browserIsOpera() {
         if (ThreadDriver.getDriver() instanceof RemoteWebDriver) {
             return isRemoteWebdriverBrowser(BrowserType.OPERA);
-        } else if (ThreadDriver.getDriver() instanceof OperaDriver) {
-            return true;
         }
-        return false;
+        throw new WebDriverExtensionException("Sorry! browserIsOpera() is only "
+                + "implemented for RemoteWebDriver at the moment.");
     }
 
     public static boolean browserIsPhantomJS() {
         if (ThreadDriver.getDriver() instanceof RemoteWebDriver) {
             return isRemoteWebdriverBrowser(BrowserType.PHANTOMJS);
-        } else if (ThreadDriver.getDriver() instanceof PhantomJSDriver) {
-            return true;
         }
-        return false;
+        throw new WebDriverExtensionException("Sorry! browserIsPhantomJS() is only "
+                + "implemented for RemoteWebDriver at the moment.");
     }
 
     public static boolean browserIsSafari() {

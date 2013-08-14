@@ -73,7 +73,7 @@ public class SeleniumGridRunner extends BlockJUnit4ClassRunner {
             return browser;
         }
     }
-    private static List<Class> browserAnnotationClasses = Arrays.asList(new Class[]{
+    private static List<Class> supportedBrowserAnnotations = Arrays.asList(new Class[]{
         Android.class,
         Chrome.class,
         Firefox.class,
@@ -86,7 +86,7 @@ public class SeleniumGridRunner extends BlockJUnit4ClassRunner {
         Safari.class,
         Browser.class
     });
-    private static List<Class> ignoreBrowserAnnotationClasses = Arrays.asList(new Class[]{
+    private static List<Class> supportedIgnoreBrowserAnnotations = Arrays.asList(new Class[]{
         IgnoreAndroid.class,
         IgnoreChrome.class,
         IgnoreFirefox.class,
@@ -187,9 +187,9 @@ public class SeleniumGridRunner extends BlockJUnit4ClassRunner {
 
         private BrowserConfigurations addBrowsersFromAnnotations(Annotation[] annotations) {
             for (Annotation annotation : annotations) {
-                if (browserAnnotationClasses.contains(annotation.annotationType())) {
+                if (supportedBrowserAnnotations.contains(annotation.annotationType())) {
                     addBrowserFromAnnotation(annotation);
-                } else if (ignoreBrowserAnnotationClasses.contains(annotation.annotationType())) {
+                } else if (supportedIgnoreBrowserAnnotations.contains(annotation.annotationType())) {
                     addIgnoreBrowserFromAnnotation(annotation);
                 } else if (annotation.annotationType().equals(org.andidev.webdriverextension.junitrunner.annotations.Browsers.class)) {
                     org.andidev.webdriverextension.junitrunner.annotations.Browsers browsersAnnotation = (org.andidev.webdriverextension.junitrunner.annotations.Browsers) annotation;
@@ -224,7 +224,7 @@ public class SeleniumGridRunner extends BlockJUnit4ClassRunner {
 
         private BrowserConfigurations addIgnoreBrowsersFromAnnotations(Annotation[] annotations) {
             for (Annotation annotation : annotations) {
-                if (browserAnnotationClasses.contains(annotation.annotationType())) {
+                if (supportedBrowserAnnotations.contains(annotation.annotationType())) {
                     addIgnoreBrowserFromAnnotation(annotation);
                 }
             }

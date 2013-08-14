@@ -2,7 +2,6 @@ package org.andidev.webdriverextension.junitrunner;
 
 import com.google.common.base.Objects;
 import com.google.gson.Gson;
-import com.opera.core.systems.OperaDriver;
 import java.lang.annotation.Annotation;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -53,13 +52,10 @@ import org.junit.runners.model.InitializationError;
 import org.junit.runners.model.TestClass;
 import org.openqa.selenium.Platform;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.android.AndroidDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
-import org.openqa.selenium.iphone.IPhoneDriver;
-import org.openqa.selenium.phantomjs.PhantomJSDriver;
 import org.openqa.selenium.remote.BrowserType;
 import org.openqa.selenium.safari.SafariDriver;
 
@@ -83,29 +79,19 @@ public class WebDriverRunner extends BlockJUnit4ClassRunner {
             return browser;
         }
     }
-    private static List<Class> browserAnnotationClasses = Arrays.asList(new Class[]{
-        Android.class,
+    private static List<Class> supportedBrowserAnnotations = Arrays.asList(new Class[]{
         Chrome.class,
         Firefox.class,
         HtmlUnit.class,
-        IPhone.class,
-        IPad.class,
         InternetExplorer.class,
-        Opera.class,
-        PhantomJS.class,
         Safari.class,
         Browser.class
     });
-    private static List<Class> ignoreBrowserAnnotationClasses = Arrays.asList(new Class[]{
-        IgnoreAndroid.class,
+    private static List<Class> supportedIgnoreBrowserAnnotations = Arrays.asList(new Class[]{
         IgnoreChrome.class,
         IgnoreFirefox.class,
         IgnoreHtmlUnit.class,
-        IgnoreIPhone.class,
-        IgnoreIPad.class,
         IgnoreInternetExplorer.class,
-        IgnoreOpera.class,
-        IgnorePhantomJS.class,
         IgnoreSafari.class,
         IgnoreBrowser.class
     });
@@ -201,9 +187,9 @@ public class WebDriverRunner extends BlockJUnit4ClassRunner {
 
         private BrowserConfigurations addBrowsersFromAnnotations(Annotation[] annotations) {
             for (Annotation annotation : annotations) {
-                if (browserAnnotationClasses.contains(annotation.annotationType())) {
+                if (supportedBrowserAnnotations.contains(annotation.annotationType())) {
                     addBrowserFromAnnotation(annotation);
-                } else if (ignoreBrowserAnnotationClasses.contains(annotation.annotationType())) {
+                } else if (supportedIgnoreBrowserAnnotations.contains(annotation.annotationType())) {
                     addIgnoreBrowserFromAnnotation(annotation);
                 } else if (annotation.annotationType().equals(org.andidev.webdriverextension.junitrunner.annotations.Browsers.class)) {
                     org.andidev.webdriverextension.junitrunner.annotations.Browsers browsersAnnotation = (org.andidev.webdriverextension.junitrunner.annotations.Browsers) annotation;
@@ -238,7 +224,7 @@ public class WebDriverRunner extends BlockJUnit4ClassRunner {
 
         private BrowserConfigurations addIgnoreBrowsersFromAnnotations(Annotation[] annotations) {
             for (Annotation annotation : annotations) {
-                if (browserAnnotationClasses.contains(annotation.annotationType())) {
+                if (supportedBrowserAnnotations.contains(annotation.annotationType())) {
                     addIgnoreBrowserFromAnnotation(annotation);
                 }
             }
@@ -347,10 +333,6 @@ public class WebDriverRunner extends BlockJUnit4ClassRunner {
         }
 
         private WebDriver createDriver() throws Exception {
-            if (BrowserType.ANDROID.equals(browserName)) {
-                return new AndroidDriver();
-            }
-
             if (BrowserType.CHROME.equals(browserName)) {
                 return new ChromeDriver();
             }
@@ -363,24 +345,8 @@ public class WebDriverRunner extends BlockJUnit4ClassRunner {
                 return new HtmlUnitDriver();
             }
 
-            if (BrowserType.IPHONE.equals(browserName)) {
-                return new IPhoneDriver();
-            }
-
-            if (BrowserType.IPAD.equals(browserName)) {
-                return new IPhoneDriver();
-            }
-
             if (BrowserType.IE.equals(browserName)) {
                 return new InternetExplorerDriver();
-            }
-
-            if (BrowserType.OPERA.equals(browserName)) {
-                return new OperaDriver();
-            }
-
-            if (BrowserType.PHANTOMJS.equals(browserName)) {
-                return new PhantomJSDriver(null);
             }
 
             if (BrowserType.SAFARI.equals(browserName)) {

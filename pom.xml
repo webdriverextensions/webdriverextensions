@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
@@ -56,18 +57,14 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
         <!-- Dependency Versions -->
-        <annotation-processor-utils.version>1.0-DEV3-SNAPSHOT</annotation-processor-utils.version>
         <commons-lang3.version>3.1</commons-lang3.version>
         <codemodel.version>2.6</codemodel.version>
-        <guava.version>13.0.1</guava.version>
         <gson.version>2.2.3</gson.version>
         <junit.version>4.11</junit.version>
         <lambdaj.version>2.3.3</lambdaj.version>
         <logback.version>1.0.9</logback.version>
         <lombok.version>0.11.6</lombok.version>
         <selenium.version>[2.33.0,)</selenium.version>
-        <operadriver.version>1.2</operadriver.version>
-        <phantomjsdriver.version>1.0.3</phantomjsdriver.version>
     </properties>
 
     <dependencies>
@@ -84,13 +81,6 @@
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-lang3</artifactId>
             <version>${commons-lang3.version}</version>
-        </dependency>
-
-        <!-- Guava -->
-        <dependency>
-            <groupId>com.google.guava</groupId>
-            <artifactId>guava</artifactId>
-            <version>${guava.version}</version>
         </dependency>
 
         <!-- Gson -->
@@ -134,20 +124,6 @@
             <groupId>org.seleniumhq.selenium</groupId>
             <artifactId>selenium-java</artifactId>
             <version>${selenium.version}</version>
-        </dependency>
-
-        <!-- Selenium Java, OperaDriver -->
-        <dependency>
-            <groupId>com.opera</groupId>
-            <artifactId>operadriver</artifactId>
-            <version>${operadriver.version}</version>
-        </dependency>
-
-        <!-- Selenium Java, PhantomJSDriver -->
-        <dependency>
-            <groupId>com.github.detro.ghostdriver</groupId>
-            <artifactId>phantomjsdriver</artifactId>
-            <version>${phantomjsdriver.version}</version>
         </dependency>
     </dependencies>
 
