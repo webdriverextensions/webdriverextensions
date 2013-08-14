@@ -142,7 +142,8 @@ public class WebDriverRunner extends BlockJUnit4ClassRunner {
             if (method.getAnnotation(Ignore.class) != null
                     || browserConfigurations.isBrowserIgnored(browserConfiguration)
                     || (BrowserType.IE.equals(browserConfiguration.getBrowserName()) && !OsUtils.isWindows())
-                    || (BrowserType.IEXPLORE.equals(browserConfiguration.getBrowserName()) && !OsUtils.isWindows())) {
+                    || (BrowserType.IEXPLORE.equals(browserConfiguration.getBrowserName()) && !OsUtils.isWindows())
+                    || (BrowserType.SAFARI.equals(browserConfiguration.getBrowserName()) && (!OsUtils.isWindows() && !OsUtils.isMac()))) {
                 notifier.fireTestIgnored(description);
             } else {
                 long threadId = Thread.currentThread().getId();
