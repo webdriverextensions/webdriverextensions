@@ -1,52 +1,38 @@
 package org.andidev.webdriverextension.internal.junitrunner;
 
-import org.andidev.webdriverextension.internal.WebDriverExtensionException;
 import org.andidev.webdriverextension.internal.utils.FileUtils;
 import org.andidev.webdriverextension.internal.utils.OsUtils;
+import org.andidev.webdriverextension.internal.utils.PropertyUtils;
 import org.andidev.webdriverextension.junitrunner.annotations.DriverPaths;
-import org.apache.commons.lang3.StringUtils;
 
 public class DriverPathLoader {
 
-    private static String CHROME_DRIVER_PROPERTY_KEY = "webdriver.chrome.driver";
-    private static String INTERNET_EXPLORER_DRIVER_PROPERTY_KEY = "webdriver.ie.driver";
-    private static String ALTERNATIVE_INTERNET_EXPLORER_DRIVER_PROPERTY_KEY = "webdriver.internetexplorer.driver";
+    private static String CHROME_DRIVER_PROPERTY_NAME = "webdriver.chrome.driver";
+    private static String IE_DRIVER_PROPERTY_NAME = "webdriver.ie.driver";
+    private static String INTERNET_EXPLORER_DRIVER_PROPERTY_NAME = "webdriver.internetexplorer.driver"; // Alternative property name that follows naming convention
+    private static String IE_DRIVER_USE64BIT_PROPERTY_NAME = "webdriver.ie.driver.use64Bit";
+    private static String INTERNET_EXPLORER_DRIVER_USE64BIT_PROPERTY_NAME = "webdriver.internetexplorer.driver.use64Bit";
 
     public static void loadDriverPaths(DriverPaths driverPaths) {
-        setChromeDriverDriverPath(driverPaths != null ? driverPaths.chrome() : "");
-        setInternetExplorerDriverPath(driverPaths != null ? driverPaths.internetExplorer() : "");
+        loadChromeDriverPath(driverPaths != null ? driverPaths.chrome() : null);
+        loadInternetExplorerDriverPath(driverPaths != null ? driverPaths.internetExplorer() : null);
         makeSureDriversAreExecutable();
     }
 
-    private static void setChromeDriverDriverPath(String path) {
-        if (System.getProperty(CHROME_DRIVER_PROPERTY_KEY) != null) {
-            return;
-        }
-        if (StringUtils.isNotBlank(path)) {
-            System.setProperty(CHROME_DRIVER_PROPERTY_KEY, path);
-            return;
-        }
-        System.setProperty(CHROME_DRIVER_PROPERTY_KEY, getChromeDriverDefaultPath());
+    private static void loadChromeDriverPath(String path) {
+        PropertyUtils.setPropertyIfNotExists(CHROME_DRIVER_PROPERTY_NAME, path);
+        PropertyUtils.setPropertyIfNotExists(CHROME_DRIVER_PROPERTY_NAME, getChromeDriverDefaultPath());
     }
 
-    private static void setInternetExplorerDriverPath(String path) {
-        if (System.getProperty(INTERNET_EXPLORER_DRIVER_PROPERTY_KEY) != null) {
-            return;
-        }
-        if (System.getProperty(ALTERNATIVE_INTERNET_EXPLORER_DRIVER_PROPERTY_KEY) != null) {
-            System.setProperty(INTERNET_EXPLORER_DRIVER_PROPERTY_KEY, System.getProperty(ALTERNATIVE_INTERNET_EXPLORER_DRIVER_PROPERTY_KEY));
-            return;
-        }
-        if (StringUtils.isNotBlank(path)) {
-            System.setProperty(INTERNET_EXPLORER_DRIVER_PROPERTY_KEY, path);
-            return;
-        }
-        System.setProperty(INTERNET_EXPLORER_DRIVER_PROPERTY_KEY, getInternetExplorerDriverDefaultPath());
+    private static void loadInternetExplorerDriverPath(String path) {
+        PropertyUtils.setPropertyIfNotExists(IE_DRIVER_PROPERTY_NAME, System.getProperty(INTERNET_EXPLORER_DRIVER_PROPERTY_NAME)); // Alternative property name that follows naming convention
+        PropertyUtils.setPropertyIfNotExists(IE_DRIVER_PROPERTY_NAME, path);
+        PropertyUtils.setPropertyIfNotExists(IE_DRIVER_PROPERTY_NAME, getInternetExplorerDriverDefaultPath());
     }
 
     private static void makeSureDriversAreExecutable() {
-        FileUtils.makeExecutable(System.getProperty(CHROME_DRIVER_PROPERTY_KEY));
-        FileUtils.makeExecutable(System.getProperty(INTERNET_EXPLORER_DRIVER_PROPERTY_KEY));
+        FileUtils.makeExecutable(System.getProperty(CHROME_DRIVER_PROPERTY_NAME));
+        FileUtils.makeExecutable(System.getProperty(IE_DRIVER_PROPERTY_NAME));
     }
 
     private static String getChromeDriverDefaultPath() {
@@ -61,10 +47,18 @@ public class DriverPathLoader {
                 return "drivers/linux/chromedriver";
             }
         }
-        throw new WebDriverExtensionException("You are using an unsuported platform. Platform = " + OsUtils.getOsName() + ", Version = " + OsUtils.getOsVersion());
+        return null;
     }
 
     private static String getInternetExplorerDriverDefaultPath() {
-        return "drivers/windows/internetexplorerdriver.exe";
+        if (OsUtils.isWindows()) {
+            if (PropertyUtils.isTrue(IE_DRIVER_USE64BIT_PROPERTY_NAME)
+                    || PropertyUtils.isTrue(INTERNET_EXPLORER_DRIVER_USE64BIT_PROPERTY_NAME)) {
+                return "drivers/windows/internetexplorerdriver64bit.exe";
+            } else {
+                return "drivers/windows/internetexplorerdriver.exe";
+            }
+        }
+        return null;
     }
 }
