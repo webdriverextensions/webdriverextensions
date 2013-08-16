@@ -4,6 +4,7 @@ import org.andidev.webdriverextension.ThreadDriver;
 import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Platform;
+import org.openqa.selenium.android.AndroidDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
@@ -29,6 +30,15 @@ public class ExperimentalBot {
         }
         throw new WebDriverExtensionException("Sorry! browserIs(String browserType) is only "
                 + "implemented for RemoteWebDriver at the moment.");
+    }
+
+    public static boolean browserIsAndroid() {
+        if (ThreadDriver.getDriver() instanceof RemoteWebDriver) {
+            return isRemoteWebdriverBrowser(BrowserType.ANDROID);
+        } else if (ThreadDriver.getDriver() instanceof AndroidDriver) {
+            return true;
+        }
+        return false;
     }
 
     public static boolean browserIsChrome() {
