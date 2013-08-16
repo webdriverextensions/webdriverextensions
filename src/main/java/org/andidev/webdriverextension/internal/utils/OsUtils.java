@@ -16,23 +16,15 @@ public class OsUtils {
     }
 
     public static boolean isWindows() {
-        return Platform.getCurrent().equals(Platform.WINDOWS);
-    }
-
-    public static boolean isWindows8() {
-        return Platform.getCurrent().equals(Platform.WIN8);
+        return Platform.WINDOWS.is(Platform.getCurrent());
     }
 
     public static boolean isMac() {
-        return Platform.getCurrent().equals(Platform.MAC);
+        return Platform.MAC.is(Platform.getCurrent());
     }
 
     public static boolean isLinux() {
-        return Platform.getCurrent().equals(Platform.LINUX);
-    }
-
-    public static boolean isAndroid() {
-        return Platform.getCurrent().equals(Platform.ANDROID);
+        return Platform.LINUX.is(Platform.getCurrent());
     }
 
     public static boolean is64Bit() {
