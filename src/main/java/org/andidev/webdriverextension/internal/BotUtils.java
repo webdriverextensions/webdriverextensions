@@ -109,7 +109,7 @@ import org.openqa.selenium.WebElement;
 
     public static void assertNotEquals(String name, String notExpected, String actual) {
         if (equals(notExpected, actual)) {
-            throw new AssertionError(name + ": " + actual + " is equal to" + notExpected + " when it shouldn't!");
+            throw new AssertionError(name + ": " + actual + " is equal to " + notExpected + " when it shouldn't!");
         }
     }
 
