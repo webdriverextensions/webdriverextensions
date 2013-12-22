@@ -27,8 +27,8 @@ public class WebRepositoryTest extends WebRepository {
 
     @Before
     public void before() {
-        open("http://webdriverextensions.github.com/webdriverextensions/index.html");
-        assertCurrentUrlEndsWith("/webdriverextensions/index.html");
+        open("http://webdriverextensions.github.com/webdriverextensions/model-test.html");
+        assertCurrentUrlEndsWith("/webdriverextensions/model-test.html");
     }
 
     @After

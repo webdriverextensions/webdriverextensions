@@ -16,7 +16,7 @@ public class HomePage extends WebPage<WebDriverExtensionSite> {
 
     @Override
     public void open() {
-        getDriver().get("http://webdriverextensions.github.com/webdriverextensions/index.html");
+        getDriver().get("http://webdriverextensions.github.com/webdriverextensions/model-test.html");
     }
 
     @Override

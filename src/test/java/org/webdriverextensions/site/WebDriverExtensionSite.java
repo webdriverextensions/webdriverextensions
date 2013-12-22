@@ -5,7 +5,7 @@ import org.webdriverextensions.generator.annotations.Generate;
 @Generate(name = "site")
 public class WebDriverExtensionSite extends AbstractSite {
 
-    public String url = "http://webdriverextensions.github.com/webdriverextensions";
+    public String url = "http://webdriverextensions.github.com/webdriverextensions/model-test.html";
 
     @Override
     public void open() {
