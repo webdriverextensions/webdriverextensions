@@ -26,7 +26,7 @@ public class ExperimentalBot {
 
     public static boolean browserIs(String browserName) {
         if (ThreadDriver.getDriver() instanceof RemoteWebDriver) {
-            return isRemoteWebdriverBrowser(browserName);
+            return isRemoteWebDriverBrowser(browserName);
         }
         throw new WebDriverExtensionException("Sorry! browserIs(String browserType) is only "
                 + "implemented for RemoteWebDriver at the moment.");
@@ -34,7 +34,7 @@ public class ExperimentalBot {
 
     public static boolean browserIsAndroid() {
         if (ThreadDriver.getDriver() instanceof RemoteWebDriver) {
-            return isRemoteWebdriverBrowser(BrowserType.ANDROID);
+            return isRemoteWebDriverBrowser(BrowserType.ANDROID);
         } else if (ThreadDriver.getDriver() instanceof AndroidDriver) {
             return true;
         }
@@ -43,7 +43,7 @@ public class ExperimentalBot {
 
     public static boolean browserIsChrome() {
         if (ThreadDriver.getDriver() instanceof RemoteWebDriver) {
-            return isRemoteWebdriverBrowser(BrowserType.CHROME);
+            return isRemoteWebDriverBrowser(BrowserType.CHROME);
         } else if (ThreadDriver.getDriver() instanceof ChromeDriver) {
             return true;
         }
@@ -52,7 +52,7 @@ public class ExperimentalBot {
 
     public static boolean browserIsFirefox() {
         if (ThreadDriver.getDriver() instanceof RemoteWebDriver) {
-            return isRemoteWebdriverBrowser(BrowserType.FIREFOX);
+            return isRemoteWebDriverBrowser(BrowserType.FIREFOX);
         } else if (ThreadDriver.getDriver() instanceof FirefoxDriver) {
             return true;
         }
@@ -61,7 +61,7 @@ public class ExperimentalBot {
 
     public static boolean browserIsHtmlUnit() {
         if (ThreadDriver.getDriver() instanceof RemoteWebDriver) {
-            return isRemoteWebdriverBrowser(BrowserType.HTMLUNIT);
+            return isRemoteWebDriverBrowser(BrowserType.HTMLUNIT);
         } else if (ThreadDriver.getDriver() instanceof HtmlUnitDriver) {
             return true;
         }
@@ -70,7 +70,7 @@ public class ExperimentalBot {
 
     public static boolean browserIsIPad() {
         if (ThreadDriver.getDriver() instanceof RemoteWebDriver) {
-            return isRemoteWebdriverBrowser(BrowserType.IPAD);
+            return isRemoteWebDriverBrowser(BrowserType.IPAD);
         }
         throw new WebDriverExtensionException("Sorry! browserIsIPad() is only "
                 + "implemented for RemoteWebDriver at the moment.");
@@ -78,7 +78,7 @@ public class ExperimentalBot {
 
     public static boolean browserIsIPhone() {
         if (ThreadDriver.getDriver() instanceof RemoteWebDriver) {
-            return isRemoteWebdriverBrowser(BrowserType.IPHONE);
+            return isRemoteWebDriverBrowser(BrowserType.IPHONE);
         }
         throw new WebDriverExtensionException("Sorry! browserIsIPhone() is only "
                 + "implemented for RemoteWebDriver at the moment.");
@@ -86,7 +86,7 @@ public class ExperimentalBot {
 
     public static boolean browserIsInternetExplorer() {
         if (ThreadDriver.getDriver() instanceof RemoteWebDriver) {
-            return isRemoteWebdriverBrowser(BrowserType.IE);
+            return isRemoteWebDriverBrowser(BrowserType.IE);
         } else if (ThreadDriver.getDriver() instanceof InternetExplorerDriver) {
             return true;
         }
@@ -95,7 +95,7 @@ public class ExperimentalBot {
 
     public static boolean browserIsOpera() {
         if (ThreadDriver.getDriver() instanceof RemoteWebDriver) {
-            return isRemoteWebdriverBrowser(BrowserType.OPERA);
+            return isRemoteWebDriverBrowser(BrowserType.OPERA);
         }
         throw new WebDriverExtensionException("Sorry! browserIsOpera() is only "
                 + "implemented for RemoteWebDriver at the moment.");
@@ -103,7 +103,7 @@ public class ExperimentalBot {
 
     public static boolean browserIsPhantomJS() {
         if (ThreadDriver.getDriver() instanceof RemoteWebDriver) {
-            return isRemoteWebdriverBrowser(BrowserType.PHANTOMJS);
+            return isRemoteWebDriverBrowser(BrowserType.PHANTOMJS);
         }
         throw new WebDriverExtensionException("Sorry! browserIsPhantomJS() is only "
                 + "implemented for RemoteWebDriver at the moment.");
@@ -111,7 +111,7 @@ public class ExperimentalBot {
 
     public static boolean browserIsSafari() {
         if (ThreadDriver.getDriver() instanceof RemoteWebDriver) {
-            return isRemoteWebdriverBrowser(BrowserType.SAFARI);
+            return isRemoteWebDriverBrowser(BrowserType.SAFARI);
         } else if (ThreadDriver.getDriver() instanceof SafariDriver) {
             return true;
         }
@@ -119,7 +119,7 @@ public class ExperimentalBot {
     }
 
     /* Browser Utils */
-    private static boolean isRemoteWebdriverBrowser(String browserName) {
+    private static boolean isRemoteWebDriverBrowser(String browserName) {
         String currentBrowserName = ((RemoteWebDriver) ThreadDriver.getDriver()).getCapabilities().getBrowserName();
         if (StringUtils.equalsIgnoreCase(browserName, currentBrowserName)) {
             return true;
