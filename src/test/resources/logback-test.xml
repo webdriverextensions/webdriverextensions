@@ -20,8 +20,8 @@
     <logger name="jdbc.connection" level="ERROR"/>
     <logger name="log4jdbc.debug" level="ERROR"/>
 
-    <!-- AndiDev -->
-    <logger name="org.andidev" level="TRACE"/>
+    <!-- WebDriver Extensions -->
+    <logger name="org.webdriverextensions" level="TRACE"/>
 
     <!-- Main log level (levels: TRACE, DEBUG, INFO, WARN, ERROR, ALL, OFF, INHERITED) -->
     <root level="WARN">

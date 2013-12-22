@@ -1,10 +1,10 @@
-WebDriver Extension
+WebDriver Extensions
 ===================
 
-WebDriver Extension is a framework that extends the WebDriver framework with components that makes it easier to apply the PageObject pattern and Bot Style testing pattern
+WebDriver Extensions is a framework that extends the WebDriver/Selenium Framework to make tests more readable, reusability and maintainable by providing components like Extendable WebElements, Page Objects, Site Objects, Bots, Junit Annotation Runners and more.
 
 ### Under Development
-This project is under development and therefore not recomended to use yet, though the development is in its final stages. Once the [Milestone 1.0](https://github.com/andidev/webdriver-extension/issues?milestone=1&page=1&sort=created&state=open) is released the framework will be fully functional and ready for community feedback.
+This project is under development and soon ready to be released but the API may still change, so watch out!
 
 ## Want to Try It?
 #### Creating a New Project
@@ -16,8 +16,8 @@ mvn archetype:generate                                                          
   -Dversion=1.0-SNAPSHOT                                                                           \
   -DsiteName=GitHub                                                                                \
   -DsiteUrl=https://github.com                                                                     \
-  -DarchetypeGroupId=org.andidev                                                                   \
-  -DarchetypeArtifactId=webdriver-extension-archetype-quickstart                                   \
+  -DarchetypeGroupId=org.webdriverextensions                                                       \
+  -DarchetypeArtifactId=webdriverextensions-archetype-quickstart                                   \
   -DarchetypeVersion=1.0-SNAPSHOT                                                                  \
   -DarchetypeCatalog=https://oss.sonatype.org/content/repositories/snapshots/archetype-catalog.xml
 ```
@@ -25,8 +25,8 @@ mvn archetype:generate                                                          
 ... and download the latest drivers
 ```sh
 mvn archetype:generate                                                                             \
-  -DarchetypeGroupId=org.andidev                                                                   \
-  -DarchetypeArtifactId=webdriver-extension-archetype-drivers                                      \
+  -DarchetypeGroupId=org.webdriverextensions                                                       \
+  -DarchetypeArtifactId=webdriverextensions-archetype-drivers                                      \
   -DarchetypeVersion=1.0-SNAPSHOT                                                                  \
   -DarchetypeCatalog=https://oss.sonatype.org/content/repositories/snapshots/archetype-catalog.xml
 ```
@@ -44,11 +44,11 @@ Add the Sonatype OSS Snapshot Repository
     <url>https://oss.sonatype.org/content/repositories/snapshots</url>
 </repository>
 ```
-...and the Webdriver Extension Snapshot Dependency to your pom.xml
+...and the WebDriver Extensions Snapshot Dependency to your pom.xml
 ```xml
 <dependency>
-    <groupId>org.andidev</groupId>
-    <artifactId>webdriver-extension</artifactId>
+    <groupId>org.webdriverextensions</groupId>
+    <artifactId>webdriverextensions</artifactId>
     <version>1.0.M1-SNAPSHOT</version>
 </dependency>
 ```
@@ -56,7 +56,7 @@ Add the Sonatype OSS Snapshot Repository
 ###Start Using the Bot methods
 Just import the static Bot where you want to use it
 ```java
-import static org.andidev.webdriverextension.Bot.*;
+import static org.webdriverextensions.Bot.*;
 ```
 ...and start interacting with your WebElements
 ```java
@@ -79,7 +79,7 @@ if (hasClass("selected", mainPageTab)) {
     // ...do something
 }
 ```
-If you won't run your tests in the Webdriver Extensions JUnit Runners make sure you set the thread driver before using the Bot
+If you won't run your tests in the WebDriver Extensions JUnit Runners make sure you set the thread driver before using the Bot
 ```java
 ThreadDriver.setDriver(yourDriver);
 ```
@@ -91,16 +91,16 @@ public class Interaction extends WebComponent {
     @FindBy(css = "h3 a")
     @Delegate
     private WebElement interactionDelegate;
-    
+
     @FindBy(css = "#n-help a")
     public WebElement help;
-    
+
     @FindBy(css = "#n-aboutsite a")
     public WebElement aboutWikipedia;
-    
+
     @FindBy(css = "#n-portal a")
     public WebElement communityPortal;
-    
+
     @FindBy(css = "#n-recentchanges a")
     public WebElement recentChanges;
 
@@ -133,33 +133,33 @@ public class MainPage extends WebPage<WikipediaSite> {
     // Side Menu
     @FindBy(css = "#n-mainpage-description a")
     public WebElement mainPage;
-    
+
     @FindBy(css = "#n-contents a")
     public WebElement contents;
-    
+
     @FindBy(css = "#n-featuredcontent a")
-    public WebElement featuredContent;    
-    
+    public WebElement featuredContent;
+
     @FindBy(css = "#n-currentevents a")
     public WebElement currentEvents;
-    
+
     @FindBy(css = "#n-randompage a")
     public WebElement randomArticle;
-    
+
     @FindBy(css = "#n-sitesupport a")
     public WebElement donateToWikipedia;
-    
+
     @FindBy(css = "#p-interaction")
     public Interaction interaction;
-    
+
     // ...other components
 
     @Override
     public void open() {
-        if (isNotOpen()) {        
+        if (isNotOpen()) {
             open("http://en.wikipedia.org/wiki/Main_Page");
             assertIsOpen();
-        }    
+        }
     }
 
     @Override
