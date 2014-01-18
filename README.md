@@ -16,7 +16,7 @@ mvn archetype:generate                                                          
   -Dversion=1.0-SNAPSHOT                                                                           \
   -DsiteName=GitHub                                                                                \
   -DsiteUrl=https://github.com                                                                     \
-  -DarchetypeGroupId=org.webdriverextensions                                                       \
+  -DarchetypeGroupId=com.github.webdriverextensions                                                       \
   -DarchetypeArtifactId=webdriverextensions-archetype-quickstart                                   \
   -DarchetypeVersion=1.0-SNAPSHOT                                                                  \
   -DarchetypeCatalog=https://oss.sonatype.org/content/repositories/snapshots/archetype-catalog.xml
@@ -25,7 +25,7 @@ mvn archetype:generate                                                          
 ... and download the latest drivers
 ```sh
 mvn archetype:generate                                                                             \
-  -DarchetypeGroupId=org.webdriverextensions                                                       \
+  -DarchetypeGroupId=com.github.webdriverextensions                                                       \
   -DarchetypeArtifactId=webdriverextensions-archetype-drivers                                      \
   -DarchetypeVersion=1.0-SNAPSHOT                                                                  \
   -DarchetypeCatalog=https://oss.sonatype.org/content/repositories/snapshots/archetype-catalog.xml
@@ -47,7 +47,7 @@ Add the Sonatype OSS Snapshot Repository
 ...and the WebDriver Extensions Snapshot Dependency to your pom.xml
 ```xml
 <dependency>
-    <groupId>org.webdriverextensions</groupId>
+    <groupId>com.github.webdriverextensions</groupId>
     <artifactId>webdriverextensions</artifactId>
     <version>1.0.M1-SNAPSHOT</version>
 </dependency>
@@ -56,7 +56,7 @@ Add the Sonatype OSS Snapshot Repository
 ###Start Using the Bot methods
 Just import the static Bot where you want to use it
 ```java
-import static org.webdriverextensions.Bot.*;
+import static com.github.webdriverextensions.Bot.*;
 ```
 ...and start interacting with your WebElements
 ```java
