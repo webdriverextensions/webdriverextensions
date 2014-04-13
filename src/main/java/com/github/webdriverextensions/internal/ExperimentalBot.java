@@ -121,10 +121,7 @@ public class ExperimentalBot {
     /* Browser Utils */
     private static boolean isRemoteWebDriverBrowser(String browserName) {
         String currentBrowserName = ((RemoteWebDriver) ThreadDriver.getDriver()).getCapabilities().getBrowserName();
-        if (StringUtils.equalsIgnoreCase(browserName, currentBrowserName)) {
-            return true;
-        }
-        return false;
+        return StringUtils.equalsIgnoreCase(browserName, currentBrowserName);
     }
 
     /* Browser Version */
