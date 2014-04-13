@@ -1,7 +1,5 @@
 package com.github.webdriverextensions.internal;
 
-import java.net.MalformedURLException;
-import java.net.URL;
 import com.github.webdriverextensions.Bot;
 import com.github.webdriverextensions.ThreadDriver;
 import static com.github.webdriverextensions.internal.utils.StringUtils.*;
