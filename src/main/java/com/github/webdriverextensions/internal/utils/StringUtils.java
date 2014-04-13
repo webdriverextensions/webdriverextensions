@@ -29,4 +29,8 @@ public class StringUtils {
     public static String quote(String text) {
         return "\"" + text + "\"";
     }
+
+    public static String quote(double number) {
+        return "\"" + number + "\"";
+    }
 }
