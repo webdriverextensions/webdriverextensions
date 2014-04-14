@@ -706,6 +706,86 @@ public class Bot {
 
 
 
+    /* Attribute as Number */
+    public static double attributeInAsNumber(String name, WebElement webElement) {
+        return createDouble(attributeIn(name, webElement));
+    }
+
+    public static boolean attributeIsNumber(String name, WebElement webElement) {
+        try {
+            attributeInAsNumber(name, webElement);
+            return true;
+        } catch (NumberFormatException e) {
+            return false;
+        }
+    }
+
+    public static boolean attributeIsNotNumber(String name, WebElement webElement) {
+        return !attributeIsNumber(name, webElement);
+    }
+
+    public static boolean attributeEquals(String name, double number, WebElement webElement) {
+        return BotUtils.equals(number, attributeInAsNumber(name, webElement));
+    }
+
+    public static boolean attributeNotEquals(String name, double number, WebElement webElement) {
+        return BotUtils.notEquals(number, attributeInAsNumber(name, webElement));
+    }
+
+    public static boolean attributeLessThan(String name, double number, WebElement webElement) {
+        return BotUtils.lessThan(number, attributeInAsNumber(name, webElement));
+    }
+
+    public static boolean attributeLessThanOrEquals(String name, double number, WebElement webElement) {
+        return BotUtils.lessThanOrEquals(number, attributeInAsNumber(name, webElement));
+    }
+
+    public static boolean attributeGreaterThan(String name, double number, WebElement webElement) {
+        return BotUtils.greaterThan(number, attributeInAsNumber(name, webElement));
+    }
+
+    public static boolean attributeGreaterThanOrEquals(String name, double number, WebElement webElement) {
+        return BotUtils.greaterThanOrEquals(number, attributeInAsNumber(name, webElement));
+    }
+
+    public static void assertAttributeIsNumber(String name, WebElement webElement) {
+        if (attributeIsNotNumber(name, webElement)) {
+            throw new AssertionError("Element attribute " + name + "=" + quote(attributeInAsNumber(name, webElement)) + " is no number!");
+        }
+    }
+
+    public static void assertAttributeIsNotNumber(String name, WebElement webElement) {
+        if (attributeIsNumber(name, webElement)) {
+            throw new AssertionError("Element attribute " + name + "=" + quote(attributeInAsNumber(name, webElement)) + " is number when it shouldn't!");
+        }
+    }
+
+    public static void assertAttributeEquals(String name, double number, WebElement webElement) {
+        BotUtils.assertEquals(name, number, attributeInAsNumber(name, webElement));
+    }
+
+    public static void assertAttributeNotEquals(String name, double number, WebElement webElement) {
+        BotUtils.assertNotEquals(name, number, attributeInAsNumber(name, webElement));
+    }
+
+    public static void assertAttributeLessThan(String name, double number, WebElement webElement) {
+        BotUtils.assertLessThan(name, number, attributeInAsNumber(name, webElement));
+    }
+
+    public static void assertAttributeLessThanOrEquals(String name, double number, WebElement webElement) {
+        BotUtils.assertLessThanOrEquals(name, number, attributeInAsNumber(name, webElement));
+    }
+
+    public static void assertAttributeGreaterThan(String name, double number, WebElement webElement) {
+        BotUtils.assertGreaterThan(name, number, attributeInAsNumber(name, webElement));
+    }
+
+    public static void assertAttributeGreaterThanOrEquals(String name, double number, WebElement webElement) {
+        BotUtils.assertGreaterThanOrEquals(name, number, attributeInAsNumber(name, webElement));
+    }
+
+
+
     /* Id */
     /**
      * Returns the {@link org.openqa.selenium.WebElement} id attribute.
