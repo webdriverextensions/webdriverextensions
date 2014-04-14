@@ -822,43 +822,43 @@ public class Bot {
     }
 
     public static boolean idEquals(String value, WebElement webElement) {
-        return BotUtils.equals(value, idIn(webElement));
+        return attributeEquals("id", value, webElement);
     }
 
     public static boolean idNotEquals(String value, WebElement webElement) {
-        return BotUtils.notEquals(value, idIn(webElement));
+        return attributeNotEquals("id", value, webElement);
     }
 
     public static boolean idContains(String searchText, WebElement webElement) {
-        return BotUtils.contains(searchText, idIn(webElement));
+        return attributeContains("id", searchText, webElement);
     }
 
     public static boolean idNotContains(String searchText, WebElement webElement) {
-        return BotUtils.contains(searchText, idIn(webElement));
+        return attributeNotContains("id", searchText, webElement);
     }
 
     public static boolean idStartsWith(String prefix, WebElement webElement) {
-        return BotUtils.startsWith(prefix, idIn(webElement));
+        return attributeStartsWith("id", prefix, webElement);
     }
 
     public static boolean idNotStartsWith(String prefix, WebElement webElement) {
-        return BotUtils.notStartsWith(prefix, idIn(webElement));
+        return attributeNotStartsWith("id", prefix, webElement);
     }
 
     public static boolean idEndsWith(String suffix, WebElement webElement) {
-        return BotUtils.endsWith(suffix, idIn(webElement));
+        return attributeEndsWith("id", suffix, webElement);
     }
 
     public static boolean idNotEndsWith(String suffix, WebElement webElement) {
-        return BotUtils.notEndsWith(suffix, idIn(webElement));
+        return attributeNotEndsWith("id", suffix, webElement);
     }
 
     public static boolean idMatches(String regExp, WebElement webElement) {
-        return BotUtils.matches(regExp, idIn(webElement));
+        return attributeMatches("id", regExp, webElement);
     }
 
     public static boolean idNotMatches(String regExp, WebElement webElement) {
-        return BotUtils.notMatches(regExp, idIn(webElement));
+        return attributeNotMatches("id", regExp, webElement);
     }
 
     public static void assertHasId(WebElement webElement) {
@@ -870,43 +870,43 @@ public class Bot {
     }
 
     public static void assertIdEquals(String value, WebElement webElement) {
-        BotUtils.assertEquals("id", value, idIn(webElement));
+        assertAttributeEquals("id", value, webElement);
     }
 
     public static void assertIdNotEquals(String value, WebElement webElement) {
-        BotUtils.assertNotEquals("id", value, idIn(webElement));
+        assertAttributeNotEquals("id", value, webElement);
     }
 
     public static void assertIdContains(String searchText, WebElement webElement) {
-        BotUtils.assertContains("id", searchText, idIn(webElement));
+        assertAttributeContains("id", searchText, webElement);
     }
 
     public static void assertIdNotContains(String searchText, WebElement webElement) {
-        BotUtils.assertNotContains("id", searchText, idIn(webElement));
+        assertAttributeNotContains("id", searchText, webElement);
     }
 
     public static void assertIdStartsWith(String prefix, WebElement webElement) {
-        BotUtils.assertStartsWith("id", prefix, idIn(webElement));
+        assertAttributeStartsWith("id", prefix, webElement);
     }
 
     public static void assertIdNotStartsWith(String prefix, WebElement webElement) {
-        BotUtils.assertNotStartsWith("id", prefix, idIn(webElement));
+        assertAttributeNotStartsWith("id", prefix, webElement);
     }
 
     public static void assertIdEndsWith(String suffix, WebElement webElement) {
-        BotUtils.assertEndsWith("id", suffix, idIn(webElement));
+        assertAttributeEndsWith("id", suffix, webElement);
     }
 
     public static void assertIdNotEndsWith(String suffix, WebElement webElement) {
-        BotUtils.assertNotEndsWith("id", suffix, idIn(webElement));
+        assertAttributeNotEndsWith("id", suffix, webElement);
     }
 
     public static void assertIdMatches(String regExp, WebElement webElement) {
-        BotUtils.assertMatches("id", regExp, idIn(webElement));
+        assertAttributeMatches("id", regExp, webElement);
     }
 
     public static void assertIdNotMatches(String regExp, WebElement webElement) {
-        BotUtils.assertNotMatches("id", regExp, idIn(webElement));
+        assertAttributeNotMatches("id", regExp, webElement);
     }
 
 
@@ -947,43 +947,43 @@ public class Bot {
     }
 
     public static boolean nameEquals(String value, WebElement webElement) {
-        return BotUtils.equals(value, nameIn(webElement));
+        return attributeEquals("name", value, webElement);
     }
 
     public static boolean nameNotEquals(String value, WebElement webElement) {
-        return BotUtils.notEquals(value, nameIn(webElement));
+        return attributeNotEquals("name", value, webElement);
     }
 
     public static boolean nameContains(String searchText, WebElement webElement) {
-        return BotUtils.contains(searchText, nameIn(webElement));
+        return attributeContains("name", searchText, webElement);
     }
 
     public static boolean nameNotContains(String searchText, WebElement webElement) {
-        return BotUtils.contains(searchText, nameIn(webElement));
+        return attributeNotContains("name", searchText, webElement);
     }
 
     public static boolean nameStartsWith(String prefix, WebElement webElement) {
-        return BotUtils.startsWith(prefix, nameIn(webElement));
+        return attributeStartsWith("name", prefix, webElement);
     }
 
     public static boolean nameNotStartsWith(String prefix, WebElement webElement) {
-        return BotUtils.notStartsWith(prefix, nameIn(webElement));
+        return attributeNotStartsWith("name", prefix, webElement);
     }
 
     public static boolean nameEndsWith(String suffix, WebElement webElement) {
-        return BotUtils.endsWith(suffix, nameIn(webElement));
+        return attributeEndsWith("name", suffix, webElement);
     }
 
     public static boolean nameNotEndsWith(String suffix, WebElement webElement) {
-        return BotUtils.notEndsWith(suffix, nameIn(webElement));
+        return attributeNotEndsWith("name", suffix, webElement);
     }
 
     public static boolean nameMatches(String regExp, WebElement webElement) {
-        return BotUtils.matches(regExp, nameIn(webElement));
+        return attributeMatches("name", regExp, webElement);
     }
 
     public static boolean nameNotMatches(String regExp, WebElement webElement) {
-        return BotUtils.notMatches(regExp, nameIn(webElement));
+        return attributeNotMatches("name", regExp, webElement);
     }
 
     public static void assertHasName(WebElement webElement) {
@@ -995,43 +995,43 @@ public class Bot {
     }
 
     public static void assertNameEquals(String value, WebElement webElement) {
-        BotUtils.assertEquals("name", value, nameIn(webElement));
+        assertAttributeEquals("name", value, webElement);
     }
 
     public static void assertNameNotEquals(String value, WebElement webElement) {
-        BotUtils.assertNotEquals("name", value, nameIn(webElement));
+        assertAttributeNotEquals("name", value, webElement);
     }
 
     public static void assertNameContains(String searchText, WebElement webElement) {
-        BotUtils.assertContains("name", searchText, nameIn(webElement));
+        assertAttributeContains("name", searchText, webElement);
     }
 
     public static void assertNameNotContains(String searchText, WebElement webElement) {
-        BotUtils.assertNotContains("name", searchText, nameIn(webElement));
+        assertAttributeNotContains("name", searchText, webElement);
     }
 
     public static void assertNameStartsWith(String prefix, WebElement webElement) {
-        BotUtils.assertStartsWith("name", prefix, nameIn(webElement));
+        assertAttributeStartsWith("name", prefix, webElement);
     }
 
     public static void assertNameNotStartsWith(String prefix, WebElement webElement) {
-        BotUtils.assertNotStartsWith("name", prefix, nameIn(webElement));
+        assertAttributeNotStartsWith("name", prefix, webElement);
     }
 
     public static void assertNameEndsWith(String suffix, WebElement webElement) {
-        BotUtils.assertEndsWith("name", suffix, nameIn(webElement));
+        assertAttributeEndsWith("name", suffix, webElement);
     }
 
     public static void assertNameNotEndsWith(String suffix, WebElement webElement) {
-        BotUtils.assertNotEndsWith("name", suffix, nameIn(webElement));
+        assertAttributeNotEndsWith("name", suffix, webElement);
     }
 
     public static void assertNameMatches(String regExp, WebElement webElement) {
-        BotUtils.assertMatches("name", regExp, nameIn(webElement));
+        assertAttributeMatches("name", regExp, webElement);
     }
 
     public static void assertNameNotMatches(String regExp, WebElement webElement) {
-        BotUtils.assertNotMatches("name", regExp, nameIn(webElement));
+        assertAttributeNotMatches("name", regExp, webElement);
     }
 
 
@@ -1274,43 +1274,43 @@ public class Bot {
     }
 
     public static boolean valueEquals(String value, WebElement webElement) {
-        return BotUtils.equals(value, valueIn(webElement));
+        return attributeEquals("value", value, webElement);
     }
 
     public static boolean valueNotEquals(String value, WebElement webElement) {
-        return BotUtils.notEquals(value, valueIn(webElement));
+        return attributeNotEquals("value", value, webElement);
     }
 
     public static boolean valueContains(String searchText, WebElement webElement) {
-        return BotUtils.contains(searchText, valueIn(webElement));
+        return attributeContains("value", searchText, webElement);
     }
 
     public static boolean valueNotContains(String searchText, WebElement webElement) {
-        return BotUtils.contains(searchText, valueIn(webElement));
+        return attributeNotContains("value", searchText, webElement);
     }
 
     public static boolean valueStartsWith(String prefix, WebElement webElement) {
-        return BotUtils.startsWith(prefix, valueIn(webElement));
+        return attributeStartsWith("value", prefix, webElement);
     }
 
     public static boolean valueNotStartsWith(String prefix, WebElement webElement) {
-        return BotUtils.notStartsWith(prefix, valueIn(webElement));
+        return attributeNotStartsWith("value", prefix, webElement);
     }
 
     public static boolean valueEndsWith(String suffix, WebElement webElement) {
-        return BotUtils.endsWith(suffix, valueIn(webElement));
+        return attributeEndsWith("value", suffix, webElement);
     }
 
     public static boolean valueNotEndsWith(String suffix, WebElement webElement) {
-        return BotUtils.notEndsWith(suffix, valueIn(webElement));
+        return attributeNotEndsWith("value", suffix, webElement);
     }
 
     public static boolean valueMatches(String regExp, WebElement webElement) {
-        return BotUtils.matches(regExp, valueIn(webElement));
+        return attributeMatches("value", regExp, webElement);
     }
 
     public static boolean valueNotMatches(String regExp, WebElement webElement) {
-        return BotUtils.notMatches(regExp, valueIn(webElement));
+        return attributeNotMatches("value", regExp, webElement);
     }
 
     public static void assertHasValue(WebElement webElement) {
@@ -1322,43 +1322,43 @@ public class Bot {
     }
 
     public static void assertValueEquals(String value, WebElement webElement) {
-        BotUtils.assertEquals("value", value, valueIn(webElement));
+        assertAttributeEquals("value", value, webElement);
     }
 
     public static void assertValueNotEquals(String value, WebElement webElement) {
-        BotUtils.assertNotEquals("value", value, valueIn(webElement));
+        assertAttributeNotEquals("value", value, webElement);
     }
 
     public static void assertValueContains(String searchText, WebElement webElement) {
-        BotUtils.assertContains("value", searchText, valueIn(webElement));
+        assertAttributeContains("value", searchText, webElement);
     }
 
     public static void assertValueNotContains(String searchText, WebElement webElement) {
-        BotUtils.assertNotContains("value", searchText, valueIn(webElement));
+        assertAttributeNotContains("value", searchText, webElement);
     }
 
     public static void assertValueStartsWith(String prefix, WebElement webElement) {
-        BotUtils.assertStartsWith("value", prefix, valueIn(webElement));
+        assertAttributeStartsWith("value", prefix, webElement);
     }
 
     public static void assertValueNotStartsWith(String prefix, WebElement webElement) {
-        BotUtils.assertNotStartsWith("value", prefix, valueIn(webElement));
+        assertAttributeNotStartsWith("value", prefix, webElement);
     }
 
     public static void assertValueEndsWith(String suffix, WebElement webElement) {
-        BotUtils.assertEndsWith("value", suffix, valueIn(webElement));
+        assertAttributeEndsWith("value", suffix, webElement);
     }
 
     public static void assertValueNotEndsWith(String suffix, WebElement webElement) {
-        BotUtils.assertNotEndsWith("value", suffix, valueIn(webElement));
+        assertAttributeNotEndsWith("value", suffix, webElement);
     }
 
     public static void assertValueMatches(String regExp, WebElement webElement) {
-        BotUtils.assertMatches("value", regExp, valueIn(webElement));
+        assertAttributeMatches("value", regExp, webElement);
     }
 
     public static void assertValueNotMatches(String regExp, WebElement webElement) {
-        BotUtils.assertNotMatches("value", regExp, valueIn(webElement));
+        assertAttributeNotMatches("value", regExp, webElement);
     }
 
 
@@ -1396,80 +1396,71 @@ public class Bot {
      * @return the value attribute as a number
      */
     public static double valueInAsNumber(WebElement webElement) {
-        return createDouble(valueIn(webElement));
+        return attributeInAsNumber("value", webElement);
     }
 
     public static boolean valueIsNumber(WebElement webElement) {
-        try {
-            valueInAsNumber(webElement);
-            return true;
-        } catch (NumberFormatException e) {
-            return false;
-        }
+        return attributeIsNumber("value", webElement);
     }
 
     public static boolean valueIsNotNumber(WebElement webElement) {
-        return !valueIsNumber(webElement);
+        return attributeIsNotNumber("value", webElement);
     }
 
     public static boolean valueEquals(double number, WebElement webElement) {
-        return BotUtils.equals(number, valueInAsNumber(webElement));
+        return attributeEquals("value", number, webElement);
     }
 
     public static boolean valueNotEquals(double number, WebElement webElement) {
-        return BotUtils.notEquals(number, valueInAsNumber(webElement));
+        return attributeNotEquals("value", number, webElement);
     }
 
     public static boolean valueLessThan(double number, WebElement webElement) {
-        return BotUtils.lessThan(number, valueInAsNumber(webElement));
+        return attributeLessThan("value", number, webElement);
     }
 
     public static boolean valueLessThanOrEquals(double number, WebElement webElement) {
-        return BotUtils.lessThanOrEquals(number, valueInAsNumber(webElement));
+        return attributeLessThanOrEquals("value", number, webElement);
     }
 
     public static boolean valueGreaterThan(double number, WebElement webElement) {
-        return BotUtils.greaterThan(number, valueInAsNumber(webElement));
+        return attributeGreaterThan("value", number, webElement);
     }
 
     public static boolean valueGreaterThanOrEquals(double number, WebElement webElement) {
-        return BotUtils.greaterThanOrEquals(number, valueInAsNumber(webElement));
+        return attributeGreaterThanOrEquals("value", number, webElement);
     }
 
     public static void assertValueIsNumber(WebElement webElement) {
-        if (valueIsNotNumber(webElement)) {
-            throw new AssertionError("value: " + valueInAsNumber(webElement) + " is no number!");
-        }
+        assertAttributeIsNumber("value", webElement);
     }
 
     public static void assertValueIsNotNumber(WebElement webElement) {
-        if (valueIsNumber(webElement)) {
-            throw new AssertionError("value: " + valueInAsNumber(webElement) + " is number when it shouldn't!");
-        }
+        assertAttributeIsNotNumber("value", webElement);
     }
 
     public static void assertValueEquals(double number, WebElement webElement) {
-        BotUtils.assertEquals("value", number, valueInAsNumber(webElement));
+        assertAttributeEquals("value", number, webElement);
     }
 
     public static void assertValueNotEquals(double number, WebElement webElement) {
-        BotUtils.assertNotEquals("value", number, valueInAsNumber(webElement));
+        assertAttributeNotEquals("value", number, webElement);
     }
 
     public static void assertValueLessThan(double number, WebElement webElement) {
-        BotUtils.assertLessThan("value", number, valueInAsNumber(webElement));
+        assertAttributeLessThan("value", number, webElement);
     }
 
     public static void assertValueLessThanOrEquals(double number, WebElement webElement) {
-        BotUtils.assertLessThanOrEquals("value", number, valueInAsNumber(webElement));
+        assertAttributeLessThanOrEquals("value", number, webElement);
     }
 
     public static void assertValueGreaterThan(double number, WebElement webElement) {
-        BotUtils.assertGreaterThan("value", number, valueInAsNumber(webElement));
+        assertAttributeGreaterThan("value", number, webElement);
     }
 
     public static void assertValueGreaterThanOrEquals(double number, WebElement webElement) {
-        BotUtils.assertGreaterThanOrEquals("value", number, valueInAsNumber(webElement));
+        assertAttributeGreaterThanOrEquals("value", number, webElement);
     }
 
 
@@ -1510,43 +1501,43 @@ public class Bot {
     }
 
     public static boolean hrefEquals(String value, WebElement webElement) {
-        return BotUtils.equals(value, hrefIn(webElement));
+        return attributeEquals("href", value, webElement);
     }
 
     public static boolean hrefNotEquals(String value, WebElement webElement) {
-        return BotUtils.notEquals(value, hrefIn(webElement));
+        return attributeNotEquals("href", value, webElement);
     }
 
     public static boolean hrefContains(String searchText, WebElement webElement) {
-        return BotUtils.contains(searchText, hrefIn(webElement));
+        return attributeContains("href", searchText, webElement);
     }
 
     public static boolean hrefNotContains(String searchText, WebElement webElement) {
-        return BotUtils.contains(searchText, hrefIn(webElement));
+        return attributeNotContains("href", searchText, webElement);
     }
 
     public static boolean hrefStartsWith(String prefix, WebElement webElement) {
-        return BotUtils.startsWith(prefix, hrefIn(webElement));
+        return attributeStartsWith("href", prefix, webElement);
     }
 
     public static boolean hrefNotStartsWith(String prefix, WebElement webElement) {
-        return BotUtils.notStartsWith(prefix, hrefIn(webElement));
+        return attributeNotStartsWith("href", prefix, webElement);
     }
 
     public static boolean hrefEndsWith(String suffix, WebElement webElement) {
-        return BotUtils.endsWith(suffix, hrefIn(webElement));
+        return attributeEndsWith("href", suffix, webElement);
     }
 
     public static boolean hrefNotEndsWith(String suffix, WebElement webElement) {
-        return BotUtils.notEndsWith(suffix, hrefIn(webElement));
+        return attributeNotEndsWith("href", suffix, webElement);
     }
 
     public static boolean hrefMatches(String regExp, WebElement webElement) {
-        return BotUtils.matches(regExp, hrefIn(webElement));
+        return attributeMatches("href", regExp, webElement);
     }
 
     public static boolean hrefNotMatches(String regExp, WebElement webElement) {
-        return BotUtils.notMatches(regExp, hrefIn(webElement));
+        return attributeNotMatches("href", regExp, webElement);
     }
 
     public static void assertHasHref(WebElement webElement) {
@@ -1558,43 +1549,43 @@ public class Bot {
     }
 
     public static void assertHrefEquals(String value, WebElement webElement) {
-        BotUtils.assertEquals("href", value, hrefIn(webElement));
+        assertAttributeEquals("href", value, webElement);
     }
 
     public static void assertHrefNotEquals(String value, WebElement webElement) {
-        BotUtils.assertNotEquals("href", value, hrefIn(webElement));
+        assertAttributeNotEquals("href", value, webElement);
     }
 
     public static void assertHrefContains(String searchText, WebElement webElement) {
-        BotUtils.assertContains("href", searchText, hrefIn(webElement));
+        assertAttributeContains("href", searchText, webElement);
     }
 
     public static void assertHrefNotContains(String searchText, WebElement webElement) {
-        BotUtils.assertNotContains("href", searchText, hrefIn(webElement));
+        assertAttributeNotContains("href", searchText, webElement);
     }
 
     public static void assertHrefStartsWith(String prefix, WebElement webElement) {
-        BotUtils.assertStartsWith("href", prefix, hrefIn(webElement));
+        assertAttributeStartsWith("href", prefix, webElement);
     }
 
     public static void assertHrefNotStartsWith(String prefix, WebElement webElement) {
-        BotUtils.assertNotStartsWith("href", prefix, hrefIn(webElement));
+        assertAttributeNotStartsWith("href", prefix, webElement);
     }
 
     public static void assertHrefEndsWith(String suffix, WebElement webElement) {
-        BotUtils.assertEndsWith("href", suffix, hrefIn(webElement));
+        assertAttributeEndsWith("href", suffix, webElement);
     }
 
     public static void assertHrefNotEndsWith(String suffix, WebElement webElement) {
-        BotUtils.assertNotEndsWith("href", suffix, hrefIn(webElement));
+        assertAttributeNotEndsWith("href", suffix, webElement);
     }
 
     public static void assertHrefMatches(String regExp, WebElement webElement) {
-        BotUtils.assertMatches("href", regExp, hrefIn(webElement));
+        assertAttributeMatches("href", regExp, webElement);
     }
 
     public static void assertHrefNotMatches(String regExp, WebElement webElement) {
-        BotUtils.assertNotMatches("href", regExp, hrefIn(webElement));
+        assertAttributeNotMatches("href", regExp, webElement);
     }
 
 
@@ -1654,7 +1645,7 @@ public class Bot {
     }
 
     public static boolean textNotContains(String searchText, WebElement webElement) {
-        return BotUtils.contains(searchText, textIn(webElement));
+        return BotUtils.notContains(searchText, textIn(webElement));
     }
 
     public static boolean textStartsWith(String prefix, WebElement webElement) {
