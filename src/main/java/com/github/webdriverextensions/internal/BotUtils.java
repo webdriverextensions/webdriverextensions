@@ -100,62 +100,62 @@ import org.openqa.selenium.WebElement;
 
     public static void assertEquals(String name, String expected, String actual) {
         if (notEquals(expected, actual)) {
-            throw new AssertionError(name + ": " + actual + " is not equal to " + expected + "!");
+            throw new AssertionError(name + ": " + quote(actual) + " is not equal to " + expected + "!");
         }
 
     }
 
     public static void assertNotEquals(String name, String notExpected, String actual) {
         if (equals(notExpected, actual)) {
-            throw new AssertionError(name + ": " + actual + " is equal to " + notExpected + " when it shouldn't!");
+            throw new AssertionError(name + ": " + quote(actual) + " is equal to " + quote(notExpected) + " when it shouldn't!");
         }
     }
 
     public static void assertMatches(String name, String regExp, String actual) {
         if (notMatches(regExp, actual)) {
-            throw new AssertionError(name + ": " + actual + " is not matching " + regExp + "!");
+            throw new AssertionError(name + ": " + quote(actual) + " is not matching " + quote(regExp) + "!");
         }
     }
 
     public static void assertNotMatches(String name, String regExp, String actual) {
         if (matches(regExp, actual)) {
-            throw new AssertionError(name + ": " + actual + " is matching " + regExp + " when it shouldn't!");
+            throw new AssertionError(name + ": " + quote(actual) + " is matching " + quote(regExp) + " when it shouldn't!");
         }
     }
 
     public static void assertContains(String name, String searchText, String actual) {
         if (notContains(searchText, actual)) {
-            throw new AssertionError(name + ": " + actual + " is not containing " + searchText);
+            throw new AssertionError(name + ": " + quote(actual) + " is not containing " + quote(searchText) + "!");
         }
     }
 
     public static void assertNotContains(String name, String searchText, String actual) {
         if (contains(searchText, actual)) {
-            throw new AssertionError(name + ": " + actual + " is containing " + searchText + " when it shouldn't!");
+            throw new AssertionError(name + ": " + quote(actual) + " is containing " + quote(searchText) + " when it shouldn't!");
         }
     }
 
     public static void assertStartsWith(String name, String prefix, String actual) {
         if (notStartsWith(prefix, actual)) {
-            throw new AssertionError(name + ": " + actual + " is not starting with " + prefix);
+            throw new AssertionError(name + ": " + quote(actual) + " is not starting with " + quote(prefix) + "!");
         }
     }
 
     public static void assertNotStartsWith(String name, String prefix, String actual) {
         if (startsWith(prefix, actual)) {
-            throw new AssertionError(name + ": " + actual + " is starting with " + prefix + " when it shouldn't!");
+            throw new AssertionError(name + ": " + quote(actual) + " is starting with " + quote(prefix) + " when it shouldn't!");
         }
     }
 
     public static void assertEndsWith(String name, String suffix, String actual) {
         if (notEndsWith(suffix, actual)) {
-            throw new AssertionError(name + ": " + actual + " is not ending with " + suffix);
+            throw new AssertionError(name + ": " + quote(actual) + " is not ending with " + quote(suffix) + "!");
         }
     }
 
     public static void assertNotEndsWith(String name, String suffix, String actual) {
         if (endsWith(suffix, actual)) {
-            throw new AssertionError(name + ": " + actual + " is ending with " + suffix + " when it shouldn't!");
+            throw new AssertionError(name + ": " + quote(actual) + " is ending with " + quote(suffix) + " when it shouldn't!");
         }
     }
 
@@ -188,37 +188,37 @@ import org.openqa.selenium.WebElement;
 
     public static void assertEquals(String name, double comparedTo, double number) {
         if (notEquals(comparedTo, number)) {
-            throw new AssertionError(name + ": " + number + " is not equal to " + comparedTo + " !");
+            throw new AssertionError(name + ": " + quote(number) + " is not equal to " + quote(comparedTo) + "!");
         }
     }
 
     public static void assertNotEquals(String name, double comparedTo, double number) {
         if (equals(comparedTo, number)) {
-            throw new AssertionError(name + ": " + number + " is equal to " + comparedTo + " when it shouldn't!");
+            throw new AssertionError(name + ": " + quote(number) + " is equal to " + quote(comparedTo) + " when it shouldn't!");
         }
     }
 
     public static void assertLessThan(String name, double comparedTo, double number) {
         if (greaterThanOrEquals(comparedTo, number)) {
-            throw new AssertionError(name + ": " + number + " is not less than " + comparedTo + " !");
+            throw new AssertionError(name + ": " + quote(number) + " is not less than " + quote(comparedTo) + "!");
         }
     }
 
     public static void assertLessThanOrEquals(String name, double comparedTo, double number) {
         if (greaterThan(comparedTo, number)) {
-            throw new AssertionError(name + ": " + number + " is not less than or equal to " + comparedTo + " !");
+            throw new AssertionError(name + ": " + quote(number) + " is not less than or equal to " + quote(comparedTo) + "!");
         }
     }
 
     public static void assertGreaterThan(String name, double comparedTo, double number) {
         if (lessThanOrEquals(comparedTo, number)) {
-            throw new AssertionError(name + ": " + number + " is not greater than " + comparedTo + " !");
+            throw new AssertionError(name + ": " + quote(number) + " is not greater than " + quote(comparedTo) + "!");
         }
     }
 
     public static void assertGreaterThanOrEquals(String name, double comparedTo, double number) {
         if (lessThan(comparedTo, number)) {
-            throw new AssertionError(name + ": " + number + " is not greater than or equal to " + comparedTo + " !");
+            throw new AssertionError(name + ": " + quote(number) + " is not greater than or equal to " + quote(comparedTo) + "!");
         }
     }
 }

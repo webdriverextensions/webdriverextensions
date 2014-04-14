@@ -31,6 +31,6 @@ public class StringUtils {
     }
 
     public static String quote(double number) {
-        return "\"" + number + "\"";
+        return "\"" + NumberUtils.toString(number) + "\"";
     }
 }

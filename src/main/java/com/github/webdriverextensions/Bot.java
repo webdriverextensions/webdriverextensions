@@ -1609,7 +1609,7 @@ public class Bot {
 
     public static void assertHasNotText(WebElement webElement) {
         if (hasText(webElement)) {
-            throw new AssertionError("Tag " + BotUtils.tagIn(webElement) + " has text \"" + textIn(webElement) + "\" when it shouldn't!");
+            throw new AssertionError("Tag " + BotUtils.tagIn(webElement) + " has text " + quote(textIn(webElement)) + " when it shouldn't!");
         }
     }
 
@@ -1918,41 +1918,41 @@ public class Bot {
 
     public static void assertHasOption(String text, WebElement webElement) {
         if (hasNotOption(text, webElement)) {
-            throw new AssertionError("Tag " + BotUtils.tagIn(webElement) + " has no option \"" + text.trim() + "\"!");
+            throw new AssertionError("Tag " + BotUtils.tagIn(webElement) + " has no option " + quote(text.trim()) + "!");
         }
     }
 
     public static void assertHasNotOption(String text, WebElement webElement) {
         if (hasOption(text, webElement)) {
-            throw new AssertionError("Tag " + BotUtils.tagIn(webElement) + " has option \"" + text.trim() + "\" when it shouldn't!");
+            throw new AssertionError("Tag " + BotUtils.tagIn(webElement) + " has option " + quote(text.trim()) + " when it shouldn't!");
         }
     }
 
     public static void assertOptionIsEnabled(String text, WebElement webElement) {
         assertHasOption(text, webElement);
         if (optionIsDisabled(text, webElement)) {
-            throw new AssertionError("Option \"" + text.trim() + "\" is not enabled!");
+            throw new AssertionError("Option " + quote(text.trim()) + " is not enabled!");
         }
     }
 
     public static void assertOptionIsDisabled(String text, WebElement webElement) {
         assertHasOption(text, webElement);
         if (optionIsEnabled(text, webElement)) {
-            throw new AssertionError("Option \"" + text.trim() + "\" is not disabled!");
+            throw new AssertionError("Option " + quote(text.trim()) + " is not disabled!");
         }
     }
 
     public static void assertOptionIsSelected(String text, WebElement webElement) {
         assertHasOption(text, webElement);
         if (optionIsDeselected(text, webElement)) {
-            throw new AssertionError("Option \"" + text.trim() + "\" is not selected!");
+            throw new AssertionError("Option " + quote(text.trim()) + " is not selected!");
         }
     }
 
     public static void assertOptionIsDeselected(String text, WebElement webElement) {
         assertHasOption(text, webElement);
         if (optionIsSelected(text, webElement)) {
-            throw new AssertionError("Option \"" + text.trim() + "\" is not deselected!");
+            throw new AssertionError("Option " + quote(text.trim()) + " is not deselected!");
         }
     }
 
@@ -2027,41 +2027,41 @@ public class Bot {
 
     public static void assertHasOptionWithValue(String value, WebElement webElement) {
         if (hasNotOptionWithValue(value, webElement)) {
-            throw new AssertionError("Tag " + BotUtils.tagIn(webElement) + " has no option with value \"" + value.trim() + "\"!");
+            throw new AssertionError("Tag " + BotUtils.tagIn(webElement) + " has no option with value " + quote(value.trim()) + "!");
         }
     }
 
     public static void assertHasNotOptionWithValue(String value, WebElement webElement) {
         if (hasOptionWithValue(value, webElement)) {
-            throw new AssertionError("Tag " + BotUtils.tagIn(webElement) + " has option with value \"" + value.trim() + "\" when it shouldn't!");
+            throw new AssertionError("Tag " + BotUtils.tagIn(webElement) + " has option with value " + quote(value.trim()) + " when it shouldn't!");
         }
     }
 
     public static void assertOptionWithValueIsEnabled(String value, WebElement webElement) {
         assertHasOptionWithValue(value, webElement);
         if (optionWithValueIsDisabled(value, webElement)) {
-            throw new AssertionError("Option with value \"" + value.trim() + "\" is not enabled!");
+            throw new AssertionError("Option with value " + quote(value.trim()) + " is not enabled!");
         }
     }
 
     public static void assertOptionWithValueIsDisabled(String value, WebElement webElement) {
         assertHasOptionWithValue(value, webElement);
         if (optionWithValueIsEnabled(value, webElement)) {
-            throw new AssertionError("Option with value \"" + value.trim() + "\" is not disabled!");
+            throw new AssertionError("Option with value " + quote(value.trim()) + " is not disabled!");
         }
     }
 
     public static void assertOptionWithValueIsSelected(String value, WebElement webElement) {
         assertHasOptionWithValue(value, webElement);
         if (optionWithValueIsDeselected(value, webElement)) {
-            throw new AssertionError("Option with value \"" + value.trim() + "\" is not selected!");
+            throw new AssertionError("Option with value " + quote(value.trim()) + " is not selected!");
         }
     }
 
     public static void assertOptionWithValueIsDeselected(String value, WebElement webElement) {
         assertHasOptionWithValue(value, webElement);
         if (optionWithValueIsSelected(value, webElement)) {
-            throw new AssertionError("Option with value \"" + value.trim() + "\" is not deselected!");
+            throw new AssertionError("Option with value " + quote(value.trim()) + " is not deselected!");
         }
     }
 
@@ -2119,41 +2119,41 @@ public class Bot {
 
     public static void assertHasOptionWithIndex(int index, WebElement webElement) {
         if (hasNotOptionWithIndex(index, webElement)) {
-            throw new AssertionError("Tag " + BotUtils.tagIn(webElement) + " has no option with index \"" + index + "\"!");
+            throw new AssertionError("Tag " + BotUtils.tagIn(webElement) + " has no option with index " + quote(index) + "!");
         }
     }
 
     public static void assertHasNotOptionWithIndex(int index, WebElement webElement) {
         if (hasOptionWithIndex(index, webElement)) {
-            throw new AssertionError("Tag " + BotUtils.tagIn(webElement) + " has option with index \"" + index + "\" when it shouldn't!");
+            throw new AssertionError("Tag " + BotUtils.tagIn(webElement) + " has option with index " + quote(index) + " when it shouldn't!");
         }
     }
 
     public static void assertOptionWithIndexIsEnabled(int index, WebElement webElement) {
         assertHasOptionWithIndex(index, webElement);
         if (optionWithIndexIsDisabled(index, webElement)) {
-            throw new AssertionError("Option with index \"" + index + "\" is not enabled!");
+            throw new AssertionError("Option with index " + quote(index) + " is not enabled!");
         }
     }
 
     public static void assertOptionWithIndexIsDisabled(int index, WebElement webElement) {
         assertHasOptionWithIndex(index, webElement);
         if (optionWithIndexIsEnabled(index, webElement)) {
-            throw new AssertionError("Option with index \"" + index + "\" is not disabled!");
+            throw new AssertionError("Option with index " + quote(index) + " is not disabled!");
         }
     }
 
     public static void assertOptionWithIndexIsSelected(int index, WebElement webElement) {
         assertHasOptionWithIndex(index, webElement);
         if (optionWithIndexIsDeselected(index, webElement)) {
-            throw new AssertionError("Option with index \"" + index + "\" is not selected!");
+            throw new AssertionError("Option with index " + quote(index) + " is not selected!");
         }
     }
 
     public static void assertOptionWithIndexIsDeselected(int index, WebElement webElement) {
         assertHasOptionWithIndex(index, webElement);
         if (optionWithIndexIsSelected(index, webElement)) {
-            throw new AssertionError("Option with index \"" + index + "\" is not deselected!");
+            throw new AssertionError("Option with index " + quote(index) + " is not deselected!");
         }
     }
 
