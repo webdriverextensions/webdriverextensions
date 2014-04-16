@@ -9,7 +9,7 @@ import org.openqa.selenium.WebElement;
 
 public class BotUtils {
 
-    /* Tag */
+    /* Html */
     public static String htmlOf(WebElement webElement) {
         if (webElement == null) {
             return "WebElement";
@@ -26,9 +26,6 @@ public class BotUtils {
         return "<" + Bot.tagNameOf(webElement) + prependSpaceIfNotBlank(attributesIn(webElement)) + ">...</" + Bot.tagNameOf(webElement) + ">";
     }
 
-
-
-    /* Inner Html */
     public static String innerHtmlOf(WebElement webElement) {
         return (String) ((JavascriptExecutor) ThreadDriver.getDriver()).executeScript("return arguments[0].innerHTML;", webElement);
     }
