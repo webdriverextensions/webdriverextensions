@@ -7,7 +7,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 
-    public class BotUtils {
+public class BotUtils {
 
     /* Tag */
     public static String htmlOf(WebElement webElement) {
