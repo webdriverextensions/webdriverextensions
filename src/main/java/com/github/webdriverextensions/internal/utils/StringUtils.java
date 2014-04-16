@@ -32,4 +32,8 @@ public class StringUtils {
     public static String quote(double number) {
         return "\"" + NumberUtils.toString(number) + "\"";
     }
+
+    public static String indent(String string, String indent) {
+        return string.replaceAll("\n", "\n" + indent);
+    }
 }
