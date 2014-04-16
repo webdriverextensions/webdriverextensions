@@ -12,16 +12,25 @@ public class BotUtils {
     /* Html */
     public static String htmlOf(WebElement webElement) {
         if (webElement == null) {
-            return "WebElement";
+            return "Element is null";
+        }
+        String innerHtml = innerHtmlOf(webElement);
+        if (StringUtils.isBlank(innerHtml)) {
+            return "<" + Bot.tagNameOf(webElement) + prependSpaceIfNotBlank(attributesIn(webElement)) + " />";
         }
         return "<" + Bot.tagNameOf(webElement) + prependSpaceIfNotBlank(attributesIn(webElement)) + ">"
-                + appendNewLineIfStartsWithNewLine(innerHtmlOf(webElement))
+                + surroundNewLinesIfContainsNewLine(innerHtml)
                 + "</" + Bot.tagNameOf(webElement) + ">";
+
     }
 
     public static String htmlOfWithoutInnerHtml(WebElement webElement) {
         if (webElement == null) {
-            return "WebElement";
+            return "Element is null";
+        }
+        String innerHtml = innerHtmlOf(webElement);
+        if (StringUtils.isBlank(innerHtml)) {
+            return "<" + Bot.tagNameOf(webElement) + prependSpaceIfNotBlank(attributesIn(webElement)) + " />";
         }
         return "<" + Bot.tagNameOf(webElement) + prependSpaceIfNotBlank(attributesIn(webElement)) + ">...</" + Bot.tagNameOf(webElement) + ">";
     }

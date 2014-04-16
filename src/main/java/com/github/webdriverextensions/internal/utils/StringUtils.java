@@ -1,7 +1,6 @@
 package com.github.webdriverextensions.internal.utils;
 
 import static org.apache.commons.lang3.StringUtils.contains;
-import static org.apache.commons.lang3.StringUtils.startsWith;
 
 public class StringUtils {
 
@@ -12,9 +11,9 @@ public class StringUtils {
         return string;
     }
 
-    public static String appendNewLineIfStartsWithNewLine(String string) {
-        if (startsWith(string, "\n")) {
-            return string + "\n";
+    public static String surroundNewLinesIfContainsNewLine(String string) {
+        if (contains(string, "\n")) {
+            return "\n" + string + "\n";
         }
         return string;
     }
