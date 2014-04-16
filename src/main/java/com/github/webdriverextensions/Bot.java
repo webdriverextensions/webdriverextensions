@@ -1,5 +1,6 @@
 package com.github.webdriverextensions;
 
+import com.github.webdriverextensions.exceptions.WebAssertionError;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
@@ -238,11 +239,11 @@ public class Bot {
     }
 
     public static void debug(WebElement webElement) {
-        log.debug("Tag:" + appendNewLineIfContainsNewLine(BotUtils.htmlOf(webElement)));
+        log.debug("Element: " + BotUtils.htmlOf(webElement));
     }
 
     public static void debug(List<? extends WebElement> webElements) {
-        log.debug("List contains the following {} tags:", sizeOf(webElements));
+        log.debug("Size: ", sizeOf(webElements));
         for (WebElement webElement : webElements) {
             debug(webElement);
         }
@@ -301,25 +302,25 @@ public class Bot {
 
     public static void assertIsDisplayed(WebElement webElement) {
         if (isNotDisplayed(webElement)) {
-            throw new AssertionError("WebElement is not displayed!");
+            throw new WebAssertionError("Element is not displayed!", webElement);
         }
     }
 
     public static void assertIsNotDisplayed(WebElement webElement) {
         if (isDisplayed(webElement)) {
-            throw new AssertionError("WebElement is displayed when it shouldn't!");
+            throw new WebAssertionError("Element is displayed when it shouldn't!", webElement);
         }
     }
 
     public static void assertIsDisplayed(WebElement webElement, long secondsToWait) {
         if (isNotDisplayed(webElement, secondsToWait)) {
-            throw new AssertionError("WebElement is not displayed within " + secondsToWait + " seconds!");
+            throw new WebAssertionError("Element is not displayed within " + secondsToWait + " seconds!", webElement);
         }
     }
 
     public static void assertIsNotDisplayed(WebElement webElement, long secondsToWait) {
         if (isDisplayed(webElement, secondsToWait)) {
-            throw new AssertionError("WebElement is displayed within " + secondsToWait + " seconds when it shouldn't!");
+            throw new WebAssertionError("Element is displayed within " + secondsToWait + " seconds when it shouldn't!", webElement);
         }
     }
 
@@ -567,11 +568,11 @@ public class Bot {
     }
 
     public static void assertTagNameEquals(String value, WebElement webElement) {
-        BotUtils.assertEquals("Tag name", value, tagNameOf(webElement));
+        BotUtils.assertEquals("Tag name", value, tagNameOf(webElement), webElement);
     }
 
     public static void assertTagNameNotEquals(String value, WebElement webElement) {
-        BotUtils.assertNotEquals("Tag name", value, tagNameOf(webElement));
+        BotUtils.assertNotEquals("Tag name", value, tagNameOf(webElement), webElement);
     }
 
 
@@ -653,54 +654,54 @@ public class Bot {
 
     public static void assertHasAttribute(String name, WebElement webElement) {
         if (hasNotAttribute(name, webElement)) {
-            throw new AssertionError("Tag " + BotUtils.htmlOfWithoutInnerHtml(webElement) + " does not have the " + name + " attribute!");
+            throw new WebAssertionError("Element does not have attribute " + quote(name) + "!", webElement);
         }
     }
 
     public static void assertHasNotAttribute(String name, WebElement webElement) {
         if (hasAttribute(name, webElement)) {
-            throw new AssertionError("Tag " + BotUtils.htmlOfWithoutInnerHtml(webElement) + " has the " + name + " attribute when it shouldn't!");
+            throw new WebAssertionError("Element has attribute " + quote(name) + " when it shouldn't!", webElement);
         }
     }
 
     public static void assertAttributeEquals(String name, String value, WebElement webElement) {
-        BotUtils.assertEquals(name, value, attributeIn(name, webElement));
+        BotUtils.assertEquals("Element attribute " + name, value, attributeIn(name, webElement), webElement);
     }
 
     public static void assertAttributeNotEquals(String name, String value, WebElement webElement) {
-        BotUtils.assertNotEquals(name, value, attributeIn(name, webElement));
+        BotUtils.assertNotEquals("Element attribute " + name, value, attributeIn(name, webElement), webElement);
     }
 
     public static void assertAttributeContains(String name, String searchText, WebElement webElement) {
-        BotUtils.assertContains(name, searchText, attributeIn(name, webElement));
+        BotUtils.assertContains("Element attribute " + name, searchText, attributeIn(name, webElement), webElement);
     }
 
     public static void assertAttributeNotContains(String name, String searchText, WebElement webElement) {
-        BotUtils.assertNotContains(name, searchText, attributeIn(name, webElement));
+        BotUtils.assertNotContains("Element attribute " + name, searchText, attributeIn(name, webElement), webElement);
     }
 
     public static void assertAttributeStartsWith(String name, String prefix, WebElement webElement) {
-        BotUtils.assertStartsWith(name, prefix, attributeIn(name, webElement));
+        BotUtils.assertStartsWith("Element attribute " + name, prefix, attributeIn(name, webElement), webElement);
     }
 
     public static void assertAttributeNotStartsWith(String name, String prefix, WebElement webElement) {
-        BotUtils.assertNotStartsWith(name, prefix, attributeIn(name, webElement));
+        BotUtils.assertNotStartsWith("Element attribute " + name, prefix, attributeIn(name, webElement), webElement);
     }
 
     public static void assertAttributeEndsWith(String name, String suffix, WebElement webElement) {
-        BotUtils.assertEndsWith(name, suffix, attributeIn(name, webElement));
+        BotUtils.assertEndsWith("Element attribute " + name, suffix, attributeIn(name, webElement), webElement);
     }
 
     public static void assertAttributeNotEndsWith(String name, String suffix, WebElement webElement) {
-        BotUtils.assertNotEndsWith(name, suffix, attributeIn(name, webElement));
+        BotUtils.assertNotEndsWith("Element attribute " + name, suffix, attributeIn(name, webElement), webElement);
     }
 
     public static void assertAttributeMatches(String name, String regExp, WebElement webElement) {
-        BotUtils.assertMatches(name, regExp, attributeIn(name, webElement));
+        BotUtils.assertMatches("Element attribute " + name, regExp, attributeIn(name, webElement), webElement);
     }
 
     public static void assertAttributeNotMatches(String name, String regExp, WebElement webElement) {
-        BotUtils.assertNotMatches(name, regExp, attributeIn(name, webElement));
+        BotUtils.assertNotMatches("Element attribute " + name, regExp, attributeIn(name, webElement), webElement);
     }
 
 
@@ -749,38 +750,38 @@ public class Bot {
 
     public static void assertAttributeIsNumber(String name, WebElement webElement) {
         if (attributeIsNotNumber(name, webElement)) {
-            throw new AssertionError("Element attribute " + name + "=" + quote(attributeInAsNumber(name, webElement)) + " is no number!");
+            throw new WebAssertionError("Element attribute " + name + " is not a number!", webElement);
         }
     }
 
     public static void assertAttributeIsNotNumber(String name, WebElement webElement) {
         if (attributeIsNumber(name, webElement)) {
-            throw new AssertionError("Element attribute " + name + "=" + quote(attributeInAsNumber(name, webElement)) + " is number when it shouldn't!");
+            throw new WebAssertionError("Element attribute " + name + " is a number when it shouldn't!", webElement);
         }
     }
 
     public static void assertAttributeEquals(String name, double number, WebElement webElement) {
-        BotUtils.assertEquals(name, number, attributeInAsNumber(name, webElement));
+        BotUtils.assertEquals(name, number, attributeInAsNumber(name, webElement), webElement);
     }
 
     public static void assertAttributeNotEquals(String name, double number, WebElement webElement) {
-        BotUtils.assertNotEquals(name, number, attributeInAsNumber(name, webElement));
+        BotUtils.assertNotEquals(name, number, attributeInAsNumber(name, webElement), webElement);
     }
 
     public static void assertAttributeLessThan(String name, double number, WebElement webElement) {
-        BotUtils.assertLessThan(name, number, attributeInAsNumber(name, webElement));
+        BotUtils.assertLessThan(name, number, attributeInAsNumber(name, webElement), webElement);
     }
 
     public static void assertAttributeLessThanOrEquals(String name, double number, WebElement webElement) {
-        BotUtils.assertLessThanOrEquals(name, number, attributeInAsNumber(name, webElement));
+        BotUtils.assertLessThanOrEquals(name, number, attributeInAsNumber(name, webElement), webElement);
     }
 
     public static void assertAttributeGreaterThan(String name, double number, WebElement webElement) {
-        BotUtils.assertGreaterThan(name, number, attributeInAsNumber(name, webElement));
+        BotUtils.assertGreaterThan(name, number, attributeInAsNumber(name, webElement), webElement);
     }
 
     public static void assertAttributeGreaterThanOrEquals(String name, double number, WebElement webElement) {
-        BotUtils.assertGreaterThanOrEquals(name, number, attributeInAsNumber(name, webElement));
+        BotUtils.assertGreaterThanOrEquals(name, number, attributeInAsNumber(name, webElement), webElement);
     }
 
 
@@ -1177,61 +1178,61 @@ public class Bot {
 
     public static void assertHasClass(String className, WebElement webElement) {
         if (hasNotClass(className, webElement)) {
-            throw new AssertionError("Tag " + BotUtils.htmlOfWithoutInnerHtml(webElement) + " does not have class " + className.trim() + "!");
+            throw new WebAssertionError("Element does not have class " + quote(className.trim()) + "!", webElement);
         }
     }
 
     public static void assertHasNotClass(String className, WebElement webElement) {
         if (hasClass(className, webElement)) {
-            throw new AssertionError("Tag " + BotUtils.htmlOfWithoutInnerHtml(webElement) + " has class " + className.trim() + " when it shouldn't!");
+            throw new WebAssertionError("Element has class " + quote(className.trim()) + " when it shouldn't!", webElement);
         }
     }
 
     public static void assertHasClassContaining(String searchText, WebElement webElement) {
         if (hasNotClassContaining(searchText, webElement)) {
-            throw new AssertionError("Tag " + BotUtils.htmlOfWithoutInnerHtml(webElement) + " does not have class containing text " + searchText.trim() + "!");
+            throw new WebAssertionError("Element does not have class containing text " + quote(searchText.trim()) + "!", webElement);
         }
     }
 
     public static void assertHasNotClassContaining(String searchText, WebElement webElement) {
         if (hasClassContaining(searchText, webElement)) {
-            throw new AssertionError("Tag " + BotUtils.htmlOfWithoutInnerHtml(webElement) + " has class containing text " + searchText.trim() + " when it shouldn't!");
+            throw new WebAssertionError("Element has class containing text " + quote(searchText.trim()) + " when it shouldn't!", webElement);
         }
     }
 
     public static void assertHasClassStartingWith(String prefix, WebElement webElement) {
         if (hasNotClassStartingWith(prefix, webElement)) {
-            throw new AssertionError("Tag " + BotUtils.htmlOfWithoutInnerHtml(webElement) + " does not have class containing prefix " + prefix.trim() + "!");
+            throw new WebAssertionError("Element does not have class containing prefix " + quote(prefix.trim()) + "!", webElement);
         }
     }
 
     public static void assertHasNotClassStartingWith(String prefix, WebElement webElement) {
         if (hasClassStartingWith(prefix, webElement)) {
-            throw new AssertionError("Tag " + BotUtils.htmlOfWithoutInnerHtml(webElement) + " has class containing prefix " + prefix.trim() + " when it shouldn't!");
+            throw new WebAssertionError("Element has class containing prefix " + quote(prefix.trim()) + " when it shouldn't!", webElement);
         }
     }
 
     public static void assertHasClassEndingWith(String suffix, WebElement webElement) {
         if (hasNotClassEndingWith(suffix, webElement)) {
-            throw new AssertionError("Tag " + BotUtils.htmlOfWithoutInnerHtml(webElement) + " does not have class containing suffix " + suffix.trim() + "!");
+            throw new WebAssertionError("Element does not have class containing suffix " + quote(suffix.trim()) + "!", webElement);
         }
     }
 
     public static void assertHasNotClassEndingWith(String suffix, WebElement webElement) {
         if (hasClassEndingWith(suffix, webElement)) {
-            throw new AssertionError("Tag " + BotUtils.htmlOfWithoutInnerHtml(webElement) + " has class containing suffix " + suffix.trim() + " when it shouldn't!");
+            throw new WebAssertionError("Element has class containing suffix " + quote(suffix.trim()) + " when it shouldn't!", webElement);
         }
     }
 
     public static void assertHasClassMatching(String regExp, WebElement webElement) {
         if (hasNotClassMatching(regExp, webElement)) {
-            throw new AssertionError("Tag " + BotUtils.htmlOfWithoutInnerHtml(webElement) + " does not have class matching regExp " + regExp.trim() + "!");
+            throw new WebAssertionError("Element does not have class matching regExp " + quote(regExp.trim()) + "!", webElement);
         }
     }
 
     public static void assertHasNotClassMatching(String regExp, WebElement webElement) {
         if (hasClassMatching(regExp, webElement)) {
-            throw new AssertionError("Tag " + BotUtils.htmlOfWithoutInnerHtml(webElement) + " has class matching regExp " + regExp.trim() + " when it shouldn't!");
+            throw new WebAssertionError("Element has class matching regExp " + quote(regExp.trim()) + " when it shouldn't!", webElement);
         }
     }
 
@@ -1673,54 +1674,54 @@ public class Bot {
 
     public static void assertHasText(WebElement webElement) {
         if (hasNotText(webElement)) {
-            throw new AssertionError("Tag " + BotUtils.htmlOf(webElement) + " has no text!");
+            throw new WebAssertionError("Element has no text!", webElement);
         }
     }
 
     public static void assertHasNotText(WebElement webElement) {
         if (hasText(webElement)) {
-            throw new AssertionError("Tag " + BotUtils.htmlOf(webElement) + " has text " + quote(textIn(webElement)) + " when it shouldn't!");
+            throw new WebAssertionError("Element has text " + quote(textIn(webElement)) + " when it shouldn't!", webElement);
         }
     }
 
     public static void assertTextEquals(String text, WebElement webElement) {
-        BotUtils.assertEquals("Text", text, textIn(webElement));
+        BotUtils.assertEquals("Text", text, textIn(webElement), webElement);
     }
 
     public static void assertTextNotEquals(String text, WebElement webElement) {
-        BotUtils.assertNotEquals("Text", text, textIn(webElement));
+        BotUtils.assertNotEquals("Text", text, textIn(webElement), webElement);
     }
 
     public static void assertTextContains(String searchText, WebElement webElement) {
-        BotUtils.assertContains("Text", searchText, textIn(webElement));
+        BotUtils.assertContains("Text", searchText, textIn(webElement), webElement);
     }
 
     public static void assertTextNotContains(String searchText, WebElement webElement) {
-        BotUtils.assertNotContains("Text", searchText, textIn(webElement));
+        BotUtils.assertNotContains("Text", searchText, textIn(webElement), webElement);
     }
 
     public static void assertTextStartsWith(String prefix, WebElement webElement) {
-        BotUtils.assertStartsWith("Text", prefix, textIn(webElement));
+        BotUtils.assertStartsWith("Text", prefix, textIn(webElement), webElement);
     }
 
     public static void assertTextNotStartsWith(String prefix, WebElement webElement) {
-        BotUtils.assertNotStartsWith("Text", prefix, textIn(webElement));
+        BotUtils.assertNotStartsWith("Text", prefix, textIn(webElement), webElement);
     }
 
     public static void assertTextEndsWith(String suffix, WebElement webElement) {
-        BotUtils.assertEndsWith("Text", suffix, textIn(webElement));
+        BotUtils.assertEndsWith("Text", suffix, textIn(webElement), webElement);
     }
 
     public static void assertTextNotEndsWith(String suffix, WebElement webElement) {
-        BotUtils.assertNotEndsWith("Text", suffix, textIn(webElement));
+        BotUtils.assertNotEndsWith("Text", suffix, textIn(webElement), webElement);
     }
 
     public static void assertTextMatches(String regExp, WebElement webElement) {
-        BotUtils.assertMatches("Text", regExp, textIn(webElement));
+        BotUtils.assertMatches("Text", regExp, textIn(webElement), webElement);
     }
 
     public static void assertTextNotMatches(String regExp, WebElement webElement) {
-        BotUtils.assertNotMatches("Text", regExp, textIn(webElement));
+        BotUtils.assertNotMatches("Text", regExp, textIn(webElement), webElement);
     }
 
 
@@ -1805,38 +1806,38 @@ public class Bot {
 
     public static void assertTextIsNumber(WebElement webElement) {
         if (textIsNotNumber(webElement)) {
-            throw new AssertionError("Text: " + textInAsNumber(webElement) + " is no number!");
+            throw new WebAssertionError("Element text is not a number!", webElement);
         }
     }
 
     public static void assertTextIsNotNumber(WebElement webElement) {
         if (textIsNumber(webElement)) {
-            throw new AssertionError("Text: " + textInAsNumber(webElement) + " is number when it shouldn't!");
+            throw new WebAssertionError("Element text is a number when it shouldn't!", webElement);
         }
     }
 
     public static void assertTextEquals(double number, WebElement webElement) {
-        BotUtils.assertEquals("Text", number, textInAsNumber(webElement));
+        BotUtils.assertEquals("Text", number, textInAsNumber(webElement), webElement);
     }
 
     public static void assertTextNotEquals(double number, WebElement webElement) {
-        BotUtils.assertNotEquals("Text", number, textInAsNumber(webElement));
+        BotUtils.assertNotEquals("Text", number, textInAsNumber(webElement), webElement);
     }
 
     public static void assertTextLessThan(double number, WebElement webElement) {
-        BotUtils.assertLessThan("Text", number, textInAsNumber(webElement));
+        BotUtils.assertLessThan("Text", number, textInAsNumber(webElement), webElement);
     }
 
     public static void assertTextLessThanOrEquals(double number, WebElement webElement) {
-        BotUtils.assertLessThanOrEquals("Text", number, textInAsNumber(webElement));
+        BotUtils.assertLessThanOrEquals("Text", number, textInAsNumber(webElement), webElement);
     }
 
     public static void assertTextGreaterThan(double number, WebElement webElement) {
-        BotUtils.assertGreaterThan("Text", number, textInAsNumber(webElement));
+        BotUtils.assertGreaterThan("Text", number, textInAsNumber(webElement), webElement);
     }
 
     public static void assertTextGreaterThanOrEquals(double number, WebElement webElement) {
-        BotUtils.assertGreaterThanOrEquals("Text", number, textInAsNumber(webElement));
+        BotUtils.assertGreaterThanOrEquals("Text", number, textInAsNumber(webElement), webElement);
     }
 
 
@@ -1852,13 +1853,13 @@ public class Bot {
 
     public static void assertIsSelected(WebElement webElement) {
         if (isDeselected(webElement)) {
-            throw new AssertionError("Tag " + BotUtils.htmlOfWithoutInnerHtml(webElement) + " is not selected!");
+            throw new WebAssertionError("Element is not selected!", webElement);
         }
     }
 
     public static void assertIsDeselected(WebElement webElement) {
         if (isSelected(webElement)) {
-            throw new AssertionError("Tag " + BotUtils.htmlOfWithoutInnerHtml(webElement) + " is not deselected!");
+            throw new WebAssertionError("Element is not deselected!", webElement);
         }
     }
 
@@ -1876,13 +1877,13 @@ public class Bot {
 
     public static void assertIsChecked(WebElement webElement) {
         if (isUnchecked(webElement)) {
-            throw new AssertionError("Tag " + BotUtils.htmlOfWithoutInnerHtml(webElement) + " is not checked!");
+            throw new WebAssertionError("Element is not checked!", webElement);
         }
     }
 
     public static void assertIsUnchecked(WebElement webElement) {
         if (isChecked(webElement)) {
-            throw new AssertionError("Tag " + BotUtils.htmlOfWithoutInnerHtml(webElement) + " is not unchecked!");
+            throw new WebAssertionError("Element is not unchecked!", webElement);
         }
     }
 
@@ -1899,13 +1900,13 @@ public class Bot {
 
     public static void assertIsEnabled(WebElement webElement) {
         if (isDisabled(webElement)) {
-            throw new AssertionError("Tag " + BotUtils.htmlOfWithoutInnerHtml(webElement) + " is not enabled!");
+            throw new WebAssertionError("Element is not enabled!", webElement);
         }
     }
 
     public static void assertIsDisabled(WebElement webElement) {
         if (isEnabled(webElement)) {
-            throw new AssertionError("Tag " + BotUtils.htmlOfWithoutInnerHtml(webElement) + " is not disabled!");
+            throw new WebAssertionError("Element is not disabled!", webElement);
         }
     }
 
@@ -1988,53 +1989,53 @@ public class Bot {
 
     public static void assertHasOption(String text, WebElement webElement) {
         if (hasNotOption(text, webElement)) {
-            throw new AssertionError("Tag " + BotUtils.htmlOf(webElement) + " has no option " + quote(text.trim()) + "!");
+            throw new WebAssertionError("Element has no option " + quote(text.trim()) + "!", webElement);
         }
     }
 
     public static void assertHasNotOption(String text, WebElement webElement) {
         if (hasOption(text, webElement)) {
-            throw new AssertionError("Tag " + BotUtils.htmlOf(webElement) + " has option " + quote(text.trim()) + " when it shouldn't!");
+            throw new WebAssertionError("Element has option " + quote(text.trim()) + " when it shouldn't!", webElement);
         }
     }
 
     public static void assertOptionIsEnabled(String text, WebElement webElement) {
         assertHasOption(text, webElement);
         if (optionIsDisabled(text, webElement)) {
-            throw new AssertionError("Option " + quote(text.trim()) + " is not enabled!");
+            throw new WebAssertionError("Option " + quote(text.trim()) + " is not enabled!", webElement);
         }
     }
 
     public static void assertOptionIsDisabled(String text, WebElement webElement) {
         assertHasOption(text, webElement);
         if (optionIsEnabled(text, webElement)) {
-            throw new AssertionError("Option " + quote(text.trim()) + " is not disabled!");
+            throw new WebAssertionError("Option " + quote(text.trim()) + " is not disabled!", webElement);
         }
     }
 
     public static void assertOptionIsSelected(String text, WebElement webElement) {
         assertHasOption(text, webElement);
         if (optionIsDeselected(text, webElement)) {
-            throw new AssertionError("Option " + quote(text.trim()) + " is not selected!");
+            throw new WebAssertionError("Option " + quote(text.trim()) + " is not selected!", webElement);
         }
     }
 
     public static void assertOptionIsDeselected(String text, WebElement webElement) {
         assertHasOption(text, webElement);
         if (optionIsSelected(text, webElement)) {
-            throw new AssertionError("Option " + quote(text.trim()) + " is not deselected!");
+            throw new WebAssertionError("Option " + quote(text.trim()) + " is not deselected!", webElement);
         }
     }
 
     public static void assertAllOptionsAreSelected(WebElement webElement) {
         if (!allOptionsAreSelected(webElement)) {
-            throw new AssertionError("All options are not selected!");
+            throw new WebAssertionError("All options are not selected!", webElement);
         }
     }
 
     public static void assertNoOptionIsSelected(WebElement webElement) {
         if (!noOptionIsSelected(webElement)) {
-            throw new AssertionError("All options are not deselected!");
+            throw new WebAssertionError("All options are not deselected!", webElement);
         }
     }
 
@@ -2097,41 +2098,41 @@ public class Bot {
 
     public static void assertHasOptionWithValue(String value, WebElement webElement) {
         if (hasNotOptionWithValue(value, webElement)) {
-            throw new AssertionError("Tag " + BotUtils.htmlOf(webElement) + " has no option with value " + quote(value.trim()) + "!");
+            throw new WebAssertionError("Element has no option with value " + quote(value.trim()) + "!", webElement);
         }
     }
 
     public static void assertHasNotOptionWithValue(String value, WebElement webElement) {
         if (hasOptionWithValue(value, webElement)) {
-            throw new AssertionError("Tag " + BotUtils.htmlOf(webElement) + " has option with value " + quote(value.trim()) + " when it shouldn't!");
+            throw new WebAssertionError("Element has option with value " + quote(value.trim()) + " when it shouldn't!", webElement);
         }
     }
 
     public static void assertOptionWithValueIsEnabled(String value, WebElement webElement) {
         assertHasOptionWithValue(value, webElement);
         if (optionWithValueIsDisabled(value, webElement)) {
-            throw new AssertionError("Option with value " + quote(value.trim()) + " is not enabled!");
+            throw new WebAssertionError("Option with value " + quote(value.trim()) + " is not enabled!", webElement);
         }
     }
 
     public static void assertOptionWithValueIsDisabled(String value, WebElement webElement) {
         assertHasOptionWithValue(value, webElement);
         if (optionWithValueIsEnabled(value, webElement)) {
-            throw new AssertionError("Option with value " + quote(value.trim()) + " is not disabled!");
+            throw new WebAssertionError("Option with value " + quote(value.trim()) + " is not disabled!", webElement);
         }
     }
 
     public static void assertOptionWithValueIsSelected(String value, WebElement webElement) {
         assertHasOptionWithValue(value, webElement);
         if (optionWithValueIsDeselected(value, webElement)) {
-            throw new AssertionError("Option with value " + quote(value.trim()) + " is not selected!");
+            throw new WebAssertionError("Option with value " + quote(value.trim()) + " is not selected!", webElement);
         }
     }
 
     public static void assertOptionWithValueIsDeselected(String value, WebElement webElement) {
         assertHasOptionWithValue(value, webElement);
         if (optionWithValueIsSelected(value, webElement)) {
-            throw new AssertionError("Option with value " + quote(value.trim()) + " is not deselected!");
+            throw new WebAssertionError("Option with value " + quote(value.trim()) + " is not deselected!", webElement);
         }
     }
 
@@ -2189,41 +2190,41 @@ public class Bot {
 
     public static void assertHasOptionWithIndex(int index, WebElement webElement) {
         if (hasNotOptionWithIndex(index, webElement)) {
-            throw new AssertionError("Tag " + BotUtils.htmlOf(webElement) + " has no option with index " + quote(index) + "!");
+            throw new WebAssertionError("Element  has no option with index " + quote(index) + "!", webElement);
         }
     }
 
     public static void assertHasNotOptionWithIndex(int index, WebElement webElement) {
         if (hasOptionWithIndex(index, webElement)) {
-            throw new AssertionError("Tag " + BotUtils.htmlOf(webElement) + " has option with index " + quote(index) + " when it shouldn't!");
+            throw new WebAssertionError("Element has option with index " + quote(index) + " when it shouldn't!", webElement);
         }
     }
 
     public static void assertOptionWithIndexIsEnabled(int index, WebElement webElement) {
         assertHasOptionWithIndex(index, webElement);
         if (optionWithIndexIsDisabled(index, webElement)) {
-            throw new AssertionError("Option with index " + quote(index) + " is not enabled!");
+            throw new WebAssertionError("Option with index " + quote(index) + " is not enabled!", webElement);
         }
     }
 
     public static void assertOptionWithIndexIsDisabled(int index, WebElement webElement) {
         assertHasOptionWithIndex(index, webElement);
         if (optionWithIndexIsEnabled(index, webElement)) {
-            throw new AssertionError("Option with index " + quote(index) + " is not disabled!");
+            throw new WebAssertionError("Option with index " + quote(index) + " is not disabled!", webElement);
         }
     }
 
     public static void assertOptionWithIndexIsSelected(int index, WebElement webElement) {
         assertHasOptionWithIndex(index, webElement);
         if (optionWithIndexIsDeselected(index, webElement)) {
-            throw new AssertionError("Option with index " + quote(index) + " is not selected!");
+            throw new WebAssertionError("Option with index " + quote(index) + " is not selected!", webElement);
         }
     }
 
     public static void assertOptionWithIndexIsDeselected(int index, WebElement webElement) {
         assertHasOptionWithIndex(index, webElement);
         if (optionWithIndexIsSelected(index, webElement)) {
-            throw new AssertionError("Option with index " + quote(index) + " is not deselected!");
+            throw new WebAssertionError("Option with index " + quote(index) + " is not deselected!", webElement);
         }
     }
 
