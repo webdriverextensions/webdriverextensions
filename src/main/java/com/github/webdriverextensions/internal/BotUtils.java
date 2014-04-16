@@ -10,7 +10,7 @@ import org.openqa.selenium.WebElement;
     public class BotUtils {
 
     /* Tag */
-    public static String tagIn(WebElement webElement) {
+    public static String htmlOf(WebElement webElement) {
         if (webElement == null) {
             return "WebElement";
         }
@@ -19,7 +19,7 @@ import org.openqa.selenium.WebElement;
                 + "</" + Bot.tagNameOf(webElement) + ">";
     }
 
-    public static String tagInWithoutHtml(WebElement webElement) {
+    public static String htmlOfWithoutInnerHtml(WebElement webElement) {
         if (webElement == null) {
             return "WebElement";
         }

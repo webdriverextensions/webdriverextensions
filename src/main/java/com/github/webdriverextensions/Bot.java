@@ -238,7 +238,7 @@ public class Bot {
     }
 
     public static void debug(WebElement webElement) {
-        log.debug("Tag:" + appendNewLineIfContainsNewLine(BotUtils.tagIn(webElement)));
+        log.debug("Tag:" + appendNewLineIfContainsNewLine(BotUtils.htmlOf(webElement)));
     }
 
     public static void debug(List<? extends WebElement> webElements) {
@@ -653,13 +653,13 @@ public class Bot {
 
     public static void assertHasAttribute(String name, WebElement webElement) {
         if (hasNotAttribute(name, webElement)) {
-            throw new AssertionError("Tag " + BotUtils.tagInWithoutHtml(webElement) + " does not have the " + name + " attribute!");
+            throw new AssertionError("Tag " + BotUtils.htmlOfWithoutInnerHtml(webElement) + " does not have the " + name + " attribute!");
         }
     }
 
     public static void assertHasNotAttribute(String name, WebElement webElement) {
         if (hasAttribute(name, webElement)) {
-            throw new AssertionError("Tag " + BotUtils.tagInWithoutHtml(webElement) + " has the " + name + " attribute when it shouldn't!");
+            throw new AssertionError("Tag " + BotUtils.htmlOfWithoutInnerHtml(webElement) + " has the " + name + " attribute when it shouldn't!");
         }
     }
 
@@ -1177,61 +1177,61 @@ public class Bot {
 
     public static void assertHasClass(String className, WebElement webElement) {
         if (hasNotClass(className, webElement)) {
-            throw new AssertionError("Tag " + BotUtils.tagInWithoutHtml(webElement) + " does not have class " + className.trim() + "!");
+            throw new AssertionError("Tag " + BotUtils.htmlOfWithoutInnerHtml(webElement) + " does not have class " + className.trim() + "!");
         }
     }
 
     public static void assertHasNotClass(String className, WebElement webElement) {
         if (hasClass(className, webElement)) {
-            throw new AssertionError("Tag " + BotUtils.tagInWithoutHtml(webElement) + " has class " + className.trim() + " when it shouldn't!");
+            throw new AssertionError("Tag " + BotUtils.htmlOfWithoutInnerHtml(webElement) + " has class " + className.trim() + " when it shouldn't!");
         }
     }
 
     public static void assertHasClassContaining(String searchText, WebElement webElement) {
         if (hasNotClassContaining(searchText, webElement)) {
-            throw new AssertionError("Tag " + BotUtils.tagInWithoutHtml(webElement) + " does not have class containing text " + searchText.trim() + "!");
+            throw new AssertionError("Tag " + BotUtils.htmlOfWithoutInnerHtml(webElement) + " does not have class containing text " + searchText.trim() + "!");
         }
     }
 
     public static void assertHasNotClassContaining(String searchText, WebElement webElement) {
         if (hasClassContaining(searchText, webElement)) {
-            throw new AssertionError("Tag " + BotUtils.tagInWithoutHtml(webElement) + " has class containing text " + searchText.trim() + " when it shouldn't!");
+            throw new AssertionError("Tag " + BotUtils.htmlOfWithoutInnerHtml(webElement) + " has class containing text " + searchText.trim() + " when it shouldn't!");
         }
     }
 
     public static void assertHasClassStartingWith(String prefix, WebElement webElement) {
         if (hasNotClassStartingWith(prefix, webElement)) {
-            throw new AssertionError("Tag " + BotUtils.tagInWithoutHtml(webElement) + " does not have class containing prefix " + prefix.trim() + "!");
+            throw new AssertionError("Tag " + BotUtils.htmlOfWithoutInnerHtml(webElement) + " does not have class containing prefix " + prefix.trim() + "!");
         }
     }
 
     public static void assertHasNotClassStartingWith(String prefix, WebElement webElement) {
         if (hasClassStartingWith(prefix, webElement)) {
-            throw new AssertionError("Tag " + BotUtils.tagInWithoutHtml(webElement) + " has class containing prefix " + prefix.trim() + " when it shouldn't!");
+            throw new AssertionError("Tag " + BotUtils.htmlOfWithoutInnerHtml(webElement) + " has class containing prefix " + prefix.trim() + " when it shouldn't!");
         }
     }
 
     public static void assertHasClassEndingWith(String suffix, WebElement webElement) {
         if (hasNotClassEndingWith(suffix, webElement)) {
-            throw new AssertionError("Tag " + BotUtils.tagInWithoutHtml(webElement) + " does not have class containing suffix " + suffix.trim() + "!");
+            throw new AssertionError("Tag " + BotUtils.htmlOfWithoutInnerHtml(webElement) + " does not have class containing suffix " + suffix.trim() + "!");
         }
     }
 
     public static void assertHasNotClassEndingWith(String suffix, WebElement webElement) {
         if (hasClassEndingWith(suffix, webElement)) {
-            throw new AssertionError("Tag " + BotUtils.tagInWithoutHtml(webElement) + " has class containing suffix " + suffix.trim() + " when it shouldn't!");
+            throw new AssertionError("Tag " + BotUtils.htmlOfWithoutInnerHtml(webElement) + " has class containing suffix " + suffix.trim() + " when it shouldn't!");
         }
     }
 
     public static void assertHasClassMatching(String regExp, WebElement webElement) {
         if (hasNotClassMatching(regExp, webElement)) {
-            throw new AssertionError("Tag " + BotUtils.tagInWithoutHtml(webElement) + " does not have class matching regExp " + regExp.trim() + "!");
+            throw new AssertionError("Tag " + BotUtils.htmlOfWithoutInnerHtml(webElement) + " does not have class matching regExp " + regExp.trim() + "!");
         }
     }
 
     public static void assertHasNotClassMatching(String regExp, WebElement webElement) {
         if (hasClassMatching(regExp, webElement)) {
-            throw new AssertionError("Tag " + BotUtils.tagInWithoutHtml(webElement) + " has class matching regExp " + regExp.trim() + " when it shouldn't!");
+            throw new AssertionError("Tag " + BotUtils.htmlOfWithoutInnerHtml(webElement) + " has class matching regExp " + regExp.trim() + " when it shouldn't!");
         }
     }
 
@@ -1673,13 +1673,13 @@ public class Bot {
 
     public static void assertHasText(WebElement webElement) {
         if (hasNotText(webElement)) {
-            throw new AssertionError("Tag " + BotUtils.tagIn(webElement) + " has no text!");
+            throw new AssertionError("Tag " + BotUtils.htmlOf(webElement) + " has no text!");
         }
     }
 
     public static void assertHasNotText(WebElement webElement) {
         if (hasText(webElement)) {
-            throw new AssertionError("Tag " + BotUtils.tagIn(webElement) + " has text " + quote(textIn(webElement)) + " when it shouldn't!");
+            throw new AssertionError("Tag " + BotUtils.htmlOf(webElement) + " has text " + quote(textIn(webElement)) + " when it shouldn't!");
         }
     }
 
@@ -1852,13 +1852,13 @@ public class Bot {
 
     public static void assertIsSelected(WebElement webElement) {
         if (isDeselected(webElement)) {
-            throw new AssertionError("Tag " + BotUtils.tagInWithoutHtml(webElement) + " is not selected!");
+            throw new AssertionError("Tag " + BotUtils.htmlOfWithoutInnerHtml(webElement) + " is not selected!");
         }
     }
 
     public static void assertIsDeselected(WebElement webElement) {
         if (isSelected(webElement)) {
-            throw new AssertionError("Tag " + BotUtils.tagInWithoutHtml(webElement) + " is not deselected!");
+            throw new AssertionError("Tag " + BotUtils.htmlOfWithoutInnerHtml(webElement) + " is not deselected!");
         }
     }
 
@@ -1876,13 +1876,13 @@ public class Bot {
 
     public static void assertIsChecked(WebElement webElement) {
         if (isUnchecked(webElement)) {
-            throw new AssertionError("Tag " + BotUtils.tagInWithoutHtml(webElement) + " is not checked!");
+            throw new AssertionError("Tag " + BotUtils.htmlOfWithoutInnerHtml(webElement) + " is not checked!");
         }
     }
 
     public static void assertIsUnchecked(WebElement webElement) {
         if (isChecked(webElement)) {
-            throw new AssertionError("Tag " + BotUtils.tagInWithoutHtml(webElement) + " is not unchecked!");
+            throw new AssertionError("Tag " + BotUtils.htmlOfWithoutInnerHtml(webElement) + " is not unchecked!");
         }
     }
 
@@ -1899,13 +1899,13 @@ public class Bot {
 
     public static void assertIsEnabled(WebElement webElement) {
         if (isDisabled(webElement)) {
-            throw new AssertionError("Tag " + BotUtils.tagInWithoutHtml(webElement) + " is not enabled!");
+            throw new AssertionError("Tag " + BotUtils.htmlOfWithoutInnerHtml(webElement) + " is not enabled!");
         }
     }
 
     public static void assertIsDisabled(WebElement webElement) {
         if (isEnabled(webElement)) {
-            throw new AssertionError("Tag " + BotUtils.tagInWithoutHtml(webElement) + " is not disabled!");
+            throw new AssertionError("Tag " + BotUtils.htmlOfWithoutInnerHtml(webElement) + " is not disabled!");
         }
     }
 
@@ -1988,13 +1988,13 @@ public class Bot {
 
     public static void assertHasOption(String text, WebElement webElement) {
         if (hasNotOption(text, webElement)) {
-            throw new AssertionError("Tag " + BotUtils.tagIn(webElement) + " has no option " + quote(text.trim()) + "!");
+            throw new AssertionError("Tag " + BotUtils.htmlOf(webElement) + " has no option " + quote(text.trim()) + "!");
         }
     }
 
     public static void assertHasNotOption(String text, WebElement webElement) {
         if (hasOption(text, webElement)) {
-            throw new AssertionError("Tag " + BotUtils.tagIn(webElement) + " has option " + quote(text.trim()) + " when it shouldn't!");
+            throw new AssertionError("Tag " + BotUtils.htmlOf(webElement) + " has option " + quote(text.trim()) + " when it shouldn't!");
         }
     }
 
@@ -2097,13 +2097,13 @@ public class Bot {
 
     public static void assertHasOptionWithValue(String value, WebElement webElement) {
         if (hasNotOptionWithValue(value, webElement)) {
-            throw new AssertionError("Tag " + BotUtils.tagIn(webElement) + " has no option with value " + quote(value.trim()) + "!");
+            throw new AssertionError("Tag " + BotUtils.htmlOf(webElement) + " has no option with value " + quote(value.trim()) + "!");
         }
     }
 
     public static void assertHasNotOptionWithValue(String value, WebElement webElement) {
         if (hasOptionWithValue(value, webElement)) {
-            throw new AssertionError("Tag " + BotUtils.tagIn(webElement) + " has option with value " + quote(value.trim()) + " when it shouldn't!");
+            throw new AssertionError("Tag " + BotUtils.htmlOf(webElement) + " has option with value " + quote(value.trim()) + " when it shouldn't!");
         }
     }
 
@@ -2189,13 +2189,13 @@ public class Bot {
 
     public static void assertHasOptionWithIndex(int index, WebElement webElement) {
         if (hasNotOptionWithIndex(index, webElement)) {
-            throw new AssertionError("Tag " + BotUtils.tagIn(webElement) + " has no option with index " + quote(index) + "!");
+            throw new AssertionError("Tag " + BotUtils.htmlOf(webElement) + " has no option with index " + quote(index) + "!");
         }
     }
 
     public static void assertHasNotOptionWithIndex(int index, WebElement webElement) {
         if (hasOptionWithIndex(index, webElement)) {
-            throw new AssertionError("Tag " + BotUtils.tagIn(webElement) + " has option with index " + quote(index) + " when it shouldn't!");
+            throw new AssertionError("Tag " + BotUtils.htmlOf(webElement) + " has option with index " + quote(index) + " when it shouldn't!");
         }
     }
 
