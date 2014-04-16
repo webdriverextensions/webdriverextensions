@@ -238,7 +238,6 @@ public class Bot {
     }
 
     public static void debug(WebElement webElement) {
-        String tag = BotUtils.tagIn(webElement);
         log.debug("Tag:" + appendNewLineIfContainsNewLine(BotUtils.tagIn(webElement)));
     }
 
