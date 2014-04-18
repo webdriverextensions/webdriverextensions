@@ -36,7 +36,6 @@ import com.github.webdriverextensions.junitrunner.annotations.Safari;
 import com.github.webdriverextensions.internal.WebDriverExtensionException;
 import com.github.webdriverextensions.internal.junitrunner.DriverPathLoader;
 import com.github.webdriverextensions.internal.utils.OsUtils;
-import com.github.webdriverextensions.junitrunner.annotations.BooleanOption;
 import com.github.webdriverextensions.junitrunner.annotations.DriverPaths;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.builder.ToStringBuilder;
@@ -248,7 +247,6 @@ public class WebDriverRunner extends BlockJUnit4ClassRunner {
         private String version;
         private Platform platform;
         private String platformName;
-        private BooleanOption javascriptEnabled;
         private Map<String, Object> desiredCapabilities;
 
         public BrowserConfiguration(Annotation annotation) {
@@ -293,7 +291,6 @@ public class WebDriverRunner extends BlockJUnit4ClassRunner {
             } else if (AnnotationUtils.getValue(annotation, "platform") instanceof Platform) {
                 this.platform = (Platform) AnnotationUtils.getValue(annotation, "platform");
             }
-            this.javascriptEnabled = (BooleanOption) AnnotationUtils.getValue(annotation, "javascriptEnabled");
             String desiredCapabilitiesString = (String) AnnotationUtils.getValue(annotation, "desiredCapabilities");
             if (desiredCapabilitiesString != null) {
                 this.desiredCapabilities = new Gson().fromJson(desiredCapabilitiesString, Map.class);
@@ -314,14 +311,6 @@ public class WebDriverRunner extends BlockJUnit4ClassRunner {
 
         public String getPlatformName() {
             return platform.toString();
-        }
-
-        public BooleanOption getJavascriptEnabled() {
-            return javascriptEnabled;
-        }
-
-        public void setJavascriptEnabled(BooleanOption javascriptEnabled) {
-            this.javascriptEnabled = javascriptEnabled;
         }
 
         public Map<String, Object> getDesiredCapabilitiesMap() {
@@ -358,15 +347,14 @@ public class WebDriverRunner extends BlockJUnit4ClassRunner {
 
         private Object getTestDescriptionSuffix() {
             String browserNameDescription = (browserName != null ? "[" + browserName + "]" : "[ANY]");
-            String javascriptEnabledDescription = (javascriptEnabled != BooleanOption.ANY ? "[" + javascriptEnabled.getValue() + "]" : "[ANY]");
             String desiredCapabilitiesDescription = (desiredCapabilities != null ? "[" + desiredCapabilities + "]" : "[NONE]");
 
-            return browserNameDescription + javascriptEnabledDescription + desiredCapabilitiesDescription;
+            return browserNameDescription + desiredCapabilitiesDescription;
         }
 
         @Override
         public String toString() {
-            return "Browser{" + "browserName=" + browserName + ", version=" + version + ", platform=" + platform + ", javascriptEnabled=" + javascriptEnabled + ", desiredCapabilitiesMap=" + desiredCapabilities + '}';
+            return "Browser{" + "browserName=" + browserName + ", version=" + version + ", platform=" + platform + ", desiredCapabilitiesMap=" + desiredCapabilities + '}';
         }
 
         private boolean matches(BrowserConfiguration browser) {
@@ -379,10 +367,6 @@ public class WebDriverRunner extends BlockJUnit4ClassRunner {
             }
             if (this.isPlatformProvided()
                     && (browser.isPlatformProvided() && !this.getPlatform().equals(browser.getPlatform()))) {
-                return false;
-            }
-            if (this.isJavascriptEnabledProvided()
-                    && (browser.isJavascriptEnabledProvided() && !this.getJavascriptEnabled().equals(browser.getJavascriptEnabled()))) {
                 return false;
             }
             if (this.isDesiredCapabilitiesProvided()
@@ -400,10 +384,6 @@ public class WebDriverRunner extends BlockJUnit4ClassRunner {
             return !Platform.ANY.equals(platform);
         }
 
-        private boolean isJavascriptEnabledProvided() {
-            return !BooleanOption.ANY.equals(javascriptEnabled);
-        }
-
         private boolean isDesiredCapabilitiesProvided() {
             return desiredCapabilities != null;
         }
@@ -413,10 +393,6 @@ public class WebDriverRunner extends BlockJUnit4ClassRunner {
             if (object instanceof BrowserConfiguration) {
                 final BrowserConfiguration browser = (BrowserConfiguration) object;
                 if (!this.getBrowserName().equals(browser.getBrowserName())) {
-                    return false;
-                }
-                if (this.isJavascriptEnabledProvided()
-                        && (browser.isJavascriptEnabledProvided() && !this.getJavascriptEnabled().equals(browser.getJavascriptEnabled()))) {
                     return false;
                 }
                 if (this.isDesiredCapabilitiesProvided()
@@ -431,7 +407,7 @@ public class WebDriverRunner extends BlockJUnit4ClassRunner {
 
         @Override
         public int hashCode() {
-            return Objects.hashCode(browserName, javascriptEnabled, desiredCapabilities);
+            return Objects.hashCode(browserName, desiredCapabilities);
         }
     }
 }

@@ -10,6 +10,5 @@ import org.openqa.selenium.Platform;
 public @interface IgnoreAndroid {
     public String version() default "";
     public Platform platform() default Platform.ANY;
-    public BooleanOption javascriptEnabled() default BooleanOption.ANY;
     public String desiredCapabilities() default "";
 }

@@ -33,7 +33,6 @@ import com.github.webdriverextensions.junitrunner.annotations.InternetExplorer;
 import com.github.webdriverextensions.junitrunner.annotations.Opera;
 import com.github.webdriverextensions.junitrunner.annotations.PhantomJS;
 import com.github.webdriverextensions.junitrunner.annotations.Safari;
-import com.github.webdriverextensions.junitrunner.annotations.BooleanOption;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
@@ -248,7 +247,6 @@ public class SeleniumGridRunner extends BlockJUnit4ClassRunner {
         private String version;
         private Platform platform;
         private String platformName;
-        private BooleanOption javascriptEnabled;
         private Map<String, Object> desiredCapabilities;
 
         public BrowserConfiguration(Annotation annotation) {
@@ -293,7 +291,6 @@ public class SeleniumGridRunner extends BlockJUnit4ClassRunner {
             } else if (AnnotationUtils.getValue(annotation, "platform") instanceof Platform) {
                 this.platform = (Platform) AnnotationUtils.getValue(annotation, "platform");
             }
-            this.javascriptEnabled = (BooleanOption) AnnotationUtils.getValue(annotation, "javascriptEnabled");
             String desiredCapabilitiesString = (String) AnnotationUtils.getValue(annotation, "desiredCapabilities");
             if (desiredCapabilitiesString != null) {
                 this.desiredCapabilities = new Gson().fromJson(desiredCapabilitiesString, Map.class);
@@ -316,14 +313,6 @@ public class SeleniumGridRunner extends BlockJUnit4ClassRunner {
             return platform.toString();
         }
 
-        public BooleanOption getJavascriptEnabled() {
-            return javascriptEnabled;
-        }
-
-        public void setJavascriptEnabled(BooleanOption javascriptEnabled) {
-            this.javascriptEnabled = javascriptEnabled;
-        }
-
         public Map<String, Object> getDesiredCapabilitiesMap() {
             return desiredCapabilities;
         }
@@ -340,9 +329,6 @@ public class SeleniumGridRunner extends BlockJUnit4ClassRunner {
                 driverDesiredCapabilities.setPlatform(this.platform);
             } else {
                 driverDesiredCapabilities.setCapability(CapabilityType.PLATFORM, this.platformName);
-            }
-            if (this.javascriptEnabled != BooleanOption.ANY) {
-                driverDesiredCapabilities.setJavascriptEnabled(this.javascriptEnabled.getValue());
             }
             if (this.desiredCapabilities != null) {
                 for (Entry<String, Object> entry : this.desiredCapabilities.entrySet()) {
@@ -364,15 +350,14 @@ public class SeleniumGridRunner extends BlockJUnit4ClassRunner {
             } else {
                 platformDescription = (platform != Platform.ANY ? "[" + platform.toString() + "]" : "[ANY]");
             }
-            String javascriptEnabledDescription = (javascriptEnabled != BooleanOption.ANY ? "[" + javascriptEnabled.getValue() + "]" : "[ANY]");
             String desiredCapabilitiesDescription = (desiredCapabilities != null ? "[" + desiredCapabilities + "]" : "[NONE]");
 
-            return browserNameDescription + versionDescription + platformDescription + javascriptEnabledDescription + desiredCapabilitiesDescription;
+            return browserNameDescription + versionDescription + platformDescription + desiredCapabilitiesDescription;
         }
 
         @Override
         public String toString() {
-            return "Browser{" + "browserName=" + browserName + ", version=" + version + ", platform=" + platform + ", javascriptEnabled=" + javascriptEnabled + ", desiredCapabilitiesMap=" + desiredCapabilities + '}';
+            return "Browser{" + "browserName=" + browserName + ", version=" + version + ", platform=" + platform + ", desiredCapabilitiesMap=" + desiredCapabilities + '}';
         }
 
         private boolean matches(BrowserConfiguration browser) {
@@ -385,10 +370,6 @@ public class SeleniumGridRunner extends BlockJUnit4ClassRunner {
             }
             if (this.isPlatformProvided()
                     && (browser.isPlatformProvided() && !this.getPlatform().equals(browser.getPlatform()))) {
-                return false;
-            }
-            if (this.isJavascriptEnabledProvided()
-                    && (browser.isJavascriptEnabledProvided() && !this.getJavascriptEnabled().equals(browser.getJavascriptEnabled()))) {
                 return false;
             }
             if (this.isDesiredCapabilitiesProvided()
@@ -404,10 +385,6 @@ public class SeleniumGridRunner extends BlockJUnit4ClassRunner {
 
         private boolean isPlatformProvided() {
             return !Platform.ANY.equals(platform);
-        }
-
-        private boolean isJavascriptEnabledProvided() {
-            return !BooleanOption.ANY.equals(javascriptEnabled);
         }
 
         private boolean isDesiredCapabilitiesProvided() {

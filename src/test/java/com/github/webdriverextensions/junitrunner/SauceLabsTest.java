@@ -13,7 +13,6 @@ import com.github.webdriverextensions.junitrunner.annotations.IgnoreBrowsers;
 import com.github.webdriverextensions.junitrunner.annotations.InternetExplorer;
 import com.github.webdriverextensions.junitrunner.annotations.Opera;
 import com.github.webdriverextensions.junitrunner.annotations.Safari;
-import com.github.webdriverextensions.junitrunner.annotations.BooleanOption;
 import org.junit.Assert;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -31,9 +30,9 @@ import org.openqa.selenium.remote.RemoteWebDriver;
 //    @Chrome(platform = Platform.MAC)
 }, firefox = {
     //    @Firefox(platform = Platform.WINDOWS, desiredCapabilities = "{}"),
-    //    @Firefox(platform = Platform.WIN8, javascriptEnabled = BooleanOption.TRUE),
+    //    @Firefox(platform = Platform.WIN8),
     //    @Firefox(platform = Platform.LINUX),
-    @Firefox(platform = Platform.MAC, javascriptEnabled = BooleanOption.FALSE)})
+    @Firefox(platform = Platform.MAC)})
 //}, iPhone = {
 //    @IPhone(platform = Platform.MAC)
 //}, iPad = {
