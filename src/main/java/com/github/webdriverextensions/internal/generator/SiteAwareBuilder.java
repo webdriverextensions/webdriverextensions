@@ -18,7 +18,6 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.builder.Builder;
 import org.apache.commons.lang3.exception.ExceptionUtils;
 
-//@Slf4j
 public class SiteAwareBuilder implements Builder<Boolean> {
 
     private static final org.slf4j.Logger log = org.slf4j.LoggerFactory.getLogger(SiteAwareBuilder.class);
