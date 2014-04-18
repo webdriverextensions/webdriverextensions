@@ -148,12 +148,12 @@ public class ExperimentalBot {
     }
 
 
-    /* Execute JavaScript */
-    public static Object executeJavaScript(String script, Object... args) {
+    /* Execute Javascript */
+    public static Object executeJavascript(String script, Object... args) {
         return ((JavascriptExecutor) ThreadDriver.getDriver()).executeScript(script, args);
     }
 
-    public static Object executeJavaScriptAsynchronously(String script, Object... args) {
+    public static Object executeJavascriptAsynchronously(String script, Object... args) {
         return ((JavascriptExecutor) ThreadDriver.getDriver()).executeAsyncScript(script, args);
     }
 }
