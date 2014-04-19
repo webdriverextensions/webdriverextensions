@@ -7,9 +7,10 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
 import com.github.webdriverextensions.internal.junitrunner.AnnotationUtils;
 import com.github.webdriverextensions.ThreadDriver;
+import com.github.webdriverextensions.internal.utils.InstanceUtils;
+import static com.github.webdriverextensions.internal.utils.WebDriverUtils.convertToJsonString;
 import com.github.webdriverextensions.junitrunner.annotations.RemoteAddress;
 import com.github.webdriverextensions.junitrunner.annotations.Android;
 import com.github.webdriverextensions.junitrunner.annotations.Chrome;
@@ -48,7 +49,7 @@ import org.junit.runners.model.TestClass;
 import org.openqa.selenium.Platform;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.remote.BrowserType;
-import org.openqa.selenium.remote.CapabilityType;
+import static org.openqa.selenium.remote.CapabilityType.PLATFORM;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
@@ -247,7 +248,7 @@ public class SeleniumGridRunner extends BlockJUnit4ClassRunner {
         private String version;
         private Platform platform;
         private String platformName;
-        private Map<String, Object> desiredCapabilities;
+        private DesiredCapabilities desiredCapabilities;
 
         public BrowserConfiguration(Annotation annotation) {
 
@@ -291,9 +292,18 @@ public class SeleniumGridRunner extends BlockJUnit4ClassRunner {
             } else if (AnnotationUtils.getValue(annotation, "platform") instanceof Platform) {
                 this.platform = (Platform) AnnotationUtils.getValue(annotation, "platform");
             }
-            String desiredCapabilitiesString = (String) AnnotationUtils.getValue(annotation, "desiredCapabilities");
-            if (desiredCapabilitiesString != null) {
-                this.desiredCapabilities = new Gson().fromJson(desiredCapabilitiesString, Map.class);
+            Class desiredCapabilitiesClass = (Class) AnnotationUtils.getValue(annotation, "desiredCapabilitiesClass");
+            if (desiredCapabilitiesClass != null) {
+                this.desiredCapabilities = InstanceUtils.newInstance(desiredCapabilitiesClass, DesiredCapabilities.class);
+            }
+            String desiredCapabilitiesJson = (String) AnnotationUtils.getValue(annotation, "desiredCapabilities");
+            if (desiredCapabilitiesJson != null) {
+                Map<String, Object> desiredCapabilitiesJsonMap = new Gson().fromJson(desiredCapabilitiesJson, Map.class);
+                if (desiredCapabilitiesJsonMap != null) {
+                    for (Map.Entry<String, Object> entry : desiredCapabilitiesJsonMap.entrySet()) {
+                        this.desiredCapabilities.setCapability(entry.getKey(), entry.getValue());
+                    }
+                }
             }
         }
 
@@ -313,31 +323,21 @@ public class SeleniumGridRunner extends BlockJUnit4ClassRunner {
             return platform.toString();
         }
 
-        public Map<String, Object> getDesiredCapabilitiesMap() {
+        public DesiredCapabilities getDesiredCapabilities() {
             return desiredCapabilities;
         }
 
-        public void setDesiredCapabilitiesMap(Map<String, Object> desiredCapabilitiesMap) {
-            this.desiredCapabilities = desiredCapabilitiesMap;
-        }
-
         private WebDriver createDriver(URL url) throws Exception {
-            DesiredCapabilities driverDesiredCapabilities = new DesiredCapabilities();
-            driverDesiredCapabilities.setBrowserName(this.browserName);
-            driverDesiredCapabilities.setVersion(this.version);
+            this.desiredCapabilities.setBrowserName(this.browserName);
+            this.desiredCapabilities.setVersion(this.version);
             if (this.platform != null) {
-                driverDesiredCapabilities.setPlatform(this.platform);
+                this.desiredCapabilities.setPlatform(this.platform);
             } else {
-                driverDesiredCapabilities.setCapability(CapabilityType.PLATFORM, this.platformName);
-            }
-            if (this.desiredCapabilities != null) {
-                for (Entry<String, Object> entry : this.desiredCapabilities.entrySet()) {
-                    driverDesiredCapabilities.setCapability(entry.getKey(), entry.getValue());
-                }
+                this.desiredCapabilities.setCapability(PLATFORM, this.platformName);
             }
             RemoteWebDriver driver = new RemoteWebDriver(
                     url,
-                    driverDesiredCapabilities);
+                    this.desiredCapabilities);
             return driver;
         }
 
@@ -350,14 +350,13 @@ public class SeleniumGridRunner extends BlockJUnit4ClassRunner {
             } else {
                 platformDescription = (platform != Platform.ANY ? "[" + platform.toString() + "]" : "[ANY]");
             }
-            String desiredCapabilitiesDescription = (desiredCapabilities != null ? "[" + desiredCapabilities + "]" : "[NONE]");
 
-            return browserNameDescription + versionDescription + platformDescription + desiredCapabilitiesDescription;
+            return browserNameDescription + versionDescription + platformDescription ;
         }
 
         @Override
         public String toString() {
-            return "Browser{" + "browserName=" + browserName + ", version=" + version + ", platform=" + platform + ", desiredCapabilitiesMap=" + desiredCapabilities + '}';
+            return "Browser{" + "browserName=" + browserName + ", version=" + version + ", platform=" + platform + ", desiredCapabilities=" + convertToJsonString(desiredCapabilities) + '}';
         }
 
         private boolean matches(BrowserConfiguration browser) {
@@ -373,7 +372,7 @@ public class SeleniumGridRunner extends BlockJUnit4ClassRunner {
                 return false;
             }
             if (this.isDesiredCapabilitiesProvided()
-                    && (browser.isDesiredCapabilitiesProvided() && !this.getDesiredCapabilitiesMap().equals(browser.getDesiredCapabilitiesMap()))) {
+                    && (browser.isDesiredCapabilitiesProvided() && !this.getDesiredCapabilities().equals(browser.getDesiredCapabilities()))) {
                 return false;
             }
             return true;

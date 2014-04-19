@@ -35,7 +35,9 @@ import com.github.webdriverextensions.junitrunner.annotations.PhantomJS;
 import com.github.webdriverextensions.junitrunner.annotations.Safari;
 import com.github.webdriverextensions.internal.WebDriverExtensionException;
 import com.github.webdriverextensions.internal.junitrunner.DriverPathLoader;
+import com.github.webdriverextensions.internal.utils.InstanceUtils;
 import com.github.webdriverextensions.internal.utils.OsUtils;
+import static com.github.webdriverextensions.internal.utils.WebDriverUtils.convertToJsonString;
 import com.github.webdriverextensions.junitrunner.annotations.DriverPaths;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.builder.ToStringBuilder;
@@ -56,6 +58,7 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.remote.BrowserType;
+import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.safari.SafariDriver;
 
 public class WebDriverRunner extends BlockJUnit4ClassRunner {
@@ -247,7 +250,7 @@ public class WebDriverRunner extends BlockJUnit4ClassRunner {
         private String version;
         private Platform platform;
         private String platformName;
-        private Map<String, Object> desiredCapabilities;
+        private DesiredCapabilities desiredCapabilities;
 
         public BrowserConfiguration(Annotation annotation) {
 
@@ -291,9 +294,18 @@ public class WebDriverRunner extends BlockJUnit4ClassRunner {
             } else if (AnnotationUtils.getValue(annotation, "platform") instanceof Platform) {
                 this.platform = (Platform) AnnotationUtils.getValue(annotation, "platform");
             }
-            String desiredCapabilitiesString = (String) AnnotationUtils.getValue(annotation, "desiredCapabilities");
-            if (desiredCapabilitiesString != null) {
-                this.desiredCapabilities = new Gson().fromJson(desiredCapabilitiesString, Map.class);
+            Class desiredCapabilitiesClass = (Class) AnnotationUtils.getValue(annotation, "desiredCapabilitiesClass");
+            if (desiredCapabilitiesClass != null) {
+                this.desiredCapabilities = InstanceUtils.newInstance(desiredCapabilitiesClass, DesiredCapabilities.class);
+            }
+            String desiredCapabilitiesJson = (String) AnnotationUtils.getValue(annotation, "desiredCapabilities");
+            if (desiredCapabilitiesJson != null) {
+                Map<String, Object> desiredCapabilitiesJsonMap = new Gson().fromJson(desiredCapabilitiesJson, Map.class);
+                if (desiredCapabilitiesJsonMap != null) {
+                    for (Map.Entry<String, Object> entry : desiredCapabilitiesJsonMap.entrySet()) {
+                        this.desiredCapabilities.setCapability(entry.getKey(), entry.getValue());
+                    }
+                }
             }
         }
 
@@ -313,33 +325,29 @@ public class WebDriverRunner extends BlockJUnit4ClassRunner {
             return platform.toString();
         }
 
-        public Map<String, Object> getDesiredCapabilitiesMap() {
+        public DesiredCapabilities getDesiredCapabilities() {
             return desiredCapabilities;
-        }
-
-        public void setDesiredCapabilitiesMap(Map<String, Object> desiredCapabilitiesMap) {
-            this.desiredCapabilities = desiredCapabilitiesMap;
         }
 
         private WebDriver createDriver() throws Exception {
             if (BrowserType.CHROME.equals(browserName)) {
-                return new ChromeDriver();
+                return new ChromeDriver(this.desiredCapabilities);
             }
 
             if (BrowserType.FIREFOX.equals(browserName)) {
-                return new FirefoxDriver();
+                return new FirefoxDriver(this.desiredCapabilities);
             }
 
             if (BrowserType.HTMLUNIT.equals(browserName)) {
-                return new HtmlUnitDriver();
+                return new HtmlUnitDriver(this.desiredCapabilities);
             }
 
             if (BrowserType.IE.equals(browserName)) {
-                return new InternetExplorerDriver();
+                return new InternetExplorerDriver(this.desiredCapabilities);
             }
 
             if (BrowserType.SAFARI.equals(browserName)) {
-                return new SafariDriver();
+                return new SafariDriver(this.desiredCapabilities);
             }
 
             throw new WebDriverExtensionException("Could not find any known driver for " + toString());
@@ -347,14 +355,13 @@ public class WebDriverRunner extends BlockJUnit4ClassRunner {
 
         private Object getTestDescriptionSuffix() {
             String browserNameDescription = (browserName != null ? "[" + browserName + "]" : "[ANY]");
-            String desiredCapabilitiesDescription = (desiredCapabilities != null ? "[" + desiredCapabilities + "]" : "[NONE]");
 
-            return browserNameDescription + desiredCapabilitiesDescription;
+            return browserNameDescription;
         }
 
         @Override
         public String toString() {
-            return "Browser{" + "browserName=" + browserName + ", version=" + version + ", platform=" + platform + ", desiredCapabilitiesMap=" + desiredCapabilities + '}';
+            return "Browser{" + "browserName=" + browserName + ", version=" + version + ", platform=" + platform + ", desiredCapabilities=" + convertToJsonString(desiredCapabilities) + '}';
         }
 
         private boolean matches(BrowserConfiguration browser) {
@@ -370,7 +377,7 @@ public class WebDriverRunner extends BlockJUnit4ClassRunner {
                 return false;
             }
             if (this.isDesiredCapabilitiesProvided()
-                    && (browser.isDesiredCapabilitiesProvided() && !this.getDesiredCapabilitiesMap().equals(browser.getDesiredCapabilitiesMap()))) {
+                    && (browser.isDesiredCapabilitiesProvided() && !this.getDesiredCapabilities().equals(browser.getDesiredCapabilities()))) {
                 return false;
             }
             return true;
@@ -396,7 +403,7 @@ public class WebDriverRunner extends BlockJUnit4ClassRunner {
                     return false;
                 }
                 if (this.isDesiredCapabilitiesProvided()
-                        && (browser.isDesiredCapabilitiesProvided() && !this.getDesiredCapabilitiesMap().equals(browser.getDesiredCapabilitiesMap()))) {
+                        && (browser.isDesiredCapabilitiesProvided() && !this.getDesiredCapabilities().equals(browser.getDesiredCapabilities()))) {
                     return false;
                 }
                 return true;
