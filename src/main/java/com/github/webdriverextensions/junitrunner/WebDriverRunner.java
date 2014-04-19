@@ -133,9 +133,9 @@ public class WebDriverRunner extends BlockJUnit4ClassRunner {
             Description description = describeChild(method);
             if (method.getAnnotation(Ignore.class) != null
                     || browserConfigurations.isBrowserIgnored(browserConfiguration)
-                    || (BrowserType.IE.equals(browserConfiguration.getBrowserName()) && !OsUtils.isWindows())
-                    || (BrowserType.IEXPLORE.equals(browserConfiguration.getBrowserName()) && !OsUtils.isWindows())
-                    || (BrowserType.SAFARI.equals(browserConfiguration.getBrowserName()) && (!OsUtils.isWindows() && !OsUtils.isMac()))) {
+                    || (BrowserType.IE.equalsIgnoreCase(browserConfiguration.getBrowserName()) && !OsUtils.isWindows())
+                    || (BrowserType.IEXPLORE.equalsIgnoreCase(browserConfiguration.getBrowserName()) && !OsUtils.isWindows())
+                    || (BrowserType.SAFARI.equalsIgnoreCase(browserConfiguration.getBrowserName()) && (!OsUtils.isWindows() && !OsUtils.isMac()))) {
                 notifier.fireTestIgnored(description);
             } else {
                 log.info("{}.{}", getName(), method.getName());
@@ -346,23 +346,23 @@ public class WebDriverRunner extends BlockJUnit4ClassRunner {
         }
 
         private WebDriver createDriver() throws Exception {
-            if (BrowserType.CHROME.equals(browserName)) {
+            if (BrowserType.CHROME.equalsIgnoreCase(browserName)) {
                 return new ChromeDriver(this.desiredCapabilities);
             }
 
-            if (BrowserType.FIREFOX.equals(browserName)) {
+            if (BrowserType.FIREFOX.equalsIgnoreCase(browserName)) {
                 return new FirefoxDriver(this.desiredCapabilities);
             }
 
-            if (BrowserType.HTMLUNIT.equals(browserName)) {
+            if (BrowserType.HTMLUNIT.equalsIgnoreCase(browserName)) {
                 return new HtmlUnitDriver(this.desiredCapabilities);
             }
 
-            if (BrowserType.IE.equals(browserName)) {
+            if (BrowserType.IE.equalsIgnoreCase(browserName)) {
                 return new InternetExplorerDriver(this.desiredCapabilities);
             }
 
-            if (BrowserType.SAFARI.equals(browserName)) {
+            if (BrowserType.SAFARI.equalsIgnoreCase(browserName)) {
                 return new SafariDriver(this.desiredCapabilities);
             }
 
@@ -381,15 +381,15 @@ public class WebDriverRunner extends BlockJUnit4ClassRunner {
         }
 
         private boolean matches(BrowserConfiguration browser) {
-            if (!this.getBrowserName().equals(browser.getBrowserName())) {
+            if (!this.getBrowserName().equalsIgnoreCase(browser.getBrowserName())) {
                 return false;
             }
             if (this.isVersionProvided()
-                    && (browser.isVersionProvided() && !this.getVersion().equals(browser.getVersion()))) {
+                    && (browser.isVersionProvided() && !this.getVersion().equalsIgnoreCase(browser.getVersion()))) {
                 return false;
             }
             if (this.isPlatformProvided()
-                    && (browser.isPlatformProvided() && !this.getPlatform().equals(browser.getPlatform()))) {
+                    && (browser.isPlatformProvided() && !this.getPlatform().equalsIgnoreCase(browser.getPlatform()))) {
                 return false;
             }
             if (this.isDesiredCapabilitiesProvided()
@@ -404,7 +404,7 @@ public class WebDriverRunner extends BlockJUnit4ClassRunner {
         }
 
         private boolean isPlatformProvided() {
-            return !Platform.ANY.toString().equals(platform);
+            return !Platform.ANY.toString().equalsIgnoreCase(platform);
         }
 
         private boolean isDesiredCapabilitiesProvided() {
@@ -415,7 +415,7 @@ public class WebDriverRunner extends BlockJUnit4ClassRunner {
         public boolean equals(Object object) {
             if (object instanceof BrowserConfiguration) {
                 final BrowserConfiguration browser = (BrowserConfiguration) object;
-                if (!this.getBrowserName().equals(browser.getBrowserName())) {
+                if (!this.getBrowserName().equalsIgnoreCase(browser.getBrowserName())) {
                     return false;
                 }
                 if (this.isDesiredCapabilitiesProvided()

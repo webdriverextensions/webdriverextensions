@@ -299,6 +299,7 @@ public class SeleniumGridRunner extends BlockJUnit4ClassRunner {
                     || annotation.annotationType().equals(IgnoreBrowser.class)) {
                 this.browserName = (String) AnnotationUtils.getValue(annotation, "browserName");
             }
+
             this.version = (String) AnnotationUtils.getValue(annotation, "version");
 
             if (annotation.annotationType().equals(Browser.class)
@@ -364,15 +365,15 @@ public class SeleniumGridRunner extends BlockJUnit4ClassRunner {
         }
 
         private boolean matches(BrowserConfiguration browser) {
-            if (!this.getBrowserName().equals(browser.getBrowserName())) {
+            if (!this.getBrowserName().equalsIgnoreCase(browser.getBrowserName())) {
                 return false;
             }
             if (this.isVersionProvided()
-                    && (browser.isVersionProvided() && !this.getVersion().equals(browser.getVersion()))) {
+                    && (browser.isVersionProvided() && !this.getVersion().equalsIgnoreCase(browser.getVersion()))) {
                 return false;
             }
             if (this.isPlatformProvided()
-                    && (browser.isPlatformProvided() && !this.getPlatform().equals(browser.getPlatform()))) {
+                    && (browser.isPlatformProvided() && !this.getPlatform().equalsIgnoreCase(browser.getPlatform()))) {
                 return false;
             }
             if (this.isDesiredCapabilitiesProvided()
@@ -387,7 +388,7 @@ public class SeleniumGridRunner extends BlockJUnit4ClassRunner {
         }
 
         private boolean isPlatformProvided() {
-            return !Platform.ANY.toString().equals(platform);
+            return !Platform.ANY.toString().equalsIgnoreCase(platform);
         }
 
         private boolean isDesiredCapabilitiesProvided() {
