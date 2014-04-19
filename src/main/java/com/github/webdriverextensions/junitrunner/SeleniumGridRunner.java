@@ -137,7 +137,18 @@ public class SeleniumGridRunner extends BlockJUnit4ClassRunner {
                 log.trace("{}.{} threadId = {}", getName(), method.getName(), Thread.currentThread().getId());
                 String remoteAddress = ((RemoteAddress) getTestClass().getJavaClass().getAnnotation(RemoteAddress.class)).value();
                 try {
+                    log.trace("Desired Capabilities");
+                    log.trace("browserName = " + browserConfiguration.getBrowserName());
+                    log.trace("version = " + browserConfiguration.getVersion());
+                    log.trace("platform = " + (browserConfiguration.getPlatform() != null ? browserConfiguration.getPlatform().toString() : browserConfiguration.getPlatformName()));
+                    log.trace("desiredCapabilities = " + convertToJsonString(browserConfiguration.getDesiredCapabilities()));
+                    log.trace("Creating WebDriver with Desired Capabilities");
                     ThreadDriver.setDriver(browserConfiguration.createDriver(new URL(remoteAddress)));
+                    log.trace("Capabilities");
+                    log.trace("browserName = " + ((RemoteWebDriver) ThreadDriver.getDriver()).getCapabilities().getBrowserName());
+                    log.trace("version = " + ((RemoteWebDriver) ThreadDriver.getDriver()).getCapabilities().getVersion());
+                    log.trace("platform = " + ((RemoteWebDriver) ThreadDriver.getDriver()).getCapabilities().getCapability(PLATFORM));
+                    log.trace("capabilities = " + convertToJsonString(((RemoteWebDriver) ThreadDriver.getDriver()).getCapabilities()));
                 } catch (Exception ex) {
                     notifier.fireTestFailure(new Failure(description, ex));
                     return;

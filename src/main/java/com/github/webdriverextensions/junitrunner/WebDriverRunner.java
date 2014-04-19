@@ -58,7 +58,9 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.remote.BrowserType;
+import static org.openqa.selenium.remote.CapabilityType.PLATFORM;
 import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.safari.SafariDriver;
 
 public class WebDriverRunner extends BlockJUnit4ClassRunner {
@@ -139,7 +141,18 @@ public class WebDriverRunner extends BlockJUnit4ClassRunner {
                 log.info("{}.{}", getName(), method.getName());
                 log.trace("{}.{} threadId = {}", getName(), method.getName(), Thread.currentThread().getId());
                 try {
+                    log.trace("Desired Capabilities");
+                    log.trace("browserName = " + browserConfiguration.getBrowserName());
+                    log.trace("version = " + browserConfiguration.getVersion());
+                    log.trace("platform = " + (browserConfiguration.getPlatform() != null ? browserConfiguration.getPlatform().toString() : browserConfiguration.getPlatformName()));
+                    log.trace("desiredCapabilities = " + convertToJsonString(browserConfiguration.getDesiredCapabilities()));
+                    log.trace("Creating WebDriver with Desired Capabilities");
                     ThreadDriver.setDriver(browserConfiguration.createDriver());
+                    log.trace("Capabilities");
+                    log.trace("browserName = " + ((RemoteWebDriver) ThreadDriver.getDriver()).getCapabilities().getBrowserName());
+                    log.trace("version = " + ((RemoteWebDriver) ThreadDriver.getDriver()).getCapabilities().getVersion());
+                    log.trace("platform = " + ((RemoteWebDriver) ThreadDriver.getDriver()).getCapabilities().getCapability(PLATFORM));
+                    log.trace("capabilities = " + convertToJsonString(((RemoteWebDriver) ThreadDriver.getDriver()).getCapabilities()));
                 } catch (Exception ex) {
                     notifier.fireTestFailure(new Failure(description, ex));
                     return;
