@@ -144,7 +144,7 @@ public class WebDriverRunner extends BlockJUnit4ClassRunner {
                     log.trace("Desired Capabilities");
                     log.trace("browserName = " + browserConfiguration.getBrowserName());
                     log.trace("version = " + browserConfiguration.getVersion());
-                    log.trace("platform = " + (browserConfiguration.getPlatform() != null ? browserConfiguration.getPlatform().toString() : browserConfiguration.getPlatformName()));
+                    log.trace("platform = " + browserConfiguration.getPlatform());
                     log.trace("desiredCapabilities = " + convertToJsonString(browserConfiguration.getDesiredCapabilities()));
                     log.trace("Creating WebDriver with Desired Capabilities");
                     ThreadDriver.setDriver(browserConfiguration.createDriver());
@@ -264,8 +264,7 @@ public class WebDriverRunner extends BlockJUnit4ClassRunner {
 
         private String browserName;
         private String version;
-        private Platform platform;
-        private String platformName;
+        private String platform;
         private DesiredCapabilities desiredCapabilities;
 
         public BrowserConfiguration(Annotation annotation) {
@@ -304,16 +303,21 @@ public class WebDriverRunner extends BlockJUnit4ClassRunner {
                     || annotation.annotationType().equals(IgnoreBrowser.class)) {
                 this.browserName = (String) AnnotationUtils.getValue(annotation, "browserName");
             }
+
             this.version = (String) AnnotationUtils.getValue(annotation, "version");
-            if (AnnotationUtils.getValue(annotation, "platform") instanceof String) {
-                this.platformName = (String) AnnotationUtils.getValue(annotation, "platform");
-            } else if (AnnotationUtils.getValue(annotation, "platform") instanceof Platform) {
-                this.platform = (Platform) AnnotationUtils.getValue(annotation, "platform");
+            
+            if (annotation.annotationType().equals(Browser.class)
+                    || annotation.annotationType().equals(IgnoreBrowser.class)) {
+                this.platform = (String) AnnotationUtils.getValue(annotation, "platform");
+            } else {
+                this.platform = ((Platform) AnnotationUtils.getValue(annotation, "platform")).toString();
             }
+
             Class desiredCapabilitiesClass = (Class) AnnotationUtils.getValue(annotation, "desiredCapabilitiesClass");
             if (desiredCapabilitiesClass != null) {
                 this.desiredCapabilities = InstanceUtils.newInstance(desiredCapabilitiesClass, DesiredCapabilities.class);
             }
+
             String desiredCapabilitiesJson = (String) AnnotationUtils.getValue(annotation, "desiredCapabilities");
             if (desiredCapabilitiesJson != null) {
                 Map<String, Object> desiredCapabilitiesJsonMap = new Gson().fromJson(desiredCapabilitiesJson, Map.class);
@@ -333,12 +337,8 @@ public class WebDriverRunner extends BlockJUnit4ClassRunner {
             return version;
         }
 
-        public Platform getPlatform() {
+        public String getPlatform() {
             return platform;
-        }
-
-        public String getPlatformName() {
-            return platform.toString();
         }
 
         public DesiredCapabilities getDesiredCapabilities() {
@@ -377,7 +377,7 @@ public class WebDriverRunner extends BlockJUnit4ClassRunner {
 
         @Override
         public String toString() {
-            return "Browser{" + "browserName=" + browserName + ", version=" + version + ", platform=" + platform + ", desiredCapabilities=" + convertToJsonString(desiredCapabilities) + '}';
+            return "Browser{" + "browserName=" + getBrowserName() + ", version=" + getVersion() + ", platform=" + getPlatform() + ", desiredCapabilities=" + convertToJsonString(desiredCapabilities) + '}';
         }
 
         private boolean matches(BrowserConfiguration browser) {
@@ -404,7 +404,7 @@ public class WebDriverRunner extends BlockJUnit4ClassRunner {
         }
 
         private boolean isPlatformProvided() {
-            return !Platform.ANY.equals(platform);
+            return !Platform.ANY.toString().equals(platform);
         }
 
         private boolean isDesiredCapabilitiesProvided() {

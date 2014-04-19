@@ -140,7 +140,7 @@ public class SeleniumGridRunner extends BlockJUnit4ClassRunner {
                     log.trace("Desired Capabilities");
                     log.trace("browserName = " + browserConfiguration.getBrowserName());
                     log.trace("version = " + browserConfiguration.getVersion());
-                    log.trace("platform = " + (browserConfiguration.getPlatform() != null ? browserConfiguration.getPlatform().toString() : browserConfiguration.getPlatformName()));
+                    log.trace("platform = " + browserConfiguration.getPlatform());
                     log.trace("desiredCapabilities = " + convertToJsonString(browserConfiguration.getDesiredCapabilities()));
                     log.trace("Creating WebDriver with Desired Capabilities");
                     ThreadDriver.setDriver(browserConfiguration.createDriver(new URL(remoteAddress)));
@@ -260,8 +260,7 @@ public class SeleniumGridRunner extends BlockJUnit4ClassRunner {
 
         private String browserName;
         private String version;
-        private Platform platform;
-        private String platformName;
+        private String platform;
         private DesiredCapabilities desiredCapabilities;
 
         public BrowserConfiguration(Annotation annotation) {
@@ -301,15 +300,19 @@ public class SeleniumGridRunner extends BlockJUnit4ClassRunner {
                 this.browserName = (String) AnnotationUtils.getValue(annotation, "browserName");
             }
             this.version = (String) AnnotationUtils.getValue(annotation, "version");
-            if (AnnotationUtils.getValue(annotation, "platform") instanceof String) {
-                this.platformName = (String) AnnotationUtils.getValue(annotation, "platform");
-            } else if (AnnotationUtils.getValue(annotation, "platform") instanceof Platform) {
-                this.platform = (Platform) AnnotationUtils.getValue(annotation, "platform");
+
+            if (annotation.annotationType().equals(Browser.class)
+                    || annotation.annotationType().equals(IgnoreBrowser.class)) {
+                this.platform = (String) AnnotationUtils.getValue(annotation, "platform");
+            } else {
+                this.platform = ((Platform) AnnotationUtils.getValue(annotation, "platform")).toString();
             }
+
             Class desiredCapabilitiesClass = (Class) AnnotationUtils.getValue(annotation, "desiredCapabilitiesClass");
             if (desiredCapabilitiesClass != null) {
                 this.desiredCapabilities = InstanceUtils.newInstance(desiredCapabilitiesClass, DesiredCapabilities.class);
             }
+
             String desiredCapabilitiesJson = (String) AnnotationUtils.getValue(annotation, "desiredCapabilities");
             if (desiredCapabilitiesJson != null) {
                 Map<String, Object> desiredCapabilitiesJsonMap = new Gson().fromJson(desiredCapabilitiesJson, Map.class);
@@ -329,12 +332,8 @@ public class SeleniumGridRunner extends BlockJUnit4ClassRunner {
             return version;
         }
 
-        public Platform getPlatform() {
+        public String getPlatform() {
             return platform;
-        }
-
-        public String getPlatformName() {
-            return platform.toString();
         }
 
         public DesiredCapabilities getDesiredCapabilities() {
@@ -344,11 +343,7 @@ public class SeleniumGridRunner extends BlockJUnit4ClassRunner {
         private WebDriver createDriver(URL url) throws Exception {
             this.desiredCapabilities.setBrowserName(this.browserName);
             this.desiredCapabilities.setVersion(this.version);
-            if (this.platform != null) {
-                this.desiredCapabilities.setPlatform(this.platform);
-            } else {
-                this.desiredCapabilities.setCapability(PLATFORM, this.platformName);
-            }
+            this.desiredCapabilities.setCapability(PLATFORM, this.platform);
             RemoteWebDriver driver = new RemoteWebDriver(
                     url,
                     this.desiredCapabilities);
@@ -356,14 +351,9 @@ public class SeleniumGridRunner extends BlockJUnit4ClassRunner {
         }
 
         private Object getTestDescriptionSuffix() {
-            String browserNameDescription = (browserName != null ? "[" + browserName + "]" : "[ANY]"); // TODO: start using this.browserName or stop using it
+            String browserNameDescription = (browserName != null ? "[" + browserName + "]" : "[ANY]");
             String versionDescription = (version != null ? "[" + version + "]" : "[ANY]");
-            String platformDescription;
-            if (platformName != null) {
-                platformDescription = "[" + platformName + "]";
-            } else {
-                platformDescription = (platform != Platform.ANY ? "[" + platform.toString() + "]" : "[ANY]");
-            }
+            String platformDescription = (platform != null ? "[" + platform + "]" : "[ANY]");
 
             return browserNameDescription + versionDescription + platformDescription ;
         }
@@ -397,7 +387,7 @@ public class SeleniumGridRunner extends BlockJUnit4ClassRunner {
         }
 
         private boolean isPlatformProvided() {
-            return !Platform.ANY.equals(platform);
+            return !Platform.ANY.toString().equals(platform);
         }
 
         private boolean isDesiredCapabilitiesProvided() {
