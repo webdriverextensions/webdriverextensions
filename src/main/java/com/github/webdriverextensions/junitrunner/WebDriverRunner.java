@@ -63,6 +63,8 @@ import org.openqa.selenium.safari.SafariDriver;
 
 public class WebDriverRunner extends BlockJUnit4ClassRunner {
 
+    private static final org.slf4j.Logger log = org.slf4j.LoggerFactory.getLogger(WebDriverRunner.class);
+
     private static class WebDriverFrameworkMethod extends FrameworkMethod {
 
         final private BrowserConfiguration browser;
@@ -134,6 +136,7 @@ public class WebDriverRunner extends BlockJUnit4ClassRunner {
                     || (BrowserType.SAFARI.equals(browserConfiguration.getBrowserName()) && (!OsUtils.isWindows() && !OsUtils.isMac()))) {
                 notifier.fireTestIgnored(description);
             } else {
+                log.info("{}.{}", getName(), method.getName());
                 log.trace("{}.{} threadId = {}", getName(), method.getName(), Thread.currentThread().getId());
                 try {
                     ThreadDriver.setDriver(browserConfiguration.createDriver());

@@ -55,6 +55,8 @@ import org.openqa.selenium.remote.RemoteWebDriver;
 
 public class SeleniumGridRunner extends BlockJUnit4ClassRunner {
 
+    private static final org.slf4j.Logger log = org.slf4j.LoggerFactory.getLogger(SeleniumGridRunner.class);
+
     private static class SeleniumGridFrameworkMethod extends FrameworkMethod {
 
         final private BrowserConfiguration browser;
@@ -131,6 +133,7 @@ public class SeleniumGridRunner extends BlockJUnit4ClassRunner {
             if (method.getAnnotation(Ignore.class) != null || browserConfigurations.isBrowserIgnored(browserConfiguration)) {
                 notifier.fireTestIgnored(description);
             } else {
+                log.info("{}.{}", getName(), method.getName());
                 log.trace("{}.{} threadId = {}", getName(), method.getName(), Thread.currentThread().getId());
                 String remoteAddress = ((RemoteAddress) getTestClass().getJavaClass().getAnnotation(RemoteAddress.class)).value();
                 try {
