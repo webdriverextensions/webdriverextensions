@@ -131,7 +131,7 @@ public class SeleniumGridRunner extends BlockJUnit4ClassRunner {
             if (method.getAnnotation(Ignore.class) != null || browserConfigurations.isBrowserIgnored(browserConfiguration)) {
                 notifier.fireTestIgnored(description);
             } else {
-                long threadId = Thread.currentThread().getId();
+                log.trace("{}.{} threadId = {}", getName(), method.getName(), Thread.currentThread().getId());
                 String remoteAddress = ((RemoteAddress) getTestClass().getJavaClass().getAnnotation(RemoteAddress.class)).value();
                 try {
                     ThreadDriver.setDriver(browserConfiguration.createDriver(new URL(remoteAddress)));
