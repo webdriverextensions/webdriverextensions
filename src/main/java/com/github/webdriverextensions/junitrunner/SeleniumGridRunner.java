@@ -238,7 +238,7 @@ public class SeleniumGridRunner extends BlockJUnit4ClassRunner {
 
         private BrowserConfigurations addIgnoreBrowsersFromAnnotations(Annotation[] annotations) {
             for (Annotation annotation : annotations) {
-                if (supportedBrowserAnnotations.contains(annotation.annotationType())) {
+                if (supportedIgnoreBrowserAnnotations.contains(annotation.annotationType())) {
                     addIgnoreBrowserFromAnnotation(annotation);
                 }
             }
@@ -365,22 +365,23 @@ public class SeleniumGridRunner extends BlockJUnit4ClassRunner {
         }
 
         private boolean matches(BrowserConfiguration browser) {
-            if (!this.getBrowserName().equalsIgnoreCase(browser.getBrowserName())) {
+            if (browser.isBrowserNameProvided()
+                    && !browser.getBrowserName().equalsIgnoreCase(this.getBrowserName())) {
                 return false;
             }
-            if (this.isVersionProvided()
-                    && (browser.isVersionProvided() && !this.getVersion().equalsIgnoreCase(browser.getVersion()))) {
+            if (browser.isVersionProvided()
+                    && !browser.getVersion().equalsIgnoreCase(this.getVersion())) {
                 return false;
             }
-            if (this.isPlatformProvided()
-                    && (browser.isPlatformProvided() && !this.getPlatform().equalsIgnoreCase(browser.getPlatform()))) {
-                return false;
-            }
-            if (this.isDesiredCapabilitiesProvided()
-                    && (browser.isDesiredCapabilitiesProvided() && !this.getDesiredCapabilities().equals(browser.getDesiredCapabilities()))) {
+            if (browser.isPlatformProvided()
+                    && !browser.getPlatform().equalsIgnoreCase(this.getPlatform())) {
                 return false;
             }
             return true;
+        }
+
+        private boolean isBrowserNameProvided() {
+            return !StringUtils.isBlank(browserName);
         }
 
         private boolean isVersionProvided() {

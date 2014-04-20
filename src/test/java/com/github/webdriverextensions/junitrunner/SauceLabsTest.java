@@ -13,6 +13,8 @@ import com.github.webdriverextensions.junitrunner.annotations.IgnoreBrowsers;
 import com.github.webdriverextensions.junitrunner.annotations.InternetExplorer;
 import com.github.webdriverextensions.junitrunner.annotations.Opera;
 import com.github.webdriverextensions.junitrunner.annotations.Safari;
+import com.github.webdriverextensions.junitrunner.annotations.IgnoreFirefox;
+import com.github.webdriverextensions.junitrunner.annotations.IgnoreSafari;
 import org.junit.Assert;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -58,10 +60,10 @@ public class SauceLabsTest {
 
     @Test
     @IgnoreBrowsers(firefox = {
-        @Firefox(platform = Platform.WIN8),
-        @Firefox(platform = Platform.LINUX),
-        @Firefox(platform = Platform.MAC)}, safari =
-            @Safari(platform = Platform.WINDOWS, desiredCapabilities = "{ }"))
+        @IgnoreFirefox(platform = Platform.WIN8),
+        @IgnoreFirefox(platform = Platform.LINUX),
+        @IgnoreFirefox(platform = Platform.MAC)}, safari =
+            @IgnoreSafari(platform = Platform.WINDOWS))
     public void test1() throws InterruptedException {
         System.out.println("browserName = " + ((RemoteWebDriver) ThreadDriver.getDriver()).getCapabilities().getBrowserName());
         System.out.println("browserVersion = " + ((RemoteWebDriver) ThreadDriver.getDriver()).getCapabilities().getVersion());
