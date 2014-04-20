@@ -65,29 +65,17 @@ public class SauceLabsTest {
         @IgnoreFirefox(platform = Platform.MAC)}, safari =
             @IgnoreSafari(platform = Platform.WINDOWS))
     public void test1() throws InterruptedException {
-        System.out.println("browserName = " + ((RemoteWebDriver) ThreadDriver.getDriver()).getCapabilities().getBrowserName());
-        System.out.println("browserVersion = " + ((RemoteWebDriver) ThreadDriver.getDriver()).getCapabilities().getVersion());
-        System.out.println("platformName = " + ((RemoteWebDriver) ThreadDriver.getDriver()).getCapabilities().getPlatform().toString());
-
         ThreadDriver.getDriver().get("http://www.google.com");
         Assert.assertEquals("Google", ThreadDriver.getDriver().getTitle());
     }
 //    @Test
 //    public void test2() {
-//        System.out.println("browserName = " + ((RemoteWebDriver) ThreadDriver.getDriver()).getCapabilities().getBrowserName());
-//        System.out.println("browserVersion = " + ((RemoteWebDriver) ThreadDriver.getDriver()).getCapabilities().getVersion());
-//        System.out.println("platformName = " + ((RemoteWebDriver) ThreadDriver.getDriver()).getCapabilities().getPlatform().toString());
-//
 //        ThreadDriver.getDriver().get("http://www.google.com");
 //        Assert.assertEquals("Google", ThreadDriver.getDriver().getTitle());
 //    }
 //
 //    @Test
 //    public void test3() {
-//        System.out.println("browserName = " + ((RemoteWebDriver) ThreadDriver.getDriver()).getCapabilities().getBrowserName());
-//        System.out.println("browserVersion = " + ((RemoteWebDriver) ThreadDriver.getDriver()).getCapabilities().getVersion());
-//        System.out.println("platformName = " + ((RemoteWebDriver) ThreadDriver.getDriver()).getCapabilities().getPlatform().toString());
-//
 //        ThreadDriver.getDriver().get("http://www.google.com");
 //        Assert.assertEquals("Google", ThreadDriver.getDriver().getTitle());
 //    }
