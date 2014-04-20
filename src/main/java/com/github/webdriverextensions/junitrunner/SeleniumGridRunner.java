@@ -391,9 +391,5 @@ public class SeleniumGridRunner extends BlockJUnit4ClassRunner {
         private boolean isPlatformProvided() {
             return !Platform.ANY.toString().equalsIgnoreCase(platform);
         }
-
-        private boolean isDesiredCapabilitiesProvided() {
-            return desiredCapabilities != null;
-        }
     }
 }

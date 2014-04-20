@@ -408,10 +408,6 @@ public class WebDriverRunner extends BlockJUnit4ClassRunner {
             return !Platform.ANY.toString().equalsIgnoreCase(platform);
         }
 
-        private boolean isDesiredCapabilitiesProvided() {
-            return desiredCapabilities != null;
-        }
-
         @Override
         public boolean equals(Object object) {
             if (object instanceof BrowserConfiguration) {
