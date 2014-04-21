@@ -270,51 +270,51 @@ public class SeleniumGridRunner extends BlockJUnit4ClassRunner {
 
             if (annotation.annotationType().equals(Android.class)
                     || annotation.annotationType().equals(IgnoreAndroid.class)) {
-                this.browserName = BrowserType.ANDROID;
+                browserName = BrowserType.ANDROID;
             } else if (annotation.annotationType().equals(Chrome.class)
                     || annotation.annotationType().equals(IgnoreChrome.class)) {
-                this.browserName = BrowserType.CHROME;
+                browserName = BrowserType.CHROME;
             } else if (annotation.annotationType().equals(Firefox.class)
                     || annotation.annotationType().equals(IgnoreFirefox.class)) {
-                this.browserName = BrowserType.FIREFOX;
+                browserName = BrowserType.FIREFOX;
             } else if (annotation.annotationType().equals(HtmlUnit.class)
                     || annotation.annotationType().equals(IgnoreHtmlUnit.class)) {
-                this.browserName = BrowserType.HTMLUNIT;
+                browserName = BrowserType.HTMLUNIT;
             } else if (annotation.annotationType().equals(IPhone.class)
                     || annotation.annotationType().equals(IgnoreIPhone.class)) {
-                this.browserName = BrowserType.IPHONE;
+                browserName = BrowserType.IPHONE;
             } else if (annotation.annotationType().equals(IPad.class)
                     || annotation.annotationType().equals(IgnoreIPad.class)) {
-                this.browserName = BrowserType.IPAD;
+                browserName = BrowserType.IPAD;
             } else if (annotation.annotationType().equals(InternetExplorer.class)
                     || annotation.annotationType().equals(IgnoreInternetExplorer.class)) {
-                this.browserName = BrowserType.IE;
+                browserName = BrowserType.IE;
             } else if (annotation.annotationType().equals(Opera.class)
                     || annotation.annotationType().equals(IgnoreOpera.class)) {
-                this.browserName = BrowserType.OPERA;
+                browserName = BrowserType.OPERA;
             } else if (annotation.annotationType().equals(PhantomJS.class)
                     || annotation.annotationType().equals(IgnorePhantomJS.class)) {
-                this.browserName = BrowserType.PHANTOMJS;
+                browserName = BrowserType.PHANTOMJS;
             } else if (annotation.annotationType().equals(Safari.class)
                     || annotation.annotationType().equals(IgnoreSafari.class)) {
-                this.browserName = BrowserType.SAFARI;
+                browserName = BrowserType.SAFARI;
             } else if (annotation.annotationType().equals(Browser.class)
                     || annotation.annotationType().equals(IgnoreBrowser.class)) {
-                this.browserName = (String) AnnotationUtils.getValue(annotation, "browserName");
+                browserName = (String) AnnotationUtils.getValue(annotation, "browserName");
             }
 
-            this.version = (String) AnnotationUtils.getValue(annotation, "version");
+            version = (String) AnnotationUtils.getValue(annotation, "version");
 
             if (annotation.annotationType().equals(Browser.class)
                     || annotation.annotationType().equals(IgnoreBrowser.class)) {
-                this.platform = (String) AnnotationUtils.getValue(annotation, "platform");
+                platform = (String) AnnotationUtils.getValue(annotation, "platform");
             } else {
-                this.platform = ((Platform) AnnotationUtils.getValue(annotation, "platform")).toString();
+                platform = ((Platform) AnnotationUtils.getValue(annotation, "platform")).toString();
             }
 
             Class desiredCapabilitiesClass = (Class) AnnotationUtils.getValue(annotation, "desiredCapabilitiesClass");
             if (desiredCapabilitiesClass != null) {
-                this.desiredCapabilities = InstanceUtils.newInstance(desiredCapabilitiesClass, DesiredCapabilities.class);
+                desiredCapabilities = InstanceUtils.newInstance(desiredCapabilitiesClass, DesiredCapabilities.class);
             }
 
             String desiredCapabilitiesJson = (String) AnnotationUtils.getValue(annotation, "desiredCapabilities");
@@ -322,7 +322,7 @@ public class SeleniumGridRunner extends BlockJUnit4ClassRunner {
                 Map<String, Object> desiredCapabilitiesJsonMap = new Gson().fromJson(desiredCapabilitiesJson, Map.class);
                 if (desiredCapabilitiesJsonMap != null) {
                     for (Map.Entry<String, Object> entry : desiredCapabilitiesJsonMap.entrySet()) {
-                        this.desiredCapabilities.setCapability(entry.getKey(), entry.getValue());
+                        desiredCapabilities.setCapability(entry.getKey(), entry.getValue());
                     }
                 }
             }
@@ -345,12 +345,12 @@ public class SeleniumGridRunner extends BlockJUnit4ClassRunner {
         }
 
         private WebDriver createDriver(URL url) throws Exception {
-            this.desiredCapabilities.setBrowserName(this.browserName);
-            this.desiredCapabilities.setVersion(this.version);
-            this.desiredCapabilities.setCapability(PLATFORM, this.platform);
+            desiredCapabilities.setBrowserName(browserName);
+            desiredCapabilities.setVersion(version);
+            desiredCapabilities.setCapability(PLATFORM, platform);
             RemoteWebDriver driver = new RemoteWebDriver(
                     url,
-                    this.desiredCapabilities);
+                    desiredCapabilities);
             return driver;
         }
 
@@ -369,15 +369,15 @@ public class SeleniumGridRunner extends BlockJUnit4ClassRunner {
 
         private boolean matches(BrowserConfiguration browser) {
             if (browser.isBrowserNameProvided()
-                    && !browser.getBrowserName().equalsIgnoreCase(this.getBrowserName())) {
+                    && !browser.getBrowserName().equalsIgnoreCase(browserName)) {
                 return false;
             }
             if (browser.isVersionProvided()
-                    && !browser.getVersion().equalsIgnoreCase(this.getVersion())) {
+                    && !browser.getVersion().equalsIgnoreCase(version)) {
                 return false;
             }
             if (browser.isPlatformProvided()
-                    && !browser.getPlatform().equalsIgnoreCase(this.getPlatform())) {
+                    && !browser.getPlatform().equalsIgnoreCase(platform)) {
                 return false;
             }
             return true;
