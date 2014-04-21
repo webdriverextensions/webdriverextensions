@@ -110,10 +110,10 @@ public abstract class AbstractGeneratorProcessor extends AbstractProcessor {
         if (validateHasAnnotations()
                 && validateAnnotatedSiteClasses()
                 && validateAnnotatedPageClasses()) {
-            debug("Configuration is valid! Continuing with the generation!");
+            debug("Configuration is valid! Continuing with the generation.");
             return true;
         }
-        error("Configuration is invalid! Please fix configuration and recompile!");
+        error("Configuration is invalid! Please fix configuration and recompile.");
         return false;
     }
 
@@ -145,7 +145,7 @@ public abstract class AbstractGeneratorProcessor extends AbstractProcessor {
     private boolean validateHasAnnotations() {
         // Return if no annotations where found
         if (getAnnotatedPageClasses().isEmpty() && getAnnotatedSiteClasses().isEmpty()) {
-            warn("No Classes annotated with @" + Generate.class.getSimpleName() + " annotation where found. Nothing to generate!");
+            warn("No Classes annotated with @" + Generate.class.getSimpleName() + " annotation where found. Nothing to generate.");
             return false;
         } else {
             return true;
@@ -155,7 +155,7 @@ public abstract class AbstractGeneratorProcessor extends AbstractProcessor {
 
     private boolean validateAnnotatedSiteClasses() {
         if (getAnnotatedSiteClasses().isEmpty()) {
-            warn("No Sites annotated with @" + Generate.class.getSimpleName() + " annotation was found!");
+            warn("No Sites annotated with @" + Generate.class.getSimpleName() + " annotation was found");
         } else {
             debug("Sites annotated with @" + Generate.class.getSimpleName() + " annotation: " + getAnnotatedSiteClasses());
         }
@@ -164,7 +164,7 @@ public abstract class AbstractGeneratorProcessor extends AbstractProcessor {
 
     private boolean validateAnnotatedPageClasses() {
         if (getAnnotatedPageClasses().isEmpty()) {
-            warn("No Pages annotated with @" + Generate.class.getSimpleName() + " annotation where found!");
+            warn("No Pages annotated with @" + Generate.class.getSimpleName() + " annotation where found");
         } else {
             debug("Pages annotated with @" + Generate.class.getSimpleName() + " annotation: " + getAnnotatedPageClasses());
         }

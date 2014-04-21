@@ -42,7 +42,7 @@ public abstract class WebPage<S> implements Openable {
     @Override
     public void assertIsNotOpen() throws AssertionError {
         if (isNotOpen()) {
-            throw new AssertionError(this.getClass().getSimpleName() + " is open when it shouldn't!");
+            throw new AssertionError(this.getClass().getSimpleName() + " is open when it shouldn't");
         }
     }
 

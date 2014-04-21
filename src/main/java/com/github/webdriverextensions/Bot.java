@@ -302,25 +302,25 @@ public class Bot {
 
     public static void assertIsDisplayed(WebElement webElement) {
         if (isNotDisplayed(webElement)) {
-            throw new WebAssertionError("Element is not displayed!", webElement);
+            throw new WebAssertionError("Element is not displayed", webElement);
         }
     }
 
     public static void assertIsNotDisplayed(WebElement webElement) {
         if (isDisplayed(webElement)) {
-            throw new WebAssertionError("Element is displayed when it shouldn't!", webElement);
+            throw new WebAssertionError("Element is displayed when it shouldn't", webElement);
         }
     }
 
     public static void assertIsDisplayed(WebElement webElement, long secondsToWait) {
         if (isNotDisplayed(webElement, secondsToWait)) {
-            throw new WebAssertionError("Element is not displayed within " + secondsToWait + " seconds!", webElement);
+            throw new WebAssertionError("Element is not displayed within " + secondsToWait + " seconds", webElement);
         }
     }
 
     public static void assertIsNotDisplayed(WebElement webElement, long secondsToWait) {
         if (isDisplayed(webElement, secondsToWait)) {
-            throw new WebAssertionError("Element is displayed within " + secondsToWait + " seconds when it shouldn't!", webElement);
+            throw new WebAssertionError("Element is displayed within " + secondsToWait + " seconds when it shouldn't", webElement);
         }
     }
 
@@ -654,13 +654,13 @@ public class Bot {
 
     public static void assertHasAttribute(String name, WebElement webElement) {
         if (hasNotAttribute(name, webElement)) {
-            throw new WebAssertionError("Element does not have attribute " + quote(name) + "!", webElement);
+            throw new WebAssertionError("Element does not have attribute " + quote(name), webElement);
         }
     }
 
     public static void assertHasNotAttribute(String name, WebElement webElement) {
         if (hasAttribute(name, webElement)) {
-            throw new WebAssertionError("Element has attribute " + quote(name) + " when it shouldn't!", webElement);
+            throw new WebAssertionError("Element has attribute " + quote(name) + " when it shouldn't", webElement);
         }
     }
 
@@ -750,13 +750,13 @@ public class Bot {
 
     public static void assertAttributeIsNumber(String name, WebElement webElement) {
         if (attributeIsNotNumber(name, webElement)) {
-            throw new WebAssertionError("Element attribute " + name + " is not a number!", webElement);
+            throw new WebAssertionError("Element attribute " + name + " is not a number", webElement);
         }
     }
 
     public static void assertAttributeIsNotNumber(String name, WebElement webElement) {
         if (attributeIsNumber(name, webElement)) {
-            throw new WebAssertionError("Element attribute " + name + " is a number when it shouldn't!", webElement);
+            throw new WebAssertionError("Element attribute " + name + " is a number when it shouldn't", webElement);
         }
     }
 
@@ -1178,61 +1178,61 @@ public class Bot {
 
     public static void assertHasClass(String className, WebElement webElement) {
         if (hasNotClass(className, webElement)) {
-            throw new WebAssertionError("Element does not have class " + quote(className.trim()) + "!", webElement);
+            throw new WebAssertionError("Element does not have class " + quote(className.trim()), webElement);
         }
     }
 
     public static void assertHasNotClass(String className, WebElement webElement) {
         if (hasClass(className, webElement)) {
-            throw new WebAssertionError("Element has class " + quote(className.trim()) + " when it shouldn't!", webElement);
+            throw new WebAssertionError("Element has class " + quote(className.trim()) + " when it shouldn't", webElement);
         }
     }
 
     public static void assertHasClassContaining(String searchText, WebElement webElement) {
         if (hasNotClassContaining(searchText, webElement)) {
-            throw new WebAssertionError("Element does not have class containing text " + quote(searchText.trim()) + "!", webElement);
+            throw new WebAssertionError("Element does not have class containing text " + quote(searchText.trim()), webElement);
         }
     }
 
     public static void assertHasNotClassContaining(String searchText, WebElement webElement) {
         if (hasClassContaining(searchText, webElement)) {
-            throw new WebAssertionError("Element has class containing text " + quote(searchText.trim()) + " when it shouldn't!", webElement);
+            throw new WebAssertionError("Element has class containing text " + quote(searchText.trim()) + " when it shouldn't", webElement);
         }
     }
 
     public static void assertHasClassStartingWith(String prefix, WebElement webElement) {
         if (hasNotClassStartingWith(prefix, webElement)) {
-            throw new WebAssertionError("Element does not have class containing prefix " + quote(prefix.trim()) + "!", webElement);
+            throw new WebAssertionError("Element does not have class containing prefix " + quote(prefix.trim()), webElement);
         }
     }
 
     public static void assertHasNotClassStartingWith(String prefix, WebElement webElement) {
         if (hasClassStartingWith(prefix, webElement)) {
-            throw new WebAssertionError("Element has class containing prefix " + quote(prefix.trim()) + " when it shouldn't!", webElement);
+            throw new WebAssertionError("Element has class containing prefix " + quote(prefix.trim()) + " when it shouldn't", webElement);
         }
     }
 
     public static void assertHasClassEndingWith(String suffix, WebElement webElement) {
         if (hasNotClassEndingWith(suffix, webElement)) {
-            throw new WebAssertionError("Element does not have class containing suffix " + quote(suffix.trim()) + "!", webElement);
+            throw new WebAssertionError("Element does not have class containing suffix " + quote(suffix.trim()), webElement);
         }
     }
 
     public static void assertHasNotClassEndingWith(String suffix, WebElement webElement) {
         if (hasClassEndingWith(suffix, webElement)) {
-            throw new WebAssertionError("Element has class containing suffix " + quote(suffix.trim()) + " when it shouldn't!", webElement);
+            throw new WebAssertionError("Element has class containing suffix " + quote(suffix.trim()) + " when it shouldn't", webElement);
         }
     }
 
     public static void assertHasClassMatching(String regExp, WebElement webElement) {
         if (hasNotClassMatching(regExp, webElement)) {
-            throw new WebAssertionError("Element does not have class matching regExp " + quote(regExp.trim()) + "!", webElement);
+            throw new WebAssertionError("Element does not have class matching regExp " + quote(regExp.trim()), webElement);
         }
     }
 
     public static void assertHasNotClassMatching(String regExp, WebElement webElement) {
         if (hasClassMatching(regExp, webElement)) {
-            throw new WebAssertionError("Element has class matching regExp " + quote(regExp.trim()) + " when it shouldn't!", webElement);
+            throw new WebAssertionError("Element has class matching regExp " + quote(regExp.trim()) + " when it shouldn't", webElement);
         }
     }
 
@@ -1674,13 +1674,13 @@ public class Bot {
 
     public static void assertHasText(WebElement webElement) {
         if (hasNotText(webElement)) {
-            throw new WebAssertionError("Element has no text!", webElement);
+            throw new WebAssertionError("Element has no text", webElement);
         }
     }
 
     public static void assertHasNotText(WebElement webElement) {
         if (hasText(webElement)) {
-            throw new WebAssertionError("Element has text " + quote(textIn(webElement)) + " when it shouldn't!", webElement);
+            throw new WebAssertionError("Element has text " + quote(textIn(webElement)) + " when it shouldn't", webElement);
         }
     }
 
@@ -1806,13 +1806,13 @@ public class Bot {
 
     public static void assertTextIsNumber(WebElement webElement) {
         if (textIsNotNumber(webElement)) {
-            throw new WebAssertionError("Element text is not a number!", webElement);
+            throw new WebAssertionError("Element text is not a number", webElement);
         }
     }
 
     public static void assertTextIsNotNumber(WebElement webElement) {
         if (textIsNumber(webElement)) {
-            throw new WebAssertionError("Element text is a number when it shouldn't!", webElement);
+            throw new WebAssertionError("Element text is a number when it shouldn't", webElement);
         }
     }
 
@@ -1853,13 +1853,13 @@ public class Bot {
 
     public static void assertIsSelected(WebElement webElement) {
         if (isDeselected(webElement)) {
-            throw new WebAssertionError("Element is not selected!", webElement);
+            throw new WebAssertionError("Element is not selected", webElement);
         }
     }
 
     public static void assertIsDeselected(WebElement webElement) {
         if (isSelected(webElement)) {
-            throw new WebAssertionError("Element is not deselected!", webElement);
+            throw new WebAssertionError("Element is not deselected", webElement);
         }
     }
 
@@ -1877,13 +1877,13 @@ public class Bot {
 
     public static void assertIsChecked(WebElement webElement) {
         if (isUnchecked(webElement)) {
-            throw new WebAssertionError("Element is not checked!", webElement);
+            throw new WebAssertionError("Element is not checked", webElement);
         }
     }
 
     public static void assertIsUnchecked(WebElement webElement) {
         if (isChecked(webElement)) {
-            throw new WebAssertionError("Element is not unchecked!", webElement);
+            throw new WebAssertionError("Element is not unchecked", webElement);
         }
     }
 
@@ -1900,13 +1900,13 @@ public class Bot {
 
     public static void assertIsEnabled(WebElement webElement) {
         if (isDisabled(webElement)) {
-            throw new WebAssertionError("Element is not enabled!", webElement);
+            throw new WebAssertionError("Element is not enabled", webElement);
         }
     }
 
     public static void assertIsDisabled(WebElement webElement) {
         if (isEnabled(webElement)) {
-            throw new WebAssertionError("Element is not disabled!", webElement);
+            throw new WebAssertionError("Element is not disabled", webElement);
         }
     }
 
@@ -1989,53 +1989,53 @@ public class Bot {
 
     public static void assertHasOption(String text, WebElement webElement) {
         if (hasNotOption(text, webElement)) {
-            throw new WebAssertionError("Element has no option " + quote(text.trim()) + "!", webElement);
+            throw new WebAssertionError("Element has no option " + quote(text.trim()), webElement);
         }
     }
 
     public static void assertHasNotOption(String text, WebElement webElement) {
         if (hasOption(text, webElement)) {
-            throw new WebAssertionError("Element has option " + quote(text.trim()) + " when it shouldn't!", webElement);
+            throw new WebAssertionError("Element has option " + quote(text.trim()) + " when it shouldn't", webElement);
         }
     }
 
     public static void assertOptionIsEnabled(String text, WebElement webElement) {
         assertHasOption(text, webElement);
         if (optionIsDisabled(text, webElement)) {
-            throw new WebAssertionError("Option " + quote(text.trim()) + " is not enabled!", webElement);
+            throw new WebAssertionError("Option " + quote(text.trim()) + " is not enabled", webElement);
         }
     }
 
     public static void assertOptionIsDisabled(String text, WebElement webElement) {
         assertHasOption(text, webElement);
         if (optionIsEnabled(text, webElement)) {
-            throw new WebAssertionError("Option " + quote(text.trim()) + " is not disabled!", webElement);
+            throw new WebAssertionError("Option " + quote(text.trim()) + " is not disabled", webElement);
         }
     }
 
     public static void assertOptionIsSelected(String text, WebElement webElement) {
         assertHasOption(text, webElement);
         if (optionIsDeselected(text, webElement)) {
-            throw new WebAssertionError("Option " + quote(text.trim()) + " is not selected!", webElement);
+            throw new WebAssertionError("Option " + quote(text.trim()) + " is not selected", webElement);
         }
     }
 
     public static void assertOptionIsDeselected(String text, WebElement webElement) {
         assertHasOption(text, webElement);
         if (optionIsSelected(text, webElement)) {
-            throw new WebAssertionError("Option " + quote(text.trim()) + " is not deselected!", webElement);
+            throw new WebAssertionError("Option " + quote(text.trim()) + " is not deselected", webElement);
         }
     }
 
     public static void assertAllOptionsAreSelected(WebElement webElement) {
         if (!allOptionsAreSelected(webElement)) {
-            throw new WebAssertionError("All options are not selected!", webElement);
+            throw new WebAssertionError("All options are not selected", webElement);
         }
     }
 
     public static void assertNoOptionIsSelected(WebElement webElement) {
         if (!noOptionIsSelected(webElement)) {
-            throw new WebAssertionError("All options are not deselected!", webElement);
+            throw new WebAssertionError("All options are not deselected", webElement);
         }
     }
 
@@ -2098,41 +2098,41 @@ public class Bot {
 
     public static void assertHasOptionWithValue(String value, WebElement webElement) {
         if (hasNotOptionWithValue(value, webElement)) {
-            throw new WebAssertionError("Element has no option with value " + quote(value.trim()) + "!", webElement);
+            throw new WebAssertionError("Element has no option with value " + quote(value.trim()), webElement);
         }
     }
 
     public static void assertHasNotOptionWithValue(String value, WebElement webElement) {
         if (hasOptionWithValue(value, webElement)) {
-            throw new WebAssertionError("Element has option with value " + quote(value.trim()) + " when it shouldn't!", webElement);
+            throw new WebAssertionError("Element has option with value " + quote(value.trim()) + " when it shouldn't", webElement);
         }
     }
 
     public static void assertOptionWithValueIsEnabled(String value, WebElement webElement) {
         assertHasOptionWithValue(value, webElement);
         if (optionWithValueIsDisabled(value, webElement)) {
-            throw new WebAssertionError("Option with value " + quote(value.trim()) + " is not enabled!", webElement);
+            throw new WebAssertionError("Option with value " + quote(value.trim()) + " is not enabled", webElement);
         }
     }
 
     public static void assertOptionWithValueIsDisabled(String value, WebElement webElement) {
         assertHasOptionWithValue(value, webElement);
         if (optionWithValueIsEnabled(value, webElement)) {
-            throw new WebAssertionError("Option with value " + quote(value.trim()) + " is not disabled!", webElement);
+            throw new WebAssertionError("Option with value " + quote(value.trim()) + " is not disabled", webElement);
         }
     }
 
     public static void assertOptionWithValueIsSelected(String value, WebElement webElement) {
         assertHasOptionWithValue(value, webElement);
         if (optionWithValueIsDeselected(value, webElement)) {
-            throw new WebAssertionError("Option with value " + quote(value.trim()) + " is not selected!", webElement);
+            throw new WebAssertionError("Option with value " + quote(value.trim()) + " is not selected", webElement);
         }
     }
 
     public static void assertOptionWithValueIsDeselected(String value, WebElement webElement) {
         assertHasOptionWithValue(value, webElement);
         if (optionWithValueIsSelected(value, webElement)) {
-            throw new WebAssertionError("Option with value " + quote(value.trim()) + " is not deselected!", webElement);
+            throw new WebAssertionError("Option with value " + quote(value.trim()) + " is not deselected", webElement);
         }
     }
 
@@ -2190,41 +2190,41 @@ public class Bot {
 
     public static void assertHasOptionWithIndex(int index, WebElement webElement) {
         if (hasNotOptionWithIndex(index, webElement)) {
-            throw new WebAssertionError("Element  has no option with index " + quote(index) + "!", webElement);
+            throw new WebAssertionError("Element  has no option with index " + quote(index), webElement);
         }
     }
 
     public static void assertHasNotOptionWithIndex(int index, WebElement webElement) {
         if (hasOptionWithIndex(index, webElement)) {
-            throw new WebAssertionError("Element has option with index " + quote(index) + " when it shouldn't!", webElement);
+            throw new WebAssertionError("Element has option with index " + quote(index) + " when it shouldn't", webElement);
         }
     }
 
     public static void assertOptionWithIndexIsEnabled(int index, WebElement webElement) {
         assertHasOptionWithIndex(index, webElement);
         if (optionWithIndexIsDisabled(index, webElement)) {
-            throw new WebAssertionError("Option with index " + quote(index) + " is not enabled!", webElement);
+            throw new WebAssertionError("Option with index " + quote(index) + " is not enabled", webElement);
         }
     }
 
     public static void assertOptionWithIndexIsDisabled(int index, WebElement webElement) {
         assertHasOptionWithIndex(index, webElement);
         if (optionWithIndexIsEnabled(index, webElement)) {
-            throw new WebAssertionError("Option with index " + quote(index) + " is not disabled!", webElement);
+            throw new WebAssertionError("Option with index " + quote(index) + " is not disabled", webElement);
         }
     }
 
     public static void assertOptionWithIndexIsSelected(int index, WebElement webElement) {
         assertHasOptionWithIndex(index, webElement);
         if (optionWithIndexIsDeselected(index, webElement)) {
-            throw new WebAssertionError("Option with index " + quote(index) + " is not selected!", webElement);
+            throw new WebAssertionError("Option with index " + quote(index) + " is not selected", webElement);
         }
     }
 
     public static void assertOptionWithIndexIsDeselected(int index, WebElement webElement) {
         assertHasOptionWithIndex(index, webElement);
         if (optionWithIndexIsSelected(index, webElement)) {
-            throw new WebAssertionError("Option with index " + quote(index) + " is not deselected!", webElement);
+            throw new WebAssertionError("Option with index " + quote(index) + " is not deselected", webElement);
         }
     }
 
