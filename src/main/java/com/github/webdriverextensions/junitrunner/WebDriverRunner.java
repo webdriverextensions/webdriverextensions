@@ -308,7 +308,7 @@ public class WebDriverRunner extends BlockJUnit4ClassRunner {
             }
 
             this.version = (String) AnnotationUtils.getValue(annotation, "version");
-            
+
             if (annotation.annotationType().equals(Browser.class)
                     || annotation.annotationType().equals(IgnoreBrowser.class)) {
                 this.platform = (String) AnnotationUtils.getValue(annotation, "platform");
