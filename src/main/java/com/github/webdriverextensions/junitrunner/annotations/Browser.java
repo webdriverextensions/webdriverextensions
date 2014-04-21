@@ -10,7 +10,7 @@ import java.lang.annotation.RetentionPolicy;
 public @interface Browser {
     public String browserName();
     public String version() default "";
-    public String platform() default "";
+    public String platform() default "ANY";
     public String desiredCapabilities() default "";
     public Class desiredCapabilitiesClass() default NoDesiredCapabilities.class;
 }

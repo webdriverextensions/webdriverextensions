@@ -9,5 +9,5 @@ import java.lang.annotation.RetentionPolicy;
 public @interface IgnoreBrowser {
     public String browserName();
     public String version() default "";
-    public String platform() default "";
+    public String platform() default "ANY";
 }
