@@ -11,6 +11,7 @@ import com.github.webdriverextensions.internal.junitrunner.AnnotationUtils;
 import com.github.webdriverextensions.ThreadDriver;
 import com.github.webdriverextensions.internal.utils.InstanceUtils;
 import static com.github.webdriverextensions.internal.utils.WebDriverUtils.convertToJsonString;
+import static com.github.webdriverextensions.internal.utils.WebDriverUtils.removeCapabilities;
 import com.github.webdriverextensions.junitrunner.annotations.RemoteAddress;
 import com.github.webdriverextensions.junitrunner.annotations.Android;
 import com.github.webdriverextensions.junitrunner.annotations.Chrome;
@@ -49,7 +50,9 @@ import org.junit.runners.model.TestClass;
 import org.openqa.selenium.Platform;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.remote.BrowserType;
+import static org.openqa.selenium.remote.CapabilityType.BROWSER_NAME;
 import static org.openqa.selenium.remote.CapabilityType.PLATFORM;
+import static org.openqa.selenium.remote.CapabilityType.VERSION;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
@@ -148,7 +151,7 @@ public class SeleniumGridRunner extends BlockJUnit4ClassRunner {
                     log.trace("browserName = " + ((RemoteWebDriver) ThreadDriver.getDriver()).getCapabilities().getBrowserName());
                     log.trace("version = " + ((RemoteWebDriver) ThreadDriver.getDriver()).getCapabilities().getVersion());
                     log.trace("platform = " + ((RemoteWebDriver) ThreadDriver.getDriver()).getCapabilities().getCapability(PLATFORM));
-                    log.trace("capabilities = " + convertToJsonString(((RemoteWebDriver) ThreadDriver.getDriver()).getCapabilities()));
+                    log.trace("capabilities = " + convertToJsonString(removeCapabilities(((RemoteWebDriver) ThreadDriver.getDriver()).getCapabilities(), BROWSER_NAME, VERSION, PLATFORM)));
                 } catch (Exception ex) {
                     notifier.fireTestFailure(new Failure(description, ex));
                     return;
