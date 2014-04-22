@@ -359,7 +359,7 @@ public class SeleniumGridRunner extends BlockJUnit4ClassRunner {
             String versionDescription = (version != null ? "[" + version + "]" : "[ANY]");
             String platformDescription = (platform != null ? "[" + platform + "]" : "[ANY]");
 
-            return browserNameDescription + versionDescription + platformDescription ;
+            return browserNameDescription + versionDescription + platformDescription;
         }
 
         @Override
