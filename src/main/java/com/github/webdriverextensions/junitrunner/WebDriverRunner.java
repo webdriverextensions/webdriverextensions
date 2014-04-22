@@ -6,6 +6,7 @@ import com.github.webdriverextensions.internal.junitrunner.AnnotationUtils;
 import com.github.webdriverextensions.internal.junitrunner.DriverPathLoader;
 import com.github.webdriverextensions.internal.utils.InstanceUtils;
 import com.github.webdriverextensions.internal.utils.OsUtils;
+import static com.github.webdriverextensions.internal.utils.StringUtils.quote;
 import static com.github.webdriverextensions.internal.utils.WebDriverUtils.addCapabilities;
 import static com.github.webdriverextensions.internal.utils.WebDriverUtils.convertToJsonString;
 import static com.github.webdriverextensions.internal.utils.WebDriverUtils.removeCapabilities;
@@ -378,7 +379,7 @@ public class WebDriverRunner extends BlockJUnit4ClassRunner {
 
         @Override
         public String toString() {
-            return "Browser{" + "browserName=" + browserName + ", version=" + version + ", platform=" + platform + ", desiredCapabilities=" + convertToJsonString(desiredCapabilities) + '}';
+            return "{" + "browserName=" + quote(browserName) + ", version=" + quote(version) + ", platform=" + quote(platform) + ", desiredCapabilities=" + quote(convertToJsonString(desiredCapabilities)) + '}';
         }
 
         private boolean matches(BrowserConfiguration browser) {
