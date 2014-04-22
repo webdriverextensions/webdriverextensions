@@ -5,6 +5,7 @@ import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import java.util.Map;
 import java.util.Set;
 import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.remote.DesiredCapabilities;
@@ -30,5 +31,21 @@ public class WebDriverUtils {
         }));
 
         return capabilities;
+    }
+
+    public static Capabilities addCapabilities(Capabilities capabilities, Map<String, Object> capabilitiesToAdd) {
+        if (capabilities == null && capabilitiesToAdd == null) {
+            return new DesiredCapabilities();
+        }
+
+        if (capabilities == null) {
+            return new DesiredCapabilities(capabilitiesToAdd);
+        }
+
+        if (capabilitiesToAdd == null) {
+            return capabilities;
+        }
+
+        return new DesiredCapabilities(capabilities, new DesiredCapabilities(capabilitiesToAdd));
     }
 }
