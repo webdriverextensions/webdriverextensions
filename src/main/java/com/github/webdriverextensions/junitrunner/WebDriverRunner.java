@@ -360,7 +360,8 @@ public class WebDriverRunner extends BlockJUnit4ClassRunner {
                 return new HtmlUnitDriver(desiredCapabilities);
             }
 
-            if (BrowserType.IE.equalsIgnoreCase(browserName)) {
+            if (BrowserType.IE.equalsIgnoreCase(browserName)
+                    || BrowserType.IEXPLORE.equalsIgnoreCase(browserName)) {
                 return new InternetExplorerDriver(desiredCapabilities);
             }
 
