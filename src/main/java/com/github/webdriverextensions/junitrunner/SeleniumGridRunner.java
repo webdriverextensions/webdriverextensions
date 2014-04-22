@@ -10,6 +10,7 @@ import java.util.Map;
 import com.github.webdriverextensions.internal.junitrunner.AnnotationUtils;
 import com.github.webdriverextensions.ThreadDriver;
 import com.github.webdriverextensions.internal.utils.InstanceUtils;
+import static com.github.webdriverextensions.internal.utils.WebDriverUtils.addCapabilities;
 import static com.github.webdriverextensions.internal.utils.WebDriverUtils.convertToJsonString;
 import static com.github.webdriverextensions.internal.utils.WebDriverUtils.removeCapabilities;
 import com.github.webdriverextensions.junitrunner.annotations.RemoteAddress;
@@ -47,6 +48,7 @@ import org.junit.runners.BlockJUnit4ClassRunner;
 import org.junit.runners.model.FrameworkMethod;
 import org.junit.runners.model.InitializationError;
 import org.junit.runners.model.TestClass;
+import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.Platform;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.remote.BrowserType;
@@ -264,7 +266,7 @@ public class SeleniumGridRunner extends BlockJUnit4ClassRunner {
         private String browserName;
         private String version;
         private String platform;
-        private DesiredCapabilities desiredCapabilities;
+        private Capabilities desiredCapabilities;
 
         public BrowserConfiguration(Annotation annotation) {
 
@@ -320,11 +322,7 @@ public class SeleniumGridRunner extends BlockJUnit4ClassRunner {
             String desiredCapabilitiesJson = (String) AnnotationUtils.getValue(annotation, "desiredCapabilities");
             if (desiredCapabilitiesJson != null) {
                 Map<String, Object> desiredCapabilitiesJsonMap = new Gson().fromJson(desiredCapabilitiesJson, Map.class);
-                if (desiredCapabilitiesJsonMap != null) {
-                    for (Map.Entry<String, Object> entry : desiredCapabilitiesJsonMap.entrySet()) {
-                        desiredCapabilities.setCapability(entry.getKey(), entry.getValue());
-                    }
-                }
+                desiredCapabilities = addCapabilities(desiredCapabilities, desiredCapabilitiesJsonMap);
             }
         }
 
@@ -340,17 +338,18 @@ public class SeleniumGridRunner extends BlockJUnit4ClassRunner {
             return platform;
         }
 
-        public DesiredCapabilities getDesiredCapabilities() {
+        public Capabilities getDesiredCapabilities() {
             return desiredCapabilities;
         }
 
         private WebDriver createDriver(URL url) throws Exception {
-            desiredCapabilities.setBrowserName(browserName);
-            desiredCapabilities.setVersion(version);
-            desiredCapabilities.setCapability(PLATFORM, platform);
+            DesiredCapabilities finalDesiredCapabilities = new DesiredCapabilities(desiredCapabilities);
+            finalDesiredCapabilities.setBrowserName(browserName);
+            finalDesiredCapabilities.setVersion(version);
+            finalDesiredCapabilities.setCapability(PLATFORM, platform);
             RemoteWebDriver driver = new RemoteWebDriver(
                     url,
-                    desiredCapabilities);
+                    finalDesiredCapabilities);
             return driver;
         }
 

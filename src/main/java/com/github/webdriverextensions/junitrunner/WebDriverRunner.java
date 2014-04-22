@@ -1,26 +1,25 @@
 package com.github.webdriverextensions.junitrunner;
 
-import com.google.common.base.Objects;
-import com.google.gson.Gson;
-import java.lang.annotation.Annotation;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.LinkedHashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import com.github.webdriverextensions.internal.junitrunner.AnnotationUtils;
 import com.github.webdriverextensions.ThreadDriver;
+import com.github.webdriverextensions.internal.WebDriverExtensionException;
+import com.github.webdriverextensions.internal.junitrunner.AnnotationUtils;
+import com.github.webdriverextensions.internal.junitrunner.DriverPathLoader;
+import com.github.webdriverextensions.internal.utils.InstanceUtils;
+import com.github.webdriverextensions.internal.utils.OsUtils;
+import static com.github.webdriverextensions.internal.utils.WebDriverUtils.addCapabilities;
+import static com.github.webdriverextensions.internal.utils.WebDriverUtils.convertToJsonString;
+import static com.github.webdriverextensions.internal.utils.WebDriverUtils.removeCapabilities;
 import com.github.webdriverextensions.junitrunner.annotations.Android;
-import com.github.webdriverextensions.junitrunner.annotations.Chrome;
 import com.github.webdriverextensions.junitrunner.annotations.Browser;
+import com.github.webdriverextensions.junitrunner.annotations.Chrome;
+import com.github.webdriverextensions.junitrunner.annotations.DriverPaths;
 import com.github.webdriverextensions.junitrunner.annotations.Firefox;
 import com.github.webdriverextensions.junitrunner.annotations.HtmlUnit;
 import com.github.webdriverextensions.junitrunner.annotations.IPad;
 import com.github.webdriverextensions.junitrunner.annotations.IPhone;
 import com.github.webdriverextensions.junitrunner.annotations.IgnoreAndroid;
-import com.github.webdriverextensions.junitrunner.annotations.IgnoreChrome;
 import com.github.webdriverextensions.junitrunner.annotations.IgnoreBrowser;
+import com.github.webdriverextensions.junitrunner.annotations.IgnoreChrome;
 import com.github.webdriverextensions.junitrunner.annotations.IgnoreFirefox;
 import com.github.webdriverextensions.junitrunner.annotations.IgnoreHtmlUnit;
 import com.github.webdriverextensions.junitrunner.annotations.IgnoreIPad;
@@ -33,13 +32,15 @@ import com.github.webdriverextensions.junitrunner.annotations.InternetExplorer;
 import com.github.webdriverextensions.junitrunner.annotations.Opera;
 import com.github.webdriverextensions.junitrunner.annotations.PhantomJS;
 import com.github.webdriverextensions.junitrunner.annotations.Safari;
-import com.github.webdriverextensions.internal.WebDriverExtensionException;
-import com.github.webdriverextensions.internal.junitrunner.DriverPathLoader;
-import com.github.webdriverextensions.internal.utils.InstanceUtils;
-import com.github.webdriverextensions.internal.utils.OsUtils;
-import static com.github.webdriverextensions.internal.utils.WebDriverUtils.convertToJsonString;
-import static com.github.webdriverextensions.internal.utils.WebDriverUtils.removeCapabilities;
-import com.github.webdriverextensions.junitrunner.annotations.DriverPaths;
+import com.google.common.base.Objects;
+import com.google.gson.Gson;
+import java.lang.annotation.Annotation;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.LinkedHashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
@@ -52,6 +53,7 @@ import org.junit.runners.BlockJUnit4ClassRunner;
 import org.junit.runners.model.FrameworkMethod;
 import org.junit.runners.model.InitializationError;
 import org.junit.runners.model.TestClass;
+import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.Platform;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -268,7 +270,7 @@ public class WebDriverRunner extends BlockJUnit4ClassRunner {
         private String browserName;
         private String version;
         private String platform;
-        private DesiredCapabilities desiredCapabilities;
+        private Capabilities desiredCapabilities;
 
         public BrowserConfiguration(Annotation annotation) {
 
@@ -324,11 +326,7 @@ public class WebDriverRunner extends BlockJUnit4ClassRunner {
             String desiredCapabilitiesJson = (String) AnnotationUtils.getValue(annotation, "desiredCapabilities");
             if (desiredCapabilitiesJson != null) {
                 Map<String, Object> desiredCapabilitiesJsonMap = new Gson().fromJson(desiredCapabilitiesJson, Map.class);
-                if (desiredCapabilitiesJsonMap != null) {
-                    for (Map.Entry<String, Object> entry : desiredCapabilitiesJsonMap.entrySet()) {
-                        desiredCapabilities.setCapability(entry.getKey(), entry.getValue());
-                    }
-                }
+                desiredCapabilities = addCapabilities(desiredCapabilities, desiredCapabilitiesJsonMap);
             }
         }
 
@@ -344,7 +342,7 @@ public class WebDriverRunner extends BlockJUnit4ClassRunner {
             return platform;
         }
 
-        public DesiredCapabilities getDesiredCapabilities() {
+        public Capabilities getDesiredCapabilities() {
             return desiredCapabilities;
         }
 
