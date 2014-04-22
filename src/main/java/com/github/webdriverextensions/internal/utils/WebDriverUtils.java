@@ -13,6 +13,9 @@ import org.openqa.selenium.remote.DesiredCapabilities;
 public class WebDriverUtils {
 
     public static String convertToJsonString(Capabilities capabilities) {
+        if (capabilities == null) {
+            return "{}";
+        }
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
         return gson.toJson(capabilities.asMap());
     }
