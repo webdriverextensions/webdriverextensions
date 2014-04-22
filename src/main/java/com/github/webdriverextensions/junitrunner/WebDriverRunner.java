@@ -33,15 +33,12 @@ import com.github.webdriverextensions.junitrunner.annotations.InternetExplorer;
 import com.github.webdriverextensions.junitrunner.annotations.Opera;
 import com.github.webdriverextensions.junitrunner.annotations.PhantomJS;
 import com.github.webdriverextensions.junitrunner.annotations.Safari;
-import com.google.common.base.Objects;
 import com.google.gson.Gson;
 import java.lang.annotation.Annotation;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
@@ -92,18 +89,28 @@ public class WebDriverRunner extends BlockJUnit4ClassRunner {
         }
     }
     private static List<Class> supportedBrowserAnnotations = Arrays.asList(new Class[]{
+        Android.class,
         Chrome.class,
         Firefox.class,
         HtmlUnit.class,
+        IPhone.class,
+        IPad.class,
         InternetExplorer.class,
+        Opera.class,
+        PhantomJS.class,
         Safari.class,
         Browser.class
     });
     private static List<Class> supportedIgnoreBrowserAnnotations = Arrays.asList(new Class[]{
+        IgnoreAndroid.class,
         IgnoreChrome.class,
         IgnoreFirefox.class,
         IgnoreHtmlUnit.class,
+        IgnoreIPhone.class,
+        IgnoreIPad.class,
         IgnoreInternetExplorer.class,
+        IgnoreOpera.class,
+        IgnorePhantomJS.class,
         IgnoreSafari.class,
         IgnoreBrowser.class
     });
@@ -137,23 +144,40 @@ public class WebDriverRunner extends BlockJUnit4ClassRunner {
             BrowserConfigurations browserConfigurations = new BrowserConfigurations().addConfigurationsFromClassAnnotations(getTestClass()).addConfigurationsFromMethodAnnotations(method);
             BrowserConfiguration browserConfiguration = ((WebDriverFrameworkMethod) method).getBrowser();
             Description description = describeChild(method);
-            if (method.getAnnotation(Ignore.class) != null
-                    || browserConfigurations.isBrowserIgnored(browserConfiguration)
-                    || (BrowserType.IE.equalsIgnoreCase(browserConfiguration.getBrowserName()) && !OsUtils.isWindows())
-                    || (BrowserType.IEXPLORE.equalsIgnoreCase(browserConfiguration.getBrowserName()) && !OsUtils.isWindows())
-                    || (BrowserType.SAFARI.equalsIgnoreCase(browserConfiguration.getBrowserName()) && (!OsUtils.isWindows() && !OsUtils.isMac()))) {
+            if (method.getAnnotation(Ignore.class) != null) {
+                log.trace("Skipping test {}.{}. Test is annotated to be ignored with @Ignore annotation", getName(), method.getName());
+                notifier.fireTestIgnored(description);
+            } else if (browserConfigurations.isBrowserIgnored(browserConfiguration)) {
+                log.trace("Skipping test {}.{}. Test is annotated to be ignored, ignore annotations = {}.", getName(), method.getName(),
+                        browserConfigurations.ignoreBrowsers.toString());
+                notifier.fireTestIgnored(description);
+            } else if (BrowserType.IE.equalsIgnoreCase(browserConfiguration.getBrowserName()) && !OsUtils.isWindows()
+                    || (BrowserType.IEXPLORE.equalsIgnoreCase(browserConfiguration.getBrowserName()) && !OsUtils.isWindows())) {
+                log.trace("Skipping test {}.{}. Internet Explorer is only supported on Windows platforms.", getName(), method.getName());
+                notifier.fireTestIgnored(description);
+            } else if (BrowserType.SAFARI.equalsIgnoreCase(browserConfiguration.getBrowserName()) && (!OsUtils.isWindows() && !OsUtils.isMac())) {
+                log.trace("Skipping test {}.{}. Safari is only supported on Windows and Mac platforms.", getName(), method.getName());
                 notifier.fireTestIgnored(description);
             } else {
-                log.info("{}.{}", getName(), method.getName());
-                log.trace("{}.{} threadId = {}", getName(), method.getName(), Thread.currentThread().getId());
                 try {
+                    try {
+                        WebDriver driver = browserConfiguration.createDriver();
+                        Capabilities driverCapabilities = ((RemoteWebDriver) driver).getCapabilities();
+                        BrowserConfiguration browser = new BrowserConfiguration(driverCapabilities);
+                        ThreadDriver.setDriver(driver);
+                    } catch (BrowserNotSupported ex) {
+                        log.trace("Skipping test {}.{}. {} has no driver for running tests in browser {}.", getName(), method.getName(),
+                                WebDriverRunner.class.getSimpleName(), quote(browserConfiguration.getBrowserName()));
+                        notifier.fireTestIgnored(description);
+                        return;
+                    }
+                    log.info("{}.{}", getName(), method.getName());
+                    log.trace("{}.{} threadId = {}", getName(), method.getName(), Thread.currentThread().getId());
                     log.trace("Desired Capabilities");
                     log.trace("browserName = " + browserConfiguration.getBrowserName());
                     log.trace("version = " + browserConfiguration.getVersion());
                     log.trace("platform = " + browserConfiguration.getPlatform());
                     log.trace("desiredCapabilities = " + convertToJsonString(browserConfiguration.getDesiredCapabilities()));
-                    log.trace("Creating WebDriver with Desired Capabilities");
-                    ThreadDriver.setDriver(browserConfiguration.createDriver());
                     log.trace("Capabilities");
                     log.trace("browserName = " + ((RemoteWebDriver) ThreadDriver.getDriver()).getCapabilities().getBrowserName());
                     log.trace("version = " + ((RemoteWebDriver) ThreadDriver.getDriver()).getCapabilities().getVersion());
@@ -174,14 +198,14 @@ public class WebDriverRunner extends BlockJUnit4ClassRunner {
 
     private class BrowserConfigurations {
 
-        Set<BrowserConfiguration> browsers = new LinkedHashSet<BrowserConfiguration>();
-        Set<BrowserConfiguration> ignoreBrowsers = new LinkedHashSet<BrowserConfiguration>();
+        List<BrowserConfiguration> browsers = new ArrayList<BrowserConfiguration>();
+        List<BrowserConfiguration> ignoreBrowsers = new ArrayList<BrowserConfiguration>();
 
-        public Set<BrowserConfiguration> getBrowsers() {
+        public List<BrowserConfiguration> getBrowsers() {
             return browsers;
         }
 
-        public Set<BrowserConfiguration> getIgnoreBrowsers() {
+        public List<BrowserConfiguration> getIgnoreBrowsers() {
             return ignoreBrowsers;
         }
 
@@ -272,6 +296,13 @@ public class WebDriverRunner extends BlockJUnit4ClassRunner {
         private String version;
         private String platform;
         private Capabilities desiredCapabilities;
+
+        public BrowserConfiguration(Capabilities driverCapabilities) {
+            this.browserName = driverCapabilities.getBrowserName();
+            this.version = driverCapabilities.getVersion();
+            this.platform = driverCapabilities.getPlatform().toString();
+            this.desiredCapabilities = removeCapabilities(driverCapabilities, BROWSER_NAME, VERSION, PLATFORM);
+        }
 
         public BrowserConfiguration(Annotation annotation) {
 
@@ -369,7 +400,7 @@ public class WebDriverRunner extends BlockJUnit4ClassRunner {
                 return new SafariDriver(desiredCapabilities);
             }
 
-            throw new WebDriverExtensionException("Could not find any known driver for " + toString());
+            throw new BrowserNotSupported();
         }
 
         private Object getTestDescriptionSuffix() {
@@ -410,23 +441,8 @@ public class WebDriverRunner extends BlockJUnit4ClassRunner {
         private boolean isPlatformProvided() {
             return !Platform.ANY.toString().equalsIgnoreCase(platform);
         }
+    }
 
-        @Override
-        public boolean equals(Object object) {
-            if (object instanceof BrowserConfiguration) {
-                final BrowserConfiguration browser = (BrowserConfiguration) object;
-                if (!browserName.equalsIgnoreCase(browser.getBrowserName())) {
-                    return false;
-                }
-                return true;
-            } else {
-                return false;
-            }
-        }
-
-        @Override
-        public int hashCode() {
-            return Objects.hashCode(browserName, desiredCapabilities);
-        }
+    public class BrowserNotSupported extends WebDriverExtensionException {
     }
 }

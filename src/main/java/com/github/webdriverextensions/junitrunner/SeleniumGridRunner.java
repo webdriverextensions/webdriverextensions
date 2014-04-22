@@ -136,20 +136,24 @@ public class SeleniumGridRunner extends BlockJUnit4ClassRunner {
             BrowserConfigurations browserConfigurations = new BrowserConfigurations().addConfigurationsFromClassAnnotations(getTestClass()).addConfigurationsFromMethodAnnotations(method);
             BrowserConfiguration browserConfiguration = ((SeleniumGridFrameworkMethod) method).getBrowser();
             Description description = describeChild(method);
-            if (method.getAnnotation(Ignore.class) != null || browserConfigurations.isBrowserIgnored(browserConfiguration)) {
+            if (method.getAnnotation(Ignore.class) != null) {
+                log.trace("Skipping test {}.{}. Test is annotated to be ignored with @Ignore annotation", getName(), method.getName());
+                notifier.fireTestIgnored(description);
+            } else if (browserConfigurations.isBrowserIgnored(browserConfiguration)) {
+                log.trace("Skipping test {}.{}. Test is annotated to be ignored, ignore annotations = {}.", getName(), method.getName(),
+                        browserConfigurations.ignoreBrowsers.toString());
                 notifier.fireTestIgnored(description);
             } else {
-                log.info("{}.{}", getName(), method.getName());
-                log.trace("{}.{} threadId = {}", getName(), method.getName(), Thread.currentThread().getId());
                 String remoteAddress = ((RemoteAddress) getTestClass().getJavaClass().getAnnotation(RemoteAddress.class)).value();
                 try {
+                    ThreadDriver.setDriver(browserConfiguration.createDriver(new URL(remoteAddress)));
+                    log.info("{}.{}", getName(), method.getName());
+                    log.trace("{}.{} threadId = {}", getName(), method.getName(), Thread.currentThread().getId());
                     log.trace("Desired Capabilities");
                     log.trace("browserName = " + browserConfiguration.getBrowserName());
                     log.trace("version = " + browserConfiguration.getVersion());
                     log.trace("platform = " + browserConfiguration.getPlatform());
                     log.trace("desiredCapabilities = " + convertToJsonString(browserConfiguration.getDesiredCapabilities()));
-                    log.trace("Creating WebDriver with Desired Capabilities");
-                    ThreadDriver.setDriver(browserConfiguration.createDriver(new URL(remoteAddress)));
                     log.trace("Capabilities");
                     log.trace("browserName = " + ((RemoteWebDriver) ThreadDriver.getDriver()).getCapabilities().getBrowserName());
                     log.trace("version = " + ((RemoteWebDriver) ThreadDriver.getDriver()).getCapabilities().getVersion());
