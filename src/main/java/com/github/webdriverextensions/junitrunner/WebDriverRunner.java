@@ -299,6 +299,7 @@ public class WebDriverRunner extends BlockJUnit4ClassRunner {
 
     public class BrowserConfiguration {
 
+        private String annotationAsString = "";
         private String browserName;
         private String version;
         private String platform;
@@ -312,6 +313,8 @@ public class WebDriverRunner extends BlockJUnit4ClassRunner {
         }
 
         public BrowserConfiguration(Annotation annotation) {
+
+            annotationAsString = annotation.toString().replace("com.github.webdriverextensions.junitrunner.annotations.", "");
 
             if (annotation.annotationType().equals(Android.class)
                     || annotation.annotationType().equals(IgnoreAndroid.class)) {
@@ -420,7 +423,7 @@ public class WebDriverRunner extends BlockJUnit4ClassRunner {
 
         @Override
         public String toString() {
-            return "{" + "browserName=" + quote(browserName) + ", version=" + quote(version) + ", platform=" + quote(platform) + ", desiredCapabilities=" + quote(convertToJsonString(desiredCapabilities)) + '}';
+            return annotationAsString;
         }
 
         private boolean matches(BrowserConfiguration browser) {
