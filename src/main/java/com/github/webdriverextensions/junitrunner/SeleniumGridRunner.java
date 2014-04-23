@@ -117,7 +117,7 @@ public class SeleniumGridRunner extends BlockJUnit4ClassRunner {
         List<FrameworkMethod> testAnnotatedMethods = getTestClass().getAnnotatedMethods(Test.class);
         List<FrameworkMethod> testMethods = new ArrayList<FrameworkMethod>();
         for (FrameworkMethod testAnnotatedMethod : testAnnotatedMethods) {
-            TestMethodContext testMethodContext = new TestMethodContext().addConfigurationsFromClassAnnotations(getTestClass()).addConfigurationsFromMethodAnnotations(testAnnotatedMethod);
+            TestMethodContext testMethodContext = new TestMethodContext().addBrowsersFromClassAnnotations(getTestClass()).addBrowsersFromMethodAnnotations(testAnnotatedMethod);
             if (!testMethodContext.getBrowsers().isEmpty()) {
                 for (BrowserConfiguration browser : testMethodContext.getBrowsers()) {
                     testMethods.add(new SeleniumGridFrameworkMethod(browser, testAnnotatedMethod));
@@ -133,8 +133,8 @@ public class SeleniumGridRunner extends BlockJUnit4ClassRunner {
     @Override
     protected void runChild(final FrameworkMethod method, RunNotifier notifier) {
         if (method instanceof SeleniumGridFrameworkMethod) {
-            TestMethodContext testMethodContext = new TestMethodContext().addConfigurationsFromClassAnnotations(getTestClass()).addConfigurationsFromMethodAnnotations(method);
-            BrowserConfiguration browserConfiguration = ((SeleniumGridFrameworkMethod) method).getBrowser();
+            TestMethodContext testMethodContext = new TestMethodContext().addBrowsersFromClassAnnotations(getTestClass()).addBrowsersFromMethodAnnotations(method);
+            BrowserConfiguration browser = ((SeleniumGridFrameworkMethod) method).getBrowser();
             Description description = describeChild(method);
 
             // Create test name
@@ -145,21 +145,21 @@ public class SeleniumGridRunner extends BlockJUnit4ClassRunner {
             if (method.getAnnotation(Ignore.class) != null) {
                 log.trace("Skipping test {}. Test is annotated to be ignored with @Ignore annotation", testName);
                 notifier.fireTestIgnored(description);
-            } else if (testMethodContext.isBrowserIgnored(browserConfiguration)) {
+            } else if (testMethodContext.isBrowserIgnored(browser)) {
                 log.trace("Skipping test {}. Test is annotated to be ignored, ignore annotations = {}.", testName,
                         testMethodContext.ignoreBrowsers.toString());
                 notifier.fireTestIgnored(description);
             } else {
                 String remoteAddress = ((RemoteAddress) getTestClass().getJavaClass().getAnnotation(RemoteAddress.class)).value();
                 try {
-                    ThreadDriver.setDriver(browserConfiguration.createDriver(new URL(remoteAddress)));
+                    ThreadDriver.setDriver(browser.createDriver(new URL(remoteAddress)));
                     log.info("Running test {}", testName);
                     log.trace("{} threadId = {}", testName, Thread.currentThread().getId());
                     log.trace("Desired Capabilities");
-                    log.trace("browserName = " + browserConfiguration.getBrowserName());
-                    log.trace("version = " + browserConfiguration.getVersion());
-                    log.trace("platform = " + browserConfiguration.getPlatform());
-                    log.trace("desiredCapabilities = " + convertToJsonString(browserConfiguration.getDesiredCapabilities()));
+                    log.trace("browserName = " + browser.getBrowserName());
+                    log.trace("version = " + browser.getVersion());
+                    log.trace("platform = " + browser.getPlatform());
+                    log.trace("desiredCapabilities = " + convertToJsonString(browser.getDesiredCapabilities()));
                     log.trace("Capabilities");
                     log.trace("browserName = " + ((RemoteWebDriver) ThreadDriver.getDriver()).getCapabilities().getBrowserName());
                     log.trace("version = " + ((RemoteWebDriver) ThreadDriver.getDriver()).getCapabilities().getVersion());
@@ -191,12 +191,12 @@ public class SeleniumGridRunner extends BlockJUnit4ClassRunner {
             return ignoreBrowsers;
         }
 
-        public TestMethodContext addConfigurationsFromClassAnnotations(TestClass clazz) {
+        public TestMethodContext addBrowsersFromClassAnnotations(TestClass clazz) {
             addBrowsersFromAnnotations(clazz.getAnnotations());
             return this;
         }
 
-        public TestMethodContext addConfigurationsFromMethodAnnotations(FrameworkMethod method) {
+        public TestMethodContext addBrowsersFromMethodAnnotations(FrameworkMethod method) {
             addBrowsersFromAnnotations(method.getAnnotations());
             return this;
         }
