@@ -70,7 +70,7 @@ public class WebDriverRunner extends BlockJUnit4ClassRunner {
 
     private static final org.slf4j.Logger log = org.slf4j.LoggerFactory.getLogger(WebDriverRunner.class);
 
-    private static class WebDriverFrameworkMethod extends FrameworkMethod {
+    public static class WebDriverFrameworkMethod extends FrameworkMethod {
 
         final private BrowserConfiguration browser;
 

@@ -63,7 +63,7 @@ public class SeleniumGridRunner extends BlockJUnit4ClassRunner {
 
     private static final org.slf4j.Logger log = org.slf4j.LoggerFactory.getLogger(SeleniumGridRunner.class);
 
-    private static class SeleniumGridFrameworkMethod extends FrameworkMethod {
+    public static class SeleniumGridFrameworkMethod extends FrameworkMethod {
 
         final private BrowserConfiguration browser;
 
