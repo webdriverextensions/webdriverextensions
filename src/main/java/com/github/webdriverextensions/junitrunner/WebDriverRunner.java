@@ -81,7 +81,7 @@ public class WebDriverRunner extends BlockJUnit4ClassRunner {
 
         @Override
         public String getName() {
-            return String.format("%s%s", super.getName(), browser.getTestDescriptionSuffix());
+            return String.format("%s%s", super.getName(), browser.toString());
         }
 
         private BrowserConfiguration getBrowser() {
@@ -144,19 +144,25 @@ public class WebDriverRunner extends BlockJUnit4ClassRunner {
             BrowserConfigurations browserConfigurations = new BrowserConfigurations().addConfigurationsFromClassAnnotations(getTestClass()).addConfigurationsFromMethodAnnotations(method);
             BrowserConfiguration browserConfiguration = ((WebDriverFrameworkMethod) method).getBrowser();
             Description description = describeChild(method);
+
+            // Create test name
+            String className = getTestClass().getJavaClass().getSimpleName();
+            String methodName = method.getName();
+            String testName = String.format("%s.%s", className, methodName);
+
             if (method.getAnnotation(Ignore.class) != null) {
-                log.trace("Skipping test {}.{}. Test is annotated to be ignored with @Ignore annotation", getName(), method.getName());
+                log.trace("Skipping test {}. Test is annotated to be ignored with @Ignore annotation", testName);
                 notifier.fireTestIgnored(description);
             } else if (browserConfigurations.isBrowserIgnored(browserConfiguration)) {
-                log.trace("Skipping test {}.{}. Test is annotated to be ignored, ignore annotations = {}.", getName(), method.getName(),
+                log.trace("Skipping test {}. Test is annotated to be ignored, ignore annotations = {}.", testName,
                         browserConfigurations.ignoreBrowsers.toString());
                 notifier.fireTestIgnored(description);
             } else if (BrowserType.IE.equalsIgnoreCase(browserConfiguration.getBrowserName()) && !OsUtils.isWindows()
                     || (BrowserType.IEXPLORE.equalsIgnoreCase(browserConfiguration.getBrowserName()) && !OsUtils.isWindows())) {
-                log.trace("Skipping test {}.{}. Internet Explorer is only supported on Windows platforms.", getName(), method.getName());
+                log.trace("Skipping test {}. Internet Explorer is only supported on Windows platforms.", testName);
                 notifier.fireTestIgnored(description);
             } else if (BrowserType.SAFARI.equalsIgnoreCase(browserConfiguration.getBrowserName()) && (!OsUtils.isWindows() && !OsUtils.isMac())) {
-                log.trace("Skipping test {}.{}. Safari is only supported on Windows and Mac platforms.", getName(), method.getName());
+                log.trace("Skipping test {}. Safari is only supported on Windows and Mac platforms.", testName);
                 notifier.fireTestIgnored(description);
             } else {
                 try {
@@ -166,20 +172,20 @@ public class WebDriverRunner extends BlockJUnit4ClassRunner {
                         BrowserConfiguration browser = new BrowserConfiguration(driverCapabilities);
                         if (browserConfigurations.isBrowserIgnored(browser)) {
                             driver.quit();
-                            log.trace("Skipping test {}.{}. Test is annotated to be ignored, ignore annotations = {}.", getName(), method.getName(),
+                            log.trace("Skipping test {}. Test is annotated to be ignored, ignore annotations = {}.", testName,
                                     browserConfigurations.ignoreBrowsers.toString());
                             notifier.fireTestIgnored(description);
                             return;
                         }
                         ThreadDriver.setDriver(driver);
                     } catch (BrowserNotSupported ex) {
-                        log.trace("Skipping test {}.{}. {} has no driver for running tests in browser {}.", getName(), method.getName(),
+                        log.trace("Skipping test {}. {} has no driver for running tests in browser {}.", testName,
                                 WebDriverRunner.class.getSimpleName(), quote(browserConfiguration.getBrowserName()));
                         notifier.fireTestIgnored(description);
                         return;
                     }
-                    log.info("{}.{}", getName(), method.getName());
-                    log.trace("{}.{} threadId = {}", getName(), method.getName(), Thread.currentThread().getId());
+                    log.info("{}", testName);
+                    log.trace("{} threadId = {}", testName, Thread.currentThread().getId());
                     log.trace("Desired Capabilities");
                     log.trace("browserName = " + browserConfiguration.getBrowserName());
                     log.trace("version = " + browserConfiguration.getVersion());
@@ -314,8 +320,6 @@ public class WebDriverRunner extends BlockJUnit4ClassRunner {
 
         public BrowserConfiguration(Annotation annotation) {
 
-            annotationAsString = annotation.toString().replace("com.github.webdriverextensions.junitrunner.annotations.", "");
-
             if (annotation.annotationType().equals(Android.class)
                     || annotation.annotationType().equals(IgnoreAndroid.class)) {
                 browserName = BrowserType.ANDROID;
@@ -370,6 +374,16 @@ public class WebDriverRunner extends BlockJUnit4ClassRunner {
                 Map<String, Object> desiredCapabilitiesJsonMap = new Gson().fromJson(desiredCapabilitiesJson, Map.class);
                 desiredCapabilities = addCapabilities(desiredCapabilities, desiredCapabilitiesJsonMap);
             }
+
+            annotationAsString = "@" +  annotation.annotationType().getSimpleName() + "("
+                    + (isBrowserNameProvided() && (annotation.annotationType().equals(Browser.class)
+                    || annotation.annotationType().equals(IgnoreBrowser.class)) ? "browserName=" + quote(browserName) + ", " : "")
+                    + (isVersionProvided() ? "version=" + quote(version) + ", " : "")
+                    + (isPlatformProvided() ? "platform=" + quote(platform) + ", " : "")
+                    + ")";
+            annotationAsString = annotationAsString.replaceFirst(", \\)$", ")"); // Replace last comaseparation
+            annotationAsString = annotationAsString.replaceFirst("\\(\\)$", ""); // Replace paranthesis if it's empty
+
         }
 
         public String getBrowserName() {
@@ -411,14 +425,6 @@ public class WebDriverRunner extends BlockJUnit4ClassRunner {
             }
 
             throw new BrowserNotSupported();
-        }
-
-        private String getTestDescriptionSuffix() {
-            String browserNameDescription = (isBrowserNameProvided() ? "[" + browserName + "]" : "");
-            String versionDescription = (isVersionProvided() ? "[" + version + "]" : "");
-            String platformDescription = (isPlatformProvided() ? "[" + platform + "]" : "");
-
-            return browserNameDescription + versionDescription + platformDescription;
         }
 
         @Override

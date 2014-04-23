@@ -74,7 +74,7 @@ public class SeleniumGridRunner extends BlockJUnit4ClassRunner {
 
         @Override
         public String getName() {
-            return String.format("%s%s", super.getName(), browser.getTestDescriptionSuffix());
+            return String.format("%s%s", super.getName(), browser.toString());
         }
 
         private BrowserConfiguration getBrowser() {
@@ -136,19 +136,25 @@ public class SeleniumGridRunner extends BlockJUnit4ClassRunner {
             BrowserConfigurations browserConfigurations = new BrowserConfigurations().addConfigurationsFromClassAnnotations(getTestClass()).addConfigurationsFromMethodAnnotations(method);
             BrowserConfiguration browserConfiguration = ((SeleniumGridFrameworkMethod) method).getBrowser();
             Description description = describeChild(method);
+
+            // Create test name
+            String className = getTestClass().getJavaClass().getSimpleName();
+            String methodName = method.getName();
+            String testName = String.format("%s.%s", className, methodName);
+
             if (method.getAnnotation(Ignore.class) != null) {
-                log.trace("Skipping test {}.{}. Test is annotated to be ignored with @Ignore annotation", getName(), method.getName());
+                log.trace("Skipping test {}. Test is annotated to be ignored with @Ignore annotation", testName);
                 notifier.fireTestIgnored(description);
             } else if (browserConfigurations.isBrowserIgnored(browserConfiguration)) {
-                log.trace("Skipping test {}.{}. Test is annotated to be ignored, ignore annotations = {}.", getName(), method.getName(),
+                log.trace("Skipping test {}. Test is annotated to be ignored, ignore annotations = {}.", testName,
                         browserConfigurations.ignoreBrowsers.toString());
                 notifier.fireTestIgnored(description);
             } else {
                 String remoteAddress = ((RemoteAddress) getTestClass().getJavaClass().getAnnotation(RemoteAddress.class)).value();
                 try {
                     ThreadDriver.setDriver(browserConfiguration.createDriver(new URL(remoteAddress)));
-                    log.info("{}.{}", getName(), method.getName());
-                    log.trace("{}.{} threadId = {}", getName(), method.getName(), Thread.currentThread().getId());
+                    log.info("{}", testName);
+                    log.trace("{} threadId = {}", testName, Thread.currentThread().getId());
                     log.trace("Desired Capabilities");
                     log.trace("browserName = " + browserConfiguration.getBrowserName());
                     log.trace("version = " + browserConfiguration.getVersion());
@@ -276,8 +282,6 @@ public class SeleniumGridRunner extends BlockJUnit4ClassRunner {
 
         public BrowserConfiguration(Annotation annotation) {
 
-            annotationAsString = annotation.toString().replace("com.github.webdriverextensions.junitrunner.annotations.", "");
-
             if (annotation.annotationType().equals(Android.class)
                     || annotation.annotationType().equals(IgnoreAndroid.class)) {
                 browserName = BrowserType.ANDROID;
@@ -332,6 +336,16 @@ public class SeleniumGridRunner extends BlockJUnit4ClassRunner {
                 Map<String, Object> desiredCapabilitiesJsonMap = new Gson().fromJson(desiredCapabilitiesJson, Map.class);
                 desiredCapabilities = addCapabilities(desiredCapabilities, desiredCapabilitiesJsonMap);
             }
+
+            annotationAsString = "@" +  annotation.annotationType().getSimpleName() + "("
+                    + (isBrowserNameProvided() && (annotation.annotationType().equals(Browser.class)
+                    || annotation.annotationType().equals(IgnoreBrowser.class)) ? "browserName=" + quote(browserName) + ", " : "")
+                    + (isVersionProvided() ? "version=" + quote(version) + ", " : "")
+                    + (isPlatformProvided() ? "platform=" + quote(platform) + ", " : "")
+                    + ")";
+            annotationAsString = annotationAsString.replaceFirst(", \\)$", ")"); // Replace last comaseparation
+            annotationAsString = annotationAsString.replaceFirst("\\(\\)$", ""); // Replace paranthesis if it's empty
+
         }
 
         public String getBrowserName() {
@@ -359,14 +373,6 @@ public class SeleniumGridRunner extends BlockJUnit4ClassRunner {
                     url,
                     finalDesiredCapabilities);
             return driver;
-        }
-
-        private String getTestDescriptionSuffix() {
-            String browserNameDescription = isBrowserNameProvided() ? "[" + browserName + "]" : "";
-            String versionDescription = isVersionProvided() ? "[" + version + "]" : "";
-            String platformDescription = isPlatformProvided() ? "[" + platform + "]" : "";
-
-            return browserNameDescription + versionDescription + platformDescription;
         }
 
         @Override
