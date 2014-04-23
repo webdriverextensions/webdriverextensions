@@ -305,7 +305,7 @@ public class WebDriverRunner extends BlockJUnit4ClassRunner {
 
     public class BrowserConfiguration {
 
-        private String annotationAsString = "";
+        private Annotation annotation;
         private String browserName;
         private String version;
         private String platform;
@@ -319,6 +319,8 @@ public class WebDriverRunner extends BlockJUnit4ClassRunner {
         }
 
         public BrowserConfiguration(Annotation annotation) {
+
+            this.annotation = annotation;
 
             if (annotation.annotationType().equals(Android.class)
                     || annotation.annotationType().equals(IgnoreAndroid.class)) {
@@ -375,15 +377,6 @@ public class WebDriverRunner extends BlockJUnit4ClassRunner {
                 desiredCapabilities = addCapabilities(desiredCapabilities, desiredCapabilitiesJsonMap);
             }
 
-            annotationAsString = "@" +  annotation.annotationType().getSimpleName() + "("
-                    + (isBrowserNameProvided() && (annotation.annotationType().equals(Browser.class)
-                    || annotation.annotationType().equals(IgnoreBrowser.class)) ? "browserName=" + quote(browserName) + ", " : "")
-                    + (isVersionProvided() ? "version=" + quote(version) + ", " : "")
-                    + (isPlatformProvided() ? "platform=" + quote(platform) + ", " : "")
-                    + ")";
-            annotationAsString = annotationAsString.replaceFirst(", \\)$", ")"); // Replace last comaseparation
-            annotationAsString = annotationAsString.replaceFirst("\\(\\)$", ""); // Replace paranthesis if it's empty
-
         }
 
         public String getBrowserName() {
@@ -429,6 +422,17 @@ public class WebDriverRunner extends BlockJUnit4ClassRunner {
 
         @Override
         public String toString() {
+            if (annotation == null) {
+                return "";
+            }
+            String annotationAsString = "@" + annotation.annotationType().getSimpleName() + "("
+                    + (isBrowserNameProvided() && (annotation.annotationType().equals(Browser.class)
+                    || annotation.annotationType().equals(IgnoreBrowser.class)) ? "browserName=" + quote(browserName) + ", " : "")
+                    + (isVersionProvided() ? "version=" + quote(version) + ", " : "")
+                    + (isPlatformProvided() ? "platform=" + quote(platform) + ", " : "")
+                    + ")";
+            annotationAsString = annotationAsString.replaceFirst(", \\)$", ")"); // Replace last comaseparation
+            annotationAsString = annotationAsString.replaceFirst("\\(\\)$", ""); // Replace paranthesis if it's empty
             return annotationAsString;
         }
 
