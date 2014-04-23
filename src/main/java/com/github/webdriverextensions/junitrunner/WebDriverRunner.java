@@ -164,6 +164,13 @@ public class WebDriverRunner extends BlockJUnit4ClassRunner {
                         WebDriver driver = browserConfiguration.createDriver();
                         Capabilities driverCapabilities = ((RemoteWebDriver) driver).getCapabilities();
                         BrowserConfiguration browser = new BrowserConfiguration(driverCapabilities);
+                        if (browserConfigurations.isBrowserIgnored(browser)) {
+                            driver.quit();
+                            log.trace("Skipping test {}.{}. Test is annotated to be ignored, ignore annotations = {}.", getName(), method.getName(),
+                                    browserConfigurations.ignoreBrowsers.toString());
+                            notifier.fireTestIgnored(description);
+                            return;
+                        }
                         ThreadDriver.setDriver(driver);
                     } catch (BrowserNotSupported ex) {
                         log.trace("Skipping test {}.{}. {} has no driver for running tests in browser {}.", getName(), method.getName(),
