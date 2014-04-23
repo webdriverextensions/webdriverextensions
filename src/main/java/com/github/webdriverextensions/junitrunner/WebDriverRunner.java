@@ -403,10 +403,12 @@ public class WebDriverRunner extends BlockJUnit4ClassRunner {
             throw new BrowserNotSupported();
         }
 
-        private Object getTestDescriptionSuffix() {
-            String browserNameDescription = (browserName != null ? "[" + browserName + "]" : "[ANY]");
+        private String getTestDescriptionSuffix() {
+            String browserNameDescription = (isBrowserNameProvided() ? "[" + browserName + "]" : "");
+            String versionDescription = (isVersionProvided() ? "[" + version + "]" : "");
+            String platformDescription = (isPlatformProvided() ? "[" + platform + "]" : "");
 
-            return browserNameDescription;
+            return browserNameDescription + versionDescription + platformDescription;
         }
 
         @Override

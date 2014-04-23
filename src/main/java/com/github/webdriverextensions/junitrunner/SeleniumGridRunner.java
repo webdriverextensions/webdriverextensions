@@ -358,10 +358,10 @@ public class SeleniumGridRunner extends BlockJUnit4ClassRunner {
             return driver;
         }
 
-        private Object getTestDescriptionSuffix() {
-            String browserNameDescription = (browserName != null ? "[" + browserName + "]" : "[ANY]");
-            String versionDescription = (version != null ? "[" + version + "]" : "[ANY]");
-            String platformDescription = (platform != null ? "[" + platform + "]" : "[ANY]");
+        private String getTestDescriptionSuffix() {
+            String browserNameDescription = isBrowserNameProvided() ? "[" + browserName + "]" : "";
+            String versionDescription = isVersionProvided() ? "[" + version + "]" : "";
+            String platformDescription = isPlatformProvided() ? "[" + platform + "]" : "";
 
             return browserNameDescription + versionDescription + platformDescription;
         }
