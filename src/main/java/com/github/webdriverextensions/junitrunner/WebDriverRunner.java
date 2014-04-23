@@ -184,7 +184,7 @@ public class WebDriverRunner extends BlockJUnit4ClassRunner {
                         notifier.fireTestIgnored(description);
                         return;
                     }
-                    log.info("{}", testName);
+                    log.info("Running test {}", testName);
                     log.trace("{} threadId = {}", testName, Thread.currentThread().getId());
                     log.trace("Desired Capabilities");
                     log.trace("browserName = " + browserConfiguration.getBrowserName());

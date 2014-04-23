@@ -153,7 +153,7 @@ public class SeleniumGridRunner extends BlockJUnit4ClassRunner {
                 String remoteAddress = ((RemoteAddress) getTestClass().getJavaClass().getAnnotation(RemoteAddress.class)).value();
                 try {
                     ThreadDriver.setDriver(browserConfiguration.createDriver(new URL(remoteAddress)));
-                    log.info("{}", testName);
+                    log.info("Running test {}", testName);
                     log.trace("{} threadId = {}", testName, Thread.currentThread().getId());
                     log.trace("Desired Capabilities");
                     log.trace("browserName = " + browserConfiguration.getBrowserName());
