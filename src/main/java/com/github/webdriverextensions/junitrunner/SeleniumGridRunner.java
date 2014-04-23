@@ -117,9 +117,9 @@ public class SeleniumGridRunner extends BlockJUnit4ClassRunner {
         List<FrameworkMethod> testAnnotatedMethods = getTestClass().getAnnotatedMethods(Test.class);
         List<FrameworkMethod> testMethods = new ArrayList<FrameworkMethod>();
         for (FrameworkMethod testAnnotatedMethod : testAnnotatedMethods) {
-            BrowserConfigurations browserConfigurations = new BrowserConfigurations().addConfigurationsFromClassAnnotations(getTestClass()).addConfigurationsFromMethodAnnotations(testAnnotatedMethod);
-            if (!browserConfigurations.getBrowsers().isEmpty()) {
-                for (BrowserConfiguration browser : browserConfigurations.getBrowsers()) {
+            TestMethodContext testMethodContext = new TestMethodContext().addConfigurationsFromClassAnnotations(getTestClass()).addConfigurationsFromMethodAnnotations(testAnnotatedMethod);
+            if (!testMethodContext.getBrowsers().isEmpty()) {
+                for (BrowserConfiguration browser : testMethodContext.getBrowsers()) {
                     testMethods.add(new SeleniumGridFrameworkMethod(browser, testAnnotatedMethod));
                 }
             } else {
@@ -133,7 +133,7 @@ public class SeleniumGridRunner extends BlockJUnit4ClassRunner {
     @Override
     protected void runChild(final FrameworkMethod method, RunNotifier notifier) {
         if (method instanceof SeleniumGridFrameworkMethod) {
-            BrowserConfigurations browserConfigurations = new BrowserConfigurations().addConfigurationsFromClassAnnotations(getTestClass()).addConfigurationsFromMethodAnnotations(method);
+            TestMethodContext testMethodContext = new TestMethodContext().addConfigurationsFromClassAnnotations(getTestClass()).addConfigurationsFromMethodAnnotations(method);
             BrowserConfiguration browserConfiguration = ((SeleniumGridFrameworkMethod) method).getBrowser();
             Description description = describeChild(method);
 
@@ -145,9 +145,9 @@ public class SeleniumGridRunner extends BlockJUnit4ClassRunner {
             if (method.getAnnotation(Ignore.class) != null) {
                 log.trace("Skipping test {}. Test is annotated to be ignored with @Ignore annotation", testName);
                 notifier.fireTestIgnored(description);
-            } else if (browserConfigurations.isBrowserIgnored(browserConfiguration)) {
+            } else if (testMethodContext.isBrowserIgnored(browserConfiguration)) {
                 log.trace("Skipping test {}. Test is annotated to be ignored, ignore annotations = {}.", testName,
-                        browserConfigurations.ignoreBrowsers.toString());
+                        testMethodContext.ignoreBrowsers.toString());
                 notifier.fireTestIgnored(description);
             } else {
                 String remoteAddress = ((RemoteAddress) getTestClass().getJavaClass().getAnnotation(RemoteAddress.class)).value();
@@ -178,7 +178,7 @@ public class SeleniumGridRunner extends BlockJUnit4ClassRunner {
         }
     }
 
-    private class BrowserConfigurations {
+    private class TestMethodContext {
 
         List<BrowserConfiguration> browsers = new ArrayList<BrowserConfiguration>();
         List<BrowserConfiguration> ignoreBrowsers = new ArrayList<BrowserConfiguration>();
@@ -191,12 +191,12 @@ public class SeleniumGridRunner extends BlockJUnit4ClassRunner {
             return ignoreBrowsers;
         }
 
-        public BrowserConfigurations addConfigurationsFromClassAnnotations(TestClass clazz) {
+        public TestMethodContext addConfigurationsFromClassAnnotations(TestClass clazz) {
             addBrowsersFromAnnotations(clazz.getAnnotations());
             return this;
         }
 
-        public BrowserConfigurations addConfigurationsFromMethodAnnotations(FrameworkMethod method) {
+        public TestMethodContext addConfigurationsFromMethodAnnotations(FrameworkMethod method) {
             addBrowsersFromAnnotations(method.getAnnotations());
             return this;
         }
@@ -215,7 +215,7 @@ public class SeleniumGridRunner extends BlockJUnit4ClassRunner {
             return ToStringBuilder.reflectionToString(this, ToStringStyle.MULTI_LINE_STYLE);
         }
 
-        private BrowserConfigurations addBrowsersFromAnnotations(Annotation[] annotations) {
+        private TestMethodContext addBrowsersFromAnnotations(Annotation[] annotations) {
             for (Annotation annotation : annotations) {
                 if (supportedBrowserAnnotations.contains(annotation.annotationType())) {
                     addBrowserFromAnnotation(annotation);
@@ -252,7 +252,7 @@ public class SeleniumGridRunner extends BlockJUnit4ClassRunner {
             return this;
         }
 
-        private BrowserConfigurations addIgnoreBrowsersFromAnnotations(Annotation[] annotations) {
+        private TestMethodContext addIgnoreBrowsersFromAnnotations(Annotation[] annotations) {
             for (Annotation annotation : annotations) {
                 if (supportedIgnoreBrowserAnnotations.contains(annotation.annotationType())) {
                     addIgnoreBrowserFromAnnotation(annotation);
@@ -261,12 +261,12 @@ public class SeleniumGridRunner extends BlockJUnit4ClassRunner {
             return this;
         }
 
-        private BrowserConfigurations addBrowserFromAnnotation(Annotation annotation) {
+        private TestMethodContext addBrowserFromAnnotation(Annotation annotation) {
             browsers.add(new BrowserConfiguration(annotation));
             return this;
         }
 
-        private BrowserConfigurations addIgnoreBrowserFromAnnotation(Annotation annotation) {
+        private TestMethodContext addIgnoreBrowserFromAnnotation(Annotation annotation) {
             ignoreBrowsers.add(new BrowserConfiguration(annotation));
             return this;
         }

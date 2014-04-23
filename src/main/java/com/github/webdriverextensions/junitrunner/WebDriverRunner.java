@@ -125,9 +125,9 @@ public class WebDriverRunner extends BlockJUnit4ClassRunner {
         List<FrameworkMethod> testAnnotatedMethods = getTestClass().getAnnotatedMethods(Test.class);
         List<FrameworkMethod> testMethods = new ArrayList<FrameworkMethod>();
         for (FrameworkMethod testAnnotatedMethod : testAnnotatedMethods) {
-            BrowserConfigurations browserConfigurations = new BrowserConfigurations().addConfigurationsFromClassAnnotations(getTestClass()).addConfigurationsFromMethodAnnotations(testAnnotatedMethod);
-            if (!browserConfigurations.getBrowsers().isEmpty()) {
-                for (BrowserConfiguration browser : browserConfigurations.getBrowsers()) {
+            TestMethodContext testMethodContext = new TestMethodContext().addConfigurationsFromClassAnnotations(getTestClass()).addConfigurationsFromMethodAnnotations(testAnnotatedMethod);
+            if (!testMethodContext.getBrowsers().isEmpty()) {
+                for (BrowserConfiguration browser : testMethodContext.getBrowsers()) {
                     testMethods.add(new WebDriverFrameworkMethod(browser, testAnnotatedMethod));
                 }
             } else {
@@ -141,7 +141,7 @@ public class WebDriverRunner extends BlockJUnit4ClassRunner {
     @Override
     protected void runChild(final FrameworkMethod method, RunNotifier notifier) {
         if (method instanceof WebDriverFrameworkMethod) {
-            BrowserConfigurations browserConfigurations = new BrowserConfigurations().addConfigurationsFromClassAnnotations(getTestClass()).addConfigurationsFromMethodAnnotations(method);
+            TestMethodContext testMethodContext = new TestMethodContext().addConfigurationsFromClassAnnotations(getTestClass()).addConfigurationsFromMethodAnnotations(method);
             BrowserConfiguration browserConfiguration = ((WebDriverFrameworkMethod) method).getBrowser();
             Description description = describeChild(method);
 
@@ -153,9 +153,9 @@ public class WebDriverRunner extends BlockJUnit4ClassRunner {
             if (method.getAnnotation(Ignore.class) != null) {
                 log.trace("Skipping test {}. Test is annotated to be ignored with @Ignore annotation", testName);
                 notifier.fireTestIgnored(description);
-            } else if (browserConfigurations.isBrowserIgnored(browserConfiguration)) {
+            } else if (testMethodContext.isBrowserIgnored(browserConfiguration)) {
                 log.trace("Skipping test {}. Test is annotated to be ignored, ignore annotations = {}.", testName,
-                        browserConfigurations.ignoreBrowsers.toString());
+                        testMethodContext.ignoreBrowsers.toString());
                 notifier.fireTestIgnored(description);
             } else if (BrowserType.IE.equalsIgnoreCase(browserConfiguration.getBrowserName()) && !OsUtils.isWindows()
                     || (BrowserType.IEXPLORE.equalsIgnoreCase(browserConfiguration.getBrowserName()) && !OsUtils.isWindows())) {
@@ -170,10 +170,10 @@ public class WebDriverRunner extends BlockJUnit4ClassRunner {
                         WebDriver driver = browserConfiguration.createDriver();
                         Capabilities driverCapabilities = ((RemoteWebDriver) driver).getCapabilities();
                         BrowserConfiguration browser = new BrowserConfiguration(driverCapabilities);
-                        if (browserConfigurations.isBrowserIgnored(browser)) {
+                        if (testMethodContext.isBrowserIgnored(browser)) {
                             driver.quit();
                             log.trace("Skipping test {}. Test is annotated to be ignored, ignore annotations = {}.", testName,
-                                    browserConfigurations.ignoreBrowsers.toString());
+                                    testMethodContext.ignoreBrowsers.toString());
                             notifier.fireTestIgnored(description);
                             return;
                         }
@@ -209,7 +209,7 @@ public class WebDriverRunner extends BlockJUnit4ClassRunner {
         }
     }
 
-    private class BrowserConfigurations {
+    private class TestMethodContext {
 
         List<BrowserConfiguration> browsers = new ArrayList<BrowserConfiguration>();
         List<BrowserConfiguration> ignoreBrowsers = new ArrayList<BrowserConfiguration>();
@@ -222,12 +222,12 @@ public class WebDriverRunner extends BlockJUnit4ClassRunner {
             return ignoreBrowsers;
         }
 
-        public BrowserConfigurations addConfigurationsFromClassAnnotations(TestClass clazz) {
+        public TestMethodContext addConfigurationsFromClassAnnotations(TestClass clazz) {
             addBrowsersFromAnnotations(clazz.getAnnotations());
             return this;
         }
 
-        public BrowserConfigurations addConfigurationsFromMethodAnnotations(FrameworkMethod method) {
+        public TestMethodContext addConfigurationsFromMethodAnnotations(FrameworkMethod method) {
             addBrowsersFromAnnotations(method.getAnnotations());
             return this;
         }
@@ -246,7 +246,7 @@ public class WebDriverRunner extends BlockJUnit4ClassRunner {
             return ToStringBuilder.reflectionToString(this, ToStringStyle.MULTI_LINE_STYLE);
         }
 
-        private BrowserConfigurations addBrowsersFromAnnotations(Annotation[] annotations) {
+        private TestMethodContext addBrowsersFromAnnotations(Annotation[] annotations) {
             for (Annotation annotation : annotations) {
                 if (supportedBrowserAnnotations.contains(annotation.annotationType())) {
                     addBrowserFromAnnotation(annotation);
@@ -283,7 +283,7 @@ public class WebDriverRunner extends BlockJUnit4ClassRunner {
             return this;
         }
 
-        private BrowserConfigurations addIgnoreBrowsersFromAnnotations(Annotation[] annotations) {
+        private TestMethodContext addIgnoreBrowsersFromAnnotations(Annotation[] annotations) {
             for (Annotation annotation : annotations) {
                 if (supportedIgnoreBrowserAnnotations.contains(annotation.annotationType())) {
                     addIgnoreBrowserFromAnnotation(annotation);
@@ -292,12 +292,12 @@ public class WebDriverRunner extends BlockJUnit4ClassRunner {
             return this;
         }
 
-        private BrowserConfigurations addBrowserFromAnnotation(Annotation annotation) {
+        private TestMethodContext addBrowserFromAnnotation(Annotation annotation) {
             browsers.add(new BrowserConfiguration(annotation));
             return this;
         }
 
-        private BrowserConfigurations addIgnoreBrowserFromAnnotation(Annotation annotation) {
+        private TestMethodContext addIgnoreBrowserFromAnnotation(Annotation annotation) {
             ignoreBrowsers.add(new BrowserConfiguration(annotation));
             return this;
         }
