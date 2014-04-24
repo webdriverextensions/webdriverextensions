@@ -64,6 +64,7 @@ import static org.openqa.selenium.remote.CapabilityType.BROWSER_NAME;
 import static org.openqa.selenium.remote.CapabilityType.PLATFORM;
 import static org.openqa.selenium.remote.CapabilityType.VERSION;
 import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.safari.SafariDriver;
 
 public class WebDriverRunner extends BlockJUnit4ClassRunner {
@@ -168,8 +169,7 @@ public class WebDriverRunner extends BlockJUnit4ClassRunner {
                 try {
                     try {
                         WebDriver driver = browser.createDriver();
-                        Capabilities driverCapabilities = ((HasCapabilities) driver).getCapabilities();
-                        BrowserConfiguration driverBrowser = new BrowserConfiguration(driverCapabilities);
+                        BrowserConfiguration driverBrowser = new BrowserConfiguration(driver);
                         if (testMethodContext.isBrowserIgnored(driverBrowser)) {
                             driver.quit();
                             log.trace("Skipping test {}. Test is annotated to be ignored, ignore annotations = {}.", testName,
@@ -311,11 +311,12 @@ public class WebDriverRunner extends BlockJUnit4ClassRunner {
         private String platform;
         private Capabilities desiredCapabilities;
 
-        public BrowserConfiguration(Capabilities driverCapabilities) {
-            this.browserName = driverCapabilities.getBrowserName();
-            this.version = driverCapabilities.getVersion();
-            this.platform = driverCapabilities.getPlatform().toString();
-            this.desiredCapabilities = removeCapabilities(driverCapabilities, BROWSER_NAME, VERSION, PLATFORM);
+        public BrowserConfiguration(WebDriver driver) {
+            Capabilities capabilities = ((HasCapabilities) driver).getCapabilities();
+            this.browserName = capabilities.getBrowserName();
+            this.version = capabilities.getVersion();
+            this.platform = capabilities.getPlatform().toString();
+            this.desiredCapabilities = removeCapabilities(capabilities, BROWSER_NAME, VERSION, PLATFORM);
         }
 
         public BrowserConfiguration(Annotation annotation) {
