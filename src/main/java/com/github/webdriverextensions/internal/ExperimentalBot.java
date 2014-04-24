@@ -59,8 +59,8 @@ public class ExperimentalBot {
         return browserIs(BrowserType.SAFARI);
     }
 
-    /* Browser Version */
-    public static String browserVersion() {
+    /* Version */
+    public static String version() {
         return ((HasCapabilities) ThreadDriver.getDriver()).getCapabilities().getVersion();
     }
 
