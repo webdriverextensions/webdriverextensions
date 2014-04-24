@@ -398,7 +398,8 @@ public class WebDriverRunner extends BlockJUnit4ClassRunner {
         }
 
         private WebDriver createDriver() throws Exception {
-            if (BrowserType.CHROME.equalsIgnoreCase(browserName)) {
+            if (BrowserType.CHROME.equalsIgnoreCase(browserName)
+                    || BrowserType.GOOGLECHROME.equalsIgnoreCase(browserName)) {
                 return new ChromeDriver(desiredCapabilities);
             }
 
