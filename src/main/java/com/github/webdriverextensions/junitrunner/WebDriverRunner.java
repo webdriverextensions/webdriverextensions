@@ -192,10 +192,11 @@ public class WebDriverRunner extends BlockJUnit4ClassRunner {
                     log.trace("platform = " + browser.getPlatform());
                     log.trace("desiredCapabilities = " + convertToJsonString(browser.getDesiredCapabilities()));
                     log.trace("Capabilities");
-                    log.trace("browserName = " + ((HasCapabilities) ThreadDriver.getDriver()).getCapabilities().getBrowserName());
-                    log.trace("version = " + ((HasCapabilities) ThreadDriver.getDriver()).getCapabilities().getVersion());
-                    log.trace("platform = " + ((HasCapabilities) ThreadDriver.getDriver()).getCapabilities().getCapability(PLATFORM));
-                    log.trace("capabilities = " + convertToJsonString(removeCapabilities(((HasCapabilities) ThreadDriver.getDriver()).getCapabilities(), BROWSER_NAME, VERSION, PLATFORM)));
+                    Capabilities capabilities = ((HasCapabilities) ThreadDriver.getDriver()).getCapabilities();
+                    log.trace("browserName = " + capabilities.getBrowserName());
+                    log.trace("version = " + capabilities.getVersion());
+                    log.trace("platform = " + capabilities.getCapability(PLATFORM));
+                    log.trace("capabilities = " + convertToJsonString(removeCapabilities(capabilities, BROWSER_NAME, VERSION, PLATFORM)));
                 } catch (Exception ex) {
                     notifier.fireTestFailure(new Failure(description, ex));
                     return;
