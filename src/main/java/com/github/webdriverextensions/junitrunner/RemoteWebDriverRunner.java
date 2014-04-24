@@ -50,6 +50,7 @@ import org.junit.runners.model.FrameworkMethod;
 import org.junit.runners.model.InitializationError;
 import org.junit.runners.model.TestClass;
 import org.openqa.selenium.Capabilities;
+import org.openqa.selenium.HasCapabilities;
 import org.openqa.selenium.Platform;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.remote.BrowserType;
@@ -161,10 +162,10 @@ public class RemoteWebDriverRunner extends BlockJUnit4ClassRunner {
                     log.trace("platform = " + browser.getPlatform());
                     log.trace("desiredCapabilities = " + convertToJsonString(browser.getDesiredCapabilities()));
                     log.trace("Capabilities");
-                    log.trace("browserName = " + ((RemoteWebDriver) ThreadDriver.getDriver()).getCapabilities().getBrowserName());
-                    log.trace("version = " + ((RemoteWebDriver) ThreadDriver.getDriver()).getCapabilities().getVersion());
-                    log.trace("platform = " + ((RemoteWebDriver) ThreadDriver.getDriver()).getCapabilities().getCapability(PLATFORM));
-                    log.trace("capabilities = " + convertToJsonString(removeCapabilities(((RemoteWebDriver) ThreadDriver.getDriver()).getCapabilities(), BROWSER_NAME, VERSION, PLATFORM)));
+                    log.trace("browserName = " + ((HasCapabilities) ThreadDriver.getDriver()).getCapabilities().getBrowserName());
+                    log.trace("version = " + ((HasCapabilities) ThreadDriver.getDriver()).getCapabilities().getVersion());
+                    log.trace("platform = " + ((HasCapabilities) ThreadDriver.getDriver()).getCapabilities().getCapability(PLATFORM));
+                    log.trace("capabilities = " + convertToJsonString(removeCapabilities(((HasCapabilities) ThreadDriver.getDriver()).getCapabilities(), BROWSER_NAME, VERSION, PLATFORM)));
                 } catch (Exception ex) {
                     notifier.fireTestFailure(new Failure(description, ex));
                     return;
