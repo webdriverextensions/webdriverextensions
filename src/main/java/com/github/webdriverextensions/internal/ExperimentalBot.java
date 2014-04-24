@@ -74,6 +74,39 @@ public class ExperimentalBot {
         return ((HasCapabilities) ThreadDriver.getDriver()).getCapabilities().getPlatform();
     }
 
+    public static boolean platformIs(Platform platform) {
+        Platform currentPlatform = ((HasCapabilities) ThreadDriver.getDriver()).getCapabilities().getPlatform();
+        return currentPlatform.is(platform);
+    }
+
+    public static boolean platformIsWindowsXP() {
+        return platformIs(Platform.XP);
+    }
+
+    public static boolean platformIsWindowsVista() {
+        return platformIs(Platform.VISTA);
+    }
+
+    public static boolean platformIsWindows8() {
+        return platformIs(Platform.WIN8);
+    }
+
+    public static boolean platformIsUnix() {
+        return platformIs(Platform.UNIX);
+    }
+
+    public static boolean platformIsLinux() {
+        return platformIs(Platform.LINUX);
+    }
+
+    public static boolean platformIsAndroid() {
+        return platformIs(Platform.ANDROID);
+    }
+
+    public static boolean platformIsMac() {
+        return platformIs(Platform.MAC);
+    }
+
     /* Execute Javascript */
     public static Object executeJavascript(String script, Object... args) {
         return ((JavascriptExecutor) ThreadDriver.getDriver()).executeScript(script, args);
