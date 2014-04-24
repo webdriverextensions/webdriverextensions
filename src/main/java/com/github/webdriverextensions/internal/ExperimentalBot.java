@@ -139,14 +139,6 @@ public class ExperimentalBot {
         throw new WebDriverExtensionException("Sorry! platform() is only "
                 + "implemented for RemoteWebDriver at the moment.");
     }
-    public static String platformAsString() {
-        if (ThreadDriver.getDriver() instanceof RemoteWebDriver) {
-            return ((RemoteWebDriver) ThreadDriver.getDriver()).getCapabilities().getPlatform().toString();
-        }
-        throw new WebDriverExtensionException("Sorry! platformAsString() is only "
-                + "implemented for RemoteWebDriver at the moment.");
-    }
-
 
     /* Execute Javascript */
     public static Object executeJavascript(String script, Object... args) {
