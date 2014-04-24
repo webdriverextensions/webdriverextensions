@@ -64,6 +64,11 @@ public class ExperimentalBot {
         return ((HasCapabilities) ThreadDriver.getDriver()).getCapabilities().getVersion();
     }
 
+    public static boolean versionIs(String version) {
+        String currentVersion = ((HasCapabilities) ThreadDriver.getDriver()).getCapabilities().getVersion();
+        return StringUtils.equalsIgnoreCase(currentVersion, version);
+    }
+
     /* Platform */
     public static Platform platform() {
         return ((HasCapabilities) ThreadDriver.getDriver()).getCapabilities().getPlatform();
