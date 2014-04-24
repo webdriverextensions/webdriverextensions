@@ -1,6 +1,6 @@
 package com.github.webdriverextensions.junitrunner;
 
-import com.github.webdriverextensions.junitrunner.SeleniumGridRunner;
+import com.github.webdriverextensions.junitrunner.RemoteWebDriverRunner;
 import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -23,7 +23,7 @@ import org.openqa.selenium.Platform;
 
 // Problem with running
 // browserName=android, version=, platform=ANDROID
-@RunWith(SeleniumGridRunner.class)
+@RunWith(RemoteWebDriverRunner.class)
 @RemoteAddress("http://863f4cca30fc77b59d4d5c171d96b0ea:487d3cf91deac1da52d43156941de39d@europe.testingbot.com:4444/wd/hub")
 @Browsers(
         android = { //    @Android(platform = Platform.ANDROID)
@@ -69,7 +69,7 @@ public class TestingBotTest {
             System.out.println("sleep = " + 10);
             Thread.sleep(10000);
         } catch (InterruptedException ex) {
-            Logger.getLogger(SeleniumGridRunner.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(RemoteWebDriverRunner.class.getName()).log(Level.SEVERE, null, ex);
         }
         System.out.println("Running test 1!!!");
 

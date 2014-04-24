@@ -59,15 +59,15 @@ import static org.openqa.selenium.remote.CapabilityType.VERSION;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
-public class SeleniumGridRunner extends BlockJUnit4ClassRunner {
+public class RemoteWebDriverRunner extends BlockJUnit4ClassRunner {
 
-    private static final org.slf4j.Logger log = org.slf4j.LoggerFactory.getLogger(SeleniumGridRunner.class);
+    private static final org.slf4j.Logger log = org.slf4j.LoggerFactory.getLogger(RemoteWebDriverRunner.class);
 
-    public static class SeleniumGridFrameworkMethod extends FrameworkMethod {
+    public static class RemoteWebDriverFrameworkMethod extends FrameworkMethod {
 
         final private BrowserConfiguration browser;
 
-        public SeleniumGridFrameworkMethod(BrowserConfiguration browser, FrameworkMethod method) {
+        public RemoteWebDriverFrameworkMethod(BrowserConfiguration browser, FrameworkMethod method) {
             super(method.getMethod());
             this.browser = browser;
         }
@@ -108,7 +108,7 @@ public class SeleniumGridRunner extends BlockJUnit4ClassRunner {
         IgnoreBrowser.class
     });
 
-    public SeleniumGridRunner(Class<?> klass) throws InitializationError {
+    public RemoteWebDriverRunner(Class<?> klass) throws InitializationError {
         super(klass);
     }
 
@@ -120,7 +120,7 @@ public class SeleniumGridRunner extends BlockJUnit4ClassRunner {
             TestMethodContext testMethodContext = new TestMethodContext().addBrowsersFromClassAnnotations(getTestClass()).addBrowsersFromMethodAnnotations(testAnnotatedMethod);
             if (!testMethodContext.getBrowsers().isEmpty()) {
                 for (BrowserConfiguration browser : testMethodContext.getBrowsers()) {
-                    testMethods.add(new SeleniumGridFrameworkMethod(browser, testAnnotatedMethod));
+                    testMethods.add(new RemoteWebDriverFrameworkMethod(browser, testAnnotatedMethod));
                 }
             } else {
                 // Not a Selenium Grid Annotated test, treat as normal test
@@ -132,9 +132,9 @@ public class SeleniumGridRunner extends BlockJUnit4ClassRunner {
 
     @Override
     protected void runChild(final FrameworkMethod method, RunNotifier notifier) {
-        if (method instanceof SeleniumGridFrameworkMethod) {
+        if (method instanceof RemoteWebDriverFrameworkMethod) {
             TestMethodContext testMethodContext = new TestMethodContext().addBrowsersFromClassAnnotations(getTestClass()).addBrowsersFromMethodAnnotations(method);
-            BrowserConfiguration browser = ((SeleniumGridFrameworkMethod) method).getBrowser();
+            BrowserConfiguration browser = ((RemoteWebDriverFrameworkMethod) method).getBrowser();
             Description description = describeChild(method);
 
             // Create test name

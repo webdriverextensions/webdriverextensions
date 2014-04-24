@@ -11,11 +11,11 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.Platform;
 
-//@RunWith(SeleniumGridRunner.class)
+//@RunWith(RemoteWebDriverRunner.class)
 @Browsers(firefox =
     @Firefox(version = "20"))
 @Ignore
-public class SeleniumGridRunnerTest {
+public class RemoteWebDriverRunnerTest {
 
 //    @Test
 //    public void testSetDriverByDriver() {
