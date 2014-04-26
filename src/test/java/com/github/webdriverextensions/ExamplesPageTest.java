@@ -24,7 +24,6 @@ public class ExamplesPageTest extends SiteAwareRepository {
     public void before() {
         open(site.url);
         open(examplesPage);
-        assertCurrentUrlEndsWith("/webdriverextensions/model-test.html");
         assertCurrentUrlEndsWith("/model-test.html");
     }
 

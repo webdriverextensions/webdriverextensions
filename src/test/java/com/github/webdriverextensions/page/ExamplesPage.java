@@ -46,7 +46,7 @@ public class ExamplesPage extends WebPage<WebDriverExtensionSite> {
 
     @Override
     public void open() {
-        getDriver().get("http://webdriverextensions.github.com/webdriverextensions/model-test.html");
+        getDriver().get(site.url);
     }
 
     @Override

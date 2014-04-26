@@ -15,6 +15,8 @@ import org.openqa.selenium.support.FindBy;
 @Chrome
 public class WebRepositoryTest extends WebRepository {
 
+    public final String url = "file://" + getClass().getResource("/html/model-test.html").getPath();
+
     Double delayTime = 0.0;
     @FindBy(css = "div.btn-group")
     Menu menu;
@@ -28,8 +30,8 @@ public class WebRepositoryTest extends WebRepository {
 
     @Before
     public void before() {
-        open("http://webdriverextensions.github.com/webdriverextensions/model-test.html");
-        assertCurrentUrlEndsWith("/webdriverextensions/model-test.html");
+        open(url);
+        assertCurrentUrlEndsWith("/model-test.html");
     }
 
     @Test

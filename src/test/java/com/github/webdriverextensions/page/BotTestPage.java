@@ -12,6 +12,8 @@ import org.openqa.selenium.support.FindBy;
 @Generate
 public class BotTestPage extends WebPage<WebDriverExtensionSite> {
 
+    public final String url = "file://" + getClass().getResource("/html/bot-test.html").getPath();
+
     @FindBy(css = "body")
     public WebElement body;
 
@@ -87,7 +89,7 @@ public class BotTestPage extends WebPage<WebDriverExtensionSite> {
 
     @Override
     public void open() {
-        getDriver().get("http://webdriverextensions.github.com/webdriverextensions/bot-test.html");
+        getDriver().get(url);
     }
 
     @Override

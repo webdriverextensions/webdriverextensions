@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>WebDriver Extension</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <!-- Le styles -->
+  <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.2.2/css/bootstrap.min.css">
+  <style type="text/css">
+  body {
+    padding-top: 20px;
+    padding-bottom: 40px;
+  }
+
+  /* Custom container */
+  .container-narrow {
+    margin: 0 auto;
+    max-width: 900px;
+  }
+  .container-narrow > hr {
+    margin: 30px 0;
+  }
+
+  /* Main marketing message and sign up button */
+  .jumbotron {
+    margin: 60px 0;
+    text-align: center;
+  }
+  .jumbotron h1 {
+    font-size: 42px;
+    line-height: 1;
+  }
+  .jumbotron .btn {
+    font-size: 21px;
+    padding: 14px 24px;
+  }
+
+  /* Supporting marketing content */
+  .marketing {
+    margin: 60px 0;
+  }
+  .marketing p + h4 {
+    margin-top: 28px;
+  }
+  </style>
+  <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.2.2/css/bootstrap-responsive.min.css">
+
+  <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+      <![endif]-->
+    </head>
+
+    <body>
+
+      <div class="container-narrow">
+
+        <div class="masthead">
+          <ul class="nav nav-pills pull-right">
+            <li class="home active"><a href="#">Home</a></li>
+            <li><a class="examples" href="#examples">Examples</a></li>
+            <li><a class="about" href="#about">About</a></li>
+            <li><a class="contact" href="#contacts">Contact</a></li>
+          </ul>
+          <h3 class="muted">WebDriver Extension</h3>
+        </div>
+
+        <hr>
+
+        <div class="jumbotron">
+          <h1>Simplify testing with WebDriver Extension!</h1>
+          <p class="lead">WebDriver Extension is a framework on top of WebDriver/Selenium 2 designed to make testing easier and more fun by puting focus on test readability, reusability and maintainability.</p>
+
+        </div>
+
+        <hr>
+
+        <div class="row-fluid marketing">
+          <div class="span4">
+            <h4>Readability</h4>
+            <p>By providing static methods for commands and asserts, a.k.a Bot Style Testing, the tests gets readable as human instructions:</p>
+            <p>E.g. Login Test</p>
+            <p>
+              open(loginPage);<br/>
+              type("andi", loginPage.username);<br/>
+              type("mypassword", loginPage.password);<br/>
+              click(loginPage.login);<br/>
+              assertPage(welcomePage);<br/>
+            </p>
+          </div>
+
+          <div class="span4">
+            <h4>Reusability</h4>
+            <p>By modeling pages as objects, a.k.a Page Object Pattern, the css-selectors or prefered locator only needs to be defined once </p>
+          </div>
+
+          <div class="span4">
+            <h4>Maintanability</h4>
+            <p>If the html for a page would change for some reason there is no need to change the locators on every place it is used, just change the locator in the Object where it is defined.</p>
+          </div>
+        </div>
+
+
+        <div class="row-fluid marketing">
+
+          <div class="span4">
+            <h4>The Page Model</h4>
+            <p>If the html for a page would change for some reason there is no need to change the locators on every place it is used, just change the locator in the Object where it is defined.</p>
+          </div>
+          <div class="span4">
+            <h4>The Page User Stories</h4>
+            <p></p>
+          </div>
+          <div class="span4">
+            <h4>The Page Tests</h4>
+            <p>By providing static methods for commands and asserts, a.k.a Bot Style Testing, the tests gets readable as human instructions:</p>
+            <p>E.g. Login Test</p>
+            <p>
+              open(loginPage);<br/>
+              type("andi", loginPage.username);<br/>
+              type("mypassword", loginPage.password);<br/>
+              click(loginPage.login);<br/>
+              assertPage(welcomePage);<br/>
+            </p>
+          </div>
+
+        </div>
+
+        <div id="tests" class="row-fluid">
+          <div class="span12">
+            <h3>The Buts</h3>
+          </div>
+        </div>
+        <div class="row-fluid">
+          <div class="span12">
+            <h4></h4>
+            <p><span class="label label-warning">Improved!</span> Donec id elit non mi porta gravida at eget metus. Maecenas faucibus mollis interdum.</p>
+
+            <h4>But what if i need to ...add example for @Delegate...</h4>
+            <p><span class="label label-warning">Improved!</span>@Delegate</p>
+
+            <h4>But what if i need to ...add example for @ResetSearchContext...</h4>
+            <p><span class="label label-warning">Improved!</span>@ResetSearchContext</p>
+          </div>
+
+          <div id="tests" class="row-fluid">
+            <div class="span12">
+              <h3>Components</h3>
+            </div>
+          </div>
+          <div class="row-fluid">
+            <div class="span12">
+              <h4>WebDriverBot</h4>
+              <p><span class="label label-warning">Improved!</span> Donec id elit non mi porta gravida at eget metus. Maecenas faucibus mollis interdum.</p>
+
+              <h4>WebDriverAssert</h4>
+              <p><span class="label label-warning">Improved!</span> Donec id elit non mi porta gravida at eget metus. Maecenas faucibus mollis interdum.</p>
+
+              <h4>SiteObject</h4>
+              <p><span class="label label-warning">Improved!</span> Donec id elit non mi porta gravida at eget metus. Maecenas faucibus mollis interdum.</p>
+
+              <h4>PageObject</h4>
+              <p><span class="label label-warning">Improved!</span> Donec id elit non mi porta gravida at eget metus. Maecenas faucibus mollis interdum.</p>
+
+              <h4>HtmlTag</h4>
+              <p><span class="label label-warning">Improved!</span> Donec id elit non mi porta gravida at eget metus. Maecenas faucibus mollis interdum.</p>
+            </div>
+
+            <div id="examples" class="row-fluid">
+              <div class="span12">
+                <h3>Modeling Examples</h3>
+              </div>
+            </div>
+            <div class="row-fluid">
+              <div class="span12">
+                <h4>Search Form/HtmlTags</h4>
+                <p>
+                  <form class="form-search">
+                    <input  id="search-query" name="search-query" type="text" class="input-medium search-query">
+                    <button id="search" type="submit" class="btn">Search</button>
+                  </form>
+                </p>
+
+                <h4>Menu/Extending a HtmlTag</h4>
+                <p>
+                  <div class="btn-group">
+                    <button id="menu" class="btn dropdown-toggle" data-toggle="dropdown">Menu <span class="caret"></span></button>
+                    <ul class="dropdown-menu">
+                      <li><a id="menu-create" href="#">Create</a></li>
+                      <li><a id="menu-update" href="#">Update</a></li>
+                      <li><a id="menu-delete" href="#">Delete</a></li>
+                    </ul>
+                  </div>
+                </p>
+
+                <h4>Todo List/List with HtmlTags</h4>
+                <p>
+                  <ul id="todo-list">
+                    <li>Buy milk!</li>
+                    <li>Don't forgett Lisas birthday!</li>
+                    <li>Remember to pay bills!</li>
+                  </ul>
+                </p>
+
+                <h4>Modeling a User Table using a list with extended HtmlTags</h4>
+                <h4>User Table/List with extended HtmlTags</h4>
+                <p>
+                  <table id="user-table" class="table">
+                    <thead>
+                      <tr>
+                        <th class="row-number">#</th>
+                        <th class="first-name">First Name</th>
+                        <th class="last-name">Last Name</th>
+                        <th class="username">Username</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td class="row-number">1</td>
+                        <td class="first-name">Mark</td>
+                        <td class="last-name">Otto</td>
+                        <td class="username">@mdo</td>
+                      </tr>
+                      <tr>
+                        <td class="row-number">2</td>
+                        <td class="first-name">Jacob</td>
+                        <td class="last-name">Thornton</td>
+                        <td class="username">@fat</td>
+                      </tr>
+                      <tr>
+                        <td class="row-number">3</td>
+                        <td class="first-name">Larry</td>
+                        <td class="last-name">the Bird</td>
+                        <td class="username">@twitter</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </p>
+              </div>
+            </div>
+
+
+            <div id="tests" class="row-fluid">
+              <div class="span12">
+                <h3>Features</h3>
+              </div>
+            </div>
+            <div class="row-fluid">
+              <div class="span12">
+                <h4>Adds a new WebElement implementation</h4>
+                <p> Donec id elit non mi porta gravida at eget metus. Maecenas faucibus mollis interdum.</p>
+
+                <h4>Makes debug mode possible</h4>
+                <p> Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Cras mattis consectetur purus sit amet fermentum.</p>
+
+                <h4>Makes it possible to extend WebElements</h4>
+                <p> Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Cras mattis consectetur purus sit amet fermentum.</p>
+
+
+                <h4>Follows the Page Object Pattern</h4>
+                <p> Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Cras mattis consectetur purus sit amet fermentum.</p>
+
+                <h4>Page Objects</h4>
+                <p> Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Cras mattis consectetur purus sit amet fermentum.</p>
+
+                <h4>Site Objects</h4>
+                <p> Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Cras mattis consectetur purus sit amet fermentum.</p>
+
+                <h4>Reduces verbosity and improves readability</h4>
+                <p> Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Cras mattis consectetur purus sit amet fermentum.</p>
+
+                <h4>Generation of tedious</h4>
+                <p> Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Cras mattis consectetur purus sit amet fermentum.</p>
+
+                <h4>Bot style testing</h4>
+                <p><span class="label label-success">New!</span> Maecenas sed diam eget risus varius blandit sit amet non magna.</p>
+
+                <h4>WebElement specific Asserts</h4>
+                <p><span class="label label-success">New!</span> Maecenas sed diam eget risus varius blandit sit amet non magna.</p>
+              </div>
+            </div>
+
+            <hr>
+
+            <div class="footer">
+              <p>&copy; Company 2012</p>
+            </div>
+
+          </div> <!-- /container -->
+
+    <!-- Le javascript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.2.2/bootstrap.min.js"></script>
+
+  </body>
+  </html>

@@ -23,7 +23,7 @@ public class BotTest extends SiteAwareRepository {
 
     @Before
     public void before() {
-        getDriver().get("http://webdriverextensions.github.com/webdriverextensions/bot-test.html");
+        getDriver().get(botTestPage.url);
     }
 
     @After
@@ -155,15 +155,15 @@ public class BotTest extends SiteAwareRepository {
     /* Url */
     @Test
     public void urlTest() {
-        assertCurrentUrlEquals("http://webdriverextensions.github.io/webdriverextensions/bot-test.html");
+        assertCurrentUrlEquals(botTestPage.url);
         assertCurrentUrlNotEquals("xxx");
-        assertCurrentUrlContains("webdriverextensions");
+        assertCurrentUrlContains("bot-test");
         assertCurrentUrlNotContains("xxx");
-        assertCurrentUrlStartsWith("http://webdriverextensions.github.io");
+        assertCurrentUrlStartsWith("file://");
         assertCurrentUrlNotStartsWith("xxx");
-        assertCurrentUrlEndsWith("webdriverextensions/bot-test.html");
+        assertCurrentUrlEndsWith("/bot-test.html");
         assertCurrentUrlNotEndsWith("xxx");
-        assertCurrentUrlMatches(".*webdriverextensions.*");
+        assertCurrentUrlMatches(".*bot-test.*");
         assertCurrentUrlNotMatches(".*xxx.*");
     }
 

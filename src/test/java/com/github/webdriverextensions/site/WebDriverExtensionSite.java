@@ -5,7 +5,7 @@ import com.github.webdriverextensions.generator.annotations.Generate;
 @Generate(name = "site")
 public class WebDriverExtensionSite extends AbstractSite {
 
-    public String url = "http://webdriverextensions.github.com/webdriverextensions/model-test.html";
+    public final String url = "file://" + getClass().getResource("/html/model-test.html").getPath();
 
     @Override
     public void open() {
