@@ -1,22 +1,23 @@
 package com.github.webdriverextensions;
 
 import static com.github.webdriverextensions.Bot.*;
-import static com.github.webdriverextensions.ThreadDriver.*;
+import com.github.webdriverextensions.junitrunner.WebDriverRunner;
+import com.github.webdriverextensions.junitrunner.annotations.Chrome;
 import com.github.webdriverextensions.page.components.UserRow;
 import com.github.webdriverextensions.site.SiteAwareRepository;
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.firefox.FirefoxDriver;
 
+@RunWith(WebDriverRunner.class)
+@Chrome
 public class ExamplesPageTest extends SiteAwareRepository {
 
     Double delayTime = 0.0;
 
     public ExamplesPageTest() {
-        ThreadDriver.setDriver(new FirefoxDriver());
-        initElements(ThreadDriver.getDriver());
+        initElements();
     }
 
     @Before
@@ -24,11 +25,7 @@ public class ExamplesPageTest extends SiteAwareRepository {
         open(site.url);
         open(examplesPage);
         assertCurrentUrlEndsWith("/webdriverextensions/model-test.html");
-    }
-
-    @After
-    public void after() {
-        getDriver().close();
+        assertCurrentUrlEndsWith("/model-test.html");
     }
 
     @Test

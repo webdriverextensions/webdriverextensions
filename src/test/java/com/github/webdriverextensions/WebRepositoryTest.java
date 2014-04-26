@@ -1,16 +1,18 @@
 package com.github.webdriverextensions;
 
 import static com.github.webdriverextensions.Bot.*;
-import static com.github.webdriverextensions.ThreadDriver.*;
+import com.github.webdriverextensions.junitrunner.WebDriverRunner;
+import com.github.webdriverextensions.junitrunner.annotations.Chrome;
 import com.github.webdriverextensions.page.ExamplesPage;
 import com.github.webdriverextensions.page.components.Menu;
 import com.github.webdriverextensions.page.components.HtmlComponent;
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import org.openqa.selenium.firefox.FirefoxDriver;
+import org.junit.runner.RunWith;
 import org.openqa.selenium.support.FindBy;
 
+@RunWith(WebDriverRunner.class)
+@Chrome
 public class WebRepositoryTest extends WebRepository {
 
     Double delayTime = 0.0;
@@ -21,19 +23,13 @@ public class WebRepositoryTest extends WebRepository {
     ExamplesPage examplesPage;
 
     public WebRepositoryTest() {
-        ThreadDriver.setDriver(new FirefoxDriver());
-        initElements(ThreadDriver.getDriver());
+        initElements();
     }
 
     @Before
     public void before() {
         open("http://webdriverextensions.github.com/webdriverextensions/model-test.html");
         assertCurrentUrlEndsWith("/webdriverextensions/model-test.html");
-    }
-
-    @After
-    public void after() {
-        getDriver().close();
     }
 
     @Test

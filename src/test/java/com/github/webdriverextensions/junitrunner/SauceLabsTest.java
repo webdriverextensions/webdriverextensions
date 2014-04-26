@@ -1,19 +1,19 @@
 package com.github.webdriverextensions.junitrunner;
 
 import com.github.webdriverextensions.ThreadDriver;
-import com.github.webdriverextensions.junitrunner.annotations.Browser;
 import com.github.webdriverextensions.junitrunner.annotations.RemoteAddress;
 import com.github.webdriverextensions.junitrunner.annotations.Browsers;
 import com.github.webdriverextensions.junitrunner.annotations.Firefox;
 import com.github.webdriverextensions.junitrunner.annotations.IgnoreBrowsers;
 import com.github.webdriverextensions.junitrunner.annotations.IgnoreFirefox;
 import com.github.webdriverextensions.junitrunner.annotations.IgnoreSafari;
+import com.github.webdriverextensions.junitrunner.annotations.InternetExplorer;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.Platform;
 
-@RunWith(WebDriverRunner.class)
+@RunWith(RemoteWebDriverRunner.class)
 @RemoteAddress("http://andidev:80b7768e-dc06-4d5b-b793-5b3b83f0e24c@ondemand.saucelabs.com:80/wd/hub")
 @Browsers(android = { //    @Android(platform = Platform.LINUX)
 //}, chrome = {
@@ -25,7 +25,7 @@ import org.openqa.selenium.Platform;
     //    @Firefox(platform = Platform.WINDOWS, desiredCapabilities = "{}"),
     //    @Firefox(platform = Platform.WIN8),
     //    @Firefox(platform = Platform.LINUX),
-    @Firefox(version = "11"), @Firefox()},
+    @Firefox(version = "11", desiredCapabilities = "{acceptSslCerts : false}" , desiredCapabilitiesClass = StartChromeMaximized.class), @Firefox()}
 //}, iPhone = {
 //    @IPhone(platform = Platform.MAC)
 //}, iPad = {
@@ -41,12 +41,13 @@ import org.openqa.selenium.Platform;
 //    @Safari(platform = Platform.WINDOWS),
 //    @Safari(platform = Platform.MAC)
 //})
- browser = {
-    @Browser(browserName = "galaxytab", platform = "ANDROID"),
-    @Browser(browserName = "nexusone", platform = "ANDROID"),
-    @Browser(browserName = "nexuss", platform = "ANDROID"),
-    @Browser(browserName = "htcdesire", platform = "ANDROID")
-})
+// browser = {
+//    @Browser(browserName = "galaxytab", platform = "ANDROID"),
+//    @Browser(browserName = "nexusone", platform = "ANDROID"),
+//    @Browser(browserName = "nexuss", platform = "ANDROID"),
+//    @Browser(browserName = "htcdesire", platform = "ANDROID")
+//}
+)
 public class SauceLabsTest {
 
     @Test
@@ -58,9 +59,10 @@ public class SauceLabsTest {
     @IgnoreBrowsers(
 //    browser = @IgnoreBrowser(browserName = "firefox"),
     firefox  = {
-        @IgnoreFirefox(platform = Platform.WIN8),
+//        @IgnoreFirefox(),
         @IgnoreFirefox(platform = Platform.LINUX),
-        @IgnoreFirefox(platform = Platform.MAC)}, safari
+        @IgnoreFirefox(version = "11")},
+            safari
             = @IgnoreSafari(platform = Platform.WINDOWS)
 
     )
@@ -68,11 +70,14 @@ public class SauceLabsTest {
         ThreadDriver.getDriver().get("http://www.google.com");
         Assert.assertEquals("Google", ThreadDriver.getDriver().getTitle());
     }
-//    @Test
-//    public void test2() {
-//        ThreadDriver.getDriver().get("http://www.google.com");
-//        Assert.assertEquals("Google", ThreadDriver.getDriver().getTitle());
-//    }
+    @Test
+    @IgnoreFirefox
+    @InternetExplorer
+    public void test2() {
+        ThreadDriver.getDriver().get("http://www.google.com");
+        Assert.assertEquals("Google", ThreadDriver.getDriver().getTitle());
+    }
+
 //
 //    @Test
 //    public void test3() {

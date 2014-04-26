@@ -4,18 +4,21 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 import static com.github.webdriverextensions.Bot.*;
 import static com.github.webdriverextensions.ThreadDriver.*;
+import com.github.webdriverextensions.junitrunner.WebDriverRunner;
+import com.github.webdriverextensions.junitrunner.annotations.Chrome;
 import org.junit.After;
 import org.junit.Assert;
 import static org.hamcrest.Matchers.*;
 import org.junit.Before;
 import org.junit.Test;
-import org.openqa.selenium.firefox.FirefoxDriver;
+import org.junit.runner.RunWith;
 
+@RunWith(WebDriverRunner.class)
+@Chrome
 public class BotTest extends SiteAwareRepository {
 
     public BotTest() {
-        ThreadDriver.setDriver(new FirefoxDriver());
-        initElements(ThreadDriver.getDriver());
+        initElements();
     }
 
     @Before
