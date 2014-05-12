@@ -1,7 +1,7 @@
 package com.github.webdriverextensions.internal;
 
 import com.github.webdriverextensions.Bot;
-import com.github.webdriverextensions.ThreadDriver;
+import com.github.webdriverextensions.WebDriverExtensionsContext;
 import com.github.webdriverextensions.exceptions.WebAssertionError;
 import static com.github.webdriverextensions.internal.utils.StringUtils.*;
 import org.apache.commons.lang3.StringUtils;
@@ -37,14 +37,14 @@ public class BotUtils {
     }
 
     public static String innerHtmlOf(WebElement webElement) {
-        return (String) ((JavascriptExecutor) ThreadDriver.getDriver()).executeScript("return arguments[0].innerHTML;", webElement);
+        return (String) ((JavascriptExecutor) WebDriverExtensionsContext.getDriver()).executeScript("return arguments[0].innerHTML;", webElement);
     }
 
 
 
     /* Attributes */
     public static String attributesIn(WebElement webElement) {
-        return (String) ((JavascriptExecutor) ThreadDriver.getDriver()).executeScript(
+        return (String) ((JavascriptExecutor) WebDriverExtensionsContext.getDriver()).executeScript(
                 "var attrsString = '';"
                 + "for (var attr, i=0, attrs=arguments[0].attributes, l=attrs.length; i<l; i++) {"
                 + "    var attr = attrs.item(i);"

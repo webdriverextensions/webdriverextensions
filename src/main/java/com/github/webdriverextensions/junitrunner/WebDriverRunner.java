@@ -1,6 +1,6 @@
 package com.github.webdriverextensions.junitrunner;
 
-import com.github.webdriverextensions.ThreadDriver;
+import com.github.webdriverextensions.WebDriverExtensionsContext;
 import com.github.webdriverextensions.internal.WebDriverExtensionException;
 import com.github.webdriverextensions.internal.junitrunner.AnnotationUtils;
 import com.github.webdriverextensions.internal.junitrunner.DriverPathLoader;
@@ -177,7 +177,7 @@ public class WebDriverRunner extends BlockJUnit4ClassRunner {
                             notifier.fireTestIgnored(description);
                             return;
                         }
-                        ThreadDriver.setDriver(driver);
+                        WebDriverExtensionsContext.setDriver(driver);
                     } catch (BrowserNotSupported ex) {
                         log.trace("Skipping test {}. {} has no driver for running tests in browser {}.", testName,
                                 WebDriverRunner.class.getSimpleName(), quote(browser.getBrowserName()));
@@ -192,7 +192,7 @@ public class WebDriverRunner extends BlockJUnit4ClassRunner {
                     log.trace("platform = " + browser.getPlatform());
                     log.trace("desiredCapabilities = " + convertToJsonString(browser.getDesiredCapabilities()));
                     log.trace("Capabilities");
-                    Capabilities capabilities = ((HasCapabilities) ThreadDriver.getDriver()).getCapabilities();
+                    Capabilities capabilities = ((HasCapabilities) WebDriverExtensionsContext.getDriver()).getCapabilities();
                     log.trace("browserName = " + capabilities.getBrowserName());
                     log.trace("version = " + capabilities.getVersion());
                     log.trace("platform = " + capabilities.getCapability(PLATFORM));
@@ -202,7 +202,7 @@ public class WebDriverRunner extends BlockJUnit4ClassRunner {
                     return;
                 }
                 runLeaf(methodBlock(method), description, notifier);
-                ThreadDriver.getDriver().quit();
+                WebDriverExtensionsContext.getDriver().quit();
             }
         } else {
             // Not a Selenium Grid Anotated test, treat as normal test

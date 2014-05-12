@@ -19,17 +19,17 @@ public class RemoteWebDriverRunnerTest {
 
 //    @Test
 //    public void testSetDriverByDriver() {
-//        System.out.println("browserName = " + ((RemoteWebDriver) ThreadDriver.getDriver()).getCapabilities().getBrowserName());
-//        System.out.println("browserVersion = " + ((RemoteWebDriver) ThreadDriver.getDriver()).getCapabilities().getVersion());
-//        System.out.println("platformName = " + ((RemoteWebDriver) ThreadDriver.getDriver()).getCapabilities().getPlatform().toString());
+//        System.out.println("browserName = " + ((RemoteWebDriver) WebDriverExtensionsContext.getDriver()).getCapabilities().getBrowserName());
+//        System.out.println("browserVersion = " + ((RemoteWebDriver) WebDriverExtensionsContext.getDriver()).getCapabilities().getVersion());
+//        System.out.println("platformName = " + ((RemoteWebDriver) WebDriverExtensionsContext.getDriver()).getCapabilities().getPlatform().toString());
 //    }
 //
 //    @Test
 //    @IgnoreChrome
 //    public void testSetDriverByDriver2() {
-//        System.out.println("browserName = " + ((RemoteWebDriver) ThreadDriver.getDriver()).getCapabilities().getBrowserName());
-//        System.out.println("browserVersion = " + ((RemoteWebDriver) ThreadDriver.getDriver()).getCapabilities().getVersion());
-//        System.out.println("platformName = " + ((RemoteWebDriver) ThreadDriver.getDriver()).getCapabilities().getPlatform().toString());
+//        System.out.println("browserName = " + ((RemoteWebDriver) WebDriverExtensionsContext.getDriver()).getCapabilities().getBrowserName());
+//        System.out.println("browserVersion = " + ((RemoteWebDriver) WebDriverExtensionsContext.getDriver()).getCapabilities().getVersion());
+//        System.out.println("platformName = " + ((RemoteWebDriver) WebDriverExtensionsContext.getDriver()).getCapabilities().getPlatform().toString());
 //    }
     @Test
     @IgnoreFirefox

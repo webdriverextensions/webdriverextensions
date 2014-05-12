@@ -7,7 +7,7 @@ import org.openqa.selenium.support.pagefactory.FieldDecorator;
 public abstract class WebRepository {
 
     public void initElements() {
-        PageFactory.initElements(new WebDriverExtensionFieldDecorator(ThreadDriver.getDriver()), this);
+        PageFactory.initElements(new WebDriverExtensionFieldDecorator(WebDriverExtensionsContext.getDriver()), this);
     }
 
     public void initElements(WebDriver driver) {

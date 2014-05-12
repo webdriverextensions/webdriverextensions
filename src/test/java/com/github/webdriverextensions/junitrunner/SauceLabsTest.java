@@ -1,6 +1,6 @@
 package com.github.webdriverextensions.junitrunner;
 
-import com.github.webdriverextensions.ThreadDriver;
+import com.github.webdriverextensions.WebDriverExtensionsContext;
 import com.github.webdriverextensions.junitrunner.annotations.RemoteAddress;
 import com.github.webdriverextensions.junitrunner.annotations.Browsers;
 import com.github.webdriverextensions.junitrunner.annotations.Firefox;
@@ -67,22 +67,22 @@ public class SauceLabsTest {
 
     )
     public void test1() throws InterruptedException {
-        ThreadDriver.getDriver().get("http://www.google.com");
-        Assert.assertEquals("Google", ThreadDriver.getDriver().getTitle());
+        WebDriverExtensionsContext.getDriver().get("http://www.google.com");
+        Assert.assertEquals("Google", WebDriverExtensionsContext.getDriver().getTitle());
     }
     @Test
     @IgnoreFirefox
     @InternetExplorer
     public void test2() {
-        ThreadDriver.getDriver().get("http://www.google.com");
-        Assert.assertEquals("Google", ThreadDriver.getDriver().getTitle());
+        WebDriverExtensionsContext.getDriver().get("http://www.google.com");
+        Assert.assertEquals("Google", WebDriverExtensionsContext.getDriver().getTitle());
     }
 
 //
 //    @Test
 //    public void test3() {
-//        ThreadDriver.getDriver().get("http://www.google.com");
-//        Assert.assertEquals("Google", ThreadDriver.getDriver().getTitle());
+//        WebDriverExtensionsContext.getDriver().get("http://www.google.com");
+//        Assert.assertEquals("Google", WebDriverExtensionsContext.getDriver().getTitle());
 //    }
 //
 //    @Test

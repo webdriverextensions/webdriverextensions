@@ -10,8 +10,8 @@ public abstract class WebSite implements Openable {
     private WebDriver internalDriver;
 
     public void initElements() {
-        internalDriver = ThreadDriver.getDriver();
-        PageFactory.initElements(new WebDriverExtensionFieldDecorator(ThreadDriver.getDriver()), this);
+        internalDriver = WebDriverExtensionsContext.getDriver();
+        PageFactory.initElements(new WebDriverExtensionFieldDecorator(WebDriverExtensionsContext.getDriver()), this);
     }
 
     public void initElements(WebDriver driver) {

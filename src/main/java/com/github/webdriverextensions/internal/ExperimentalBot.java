@@ -1,6 +1,6 @@
 package com.github.webdriverextensions.internal;
 
-import com.github.webdriverextensions.ThreadDriver;
+import com.github.webdriverextensions.WebDriverExtensionsContext;
 import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.HasCapabilities;
 import org.openqa.selenium.JavascriptExecutor;
@@ -11,11 +11,11 @@ public class ExperimentalBot {
 
     /* Browser */
     public static String browser() {
-        return ((HasCapabilities) ThreadDriver.getDriver()).getCapabilities().getBrowserName();
+        return ((HasCapabilities) WebDriverExtensionsContext.getDriver()).getCapabilities().getBrowserName();
     }
 
     public static boolean browserIs(String browserName) {
-        String currentBrowserName = ((HasCapabilities) ThreadDriver.getDriver()).getCapabilities().getBrowserName();
+        String currentBrowserName = ((HasCapabilities) WebDriverExtensionsContext.getDriver()).getCapabilities().getBrowserName();
         return StringUtils.equalsIgnoreCase(currentBrowserName, browserName);
     }
 
@@ -61,21 +61,21 @@ public class ExperimentalBot {
 
     /* Version */
     public static String version() {
-        return ((HasCapabilities) ThreadDriver.getDriver()).getCapabilities().getVersion();
+        return ((HasCapabilities) WebDriverExtensionsContext.getDriver()).getCapabilities().getVersion();
     }
 
     public static boolean versionIs(String version) {
-        String currentVersion = ((HasCapabilities) ThreadDriver.getDriver()).getCapabilities().getVersion();
+        String currentVersion = ((HasCapabilities) WebDriverExtensionsContext.getDriver()).getCapabilities().getVersion();
         return StringUtils.equalsIgnoreCase(currentVersion, version);
     }
 
     /* Platform */
     public static Platform platform() {
-        return ((HasCapabilities) ThreadDriver.getDriver()).getCapabilities().getPlatform();
+        return ((HasCapabilities) WebDriverExtensionsContext.getDriver()).getCapabilities().getPlatform();
     }
 
     public static boolean platformIs(Platform platform) {
-        Platform currentPlatform = ((HasCapabilities) ThreadDriver.getDriver()).getCapabilities().getPlatform();
+        Platform currentPlatform = ((HasCapabilities) WebDriverExtensionsContext.getDriver()).getCapabilities().getPlatform();
         return currentPlatform.is(platform);
     }
 
@@ -109,10 +109,10 @@ public class ExperimentalBot {
 
     /* Execute Javascript */
     public static Object executeJavascript(String script, Object... args) {
-        return ((JavascriptExecutor) ThreadDriver.getDriver()).executeScript(script, args);
+        return ((JavascriptExecutor) WebDriverExtensionsContext.getDriver()).executeScript(script, args);
     }
 
     public static Object executeJavascriptAsynchronously(String script, Object... args) {
-        return ((JavascriptExecutor) ThreadDriver.getDriver()).executeAsyncScript(script, args);
+        return ((JavascriptExecutor) WebDriverExtensionsContext.getDriver()).executeAsyncScript(script, args);
     }
 }

@@ -8,7 +8,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import com.github.webdriverextensions.internal.junitrunner.AnnotationUtils;
-import com.github.webdriverextensions.ThreadDriver;
+import com.github.webdriverextensions.WebDriverExtensionsContext;
 import com.github.webdriverextensions.internal.utils.InstanceUtils;
 import static com.github.webdriverextensions.internal.utils.StringUtils.quote;
 import static com.github.webdriverextensions.internal.utils.WebDriverUtils.addCapabilities;
@@ -153,7 +153,7 @@ public class RemoteWebDriverRunner extends BlockJUnit4ClassRunner {
             } else {
                 String remoteAddress = ((RemoteAddress) getTestClass().getJavaClass().getAnnotation(RemoteAddress.class)).value();
                 try {
-                    ThreadDriver.setDriver(browser.createDriver(new URL(remoteAddress)));
+                    WebDriverExtensionsContext.setDriver(browser.createDriver(new URL(remoteAddress)));
                     log.info("Running test {}", testName);
                     log.trace("{} threadId = {}", testName, Thread.currentThread().getId());
                     log.trace("Desired Capabilities");
@@ -162,7 +162,7 @@ public class RemoteWebDriverRunner extends BlockJUnit4ClassRunner {
                     log.trace("platform = " + browser.getPlatform());
                     log.trace("desiredCapabilities = " + convertToJsonString(browser.getDesiredCapabilities()));
                     log.trace("Capabilities");
-                    Capabilities capabilities = ((HasCapabilities) ThreadDriver.getDriver()).getCapabilities();
+                    Capabilities capabilities = ((HasCapabilities) WebDriverExtensionsContext.getDriver()).getCapabilities();
                     log.trace("browserName = " + capabilities.getBrowserName());
                     log.trace("version = " + capabilities.getVersion());
                     log.trace("platform = " + capabilities.getCapability(PLATFORM));
@@ -172,7 +172,7 @@ public class RemoteWebDriverRunner extends BlockJUnit4ClassRunner {
                     return;
                 }
                 runLeaf(methodBlock(method), description, notifier);
-                ThreadDriver.getDriver().quit();
+                WebDriverExtensionsContext.getDriver().quit();
             }
         } else {
             // Not a Selenium Grid Anotated test, treat as normal test

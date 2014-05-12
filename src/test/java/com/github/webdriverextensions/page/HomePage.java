@@ -1,7 +1,7 @@
 package com.github.webdriverextensions.page;
 
 import static com.github.webdriverextensions.Bot.*;
-import static com.github.webdriverextensions.ThreadDriver.*;
+import static com.github.webdriverextensions.WebDriverExtensionsContext.*;
 import com.github.webdriverextensions.WebPage;
 import com.github.webdriverextensions.generator.annotations.Generate;
 import com.github.webdriverextensions.site.WebDriverExtensionSite;

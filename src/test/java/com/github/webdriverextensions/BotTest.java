@@ -3,7 +3,7 @@ package com.github.webdriverextensions;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 import static com.github.webdriverextensions.Bot.*;
-import static com.github.webdriverextensions.ThreadDriver.*;
+import static com.github.webdriverextensions.WebDriverExtensionsContext.*;
 import com.github.webdriverextensions.junitrunner.WebDriverRunner;
 import com.github.webdriverextensions.junitrunner.annotations.Chrome;
 import org.junit.After;

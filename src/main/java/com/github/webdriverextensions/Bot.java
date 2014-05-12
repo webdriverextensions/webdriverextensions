@@ -147,7 +147,7 @@ public class Bot {
 
     /* Open */
     public static void open(String url) {
-        ThreadDriver.getDriver().get(url);
+        WebDriverExtensionsContext.getDriver().get(url);
     }
 
     public static void open(Openable openable) {
@@ -158,13 +158,13 @@ public class Bot {
 
     /* Navigation */
     public static void navigateBack() {
-        ThreadDriver.getDriver().navigate().back();
+        WebDriverExtensionsContext.getDriver().navigate().back();
     }
     public static void navigateForward() {
-        ThreadDriver.getDriver().navigate().forward();
+        WebDriverExtensionsContext.getDriver().navigate().forward();
     }
     public static void navigateRefresh() {
-        ThreadDriver.getDriver().navigate().refresh();
+        WebDriverExtensionsContext.getDriver().navigate().refresh();
     }
 
 
@@ -222,12 +222,12 @@ public class Bot {
     }
 
     public static void waitForElementToDisplay(WebElement webElement, long secondsToWait) {
-        WebDriverWait wait = new WebDriverWait(ThreadDriver.getDriver(), secondsToWait);
+        WebDriverWait wait = new WebDriverWait(WebDriverExtensionsContext.getDriver(), secondsToWait);
         wait.until(ExpectedConditions.visibilityOf(webElement));
     }
 
     public static void waitForElementToDisplay(WebElement webElement, long secondsToWait, long sleepInMillis) {
-        WebDriverWait wait = new WebDriverWait(ThreadDriver.getDriver(), secondsToWait, sleepInMillis);
+        WebDriverWait wait = new WebDriverWait(WebDriverExtensionsContext.getDriver(), secondsToWait, sleepInMillis);
         wait.until(ExpectedConditions.visibilityOf(webElement));
     }
 
@@ -285,7 +285,7 @@ public class Bot {
 
     public static boolean isDisplayed(WebElement webElement, long secondsToWait) {
         try {
-            WebElement foundWebElement = new WebDriverWait(ThreadDriver.getDriver(), secondsToWait).until(ExpectedConditions.visibilityOf(webElement));
+            WebElement foundWebElement = new WebDriverWait(WebDriverExtensionsContext.getDriver(), secondsToWait).until(ExpectedConditions.visibilityOf(webElement));
             if (foundWebElement != null) {
                 return true;
             } else {
@@ -382,7 +382,7 @@ public class Bot {
 
     /* Current Url */
     public static String currentUrl() {
-        return ThreadDriver.getDriver().getCurrentUrl();
+        return WebDriverExtensionsContext.getDriver().getCurrentUrl();
     }
 
     public static boolean currentUrlEquals(String url) {
@@ -469,7 +469,7 @@ public class Bot {
 
     /* Title */
     public static String title() {
-        return ThreadDriver.getDriver().getTitle();
+        return WebDriverExtensionsContext.getDriver().getTitle();
     }
 
     public static boolean titleEquals(String title) {

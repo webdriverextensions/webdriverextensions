@@ -2,7 +2,7 @@ package com.github.webdriverextensions.page;
 
 import java.util.List;
 import static com.github.webdriverextensions.Bot.assertIsDisplayed;
-import static com.github.webdriverextensions.ThreadDriver.*;
+import static com.github.webdriverextensions.WebDriverExtensionsContext.*;
 import com.github.webdriverextensions.WebPage;
 import com.github.webdriverextensions.generator.annotations.Generate;
 import com.github.webdriverextensions.site.WebDriverExtensionSite;

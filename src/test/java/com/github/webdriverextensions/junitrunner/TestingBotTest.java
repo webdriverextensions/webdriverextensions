@@ -73,12 +73,12 @@ public class TestingBotTest {
         }
         System.out.println("Running test 1!!!");
 
-//        System.out.println("browserName = " + ((RemoteWebDriver) ThreadDriver.getDriver()).getCapabilities().getBrowserName());
-//        System.out.println("browserVersion = " + ((RemoteWebDriver) ThreadDriver.getDriver()).getCapabilities().getVersion());
-//        System.out.println("platformName = " + ((RemoteWebDriver) ThreadDriver.getDriver()).getCapabilities().getPlatform().toString());
+//        System.out.println("browserName = " + ((RemoteWebDriver) WebDriverExtensionsContext.getDriver()).getCapabilities().getBrowserName());
+//        System.out.println("browserVersion = " + ((RemoteWebDriver) WebDriverExtensionsContext.getDriver()).getCapabilities().getVersion());
+//        System.out.println("platformName = " + ((RemoteWebDriver) WebDriverExtensionsContext.getDriver()).getCapabilities().getPlatform().toString());
 //
-//        ThreadDriver.getDriver().get("http://www.google.com");
-//        Assert.assertEquals("Google", ThreadDriver.getDriver().getTitle());
+//        WebDriverExtensionsContext.getDriver().get("http://www.google.com");
+//        Assert.assertEquals("Google", WebDriverExtensionsContext.getDriver().getTitle());
     }
     //    @Test
 //    @IgnoreFirefox

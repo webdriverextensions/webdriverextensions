@@ -10,7 +10,7 @@ public abstract class WebPage<S> implements Openable {
     public S site;
 
     public void initElements() {
-        PageFactory.initElements(new WebDriverExtensionFieldDecorator(ThreadDriver.getDriver()), this);
+        PageFactory.initElements(new WebDriverExtensionFieldDecorator(WebDriverExtensionsContext.getDriver()), this);
     }
 
     public void initElements(WebDriver driver) {
@@ -47,7 +47,7 @@ public abstract class WebPage<S> implements Openable {
     }
 
     public static void open(String url) {
-        ThreadDriver.getDriver().get(url);
+        WebDriverExtensionsContext.getDriver().get(url);
     }
 
     public void open(Openable openable) {
