@@ -45,6 +45,11 @@
         </developer>
     </developers>
 
+    <issueManagement>
+        <system>github</system>
+        <url>https://github.com/webdriverextensions/webdriverextensions/issues</url>
+    </issueManagement>
+
     <parent>
         <groupId>org.sonatype.oss</groupId>
         <artifactId>oss-parent</artifactId>
