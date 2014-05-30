@@ -22,7 +22,7 @@
     <scm>
         <connection>scm:git:git@github.com:webdriverextensions/webdriverextensions.git</connection>
         <developerConnection>scm:git:git@github.com:webdriverextensions/webdriverextensions.git</developerConnection>
-        <url>git@github.com:webdriverextensions/webdriverextensions.git</url>
+        <url>scm:git:git@github.com:webdriverextensions/webdriverextensions.git</url>
     </scm>
 
     <organization>
@@ -44,6 +44,13 @@
             </roles>
         </developer>
     </developers>
+
+    <contributors>
+        <contributor>
+            <name>andidev</name>
+            <url>https://github.com/andidev</url>
+        </contributor>
+    </contributors>
 
     <issueManagement>
         <system>github</system>
