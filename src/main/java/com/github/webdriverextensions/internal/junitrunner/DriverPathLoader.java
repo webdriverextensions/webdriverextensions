@@ -37,14 +37,14 @@ public class DriverPathLoader {
 
     private static String getChromeDriverDefaultPath() {
         if (OsUtils.isWindows()) {
-            return "drivers/windows/chromedriver.exe";
+            return "drivers/chromedriver-windows-32bit.exe";
         } else if (OsUtils.isMac()) {
-            return "drivers/mac/chromedriver";
+            return "drivers/chromedriver-mac-32bit";
         } else if (OsUtils.isLinux()) {
             if (OsUtils.is64Bit()) {
-                return "drivers/linux/chromedriver64bit";
+                return "drivers/chromedriver-linux-64bit";
             } else {
-                return "drivers/linux/chromedriver";
+                return "drivers/chromedriver-linux-32bit";
             }
         }
         return null;
@@ -54,9 +54,9 @@ public class DriverPathLoader {
         if (OsUtils.isWindows()) {
             if (PropertyUtils.isTrue(IE_DRIVER_USE64BIT_PROPERTY_NAME)
                     || PropertyUtils.isTrue(INTERNET_EXPLORER_DRIVER_USE64BIT_PROPERTY_NAME)) {
-                return "drivers/windows/internetexplorerdriver64bit.exe";
+                return "drivers/internetexplorerdriver-windows-64bit.exe";
             } else {
-                return "drivers/windows/internetexplorerdriver.exe";
+                return "drivers/internetexplorerdriver-windows-32bit.exe";
             }
         }
         return null;
