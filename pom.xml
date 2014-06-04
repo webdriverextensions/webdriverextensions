@@ -75,7 +75,7 @@
         <junit.version>4.11</junit.version>
         <lambdaj.version>2.3.3</lambdaj.version>
         <logback.version>1.1.2</logback.version>
-        <selenium.version>[2.41.0,)</selenium.version>
+        <selenium.version>2.42.2</selenium.version>
 
         <!-- Plugin Versions -->
         <maven-deploy-plugin.version>2.8.1</maven-deploy-plugin.version>
@@ -191,6 +191,59 @@
                 <configuration>
                     <parallel>classes</parallel>
                     <threadCount>10</threadCount>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>com.github.webdriverextensions</groupId>
+                <artifactId>webdriverextensions-maven-plugin</artifactId>
+                <version>1.0-SNAPSHOT</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>install-drivers</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <drivers>
+                        <driver>
+                            <name>internetexplorerdriver</name>
+                            <platform>windows</platform>
+                            <bit>32</bit>
+                            <version>2.42</version>
+                        </driver>
+                        <driver>
+                            <name>internetexplorerdriver</name>
+                            <platform>windows</platform>
+                            <bit>64</bit>
+                            <version>2.42</version>
+                        </driver>
+                        <driver>
+                            <name>chromedriver</name>
+                            <platform>windows</platform>
+                            <bit>32</bit>
+                            <version>2.10</version>
+                        </driver>
+                        <driver>
+                            <name>chromedriver</name>
+                            <platform>mac</platform>
+                            <bit>32</bit>
+                            <version>2.10</version>
+                        </driver>
+                        <driver>
+                            <name>chromedriver</name>
+                            <platform>linux</platform>
+                            <bit>32</bit>
+                            <version>2.10</version>
+                        </driver>
+                        <driver>
+                            <name>chromedriver</name>
+                            <platform>linux</platform>
+                            <bit>64</bit>
+                            <version>2.10</version>
+                        </driver>
+                    </drivers>
                 </configuration>
             </plugin>
         </plugins>
