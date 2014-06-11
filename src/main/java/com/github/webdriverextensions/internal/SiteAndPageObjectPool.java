@@ -9,7 +9,6 @@ import java.util.HashMap;
 import com.github.webdriverextensions.WebPage;
 import com.github.webdriverextensions.WebRepository;
 import com.github.webdriverextensions.WebSite;
-import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 import org.openqa.selenium.WebDriver;
