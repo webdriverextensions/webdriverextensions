@@ -13,11 +13,11 @@ import org.openqa.selenium.support.PageFactory;
 
 public class WebComponentList<T extends WebComponent> implements List<T> {
 
-    Class<T> webComponentClass;
-    List<WebElement> wrappedWebElements;
-    List<T> webComponents;
-    WebComponentFactory webComponentFactory = new DefaultWebComponentFactory();
-    WebDriver driver;
+    private Class<T> webComponentClass;
+    private List<WebElement> wrappedWebElements;
+    private List<T> webComponents;
+    private WebComponentFactory webComponentFactory = new DefaultWebComponentFactory();
+    private WebDriver driver;
 
     public WebComponentList(Class<T> webComponentClass, List<WebElement> webElements, WebComponentFactory webComponentFactory, WebDriver driver) {
         this.webComponentClass = webComponentClass;
