@@ -26,7 +26,7 @@ public abstract class WebPage<S> implements Openable {
         try {
             assertIsOpen();
             return true;
-        } catch (Error e) {
+        } catch (AssertionError e) {
             return false;
         }
     }

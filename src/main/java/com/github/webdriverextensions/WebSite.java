@@ -29,7 +29,7 @@ public abstract class WebSite implements Openable {
         try {
             assertIsOpen();
             return true;
-        } catch (Error e) {
+        } catch (AssertionError e) {
             return false;
         }
     }
