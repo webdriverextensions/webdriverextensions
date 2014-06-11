@@ -3,10 +3,8 @@ package com.github.webdriverextensions;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 import static com.github.webdriverextensions.Bot.*;
-import static com.github.webdriverextensions.WebDriverExtensionsContext.*;
 import com.github.webdriverextensions.junitrunner.WebDriverRunner;
 import com.github.webdriverextensions.junitrunner.annotations.Chrome;
-import org.junit.After;
 import org.junit.Assert;
 import static org.hamcrest.Matchers.*;
 import org.junit.Before;
@@ -23,12 +21,7 @@ public class BotTest extends SiteAwareRepository {
 
     @Before
     public void before() {
-        getDriver().get(botTestPage.url);
-    }
-
-    @After
-    public void after() {
-        getDriver().close();
+        open(botTestPage.url);
     }
 
     /* Click */
