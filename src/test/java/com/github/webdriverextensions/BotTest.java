@@ -15,10 +15,6 @@ import org.junit.runner.RunWith;
 @Chrome
 public class BotTest extends SiteAwareRepository {
 
-    public BotTest() {
-        initElements();
-    }
-
     @Before
     public void before() {
         open(botTestPage.url);

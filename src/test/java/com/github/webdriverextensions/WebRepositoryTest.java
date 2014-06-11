@@ -24,10 +24,6 @@ public class WebRepositoryTest extends WebRepository {
     HtmlComponent html;
     ExamplesPage examplesPage;
 
-    public WebRepositoryTest() {
-        initElements();
-    }
-
     @Before
     public void before() {
         open(url);

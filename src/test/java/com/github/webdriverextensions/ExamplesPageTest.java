@@ -16,10 +16,6 @@ public class ExamplesPageTest extends SiteAwareRepository {
 
     Double delayTime = 0.0;
 
-    public ExamplesPageTest() {
-        initElements();
-    }
-
     @Before
     public void before() {
         open(site.url);

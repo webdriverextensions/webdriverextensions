@@ -1,5 +1,6 @@
 package com.github.webdriverextensions.junitrunner;
 
+import com.github.webdriverextensions.WebDriverExtensionFieldDecorator;
 import com.github.webdriverextensions.WebDriverExtensionsContext;
 import com.github.webdriverextensions.internal.WebDriverExtensionException;
 import com.github.webdriverextensions.internal.junitrunner.AnnotationUtils;
@@ -50,6 +51,7 @@ import org.junit.runner.notification.RunNotifier;
 import org.junit.runners.BlockJUnit4ClassRunner;
 import org.junit.runners.model.FrameworkMethod;
 import org.junit.runners.model.InitializationError;
+import org.junit.runners.model.Statement;
 import org.junit.runners.model.TestClass;
 import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.HasCapabilities;
@@ -65,10 +67,19 @@ import static org.openqa.selenium.remote.CapabilityType.PLATFORM;
 import static org.openqa.selenium.remote.CapabilityType.VERSION;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.safari.SafariDriver;
+import org.openqa.selenium.support.PageFactory;
 
 public class WebDriverRunner extends BlockJUnit4ClassRunner {
 
     private static final org.slf4j.Logger log = org.slf4j.LoggerFactory.getLogger(WebDriverRunner.class);
+
+    protected ThreadLocal<Object> testInstance = new ThreadLocal<Object>();
+
+    @Override
+    protected Object createTest() throws Exception {
+        testInstance.set(super.createTest()); // Make test instance available in runnder
+        return testInstance.get();
+    }
 
     public static class WebDriverFrameworkMethod extends FrameworkMethod {
 
@@ -200,7 +211,10 @@ public class WebDriverRunner extends BlockJUnit4ClassRunner {
                     notifier.fireTestFailure(new Failure(description, ex));
                     return;
                 }
-                runLeaf(methodBlock(method), description, notifier);
+                Statement statement = methodBlock(method); // Make sure test instance is created by calling methodBlock(method)
+                PageFactory.initElements(new WebDriverExtensionFieldDecorator(WebDriverExtensionsContext.getDriver()), testInstance.get());
+                testInstance.remove();
+                runLeaf(statement, description, notifier);
                 WebDriverExtensionsContext.getDriver().quit();
             }
         } else {
