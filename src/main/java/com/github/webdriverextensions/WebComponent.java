@@ -10,8 +10,8 @@ import org.openqa.selenium.interactions.internal.Coordinates;
 
 public class WebComponent implements org.openqa.selenium.WebElement, org.openqa.selenium.internal.FindsByLinkText, org.openqa.selenium.internal.FindsById, org.openqa.selenium.internal.FindsByName, org.openqa.selenium.internal.FindsByTagName, org.openqa.selenium.internal.FindsByClassName, org.openqa.selenium.internal.FindsByCssSelector, org.openqa.selenium.internal.FindsByXPath, org.openqa.selenium.internal.WrapsDriver, org.openqa.selenium.internal.Locatable {
 
-    public WebElement wrappedWebElement;
-    public WebElement delegateWebElement;
+    WebElement wrappedWebElement;
+    WebElement delegateWebElement;
 
     public void init(WebElement wrappedWebElement) {
         this.wrappedWebElement = wrappedWebElement;

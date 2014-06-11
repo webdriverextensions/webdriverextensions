@@ -7,7 +7,7 @@ import org.openqa.selenium.support.pagefactory.FieldDecorator;
 
 public abstract class WebSite implements Openable {
 
-    private WebDriver internalDriver;
+    WebDriver internalDriver;
 
     public void initElements() {
         internalDriver = WebDriverExtensionsContext.getDriver();
