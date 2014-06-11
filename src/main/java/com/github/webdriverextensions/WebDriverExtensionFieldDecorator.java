@@ -23,10 +23,10 @@ import org.openqa.selenium.support.pagefactory.ElementLocator;
 
 public class WebDriverExtensionFieldDecorator extends DefaultFieldDecorator {
 
-    private WebDriver driver;
-    private SiteAndPageObjectPool pool;
-    private WebComponentFactory webComponentFactory;
-    private WebComponentListFactory webComponentListFactory;
+    private final WebDriver driver;
+    private final SiteAndPageObjectPool pool;
+    private final WebComponentFactory webComponentFactory;
+    private final WebComponentListFactory webComponentListFactory;
 
     public WebDriverExtensionFieldDecorator(final WebDriver driver) {
         super(new WebDriverExtensionElementLocatorFactory(driver, driver));
