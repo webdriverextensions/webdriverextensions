@@ -44,7 +44,7 @@ public class SiteAndPageObjectPool {
         if (pageObject == null) {
             pageObject = createPageObject(field);
             pageObjects.put(pageObjectKey, pageObject);
-            pageObject.initElements(driver);
+            pageObject.initElements(decorator);
         }
         Key siteObjectKey = Key.createSiteObjectKeyFromPageObjectField(field);
         WebSite siteObject = siteObjects.get(siteObjectKey);
