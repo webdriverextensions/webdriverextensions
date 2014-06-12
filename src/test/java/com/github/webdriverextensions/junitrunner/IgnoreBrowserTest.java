@@ -12,6 +12,6 @@ public class IgnoreBrowserTest {
     @Test
     @IgnoreFirefox
     public void ignoredTest() {
-        assert false;
+        assert false; // Fail test if test runs
     }
 }
