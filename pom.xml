@@ -83,6 +83,7 @@
         <maven-compiler-plugin.version>3.1</maven-compiler-plugin.version>
         <maven-processor-plugin.version>2.2.4</maven-processor-plugin.version>
         <maven-surefire-plugin.version>2.17</maven-surefire-plugin.version>
+        <webdriverextensions-maven-plugin.version>1.0</webdriverextensions-maven-plugin.version>
     </properties>
 
     <dependencies>
@@ -197,7 +198,7 @@
             <plugin>
                 <groupId>com.github.webdriverextensions</groupId>
                 <artifactId>webdriverextensions-maven-plugin</artifactId>
-                <version>1.0</version>
+                <version>${webdriverextensions-maven-plugin.version}</version>
                 <executions>
                     <execution>
                         <goals>
