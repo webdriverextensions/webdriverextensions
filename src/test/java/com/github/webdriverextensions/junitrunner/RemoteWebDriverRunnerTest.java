@@ -1,66 +1,28 @@
 package com.github.webdriverextensions.junitrunner;
 
+import static com.github.webdriverextensions.Bot.assertCurrentUrlContains;
+import static com.github.webdriverextensions.Bot.open;
 import com.github.webdriverextensions.junitrunner.annotations.Browsers;
 import com.github.webdriverextensions.junitrunner.annotations.Chrome;
-import com.github.webdriverextensions.junitrunner.annotations.Firefox;
-import com.github.webdriverextensions.junitrunner.annotations.IgnoreBrowsers;
-import com.github.webdriverextensions.junitrunner.annotations.IgnoreFirefox;
-import org.junit.Assert;
-import org.junit.Ignore;
+import com.github.webdriverextensions.junitrunner.annotations.RemoteAddress;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.Platform;
 
-//@RunWith(RemoteWebDriverRunner.class)
-@Browsers(firefox =
-    @Firefox(version = "20"))
-@Ignore
+@RunWith(RemoteWebDriverRunner.class)
+@RemoteAddress("http://andidev:80b7768e-dc06-4d5b-b793-5b3b83f0e24c@ondemand.saucelabs.com:80/wd/hub")
+@Browsers(
+        chrome = {
+            @Chrome(platform = Platform.WINDOWS),
+            @Chrome(platform = Platform.LINUX),
+            @Chrome(platform = Platform.MAC)
+        }
+)
 public class RemoteWebDriverRunnerTest {
 
-//    @Test
-//    public void testSetDriverByDriver() {
-//        System.out.println("browserName = " + ((RemoteWebDriver) WebDriverExtensionsContext.getDriver()).getCapabilities().getBrowserName());
-//        System.out.println("browserVersion = " + ((RemoteWebDriver) WebDriverExtensionsContext.getDriver()).getCapabilities().getVersion());
-//        System.out.println("platformName = " + ((RemoteWebDriver) WebDriverExtensionsContext.getDriver()).getCapabilities().getPlatform().toString());
-//    }
-//
-//    @Test
-//    @IgnoreChrome
-//    public void testSetDriverByDriver2() {
-//        System.out.println("browserName = " + ((RemoteWebDriver) WebDriverExtensionsContext.getDriver()).getCapabilities().getBrowserName());
-//        System.out.println("browserVersion = " + ((RemoteWebDriver) WebDriverExtensionsContext.getDriver()).getCapabilities().getVersion());
-//        System.out.println("platformName = " + ((RemoteWebDriver) WebDriverExtensionsContext.getDriver()).getCapabilities().getPlatform().toString());
-//    }
     @Test
-    @IgnoreFirefox
-    public void successfulTest() {
-        System.out.println("Running successfulTest");
+    public void openGoogleTest() {
+        open("https://github.com");
+        assertCurrentUrlContains("github");
     }
-    @Test
-    @IgnoreFirefox
-    public void successfulTest2() {
-        System.out.println("Running successfulTest");
-    }
-    @Test
-    @IgnoreFirefox
-    public void successfulTest3() {
-        System.out.println("Running successfulTest");
-    }
-//    @Test
-//    @Ignore
-//    public void ignoredTest() {
-//        System.out.println("Running ignoredTest");
-//    }
-//
-//    @Test
-//    public void failingTest() {
-//        System.out.println("Running failingTest");
-//        Assert.fail("Failing test!");
-//    }
-//
-//    @Test
-//    public void throwingExceptionTest() {
-//        System.out.println("Running throwingExceptionTest");
-//        throw new RuntimeException("Throwing exception from test");
-//    }
 }
