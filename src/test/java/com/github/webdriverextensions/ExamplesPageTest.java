@@ -47,6 +47,7 @@ public class ExamplesPageTest extends SiteAwareRepository {
         for (WebElement todo : examplesPage.todos) {
             assertTextEndsWith("!", todo);
         }
+        assertSizeEquals(3, examplesPage.todos);
     }
 
     @Test
