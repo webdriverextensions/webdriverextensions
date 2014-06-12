@@ -73,14 +73,6 @@ public class WebDriverRunner extends BlockJUnit4ClassRunner {
 
     private static final org.slf4j.Logger log = org.slf4j.LoggerFactory.getLogger(WebDriverRunner.class);
 
-    protected ThreadLocal<Object> testInstance = new ThreadLocal<Object>();
-
-    @Override
-    protected Object createTest() throws Exception {
-        testInstance.set(super.createTest()); // Make test instance available in runnder
-        return testInstance.get();
-    }
-
     public static class WebDriverFrameworkMethod extends FrameworkMethod {
 
         final private BrowserConfiguration browser;
@@ -150,6 +142,13 @@ public class WebDriverRunner extends BlockJUnit4ClassRunner {
     }
 
     @Override
+    protected Object createTest() throws Exception {
+        Object test = super.createTest();
+        PageFactory.initElements(new WebDriverExtensionFieldDecorator(WebDriverExtensionsContext.getDriver()), test);
+        return test;
+    }
+
+    @Override
     protected void runChild(final FrameworkMethod method, RunNotifier notifier) {
         if (method instanceof WebDriverFrameworkMethod) {
             TestMethodContext testMethodContext = new TestMethodContext().addBrowsersFromClassAnnotations(getTestClass()).addBrowsersFromMethodAnnotations(method);
@@ -211,10 +210,7 @@ public class WebDriverRunner extends BlockJUnit4ClassRunner {
                     notifier.fireTestFailure(new Failure(description, ex));
                     return;
                 }
-                Statement statement = methodBlock(method); // Make sure test instance is created by calling methodBlock(method)
-                PageFactory.initElements(new WebDriverExtensionFieldDecorator(WebDriverExtensionsContext.getDriver()), testInstance.get());
-                testInstance.remove();
-                runLeaf(statement, description, notifier);
+                runLeaf(methodBlock(method), description, notifier);
                 WebDriverExtensionsContext.getDriver().quit();
             }
         } else {
