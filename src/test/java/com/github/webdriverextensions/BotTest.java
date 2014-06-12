@@ -5,6 +5,8 @@ import java.util.concurrent.TimeUnit;
 import static com.github.webdriverextensions.Bot.*;
 import com.github.webdriverextensions.junitrunner.WebDriverRunner;
 import com.github.webdriverextensions.junitrunner.annotations.Chrome;
+import com.github.webdriverextensions.junitrunner.annotations.Firefox;
+import com.github.webdriverextensions.junitrunner.annotations.IgnoreChrome;
 import org.junit.Assert;
 import static org.hamcrest.Matchers.*;
 import org.junit.Before;
@@ -359,6 +361,8 @@ public class BotTest extends SiteAwareRepository {
 
     /* Option */
     @Test
+    @IgnoreChrome // Ignore chrome and run tests in Firefox instead since test fails cause Chrome does not trim spaces
+    @Firefox      // see bug report https://code.google.com/p/selenium/issues/detail?id=7473, remove this when bug is solved!
     public void optionTest() {
         // Selected/Deselected
         assertOptionIsSelected("Option 1", botTestPage.select);
