@@ -150,8 +150,9 @@ public class Bot {
         WebDriverExtensionsContext.getDriver().get(url);
     }
 
-    public static void open(Openable openable) {
+    public static <T extends Openable> T open(T openable) {
         openable.open();
+        return openable;
     }
 
 
@@ -869,8 +870,9 @@ public class Bot {
         assertHasNotAttribute("id", webElement);
     }
 
-    public static void assertIdEquals(String value, WebElement webElement) {
+    public static <T extends WebElement> T assertIdEquals(String value, T webElement) {
         assertAttributeEquals("id", value, webElement);
+        return webElement;
     }
 
     public static void assertIdNotEquals(String value, WebElement webElement) {
