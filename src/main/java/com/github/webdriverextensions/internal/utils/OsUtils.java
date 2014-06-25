@@ -5,16 +5,6 @@ import org.openqa.selenium.Platform;
 
 public class OsUtils {
 
-    private static String OS = System.getProperty("os.name").toLowerCase();
-
-    public static String getOsName() {
-        return System.getProperty("os.name");
-    }
-
-    public static String getOsVersion() {
-        return System.getProperty("os.version");
-    }
-
     public static boolean isWindows() {
         return Platform.WINDOWS.is(Platform.getCurrent());
     }
@@ -27,15 +17,15 @@ public class OsUtils {
         return Platform.LINUX.is(Platform.getCurrent());
     }
 
+    public static boolean isCurrentPlatform(String platform) {
+        try {
+            return Platform.valueOf(platform).is(Platform.getCurrent());
+        } catch (IllegalArgumentException e) {
+            return false;
+        }
+    }
+
     public static boolean is64Bit() {
         return com.sun.jna.Platform.is64Bit();
-    }
-
-    public static String getUserHomePath() {
-        return new File(System.getProperty("user.home")).getAbsolutePath();
-    }
-
-    public static String getLineSeparator() {
-        return System.getProperty("line.separator");
     }
 }

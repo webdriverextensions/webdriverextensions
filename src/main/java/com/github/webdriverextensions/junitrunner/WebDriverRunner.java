@@ -33,9 +33,11 @@ import com.github.webdriverextensions.junitrunner.annotations.IgnoreSafari;
 import com.github.webdriverextensions.junitrunner.annotations.InternetExplorer;
 import com.github.webdriverextensions.junitrunner.annotations.Opera;
 import com.github.webdriverextensions.junitrunner.annotations.PhantomJS;
+import com.github.webdriverextensions.junitrunner.annotations.RemoteAddress;
 import com.github.webdriverextensions.junitrunner.annotations.Safari;
 import com.google.gson.Gson;
 import java.lang.annotation.Annotation;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -51,7 +53,6 @@ import org.junit.runner.notification.RunNotifier;
 import org.junit.runners.BlockJUnit4ClassRunner;
 import org.junit.runners.model.FrameworkMethod;
 import org.junit.runners.model.InitializationError;
-import org.junit.runners.model.Statement;
 import org.junit.runners.model.TestClass;
 import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.HasCapabilities;
@@ -66,6 +67,7 @@ import static org.openqa.selenium.remote.CapabilityType.BROWSER_NAME;
 import static org.openqa.selenium.remote.CapabilityType.PLATFORM;
 import static org.openqa.selenium.remote.CapabilityType.VERSION;
 import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.safari.SafariDriver;
 import org.openqa.selenium.support.PageFactory;
 
@@ -91,7 +93,7 @@ public class WebDriverRunner extends BlockJUnit4ClassRunner {
             return browser;
         }
     }
-    private static List<Class> supportedBrowserAnnotations = Arrays.asList(new Class[]{
+    private static final List<Class> supportedBrowserAnnotations = Arrays.asList(new Class[]{
         Android.class,
         Chrome.class,
         Firefox.class,
@@ -104,7 +106,7 @@ public class WebDriverRunner extends BlockJUnit4ClassRunner {
         Safari.class,
         Browser.class
     });
-    private static List<Class> supportedIgnoreBrowserAnnotations = Arrays.asList(new Class[]{
+    private static final List<Class> supportedIgnoreBrowserAnnotations = Arrays.asList(new Class[]{
         IgnoreAndroid.class,
         IgnoreChrome.class,
         IgnoreFirefox.class,
@@ -134,7 +136,7 @@ public class WebDriverRunner extends BlockJUnit4ClassRunner {
                     testMethods.add(new WebDriverFrameworkMethod(browser, testAnnotatedMethod));
                 }
             } else {
-                // Not a WebDriver Annotated test, treat as normal test
+                // Not a WebDriverRunner Annotated test, treat as normal test
                 testMethods.add(testAnnotatedMethod);
             }
         }
@@ -159,6 +161,7 @@ public class WebDriverRunner extends BlockJUnit4ClassRunner {
             String className = getTestClass().getJavaClass().getSimpleName();
             String methodName = method.getName();
             String testName = String.format("%s.%s", className, methodName);
+            boolean hasRemoteAddressAnnotation = ((RemoteAddress) getTestClass().getJavaClass().getAnnotation(RemoteAddress.class)) != null;
 
             if (method.getAnnotation(Ignore.class) != null) {
                 log.trace("Skipping test {}. Test is annotated to be ignored with @Ignore annotation", testName);
@@ -167,31 +170,39 @@ public class WebDriverRunner extends BlockJUnit4ClassRunner {
                 log.trace("Skipping test {}. Test is annotated to be ignored, ignore annotations = {}.", testName,
                         testMethodContext.ignoreBrowsers.toString());
                 notifier.fireTestIgnored(description);
-            } else if (BrowserType.IE.equalsIgnoreCase(browser.getBrowserName()) && !OsUtils.isWindows()
+            } else if (!hasRemoteAddressAnnotation && BrowserType.IE.equalsIgnoreCase(browser.getBrowserName()) && !OsUtils.isWindows()
                     || (BrowserType.IEXPLORE.equalsIgnoreCase(browser.getBrowserName()) && !OsUtils.isWindows())) {
                 log.trace("Skipping test {}. Internet Explorer is only supported on Windows platforms.", testName);
                 notifier.fireTestIgnored(description);
-            } else if (BrowserType.SAFARI.equalsIgnoreCase(browser.getBrowserName()) && (!OsUtils.isWindows() && !OsUtils.isMac())) {
+            } else if (!hasRemoteAddressAnnotation && BrowserType.SAFARI.equalsIgnoreCase(browser.getBrowserName()) && (!OsUtils.isWindows() && !OsUtils.isMac())) {
                 log.trace("Skipping test {}. Safari is only supported on Windows and Mac platforms.", testName);
+                notifier.fireTestIgnored(description);
+            } else if (!hasRemoteAddressAnnotation && !OsUtils.isCurrentPlatform(browser.platform)) {
+                log.trace("Skipping test {}. Current platform is not " + browser.platform, testName);
                 notifier.fireTestIgnored(description);
             } else {
                 try {
-                    try {
-                        WebDriver driver = browser.createDriver();
-                        BrowserConfiguration driverBrowser = new BrowserConfiguration(driver);
-                        if (testMethodContext.isBrowserIgnored(driverBrowser)) {
-                            driver.quit();
-                            log.trace("Skipping test {}. Test is annotated to be ignored, ignore annotations = {}.", testName,
-                                    testMethodContext.ignoreBrowsers.toString());
+                    if (hasRemoteAddressAnnotation) {
+                        String remoteAddress = ((RemoteAddress) getTestClass().getJavaClass().getAnnotation(RemoteAddress.class)).value();
+                        WebDriverExtensionsContext.setDriver(browser.createDriver(new URL(remoteAddress)));
+                    } else {
+                        try {
+                            WebDriver driver = browser.createDriver();
+                            BrowserConfiguration driverBrowser = new BrowserConfiguration(driver);
+                            if (testMethodContext.isBrowserIgnored(driverBrowser)) {
+                                driver.quit();
+                                log.trace("Skipping test {}. Test is annotated to be ignored, ignore annotations = {}.", testName,
+                                        testMethodContext.ignoreBrowsers.toString());
+                                notifier.fireTestIgnored(description);
+                                return;
+                            }
+                            WebDriverExtensionsContext.setDriver(driver);
+                        } catch (BrowserNotSupported ex) {
+                            log.trace("Skipping test {}. {} has no driver for running tests in browser {}.", testName,
+                                    WebDriverRunner.class.getSimpleName(), quote(browser.getBrowserName()));
                             notifier.fireTestIgnored(description);
                             return;
                         }
-                        WebDriverExtensionsContext.setDriver(driver);
-                    } catch (BrowserNotSupported ex) {
-                        log.trace("Skipping test {}. {} has no driver for running tests in browser {}.", testName,
-                                WebDriverRunner.class.getSimpleName(), quote(browser.getBrowserName()));
-                        notifier.fireTestIgnored(description);
-                        return;
                     }
                     log.info("Running test {}", testName);
                     log.trace("{} threadId = {}", testName, Thread.currentThread().getId());
@@ -430,6 +441,17 @@ public class WebDriverRunner extends BlockJUnit4ClassRunner {
             }
 
             throw new BrowserNotSupported();
+        }
+
+        private WebDriver createDriver(URL url) throws Exception {
+            DesiredCapabilities finalDesiredCapabilities = new DesiredCapabilities(desiredCapabilities);
+            finalDesiredCapabilities.setBrowserName(browserName);
+            finalDesiredCapabilities.setVersion(version);
+            finalDesiredCapabilities.setCapability(PLATFORM, platform);
+            RemoteWebDriver driver = new RemoteWebDriver(
+                    url,
+                    finalDesiredCapabilities);
+            return driver;
         }
 
         @Override
