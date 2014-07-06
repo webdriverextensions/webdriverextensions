@@ -10,7 +10,6 @@ public abstract class SiteAwareRepository
     extends WebRepository
 {
 
-    public AnotherSite anotherSite;
     public WebDriverExtensionSite site;
     public BotTestPage botTestPage;
     public ExamplesPage examplesPage;

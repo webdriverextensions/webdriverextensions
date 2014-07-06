@@ -12,18 +12,12 @@ import com.github.webdriverextensions.internal.generator.SiteAwareBuilder;
 public class SiteAwareGeneratorProcessor extends AbstractGeneratorProcessor {
 
     @Override
-    public void generateClasses() {
-        for (TypeElement siteClass : getAnnotatedSiteClasses()) {
-            generateSiteAwareClass(siteClass);
-        }
-    }
-
-    private void generateSiteAwareClass(TypeElement siteClass) {
-        debug("Generating SiteAware class with Site Classes: " + siteClass.getSimpleName() + " and Page Classes: " + getAnnotatedPageClasses(siteClass));
+    public void generateClass() {
+        TypeElement siteClass = getAnnotatedSiteClasses().iterator().next();
+        debug("Generating SiteAware class with Site Classes: " + siteClass.getSimpleName() + " and Page Classes: " + getAnnotatedPageClasses());
         SiteAwareBuilder builder = new SiteAwareBuilder(processingEnv,
                 siteClass,
-                getAnnotatedSiteClasses(),
-                getAnnotatedPageClasses(siteClass));
+                getAnnotatedPageClasses());
         builder.build();
     }
 }

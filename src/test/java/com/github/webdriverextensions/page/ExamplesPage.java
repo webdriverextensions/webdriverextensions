@@ -14,8 +14,10 @@ import com.github.webdriverextensions.site.WebDriverExtensionSite;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-@Generate(name = "examplesPage")
-public class ExamplesPage extends WebPage<WebDriverExtensionSite> {
+@Generate
+public class ExamplesPage extends WebPage {
+
+    WebDriverExtensionSite site;
 
     // Section: WebElements
     @FindBy(css = "#search-query")

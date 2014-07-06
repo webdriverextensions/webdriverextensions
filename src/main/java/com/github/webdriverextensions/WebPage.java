@@ -5,9 +5,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.pagefactory.FieldDecorator;
 
-public abstract class WebPage<S> implements Openable {
-
-    public S site;
+public abstract class WebPage implements Openable {
 
     public void initElements() {
         PageFactory.initElements(new WebDriverExtensionFieldDecorator(WebDriverExtensionsContext.getDriver()), this);

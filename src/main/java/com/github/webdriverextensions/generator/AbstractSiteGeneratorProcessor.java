@@ -3,7 +3,7 @@ package com.github.webdriverextensions.generator;
 import javax.annotation.processing.SupportedAnnotationTypes;
 import javax.annotation.processing.SupportedSourceVersion;
 import javax.lang.model.SourceVersion;
-import javax.lang.model.element.*;
+import javax.lang.model.element.TypeElement;
 import com.github.webdriverextensions.internal.generator.AbstractGeneratorProcessor;
 import com.github.webdriverextensions.internal.generator.AbstractSiteBuilder;
 
@@ -12,17 +12,12 @@ import com.github.webdriverextensions.internal.generator.AbstractSiteBuilder;
 public class AbstractSiteGeneratorProcessor extends AbstractGeneratorProcessor {
 
     @Override
-    public void generateClasses() {
-        for (TypeElement siteClass : getReferencedSiteClasses()) {
-            generateAbstractSiteClass(siteClass);
-        }
-    }
-
-    private void generateAbstractSiteClass(TypeElement siteClass) {
-        debug("Generating AbstractSite for class: " + siteClass.getSimpleName() + " with Page Classes: " + getAnnotatedPageClasses(siteClass));
+    public void generateClass() {
+        TypeElement siteClass = getAnnotatedSiteClasses().iterator().next();
+        debug("Generating AbstractSite for class: " + siteClass.getSimpleName() + " with Page Classes: " + getAnnotatedPageClasses());
         AbstractSiteBuilder smb = new AbstractSiteBuilder(processingEnv,
                 siteClass,
-                getAnnotatedPageClasses(siteClass));
+                getAnnotatedPageClasses());
         smb.build();
     }
 }

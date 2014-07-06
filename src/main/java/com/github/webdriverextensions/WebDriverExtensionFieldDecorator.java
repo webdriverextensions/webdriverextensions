@@ -8,7 +8,7 @@ import java.util.List;
 import com.github.webdriverextensions.internal.DefaultWebComponentFactory;
 import com.github.webdriverextensions.internal.DefaultWebComponentListFactory;
 import com.github.webdriverextensions.internal.ReflectionUtils;
-import com.github.webdriverextensions.internal.SiteAndPageObjectPool;
+import com.github.webdriverextensions.internal.ObjectPool;
 import com.github.webdriverextensions.internal.WebComponentFactory;
 import com.github.webdriverextensions.internal.WebComponentListFactory;
 import com.github.webdriverextensions.internal.WebDriverExtensionElementLocatorFactory;
@@ -24,14 +24,14 @@ import org.openqa.selenium.support.pagefactory.ElementLocator;
 public class WebDriverExtensionFieldDecorator extends DefaultFieldDecorator {
 
     private final WebDriver driver;
-    private final SiteAndPageObjectPool pool;
+    private final ObjectPool pool;
     private final WebComponentFactory webComponentFactory;
     private final WebComponentListFactory webComponentListFactory;
 
     public WebDriverExtensionFieldDecorator(final WebDriver driver) {
         super(new WebDriverExtensionElementLocatorFactory(driver, driver));
         this.driver = driver;
-        this.pool = new SiteAndPageObjectPool(driver);
+        this.pool = new ObjectPool(driver);
         this.webComponentFactory = new DefaultWebComponentFactory();
         this.webComponentListFactory = new DefaultWebComponentListFactory(webComponentFactory);
     }
@@ -39,7 +39,7 @@ public class WebDriverExtensionFieldDecorator extends DefaultFieldDecorator {
     public WebDriverExtensionFieldDecorator(final SearchContext searchContext, final WebDriver driver) {
         super(new WebDriverExtensionElementLocatorFactory(searchContext, driver));
         this.driver = driver;
-        this.pool = new SiteAndPageObjectPool(driver);
+        this.pool = new ObjectPool(driver);
         this.webComponentFactory = new DefaultWebComponentFactory();
         this.webComponentListFactory = new DefaultWebComponentListFactory(webComponentFactory);
     }

@@ -50,13 +50,6 @@ public abstract class AbstractGeneratorProcessor extends AbstractProcessor {
         return annotatedClasses;
     }
 
-    public Set<TypeElement> getReferencedSiteClasses() {
-        Set<TypeElement> siteClasses = new LinkedHashSet<TypeElement>();
-        siteClasses.addAll(getAnnotatedSiteClasses());
-        siteClasses.addAll(getSiteClassesFromPageGenerics());
-        return siteClasses;
-    }
-
     public Set<TypeElement> getAnnotatedSiteClasses() {
         if (annotatedSiteClasses == null) {
             loadAnnotatedSiteClasses();
@@ -71,16 +64,6 @@ public abstract class AbstractGeneratorProcessor extends AbstractProcessor {
         return annotatedPageClasses;
     }
 
-    public Set<TypeElement> getAnnotatedPageClasses(TypeElement siteClass) {
-        Set<TypeElement> pageClasses = new LinkedHashSet<TypeElement>();
-        for (TypeElement element : getAnnotatedPageClasses()) {
-            if (isPageClass(element) && hasGenericSiteClass(element, siteClass)) {
-                pageClasses.add(element);
-            }
-        }
-        return pageClasses;
-    }
-
     @Override
     public boolean process(Set<? extends TypeElement> annotations, RoundEnvironment roundEnvironment) {
         if (!generated) {
@@ -91,7 +74,7 @@ public abstract class AbstractGeneratorProcessor extends AbstractProcessor {
             debug("Processing @" + Generate.class.getSimpleName() + " Annotations");
 
             if (validate()) {
-                generateClasses();
+                generateClass();
             };
 
             debug("Processed " + Generate.class.getSimpleName() + " Annotations");
@@ -117,8 +100,7 @@ public abstract class AbstractGeneratorProcessor extends AbstractProcessor {
         return false;
     }
 
-    public void generateClasses() {
-    }
+    abstract public void generateClass();
 
     private void loadAnnotatedClasses() {
         annotatedClasses = (Set<TypeElement>) getClassElementsAnnotatedWith(Generate.class);
@@ -171,10 +153,6 @@ public abstract class AbstractGeneratorProcessor extends AbstractProcessor {
         return true;
     }
 
-    private Set<TypeElement> getSiteClassesFromPageGenerics() {
-        return new LinkedHashSet<TypeElement>(); // TODO: Implement!!!
-    }
-
     private boolean isSiteClass(Element element) {
         if (!isPageClass(element)) {
             // If element is not page class assume it is a site class
@@ -187,30 +165,12 @@ public abstract class AbstractGeneratorProcessor extends AbstractProcessor {
     private boolean isPageClass(Element element) {
         TypeMirror type = element.asType();
         TypeMirror webPageWildcardType = typeUtils.getDeclaredType(
-                elementUtils.getTypeElement(WebPage.class.getCanonicalName()),
-                typeUtils.getWildcardType(null, null));
+                elementUtils.getTypeElement(WebPage.class.getCanonicalName()));
         if (typeUtils.isAssignable(type, webPageWildcardType)) {
             return true;
         } else {
             return false;
         }
-    }
-
-    private boolean hasGenericSiteClass(TypeElement pageClass, TypeElement siteClass) {
-        TypeMirror webPageType = pageClass.asType();
-        TypeMirror webPageSiteClass = typeUtils.getDeclaredType(
-                elementUtils.getTypeElement(WebPage.class.getCanonicalName()),
-                siteClass.asType());
-        if (typeUtils.isAssignable(webPageType, webPageSiteClass)) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    private TypeElement getGenericSiteClass(TypeElement pageClass) {
-        System.out.println(ReflectionToStringBuilder.reflectionToString(pageClass, ToStringStyle.MULTI_LINE_STYLE));
-        return (TypeElement) pageClass.getTypeParameters().iterator().next();
     }
 
     private Set<? extends Element> getClassElementsAnnotatedWith(Class<? extends Annotation> annotation) {

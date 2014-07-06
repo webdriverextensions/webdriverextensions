@@ -61,7 +61,7 @@ public class AbstractSiteBuilder implements Builder<Boolean> {
 
     private void init() throws JClassAlreadyExistsException {
         codeModel = new JCodeModel();
-        abstractSiteClass = codeModel._class(JMod.PUBLIC | JMod.ABSTRACT, ElementUtils.getPackageName(siteObjectElement) + ".Abstract" + StringUtils.capitalize(GeneratorUtils.getName(siteObjectElement)), ClassType.CLASS);
+        abstractSiteClass = codeModel._class(JMod.PUBLIC | JMod.ABSTRACT, ElementUtils.getPackageName(siteObjectElement) + ".AbstractSite", ClassType.CLASS);
         abstractSiteClass._extends(codeModel.ref(WebSite.class));
         pageObjectClasses = getCodeModelRefs(pageObjectElements);
     }
@@ -97,10 +97,6 @@ public class AbstractSiteBuilder implements Builder<Boolean> {
         for (JClass pageObjectClass : pageObjectClasses) {
             method.body().assign(JExpr.ref(getPageObjectFieldName(pageObjectClass)), JExpr._new(pageObjectClass));
         }
-    }
-
-    private String getSiteObjectFieldName() {
-        return GeneratorUtils.getName(siteObjectElement);
     }
 
     private String getPageObjectFieldName(JClass pageObjectClass) {
