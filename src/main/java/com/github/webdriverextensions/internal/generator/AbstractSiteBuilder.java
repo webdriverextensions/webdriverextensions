@@ -61,7 +61,7 @@ public class AbstractSiteBuilder implements Builder<Boolean> {
 
     private void init() throws JClassAlreadyExistsException {
         codeModel = new JCodeModel();
-        abstractSiteClass = codeModel._class(JMod.PUBLIC | JMod.ABSTRACT, ElementUtils.getPackageName(siteObjectElement) + ".AbstractSite", ClassType.CLASS);
+        abstractSiteClass = codeModel._class(JMod.PUBLIC | JMod.ABSTRACT, ElementUtils.getPackageName(siteObjectElement) + ".GeneratedWebSite", ClassType.CLASS);
         abstractSiteClass._extends(codeModel.ref(WebSite.class));
         pageObjectClasses = getCodeModelRefs(pageObjectElements);
     }

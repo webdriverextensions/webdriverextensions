@@ -60,7 +60,7 @@ public class SiteAwareBuilder implements Builder<Boolean> {
 
     private void init() throws JClassAlreadyExistsException {
         codeModel = new JCodeModel();
-        siteAwareRepositoryClass = codeModel._class(JMod.PUBLIC | JMod.ABSTRACT, ElementUtils.getPackageName(siteObjectElement) + ".SiteAwareRepository", ClassType.CLASS);
+        siteAwareRepositoryClass = codeModel._class(JMod.PUBLIC | JMod.ABSTRACT, ElementUtils.getPackageName(siteObjectElement) + ".GeneratedSiteRepository", ClassType.CLASS);
         siteAwareRepositoryClass._extends(codeModel.ref(WebRepository.class));
         siteObjectClass = codeModel.ref(siteObjectElement.getQualifiedName().toString());
         pageObjectClasses = getCodeModelRefs(pageObjectElements);

@@ -4,7 +4,7 @@ import static com.github.webdriverextensions.Bot.*;
 import com.github.webdriverextensions.junitrunner.WebDriverRunner;
 import com.github.webdriverextensions.junitrunner.annotations.Chrome;
 import com.github.webdriverextensions.page.components.UserRow;
-import com.github.webdriverextensions.site.SiteAwareRepository;
+import com.github.webdriverextensions.site.GeneratedSiteRepository;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -12,7 +12,7 @@ import org.openqa.selenium.WebElement;
 
 @RunWith(WebDriverRunner.class)
 @Chrome
-public class ExamplesPageTest extends SiteAwareRepository {
+public class ExamplesPageTest extends GeneratedSiteRepository {
 
     Double delayTime = 0.0;
 

@@ -3,7 +3,7 @@ package com.github.webdriverextensions.site;
 import com.github.webdriverextensions.generator.annotations.Generate;
 
 @Generate
-public class WebDriverExtensionSite extends AbstractSite {
+public class WebDriverExtensionSite extends GeneratedWebSite {
 
     public final String url = "file://" + getClass().getResource("/html/model-test.html").getPath();
 
