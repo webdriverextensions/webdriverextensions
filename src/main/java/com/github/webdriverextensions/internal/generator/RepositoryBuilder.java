@@ -60,7 +60,7 @@ public class RepositoryBuilder implements Builder<Boolean> {
 
     private void init() throws JClassAlreadyExistsException {
         codeModel = new JCodeModel();
-        generatedRepositoryClass = codeModel._class(JMod.PUBLIC | JMod.ABSTRACT, ElementUtils.getPackageName(siteObjectElement) + ".GeneratedRepository", ClassType.CLASS);
+        generatedRepositoryClass = codeModel._class(JMod.PUBLIC | JMod.ABSTRACT, "com.github.webdriverextensions.generator.GeneratedRepository", ClassType.CLASS);
         generatedRepositoryClass._extends(codeModel.ref(WebRepository.class));
         siteObjectClass = codeModel.ref(siteObjectElement.getQualifiedName().toString());
         pageObjectClasses = getCodeModelRefs(pageObjectElements);

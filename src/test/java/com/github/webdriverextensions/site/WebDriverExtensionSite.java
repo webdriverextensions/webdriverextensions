@@ -1,6 +1,7 @@
 package com.github.webdriverextensions.site;
 
 import com.github.webdriverextensions.generator.annotations.Generate;
+import com.github.webdriverextensions.generator.GeneratedWebSite;
 
 @Generate
 public class WebDriverExtensionSite extends GeneratedWebSite {

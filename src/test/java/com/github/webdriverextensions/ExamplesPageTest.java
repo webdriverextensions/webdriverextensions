@@ -4,7 +4,7 @@ import static com.github.webdriverextensions.Bot.*;
 import com.github.webdriverextensions.junitrunner.WebDriverRunner;
 import com.github.webdriverextensions.junitrunner.annotations.Chrome;
 import com.github.webdriverextensions.page.components.UserRow;
-import com.github.webdriverextensions.site.GeneratedRepository;
+import com.github.webdriverextensions.generator.GeneratedRepository;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;

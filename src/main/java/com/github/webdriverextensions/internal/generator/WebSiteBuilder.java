@@ -24,7 +24,6 @@ public class WebSiteBuilder implements Builder<Boolean> {
 
     // Input Elements
     private ProcessingEnvironment processingEnv;
-    private TypeElement siteObjectElement;
     private Set<TypeElement> pageObjectElements;
     private JCodeModel codeModel;
     // JClasses
@@ -32,9 +31,8 @@ public class WebSiteBuilder implements Builder<Boolean> {
     private Set<JClass> pageObjectClasses;
 
     public WebSiteBuilder(ProcessingEnvironment processingEnv,
-            TypeElement siteObjectElement, Set<TypeElement> pageObjectElements) {
+            Set<TypeElement> pageObjectElements) {
         this.processingEnv = processingEnv;
-        this.siteObjectElement = siteObjectElement;
         this.pageObjectElements = pageObjectElements;
     }
 
@@ -60,7 +58,7 @@ public class WebSiteBuilder implements Builder<Boolean> {
 
     private void init() throws JClassAlreadyExistsException {
         codeModel = new JCodeModel();
-        generatedWebSiteClass = codeModel._class(JMod.PUBLIC | JMod.ABSTRACT, ElementUtils.getPackageName(siteObjectElement) + ".GeneratedWebSite", ClassType.CLASS);
+        generatedWebSiteClass = codeModel._class(JMod.PUBLIC | JMod.ABSTRACT, "com.github.webdriverextensions.generator.GeneratedWebSite", ClassType.CLASS);
         generatedWebSiteClass._extends(codeModel.ref(WebSite.class));
         pageObjectClasses = getCodeModelRefs(pageObjectElements);
     }
