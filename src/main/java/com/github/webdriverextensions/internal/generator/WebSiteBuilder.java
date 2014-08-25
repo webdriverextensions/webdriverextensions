@@ -6,33 +6,33 @@ import com.sun.codemodel.JClass;
 import com.sun.codemodel.JClassAlreadyExistsException;
 import com.sun.codemodel.JCodeModel;
 import com.sun.codemodel.JDefinedClass;
+import com.sun.codemodel.JExpr;
+import com.sun.codemodel.JMethod;
 import com.sun.codemodel.JMod;
 import java.io.IOException;
 import java.util.Set;
 import java.util.LinkedHashSet;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.annotation.processing.ProcessingEnvironment;
 import javax.lang.model.element.TypeElement;
-import com.github.webdriverextensions.WebRepository;
 import com.github.webdriverextensions.internal.GeneratorUtils;
+import com.github.webdriverextensions.WebSite;
 import org.apache.commons.lang3.builder.Builder;
-import org.apache.commons.lang3.exception.ExceptionUtils;
 
-public class SiteAwareBuilder implements Builder<Boolean> {
+public class WebSiteBuilder implements Builder<Boolean> {
 
-    private static final org.slf4j.Logger log = org.slf4j.LoggerFactory.getLogger(SiteAwareBuilder.class);
     // Input Elements
     private ProcessingEnvironment processingEnv;
     private TypeElement siteObjectElement;
     private Set<TypeElement> pageObjectElements;
     private JCodeModel codeModel;
     // JClasses
-    private JDefinedClass siteAwareRepositoryClass;
-    private JClass siteObjectClass;
+    private JDefinedClass generatedWebSiteClass;
     private Set<JClass> pageObjectClasses;
 
-    public SiteAwareBuilder(ProcessingEnvironment processingEnv,
-            TypeElement siteObjectElement,
-            Set<TypeElement> pageObjectElements) {
+    public WebSiteBuilder(ProcessingEnvironment processingEnv,
+            TypeElement siteObjectElement, Set<TypeElement> pageObjectElements) {
         this.processingEnv = processingEnv;
         this.siteObjectElement = siteObjectElement;
         this.pageObjectElements = pageObjectElements;
@@ -48,10 +48,10 @@ public class SiteAwareBuilder implements Builder<Boolean> {
             generate();
             return true;
         } catch (IOException ex) {
-            log.error(ExceptionUtils.getStackTrace(ex));
+            Logger.getLogger(WebSiteBuilder.class.getName()).log(Level.SEVERE, null, ex);
             return false;
         } catch (JClassAlreadyExistsException ex) {
-            log.error(ExceptionUtils.getStackTrace(ex));
+            Logger.getLogger(WebSiteBuilder.class.getName()).log(Level.SEVERE, null, ex);
             return false;
         }
 
@@ -60,19 +60,15 @@ public class SiteAwareBuilder implements Builder<Boolean> {
 
     private void init() throws JClassAlreadyExistsException {
         codeModel = new JCodeModel();
-        siteAwareRepositoryClass = codeModel._class(JMod.PUBLIC | JMod.ABSTRACT, ElementUtils.getPackageName(siteObjectElement) + ".GeneratedSiteRepository", ClassType.CLASS);
-        siteAwareRepositoryClass._extends(codeModel.ref(WebRepository.class));
-        siteObjectClass = codeModel.ref(siteObjectElement.getQualifiedName().toString());
+        generatedWebSiteClass = codeModel._class(JMod.PUBLIC | JMod.ABSTRACT, ElementUtils.getPackageName(siteObjectElement) + ".GeneratedWebSite", ClassType.CLASS);
+        generatedWebSiteClass._extends(codeModel.ref(WebSite.class));
         pageObjectClasses = getCodeModelRefs(pageObjectElements);
     }
 
     private void fields() {
-        // Declare SiteObject
-        siteAwareRepositoryClass.field(JMod.PUBLIC, siteObjectClass, "site");
-
         // Declare PageObjects
         for (JClass pageObjectClass : pageObjectClasses) {
-            siteAwareRepositoryClass.field(JMod.PUBLIC, pageObjectClass, getPageObjectFieldName(pageObjectClass));
+            generatedWebSiteClass.field(JMod.PUBLIC, pageObjectClass, getPageObjectFieldName(pageObjectClass));
         }
     }
 
@@ -89,10 +85,17 @@ public class SiteAwareBuilder implements Builder<Boolean> {
 
     private Set<JClass> getCodeModelRefs(Set<TypeElement> elements) {
         Set<JClass> codeModeModelRefs = new LinkedHashSet<JClass>();
-        for (TypeElement element : elements) {
-            codeModeModelRefs.add(codeModel.ref(element.getQualifiedName().toString()));
+        for (TypeElement pageObjectElement : pageObjectElements) {
+            codeModeModelRefs.add(codeModel.ref(pageObjectElement.getQualifiedName().toString()));
         }
         return codeModeModelRefs;
+    }
+
+    private void newPageObjects() {
+        JMethod method = generatedWebSiteClass.method(JMod.PRIVATE, void.class, "newPageObjects");
+        for (JClass pageObjectClass : pageObjectClasses) {
+            method.body().assign(JExpr.ref(getPageObjectFieldName(pageObjectClass)), JExpr._new(pageObjectClass));
+        }
     }
 
     private String getPageObjectFieldName(JClass pageObjectClass) {

@@ -6,34 +6,33 @@ import com.sun.codemodel.JClass;
 import com.sun.codemodel.JClassAlreadyExistsException;
 import com.sun.codemodel.JCodeModel;
 import com.sun.codemodel.JDefinedClass;
-import com.sun.codemodel.JExpr;
-import com.sun.codemodel.JMethod;
 import com.sun.codemodel.JMod;
 import java.io.IOException;
 import java.util.Set;
 import java.util.LinkedHashSet;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.annotation.processing.ProcessingEnvironment;
 import javax.lang.model.element.TypeElement;
+import com.github.webdriverextensions.WebRepository;
 import com.github.webdriverextensions.internal.GeneratorUtils;
-import com.github.webdriverextensions.WebSite;
-import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.builder.Builder;
+import org.apache.commons.lang3.exception.ExceptionUtils;
 
-public class AbstractSiteBuilder implements Builder<Boolean> {
+public class RepositoryBuilder implements Builder<Boolean> {
 
+    private static final org.slf4j.Logger log = org.slf4j.LoggerFactory.getLogger(RepositoryBuilder.class);
     // Input Elements
     private ProcessingEnvironment processingEnv;
     private TypeElement siteObjectElement;
     private Set<TypeElement> pageObjectElements;
     private JCodeModel codeModel;
     // JClasses
-    private JDefinedClass abstractSiteClass;
+    private JDefinedClass generatedRepositoryClass;
+    private JClass siteObjectClass;
     private Set<JClass> pageObjectClasses;
 
-    public AbstractSiteBuilder(ProcessingEnvironment processingEnv,
-            TypeElement siteObjectElement, Set<TypeElement> pageObjectElements) {
+    public RepositoryBuilder(ProcessingEnvironment processingEnv,
+            TypeElement siteObjectElement,
+            Set<TypeElement> pageObjectElements) {
         this.processingEnv = processingEnv;
         this.siteObjectElement = siteObjectElement;
         this.pageObjectElements = pageObjectElements;
@@ -49,10 +48,10 @@ public class AbstractSiteBuilder implements Builder<Boolean> {
             generate();
             return true;
         } catch (IOException ex) {
-            Logger.getLogger(AbstractSiteBuilder.class.getName()).log(Level.SEVERE, null, ex);
+            log.error(ExceptionUtils.getStackTrace(ex));
             return false;
         } catch (JClassAlreadyExistsException ex) {
-            Logger.getLogger(AbstractSiteBuilder.class.getName()).log(Level.SEVERE, null, ex);
+            log.error(ExceptionUtils.getStackTrace(ex));
             return false;
         }
 
@@ -61,15 +60,19 @@ public class AbstractSiteBuilder implements Builder<Boolean> {
 
     private void init() throws JClassAlreadyExistsException {
         codeModel = new JCodeModel();
-        abstractSiteClass = codeModel._class(JMod.PUBLIC | JMod.ABSTRACT, ElementUtils.getPackageName(siteObjectElement) + ".GeneratedWebSite", ClassType.CLASS);
-        abstractSiteClass._extends(codeModel.ref(WebSite.class));
+        generatedRepositoryClass = codeModel._class(JMod.PUBLIC | JMod.ABSTRACT, ElementUtils.getPackageName(siteObjectElement) + ".GeneratedRepository", ClassType.CLASS);
+        generatedRepositoryClass._extends(codeModel.ref(WebRepository.class));
+        siteObjectClass = codeModel.ref(siteObjectElement.getQualifiedName().toString());
         pageObjectClasses = getCodeModelRefs(pageObjectElements);
     }
 
     private void fields() {
+        // Declare SiteObject
+        generatedRepositoryClass.field(JMod.PUBLIC, siteObjectClass, "site");
+
         // Declare PageObjects
         for (JClass pageObjectClass : pageObjectClasses) {
-            abstractSiteClass.field(JMod.PUBLIC, pageObjectClass, getPageObjectFieldName(pageObjectClass));
+            generatedRepositoryClass.field(JMod.PUBLIC, pageObjectClass, getPageObjectFieldName(pageObjectClass));
         }
     }
 
@@ -86,17 +89,10 @@ public class AbstractSiteBuilder implements Builder<Boolean> {
 
     private Set<JClass> getCodeModelRefs(Set<TypeElement> elements) {
         Set<JClass> codeModeModelRefs = new LinkedHashSet<JClass>();
-        for (TypeElement pageObjectElement : pageObjectElements) {
-            codeModeModelRefs.add(codeModel.ref(pageObjectElement.getQualifiedName().toString()));
+        for (TypeElement element : elements) {
+            codeModeModelRefs.add(codeModel.ref(element.getQualifiedName().toString()));
         }
         return codeModeModelRefs;
-    }
-
-    private void newPageObjects() {
-        JMethod method = abstractSiteClass.method(JMod.PRIVATE, void.class, "newPageObjects");
-        for (JClass pageObjectClass : pageObjectClasses) {
-            method.body().assign(JExpr.ref(getPageObjectFieldName(pageObjectClass)), JExpr._new(pageObjectClass));
-        }
     }
 
     private String getPageObjectFieldName(JClass pageObjectClass) {

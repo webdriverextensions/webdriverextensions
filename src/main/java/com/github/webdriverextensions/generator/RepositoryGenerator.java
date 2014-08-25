@@ -4,20 +4,20 @@ import javax.annotation.processing.SupportedAnnotationTypes;
 import javax.annotation.processing.SupportedSourceVersion;
 import javax.lang.model.SourceVersion;
 import javax.lang.model.element.TypeElement;
-import com.github.webdriverextensions.internal.generator.AbstractGeneratorProcessor;
-import com.github.webdriverextensions.internal.generator.AbstractSiteBuilder;
+import com.github.webdriverextensions.internal.generator.GeneratorProcessor;
+import com.github.webdriverextensions.internal.generator.RepositoryBuilder;
 
 @SupportedAnnotationTypes({"com.github.webdriverextensions.generator.annotations.Generate"})
 @SupportedSourceVersion(SourceVersion.RELEASE_6)
-public class AbstractSiteGeneratorProcessor extends AbstractGeneratorProcessor {
+public class RepositoryGenerator extends GeneratorProcessor {
 
     @Override
     public void generateClass() {
         TypeElement siteClass = getAnnotatedSiteClasses().iterator().next();
-        debug("Generating AbstractSite for class: " + siteClass.getSimpleName() + " with Page Classes: " + getAnnotatedPageClasses());
-        AbstractSiteBuilder smb = new AbstractSiteBuilder(processingEnv,
+        debug("Creating GeneratedRepository class with Site Classes: " + siteClass.getSimpleName() + " and Page Classes: " + getAnnotatedPageClasses());
+        RepositoryBuilder builder = new RepositoryBuilder(processingEnv,
                 siteClass,
                 getAnnotatedPageClasses());
-        smb.build();
+        builder.build();
     }
 }

@@ -1,2 +1,2 @@
-com.github.webdriverextensions.generator.AbstractSiteGeneratorProcessor
-com.github.webdriverextensions.generator.SiteAwareGeneratorProcessor
+com.github.webdriverextensions.generator.WebSiteGenerator
+com.github.webdriverextensions.generator.RepositoryGenerator

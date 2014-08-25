@@ -24,7 +24,7 @@ import org.apache.commons.lang3.builder.ToStringStyle;
 
 @SupportedAnnotationTypes({"com.github.webdriverextensions.generator.annotations.Generate"})
 @SupportedSourceVersion(SourceVersion.RELEASE_6)
-public abstract class AbstractGeneratorProcessor extends AbstractProcessor {
+public abstract class GeneratorProcessor extends AbstractProcessor {
 
     protected RoundEnvironment roundEnvironment;
     protected Types typeUtils = null;
