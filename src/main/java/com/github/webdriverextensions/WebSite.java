@@ -7,20 +7,15 @@ import org.openqa.selenium.support.pagefactory.FieldDecorator;
 
 public abstract class WebSite implements Openable {
 
-    WebDriver internalDriver;
-
     public void initElements() {
-        internalDriver = WebDriverExtensionsContext.getDriver();
         PageFactory.initElements(new WebDriverExtensionFieldDecorator(WebDriverExtensionsContext.getDriver()), this);
     }
 
     public void initElements(WebDriver driver) {
-        this.internalDriver = driver;
         PageFactory.initElements(new WebDriverExtensionFieldDecorator(driver), this);
     }
 
-    public void initElements(WebDriver driver, FieldDecorator decorator) {
-        this.internalDriver = driver;
+    public void initElements(FieldDecorator decorator) {
         PageFactory.initElements(decorator, this);
     }
 
@@ -50,7 +45,7 @@ public abstract class WebSite implements Openable {
     }
 
     public void open(String url) {
-        internalDriver.get(url);
+        WebDriverExtensionsContext.getDriver().get(url);
     }
 
     public void open(Openable openable) {

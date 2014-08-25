@@ -29,7 +29,7 @@ public class ObjectPool {
         if (siteObject == null) {
             siteObject = createSiteObject(field);
             siteObjects.put(field.getType(), siteObject);
-            siteObject.initElements(driver, decorator);
+            siteObject.initElements(decorator);
         }
         return siteObject;
     }
