@@ -6,7 +6,7 @@ designed to make tests more readable, reusability and maintainable. This is
 achivied by combining the [Page Object Pattern](https://code.google.com/p/selenium/wiki/PageObjects)
 with the [Bot Pattern](https://code.google.com/p/selenium/wiki/BotStyleTests).
 
-A short list of what is included in this framework
+What is included in this framework?
 - A [Maven Archetype](https://github.com/webdriverextensions/webdriverextensions-archetype-quickstart#webdriver-extension-archetype-quickstart) for creating new projects
 - A [Maven Plugin](https://github.com/webdriverextensions/webdriverextensions-maven-plugin#webdriver-extensions-maven-plugin) to manage, download and install drivers
 - JUnit Runners for running Selenium/WebDriver tests locally or remotely against multiple browsers
