@@ -5,6 +5,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.HasCapabilities;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Platform;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.BrowserType;
 
 public class ExperimentalBot {
@@ -114,5 +115,9 @@ public class ExperimentalBot {
 
     public static Object executeJavascriptAsynchronously(String script, Object... args) {
         return ((JavascriptExecutor) WebDriverExtensionsContext.getDriver()).executeAsyncScript(script, args);
+    }
+
+    public static Object scrollTo(WebElement webElement) {
+        return executeJavascript("arguments[0].scrollIntoView(true);", webElement);
     }
 }
