@@ -4,11 +4,13 @@ import java.util.List;
 import static com.github.webdriverextensions.Bot.assertIsDisplayed;
 import static com.github.webdriverextensions.WebDriverExtensionsContext.*;
 import com.github.webdriverextensions.WebPage;
-import com.github.webdriverextensions.generator.annotations.Generate;
+import com.github.webdriverextensions.generator.annotations.AddToRepository;
+import com.github.webdriverextensions.generator.annotations.AddToWebSite;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-@Generate
+@AddToRepository
+@AddToWebSite
 public class BotTestPage extends WebPage {
 
     public final String url = "file://" + getClass().getResource("/html/bot-test.html").getPath();

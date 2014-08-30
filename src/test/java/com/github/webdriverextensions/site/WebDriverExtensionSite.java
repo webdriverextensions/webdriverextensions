@@ -1,9 +1,9 @@
 package com.github.webdriverextensions.site;
 
-import com.github.webdriverextensions.generator.annotations.Generate;
 import com.github.webdriverextensions.generator.GeneratedWebSite;
+import com.github.webdriverextensions.generator.annotations.AddToRepository;
 
-@Generate
+@AddToRepository
 public class WebDriverExtensionSite extends GeneratedWebSite {
 
     public final String url = "file://" + getClass().getResource("/html/model-test.html").getPath();

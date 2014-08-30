@@ -3,6 +3,7 @@ package com.github.webdriverextensions;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 import static com.github.webdriverextensions.Bot.*;
+import com.github.webdriverextensions.generator.GeneratedWebRepository;
 import com.github.webdriverextensions.junitrunner.WebDriverRunner;
 import com.github.webdriverextensions.junitrunner.annotations.Chrome;
 import com.github.webdriverextensions.junitrunner.annotations.Firefox;
@@ -15,7 +16,7 @@ import org.junit.runner.RunWith;
 
 @RunWith(WebDriverRunner.class)
 @Chrome
-public class BotTest extends SiteAwareRepository {
+public class BotTest extends GeneratedWebRepository {
 
     @Before
     public void before() {
@@ -120,7 +121,7 @@ public class BotTest extends SiteAwareRepository {
     @Test
     public void isOpenTest() {
         assertIsOpen(botTestPage);
-        assertIsNotOpen(site);
+        assertIsNotOpen(webDriverExtensionSite);
     }
 
     /* Is Display */

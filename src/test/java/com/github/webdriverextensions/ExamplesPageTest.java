@@ -4,7 +4,7 @@ import static com.github.webdriverextensions.Bot.*;
 import com.github.webdriverextensions.junitrunner.WebDriverRunner;
 import com.github.webdriverextensions.junitrunner.annotations.Chrome;
 import com.github.webdriverextensions.page.components.UserRow;
-import com.github.webdriverextensions.generator.GeneratedRepository;
+import com.github.webdriverextensions.generator.GeneratedWebRepository;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -12,13 +12,13 @@ import org.openqa.selenium.WebElement;
 
 @RunWith(WebDriverRunner.class)
 @Chrome
-public class ExamplesPageTest extends GeneratedRepository {
+public class ExamplesPageTest extends GeneratedWebRepository {
 
     Double delayTime = 0.0;
 
     @Before
     public void before() {
-        open(site.url);
+        open(webDriverExtensionSite.url);
         open(examplesPage);
         assertCurrentUrlEndsWith("/model-test.html");
     }

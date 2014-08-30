@@ -8,19 +8,20 @@ import javax.annotation.processing.SupportedAnnotationTypes;
 import javax.annotation.processing.SupportedSourceVersion;
 import javax.lang.model.SourceVersion;
 import javax.lang.model.element.TypeElement;
-import com.github.webdriverextensions.generator.annotations.AddToWebSite;
-import com.github.webdriverextensions.internal.generator.WebSiteBuilder;
+import com.github.webdriverextensions.generator.annotations.AddToRepository;
+import com.github.webdriverextensions.internal.generator.WebRepositoryBuilder;
 import static com.github.webdriverextensions.internal.generator.GeneratorUtils.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-@SupportedAnnotationTypes({"com.github.webdriverextensions.generator.annotations.AddToWebSite"})
+@SupportedAnnotationTypes({"com.github.webdriverextensions.generator.annotations.AddToRepository"})
 @SupportedSourceVersion(SourceVersion.RELEASE_6)
-public class WebSiteGenerator extends AbstractProcessor {
+public class WebRepositoryGenerator extends AbstractProcessor {
 
     Logger log = LoggerFactory.getLogger(this.getClass().getName());
 
     protected boolean debug = true;
+    final private Set<TypeElement> annotatedSiteClasses = new LinkedHashSet<TypeElement>();
     final private Set<TypeElement> annotatedPageClasses = new LinkedHashSet<TypeElement>();
     final private Set<TypeElement> annotatedRepositoryClasses = new LinkedHashSet<TypeElement>();
     final private Set<TypeElement> annotatedOtherClasses = new LinkedHashSet<TypeElement>();
@@ -34,7 +35,7 @@ public class WebSiteGenerator extends AbstractProcessor {
 
         for (TypeElement typeElement : getAnnotatedClasses(roundEnvironment)) {
             if (isSiteClass(typeElement, processingEnv)) {
-                warn("Cannot add WebSite " + typeElement.getQualifiedName() + " to GeneratedWebSite. Ignoring @" + AddToWebSite.class.getSimpleName() + " annotation.", processingEnv);
+                annotatedSiteClasses.add(typeElement);
             } else if (isPageClass(typeElement, processingEnv)) {
                 annotatedPageClasses.add(typeElement);
             } else if (isRepositoryClass(typeElement, processingEnv)) {
@@ -46,7 +47,7 @@ public class WebSiteGenerator extends AbstractProcessor {
     }
 
     public Set<TypeElement> getAnnotatedClasses(RoundEnvironment roundEnvironment) {
-        return (Set<TypeElement>) roundEnvironment.getElementsAnnotatedWith(AddToWebSite.class);
+        return (Set<TypeElement>) roundEnvironment.getElementsAnnotatedWith(AddToRepository.class);
     }
 
     @Override
@@ -55,17 +56,17 @@ public class WebSiteGenerator extends AbstractProcessor {
             return true; // Skip processing if annotation is already processed
         }
 
-        info("Processing @" + AddToWebSite.class.getSimpleName() + " annotations", processingEnv);
+        info("Processing @" + AddToRepository.class.getSimpleName() + " annotations", processingEnv);
         initAnnotations(roundEnvironment);
         generateClass();
         return true;
     }
 
     public void generateClass() {
-        info("Creating GeneratedWebSite class with " + "\n\tWebPages: " + annotatedPageClasses
+        info("Creating GeneratedWebRepository class with " + "\n\tWebSites: " + annotatedSiteClasses + "\n\tWebPages: " + annotatedPageClasses
                 + "\n\tWebRepositories: " + annotatedRepositoryClasses + "\n\tOther: " + annotatedOtherClasses, processingEnv);
-        WebSiteBuilder builder = new WebSiteBuilder(processingEnv,
-                annotatedPageClasses, annotatedRepositoryClasses, annotatedOtherClasses);
+        WebRepositoryBuilder builder = new WebRepositoryBuilder(processingEnv,
+                annotatedSiteClasses, annotatedPageClasses, annotatedRepositoryClasses, annotatedOtherClasses);
         builder.build();
     }
 

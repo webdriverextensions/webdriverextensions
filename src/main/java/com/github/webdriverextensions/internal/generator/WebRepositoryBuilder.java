@@ -1,6 +1,6 @@
 package com.github.webdriverextensions.internal.generator;
 
-import com.github.webdriverextensions.WebSite;
+import com.github.webdriverextensions.WebRepository;
 import static com.github.webdriverextensions.internal.generator.GeneratorUtils.annotateFieldWithFindByAnnotation;
 import static com.github.webdriverextensions.internal.generator.GeneratorUtils.annotateFieldWithFindBysAnnotation;
 import static com.github.webdriverextensions.internal.generator.GeneratorUtils.error;
@@ -24,20 +24,22 @@ import javax.lang.model.element.TypeElement;
 import org.apache.commons.lang3.builder.Builder;
 import org.apache.commons.lang3.exception.ExceptionUtils;
 
-public class WebSiteBuilder implements Builder<Boolean> {
+public class WebRepositoryBuilder implements Builder<Boolean> {
 
     // Input Elements
     final private ProcessingEnvironment processingEnv;
+    final private Set<TypeElement> webSiteElements;
     final private Set<TypeElement> webPageElements;
     final private Set<TypeElement> webRepositoryElements;
     final private Set<TypeElement> otherElements;
     final private JCodeModel codeModel;
     // JClasses
-    private JDefinedClass generatedWebSiteClass;
+    private JDefinedClass generatedWebRepositoryClass;
 
-    public WebSiteBuilder(ProcessingEnvironment processingEnv,
+    public WebRepositoryBuilder(ProcessingEnvironment processingEnv, Set<TypeElement> webSiteElements,
             Set<TypeElement> webPageElements, Set<TypeElement> webRepositoryElements, Set<TypeElement> otherElements) {
         this.processingEnv = processingEnv;
+        this.webSiteElements = webSiteElements;
         this.webPageElements = webPageElements;
         this.webRepositoryElements = webRepositoryElements;
         this.otherElements = otherElements;
@@ -52,11 +54,11 @@ public class WebSiteBuilder implements Builder<Boolean> {
             generate();
             return true;
         } catch (IOException ex) {
-            error("Failed to generate GeneratedWebSite!", processingEnv);
+            error("Failed to generate GeneratedWebRepository!", processingEnv);
             error(ExceptionUtils.getStackTrace(ex), processingEnv);
             return false;
         } catch (JClassAlreadyExistsException ex) {
-            error("Failed to generate GeneratedWebSite!", processingEnv);
+            error("Failed to generate GeneratedWebRepository!", processingEnv);
             error(ExceptionUtils.getStackTrace(ex), processingEnv);
             return false;
         }
@@ -64,27 +66,33 @@ public class WebSiteBuilder implements Builder<Boolean> {
     }
 
     private void createClass() throws JClassAlreadyExistsException {
-        generatedWebSiteClass = codeModel._class(JMod.PUBLIC | JMod.ABSTRACT, "com.github.webdriverextensions.generator.GeneratedWebSite", ClassType.CLASS);
-        generatedWebSiteClass._extends(codeModel.ref(WebSite.class));
+        generatedWebRepositoryClass = codeModel._class(JMod.PUBLIC | JMod.ABSTRACT, "com.github.webdriverextensions.generator.GeneratedWebRepository", ClassType.CLASS);
+        generatedWebRepositoryClass._extends(codeModel.ref(WebRepository.class));
     }
 
     private void createFields() {
+        // Declare WebSites
+        for (TypeElement webSiteElement : webSiteElements) {
+            JClass webSiteClass = codeModel.ref(webSiteElement.getQualifiedName().toString());
+            generatedWebRepositoryClass.field(JMod.PUBLIC, webSiteClass, getFieldName(webSiteElement));
+        }
+
         // Declare WebPages
         for (TypeElement webPageElement : webPageElements) {
             JClass webPageClass = codeModel.ref(webPageElement.getQualifiedName().toString());
-            generatedWebSiteClass.field(JMod.PUBLIC, webPageClass, getFieldName(webPageElement));
+            generatedWebRepositoryClass.field(JMod.PUBLIC, webPageClass, getFieldName(webPageElement));
         }
 
         // Declare WebRepositories
         for (TypeElement webRepositoryElement : webRepositoryElements) {
             JClass webRepositoryClass = codeModel.ref(webRepositoryElement.getQualifiedName().toString());
-            generatedWebSiteClass.field(JMod.PUBLIC, webRepositoryClass, getFieldName(webRepositoryElement));
+            generatedWebRepositoryClass.field(JMod.PUBLIC, webRepositoryClass, getFieldName(webRepositoryElement));
         }
 
         // Declare Other
         for (TypeElement otherElement : otherElements) {
             JClass otherClass = codeModel.ref(otherElement.getQualifiedName().toString());
-            JFieldVar field = generatedWebSiteClass.field(JMod.PUBLIC, otherClass, getFieldName(otherElement));
+            JFieldVar field = generatedWebRepositoryClass.field(JMod.PUBLIC, otherClass, getFieldName(otherElement));
             if (hasFindBysAnnotation(otherElement)) {
                 annotateFieldWithFindBysAnnotation(field, getFindBysAnnotation(otherElement));
             }
