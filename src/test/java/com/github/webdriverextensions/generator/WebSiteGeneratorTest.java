@@ -6,7 +6,7 @@ import static com.github.webdriverextensions.Bot.click;
 import static com.github.webdriverextensions.Bot.open;
 import com.github.webdriverextensions.junitrunner.WebDriverRunner;
 import com.github.webdriverextensions.junitrunner.annotations.Chrome;
-import com.github.webdriverextensions.site.WebDriverExtensionSite;
+import com.github.webdriverextensions.model.WebDriverExtensionSite;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 

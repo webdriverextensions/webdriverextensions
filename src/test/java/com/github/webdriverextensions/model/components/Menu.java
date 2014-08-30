@@ -1,4 +1,4 @@
-package com.github.webdriverextensions.page.components;
+package com.github.webdriverextensions.model.components;
 
 import com.github.webdriverextensions.WebComponent;
 import com.github.webdriverextensions.annotations.Delegate;

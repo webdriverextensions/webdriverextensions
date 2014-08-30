@@ -1,4 +1,4 @@
-package com.github.webdriverextensions.page.components;
+package com.github.webdriverextensions.model.components;
 
 import java.util.List;
 import com.github.webdriverextensions.WebComponent;

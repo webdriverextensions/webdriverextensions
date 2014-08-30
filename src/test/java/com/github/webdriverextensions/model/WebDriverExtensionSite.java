@@ -1,4 +1,4 @@
-package com.github.webdriverextensions.site;
+package com.github.webdriverextensions.model;
 
 import com.github.webdriverextensions.generator.GeneratedWebSite;
 import com.github.webdriverextensions.generator.annotations.AddToRepository;

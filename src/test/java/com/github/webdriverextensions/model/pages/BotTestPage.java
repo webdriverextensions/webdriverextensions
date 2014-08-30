@@ -1,4 +1,4 @@
-package com.github.webdriverextensions.page;
+package com.github.webdriverextensions.model.pages;
 
 import java.util.List;
 import static com.github.webdriverextensions.Bot.assertIsDisplayed;

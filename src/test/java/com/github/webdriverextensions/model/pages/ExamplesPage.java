@@ -1,4 +1,4 @@
-package com.github.webdriverextensions.page;
+package com.github.webdriverextensions.model.pages;
 
 import java.util.List;
 import static com.github.webdriverextensions.Bot.*;
@@ -6,12 +6,12 @@ import static com.github.webdriverextensions.WebDriverExtensionsContext.*;
 import com.github.webdriverextensions.WebPage;
 import com.github.webdriverextensions.generator.annotations.AddToRepository;
 import com.github.webdriverextensions.generator.annotations.AddToWebSite;
-import com.github.webdriverextensions.page.components.HtmlComponent;
-import com.github.webdriverextensions.page.components.Menu;
-import com.github.webdriverextensions.page.components.MenuButtonGroup;
-import com.github.webdriverextensions.page.components.UserRow;
-import com.github.webdriverextensions.page.components.UserTableSearchContext;
-import com.github.webdriverextensions.site.WebDriverExtensionSite;
+import com.github.webdriverextensions.model.components.HtmlComponent;
+import com.github.webdriverextensions.model.components.Menu;
+import com.github.webdriverextensions.model.components.MenuButtonGroup;
+import com.github.webdriverextensions.model.components.UserRow;
+import com.github.webdriverextensions.model.components.UserTableSearchContext;
+import com.github.webdriverextensions.model.WebDriverExtensionSite;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
