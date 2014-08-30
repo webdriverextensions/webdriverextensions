@@ -109,12 +109,12 @@ public class ExperimentalBot {
     }
 
     /* Execute Javascript */
-    public static Object executeJavascript(String script, Object... args) {
-        return ((JavascriptExecutor) WebDriverExtensionsContext.getDriver()).executeScript(script, args);
+    public static Object executeJavascript(String script, Object... arguments) {
+        return ((JavascriptExecutor) WebDriverExtensionsContext.getDriver()).executeScript(script, arguments);
     }
 
-    public static Object executeJavascriptAsynchronously(String script, Object... args) {
-        return ((JavascriptExecutor) WebDriverExtensionsContext.getDriver()).executeAsyncScript(script, args);
+    public static Object executeJavascriptAsynchronously(String script, Object... arguments) {
+        return ((JavascriptExecutor) WebDriverExtensionsContext.getDriver()).executeAsyncScript(script, arguments);
     }
 
     public static Object scrollTo(WebElement webElement) {
