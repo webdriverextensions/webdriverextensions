@@ -45,26 +45,26 @@ public abstract class WebSite implements Openable {
     }
 
     public void open(String url) {
-        WebDriverExtensionsContext.getDriver().get(url);
+        Bot.open(url);
     }
 
     public void open(Openable openable) {
-        openable.open();
+        Bot.open(openable);
     }
 
     public boolean isOpen(Openable openable) {
-        return openable.isOpen();
+        return Bot.isOpen(openable);
     }
 
     public boolean isNotOpen(Openable openable) {
-        return openable.isNotOpen();
+        return Bot.isNotOpen(openable);
     }
 
     public void assertIsOpen(Openable openable) throws AssertionError {
-        openable.assertIsOpen();
+        Bot.assertIsOpen(openable);
     }
 
     public void assertIsNotOpen(Openable openable) throws AssertionError {
-        openable.assertIsNotOpen();
+        Bot.assertIsNotOpen(openable);
     }
 }
