@@ -7,6 +7,7 @@ import com.github.webdriverextensions.internal.junitrunner.AnnotationUtils;
 import com.github.webdriverextensions.internal.junitrunner.DriverPathLoader;
 import com.github.webdriverextensions.internal.utils.InstanceUtils;
 import com.github.webdriverextensions.internal.utils.OsUtils;
+import com.github.webdriverextensions.internal.utils.PropertyUtils;
 import static com.github.webdriverextensions.internal.utils.StringUtils.quote;
 import static com.github.webdriverextensions.internal.utils.WebDriverUtils.addCapabilities;
 import static com.github.webdriverextensions.internal.utils.WebDriverUtils.convertToJsonString;
@@ -161,7 +162,8 @@ public class WebDriverRunner extends BlockJUnit4ClassRunner {
             String className = getTestClass().getJavaClass().getSimpleName();
             String methodName = method.getName();
             String testName = String.format("%s.%s", className, methodName);
-            boolean hasRemoteAddressAnnotation = ((RemoteAddress) getTestClass().getJavaClass().getAnnotation(RemoteAddress.class)) != null;
+            boolean hasRemoteAddress = PropertyUtils.propertyExists("webdriverextensions.remoteaddress")
+                    || ((RemoteAddress) getTestClass().getJavaClass().getAnnotation(RemoteAddress.class)) != null;
 
             if (method.getAnnotation(Ignore.class) != null) {
                 log.trace("Skipping test {}. Test is annotated to be ignored with @Ignore annotation", testName);
@@ -170,20 +172,25 @@ public class WebDriverRunner extends BlockJUnit4ClassRunner {
                 log.trace("Skipping test {}. Test is annotated to be ignored, ignore annotations = {}.", testName,
                         testMethodContext.ignoreBrowsers.toString());
                 notifier.fireTestIgnored(description);
-            } else if (!hasRemoteAddressAnnotation && BrowserType.IE.equalsIgnoreCase(browser.getBrowserName()) && !OsUtils.isWindows()
+            } else if (!hasRemoteAddress && BrowserType.IE.equalsIgnoreCase(browser.getBrowserName()) && !OsUtils.isWindows()
                     || (BrowserType.IEXPLORE.equalsIgnoreCase(browser.getBrowserName()) && !OsUtils.isWindows())) {
                 log.trace("Skipping test {}. Internet Explorer is only supported on Windows platforms.", testName);
                 notifier.fireTestIgnored(description);
-            } else if (!hasRemoteAddressAnnotation && BrowserType.SAFARI.equalsIgnoreCase(browser.getBrowserName()) && (!OsUtils.isWindows() && !OsUtils.isMac())) {
+            } else if (!hasRemoteAddress && BrowserType.SAFARI.equalsIgnoreCase(browser.getBrowserName()) && (!OsUtils.isWindows() && !OsUtils.isMac())) {
                 log.trace("Skipping test {}. Safari is only supported on Windows and Mac platforms.", testName);
                 notifier.fireTestIgnored(description);
-            } else if (!hasRemoteAddressAnnotation && !OsUtils.isCurrentPlatform(browser.platform)) {
+            } else if (!hasRemoteAddress && !OsUtils.isCurrentPlatform(browser.platform)) {
                 log.trace("Skipping test {}. Current platform is not " + browser.platform, testName);
                 notifier.fireTestIgnored(description);
             } else {
                 try {
-                    if (hasRemoteAddressAnnotation) {
-                        String remoteAddress = ((RemoteAddress) getTestClass().getJavaClass().getAnnotation(RemoteAddress.class)).value();
+                    if (hasRemoteAddress) {
+                        String remoteAddress;
+                        if (PropertyUtils.propertyExists("webdriverextensions.remoteaddress")) {
+                            remoteAddress = System.getProperty("webdriverextensions.remoteaddress");
+                        } else {
+                            remoteAddress = ((RemoteAddress) getTestClass().getJavaClass().getAnnotation(RemoteAddress.class)).value();
+                        }
                         WebDriverExtensionsContext.setDriver(browser.createDriver(new URL(remoteAddress)));
                     } else {
                         try {
