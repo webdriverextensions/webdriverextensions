@@ -49,12 +49,12 @@ public class ExamplesPage extends WebPage {
     public HtmlComponent html;
 
     @Override
-    public void open() {
+    public void open(Object... arguments) {
         getDriver().get(site.url);
     }
 
     @Override
-    public void assertIsOpen() throws AssertionError {
+    public void assertIsOpen(Object... arguments) throws AssertionError {
 //        assertIsDisplayed(searchQuery);
 //        assertIsDisplayed(search);
 //        assertIsDisplayed(menu);

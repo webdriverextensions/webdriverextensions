@@ -20,9 +20,9 @@ public abstract class WebSite implements Openable {
     }
 
     @Override
-    public boolean isOpen() {
+    public boolean isOpen(Object... arguments) {
         try {
-            assertIsOpen();
+            assertIsOpen(arguments);
             return true;
         } catch (AssertionError e) {
             return false;
@@ -30,16 +30,16 @@ public abstract class WebSite implements Openable {
     }
 
     @Override
-    public boolean isNotOpen() {
-        return !isOpen();
+    public boolean isNotOpen(Object... arguments) {
+        return !isOpen(arguments);
     }
 
     @Override
-    public abstract void assertIsOpen() throws AssertionError;
+    public abstract void assertIsOpen(Object... arguments) throws AssertionError;
 
     @Override
-    public void assertIsNotOpen() throws AssertionError {
-        if (isNotOpen()) {
+    public void assertIsNotOpen(Object... arguments) throws AssertionError {
+        if (isNotOpen(arguments)) {
             throw new AssertionError(this.getClass().getSimpleName() + " is open when it shouldn't");
         }
     }
@@ -48,23 +48,23 @@ public abstract class WebSite implements Openable {
         Bot.open(url);
     }
 
-    public void open(Openable openable) {
-        Bot.open(openable);
+    public void open(Openable openable, Object... arguments) {
+        Bot.open(openable, arguments);
     }
 
-    public boolean isOpen(Openable openable) {
-        return Bot.isOpen(openable);
+    public boolean isOpen(Openable openable, Object... arguments) {
+        return Bot.isOpen(openable, arguments);
     }
 
-    public boolean isNotOpen(Openable openable) {
-        return Bot.isNotOpen(openable);
+    public boolean isNotOpen(Openable openable, Object... arguments) {
+        return Bot.isNotOpen(openable, arguments);
     }
 
-    public void assertIsOpen(Openable openable) throws AssertionError {
-        Bot.assertIsOpen(openable);
+    public void assertIsOpen(Openable openable, Object... arguments) throws AssertionError {
+        Bot.assertIsOpen(openable, arguments);
     }
 
-    public void assertIsNotOpen(Openable openable) throws AssertionError {
-        Bot.assertIsNotOpen(openable);
+    public void assertIsNotOpen(Openable openable, Object... arguments) throws AssertionError {
+        Bot.assertIsNotOpen(openable, arguments);
     }
 }

@@ -89,12 +89,12 @@ public class BotTestPage extends WebPage {
     public WebElement secondAppendedSpan;
 
     @Override
-    public void open() {
+    public void open(Object... arguments) {
         getDriver().get(url);
     }
 
     @Override
-    public void assertIsOpen() throws AssertionError {
+    public void assertIsOpen(Object... arguments) throws AssertionError {
         assertIsDisplayed(textSpan);
         assertIsDisplayed(textInput);
         assertIsDisplayed(intNumberSpan);

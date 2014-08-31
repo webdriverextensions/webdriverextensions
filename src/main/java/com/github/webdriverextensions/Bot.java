@@ -150,11 +150,9 @@ public class Bot {
         WebDriverExtensionsContext.getDriver().get(url);
     }
 
-    public static void open(Openable openable) {
-        openable.open();
+    public static void open(Openable openable, Object... arguments) {
+        openable.open(arguments);
     }
-
-
 
     /* Navigation */
     public static void navigateBack() {
@@ -252,20 +250,20 @@ public class Bot {
 
 
     /* Is Open */
-    public static boolean isOpen(Openable openable) {
-        return openable.isOpen();
+    public static boolean isOpen(Openable openable, Object... arguments) {
+        return openable.isOpen(arguments);
     }
 
-    public static boolean isNotOpen(Openable openable) {
-        return openable.isNotOpen();
+    public static boolean isNotOpen(Openable openable, Object... arguments) {
+        return openable.isNotOpen(arguments);
     }
 
-    public static void assertIsOpen(Openable openable) {
-        openable.assertIsOpen();
+    public static void assertIsOpen(Openable openable, Object... arguments) {
+        openable.assertIsOpen(arguments);
     }
 
-    public static void assertIsNotOpen(Openable openable) {
-        openable.assertIsNotOpen();
+    public static void assertIsNotOpen(Openable openable, Object... arguments) {
+        openable.assertIsNotOpen(arguments);
     }
 
 

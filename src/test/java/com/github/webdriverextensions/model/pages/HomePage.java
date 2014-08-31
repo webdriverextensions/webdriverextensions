@@ -19,12 +19,12 @@ public class HomePage extends WebPage {
     public WebElement examples;
 
     @Override
-    public void open() {
+    public void open(Object... arguments) {
         getDriver().get(site.url);
     }
 
     @Override
-    public void assertIsOpen() throws AssertionError {
+    public void assertIsOpen(Object... arguments) throws AssertionError {
         assertIsDisplayed(examples);
     }
 }

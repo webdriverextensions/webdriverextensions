@@ -2,13 +2,13 @@ package com.github.webdriverextensions.internal;
 
 public interface Openable {
 
-    public void open();
+    public void open(Object... arguments);
 
-    public boolean isOpen();
+    public boolean isOpen(Object... arguments);
 
-    public boolean isNotOpen();
+    public boolean isNotOpen(Object... arguments);
 
-    public void assertIsOpen() throws AssertionError;
+    public void assertIsOpen(Object... arguments) throws AssertionError;
 
-    public void assertIsNotOpen() throws AssertionError;
+    public void assertIsNotOpen(Object... arguments) throws AssertionError;
 }

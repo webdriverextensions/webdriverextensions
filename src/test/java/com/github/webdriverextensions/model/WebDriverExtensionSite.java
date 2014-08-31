@@ -9,12 +9,12 @@ public class WebDriverExtensionSite extends GeneratedWebSite {
     public final String url = "file://" + getClass().getResource("/html/model-test.html").getPath();
 
     @Override
-    public void open() {
+    public void open(Object... arguments) {
         open(url);
     }
 
     @Override
-    public void assertIsOpen() throws AssertionError {
+    public void assertIsOpen(Object... arguments) throws AssertionError {
         examplesPage.assertIsOpen();
     }
 }
