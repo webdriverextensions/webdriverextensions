@@ -2,16 +2,17 @@ WebDriver Extensions
 ===================
 
 WebDriver Extensions is a framework build on top of Selenium/WebDriver,
-designed to make tests more readable, reusability and maintainable. This is
-achivied by combining the [Page Object Pattern](https://code.google.com/p/selenium/wiki/PageObjects)
-with the [Bot Pattern](https://code.google.com/p/selenium/wiki/BotStyleTests).
+designed to make tests more readable, reusability and maintainable by following
+the [Page Object Pattern](https://code.google.com/p/selenium/wiki/PageObjects)
+and [Bot Pattern](https://code.google.com/p/selenium/wiki/BotStyleTests).
 
-What is included in this framework?
+What's included in this framework?
 - A [Maven Archetype](https://github.com/webdriverextensions/webdriverextensions-archetype-quickstart#webdriver-extension-archetype-quickstart) for creating new projects
 - A [Maven Plugin](https://github.com/webdriverextensions/webdriverextensions-maven-plugin#webdriver-extensions-maven-plugin) to manage, download and install drivers
-- JUnit Runners for running Selenium/WebDriver tests locally or remotely against multiple browsers
-- Abstract classes for modeling your website like WebComponent (an extendable WebElement), WebPage and WebSite
+- Annotation based JUnit Runner for running Selenium/WebDriver tests locally or remotely against multiple browsers
+- New classes for modeling your website e.g. WebComponent (an extendable WebElement), WebPage, WebSite and WebRepository
 - A Bot class providing static methods for interacting, asserting and checking conditions of WebElements, WebComponents, WebPages and WebSites
+- A WebSite and WebRepository generator that enables adding WebComponents, WebPages, WebSites and WebRepositories by annotations
 
 ### Under Development
 This project is ready to be released, the only missing part is the documentation which will soon arrive in this README. Stay tuned!
