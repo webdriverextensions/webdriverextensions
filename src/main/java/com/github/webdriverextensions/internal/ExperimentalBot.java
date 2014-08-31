@@ -16,8 +16,7 @@ public class ExperimentalBot {
     }
 
     public static boolean browserIs(String browserName) {
-        String currentBrowserName = ((HasCapabilities) WebDriverExtensionsContext.getDriver()).getCapabilities().getBrowserName();
-        return StringUtils.equalsIgnoreCase(currentBrowserName, browserName);
+        return StringUtils.equalsIgnoreCase(browser(), browserName);
     }
 
     public static boolean browserIsAndroid() {
@@ -66,8 +65,7 @@ public class ExperimentalBot {
     }
 
     public static boolean versionIs(String version) {
-        String currentVersion = ((HasCapabilities) WebDriverExtensionsContext.getDriver()).getCapabilities().getVersion();
-        return StringUtils.equalsIgnoreCase(currentVersion, version);
+        return StringUtils.equalsIgnoreCase(version(), version);
     }
 
     /* Platform */
@@ -76,8 +74,7 @@ public class ExperimentalBot {
     }
 
     public static boolean platformIs(Platform platform) {
-        Platform currentPlatform = ((HasCapabilities) WebDriverExtensionsContext.getDriver()).getCapabilities().getPlatform();
-        return currentPlatform.is(platform);
+        return platform().is(platform);
     }
 
     public static boolean platformIsWindowsXP() {
@@ -117,6 +114,7 @@ public class ExperimentalBot {
         return ((JavascriptExecutor) WebDriverExtensionsContext.getDriver()).executeAsyncScript(script, arguments);
     }
 
+    /* Scrolling */
     public static Object scrollTo(WebElement webElement) {
         return executeJavascript("arguments[0].scrollIntoView(true);", webElement);
     }
