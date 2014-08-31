@@ -10,8 +10,8 @@ public class DriverPathLoader {
     private static final String CHROME_DRIVER_PROPERTY_NAME = "webdriver.chrome.driver";
     private static final String IE_DRIVER_PROPERTY_NAME = "webdriver.ie.driver";
     private static final String INTERNET_EXPLORER_DRIVER_PROPERTY_NAME = "webdriver.internetexplorer.driver"; // Alternative property name that follows naming convention
-    private static final String IE_DRIVER_USE64BIT_PROPERTY_NAME = "webdriver.ie.driver.use64Bit";
-    private static final String INTERNET_EXPLORER_DRIVER_USE64BIT_PROPERTY_NAME = "webdriver.internetexplorer.driver.use64Bit";
+    private static final String IE_DRIVER_USE64BIT_PROPERTY_NAME = "webdriverextensions.ie.driver.use64Bit";
+    private static final String INTERNET_EXPLORER_DRIVER_USE64BIT_PROPERTY_NAME = "webdriverextensions.internetexplorer.driver.use64Bit";
 
     public static void loadDriverPaths(DriverPaths driverPaths) {
         loadChromeDriverPath(driverPaths != null ? driverPaths.chrome() : null);
