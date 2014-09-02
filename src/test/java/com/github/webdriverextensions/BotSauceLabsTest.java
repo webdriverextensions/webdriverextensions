@@ -1,7 +1,6 @@
 package com.github.webdriverextensions;
 
 import static com.github.webdriverextensions.Bot.*;
-import static com.github.webdriverextensions.internal.ExperimentalBot.*;
 import com.github.webdriverextensions.junitrunner.WebDriverRunner;
 import com.github.webdriverextensions.junitrunner.annotations.Android;
 import com.github.webdriverextensions.junitrunner.annotations.Chrome;
@@ -23,7 +22,7 @@ import org.openqa.selenium.remote.BrowserType;
 
 @RunWith(WebDriverRunner.class)
 @RemoteAddress("http://andidev:80b7768e-dc06-4d5b-b793-5b3b83f0e24c@ondemand.saucelabs.com:80/wd/hub")
-public class ExperimentalBotTest {
+public class BotSauceLabsTest {
 
     @Test
     @Firefox
