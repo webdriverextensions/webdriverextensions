@@ -29,11 +29,19 @@ import com.github.webdriverextensions.internal.utils.NumberUtils;
 import org.openqa.selenium.HasCapabilities;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Platform;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.remote.BrowserType;
 
 public class Bot {
 
     private static final org.slf4j.Logger log = org.slf4j.LoggerFactory.getLogger(Bot.class);
+
+    /* Driver */
+    public static WebDriver driver() {
+        return WebDriverExtensionsContext.getDriver();
+    }
+
+
 
     /* Click */
     public static void click(WebElement webElement) {
@@ -151,7 +159,7 @@ public class Bot {
 
     /* Open */
     public static void open(String url) {
-        WebDriverExtensionsContext.getDriver().get(url);
+        driver().get(url);
     }
 
     public static void open(Openable openable, Object... arguments) {
@@ -160,13 +168,13 @@ public class Bot {
 
     /* Navigation */
     public static void navigateBack() {
-        WebDriverExtensionsContext.getDriver().navigate().back();
+        driver().navigate().back();
     }
     public static void navigateForward() {
-        WebDriverExtensionsContext.getDriver().navigate().forward();
+        driver().navigate().forward();
     }
     public static void navigateRefresh() {
-        WebDriverExtensionsContext.getDriver().navigate().refresh();
+        driver().navigate().refresh();
     }
 
 
@@ -224,12 +232,12 @@ public class Bot {
     }
 
     public static void waitForElementToDisplay(WebElement webElement, long secondsToWait) {
-        WebDriverWait wait = new WebDriverWait(WebDriverExtensionsContext.getDriver(), secondsToWait);
+        WebDriverWait wait = new WebDriverWait(driver(), secondsToWait);
         wait.until(ExpectedConditions.visibilityOf(webElement));
     }
 
     public static void waitForElementToDisplay(WebElement webElement, long secondsToWait, long sleepInMillis) {
-        WebDriverWait wait = new WebDriverWait(WebDriverExtensionsContext.getDriver(), secondsToWait, sleepInMillis);
+        WebDriverWait wait = new WebDriverWait(driver(), secondsToWait, sleepInMillis);
         wait.until(ExpectedConditions.visibilityOf(webElement));
     }
 
@@ -244,18 +252,18 @@ public class Bot {
 
     /* Execute Javascript */
     public static Object executeJavascript(String script, Object... arguments) {
-        return ((JavascriptExecutor) WebDriverExtensionsContext.getDriver()).executeScript(script, arguments);
+        return ((JavascriptExecutor) driver()).executeScript(script, arguments);
     }
 
     public static Object executeJavascriptAsynchronously(String script, Object... arguments) {
-        return ((JavascriptExecutor) WebDriverExtensionsContext.getDriver()).executeAsyncScript(script, arguments);
+        return ((JavascriptExecutor) driver()).executeAsyncScript(script, arguments);
     }
 
 
 
     /* Browser */
     public static String browser() {
-        return ((HasCapabilities) WebDriverExtensionsContext.getDriver()).getCapabilities().getBrowserName();
+        return ((HasCapabilities) driver()).getCapabilities().getBrowserName();
     }
 
     public static boolean browserIs(String browserName) {
@@ -350,7 +358,7 @@ public class Bot {
 
     /* Version */
     public static String version() {
-        return ((HasCapabilities) WebDriverExtensionsContext.getDriver()).getCapabilities().getVersion();
+        return ((HasCapabilities) driver()).getCapabilities().getVersion();
     }
 
     public static boolean versionIs(String version) {
@@ -365,7 +373,7 @@ public class Bot {
 
     /* Platform */
     public static Platform platform() {
-        return ((HasCapabilities) WebDriverExtensionsContext.getDriver()).getCapabilities().getPlatform();
+        return ((HasCapabilities) driver()).getCapabilities().getPlatform();
     }
 
     public static boolean platformIs(Platform platform) {
@@ -502,7 +510,7 @@ public class Bot {
 
     public static boolean isDisplayed(WebElement webElement, long secondsToWait) {
         try {
-            WebElement foundWebElement = new WebDriverWait(WebDriverExtensionsContext.getDriver(), secondsToWait).until(ExpectedConditions.visibilityOf(webElement));
+            WebElement foundWebElement = new WebDriverWait(driver(), secondsToWait).until(ExpectedConditions.visibilityOf(webElement));
             if (foundWebElement != null) {
                 return true;
             } else {
@@ -599,7 +607,7 @@ public class Bot {
 
     /* Current Url */
     public static String currentUrl() {
-        return WebDriverExtensionsContext.getDriver().getCurrentUrl();
+        return driver().getCurrentUrl();
     }
 
     public static boolean currentUrlEquals(String url) {
@@ -686,7 +694,7 @@ public class Bot {
 
     /* Title */
     public static String title() {
-        return WebDriverExtensionsContext.getDriver().getTitle();
+        return driver().getTitle();
     }
 
     public static boolean titleEquals(String title) {
