@@ -218,9 +218,9 @@ public class ExperimentalBotTest {
         assertThat(platformIsNotMac(), equalTo(true));
         assertThat(platformIsNotUnix(), equalTo(true));
         assertThat(platformIsNotWindows(), equalTo(true));
-        assertThat(platformIsNotWindows8(), equalTo(true));
-        assertThat(platformIsNotWindowsVista(), equalTo(true));
-        assertThat(platformIsNotWindowsXP(), equalTo(true));
+        assertThat(platformIsNotWin8(), equalTo(true));
+        assertThat(platformIsNotVista(), equalTo(true));
+        assertThat(platformIsNotXP(), equalTo(true));
     }
 
     @Test
@@ -231,9 +231,9 @@ public class ExperimentalBotTest {
         assertThat(platformIsNotMac(), equalTo(true));
         assertThat(platformIsUnix(), equalTo(true));
         assertThat(platformIsNotWindows(), equalTo(true));
-        assertThat(platformIsNotWindows8(), equalTo(true));
-        assertThat(platformIsNotWindowsVista(), equalTo(true));
-        assertThat(platformIsNotWindowsXP(), equalTo(true));
+        assertThat(platformIsNotWin8(), equalTo(true));
+        assertThat(platformIsNotVista(), equalTo(true));
+        assertThat(platformIsNotXP(), equalTo(true));
     }
 
     @Test
@@ -244,9 +244,9 @@ public class ExperimentalBotTest {
         assertThat(platformIsMac(), equalTo(true));
         assertThat(platformIsNotUnix(), equalTo(true));
         assertThat(platformIsNotWindows(), equalTo(true));
-        assertThat(platformIsNotWindows8(), equalTo(true));
-        assertThat(platformIsNotWindowsVista(), equalTo(true));
-        assertThat(platformIsNotWindowsXP(), equalTo(true));
+        assertThat(platformIsNotWin8(), equalTo(true));
+        assertThat(platformIsNotVista(), equalTo(true));
+        assertThat(platformIsNotXP(), equalTo(true));
     }
 
     @Test
@@ -256,9 +256,9 @@ public class ExperimentalBotTest {
         assertThat(platformIsNotMac(), equalTo(true));
         assertThat(platformIsUnix(), equalTo(true));
         assertThat(platformIsNotWindows(), equalTo(true));
-        assertThat(platformIsNotWindows8(), equalTo(true));
-        assertThat(platformIsNotWindowsVista(), equalTo(true));
-        assertThat(platformIsNotWindowsXP(), equalTo(true));
+        assertThat(platformIsNotWin8(), equalTo(true));
+        assertThat(platformIsNotVista(), equalTo(true));
+        assertThat(platformIsNotXP(), equalTo(true));
     }
 
     @Test
@@ -274,43 +274,43 @@ public class ExperimentalBotTest {
     @Ignore // since platform is not correctly set by sauce labs
     @Test
     @InternetExplorer(platform = Platform.WIN8)
-    public void platformIsWindows8Test() {
+    public void platformIsWin8Test() {
         assertThat(platformIsNotAndroid(), equalTo(true));
         assertThat(platformIsNotLinux(), equalTo(true));
         assertThat(platformIsNotMac(), equalTo(true));
         assertThat(platformIsNotUnix(), equalTo(true));
         assertThat(platformIsWindows(), equalTo(true));
-        //assertThat(platformIsWindows8(), equalTo(true)); // Ignore since platform is set to WINDOWS in sauce labs
-        assertThat(platformIsNotWindowsVista(), equalTo(true));
-        assertThat(platformIsNotWindowsXP(), equalTo(true));
+        assertThat(platformIsWin8(), equalTo(true));
+        assertThat(platformIsNotVista(), equalTo(true));
+        assertThat(platformIsNotXP(), equalTo(true));
     }
 
     @Ignore // since platform is not correctly set by sauce labs
     @Test
     @InternetExplorer(platform = Platform.VISTA)
-    public void platformIsWindowsVistaTest() {
+    public void platformIsVistaTest() {
         assertThat(platformIsNotAndroid(), equalTo(true));
         assertThat(platformIsNotLinux(), equalTo(true));
         assertThat(platformIsNotMac(), equalTo(true));
         assertThat(platformIsNotUnix(), equalTo(true));
         assertThat(platformIsWindows(), equalTo(true));
-        assertThat(platformIsNotWindows8(), equalTo(true));
-        //assertThat(platformIsWindowsVista(), equalTo(true)); // Ignore since platform is set to WINDOWS in sauce labs
-        assertThat(platformIsNotWindowsXP(), equalTo(true));
+        assertThat(platformIsNotWin8(), equalTo(true));
+        assertThat(platformIsVista(), equalTo(true));
+        assertThat(platformIsNotXP(), equalTo(true));
     }
 
     @Ignore // since platform is not correctly set by sauce labs
     @Test
     @InternetExplorer(platform = Platform.XP)
-    public void platformIsWindowsXPTest() {
+    public void platformIsXPTest() {
         assertThat(platformIsNotAndroid(), equalTo(true));
         assertThat(platformIsNotLinux(), equalTo(true));
         assertThat(platformIsNotMac(), equalTo(true));
         assertThat(platformIsNotUnix(), equalTo(true));
         assertThat(platformIsWindows(), equalTo(true));
-        assertThat(platformIsNotWindows8(), equalTo(true));
-        assertThat(platformIsNotWindowsVista(), equalTo(true));
-        assertThat(platformIsWindowsXP(), equalTo(true));
+        assertThat(platformIsNotWin8(), equalTo(true));
+        assertThat(platformIsNotVista(), equalTo(true));
+        assertThat(platformIsXP(), equalTo(true));
     }
 
 }

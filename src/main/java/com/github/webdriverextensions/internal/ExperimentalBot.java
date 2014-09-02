@@ -167,27 +167,27 @@ public class ExperimentalBot {
         return !platformIsWindows();
     }
 
-    public static boolean platformIsWindows8() {
+    public static boolean platformIsWin8() {
         return platformIs(Platform.WIN8);
     }
 
-    public static boolean platformIsNotWindows8() {
-        return !platformIsWindows8();
+    public static boolean platformIsNotWin8() {
+        return !platformIsWin8();
     }
 
-    public static boolean platformIsWindowsVista() {
+    public static boolean platformIsVista() {
         return platformIs(Platform.VISTA);
     }
 
-    public static boolean platformIsNotWindowsVista() {
-        return !platformIsWindowsVista();
+    public static boolean platformIsNotVista() {
+        return !platformIsVista();
     }
 
-    public static boolean platformIsWindowsXP() {
+    public static boolean platformIsXP() {
         return platformIs(Platform.XP);
     }
 
-    public static boolean platformIsNotWindowsXP() {
-        return !platformIsWindowsXP();
+    public static boolean platformIsNotXP() {
+        return !platformIsXP();
     }
 }
