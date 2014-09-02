@@ -219,6 +219,7 @@ public class ExperimentalBotTest {
         assertThat(platformIsNotUnix(), equalTo(true));
         assertThat(platformIsNotWindows(), equalTo(true));
         assertThat(platformIsNotWin8(), equalTo(true));
+        assertThat(platformIsNotWin8_1(), equalTo(true));
         assertThat(platformIsNotVista(), equalTo(true));
         assertThat(platformIsNotXP(), equalTo(true));
     }
@@ -232,6 +233,7 @@ public class ExperimentalBotTest {
         assertThat(platformIsUnix(), equalTo(true));
         assertThat(platformIsNotWindows(), equalTo(true));
         assertThat(platformIsNotWin8(), equalTo(true));
+        assertThat(platformIsNotWin8_1(), equalTo(true));
         assertThat(platformIsNotVista(), equalTo(true));
         assertThat(platformIsNotXP(), equalTo(true));
     }
@@ -245,6 +247,7 @@ public class ExperimentalBotTest {
         assertThat(platformIsNotUnix(), equalTo(true));
         assertThat(platformIsNotWindows(), equalTo(true));
         assertThat(platformIsNotWin8(), equalTo(true));
+        assertThat(platformIsNotWin8_1(), equalTo(true));
         assertThat(platformIsNotVista(), equalTo(true));
         assertThat(platformIsNotXP(), equalTo(true));
     }
@@ -257,6 +260,7 @@ public class ExperimentalBotTest {
         assertThat(platformIsUnix(), equalTo(true));
         assertThat(platformIsNotWindows(), equalTo(true));
         assertThat(platformIsNotWin8(), equalTo(true));
+        assertThat(platformIsNotWin8_1(), equalTo(true));
         assertThat(platformIsNotVista(), equalTo(true));
         assertThat(platformIsNotXP(), equalTo(true));
     }
@@ -281,6 +285,22 @@ public class ExperimentalBotTest {
         assertThat(platformIsNotUnix(), equalTo(true));
         assertThat(platformIsWindows(), equalTo(true));
         assertThat(platformIsWin8(), equalTo(true));
+        assertThat(platformIsNotWin8_1(), equalTo(true));
+        assertThat(platformIsNotVista(), equalTo(true));
+        assertThat(platformIsNotXP(), equalTo(true));
+    }
+
+    @Ignore // since platform is not correctly set by sauce labs
+    @Test
+    @InternetExplorer(platform = Platform.WIN8)
+    public void platformIsWin8_1Test() {
+        assertThat(platformIsNotAndroid(), equalTo(true));
+        assertThat(platformIsNotLinux(), equalTo(true));
+        assertThat(platformIsNotMac(), equalTo(true));
+        assertThat(platformIsNotUnix(), equalTo(true));
+        assertThat(platformIsWindows(), equalTo(true));
+        assertThat(platformIsNotWin8(), equalTo(true));
+        assertThat(platformIsWin8_1(), equalTo(true));
         assertThat(platformIsNotVista(), equalTo(true));
         assertThat(platformIsNotXP(), equalTo(true));
     }
@@ -295,6 +315,7 @@ public class ExperimentalBotTest {
         assertThat(platformIsNotUnix(), equalTo(true));
         assertThat(platformIsWindows(), equalTo(true));
         assertThat(platformIsNotWin8(), equalTo(true));
+        assertThat(platformIsNotWin8_1(), equalTo(true));
         assertThat(platformIsVista(), equalTo(true));
         assertThat(platformIsNotXP(), equalTo(true));
     }
@@ -309,6 +330,7 @@ public class ExperimentalBotTest {
         assertThat(platformIsNotUnix(), equalTo(true));
         assertThat(platformIsWindows(), equalTo(true));
         assertThat(platformIsNotWin8(), equalTo(true));
+        assertThat(platformIsNotWin8_1(), equalTo(true));
         assertThat(platformIsNotVista(), equalTo(true));
         assertThat(platformIsXP(), equalTo(true));
     }

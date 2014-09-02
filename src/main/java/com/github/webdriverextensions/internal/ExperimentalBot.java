@@ -175,6 +175,14 @@ public class ExperimentalBot {
         return !platformIsWin8();
     }
 
+    public static boolean platformIsWin8_1() {
+        return platformIs(Platform.WIN8_1);
+    }
+
+    public static boolean platformIsNotWin8_1() {
+        return !platformIsWin8_1();
+    }
+
     public static boolean platformIsVista() {
         return platformIs(Platform.VISTA);
     }
