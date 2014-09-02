@@ -26,6 +26,7 @@ import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import static com.github.webdriverextensions.internal.utils.StringUtils.*;
 import com.github.webdriverextensions.internal.utils.NumberUtils;
+import org.openqa.selenium.JavascriptExecutor;
 
 public class Bot {
 
@@ -227,6 +228,24 @@ public class Bot {
     public static void waitForElementToDisplay(WebElement webElement, long secondsToWait, long sleepInMillis) {
         WebDriverWait wait = new WebDriverWait(WebDriverExtensionsContext.getDriver(), secondsToWait, sleepInMillis);
         wait.until(ExpectedConditions.visibilityOf(webElement));
+    }
+
+
+
+    /* Scrolling */
+    public static Object scrollTo(WebElement webElement) {
+        return executeJavascript("arguments[0].scrollIntoView(true);", webElement);
+    }
+
+
+
+    /* Execute Javascript */
+    public static Object executeJavascript(String script, Object... arguments) {
+        return ((JavascriptExecutor) WebDriverExtensionsContext.getDriver()).executeScript(script, arguments);
+    }
+
+    public static Object executeJavascriptAsynchronously(String script, Object... arguments) {
+        return ((JavascriptExecutor) WebDriverExtensionsContext.getDriver()).executeAsyncScript(script, arguments);
     }
 
 

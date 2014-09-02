@@ -3,9 +3,7 @@ package com.github.webdriverextensions.internal;
 import com.github.webdriverextensions.WebDriverExtensionsContext;
 import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.HasCapabilities;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Platform;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.BrowserType;
 
 public class ExperimentalBot {
@@ -191,19 +189,5 @@ public class ExperimentalBot {
 
     public static boolean platformIsNotWindowsXP() {
         return !platformIsWindowsXP();
-    }
-
-    /* Execute Javascript */
-    public static Object executeJavascript(String script, Object... arguments) {
-        return ((JavascriptExecutor) WebDriverExtensionsContext.getDriver()).executeScript(script, arguments);
-    }
-
-    public static Object executeJavascriptAsynchronously(String script, Object... arguments) {
-        return ((JavascriptExecutor) WebDriverExtensionsContext.getDriver()).executeAsyncScript(script, arguments);
-    }
-
-    /* Scrolling */
-    public static Object scrollTo(WebElement webElement) {
-        return executeJavascript("arguments[0].scrollIntoView(true);", webElement);
     }
 }
