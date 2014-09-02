@@ -4,7 +4,7 @@
 
     <groupId>com.github.webdriverextensions</groupId>
     <artifactId>webdriverextensions</artifactId>
-    <version>1.0</version>
+    <version>1.0.1-SNAPSHOT</version>
     <packaging>jar</packaging>
 
     <parent>
@@ -29,7 +29,7 @@
         <connection>scm:git:git@github.com:webdriverextensions/webdriverextensions.git</connection>
         <developerConnection>scm:git:git@github.com:webdriverextensions/webdriverextensions.git</developerConnection>
         <url>scm:git:git@github.com:webdriverextensions/webdriverextensions.git</url>
-      <tag>webdriverextensions-1.0</tag>
+      <tag>HEAD</tag>
   </scm>
 
     <organization>
