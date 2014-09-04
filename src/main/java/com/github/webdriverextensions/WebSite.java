@@ -20,6 +20,9 @@ public abstract class WebSite implements Openable {
     }
 
     @Override
+    public abstract void open(Object... arguments);
+
+    @Override
     public boolean isOpen(Object... arguments) {
         try {
             assertIsOpen(arguments);
@@ -44,6 +47,9 @@ public abstract class WebSite implements Openable {
         }
     }
 
+
+
+    // WORKAROUND: Make Bot methods visible that are otherwise hidden when using static import
     public void open(String url) {
         Bot.open(url);
     }
