@@ -46,6 +46,8 @@ import java.util.Map;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.Description;
@@ -124,6 +126,16 @@ public class WebDriverRunner extends BlockJUnit4ClassRunner {
     public WebDriverRunner(Class<?> klass) throws InitializationError {
         super(klass);
         DriverPathLoader.loadDriverPaths(getTestClass().getJavaClass().getAnnotation(DriverPaths.class));
+    }
+
+    @Deprecated
+    @Override
+    protected void validateInstanceMethods(List<Throwable> errors) {
+        // Instead of calling super.validateInstanceMethods(errors)
+        // make the same calls except skip adding the "No runnable methods" error
+        validatePublicVoidNoArgMethods(After.class, false, errors);
+        validatePublicVoidNoArgMethods(Before.class, false, errors);
+        validateTestMethods(errors);
     }
 
     @Override
