@@ -17,7 +17,7 @@ public class Menu extends WebComponent {
 
     @Delegate
     @FindBy(css = "#menu")
-    public WebElement menu;
+    private WebElement menu;
     @FindBy(css = "#menu-create")
     public WebElement create;
     @FindBy(css = "#menu-update")

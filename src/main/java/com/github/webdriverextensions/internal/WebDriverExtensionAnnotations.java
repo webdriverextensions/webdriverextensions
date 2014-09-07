@@ -30,6 +30,7 @@ public class WebDriverExtensionAnnotations extends Annotations {
         }
         WebElement delegate;
         try {
+            fields[0].setAccessible(true); // Make sure field is accessible if it is not declared as public
             delegate = (WebElement) fields[0].get(webComponent);
         } catch (IllegalArgumentException e) {
             throw new RuntimeException(e);
