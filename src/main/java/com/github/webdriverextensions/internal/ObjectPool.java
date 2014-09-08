@@ -1,16 +1,11 @@
 package com.github.webdriverextensions.internal;
 
 import com.github.webdriverextensions.WebDriverExtensionFieldDecorator;
-import com.google.common.base.Objects;
 import java.lang.reflect.Field;
-import java.lang.reflect.ParameterizedType;
-import java.lang.reflect.Type;
 import java.util.HashMap;
 import com.github.webdriverextensions.WebPage;
 import com.github.webdriverextensions.WebRepository;
 import com.github.webdriverextensions.WebSite;
-import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
-import org.apache.commons.lang3.builder.ToStringStyle;
 import org.openqa.selenium.WebDriver;
 
 public class ObjectPool {
