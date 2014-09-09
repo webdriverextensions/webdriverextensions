@@ -299,12 +299,20 @@ public class BotTest extends GeneratedWebRepository {
     public void textTest() {
         assertTextEquals("prefixtextsuffix", botTestPage.textSpan);
         assertTextNotEquals("xxx", botTestPage.textSpan);
+        assertTextEqualsIgnoreCase("PREFIXTEXTSUFFIX", botTestPage.textSpan);
+        assertTextNotEqualsIgnoreCase("xxx", botTestPage.textSpan);
         assertTextContains("text", botTestPage.textSpan);
         assertTextNotContains("xxx", botTestPage.textSpan);
+        assertTextContainsIgnoreCase("TEXT", botTestPage.textSpan);
+        assertTextNotContainsIgnoreCase("xxx", botTestPage.textSpan);
         assertTextStartsWith("prefixtext", botTestPage.textSpan);
         assertTextNotStartsWith("xxx", botTestPage.textSpan);
+        assertTextStartsWithIgnoreCase("PREFIXTEXT", botTestPage.textSpan);
+        assertTextNotStartsWithIgnoreCase("xxx", botTestPage.textSpan);
         assertTextEndsWith("textsuffix", botTestPage.textSpan);
         assertTextNotEndsWith("xxx", botTestPage.textSpan);
+        assertTextEndsWithIgnoreCase("TEXTSUFFIX", botTestPage.textSpan);
+        assertTextNotEndsWithIgnoreCase("xxx", botTestPage.textSpan);
         assertTextMatches(".*text.*", botTestPage.textSpan);
         assertTextNotMatches(".*xxx.*", botTestPage.textSpan);
     }

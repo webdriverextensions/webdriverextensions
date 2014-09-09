@@ -1865,12 +1865,28 @@ public class Bot {
         return BotUtils.notEquals(text, textIn(webElement));
     }
 
+    public static boolean textEqualsIgnoreCase(String text, WebElement webElement) {
+        return BotUtils.equalsIgnoreCase(text, textIn(webElement));
+    }
+
+    public static boolean textNotEqualsIgnoreCase(String text, WebElement webElement) {
+        return BotUtils.notEqualsIgnoreCase(text, textIn(webElement));
+    }
+
     public static boolean textContains(String searchText, WebElement webElement) {
         return BotUtils.contains(searchText, textIn(webElement));
     }
 
     public static boolean textNotContains(String searchText, WebElement webElement) {
         return BotUtils.notContains(searchText, textIn(webElement));
+    }
+
+    public static boolean textContainsIgnoreCase(String searchText, WebElement webElement) {
+        return BotUtils.containsIgnoreCase(searchText, textIn(webElement));
+    }
+
+    public static boolean textNotContainsIgnoreCase(String searchText, WebElement webElement) {
+        return BotUtils.notContainsIgnoreCase(searchText, textIn(webElement));
     }
 
     public static boolean textStartsWith(String prefix, WebElement webElement) {
@@ -1881,12 +1897,28 @@ public class Bot {
         return BotUtils.notStartsWith(prefix, textIn(webElement));
     }
 
+    public static boolean textStartsWithIgnoreCase(String prefix, WebElement webElement) {
+        return BotUtils.startsWithIgnoreCase(prefix, textIn(webElement));
+    }
+
+    public static boolean textNotStartsWithIgnoreCase(String prefix, WebElement webElement) {
+        return BotUtils.notStartsWithIgnoreCase(prefix, textIn(webElement));
+    }
+
     public static boolean textEndsWith(String suffix, WebElement webElement) {
         return BotUtils.endsWith(suffix, textIn(webElement));
     }
 
     public static boolean textNotEndsWith(String suffix, WebElement webElement) {
         return BotUtils.notEndsWith(suffix, textIn(webElement));
+    }
+
+    public static boolean textEndsWithIgnoreCase(String suffix, WebElement webElement) {
+        return BotUtils.endsWithIgnoreCase(suffix, textIn(webElement));
+    }
+
+    public static boolean textNotEndsWithIgnoreCase(String suffix, WebElement webElement) {
+        return BotUtils.notEndsWithIgnoreCase(suffix, textIn(webElement));
     }
 
     public static boolean textMatches(String regExp, WebElement webElement) {
@@ -1917,12 +1949,28 @@ public class Bot {
         BotUtils.assertNotEquals("Text", text, textIn(webElement), webElement);
     }
 
+    public static void assertTextEqualsIgnoreCase(String text, WebElement webElement) {
+        BotUtils.assertEqualsIgnoreCase("Text", text, textIn(webElement), webElement);
+    }
+
+    public static void assertTextNotEqualsIgnoreCase(String text, WebElement webElement) {
+        BotUtils.assertNotEqualsIgnoreCase("Text", text, textIn(webElement), webElement);
+    }
+
     public static void assertTextContains(String searchText, WebElement webElement) {
         BotUtils.assertContains("Text", searchText, textIn(webElement), webElement);
     }
 
     public static void assertTextNotContains(String searchText, WebElement webElement) {
         BotUtils.assertNotContains("Text", searchText, textIn(webElement), webElement);
+    }
+
+    public static void assertTextContainsIgnoreCase(String searchText, WebElement webElement) {
+        BotUtils.assertContainsIgnoreCase("Text", searchText, textIn(webElement), webElement);
+    }
+
+    public static void assertTextNotContainsIgnoreCase(String searchText, WebElement webElement) {
+        BotUtils.assertNotContainsIgnoreCase("Text", searchText, textIn(webElement), webElement);
     }
 
     public static void assertTextStartsWith(String prefix, WebElement webElement) {
@@ -1933,12 +1981,28 @@ public class Bot {
         BotUtils.assertNotStartsWith("Text", prefix, textIn(webElement), webElement);
     }
 
+    public static void assertTextStartsWithIgnoreCase(String prefix, WebElement webElement) {
+        BotUtils.assertStartsWithIgnoreCase("Text", prefix, textIn(webElement), webElement);
+    }
+
+    public static void assertTextNotStartsWithIgnoreCase(String prefix, WebElement webElement) {
+        BotUtils.assertNotStartsWithIgnoreCase("Text", prefix, textIn(webElement), webElement);
+    }
+
     public static void assertTextEndsWith(String suffix, WebElement webElement) {
         BotUtils.assertEndsWith("Text", suffix, textIn(webElement), webElement);
     }
 
     public static void assertTextNotEndsWith(String suffix, WebElement webElement) {
         BotUtils.assertNotEndsWith("Text", suffix, textIn(webElement), webElement);
+    }
+
+    public static void assertTextEndsWithIgnoreCase(String suffix, WebElement webElement) {
+        BotUtils.assertEndsWithIgnoreCase("Text", suffix, textIn(webElement), webElement);
+    }
+
+    public static void assertTextNotEndsWithIgnoreCase(String suffix, WebElement webElement) {
+        BotUtils.assertNotEndsWithIgnoreCase("Text", suffix, textIn(webElement), webElement);
     }
 
     public static void assertTextMatches(String regExp, WebElement webElement) {

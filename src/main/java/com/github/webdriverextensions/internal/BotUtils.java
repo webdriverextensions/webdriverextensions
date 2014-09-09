@@ -65,12 +65,28 @@ public class BotUtils {
         return !StringUtils.equals(text1, text2);
     }
 
+    public static boolean equalsIgnoreCase(String text1, String text2) {
+        return StringUtils.equalsIgnoreCase(text1, text2);
+    }
+
+    public static boolean notEqualsIgnoreCase(String text1, String text2) {
+        return !StringUtils.equalsIgnoreCase(text1, text2);
+    }
+
     public static boolean contains(String searchText, String text) {
         return StringUtils.contains(text, searchText);
     }
 
     public static boolean notContains(String searchText, String text) {
         return !StringUtils.contains(text, searchText);
+    }
+
+    public static boolean containsIgnoreCase(String searchText, String text) {
+        return StringUtils.containsIgnoreCase(text, searchText);
+    }
+
+    public static boolean notContainsIgnoreCase(String searchText, String text) {
+        return !StringUtils.containsIgnoreCase(text, searchText);
     }
 
     public static boolean startsWith(String prefix, String text) {
@@ -81,12 +97,28 @@ public class BotUtils {
         return !StringUtils.startsWith(text, prefix);
     }
 
+    public static boolean startsWithIgnoreCase(String prefix, String text) {
+        return StringUtils.startsWithIgnoreCase(text, prefix);
+    }
+
+    public static boolean notStartsWithIgnoreCase(String prefix, String text) {
+        return !StringUtils.startsWithIgnoreCase(text, prefix);
+    }
+
     public static boolean endsWith(String suffix, String text) {
         return StringUtils.endsWith(text, suffix);
     }
 
     public static boolean notEndsWith(String suffix, String text) {
         return !StringUtils.endsWith(text, suffix);
+    }
+
+    public static boolean endsWithIgnoreCase(String suffix, String text) {
+        return StringUtils.endsWithIgnoreCase(text, suffix);
+    }
+
+    public static boolean notEndsWithIgnoreCase(String suffix, String text) {
+        return !StringUtils.endsWithIgnoreCase(text, suffix);
     }
 
     public static boolean matches(String regularExpression, String text) {
@@ -176,6 +208,18 @@ public class BotUtils {
         }
     }
 
+    public static void assertEqualsIgnoreCase(String name, String expected, String actual, WebElement webElement) {
+        if (notEqualsIgnoreCase(expected, actual)) {
+            throw new WebAssertionError(name + " is not equal to " + quote(expected), webElement);
+        }
+    }
+
+    public static void assertNotEqualsIgnoreCase(String name, String notExpected, String actual, WebElement webElement) {
+        if (equalsIgnoreCase(notExpected, actual)) {
+            throw new WebAssertionError(name + " is equal to " + quote(notExpected) + " when it shouldn't", webElement);
+        }
+    }
+
     public static void assertMatches(String name, String regExp, String actual, WebElement webElement) {
         if (notMatches(regExp, actual)) {
             throw new WebAssertionError(name + " is not matching " + quote(regExp), webElement);
@@ -200,6 +244,18 @@ public class BotUtils {
         }
     }
 
+    public static void assertContainsIgnoreCase(String name, String searchText, String actual, WebElement webElement) {
+        if (notContainsIgnoreCase(searchText, actual)) {
+            throw new WebAssertionError(name + " is not containing " + quote(searchText), webElement);
+        }
+    }
+
+    public static void assertNotContainsIgnoreCase(String name, String searchText, String actual, WebElement webElement) {
+        if (containsIgnoreCase(searchText, actual)) {
+            throw new WebAssertionError(name + " is containing " + quote(searchText) + " when it shouldn't", webElement);
+        }
+    }
+
     public static void assertStartsWith(String name, String prefix, String actual, WebElement webElement) {
         if (notStartsWith(prefix, actual)) {
             throw new WebAssertionError(name + " is not starting with " + quote(prefix), webElement);
@@ -212,6 +268,18 @@ public class BotUtils {
         }
     }
 
+    public static void assertStartsWithIgnoreCase(String name, String prefix, String actual, WebElement webElement) {
+        if (notStartsWithIgnoreCase(prefix, actual)) {
+            throw new WebAssertionError(name + " is not starting with " + quote(prefix), webElement);
+        }
+    }
+
+    public static void assertNotStartsWithIgnoreCase(String name, String prefix, String actual, WebElement webElement) {
+        if (startsWithIgnoreCase(prefix, actual)) {
+            throw new WebAssertionError(name + " is starting with " + quote(prefix) + " when it shouldn't", webElement);
+        }
+    }
+
     public static void assertEndsWith(String name, String suffix, String actual, WebElement webElement) {
         if (notEndsWith(suffix, actual)) {
             throw new WebAssertionError(name + " is not ending with " + quote(suffix), webElement);
@@ -220,6 +288,18 @@ public class BotUtils {
 
     public static void assertNotEndsWith(String name, String suffix, String actual, WebElement webElement) {
         if (endsWith(suffix, actual)) {
+            throw new WebAssertionError(name + " is ending with " + quote(suffix) + " when it shouldn't", webElement);
+        }
+    }
+
+    public static void assertEndsWithIgnoreCase(String name, String suffix, String actual, WebElement webElement) {
+        if (notEndsWithIgnoreCase(suffix, actual)) {
+            throw new WebAssertionError(name + " is not ending with " + quote(suffix), webElement);
+        }
+    }
+
+    public static void assertNotEndsWithIgnoreCase(String name, String suffix, String actual, WebElement webElement) {
+        if (endsWithIgnoreCase(suffix, actual)) {
             throw new WebAssertionError(name + " is ending with " + quote(suffix) + " when it shouldn't", webElement);
         }
     }
