@@ -1,21 +1,155 @@
 WebDriver Extensions
 ===================
 
-WebDriver Extensions is a framework build on top of Selenium/WebDriver,
-designed to make tests more readable, reusability and maintainable by following
-the [Page Object Pattern](https://code.google.com/p/selenium/wiki/PageObjects)
-and [Bot Pattern](https://code.google.com/p/selenium/wiki/BotStyleTests).
+WebDriver Extensions is designed to simplify the process of writing Java based Selenium/WebDriver tests. It's built on top of Selenium/WebDriver to make your tests more readable, reusabable and maintainable by encouraging the use of the [Page Object Pattern](https://code.google.com/p/selenium/wiki/PageObjects) and [Bot Pattern](https://code.google.com/p/selenium/wiki/BotStyleTests).
+
+Finally released to the [Maven Repository](http://mvnrepository.com/search?q=webdriverextensions)!
 
 What's included in this framework?
-- A [Maven Archetype](https://github.com/webdriverextensions/webdriverextensions-archetype-quickstart#webdriver-extension-archetype-quickstart) for creating new projects
 - A [Maven Plugin](https://github.com/webdriverextensions/webdriverextensions-maven-plugin#webdriver-extensions-maven-plugin) to manage, download and install drivers
 - Annotation based JUnit Runner for running Selenium/WebDriver tests locally or remotely against multiple browsers
 - New classes for modeling your website e.g. WebComponent (an extendable WebElement), WebPage, WebSite and WebRepository
 - A Bot class providing static methods for interacting, asserting and checking conditions of WebElements, WebComponents, WebPages and WebSites
 - A WebSite and WebRepository generator that enables adding WebComponents, WebPages, WebSites and WebRepositories by annotations
+- A [Maven Archetype](https://github.com/webdriverextensions/webdriverextensions-archetype-quickstart#webdriver-extension-archetype-quickstart) for creating new projects
 
-### Under Development
-This project is ready to be released, the only missing part is the documentation which will soon arrive in this README. Stay tuned!
+
+### Quick Introduction
+
+Use Maven to add WebDriver Extensions
+```xml
+<dependency>
+	<groupId>com.github.webdriverextensions</groupId>
+	<artifactId>webdriverextensions</artifactId>
+	<version>1.0.1</version>
+</dependency>
+```
+
+Download and manage your drivers with the Maven Plugin
+```xml
+<plugin>
+    <groupId>com.github.webdriverextensions</groupId>
+    <artifactId>webdriverextensions-maven-plugin</artifactId>
+    <version>1.0.1</version>
+    <executions>
+        <execution>
+            <goals>
+                <goal>install-drivers</goal>
+            </goals>
+        </execution>
+    </executions>
+    <configuration>
+        <drivers>
+            <driver>
+                <name>internetexplorerdriver</name>
+                <version>2.42</version>
+            </driver>
+            <driver>
+                <name>chromedriver</name>
+                <version>2.10</version>
+            </driver>
+        </drivers>
+    </configuration>
+</plugin>
+```
+
+Run your tests on different browsers with the JUnitRunner
+```java
+import com.github.webdriverextensions.junitrunner.WebDriverRunner;
+import com.github.webdriverextensions.junitrunner.annotations.*;
+
+@RunWith(WebDriverRunner.class)
+@Firefox
+@Chrome
+@InternetExplorer
+public class GoogleTest {
+
+    // Models to initialize goes here...
+
+    @Test
+    public void searchTest() throws InterruptedException {
+
+        // Test goes here...
+
+    }
+
+}
+```
+
+Model your website with the [Page Object Pattern](https://code.google.com/p/selenium/wiki/PageObjects) to make your test  reusable and maintainable
+```java
+import com.github.webdriverextensions.WebPage;
+
+public class SearchPage extends WebPage {
+
+    @FindBy(name = "q")
+    public WebElement query;
+    @FindBy(name = "btnG")
+    public WebElement searchButton;
+    @FindBy(id = "resultStats")
+    public WebElement resultStats;
+    @FindBy(css = ".rc")
+    public List<SearchResult> searchResults;
+
+    @Override
+    public void open(Object... arguments) {
+        open(GoogleSite.url);
+        assertIsOpen();
+    }
+
+    @Override
+    public void assertIsOpen(Object... arguments) throws AssertionError {
+        assertIsDisplayed(query);
+        assertIsDisplayed(searchButton);
+    }
+
+}
+```
+
+Model your page components with the WebComponent (an extendable WebElement)
+```java
+import com.github.webdriverextensions.WebComponent;
+
+public class SearchResult extends WebComponent {
+
+    @FindBy(css = ".r a")
+    public WebElement link;
+    @FindBy(css = "._Rm")
+    WebElement url;
+
+}
+```
+
+Make your test readable as instructions with the [Bot Pattern](https://code.google.com/p/selenium/wiki/BotStyleTests) by using the provided static Bot methods
+```java
+import static com.github.webdriverextensions.Bot.*;
+
+@RunWith(WebDriverRunner.class)
+@Firefox
+@Chrome
+@InternetExplorer
+public class GoogleTest {
+
+    GoogleSite googleSite;
+    SearchPage searchPage;
+
+    @Test
+    public void searchTest() throws InterruptedException {
+        open(googleSite);
+
+        type("WebDriverExtensions Github", searchPage.query);
+        click(searchPage.searchButton);
+        assertIsOpen(searchPage);
+
+        waitForElementToDisplay(searchPage.resultStats);
+        SearchResult firstSearchResult = searchPage.searchResults.get(0);
+        assertTextContains("webdriverextensions", firstSearchResult.link);
+        assertTextStartsWith("https://github.com", firstSearchResult.url);
+    }
+
+}
+```
+
 
 
 ### <a href="http://testingbot.com" target="_blank">TestingBot</a> is now supporting this project by giving it a Free account!
