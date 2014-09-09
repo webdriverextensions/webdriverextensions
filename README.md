@@ -16,7 +16,7 @@ What's included in this framework?
 
 ### Quick Introduction
 
-Use Maven to add WebDriver Extensions
+##### Use Maven to add WebDriver Extensions
 ```xml
 <dependency>
 	<groupId>com.github.webdriverextensions</groupId>
@@ -25,7 +25,7 @@ Use Maven to add WebDriver Extensions
 </dependency>
 ```
 
-Download and manage your drivers with the Maven Plugin
+##### Download and manage your drivers with the Maven Plugin
 ```xml
 <plugin>
     <groupId>com.github.webdriverextensions</groupId>
@@ -53,7 +53,7 @@ Download and manage your drivers with the Maven Plugin
 </plugin>
 ```
 
-Run your tests on different browsers with the JUnitRunner
+##### Run your tests on different browsers with the JUnitRunner
 ```java
 import com.github.webdriverextensions.junitrunner.WebDriverRunner;
 import com.github.webdriverextensions.junitrunner.annotations.*;
@@ -76,7 +76,7 @@ public class GoogleTest {
 }
 ```
 
-Model your website with the [Page Object Pattern](https://code.google.com/p/selenium/wiki/PageObjects) to make your test  reusable and maintainable
+##### Model your website with the [Page Object Pattern](https://code.google.com/p/selenium/wiki/PageObjects) to make your test  reusable and maintainable
 ```java
 import com.github.webdriverextensions.WebPage;
 
@@ -106,7 +106,7 @@ public class SearchPage extends WebPage {
 }
 ```
 
-Model your page components with the WebComponent (an extendable WebElement)
+##### Model your page components with the WebComponent (an extendable WebElement)
 ```java
 import com.github.webdriverextensions.WebComponent;
 
@@ -120,7 +120,7 @@ public class SearchResult extends WebComponent {
 }
 ```
 
-Make your test readable as instructions with the [Bot Pattern](https://code.google.com/p/selenium/wiki/BotStyleTests) by using the provided static Bot methods
+##### Make your test readable as instructions with the [Bot Pattern](https://code.google.com/p/selenium/wiki/BotStyleTests) by using the provided static Bot methods
 ```java
 import static com.github.webdriverextensions.Bot.*;
 
