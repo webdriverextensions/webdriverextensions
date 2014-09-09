@@ -241,6 +241,20 @@ public class Bot {
         wait.until(ExpectedConditions.visibilityOf(webElement));
     }
 
+    public static void waitForElementsToDisplay(List<? extends WebElement> webElements) {
+        waitForElementsToDisplay((List<WebElement>) webElements, 30);
+    }
+
+    public static void waitForElementsToDisplay(List<? extends WebElement> webElements, long secondsToWait) {
+        WebDriverWait wait = new WebDriverWait(driver(), secondsToWait);
+        wait.until(ExpectedConditions.visibilityOfAllElements((List<WebElement>) webElements));
+    }
+
+    public static void waitForElementsToDisplay(List<? extends WebElement> webElements, long secondsToWait, long sleepInMillis) {
+        WebDriverWait wait = new WebDriverWait(driver(), secondsToWait, sleepInMillis);
+        wait.until(ExpectedConditions.visibilityOfAllElements((List<WebElement>) webElements));
+    }
+
 
 
     /* Scrolling */

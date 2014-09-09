@@ -87,6 +87,8 @@ public class BotTestPage extends WebPage {
     public WebElement firstAppendedSpan;
     @FindBy(css = "#secondappended-span")
     public WebElement secondAppendedSpan;
+    @FindBy(css = ".appended-span")
+    public List<WebElement> appendedSpans;
 
     @Override
     public void open(Object... arguments) {

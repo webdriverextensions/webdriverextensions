@@ -107,6 +107,12 @@ public class BotTest extends GeneratedWebRepository {
         assertIsDisplayed(botTestPage.firstAppendedSpan);
         assertIsDisplayed(botTestPage.secondAppendedSpan);
     }
+    @Test
+    public void waitForElementsToDisplayTest() {
+        waitForElementsToDisplay(botTestPage.appendedSpans);
+        assertIsDisplayed(botTestPage.firstAppendedSpan);
+        assertIsNotDisplayed(botTestPage.secondAppendedSpan);
+    }
 
     /* Debug */
     @Test
