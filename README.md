@@ -115,7 +115,7 @@ public class SearchResult extends WebComponent {
     @FindBy(css = ".r a")
     public WebElement link;
     @FindBy(css = "._Rm")
-    WebElement url;
+    public WebElement url;
 
 }
 ```
