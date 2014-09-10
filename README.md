@@ -21,7 +21,7 @@ What's included in this framework?
 <dependency>
 	<groupId>com.github.webdriverextensions</groupId>
 	<artifactId>webdriverextensions</artifactId>
-	<version>1.0.1</version>
+	<version>1.1</version>
 </dependency>
 ```
 
@@ -42,7 +42,7 @@ What's included in this framework?
         <drivers>
             <driver>
                 <name>internetexplorerdriver</name>
-                <version>2.42</version>
+                <version>2.43</version>
             </driver>
             <driver>
                 <name>chromedriver</name>
