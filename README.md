@@ -21,7 +21,7 @@ What's included in this framework?
 <dependency>
 	<groupId>com.github.webdriverextensions</groupId>
 	<artifactId>webdriverextensions</artifactId>
-	<version>1.1</version>
+	<version>1.1.0</version>
 </dependency>
 ```
 
