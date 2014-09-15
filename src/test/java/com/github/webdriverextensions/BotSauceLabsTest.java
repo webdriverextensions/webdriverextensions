@@ -215,7 +215,7 @@ public class BotSauceLabsTest {
         assertThat(platformIsAndroid(), equalTo(true));
         assertThat(platformIsLinux(), equalTo(true));
         assertThat(platformIsNotMac(), equalTo(true));
-        assertThat(platformIsNotUnix(), equalTo(true));
+        assertThat(platformIsUnix(), equalTo(true));
         assertThat(platformIsNotWindows(), equalTo(true));
         assertThat(platformIsNotWin8(), equalTo(true));
         assertThat(platformIsNotWin8_1(), equalTo(true));

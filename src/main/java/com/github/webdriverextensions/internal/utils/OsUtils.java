@@ -1,25 +1,24 @@
 package com.github.webdriverextensions.internal.utils;
 
-import java.io.File;
 import org.openqa.selenium.Platform;
 
 public class OsUtils {
 
     public static boolean isWindows() {
-        return Platform.WINDOWS.is(Platform.getCurrent());
+        return Platform.getCurrent().is(Platform.WINDOWS);
     }
 
     public static boolean isMac() {
-        return Platform.MAC.is(Platform.getCurrent());
+        return Platform.getCurrent().is(Platform.MAC);
     }
 
     public static boolean isLinux() {
-        return Platform.LINUX.is(Platform.getCurrent());
+        return Platform.getCurrent().is(Platform.LINUX);
     }
 
     public static boolean isCurrentPlatform(String platform) {
         try {
-            return Platform.valueOf(platform).is(Platform.getCurrent());
+            return Platform.getCurrent().is(Platform.valueOf(platform));
         } catch (IllegalArgumentException e) {
             return false;
         }
