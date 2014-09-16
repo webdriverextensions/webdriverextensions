@@ -150,7 +150,45 @@ public class GoogleTest {
 }
 ```
 
+##### Create new project with the [Maven Archetype](https://github.com/webdriverextensions/webdriverextensions-archetype-quickstart#webdriver-extension-archetype-quickstart)
+Run
+```sh
+mvn archetype:generate -DarchetypeGroupId=com.github.webdriverextensions -DarchetypeArtifactId=webdriverextensions-archetype-quickstart
+```
 
+in your terminal to create
+```
+projectname
+├── drivers
+├── pom.xml
+└── src
+    ├── main
+    │   └── java
+    │       └── com
+    │           └── companyname
+    │               ├── SiteNameSite.java
+    │               ├── SiteNameSiteTest.java
+    │               ├── component
+    │               │   └── ExampleWebComponent.java
+    │               └── page
+    │                   └── MainPage.java
+    └── test
+        ├── java
+        │   └── com
+        │       └── companyname
+        │           └── MainPageTest.java
+        └── resources
+            └── logback-test.xml
+```
+
+No need to add any drivers since the webdriverextensions-maven-plugin is configured to download
+them for you!
+
+Simply just run the generated template test by executing
+```sh
+cd projectname
+mvn test
+```
 
 ### <a href="http://testingbot.com" target="_blank">TestingBot</a> is now supporting this project by giving it a Free account!
 
