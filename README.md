@@ -148,7 +148,7 @@ E.g. model your table rows
 ```java
 import com.github.webdriverextensions.WebComponent;
 
-public static class PlaylistRow extends WebComponent {
+public class PlaylistRow extends WebComponent {
 
     @FindBy(className = "track")
     public WebElement username;
