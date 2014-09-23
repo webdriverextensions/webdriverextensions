@@ -62,16 +62,26 @@ import com.github.webdriverextensions.junitrunner.annotations.*;
 @Firefox
 @Chrome
 @InternetExplorer
-public class GoogleTest {
+public class CrossBrowserTest {
 
     // Models to initialize goes here...
 
     @Test
-    public void searchTest() {
+    public void test1() {
 
         // Test goes here...
 
     }
+
+    @Test
+    @IgnoreInternetExplorer
+    public void test2() {
+
+        // Test goes here...
+
+    }
+
+    ...
 
 }
 ```
@@ -84,10 +94,13 @@ public class SearchPage extends WebPage {
 
     @FindBy(name = "q")
     public WebElement query;
+
     @FindBy(name = "btnG")
     public WebElement searchButton;
+
     @FindBy(id = "resultStats")
     public WebElement resultStats;
+
     @FindBy(css = ".rc")
     public List<SearchResult> searchResults;
 
@@ -107,47 +120,107 @@ public class SearchPage extends WebPage {
 ```
 
 ##### Model your page components with the WebComponent (an extendable WebElement)
+
+E.g. model your table rows
+
+```html
+    <table id="playlist">
+         <tr>
+              <td class="track">Hey Joe</td>
+              <td class="artist">Jimi Hendrix</td>
+              <td class="time">3:30</td>
+              <td class="album">Are You Experienced</td>
+         </tr>
+         <tr>
+              <td class="track">Play with Fire</td>
+              <td class="artist">The Rolling Stones</td>
+              <td class="time">2:14</td>
+              <td class="album">The Last time</td>
+         </tr>
+
+         ...
+
+    </table>
+```
+
+...by extending the WebComponent
+
 ```java
 import com.github.webdriverextensions.WebComponent;
 
-public class SearchResult extends WebComponent {
+public static class PlaylistRow extends WebComponent {
 
-    @FindBy(css = ".r a")
-    public WebElement link;
-    @FindBy(css = "._Rm")
-    public WebElement url;
+    @FindBy(className = "track")
+    public WebElement username;
 
+    @FindBy(className = "artist")
+    public WebElement permission;
+
+    @FindBy(className = "time")
+    public WebElement time;
+
+    @FindBy(className = "album")
+    public WebElement album;
 }
 ```
 
+...and then include your new WebComponent as you include a WebElement
+
+```java
+    @FindBy(css = "#playlist tr")
+    public List<PlaylistRow> playlist;
+```
+
+...and then use your new WebComponent in your tests
+
+```java
+    assertTextEquals("Hey Joe", playlist.get(0).track);
+```
+
+
+
 ##### Make your test readable as instructions with the [Bot Pattern](https://code.google.com/p/selenium/wiki/BotStyleTests) by using the provided static Bot methods
+
+Simply import the static Bot where you want to use it
+
 ```java
 import static com.github.webdriverextensions.Bot.*;
+```
 
-@RunWith(WebDriverRunner.class)
-@Firefox
-@Chrome
-@InternetExplorer
-public class GoogleTest {
+...and start interacting with your WebElements
 
-    GoogleSite googleSite;
-    SearchPage searchPage;
+```java
+type("testuser", username);
+type("ai78cGsT", password);
+uncheck(rememberMeCheckbox);
+click(loginButton);
+```
 
-    @Test
-    public void searchTest() {
-        open(googleSite);
+...and write your asserts
 
-        type("WebDriverExtensions Github", searchPage.query);
-        click(searchPage.searchButton);
-        assertIsOpen(searchPage);
+```java
+assertTextEquals("testuser", currentUser);
+assertTitleStartsWith("Wikipedia - ");
+assertCurrentUrlMatches("http://[a-z]{2,3}.wikipedia.org/.*");
+assertHasClass("selected", mainPageTab);
+// ...type assert then bring up the list of all supported asserts with your IDE's autocompletion
+```
 
-        waitForElementToDisplay(searchPage.resultStats);
-        SearchResult firstSearchResult = searchPage.searchResults.get(0);
-        assertTextContains("webdriverextensions", firstSearchResult.link);
-        assertTextStartsWith("https://github.com", firstSearchResult.url);
-    }
+...and conditional statements
 
+```java
+if (hasClass("selected", mainPageTab)) {
+    // ...do something
 }
+if (browserIsInternetExplorer()) {
+    // ...handle crossbrowser difference
+}
+```
+
+If you won't run your tests in the provided JUnitRunner make sure you set the thread driver before using the Bot
+
+```java
+WebDriverExtensionsContext.setDriver(yourDriver);
 ```
 
 ##### Create new project with the [Maven Archetype](https://github.com/webdriverextensions/webdriverextensions-archetype-quickstart#webdriver-extension-archetype-quickstart)
