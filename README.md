@@ -220,6 +220,8 @@ if (browserIsInternetExplorer()) {
 If you won't run your tests in the provided JUnitRunner make sure you set the driver in the WebDriverExtensionsContext before using the Bot
 
 ```java
+import com.github.webdriverextensions.WebDriverExtensionsContext;
+
 WebDriverExtensionsContext.setDriver(yourDriver);
 ```
 
