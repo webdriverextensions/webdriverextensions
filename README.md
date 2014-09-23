@@ -3,7 +3,7 @@ WebDriver Extensions
 
 WebDriver Extensions is designed to simplify the process of writing Java based Selenium/WebDriver tests. It's built on top of Selenium/WebDriver to make your tests more readable, reusabable and maintainable by encouraging the use of the [Page Object Pattern](https://code.google.com/p/selenium/wiki/PageObjects) and [Bot Pattern](https://code.google.com/p/selenium/wiki/BotStyleTests).
 
-Finally released to the [Maven Repository](http://mvnrepository.com/search?q=webdriverextensions)!
+Finally released to the [Maven Central Repository](http://mvnrepository.com/search?q=webdriverextensions)! Latest release is version 1.1.0 which includes selenium-java 2.43.1 as a transative dependency.
 
 What's included in this framework?
 - A [Maven Plugin](https://github.com/webdriverextensions/webdriverextensions-maven-plugin#webdriver-extensions-maven-plugin) to manage, download and install drivers
@@ -67,7 +67,7 @@ public class GoogleTest {
     // Models to initialize goes here...
 
     @Test
-    public void searchTest() throws InterruptedException {
+    public void searchTest() {
 
         // Test goes here...
 
@@ -98,7 +98,7 @@ public class SearchPage extends WebPage {
     }
 
     @Override
-    public void assertIsOpen(Object... arguments) throws AssertionError {
+    public void assertIsOpen(Object... arguments) {
         assertIsDisplayed(query);
         assertIsDisplayed(searchButton);
     }
@@ -134,7 +134,7 @@ public class GoogleTest {
     SearchPage searchPage;
 
     @Test
-    public void searchTest() throws InterruptedException {
+    public void searchTest() {
         open(googleSite);
 
         type("WebDriverExtensions Github", searchPage.query);
