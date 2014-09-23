@@ -217,7 +217,7 @@ if (browserIsInternetExplorer()) {
 }
 ```
 
-If you won't run your tests in the provided JUnitRunner make sure you set the thread driver before using the Bot
+If you won't run your tests in the provided JUnitRunner make sure you set the driver in the WebDriverExtensionsContext before using the Bot
 
 ```java
 WebDriverExtensionsContext.setDriver(yourDriver);
