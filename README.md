@@ -167,14 +167,14 @@ public class PlaylistRow extends WebComponent {
 ...and then include your new WebComponent as you include a WebElement
 
 ```java
-    @FindBy(css = "#playlist tr")
-    public List<PlaylistRow> playlist;
+@FindBy(css = "#playlist tr")
+public List<PlaylistRow> playlist;
 ```
 
 ...and then use your new WebComponent in your tests
 
 ```java
-    assertTextEquals("Hey Joe", playlist.get(0).track);
+assertTextEquals("Hey Joe", playlist.get(0).track);
 ```
 
 
