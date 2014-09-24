@@ -80,7 +80,7 @@ public class CrossBrowserTest {
     @Safari
     public void test2() {
 
-        // ...or configure browsers to test by annotating test methods
+        // ...or by annotating test methods
 
     }
 
