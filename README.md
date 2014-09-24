@@ -151,10 +151,10 @@ import com.github.webdriverextensions.WebComponent;
 public class PlaylistRow extends WebComponent {
 
     @FindBy(className = "track")
-    public WebElement username;
+    public WebElement track;
 
     @FindBy(className = "artist")
-    public WebElement permission;
+    public WebElement artist;
 
     @FindBy(className = "time")
     public WebElement time;
