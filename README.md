@@ -53,7 +53,10 @@ What's included in this framework?
 </plugin>
 ```
 
-##### Run your tests on different browsers with the JUnitRunner
+##### Cross Browser test your web site with the JUnitRunner
+
+Run your tests locally by using the WebDriverRunner
+
 ```java
 import com.github.webdriverextensions.junitrunner.WebDriverRunner;
 import com.github.webdriverextensions.junitrunner.annotations.*;
@@ -64,20 +67,28 @@ import com.github.webdriverextensions.junitrunner.annotations.*;
 @InternetExplorer
 public class CrossBrowserTest {
 
-    // Models to initialize goes here...
+    // Add WebElements, WebPages and other supported web models to use in tests
 
     @Test
     public void test1() {
 
-        // Test goes here...
+        // Configure browsers to test by annotating the test class
+
+    }
+
+    @Test
+    @Safari
+    public void test2() {
+
+        // ...or configure browsers to test by annotating test methods
 
     }
 
     @Test
     @IgnoreInternetExplorer
-    public void test2() {
+    public void test3() {
 
-        // Test goes here...
+        // ...and use the ignore annotations to ignore specific browsers
 
     }
 
@@ -86,7 +97,15 @@ public class CrossBrowserTest {
 }
 ```
 
-##### Model your website with the [Page Object Pattern](https://code.google.com/p/selenium/wiki/PageObjects) to make your test  reusable and maintainable
+...or remotely by adding
+
+```java
+@RemoteAddress("http://your-remote-url")
+```
+
+to the test class
+
+##### Model your website with the [Page Object Pattern](https://code.google.com/p/selenium/wiki/PageObjects)
 ```java
 import com.github.webdriverextensions.WebPage;
 
@@ -179,7 +198,7 @@ assertTextEquals("Hey Joe", playlist.get(0).track);
 
 
 
-##### Make your test readable as instructions with the [Bot Pattern](https://code.google.com/p/selenium/wiki/BotStyleTests) by using the provided static Bot methods
+##### Make your test readable as instructions with the [Bot Pattern](https://code.google.com/p/selenium/wiki/BotStyleTests)
 
 Simply import the static Bot where you want to use it
 
