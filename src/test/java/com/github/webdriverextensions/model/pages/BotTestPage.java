@@ -48,22 +48,22 @@ public class BotTestPage extends WebPage {
     // Select/Options
     @FindBy(css = "#select")
     public WebElement select;
-    @FindBy(css = "#select option:nth-child(1)")
+    @FindBy(css = "#select option[value='option1value']")
     public WebElement selectOption1;
-    @FindBy(css = "#select option:nth-child(2)")
+    @FindBy(css = "#select option[value='option2value']")
     public WebElement selectOption2;
-    @FindBy(css = "#select option:nth-child(3)")
+    @FindBy(css = "#select option[value='option3value']")
     public WebElement selectOption3;
     @FindBy(css = "#select option")
     public List<WebElement> selectAllOption;
 
     @FindBy(css = "#multiple-select")
     public WebElement multipleSelect;
-    @FindBy(css = "#multiple-select option:nth-child(1)")
+    @FindBy(css = "#multiple-select option[value='option1value']")
     public WebElement multipleSelectOption1;
-    @FindBy(css = "#multiple-select option:nth-child(2)")
+    @FindBy(css = "#multiple-select option[value='option2value']")
     public WebElement multipleSelectOption2;
-    @FindBy(css = "#multiple-select option:nth-child(3)")
+    @FindBy(css = "#multiple-select option[value='option3value']")
     public WebElement multipleSelectOption3;
 
     // Checkboxes
