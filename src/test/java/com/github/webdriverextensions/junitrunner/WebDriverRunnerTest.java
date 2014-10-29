@@ -15,7 +15,7 @@ import org.junit.runner.RunWith;
 @Chrome
 @InternetExplorer
 @HtmlUnit
-@Safari
+//@Safari Disabled until bug is solved, see https://code.google.com/p/selenium/issues/detail?id=7933
 @Browsers(chrome = {
     @Chrome(desiredCapabilities = "{chromeOptions: {args: ['start-maximized']}}"),
     @Chrome(desiredCapabilitiesClass = StartChromeMaximized.class)
