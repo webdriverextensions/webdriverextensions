@@ -3,7 +3,7 @@ WebDriver Extensions
 
 WebDriver Extensions is designed to simplify the process of writing Java based Selenium/WebDriver tests. It's built on top of Selenium/WebDriver to make your tests more readable, reusabable and maintainable by encouraging the use of the [Page Object Pattern](https://code.google.com/p/selenium/wiki/PageObjects) and [Bot Pattern](https://code.google.com/p/selenium/wiki/BotStyleTests).
 
-Finally released to the [Maven Central Repository](http://mvnrepository.com/search?q=webdriverextensions)! Latest release is version 1.1.0 which includes selenium-java 2.43.1 as a transative dependency.
+Finally released to the [Maven Central Repository](http://mvnrepository.com/search?q=webdriverextensions)! Latest release is version 1.2.0 which includes selenium-java 2.44.0 as a transative dependency.
 
 What's included in this framework?
 - A [Maven Plugin](https://github.com/webdriverextensions/webdriverextensions-maven-plugin#webdriver-extensions-maven-plugin) to manage, download and install drivers
@@ -21,7 +21,7 @@ What's included in this framework?
 <dependency>
 	<groupId>com.github.webdriverextensions</groupId>
 	<artifactId>webdriverextensions</artifactId>
-	<version>1.1.0</version>
+	<version>1.2.0</version>
 </dependency>
 ```
 
@@ -42,11 +42,11 @@ What's included in this framework?
         <drivers>
             <driver>
                 <name>internetexplorerdriver</name>
-                <version>2.43</version>
+                <version>2.44</version>
             </driver>
             <driver>
                 <name>chromedriver</name>
-                <version>2.10</version>
+                <version>2.12</version>
             </driver>
         </drivers>
     </configuration>
@@ -284,6 +284,25 @@ mvn test
 
 ### <a href="http://testingbot.com" target="_blank">TestingBot</a> is now supporting this project by giving it a Free account!
 
+### Changelog
+
+#### 1.2.0 (2014 October 29)
+- SELENIUM UPDATE Updated selenium version to 2.44.0
+- BUGFIX Using JUnit @Test timeouts will no longer cause WebDriverExtensionsContext.getDriver() method to throw an exception
+
+#### 1.1.0 (2014 September 15)
+- SELENIUM UPDATE Updated selenium version to 2.43.1
+- FEATURE Added waitForElementsToDisplay
+- FEATURE Added ignore case to text bot methods
+- BUGFIX @Delegate annotated field is now allowed to be private
+
+#### 1.0.1 (2014 September 4)
+- BUGFIX Swallowing 'No runnable methods' error from BlockJUnit4ClassRunner so empty tests are allowed
+- BUGFIX Made created abstract open method in WebPage and SitePage so eclipse wont complain about @Override annotation
+
+
+#### 1.0.0 (2014 September 2)
+- Initial release!
 
 ## License
 
