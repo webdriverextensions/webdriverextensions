@@ -286,6 +286,9 @@ mvn test
 
 ### Changelog
 
+#### 1.2.1 (2014 December 3)
+- Added descriptive messages to instantiation exceptions thrown by WebDriverExtensions when WebPage, WebSite and WebRepository class is either abstract, has no no args constructor or has no accessible constructor
+
 #### 1.2.0 (2014 October 29)
 - SELENIUM UPDATE Updated selenium version to 2.44.0
 - BUGFIX Using JUnit @Test timeouts will no longer cause WebDriverExtensionsContext.getDriver() method to throw an exception

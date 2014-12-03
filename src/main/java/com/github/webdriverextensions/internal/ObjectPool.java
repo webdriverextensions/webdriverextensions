@@ -6,6 +6,7 @@ import java.util.HashMap;
 import com.github.webdriverextensions.WebPage;
 import com.github.webdriverextensions.WebRepository;
 import com.github.webdriverextensions.WebSite;
+import static com.github.webdriverextensions.internal.utils.StringUtils.quote;
 import org.openqa.selenium.WebDriver;
 
 public class ObjectPool {
@@ -54,9 +55,13 @@ public class ObjectPool {
         try {
             siteObject = (WebSite) field.getType().newInstance();
         } catch (InstantiationException ex) {
-            throw new WebDriverExtensionException(ex);
+            if (ex.getCause() instanceof NoSuchMethodException) {
+                throw new WebDriverExtensionException("Failed to instantiate WebSite class " + quote(field.getType().getSimpleName()) + " for field " + quote(field.getName()) + " since no args constructor is missing. Remove any other constructor or implement a no args constructor.", ex);
+            } else {
+                throw new WebDriverExtensionException("Failed to instantiate WebSite class " + quote(field.getType().getSimpleName()) + " for field " + quote(field.getName()) + " since class is abstract. Remove the abstract modifier and implement the abstract methods.", ex);
+            }
         } catch (IllegalAccessException ex) {
-            throw new WebDriverExtensionException(ex);
+            throw new WebDriverExtensionException("Failed to instantiate WebSite class " + quote(field.getType().getSimpleName()) + " for field " + quote(field.getName()) + " since constructor is not accessable. Make the constructor public.", ex);
         }
         return siteObject;
     }
@@ -66,9 +71,13 @@ public class ObjectPool {
         try {
             pageObject = (WebPage) field.getType().newInstance();
         } catch (InstantiationException ex) {
-            throw new WebDriverExtensionException(ex);
+            if (ex.getCause() instanceof NoSuchMethodException) {
+                throw new WebDriverExtensionException("Failed to instantiate WebPage class " + quote(field.getType().getSimpleName()) + " for field " + quote(field.getName()) + " since no args constructor is missing. Remove any other constructor or implement a no args constructor.", ex);
+            } else {
+                throw new WebDriverExtensionException("Failed to instantiate WebPage class " + quote(field.getType().getSimpleName()) + " for field " + quote(field.getName()) + " since class is abstract. Remove the abstract modifier and implement the abstract methods.", ex);
+            }
         } catch (IllegalAccessException ex) {
-            throw new WebDriverExtensionException(ex);
+            throw new WebDriverExtensionException("Failed to instantiate WebPage class " + quote(field.getType().getSimpleName()) + " for field " + quote(field.getName()) + " since constructor is not accessable. Make the constructor public.", ex);
         }
         return pageObject;
     }
@@ -78,9 +87,13 @@ public class ObjectPool {
         try {
             repositoryObject = (WebRepository) field.getType().newInstance();
         } catch (InstantiationException ex) {
-            throw new WebDriverExtensionException(ex);
+            if (ex.getCause() instanceof NoSuchMethodException) {
+                throw new WebDriverExtensionException("Failed to instantiate WebRepository class " + quote(field.getType().getSimpleName()) + " for field " + quote(field.getName()) + " since no args constructor is missing. Remove any other constructor or implement a no args constructor.", ex);
+            } else {
+                throw new WebDriverExtensionException("Failed to instantiate WebRepository class " + quote(field.getType().getSimpleName()) + " for field " + quote(field.getName()) + " since class is abstract. Remove the abstract modifier and implement the abstract methods.", ex);
+            }
         } catch (IllegalAccessException ex) {
-            throw new WebDriverExtensionException(ex);
+            throw new WebDriverExtensionException("Failed to instantiate WebRepository class " + quote(field.getType().getSimpleName()) + " for field " + quote(field.getName()) + " since constructor is not accessable. Make the constructor public.", ex);
         }
         return repositoryObject;
     }
