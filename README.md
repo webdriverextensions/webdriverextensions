@@ -3,7 +3,7 @@ WebDriver Extensions
 
 WebDriver Extensions is designed to simplify the process of writing Java based Selenium/WebDriver tests. It's built on top of Selenium/WebDriver to make your tests more readable, reusabable and maintainable by encouraging the use of the [Page Object Pattern](https://code.google.com/p/selenium/wiki/PageObjects) and [Bot Pattern](https://code.google.com/p/selenium/wiki/BotStyleTests).
 
-Finally released to the [Maven Central Repository](http://mvnrepository.com/search?q=webdriverextensions)! Latest release is version 1.2.0 which includes selenium-java 2.44.0 as a transative dependency.
+Finally released to the [Maven Central Repository](http://mvnrepository.com/search?q=webdriverextensions)! Latest release is version 1.2.1 which includes selenium-java 2.44.0 as a transative dependency.
 
 What's included in this framework?
 - A [Maven Plugin](https://github.com/webdriverextensions/webdriverextensions-maven-plugin#webdriver-extensions-maven-plugin) to manage, download and install drivers
@@ -21,7 +21,7 @@ What's included in this framework?
 <dependency>
 	<groupId>com.github.webdriverextensions</groupId>
 	<artifactId>webdriverextensions</artifactId>
-	<version>1.2.0</version>
+	<version>1.2.1</version>
 </dependency>
 ```
 
@@ -287,7 +287,7 @@ mvn test
 ### Changelog
 
 #### 1.2.1 (2014 December 3)
-- Added descriptive messages to instantiation exceptions thrown by WebDriverExtensions when WebPage, WebSite and WebRepository class is either abstract, has no no args constructor or has no accessible constructor
+- ENHANCEMENT Added descriptive messages to instantiation exceptions thrown by WebDriverExtensions when WebPage, WebSite and WebRepository class is either abstract, has no no args constructor or has no accessible constructor
 
 #### 1.2.0 (2014 October 29)
 - SELENIUM UPDATE Updated selenium version to 2.44.0
