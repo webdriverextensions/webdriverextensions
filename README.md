@@ -14,9 +14,136 @@ What's included in this framework?
 - A [Maven Archetype](https://github.com/webdriverextensions/webdriverextensions-archetype-quickstart#webdriver-extension-archetype-quickstart) for creating new projects
 
 
-### Quick Introduction
 
-##### Use Maven to add WebDriver Extensions
+<br>
+# Hello World Example
+Here is an example of how a cross browser test is configured and written with and without the WebDriver Extensions Framework. The test will run on Firefox, Chrome and Internet Explorer. It will google for "Hello World" and assert that the first result contains the searched text "Hello World".
+
+### With WebDriver Extensions
+```java
+@RunWith(WebDriverRunner.class)
+@Firefox
+@Chrome
+@InternetExplorer
+public class WebDriverExtensionsExampleTest {
+
+    @FindBy(css = "input[name='q']")
+    WebElement queryInput;
+    @FindBy(css = "button[name='btnG']")
+    WebElement searchButton;
+    @FindBy(css = "#search")
+    WebElement searchResults;
+
+    @Test
+    public void searchGoogleForHelloWorldTest() {
+        open("http://www.google.com");
+        assertCurrentUrlContains("google");
+
+        type("Hello World", queryInput);
+        click(searchButton);
+
+        waitFor(3, SECONDS);
+        assertTextContains("Hello World", searchResults);
+    }
+}
+```
+_<sub>Imports are hidden for the sake of simplicity, for imports and instructions on how to run this example see this [gist](https://gist.github.com/andidev/ad006a454edfd9f0e9e5)</sub>_
+
+
+### Without WebDriver Extensions
+```java
+@RunWith(Parameterized.class)
+public class WebDriverExampleTest {
+    WebDriver driver;
+    @Parameters
+    public static Collection<Object[]> data() {
+        return Arrays.asList(new Object[][]{
+            {"Firefox"}, {"Chrome"}, {"InternetExplorer"}
+        });
+    }
+
+    public WebDriverTest(String browserName) {
+        if (browserName.equals("Firefox")) {
+            driver = new FirefoxDriver();
+        } else if (browserName.equals("Chrome")) {
+            driver = new ChromeDriver();
+        } else if (browserName.equals("InternetExplorer")) {
+            driver = new InternetExplorerDriver();
+        }
+        PageFactory.initElements(driver, this);
+    }
+
+    @After
+    public void tearDown() {
+        driver.quit();
+    }
+
+    @FindBy(css = "input[name='q']")
+    WebElement queryInput;
+    @FindBy(css = "button[name='btnG']")
+    WebElement searchButton;
+    @FindBy(css = "#search")
+    WebElement searchResults;
+
+    @Test
+    public void searchGoogleForHelloWorldTest() throws InterruptedException {
+        driver.get("http://www.google.com");
+        assert driver.getCurrentUrl().contains("google");
+
+        queryInput.sendKeys("Hello World");
+        searchButton.click();
+
+        SECONDS.sleep(3);
+        assert searchResults.getText().contains("Hello World");
+    }
+}
+```
+_<sub>Imports are hidden for the sake of simplicity, for imports and instructions on how to run this example see this [gist](https://gist.github.com/andidev/6c5dc8033c019e4c069d)</sub>_
+
+
+As you can see WebDriver Extensions Framework made the test almost readable as instructions you would give to someone who needs to manually perform this test. This is one of the main punchlines of this framework. The other one is the use of the [Page Object Pattern](https://code.google.com/p/selenium/wiki/PageObjects) which is unfortunately not demonstrated by this example for simplicity reasons.
+
+### Further increased readability with Groovy
+If wanted one could further increase readability by using the Groovy language instead of Java. Then the Hello World example would look like this
+
+```groovy
+@Grab(group='com.github.webdriverextensions', module='webdriverextensions', version='1.2.1')
+@RunWith(WebDriverRunner)
+@Firefox
+@Chrome
+@InternetExplorer
+class WebDriverExtensionsGroovyExampleTest {
+
+    @FindBy(css = "input[name='q']")
+    WebElement queryInput;
+    @FindBy(css = "button[name='btnG']")
+    WebElement searchButton;
+    @FindBy(css = "#search")
+    WebElement searchResults;
+
+    @Test
+    void searchGoogleForHelloWorldTest() {
+        open "http://www.google.com"
+        assertCurrentUrlContains "google"
+
+        type "Hello World", queryInput
+        click searchButton
+
+        waitFor 3, SECONDS
+        assertTextContains "Hello World", searchResults
+    }
+}
+```
+
+_<sub>Imports are hidden for the sake of simplicity, for imports and instructions on how to run this example see this [gist](https://gist.github.com/andidev/b182c59a92d5ad66b035)</sub>_
+
+
+
+<br>
+# Getting Started
+
+### Use Maven to add WebDriver Extensions
+Add
 ```xml
 <dependency>
 	<groupId>com.github.webdriverextensions</groupId>
@@ -24,8 +151,12 @@ What's included in this framework?
 	<version>1.2.1</version>
 </dependency>
 ```
+inside the `<dependencies>`-tag in your pom.xml file
 
-##### Download and manage your drivers with the Maven Plugin
+
+<br>
+### Download and manage your drivers with the Maven Plugin
+Add
 ```xml
 <plugin>
     <groupId>com.github.webdriverextensions</groupId>
@@ -52,10 +183,13 @@ What's included in this framework?
     </configuration>
 </plugin>
 ```
+inside the `<plugins>`-tag within the `<build>`-tag
 
-##### Cross Browser test your web site with the JUnitRunner
 
-Run your tests locally by using the WebDriverRunner
+<br>
+### Cross Browser test your web site with the JUnitRunner
+
+Run your tests locally by using the `WebDriverRunner`
 
 ```java
 import com.github.webdriverextensions.junitrunner.WebDriverRunner;
@@ -71,25 +205,19 @@ public class CrossBrowserTest {
 
     @Test
     public void test1() {
-
         // Configure browsers to test by annotating the test class
-
     }
 
     @Test
     @Safari
     public void test2() {
-
         // ...or by annotating test methods
-
     }
 
     @Test
     @IgnoreInternetExplorer
     public void test3() {
-
         // ...and use the ignore annotations to ignore specific browsers
-
     }
 
     ...
@@ -97,15 +225,50 @@ public class CrossBrowserTest {
 }
 ```
 
-...or remotely by adding
+...or remotely by adding the `@RemoteAddress` annotaion
 
 ```java
+@RunWith(WebDriverRunner.class)
 @RemoteAddress("http://your-remote-url")
+@Firefox
+@Chrome
+@InternetExplorer
+public class CrossBrowserTest {
+	...
+}
 ```
 
-to the test class
+To run your test headless you can use the `@HtmlUnit` annotation. If wanted you can also run your tests agains the Safari browser with the `@Safari` annotation (just make sure the chromedriver is installed).
 
-##### Model your website with the [Page Object Pattern](https://code.google.com/p/selenium/wiki/PageObjects)
+Browser `version` and `platform` settings can be passed as annotation parameters e.g. `@Firefox(version = "35.0", platform = Platform.MAC)`.
+
+The desired capabilities can either be provided in JSON format as a string e.g. `@Chrome(desiredCapabilities = "{ chromeOptions: { args: [''--start-maximized'] }")` or by creating a new class that extends the WebDriver's `DesiredCapabilities` class
+```java
+public class StartMaximized extends DesiredCapabilities {
+    public StartMaximized() {
+        ChromeOptions options = new ChromeOptions();
+        options.addArguments("--start-maximized");
+        setCapability(ChromeOptions.CAPABILITY, options);
+    }
+}
+```
+...and passing that to the annotation e.g. `@Chrome(desiredCapabilitiesClass = StartMaximized.class)`.
+
+If you want set a custom browser name this can be done by using the `@Browser` annotation e.g. `Browser(browserName = "foo")`.
+
+For larger and more complex test grids the `@Browsers` annotation can be used. For example to test the Firefox browser on Windows, Mac and Linux
+```java
+@Browsers(firefox = {
+    @Firefox(platform = Platform.WINDOWS),
+    @Firefox(platform = Platform.MAC),
+    @Firefox(platform = Platform.LINUX)
+})
+```
+
+
+
+<br>
+### Model your website with the [Page Object Pattern](https://code.google.com/p/selenium/wiki/PageObjects)
 ```java
 import com.github.webdriverextensions.WebPage;
 
@@ -138,9 +301,12 @@ public class SearchPage extends WebPage {
 }
 ```
 
-##### Model your page components with the WebComponent (an extendable WebElement)
 
-E.g. model your table rows
+
+<br>
+### Model your page components with the WebComponent
+
+Model repeating html content, e.g. table rows
 
 ```html
     <table id="playlist">
@@ -198,7 +364,8 @@ assertTextEquals("Hey Joe", playlist.get(0).track);
 
 
 
-##### Make your test readable as instructions with the [Bot Pattern](https://code.google.com/p/selenium/wiki/BotStyleTests)
+<br>
+### Make your test readable as instructions with the [Bot Pattern](https://code.google.com/p/selenium/wiki/BotStyleTests)
 
 Simply import the static Bot where you want to use it
 
@@ -209,8 +376,8 @@ import static com.github.webdriverextensions.Bot.*;
 ...and start interacting with your WebElements
 
 ```java
-type("testuser", username);
-type("ai78cGsT", password);
+type("testuser", usernameInput);
+type("ai78cGsT", passwordInput);
 uncheck(rememberMeCheckbox);
 click(loginButton);
 ```
@@ -232,7 +399,7 @@ if (hasClass("selected", mainPageTab)) {
     // ...do something
 }
 if (browserIsInternetExplorer()) {
-    // ...handle crossbrowser difference
+    // ...handle cross browser difference
 }
 ```
 
@@ -242,13 +409,14 @@ If you won't run your tests in the provided JUnitRunner make sure you set the dr
 WebDriverExtensionsContext.setDriver(yourDriver);
 ```
 
-##### Create new project with the [Maven Archetype](https://github.com/webdriverextensions/webdriverextensions-archetype-quickstart#webdriver-extension-archetype-quickstart)
-Run
+<br>
+### Create new projects with the [Maven Archetype](https://github.com/webdriverextensions/webdriverextensions-archetype-quickstart#webdriver-extension-archetype-quickstart)
+Open your terminal and run
 ```sh
 mvn archetype:generate -DarchetypeGroupId=com.github.webdriverextensions -DarchetypeArtifactId=webdriverextensions-archetype-quickstart
 ```
 
-in your terminal to create
+...and answer the questions to generate
 ```
 projectname
 ├── drivers
@@ -284,7 +452,10 @@ mvn test
 
 ### <a href="http://testingbot.com" target="_blank">TestingBot</a> is now supporting this project by giving it a Free account!
 
-### Changelog
+
+
+<br>
+# Changelog
 
 #### 1.2.1 (2014 December 3)
 - ENHANCEMENT Added descriptive messages to instantiation exceptions thrown by WebDriverExtensions when WebPage, WebSite and WebRepository class is either abstract, has no no args constructor or has no accessible constructor
@@ -307,7 +478,9 @@ mvn test
 #### 1.0.0 (2014 September 2)
 - Initial release!
 
-## License
+
+<br>
+# License
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this work except in compliance with the License.
