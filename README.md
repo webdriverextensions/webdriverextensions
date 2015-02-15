@@ -17,7 +17,7 @@ Available through the [Maven Central Repository](http://mvnrepository.com/search
 
 <br>
 ### Want to Contribute?
-Feel free to report any bug or feature request. Just open a new GitHub issue [here](https://github.com/webdriverextensions/webdriverextensions/issues/new) and I'll try to bugfix/implement it ASAP. Or even better clone this repo and commit your changes and make a [Pull Request](https://help.github.com/articles/using-pull-requests/).
+Feel free to report any bug or feature request. Just open a new GitHub issue [here](https://github.com/webdriverextensions/webdriverextensions/issues/new) and I'll try to bugfix/implement it ASAP. Or even better clone this repository, commit your changes and make a [Pull Request](https://help.github.com/articles/using-pull-requests/).
 
 <br>
 # Content
@@ -42,7 +42,7 @@ Feel free to report any bug or feature request. Just open a new GitHub issue [he
 
 <br>
 # Hello World Example
-Here is an example of how a cross browser test is configured and written with and without the WebDriver Extensions Framework. The test will run on Firefox, Chrome and Internet Explorer. It will google for "Hello World" and assert that the search result contains the searched text "Hello World".
+Here is an example of how a cross browser test looks like with and without the WebDriver Extensions Framework. The test will run on Firefox, Chrome and Internet Explorer. It will google for "Hello World" and assert that the search result contains the searched text "Hello World".
 
 
 
@@ -130,7 +130,9 @@ public class WebDriverExampleTest {
 _<sub>Imports are hidden for the sake of simplicity, for imports and instructions on how to run this example see this [gist](https://gist.github.com/andidev/6c5dc8033c019e4c069d)</sub>_
 
 
-As you can see WebDriver Extensions Framework made the test almost readable as instructions you would give to someone who needs to manually perform this test. This is one of the main punchlines of this framework. The other one is the use of the [Page Object Pattern](https://code.google.com/p/selenium/wiki/PageObjects) which is unfortunately not demonstrated by this example for simplicity reasons.
+As you can see WebDriver Extensions Framework made the test almost readable as instructions you would give to someone who needs to manually perform this test. This is one of the main points of this framework. It also removed a lot of verbose boilerplate configuration code.
+
+For the sake of simplicity this example does not demonstrate the [Page Object Pattern](https://code.google.com/p/selenium/wiki/PageObjects). Please keep on reading the [Getting Started](#getting-started) section to read more about how to create and use Page Objects.
 
 
 
@@ -169,7 +171,7 @@ class WebDriverExtensionsGroovyExampleTest {
 
 _<sub>Imports are hidden for the sake of simplicity, for imports and instructions on how to run this example see this [gist](https://gist.github.com/andidev/b182c59a92d5ad66b035)</sub>_
 
-Note that Groovy examples will not be covered anymore than this in this document.
+Note that Groovy examples will not be covered by this document.
 
 
 
@@ -190,7 +192,7 @@ Add
 
 <br>
 ### Download and manage your drivers with the [Maven Plugin](https://github.com/webdriverextensions/webdriverextensions-maven-plugin#webdriver-extensions-maven-plugin)
-There is no need to download any drivers manually. Instead use the WebDriver Extensions Maven Plugin to download and manage your drivers by adding
+There is no need to download any drivers manually. Instead use the [WebDriver Extensions Maven Plugin GitHub page](https://github.com/webdriverextensions/webdriverextensions-maven-plugin) to download and manage your drivers by adding
 ```xml
 <plugin>
     <groupId>com.github.webdriverextensions</groupId>
@@ -217,9 +219,9 @@ There is no need to download any drivers manually. Instead use the WebDriver Ext
     </configuration>
 </plugin>
 ```
-...as a plugin in your [pom.xml](https://gist.github.com/andidev/ad006a454edfd9f0e9e5#file-pom-xml) file. Then simply just update the version tag of the driver when a new driver is available and re-run your tests.
+...as a plugin in your [pom.xml](https://gist.github.com/andidev/ad006a454edfd9f0e9e5#file-pom-xml) file. Then simply just update the version tag of the driver when a new driver is available and re-run your tests with the `mvn test` command or your preferred IDE.
 
-The plugin will download the most suitable driver for the currently running OS. The bit of the driver will be 32bit with the exception of running the tests from a linux 64bit OS. If you would like to specify the OS and bit of the drivers to download you can provide them with a `<platform>` and `<bit>`-tag inside each `<driver>`-tag. Platform can be set to `windows`, `mac` or `linux` while the bit can be set to `32` or `64`.
+The plugin will download the most suitable driver for  your OS. The bit of the driver will be 32bit with the exception of running the tests from a linux 64bit OS. If you would like to specify the OS and bit of the drivers to download you can provide them with a `<platform>` and `<bit>`-tag inside each `<driver>`-tag. Platform can be set to `windows`, `mac` or `linux` while the bit can be set to `32` or `64`.
 
 The drivers will placed in a folder called `drivers` in the project root. If you will use the provided `WebDriverRunner` there is no need for passing driver paths as System Properties since the framework will take care of the for you. If you won't be using it make sure to point the drivers out manually.
 
@@ -317,10 +319,8 @@ public class LoginPage extends WebPage {
 
     @FindBy(name = "username")
     public WebElement usernameInput;
-
     @FindBy(name = "password")
     public WebElement passwordInput;
-
     @FindBy(name = "rememberMe")
     public WebElement rememberMeCheckbox;
 
@@ -377,13 +377,10 @@ public class PlaylistRow extends WebComponent {
 
     @FindBy(className = "track")
     public WebElement track;
-
     @FindBy(className = "artist")
     public WebElement artist;
-
     @FindBy(className = "time")
     public WebElement time;
-
     @FindBy(className = "album")
     public WebElement album;
 }
@@ -407,8 +404,7 @@ assertTextEquals("Hey Joe", playlist.get(0).track);
 <br>
 ### Make your test readable as instructions with the [Bot Pattern](https://code.google.com/p/selenium/wiki/BotStyleTests)
 
-Simply import the static [Bot](http://static.javadoc.io/com.github.webdriverextensions/webdriverextensions/1.2.1/com/github/webdriverextensions/Bot.html)
-) where you want to use it
+Simply import the static [Bot](http://static.javadoc.io/com.github.webdriverextensions/webdriverextensions/1.2.1/com/github/webdriverextensions/Bot.html) where you want to use it
 
 ```java
 import static com.github.webdriverextensions.Bot.*;
@@ -444,9 +440,11 @@ if (browserIsInternetExplorer()) {
 }
 ```
 
-The list of provided methods for interacting, asserting and conditional checks of WebElements is to large to mention in this documentation. Instead you can find them in the [javadoc for the Bot class](http://static.javadoc.io/com.github.webdriverextensions/webdriverextensions/1.2.1/com/github/webdriverextensions/Bot.html). Another way is to use the autocompletion tool of your IDE (usally with Ctrl + Space and then start typing). The rule is that everything you would ever need from the Bot class should already be there today. If you feel that some Bot methods are missing please explain why in a new GitHub issue over [here](https://github.com/webdriverextensions/webdriverextensions/issues/new). Or even better clone this repository and commit the new methods and create a [Pull Request](https://help.github.com/articles/using-pull-requests/).
+The list of provided methods for interacting, asserting and conditional checks of WebElements is to large to mention in this documentation. Instead you can find them in the [javadoc for the Bot class](http://static.javadoc.io/com.github.webdriverextensions/webdriverextensions/1.2.1/com/github/webdriverextensions/Bot.html). Another way is to use the autocompletion tool of your IDE (usally with Ctrl + Space and then start typing).
 
-If you won't run your tests in the provided JUnitRunner make sure you set the driver in the WebDriverExtensionsContext before using the Bot
+If you feel that some Bot methods are missing please describe them in a new GitHub issue [here](https://github.com/webdriverextensions/webdriverextensions/issues/new). Or even better clone this repository, commit the new methods and create a [Pull Request](https://help.github.com/articles/using-pull-requests/).
+
+If you won't run your tests with the WebDriverRunner make sure you set the driver in the WebDriverExtensionsContext before using the Bot
 
 ```java
 WebDriverExtensionsContext.setDriver(yourDriver);
