@@ -368,7 +368,7 @@ public class LoginPage extends WebPage {
     }
 }
 ```
-...and then add and use your Page Model in your tests
+...and then add and use it in your tests
 
 ```java
 @RunWith(WebDriverRunner.class)
@@ -449,14 +449,14 @@ public class PlaylistRow extends WebComponent {
 }
 ```
 
-...and then include your new WebComponent as you include a WebElement
+...and then include it as you include a WebElement
 
 ```java
 @FindBy(css = "#playlist tr")
 public List<PlaylistRow> playlist;
 ```
 
-...and then use your new WebComponent in your tests
+...and then use it in your tests
 
 ```java
 assertTextEquals("Hey Joe", playlist.get(0).track);
