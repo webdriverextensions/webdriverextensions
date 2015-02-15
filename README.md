@@ -360,7 +360,7 @@ public class LoginPage extends WebPage {
     @Override
     public void assertIsOpen(Object... arguments) {
         // Define how to assert that this page is open, e.g.
-        assertTitleEquals("Login Page")
+        assertTitleEquals("Login Page");
         assertIsDisplayed(usernameInput);
         assertIsDisplayed(passwordInput);
         assertIsDisplayed(rememberMeCheckbox);
