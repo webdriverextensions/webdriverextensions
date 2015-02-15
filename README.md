@@ -28,7 +28,7 @@ Feel free to report any bug or feature request. Just open a new GitHub issue [he
 - [Getting Started](#getting-started)
     - [Use Maven to add WebDriver Extensions](#use-maven-to-add-webdriver-extensions)
     - [Download and manage your drivers with the Maven Plugin](#download-and-manage-your-drivers-with-the-maven-plugin)
-    - [Cross Browser test your web site with the JUnitRunner](#cross-browser-test-your-web-site-with-the-junitrunner)
+    - [Cross Browser test your website with the JUnitRunner](#cross-browser-test-your-website-with-the-junitrunner)
     - [Model your website with the Page Object Pattern](#model-your-website-with-the-page-object-pattern)
     - [Model your page components with the WebComponent](#model-your-page-components-with-the-webcomponent)
     - [Make your test readable as instructions with the Bot Pattern](#make-your-test-readable-as-instructions-with-the-bot-pattern)
@@ -54,6 +54,7 @@ Here is an example of how a cross browser test looks like with and without the W
 @InternetExplorer
 public class WebDriverExtensionsExampleTest {
 
+    // Model
     @FindBy(name = "q")
     WebElement queryInput;
     @FindBy(name = "btnG")
@@ -107,6 +108,7 @@ public class WebDriverExampleTest {
         driver.quit();
     }
 
+    // Model
     @FindBy(name = "q")
     WebElement queryInput;
     @FindBy(name = "btnG")
@@ -148,6 +150,7 @@ If wanted one could further increase readability by using the Groovy language in
 @InternetExplorer
 class WebDriverExtensionsGroovyExampleTest {
 
+    // Model
     @FindBy(name = "q")
     WebElement queryInput;
     @FindBy(name = "btnG")
@@ -230,7 +233,7 @@ For more information on configuring the driver please visit the [WebDriver Exten
 
 
 <br>
-### Cross Browser test your web site with the JUnitRunner
+### Cross Browser test your website with the JUnitRunner
 
 Run your tests locally by using the `WebDriverRunner`
 
@@ -312,6 +315,27 @@ For larger and more complex test grids the `@Browsers` annotation can be used. F
 
 <br>
 ### Model your website with the [Page Object Pattern](https://code.google.com/p/selenium/wiki/PageObjects)
+
+Model your website pages, e.g. a login page
+
+```html
+<html>
+    <head>
+        <title>Login Page</title>
+    </head>
+    <body>
+        <form>
+            <label>Username</label> <input name="username">
+            <label>Password</label> <input name="password">
+            <input type="checkbox" name="remember-me"> Remember me
+            <button id="login-button">Login</button>
+        </form>
+    </body>
+</html>
+```
+
+...by extending the `WebPage` class
+
 ```java
 import com.github.webdriverextensions.WebPage;
 
@@ -321,8 +345,10 @@ public class LoginPage extends WebPage {
     public WebElement usernameInput;
     @FindBy(name = "password")
     public WebElement passwordInput;
-    @FindBy(name = "rememberMe")
+    @FindBy(name = "remember-me")
     public WebElement rememberMeCheckbox;
+    @FindBy(id = "login-buttom")
+    public WebElement loginButton;
 
     @Override
     public void open(Object... arguments) {
@@ -334,11 +360,48 @@ public class LoginPage extends WebPage {
     @Override
     public void assertIsOpen(Object... arguments) {
         // Define how to assert that this page is open, e.g.
+        assertTitleEquals("Login Page")
         assertIsDisplayed(usernameInput);
         assertIsDisplayed(passwordInput);
         assertIsDisplayed(rememberMeCheckbox);
+        assertIsDisplayed(loginButton);
     }
 }
+```
+...and then add and use your Page Model in your tests
+
+```java
+@RunWith(WebDriverRunner.class)
+@Firefox
+public class LoginPageTest {
+
+    // Add models to inject into test
+    LoginPage loginPage;
+
+    @Test
+    public void loginTest() {
+        open(loginPage); // Calls the open method defined in LoginPage
+        type("foo", loginPage.username);
+        type("bar", loginPage.password);
+        click(loginButtom);
+        assertIsNotOpen(loginPage); // Calls the assertIsNotOpen method in the abstract WebPage class which inverts the assertIsOpen method defined in LoginPage
+    }
+
+    ...
+
+}
+```
+
+You have to override and implement the `void open(Object... arguments)` and `void assertIsOpen(Object... arguments)` methods inherited from the abstract `WebPage` class. Implementing these methods  enables you to easily open and assert that the page is open in your tests. As soon as the methods are implemented you can also call the  `isOpen(Object... arguments)`, `isNotOpen(Object... arguments)` and the `assertIsNotOpen(Object... arguments)` methods available since the `WebPage` is extended. These methods allows you to pass any kind of arbitrary number of arguments you would need to open a page e.g. an entity id or similar.
+
+There is also a [WebSite](http://static.javadoc.io/com.github.webdriverextensions/webdriverextensions/1.2.1/com/github/webdriverextensions/WebSite.html) class which can be used if you would want to create a Site Object i.e. a model of the complete website. It is actually no difference between the [WebPage](http://static.javadoc.io/com.github.webdriverextensions/webdriverextensions/1.2.1/com/github/webdriverextensions/WebPage.html) and the [WebSite](http://static.javadoc.io/com.github.webdriverextensions/webdriverextensions/1.2.1/com/github/webdriverextensions/WebSite.html) class except the name.
+
+An alternative to using the [WebPage](http://static.javadoc.io/com.github.webdriverextensions/webdriverextensions/1.2.1/com/github/webdriverextensions/WebPage.html) class is using the [WebRepository](http://static.javadoc.io/com.github.webdriverextensions/webdriverextensions/1.2.1/com/github/webdriverextensions/WebRepository.html) class. The only difference is that it does not implement the Openable interface and therefore there is no need to override and implement the `void open(Object... arguments)` and `void assertIsOpen(Object... arguments)` methods.
+
+Note that any class extending the `WebPage`, `WebSite` or `WebRepository` class that are added as fields in the test will automatically be injected/instantiated if the `WebDriverRunner` is used. If you won't run your tests with the WebDriverRunner you can call the Selenium WebDriver `PageFactory.initElements` method and pass the `WebDriverExtensionFieldDecorator` before running the test, e.g.
+
+```java
+PageFactory.initElements(new WebDriverExtensionFieldDecorator(yourDriver), this);
 ```
 
 
@@ -349,23 +412,23 @@ public class LoginPage extends WebPage {
 Model repeating html content, e.g. table rows
 
 ```html
-    <table id="playlist">
-         <tr>
-              <td class="track">Hey Joe</td>
-              <td class="artist">Jimi Hendrix</td>
-              <td class="time">3:30</td>
-              <td class="album">Are You Experienced</td>
-         </tr>
-         <tr>
-              <td class="track">Play with Fire</td>
-              <td class="artist">The Rolling Stones</td>
-              <td class="time">2:14</td>
-              <td class="album">The Last time</td>
-         </tr>
+<table id="playlist">
+     <tr>
+          <td class="track">Hey Joe</td>
+          <td class="artist">Jimi Hendrix</td>
+          <td class="time">3:30</td>
+          <td class="album">Are You Experienced</td>
+     </tr>
+     <tr>
+          <td class="track">Play with Fire</td>
+          <td class="artist">The Rolling Stones</td>
+          <td class="time">2:14</td>
+          <td class="album">The Last time</td>
+     </tr>
 
-         ...
+     ...
 
-    </table>
+</table>
 ```
 
 ...by extending the WebComponent
