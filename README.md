@@ -271,7 +271,7 @@ public class CrossBrowserTest {
 }
 ```
 
-...or remotely by adding the `@RemoteAddress` annotaion
+...or remotely by adding the [@RemoteAddress](http://static.javadoc.io/com.github.webdriverextensions/webdriverextensions/1.2.1/com/github/webdriverextensions/junitrunner/annotations/RemoteAddress.html) annotaion
 
 ```java
 @RunWith(WebDriverRunner.class)
