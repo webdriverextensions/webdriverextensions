@@ -284,7 +284,7 @@ public class CrossBrowserTest {
 }
 ```
 
-To run your test headless without starting a browser, use the `@HtmlUnit` annotation. If wanted you can also run your tests against the Safari browser with the `@Safari` annotation (just make sure the chromedriver is installed). Note that there is currently a [WebDriver issue](https://code.google.com/p/selenium/issues/detail?id=7933) with running the SafariDriver on some OSX/Safari versions.
+To run your test headless without starting a browser, use the [@HtmlUnit](http://static.javadoc.io/com.github.webdriverextensions/webdriverextensions/1.2.1/com/github/webdriverextensions/junitrunner/annotations/HtmlUnit.html) annotation. If wanted you can also run your tests against the Safari browser with the [@Safari](http://static.javadoc.io/com.github.webdriverextensions/webdriverextensions/1.2.1/com/github/webdriverextensions/junitrunner/annotations/Safari.html) annotation (just make sure the chromedriver is installed). Note that there is currently a [WebDriver issue](https://code.google.com/p/selenium/issues/detail?id=7933) with running the SafariDriver on some OSX/Safari versions.
 
 Browser `version` and `platform` settings can be passed as annotation parameters e.g. `@Firefox(version = "35.0", platform = Platform.MAC)`.
 
@@ -300,9 +300,9 @@ public class StartMaximized extends DesiredCapabilities {
 ```
 ...and passing that to the annotation e.g. `@Chrome(desiredCapabilitiesClass = StartMaximized.class)`.
 
-If you want set a custom browser name this can be done by using the `@Browser` annotation e.g. `Browser(browserName = "foo")`.
+If you want set a custom browser name this can be done by using the [@Browser](http://static.javadoc.io/com.github.webdriverextensions/webdriverextensions/1.2.1/com/github/webdriverextensions/junitrunner/annotations/Browser.html) annotation e.g. `Browser(browserName = "foo")`.
 
-For larger and more complex test grids the `@Browsers` annotation can be used. For example to test the Firefox browser on Windows, Mac and Linux
+For larger and more complex test grids the [@Browsers](http://static.javadoc.io/com.github.webdriverextensions/webdriverextensions/1.2.1/com/github/webdriverextensions/junitrunner/annotations/Browsers.html) annotation can be used. For example to test the Firefox browser on Windows, Mac and Linux
 ```java
 @Browsers(firefox = {
     @Firefox(platform = Platform.WINDOWS),
