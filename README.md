@@ -195,7 +195,7 @@ Add
 
 <br>
 ### Download and manage your drivers with the [Maven Plugin](https://github.com/webdriverextensions/webdriverextensions-maven-plugin#webdriver-extensions-maven-plugin)
-There is no need to download any drivers manually. Instead use the [WebDriver Extensions Maven Plugin GitHub page](https://github.com/webdriverextensions/webdriverextensions-maven-plugin) to download and manage your drivers by adding
+There is no need to download any drivers manually. Instead use the [WebDriver Extensions Maven Plugin GitHub](https://github.com/webdriverextensions/webdriverextensions-maven-plugin) to download and manage your drivers by adding
 ```xml
 <plugin>
     <groupId>com.github.webdriverextensions</groupId>
