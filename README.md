@@ -486,6 +486,7 @@ click(loginButton);              // click at WebElements
 ...and write your asserts
 
 ```java
+assertIsOpen(homePage);                                        // assert WebPages are open
 assertTextEquals("testuser", currentUser);                     // assert text in WebElements equals
 assertTitleStartsWith("Wikipedia - ");                         // assert title starts with
 assertCurrentUrlMatches("http://[a-z]{2,3}.wikipedia.org/.*"); // assert current url matches regex
