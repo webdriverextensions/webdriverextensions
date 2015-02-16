@@ -476,29 +476,30 @@ import static com.github.webdriverextensions.Bot.*;
 ...and start interacting with your WebElements
 
 ```java
-type("testuser", usernameInput);
+open(loginPage);                 // open WebPages
+type("testuser", usernameInput); // type into WebElements pointing at text input tags
 type("ai78cGsT", passwordInput);
-uncheck(rememberMeCheckbox);
-click(loginButton);
+uncheck(rememberMeCheckbox);     // check and uncheck WebElements pointing at checkbox input tags
+click(loginButton);              // click at WebElements
 ```
 
 ...and write your asserts
 
 ```java
-assertTextEquals("testuser", currentUser);
-assertTitleStartsWith("Wikipedia - ");
-assertCurrentUrlMatches("http://[a-z]{2,3}.wikipedia.org/.*");
-assertHasClass("selected", mainPageTab);
+assertTextEquals("testuser", currentUser);                     // assert text in WebElements equals
+assertTitleStartsWith("Wikipedia - ");                         // assert title starts with
+assertCurrentUrlMatches("http://[a-z]{2,3}.wikipedia.org/.*"); // assert current url matches regex
+assertHasClass("selected", homeTab);                           // assert WebElement tags has class
 // ...type assert then bring up the list of all supported asserts with your IDE's autocompletion
 ```
 
 ...and conditional statements
 
 ```java
-if (hasClass("selected", mainPageTab)) {
+if (hasClass("selected", homeTab)) { // check if WebElement tags has class
     // ...do something
 }
-if (browserIsInternetExplorer()) {
+if (browserIsInternetExplorer()) {   // check if browser is Internet Explorer
     // ...handle cross browser difference
 }
 ```
