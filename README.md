@@ -11,8 +11,8 @@ Available through the [Maven Central Repository](http://mvnrepository.com/search
 - A [Maven Plugin](https://github.com/webdriverextensions/webdriverextensions-maven-plugin#webdriver-extensions-maven-plugin) to manage, download and install drivers
 - Annotation based JUnit Runner for running Selenium/WebDriver tests locally or remotely against multiple browsers
 - New classes for modelling your website e.g. [WebComponent](http://static.javadoc.io/com.github.webdriverextensions/webdriverextensions/1.2.1/com/github/webdriverextensions/WebComponent.html) (an extendable WebElement), [WebPage](http://static.javadoc.io/com.github.webdriverextensions/webdriverextensions/1.2.1/com/github/webdriverextensions/WebPage.html), [WebSite](http://static.javadoc.io/com.github.webdriverextensions/webdriverextensions/1.2.1/com/github/webdriverextensions/WebSite.html) and [WebRepository](http://static.javadoc.io/com.github.webdriverextensions/webdriverextensions/1.2.1/com/github/webdriverextensions/WebRepository.html)
-- A Bot class providing static methods for interacting, asserting and checking conditions of WebElements, WebComponents, WebPages and WebSites
-- A WebSite and WebRepository generator that enables adding WebComponents, WebPages, WebSites and WebRepositories by annotations
+- A [Bot](http://static.javadoc.io/com.github.webdriverextensions/webdriverextensions/1.2.1/com/github/webdriverextensions/Bot.html) providing static methods for interacting, asserting and checking conditions of WebElements, WebComponents, WebPages and WebSites
+- A WebSite and WebRepository [generators](http://static.javadoc.io/com.github.webdriverextensions/webdriverextensions/1.2.1/com/github/webdriverextensions/generator/package-summary.html) that enables adding WebComponents, WebPages, WebSites and WebRepositories by [annotations](http://static.javadoc.io/com.github.webdriverextensions/webdriverextensions/1.2.1/com/github/webdriverextensions/generator/annotations/package-summary.html)
 - A [Maven Archetype](https://github.com/webdriverextensions/webdriverextensions-archetype-quickstart#webdriver-extension-archetype-quickstart) for creating new projects
 
 <br>
