@@ -462,6 +462,7 @@ public List<PlaylistRow> playlist;
 assertTextEquals("Hey Joe", playlist.get(0).track);
 ```
 
+TODO: document the [@Delegate](http://static.javadoc.io/com.github.webdriverextensions/webdriverextensions/1.2.1/com/github/webdriverextensions/annotations/Delegate.html) [ResetSearchContext](http://static.javadoc.io/com.github.webdriverextensions/webdriverextensions/1.2.1/com/github/webdriverextensions/annotations/ResetSearchContext.html) annotation.
 
 
 <br>
@@ -507,9 +508,9 @@ if (browserIsInternetExplorer()) {   // check if browser is Internet Explorer
 
 The list of provided methods for interacting, asserting and conditional checks of WebElements is to large to mention in this documentation. Instead you can find them in the [javadoc for the Bot class](http://static.javadoc.io/com.github.webdriverextensions/webdriverextensions/1.2.1/com/github/webdriverextensions/Bot.html). Another way is to use the autocompletion tool of your IDE (usally with Ctrl + Space and then start typing).
 
-If you feel that some Bot methods are missing please describe them in a new GitHub issue [here](https://github.com/webdriverextensions/webdriverextensions/issues/new). Or even better clone this repository, commit the new methods and create a [Pull Request](https://help.github.com/articles/using-pull-requests/).
+If you feel that some [Bot](http://static.javadoc.io/com.github.webdriverextensions/webdriverextensions/1.2.1/com/github/webdriverextensions/Bot.html) methods are missing please describe them in a new GitHub issue [here](https://github.com/webdriverextensions/webdriverextensions/issues/new). Or even better clone this repository, commit the new methods and create a [Pull Request](https://help.github.com/articles/using-pull-requests/).
 
-If you won't run your tests with the [WebDriverRunner](http://static.javadoc.io/com.github.webdriverextensions/webdriverextensions/1.2.1/com/github/webdriverextensions/junitrunner/WebDriverRunner.html) make sure you set the driver in the [WebDriverExtensionsContext](http://static.javadoc.io/com.github.webdriverextensions/webdriverextensions/1.2.1/com/github/webdriverextensions/WebDriverExtensionsContext.html) before using the Bot
+If you won't run your tests with the [WebDriverRunner](http://static.javadoc.io/com.github.webdriverextensions/webdriverextensions/1.2.1/com/github/webdriverextensions/junitrunner/WebDriverRunner.html) make sure you set the driver in the [WebDriverExtensionsContext](http://static.javadoc.io/com.github.webdriverextensions/webdriverextensions/1.2.1/com/github/webdriverextensions/WebDriverExtensionsContext.html) before using the [Bot](http://static.javadoc.io/com.github.webdriverextensions/webdriverextensions/1.2.1/com/github/webdriverextensions/Bot.html)
 
 ```java
 WebDriverExtensionsContext.setDriver(yourDriver);
