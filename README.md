@@ -311,6 +311,8 @@ For larger and more complex test grids the [@Browsers](http://static.javadoc.io/
 })
 ```
 
+TODO: Document the [@DriverPaths](http://static.javadoc.io/com.github.webdriverextensions/webdriverextensions/1.2.1/com/github/webdriverextensions/junitrunner/annotations/DriverPaths.html) annotation
+
 
 
 <br>
@@ -462,7 +464,7 @@ public List<PlaylistRow> playlist;
 assertTextEquals("Hey Joe", playlist.get(0).track);
 ```
 
-TODO: document the [@Delegate](http://static.javadoc.io/com.github.webdriverextensions/webdriverextensions/1.2.1/com/github/webdriverextensions/annotations/Delegate.html) and [@ResetSearchContext](http://static.javadoc.io/com.github.webdriverextensions/webdriverextensions/1.2.1/com/github/webdriverextensions/annotations/ResetSearchContext.html) annotation.
+TODO: Document the [@Delegate](http://static.javadoc.io/com.github.webdriverextensions/webdriverextensions/1.2.1/com/github/webdriverextensions/annotations/Delegate.html) and [@ResetSearchContext](http://static.javadoc.io/com.github.webdriverextensions/webdriverextensions/1.2.1/com/github/webdriverextensions/annotations/ResetSearchContext.html) annotation.
 
 
 <br>
