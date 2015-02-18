@@ -28,6 +28,7 @@ Feel free to report any bug or feature request. Just open a new GitHub issue [he
 - [Getting Started](#getting-started)
     - [Use Maven to add WebDriver Extensions](#use-maven-to-add-webdriver-extensions)
     - [Download and manage your drivers with the Maven Plugin](#download-and-manage-your-drivers-with-the-maven-plugin)
+    - [Speed up your tests by running them in parallel](#speed-up-your-tests-by-running-them-in-parallel)
     - [Cross Browser test your website with the JUnitRunner](#cross-browser-test-your-website-with-the-junitrunner)
     - [Model your website with the Page Object Pattern](#model-your-website-with-the-page-object-pattern)
     - [Model your page components with the WebComponent](#model-your-page-components-with-the-webcomponent)
@@ -229,6 +230,33 @@ The plugin will download the most suitable driver for  your OS. The bit of the d
 The drivers will placed in a folder called `drivers` in the project root. If you will use the provided [WebDriverRunner](http://static.javadoc.io/com.github.webdriverextensions/webdriverextensions/1.2.1/com/github/webdriverextensions/junitrunner/WebDriverRunner.html) there is no need for passing driver paths as System Properties since the framework will take care of the for you. If you won't be using it make sure to point the drivers out manually.
 
 For more information on configuring the driver please visit the [WebDriver Extensions Maven Plugin GitHub page](https://github.com/webdriverextensions/webdriverextensions-maven-plugin). If the latest drivers are not available yet please create an issue [here](https://github.com/webdriverextensions/webdriverextensions-maven-plugin/issues/new).
+
+
+
+<br>
+### Speed up your tests by running them in parallel
+Run your tests in parallel by adding
+```xml
+<plugin>
+    <groupId>org.apache.maven.plugins</groupId>
+    <artifactId>maven-surefire-plugin</artifactId>
+    <version>2.18.1</version>
+    <configuration>
+        <parallel>all</parallel>
+        <threadCount>10</threadCount>
+        <perCoreThreadCount>false</perCoreThreadCount>
+    </configuration>
+</plugin>
+```
+...to your pom.xml file. If your project already included the `maven-surfire-plugin` just add the configuration from the above xml snippet and make sure the version is 2.18.1 or higher.
+
+This configuration will run maximum 10 tests in parallel. For more information
+about the configuration please see section [Fork Options and Parallel Test Execution](http://maven.apache.org/surefire/maven-surefire-plugin/examples/fork-options-and-parallel-execution.html) in the documentation of the [Maven Surefire Plugin](http://maven.apache.org/surefire/maven-surefire-plugin/index.html).
+
+Before configuring to run your tests in parallel make sure that your website
+allows it. For example problems could occur when logging in with the same user
+at the same time (if your website supports a login functionality).
+There could also be other reasons not to run tests in parallel.
 
 
 
