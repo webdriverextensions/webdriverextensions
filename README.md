@@ -513,7 +513,7 @@ type("ai78cGsT", passwordInput);
 uncheck(rememberMeCheckbox);     // check and uncheck WebElements pointing at checkbox input tags
 click(loginButton);              // click at WebElements
 ```
-TODO: add optionIsSelected
+TODO: add selectOption
 
 ...and write your asserts
 
