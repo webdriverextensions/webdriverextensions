@@ -537,7 +537,15 @@ if (browserIsInternetExplorer()) {   // check if browser is Internet Explorer
 }
 ```
 
-TODO: add section  ... and wait for ExpectedConditions
+...and wait for ExpectedConditions
+
+TODO: add content
+
+...and get the current driver
+
+```java
+System.out.println(driver().getPageSource());
+```
 
 The list of provided methods for interacting, asserting and conditional checks of WebElements is to large to mention in this documentation. Instead you can find them in the [javadoc for the Bot class](http://static.javadoc.io/com.github.webdriverextensions/webdriverextensions/1.2.1/com/github/webdriverextensions/Bot.html). Another way is to use the autocompletion tool of your IDE (usally with Ctrl + Space and then start typing).
 
