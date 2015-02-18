@@ -422,7 +422,7 @@ public class LoginPageTest {
 }
 ```
 
-You have to override and implement the [void open(Object... arguments)](http://static.javadoc.io/com.github.webdriverextensions/webdriverextensions/1.2.1/com/github/webdriverextensions/WebPage.html#open-java.lang.Object...-) and [void assertIsOpen(Object... arguments)](http://static.javadoc.io/com.github.webdriverextensions/webdriverextensions/1.2.1/com/github/webdriverextensions/WebPage.html#assertIsOpen-java.lang.Object...-) methods inherited from the abstract [WebPage](http://static.javadoc.io/com.github.webdriverextensions/webdriverextensions/1.2.1/com/github/webdriverextensions/WebPage.html) class. Implementing these methods  enables you to easily open and assert that the page is open in your tests. As soon as the methods are implemented you can also call the [isOpen(Object... arguments)](http://static.javadoc.io/com.github.webdriverextensions/webdriverextensions/1.2.1/com/github/webdriverextensions/WebPage.html#isOpen-java.lang.Object...-), [isNotOpen(Object... arguments)](http://static.javadoc.io/com.github.webdriverextensions/webdriverextensions/1.2.1/com/github/webdriverextensions/WebPage.html#isNotOpen-java.lang.Object...-) and the [assertIsNotOpen(Object... arguments)](http://static.javadoc.io/com.github.webdriverextensions/webdriverextensions/1.2.1/com/github/webdriverextensions/WebPage.html#assertIsNotOpen-java.lang.Object...-) methods available since the [WebPage](http://static.javadoc.io/com.github.webdriverextensions/webdriverextensions/1.2.1/com/github/webdriverextensions/WebPage.html) is extended. These methods allows you to pass any kind of arbitrary number of arguments you would need to open a page e.g. an entity id or similar.
+You have to override and implement the [void open(Object... arguments)](http://static.javadoc.io/com.github.webdriverextensions/webdriverextensions/1.2.1/com/github/webdriverextensions/WebPage.html#open-java.lang.Object...-) and [void assertIsOpen(Object... arguments)](http://static.javadoc.io/com.github.webdriverextensions/webdriverextensions/1.2.1/com/github/webdriverextensions/WebPage.html#assertIsOpen-java.lang.Object...-) methods inherited from the abstract [WebPage](http://static.javadoc.io/com.github.webdriverextensions/webdriverextensions/1.2.1/com/github/webdriverextensions/WebPage.html) class. Implementing these methods  enables you to easily open and assert that the page is open in your tests. As soon as the methods are implemented you can also call the [isOpen(Object... arguments)](http://static.javadoc.io/com.github.webdriverextensions/webdriverextensions/1.2.1/com/github/webdriverextensions/WebPage.html#isOpen-java.lang.Object...-), [isNotOpen(Object... arguments)](http://static.javadoc.io/com.github.webdriverextensions/webdriverextensions/1.2.1/com/github/webdriverextensions/WebPage.html#isNotOpen-java.lang.Object...-) and the [assertIsNotOpen(Object... arguments)](http://static.javadoc.io/com.github.webdriverextensions/webdriverextensions/1.2.1/com/github/webdriverextensions/WebPage.html#assertIsNotOpen-java.lang.Object...-) methods available since the [WebPage](http://static.javadoc.io/com.github.webdriverextensions/webdriverextensions/1.2.1/com/github/webdriverextensions/WebPage.html) is extended. These methods allows you to pass any kind of arbitrary number of arguments you would need to open a page e.g. an entity id or similar. TODO: add example
 
 There is also a [WebSite](http://static.javadoc.io/com.github.webdriverextensions/webdriverextensions/1.2.1/com/github/webdriverextensions/WebSite.html) class which can be used if you would want to create a Site Object i.e. a model of the complete website. It is actually no difference between the [WebPage](http://static.javadoc.io/com.github.webdriverextensions/webdriverextensions/1.2.1/com/github/webdriverextensions/WebPage.html) and the [WebSite](http://static.javadoc.io/com.github.webdriverextensions/webdriverextensions/1.2.1/com/github/webdriverextensions/WebSite.html) class except the name.
 
@@ -504,7 +504,7 @@ Simply import the static [Bot](http://static.javadoc.io/com.github.webdriverexte
 import static com.github.webdriverextensions.Bot.*;
 ```
 
-...and start interacting with your WebElements
+...and start interacting with your web models
 
 ```java
 open(loginPage);                 // open WebPages
@@ -513,11 +513,12 @@ type("ai78cGsT", passwordInput);
 uncheck(rememberMeCheckbox);     // check and uncheck WebElements pointing at checkbox input tags
 click(loginButton);              // click at WebElements
 ```
+TODO: add optionIsSelected
 
 ...and write your asserts
 
 ```java
-assertIsOpen(homePage);                                        // assert WebPages are o
+assertIsOpen(homePage);                                        // assert WebPages are open
 assertTextEquals("testuser", currentUser);                     // assert text in WebElements equals
 assertTitleStartsWith("Wikipedia - ");                         // assert title starts with
 assertCurrentUrlMatches("http://[a-z]{2,3}.wikipedia.org/.*"); // assert current url matches regex
@@ -536,9 +537,11 @@ if (browserIsInternetExplorer()) {   // check if browser is Internet Explorer
 }
 ```
 
+TODO: add section  ... and wait for ExpectedConditions
+
 The list of provided methods for interacting, asserting and conditional checks of WebElements is to large to mention in this documentation. Instead you can find them in the [javadoc for the Bot class](http://static.javadoc.io/com.github.webdriverextensions/webdriverextensions/1.2.1/com/github/webdriverextensions/Bot.html). Another way is to use the autocompletion tool of your IDE (usally with Ctrl + Space and then start typing).
 
-If you feel that some [Bot](http://static.javadoc.io/com.github.webdriverextensions/webdriverextensions/1.2.1/com/github/webdriverextensions/Bot.html) methods are missing please describe them in a new GitHub issue [here](https://github.com/webdriverextensions/webdriverextensions/issues/new). Or even better clone this repository, commit the new methods and create a [Pull Request](https://help.github.com/articles/using-pull-requests/).
+If you feel that some [Bot](http://static.javadoc.io/com.github.webdriverextensions/webdriverextensions/1.2.1/com/github/webdriverextensions/Bot.html) methods are missing please describe them in a new GitHub issue [here](https://github.com/webdriverextensions/webdriverextensions/issues/new) and I'll try to add them ASAP. Or even better clone this repository, commit the new methods and create a [Pull Request](https://help.github.com/articles/using-pull-requests/).
 
 If you won't run your tests with the [WebDriverRunner](http://static.javadoc.io/com.github.webdriverextensions/webdriverextensions/1.2.1/com/github/webdriverextensions/junitrunner/WebDriverRunner.html) make sure you set the driver in the [WebDriverExtensionsContext](http://static.javadoc.io/com.github.webdriverextensions/webdriverextensions/1.2.1/com/github/webdriverextensions/WebDriverExtensionsContext.html) before using the [Bot](http://static.javadoc.io/com.github.webdriverextensions/webdriverextensions/1.2.1/com/github/webdriverextensions/Bot.html)
 
