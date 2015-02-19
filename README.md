@@ -609,6 +609,45 @@ mvn test
 ```
 
 
+- [Design Guides](#design-guides)
+    - [Naming Conventions](#naming-conventions)
+    - [Modelling WebPages](#modelling-webpages)
+    - [Modelling a WebSite](#modelling-a-website)
+    - [Creating Test Data](#creating-test-data)
+- [Known Pitfalls](#known-pitfalls)
+    - [StaleElementReferenceException](#staleelementreferenceexception)
+
+
+
+<br>
+# Design Guides
+### Naming Conventions
+
+TODO: Document
+
+### Modelling WebPages
+
+TODO: Document
+
+### Modelling a WebSite
+
+TODO: Document
+
+### Creating Test Data
+
+TODO: Document
+
+
+
+<br>
+# Known Pitfalls
+### [StaleElementReferenceException](http://docs.seleniumhq.org/exceptions/stale_element_reference.jsp)
+
+TODO: Document for each loop not working when reloading page
+
+
+
+
 <br>
 # Javadoc
 The Javadoc of this project is available online hosted by javadoc.io. You can find the latest documentation over  [here](http://www.javadoc.io/doc/com.github.webdriverextensions/webdriverextensions). Please note that at the moment the documentation of the java classes and methods are limited (except for this documentation). I will try to add the Javadoc as soon as possible.
