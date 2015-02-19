@@ -255,8 +255,8 @@ about the configuration please see section [Fork Options and Parallel Test Execu
 
 Try not to use non final static variables within your tests if you run your tests in parallel.
 If you really have to use static variables that are not defined as final make sure to wrap them
-in an [InheritableThreadLocal](http://docs.oracle.com/javase/7/docs/api/java/lang/InheritableThreadLocal.html)
-object. In this way it will be static within the current thread and child threads (i.e. the current test).
+in [InheritableThreadLocal](http://docs.oracle.com/javase/7/docs/api/java/lang/InheritableThreadLocal.html)
+objects. In this way it will be static within the current thread and child threads (i.e. the current test).
 
 Also before configuring to run your tests in parallel check that your website
 allows it. For example problems could occur when logging in with the same user
