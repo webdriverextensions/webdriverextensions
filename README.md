@@ -248,15 +248,20 @@ Run your tests in parallel by adding
     </configuration>
 </plugin>
 ```
-...to your pom.xml file. If your project already included the `maven-surfire-plugin` just add the configuration from the above xml snippet and make sure the version is 2.18.1 or higher.
+...to your pom.xml file.
 
 This configuration will run maximum 10 tests in parallel. For more information
 about the configuration please see section [Fork Options and Parallel Test Execution](http://maven.apache.org/surefire/maven-surefire-plugin/examples/fork-options-and-parallel-execution.html) in the documentation of the [Maven Surefire Plugin](http://maven.apache.org/surefire/maven-surefire-plugin/index.html).
 
-Before configuring to run your tests in parallel make sure that your website
+Try not to use non final static variables within your tests if you run your tests in parallel.
+If you really have to use static variables that are not defined as final make sure to wrap them
+in an [InheritableThreadLocal]http://docs.oracle.com/javase/7/docs/api/java/lang/InheritableThreadLocal.html)
+object. In this way it will be static within the current thread and child threads (i.e. the current test).
+
+Also before configuring to run your tests in parallel check that your website
 allows it. For example problems could occur when logging in with the same user
-at the same time (if your website supports a login functionality).
-There could also be other reasons not to run tests in parallel.
+at the same time (if your website supports a login functionality). There could
+also be other reasons not to run tests in parallel.
 
 
 
@@ -383,7 +388,7 @@ public class LoginPage extends WebPage {
     @Override
     public void open(Object... arguments) {
         // Define how to open this page, e.g.
-        open("https://www.projecturl.com");
+        open("https://www.your-website-url.com/login");
         assertIsOpen();
     }
 
@@ -507,47 +512,52 @@ import static com.github.webdriverextensions.Bot.*;
 ...and start interacting with your web models
 
 ```java
-open(loginPage);                 // open WebPages
-type("testuser", usernameInput); // type into WebElements pointing at text input tags
+open("https://www.your-website-url.com");   // Open urls
+type("testuser", usernameInput);            // Type into WebElements referencing text input tags
 type("ai78cGsT", passwordInput);
-uncheck(rememberMeCheckbox);     // check and uncheck WebElements pointing at checkbox input tags
-click(loginButton);              // click at WebElements
+uncheck(rememberMeCheckbox);                // Check and uncheck WebElements referencing checkbox input tags
+click(loginButton);                         // Click at WebElements
+
+open(settingsPage)                          // Open WebPages
+selectOption("Swedish", languageSelectBox); // Select options in WebElements referencing select tags
 ```
-TODO: add selectOption
 
 ...and write your asserts
 
 ```java
-assertIsOpen(homePage);                                        // assert WebPages are open
-assertTextEquals("testuser", currentUser);                     // assert text in WebElements equals
-assertTitleStartsWith("Wikipedia - ");                         // assert title starts with
-assertCurrentUrlMatches("http://[a-z]{2,3}.wikipedia.org/.*"); // assert current url matches regex
-assertHasClass("selected", homeTab);                           // assert WebElement tags has class
+assertIsOpen(homePage);                                        // Assert WebPages are open
+assertTextEquals("testuser", currentUser);                     // Assert text in WebElements equals
+assertTitleStartsWith("Wikipedia - ");                         // Assert title starts with
+assertCurrentUrlMatches("http://[a-z]{2,3}.wikipedia.org/.*"); // Assert current url matches regex
+assertHasClass("selected", homeTab);                           // Assert WebElement tags has class
 // ...type assert then bring up the list of all supported asserts with your IDE's autocompletion
 ```
 
 ...and conditional statements
 
 ```java
-if (hasClass("selected", homeTab)) { // check if WebElement tags has class
+if (hasClass("selected", homeTab)) { // Check if WebElement tags has class
     // ...do something
 }
-if (browserIsInternetExplorer()) {   // check if browser is Internet Explorer
+if (browserIsInternetExplorer()) {   // Check if browser is Internet Explorer
     // ...handle cross browser difference
 }
 ```
 
-...and wait for ExpectedConditions
+...and wait for specific time and conditions
 
-TODO: add content
+```java
+waitFor(3, MINUTES);                                // Wait for specific time
+waitForElementToDisplay(downloadCompletePopup, 30); // Wait for WebElements to display within specific time
+```
 
-...and get the current driver
+...and use the driver
 
 ```java
 System.out.println(driver().getPageSource());
 ```
 
-The list of provided methods for interacting, asserting and conditional checks of WebElements is to large to mention in this documentation. Instead you can find them in the [javadoc for the Bot class](http://static.javadoc.io/com.github.webdriverextensions/webdriverextensions/1.2.1/com/github/webdriverextensions/Bot.html). Another way is to use the autocompletion tool of your IDE (usally with Ctrl + Space and then start typing).
+The list of provided [Bot](http://static.javadoc.io/com.github.webdriverextensions/webdriverextensions/1.2.1/com/github/webdriverextensions/Bot.html) methods is to large to mention in this documentation. Instead look for them in the [javadoc for the Bot class](http://static.javadoc.io/com.github.webdriverextensions/webdriverextensions/1.2.1/com/github/webdriverextensions/Bot.html). Another way is to use the autocompletion tool of your IDE (usally with Ctrl + Space and then start typing).
 
 If you feel that some [Bot](http://static.javadoc.io/com.github.webdriverextensions/webdriverextensions/1.2.1/com/github/webdriverextensions/Bot.html) methods are missing please describe them in a new GitHub issue [here](https://github.com/webdriverextensions/webdriverextensions/issues/new) and I'll try to add them ASAP. Or even better clone this repository, commit the new methods and create a [Pull Request](https://help.github.com/articles/using-pull-requests/).
 
