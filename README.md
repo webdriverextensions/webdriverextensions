@@ -344,7 +344,11 @@ For larger and more complex test grids the [@Browsers](http://static.javadoc.io/
 })
 ```
 
-TODO: Document the [@DriverPaths](http://static.javadoc.io/com.github.webdriverextensions/webdriverextensions/1.2.1/com/github/webdriverextensions/junitrunner/annotations/DriverPaths.html) annotation
+If you would like to use a custom driver path annotate the test with the  [@DriverPaths](http://static.javadoc.io/com.github.webdriverextensions/webdriverextensions/1.2.1/com/github/webdriverextensions/junitrunner/annotations/DriverPaths.html) annotation, e.g.
+
+```java
+@DriverPaths(chrome="path/to/chromedriver", internetExplorer ="path/to/internetexplorerdriver")
+```
 
 
 
@@ -491,13 +495,21 @@ public class PlaylistRow extends WebComponent {
 public List<PlaylistRow> playlist;
 ```
 
-...and then use it in your tests
+...and then start using it
 
 ```java
-assertTextEquals("Hey Joe", playlist.get(0).track);
+assertTextEquals("Hey Joe", playlist.get(0).track); // Use WebElements in WebComponents
+click(playlist.get(0));                             // Use WebComponents as WebElements
 ```
 
+
+
 TODO: Document the [@Delegate](http://static.javadoc.io/com.github.webdriverextensions/webdriverextensions/1.2.1/com/github/webdriverextensions/annotations/Delegate.html) and [@ResetSearchContext](http://static.javadoc.io/com.github.webdriverextensions/webdriverextensions/1.2.1/com/github/webdriverextensions/annotations/ResetSearchContext.html) annotation.
+
+If you won't run your tests with the [WebDriverRunner](http://static.javadoc.io/com.github.webdriverextensions/webdriverextensions/1.2.1/com/github/webdriverextensions/junitrunner/WebDriverRunner.html) you must call the Selenium WebDriver `PageFactory.initElements` method and pass the [WebDriverExtensionFieldDecorator](http://static.javadoc.io/com.github.webdriverextensions/webdriverextensions/1.2.1/com/github/webdriverextensions/WebDriverExtensionFieldDecorator.html) before running the test, e.g.
+```java
+PageFactory.initElements(new WebDriverExtensionFieldDecorator(yourDriver), this);
+```
 
 
 <br>
