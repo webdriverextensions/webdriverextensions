@@ -431,11 +431,42 @@ public class LoginPageTest {
 }
 ```
 
-You have to override and implement the [void open(Object... arguments)](http://static.javadoc.io/com.github.webdriverextensions/webdriverextensions/1.2.1/com/github/webdriverextensions/WebPage.html#open-java.lang.Object...-) and [void assertIsOpen(Object... arguments)](http://static.javadoc.io/com.github.webdriverextensions/webdriverextensions/1.2.1/com/github/webdriverextensions/WebPage.html#assertIsOpen-java.lang.Object...-) methods inherited from the abstract [WebPage](http://static.javadoc.io/com.github.webdriverextensions/webdriverextensions/1.2.1/com/github/webdriverextensions/WebPage.html) class. Implementing these methods  enables you to easily open and assert that the page is open in your tests. As soon as the methods are implemented you can also call the [isOpen(Object... arguments)](http://static.javadoc.io/com.github.webdriverextensions/webdriverextensions/1.2.1/com/github/webdriverextensions/WebPage.html#isOpen-java.lang.Object...-), [isNotOpen(Object... arguments)](http://static.javadoc.io/com.github.webdriverextensions/webdriverextensions/1.2.1/com/github/webdriverextensions/WebPage.html#isNotOpen-java.lang.Object...-) and the [assertIsNotOpen(Object... arguments)](http://static.javadoc.io/com.github.webdriverextensions/webdriverextensions/1.2.1/com/github/webdriverextensions/WebPage.html#assertIsNotOpen-java.lang.Object...-) methods available since the [WebPage](http://static.javadoc.io/com.github.webdriverextensions/webdriverextensions/1.2.1/com/github/webdriverextensions/WebPage.html) is extended. These methods allows you to pass any kind of arbitrary number of arguments you would need to open a page e.g. an entity id or similar. TODO: add example
+Since the [WebPage](http://static.javadoc.io/com.github.webdriverextensions/webdriverextensions/1.2.1/com/github/webdriverextensions/WebPage.html) class only implements a part of the the [Openable](http://static.javadoc.io/com.github.webdriverextensions/webdriverextensions/1.2.1/com/github/webdriverextensions/internal/Openable.html) interface you have to implement the [open(Object... arguments)](http://static.javadoc.io/com.github.webdriverextensions/webdriverextensions/1.2.1/com/github/webdriverextensions/WebPage.html#open-java.lang.Object...-) and [assertIsOpen(Object... arguments)](http://static.javadoc.io/com.github.webdriverextensions/webdriverextensions/1.2.1/com/github/webdriverextensions/WebPage.html#assertIsOpen-java.lang.Object...-) methods yourself. As soon as this is done you can also call the [isOpen(Object... arguments)](http://static.javadoc.io/com.github.webdriverextensions/webdriverextensions/1.2.1/com/github/webdriverextensions/WebPage.html#isOpen-java.lang.Object...-), [isNotOpen(Object... arguments)](http://static.javadoc.io/com.github.webdriverextensions/webdriverextensions/1.2.1/com/github/webdriverextensions/WebPage.html#isNotOpen-java.lang.Object...-) and the [assertIsNotOpen(Object... arguments)](http://static.javadoc.io/com.github.webdriverextensions/webdriverextensions/1.2.1/com/github/webdriverextensions/WebPage.html#assertIsNotOpen-java.lang.Object...-) methods inherited from the [WebPage](http://static.javadoc.io/com.github.webdriverextensions/webdriverextensions/1.2.1/com/github/webdriverextensions/WebPage.html) class.
+
+The [open(Object... arguments)](http://static.javadoc.io/com.github.webdriverextensions/webdriverextensions/1.2.1/com/github/webdriverextensions/WebPage.html#open-java.lang.Object...-) and [assertIsOpen(Object... arguments)](http://static.javadoc.io/com.github.webdriverextensions/webdriverextensions/1.2.1/com/github/webdriverextensions/WebPage.html#assertIsOpen-java.lang.Object...-) methods can take any number of arguments and therefore it is possible to pass entity ids or other required data needed to load the page. E.g. a page showing a specific order
+
+```java
+public class OrderPage {
+
+    @FindBy(id = "order-number")
+    public WebElement orderNumber;
+    ...
+
+    @Override
+    public void open(Object... arguments) {
+        int orderNumberToOpen = (int) arguments[0];
+        System.err.println("https://www.your-website-url.com/order?orderid=" + orderNumberToOpen);
+        assertIsOpen(orderNumberToOpen);
+    }
+
+    @Override
+    public void assertIsOpen(Object... arguments) {
+        int orderNumberToAssert = (int) arguments[0];
+        assertTextEquals(orderNumberToAssert, orderNumber);
+        ...
+    }
+}
+```
+
+...and then use it in your test
+
+```java
+open(orderPage, 134523); // Calls the open method defined in OrderPage with the order number 134523 as an argument
+```
 
 There is also a [WebSite](http://static.javadoc.io/com.github.webdriverextensions/webdriverextensions/1.2.1/com/github/webdriverextensions/WebSite.html) class which can be used if you would want to create a Site Object i.e. a model of the complete website. It is actually no difference between the [WebPage](http://static.javadoc.io/com.github.webdriverextensions/webdriverextensions/1.2.1/com/github/webdriverextensions/WebPage.html) and the [WebSite](http://static.javadoc.io/com.github.webdriverextensions/webdriverextensions/1.2.1/com/github/webdriverextensions/WebSite.html) class except the name.
 
-An alternative to using the [WebPage](http://static.javadoc.io/com.github.webdriverextensions/webdriverextensions/1.2.1/com/github/webdriverextensions/WebPage.html) class is using the [WebRepository](http://static.javadoc.io/com.github.webdriverextensions/webdriverextensions/1.2.1/com/github/webdriverextensions/WebRepository.html) class. The only difference is that it does not implement the [Openable](http://static.javadoc.io/com.github.webdriverextensions/webdriverextensions/1.2.1/com/github/webdriverextensions/internal/Openable.html) interface and therefore there is no need to override and implement the `void open(Object... arguments)` and `void assertIsOpen(Object... arguments)` methods.
+An alternative to using the [WebPage](http://static.javadoc.io/com.github.webdriverextensions/webdriverextensions/1.2.1/com/github/webdriverextensions/WebPage.html) class is using the [WebRepository](http://static.javadoc.io/com.github.webdriverextensions/webdriverextensions/1.2.1/com/github/webdriverextensions/WebRepository.html) class. The only difference is that it does not implement the [Openable](http://static.javadoc.io/com.github.webdriverextensions/webdriverextensions/1.2.1/com/github/webdriverextensions/internal/Openable.html) interface and therefore there is no need to override and implement the `open(Object... arguments)` and `assertIsOpen(Object... arguments)` methods.
 
 Note that any class extending the [WebPage](http://static.javadoc.io/com.github.webdriverextensions/webdriverextensions/1.2.1/com/github/webdriverextensions/WebPage.html), [WebSite](http://static.javadoc.io/com.github.webdriverextensions/webdriverextensions/1.2.1/com/github/webdriverextensions/WebSite.html) or [WebRepository](http://static.javadoc.io/com.github.webdriverextensions/webdriverextensions/1.2.1/com/github/webdriverextensions/WebRepository.html) class that are added as fields in the test will automatically be injected/instantiated if the [WebDriverRunner](http://static.javadoc.io/com.github.webdriverextensions/webdriverextensions/1.2.1/com/github/webdriverextensions/junitrunner/WebDriverRunner.html) is used. If you won't run your tests with the [WebDriverRunner](http://static.javadoc.io/com.github.webdriverextensions/webdriverextensions/1.2.1/com/github/webdriverextensions/junitrunner/WebDriverRunner.html) you can call the Selenium WebDriver `PageFactory.initElements` method and pass the [WebDriverExtensionFieldDecorator](http://static.javadoc.io/com.github.webdriverextensions/webdriverextensions/1.2.1/com/github/webdriverextensions/WebDriverExtensionFieldDecorator.html) before running the test, e.g.
 

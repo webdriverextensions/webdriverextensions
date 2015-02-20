@@ -87,6 +87,7 @@ public class BotTest extends GeneratedWebRepository {
     /* Open */
     @Test
     public void openTest() {
+        debug(driver().getPageSource());
         open(botTestPage);
         assertIsOpen(botTestPage);
     }
