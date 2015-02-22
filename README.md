@@ -17,7 +17,11 @@ Available through the [Maven Central Repository](http://mvnrepository.com/search
 
 <br>
 ### Want to Contribute?
-Feel free to report any bug or feature request. Just open a new GitHub issue [here](https://github.com/webdriverextensions/webdriverextensions/issues/new) and I'll try to bugfix/implement it ASAP. Or even better clone this repository, commit your changes and make a [Pull Request](https://help.github.com/articles/using-pull-requests/).
+Feel free to report any bug or feature request. Just [open a new GitHub issue](https://github.com/webdriverextensions/webdriverextensions/issues/new) and I'll try to bugfix/implement it ASAP. Or even better clone this repository, commit your changes and make a [Pull Request](https://help.github.com/articles/using-pull-requests/).
+
+<br>
+### Have any Questions?
+If you have question [ask them at Stack Overflow with the webdriverextensions tag](http://stackoverflow.com/questions/ask?tags=webdriverextensions).
 
 <br>
 # Content
