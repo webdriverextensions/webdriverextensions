@@ -17,7 +17,7 @@ Available through the [Maven Central Repository](http://mvnrepository.com/search
 
 <br>
 ### Want to Contribute?
-Feel free to report any bug or feature request. Just [open a new GitHub issue](https://github.com/webdriverextensions/webdriverextensions/issues/new) and I'll try to bugfix/implement it ASAP. Or even better clone this repository, commit your changes and make a [Pull Request](https://help.github.com/articles/using-pull-requests/).
+If you find a bug or have a feature request please [create a new GitHub issue](https://github.com/webdriverextensions/webdriverextensions/issues/new) or even better clone this repository, commit your changes and make a [Pull Request](https://help.github.com/articles/using-pull-requests/).
 
 <br>
 ### Have any Questions?
@@ -539,6 +539,7 @@ click(playlist.get(0));                             // Use WebComponents as WebE
 
 Note that `@FindBy` annotation locators used inside a WebComponent have the WebComponent's html content as the search context. To locate html tags outside the WebComponent you could reset the search context by adding the [@ResetSearchContext](http://static.javadoc.io/com.github.webdriverextensions/webdriverextensions/1.2.1/com/github/webdriverextensions/annotations/ResetSearchContext.html) annotation.
 
+If you wish to delegate the method calls of a WebComponent to an underlying WebElement you can do so by annotating a WebElement inside the WebComponent with the [@Delegate](http://static.javadoc.io/com.github.webdriverextensions/webdriverextensions/1.2.1/com/github/webdriverextensions/annotations/Delegate.html) annotation.
 If you won't run your tests with the [WebDriverRunner](http://static.javadoc.io/com.github.webdriverextensions/webdriverextensions/1.2.1/com/github/webdriverextensions/junitrunner/WebDriverRunner.html) you must call the Selenium WebDriver `PageFactory.initElements` method and pass the [WebDriverExtensionFieldDecorator](http://static.javadoc.io/com.github.webdriverextensions/webdriverextensions/1.2.1/com/github/webdriverextensions/WebDriverExtensionFieldDecorator.html) before running the test, e.g.
 ```java
 PageFactory.initElements(new WebDriverExtensionFieldDecorator(yourDriver), this);
@@ -602,9 +603,9 @@ waitForElementToDisplay(downloadCompletePopup, 30); // Wait for WebElements to d
 System.out.println(driver().getPageSource());
 ```
 
-The list of provided [Bot](http://static.javadoc.io/com.github.webdriverextensions/webdriverextensions/1.2.1/com/github/webdriverextensions/Bot.html) methods is to large to mention in this documentation. Instead look for them in the [javadoc for the Bot class](http://static.javadoc.io/com.github.webdriverextensions/webdriverextensions/1.2.1/com/github/webdriverextensions/Bot.html). Another way is to use the autocompletion tool of your IDE (usally with Ctrl + Space and then start typing).
+For a list of provided [Bot](http://static.javadoc.io/com.github.webdriverextensions/webdriverextensions/1.2.1/com/github/webdriverextensions/Bot.html) methods take a look at the [javadoc for the Bot class](http://static.javadoc.io/com.github.webdriverextensions/webdriverextensions/1.2.1/com/github/webdriverextensions/Bot.html) or use the autocompletion tool of your IDE (usally with Ctrl + Space and then start typing).
 
-If you feel that some [Bot](http://static.javadoc.io/com.github.webdriverextensions/webdriverextensions/1.2.1/com/github/webdriverextensions/Bot.html) methods are missing please describe them in a new GitHub issue [here](https://github.com/webdriverextensions/webdriverextensions/issues/new) and I'll try to add them ASAP. Or even better clone this repository, commit the new methods and create a [Pull Request](https://help.github.com/articles/using-pull-requests/).
+If you feel that some [Bot](http://static.javadoc.io/com.github.webdriverextensions/webdriverextensions/1.2.1/com/github/webdriverextensions/Bot.html) methods are missing please describe them in a [new GitHub issue](https://github.com/webdriverextensions/webdriverextensions/issues/new) or even better clone this repository, commit the new methods and create a [Pull Request](https://help.github.com/articles/using-pull-requests/).
 
 If you won't run your tests with the [WebDriverRunner](http://static.javadoc.io/com.github.webdriverextensions/webdriverextensions/1.2.1/com/github/webdriverextensions/junitrunner/WebDriverRunner.html) make sure you set the driver in the [WebDriverExtensionsContext](http://static.javadoc.io/com.github.webdriverextensions/webdriverextensions/1.2.1/com/github/webdriverextensions/WebDriverExtensionsContext.html) before using the [Bot](http://static.javadoc.io/com.github.webdriverextensions/webdriverextensions/1.2.1/com/github/webdriverextensions/Bot.html)
 
