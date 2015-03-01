@@ -540,6 +540,7 @@ click(playlist.get(0));                             // Use WebComponents as WebE
 Note that `@FindBy` annotation locators used inside a WebComponent have the WebComponent's html content as the search context. To locate html tags outside the WebComponent you could reset the search context by adding the [@ResetSearchContext](http://static.javadoc.io/com.github.webdriverextensions/webdriverextensions/1.2.1/com/github/webdriverextensions/annotations/ResetSearchContext.html) annotation.
 
 If you wish to delegate the method calls of a WebComponent to an underlying WebElement you can do so by annotating a WebElement inside the WebComponent with the [@Delegate](http://static.javadoc.io/com.github.webdriverextensions/webdriverextensions/1.2.1/com/github/webdriverextensions/annotations/Delegate.html) annotation.
+
 If you won't run your tests with the [WebDriverRunner](http://static.javadoc.io/com.github.webdriverextensions/webdriverextensions/1.2.1/com/github/webdriverextensions/junitrunner/WebDriverRunner.html) you must call the Selenium WebDriver `PageFactory.initElements` method and pass the [WebDriverExtensionFieldDecorator](http://static.javadoc.io/com.github.webdriverextensions/webdriverextensions/1.2.1/com/github/webdriverextensions/WebDriverExtensionFieldDecorator.html) before running the test, e.g.
 ```java
 PageFactory.initElements(new WebDriverExtensionFieldDecorator(yourDriver), this);
