@@ -81,11 +81,11 @@ public class WebDriverExtensionFieldDecoratorTest extends GeneratedWebRepository
 
     @Test
     public void doubleWrappedComponents() {
-        click(examplesPage.html);
-        click(examplesPage.html.menu);
+        click(examplesPage.body);
+        click(examplesPage.body.menu);
         waitFor(delayTime);
-        assertIsDisplayed(examplesPage.html.menu.create);
-        assertIsDisplayed(examplesPage.html.menu.update);
-        assertIsDisplayed(examplesPage.html.menu.delete);
+        assertIsDisplayed(examplesPage.body.menu.create);
+        assertIsDisplayed(examplesPage.body.menu.update);
+        assertIsDisplayed(examplesPage.body.menu.delete);
     }
 }

@@ -6,7 +6,7 @@ import static com.github.webdriverextensions.WebDriverExtensionsContext.*;
 import com.github.webdriverextensions.WebPage;
 import com.github.webdriverextensions.generator.annotations.AddToRepository;
 import com.github.webdriverextensions.generator.annotations.AddToWebSite;
-import com.github.webdriverextensions.model.components.HtmlComponent;
+import com.github.webdriverextensions.model.components.Body;
 import com.github.webdriverextensions.model.components.Menu;
 import com.github.webdriverextensions.model.components.MenuButtonGroup;
 import com.github.webdriverextensions.model.components.UserRow;
@@ -45,8 +45,8 @@ public class ExamplesPage extends WebPage {
     public Menu menu;
 //    @FindBy(css = "#user-table")
 //    public UserTable userTable;
-    @FindBy(css = "html")
-    public HtmlComponent html;
+    @FindBy(css = "body")
+    public Body body;
 
     @Override
     public void open(Object... arguments) {

@@ -3,16 +3,16 @@ WebDriver Extensions
 
 WebDriver Extensions is designed to simplify Java based Selenium/WebDriver tests. It's built on top of Selenium/WebDriver to make your tests more readable, reusabable and maintainable by combining the [Page Object Pattern](https://code.google.com/p/selenium/wiki/PageObjects) and [Bot Pattern](https://code.google.com/p/selenium/wiki/BotStyleTests).
 
-Available through the [Maven Central Repository](http://mvnrepository.com/search?q=webdriverextensions)! Latest release is version 1.2.1 which includes selenium-java 2.44.0 as a transative dependency.
+Available through the [Maven Central Repository](http://mvnrepository.com/search?q=webdriverextensions)! Latest release is version 1.3.0 which includes selenium-java 2.45.0 as a transative dependency.
 
 
 <br>
 ### What's included in this framework?
 - A [Maven Plugin](https://github.com/webdriverextensions/webdriverextensions-maven-plugin#webdriver-extensions-maven-plugin) to manage, download and install drivers
-- [Annotation based JUnit Runner](http://static.javadoc.io/com.github.webdriverextensions/webdriverextensions/1.2.1/com/github/webdriverextensions/junitrunner/WebDriverRunner.html) for running Selenium/WebDriver tests locally or remotely against multiple browsers
-- New classes for modelling your website e.g. [WebComponent](http://static.javadoc.io/com.github.webdriverextensions/webdriverextensions/1.2.1/com/github/webdriverextensions/WebComponent.html) (an extendable WebElement), [WebPage](http://static.javadoc.io/com.github.webdriverextensions/webdriverextensions/1.2.1/com/github/webdriverextensions/WebPage.html), [WebSite](http://static.javadoc.io/com.github.webdriverextensions/webdriverextensions/1.2.1/com/github/webdriverextensions/WebSite.html) and [WebRepository](http://static.javadoc.io/com.github.webdriverextensions/webdriverextensions/1.2.1/com/github/webdriverextensions/WebRepository.html)
-- A [Bot](http://static.javadoc.io/com.github.webdriverextensions/webdriverextensions/1.2.1/com/github/webdriverextensions/Bot.html) providing static methods for interacting, asserting and checking conditions of WebElements, WebComponents, WebPages and WebSites
-- A WebSite and WebRepository [generators](http://static.javadoc.io/com.github.webdriverextensions/webdriverextensions/1.2.1/com/github/webdriverextensions/generator/package-summary.html) that enables adding WebComponents, WebPages, WebSites and WebRepositories by [annotations](http://static.javadoc.io/com.github.webdriverextensions/webdriverextensions/1.2.1/com/github/webdriverextensions/generator/annotations/package-summary.html)
+- [Annotation based JUnit Runner](http://static.javadoc.io/com.github.webdriverextensions/webdriverextensions/1.3.0/com/github/webdriverextensions/junitrunner/WebDriverRunner.html) for running Selenium/WebDriver tests locally or remotely against multiple browsers
+- New classes for modelling your website e.g. [WebComponent](http://static.javadoc.io/com.github.webdriverextensions/webdriverextensions/1.3.0/com/github/webdriverextensions/WebComponent.html) (an extendable WebElement), [WebPage](http://static.javadoc.io/com.github.webdriverextensions/webdriverextensions/1.3.0/com/github/webdriverextensions/WebPage.html), [WebSite](http://static.javadoc.io/com.github.webdriverextensions/webdriverextensions/1.3.0/com/github/webdriverextensions/WebSite.html) and [WebRepository](http://static.javadoc.io/com.github.webdriverextensions/webdriverextensions/1.3.0/com/github/webdriverextensions/WebRepository.html)
+- A [Bot](http://static.javadoc.io/com.github.webdriverextensions/webdriverextensions/1.3.0/com/github/webdriverextensions/Bot.html) providing static methods for interacting, asserting and checking conditions of WebElements, WebComponents, WebPages and WebSites
+- A WebSite and WebRepository [generators](http://static.javadoc.io/com.github.webdriverextensions/webdriverextensions/1.3.0/com/github/webdriverextensions/generator/package-summary.html) that enables adding WebComponents, WebPages, WebSites and WebRepositories by [annotations](http://static.javadoc.io/com.github.webdriverextensions/webdriverextensions/1.3.0/com/github/webdriverextensions/generator/annotations/package-summary.html)
 - A [Maven Archetype](https://github.com/webdriverextensions/webdriverextensions-archetype-quickstart#webdriver-extension-archetype-quickstart) for creating new projects
 
 <br>
@@ -148,7 +148,7 @@ For the sake of simplicity this example does not demonstrate the [Page Object Pa
 If wanted one could further increase readability by using the Groovy language instead of Java. Then the Hello World example would look like this
 
 ```groovy
-@Grab(group='com.github.webdriverextensions', module='webdriverextensions', version='1.2.1')
+@Grab(group='com.github.webdriverextensions', module='webdriverextensions', version='1.3.0')
 @RunWith(WebDriverRunner)
 @Firefox
 @Chrome
@@ -192,7 +192,7 @@ Add
 <dependency>
 	<groupId>com.github.webdriverextensions</groupId>
 	<artifactId>webdriverextensions</artifactId>
-	<version>1.2.1</version>
+	<version>1.3.0</version>
 </dependency>
 ```
 ...as a dependency in your [pom.xml](https://gist.github.com/andidev/ad006a454edfd9f0e9e5#file-pom-xml) file.
@@ -217,11 +217,11 @@ There is no need to download any drivers manually. Instead use the [WebDriver Ex
         <drivers>
             <driver>
                 <name>internetexplorerdriver</name>
-                <version>2.44</version>
+                <version>2.45</version>
             </driver>
             <driver>
                 <name>chromedriver</name>
-                <version>2.12</version>
+                <version>2.14</version>
             </driver>
         </drivers>
     </configuration>
@@ -231,7 +231,7 @@ There is no need to download any drivers manually. Instead use the [WebDriver Ex
 
 The plugin will download the most suitable driver for  your OS. The bit of the driver will be 32bit with the exception of running the tests from a linux 64bit OS. If you would like to specify the OS and bit of the drivers to download you can provide them with a `<platform>` and `<bit>`-tag inside each `<driver>`-tag. Platform can be set to `windows`, `mac` or `linux` while the bit can be set to `32` or `64`.
 
-The drivers will placed in a folder called `drivers` in the project root. If you will use the provided [WebDriverRunner](http://static.javadoc.io/com.github.webdriverextensions/webdriverextensions/1.2.1/com/github/webdriverextensions/junitrunner/WebDriverRunner.html) there is no need for passing driver paths as System Properties since the framework will take care of the for you. If you won't be using it make sure to point the drivers out manually.
+The drivers will placed in a folder called `drivers` in the project root. If you will use the provided [WebDriverRunner](http://static.javadoc.io/com.github.webdriverextensions/webdriverextensions/1.3.0/com/github/webdriverextensions/junitrunner/WebDriverRunner.html) there is no need for passing driver paths as System Properties since the framework will take care of the for you. If you won't be using it make sure to point the drivers out manually.
 
 For more information on configuring the driver please visit the [WebDriver Extensions Maven Plugin GitHub page](https://github.com/webdriverextensions/webdriverextensions-maven-plugin). If the latest drivers are not available yet please create an issue [here](https://github.com/webdriverextensions/webdriverextensions-maven-plugin/issues/new).
 
@@ -272,7 +272,7 @@ also be other reasons not to run tests in parallel.
 <br>
 ### Cross Browser test your website with the JUnitRunner
 
-Run your tests locally by using the [WebDriverRunner](http://static.javadoc.io/com.github.webdriverextensions/webdriverextensions/1.2.1/com/github/webdriverextensions/junitrunner/WebDriverRunner.html)
+Run your tests locally by using the [WebDriverRunner](http://static.javadoc.io/com.github.webdriverextensions/webdriverextensions/1.3.0/com/github/webdriverextensions/junitrunner/WebDriverRunner.html)
 
 ```java
 import com.github.webdriverextensions.junitrunner.WebDriverRunner;
@@ -308,7 +308,7 @@ public class CrossBrowserTest {
 }
 ```
 
-...or remotely by adding the [@RemoteAddress](http://static.javadoc.io/com.github.webdriverextensions/webdriverextensions/1.2.1/com/github/webdriverextensions/junitrunner/annotations/RemoteAddress.html) annotaion
+...or remotely by adding the [@RemoteAddress](http://static.javadoc.io/com.github.webdriverextensions/webdriverextensions/1.3.0/com/github/webdriverextensions/junitrunner/annotations/RemoteAddress.html) annotaion
 
 ```java
 @RunWith(WebDriverRunner.class)
@@ -321,7 +321,7 @@ public class CrossBrowserTest {
 }
 ```
 
-To run your test headless without starting a browser, use the [@HtmlUnit](http://static.javadoc.io/com.github.webdriverextensions/webdriverextensions/1.2.1/com/github/webdriverextensions/junitrunner/annotations/HtmlUnit.html) annotation. If wanted you can also run your tests against the Safari browser with the [@Safari](http://static.javadoc.io/com.github.webdriverextensions/webdriverextensions/1.2.1/com/github/webdriverextensions/junitrunner/annotations/Safari.html) annotation (just make sure the chromedriver is installed). Note that there is currently a [WebDriver issue](https://code.google.com/p/selenium/issues/detail?id=7933) with running the SafariDriver on some OSX/Safari versions.
+To run your test headless without starting a browser, use the [@HtmlUnit](http://static.javadoc.io/com.github.webdriverextensions/webdriverextensions/1.3.0/com/github/webdriverextensions/junitrunner/annotations/HtmlUnit.html) annotation. If wanted you can also run your tests against the Safari browser with the [@Safari](http://static.javadoc.io/com.github.webdriverextensions/webdriverextensions/1.3.0/com/github/webdriverextensions/junitrunner/annotations/Safari.html) annotation (just make sure the chromedriver is installed). Note that there is currently a [WebDriver issue](https://code.google.com/p/selenium/issues/detail?id=7933) with running the SafariDriver on some OSX/Safari versions.
 
 Browser `version` and `platform` settings can be passed as annotation parameters e.g. `@Firefox(version = "35.0", platform = Platform.MAC)`.
 
@@ -337,9 +337,9 @@ public class StartMaximized extends DesiredCapabilities {
 ```
 ...and passing that to the annotation e.g. `@Chrome(desiredCapabilitiesClass = StartMaximized.class)`.
 
-If you want set a custom browser name this can be done by using the [@Browser](http://static.javadoc.io/com.github.webdriverextensions/webdriverextensions/1.2.1/com/github/webdriverextensions/junitrunner/annotations/Browser.html) annotation e.g. `Browser(browserName = "foo")`.
+If you want set a custom browser name this can be done by using the [@Browser](http://static.javadoc.io/com.github.webdriverextensions/webdriverextensions/1.3.0/com/github/webdriverextensions/junitrunner/annotations/Browser.html) annotation e.g. `Browser(browserName = "foo")`.
 
-For larger and more complex test grids the [@Browsers](http://static.javadoc.io/com.github.webdriverextensions/webdriverextensions/1.2.1/com/github/webdriverextensions/junitrunner/annotations/Browsers.html) annotation can be used. For example to test the Firefox browser on Windows, Mac and Linux
+For larger and more complex test grids the [@Browsers](http://static.javadoc.io/com.github.webdriverextensions/webdriverextensions/1.3.0/com/github/webdriverextensions/junitrunner/annotations/Browsers.html) annotation can be used. For example to test the Firefox browser on Windows, Mac and Linux
 ```java
 @Browsers(firefox = {
     @Firefox(platform = Platform.WINDOWS),
@@ -348,7 +348,7 @@ For larger and more complex test grids the [@Browsers](http://static.javadoc.io/
 })
 ```
 
-If you would like to use a custom driver path annotate the test with the  [@DriverPaths](http://static.javadoc.io/com.github.webdriverextensions/webdriverextensions/1.2.1/com/github/webdriverextensions/junitrunner/annotations/DriverPaths.html) annotation, e.g.
+If you would like to use a custom driver path annotate the test with the  [@DriverPaths](http://static.javadoc.io/com.github.webdriverextensions/webdriverextensions/1.3.0/com/github/webdriverextensions/junitrunner/annotations/DriverPaths.html) annotation, e.g.
 
 ```java
 @DriverPaths(chrome="path/to/chromedriver", internetExplorer ="path/to/internetexplorerdriver")
@@ -377,7 +377,7 @@ Model your website pages, e.g. a login page
 </html>
 ```
 
-...by extending the [WebPage](http://static.javadoc.io/com.github.webdriverextensions/webdriverextensions/1.2.1/com/github/webdriverextensions/WebPage.html) class
+...by extending the [WebPage](http://static.javadoc.io/com.github.webdriverextensions/webdriverextensions/1.3.0/com/github/webdriverextensions/WebPage.html) class
 
 ```java
 import com.github.webdriverextensions.WebPage;
@@ -435,9 +435,9 @@ public class LoginPageTest {
 }
 ```
 
-Since the [WebPage](http://static.javadoc.io/com.github.webdriverextensions/webdriverextensions/1.2.1/com/github/webdriverextensions/WebPage.html) class only implements a part of the the [Openable](http://static.javadoc.io/com.github.webdriverextensions/webdriverextensions/1.2.1/com/github/webdriverextensions/internal/Openable.html) interface you have to implement the [open(Object... arguments)](http://static.javadoc.io/com.github.webdriverextensions/webdriverextensions/1.2.1/com/github/webdriverextensions/WebPage.html#open-java.lang.Object...-) and [assertIsOpen(Object... arguments)](http://static.javadoc.io/com.github.webdriverextensions/webdriverextensions/1.2.1/com/github/webdriverextensions/WebPage.html#assertIsOpen-java.lang.Object...-) methods yourself. As soon as this is done you can also call the [isOpen(Object... arguments)](http://static.javadoc.io/com.github.webdriverextensions/webdriverextensions/1.2.1/com/github/webdriverextensions/WebPage.html#isOpen-java.lang.Object...-), [isNotOpen(Object... arguments)](http://static.javadoc.io/com.github.webdriverextensions/webdriverextensions/1.2.1/com/github/webdriverextensions/WebPage.html#isNotOpen-java.lang.Object...-) and the [assertIsNotOpen(Object... arguments)](http://static.javadoc.io/com.github.webdriverextensions/webdriverextensions/1.2.1/com/github/webdriverextensions/WebPage.html#assertIsNotOpen-java.lang.Object...-) methods inherited from the [WebPage](http://static.javadoc.io/com.github.webdriverextensions/webdriverextensions/1.2.1/com/github/webdriverextensions/WebPage.html) class.
+Since the [WebPage](http://static.javadoc.io/com.github.webdriverextensions/webdriverextensions/1.3.0/com/github/webdriverextensions/WebPage.html) class only implements a part of the the [Openable](http://static.javadoc.io/com.github.webdriverextensions/webdriverextensions/1.3.0/com/github/webdriverextensions/internal/Openable.html) interface you have to implement the [open(Object... arguments)](http://static.javadoc.io/com.github.webdriverextensions/webdriverextensions/1.3.0/com/github/webdriverextensions/WebPage.html#open-java.lang.Object...-) and [assertIsOpen(Object... arguments)](http://static.javadoc.io/com.github.webdriverextensions/webdriverextensions/1.3.0/com/github/webdriverextensions/WebPage.html#assertIsOpen-java.lang.Object...-) methods yourself. As soon as this is done you can also call the [isOpen(Object... arguments)](http://static.javadoc.io/com.github.webdriverextensions/webdriverextensions/1.3.0/com/github/webdriverextensions/WebPage.html#isOpen-java.lang.Object...-), [isNotOpen(Object... arguments)](http://static.javadoc.io/com.github.webdriverextensions/webdriverextensions/1.3.0/com/github/webdriverextensions/WebPage.html#isNotOpen-java.lang.Object...-) and the [assertIsNotOpen(Object... arguments)](http://static.javadoc.io/com.github.webdriverextensions/webdriverextensions/1.3.0/com/github/webdriverextensions/WebPage.html#assertIsNotOpen-java.lang.Object...-) methods inherited from the [WebPage](http://static.javadoc.io/com.github.webdriverextensions/webdriverextensions/1.3.0/com/github/webdriverextensions/WebPage.html) class.
 
-The [open(Object... arguments)](http://static.javadoc.io/com.github.webdriverextensions/webdriverextensions/1.2.1/com/github/webdriverextensions/WebPage.html#open-java.lang.Object...-) and [assertIsOpen(Object... arguments)](http://static.javadoc.io/com.github.webdriverextensions/webdriverextensions/1.2.1/com/github/webdriverextensions/WebPage.html#assertIsOpen-java.lang.Object...-) methods can take any number of arguments and therefore it is possible to pass entity ids or other required data needed to load the page. E.g. a page showing a specific order
+The [open(Object... arguments)](http://static.javadoc.io/com.github.webdriverextensions/webdriverextensions/1.3.0/com/github/webdriverextensions/WebPage.html#open-java.lang.Object...-) and [assertIsOpen(Object... arguments)](http://static.javadoc.io/com.github.webdriverextensions/webdriverextensions/1.3.0/com/github/webdriverextensions/WebPage.html#assertIsOpen-java.lang.Object...-) methods can take any number of arguments and therefore it is possible to pass entity ids or other required data needed to load the page. E.g. a page showing a specific order
 
 ```java
 public class OrderPage {
@@ -468,11 +468,11 @@ public class OrderPage {
 open(orderPage, 134523); // Calls the open method defined in OrderPage with the order number 134523 as an argument
 ```
 
-There is also a [WebSite](http://static.javadoc.io/com.github.webdriverextensions/webdriverextensions/1.2.1/com/github/webdriverextensions/WebSite.html) class which can be used if you would want to create a Site Object i.e. a model of the complete website. It is actually no difference between the [WebPage](http://static.javadoc.io/com.github.webdriverextensions/webdriverextensions/1.2.1/com/github/webdriverextensions/WebPage.html) and the [WebSite](http://static.javadoc.io/com.github.webdriverextensions/webdriverextensions/1.2.1/com/github/webdriverextensions/WebSite.html) class except the name.
+There is also a [WebSite](http://static.javadoc.io/com.github.webdriverextensions/webdriverextensions/1.3.0/com/github/webdriverextensions/WebSite.html) class which can be used if you would want to create a Site Object i.e. a model of the complete website. It is actually no difference between the [WebPage](http://static.javadoc.io/com.github.webdriverextensions/webdriverextensions/1.3.0/com/github/webdriverextensions/WebPage.html) and the [WebSite](http://static.javadoc.io/com.github.webdriverextensions/webdriverextensions/1.3.0/com/github/webdriverextensions/WebSite.html) class except the name.
 
-An alternative to using the [WebPage](http://static.javadoc.io/com.github.webdriverextensions/webdriverextensions/1.2.1/com/github/webdriverextensions/WebPage.html) class is using the [WebRepository](http://static.javadoc.io/com.github.webdriverextensions/webdriverextensions/1.2.1/com/github/webdriverextensions/WebRepository.html) class. The only difference is that it does not implement the [Openable](http://static.javadoc.io/com.github.webdriverextensions/webdriverextensions/1.2.1/com/github/webdriverextensions/internal/Openable.html) interface and therefore there is no need to override and implement the `open(Object... arguments)` and `assertIsOpen(Object... arguments)` methods.
+An alternative to using the [WebPage](http://static.javadoc.io/com.github.webdriverextensions/webdriverextensions/1.3.0/com/github/webdriverextensions/WebPage.html) class is using the [WebRepository](http://static.javadoc.io/com.github.webdriverextensions/webdriverextensions/1.3.0/com/github/webdriverextensions/WebRepository.html) class. The only difference is that it does not implement the [Openable](http://static.javadoc.io/com.github.webdriverextensions/webdriverextensions/1.3.0/com/github/webdriverextensions/internal/Openable.html) interface and therefore there is no need to override and implement the `open(Object... arguments)` and `assertIsOpen(Object... arguments)` methods.
 
-Note that any class extending the [WebPage](http://static.javadoc.io/com.github.webdriverextensions/webdriverextensions/1.2.1/com/github/webdriverextensions/WebPage.html), [WebSite](http://static.javadoc.io/com.github.webdriverextensions/webdriverextensions/1.2.1/com/github/webdriverextensions/WebSite.html) or [WebRepository](http://static.javadoc.io/com.github.webdriverextensions/webdriverextensions/1.2.1/com/github/webdriverextensions/WebRepository.html) class that are added as fields in the test will automatically be injected/instantiated if the [WebDriverRunner](http://static.javadoc.io/com.github.webdriverextensions/webdriverextensions/1.2.1/com/github/webdriverextensions/junitrunner/WebDriverRunner.html) is used. If you won't run your tests with the [WebDriverRunner](http://static.javadoc.io/com.github.webdriverextensions/webdriverextensions/1.2.1/com/github/webdriverextensions/junitrunner/WebDriverRunner.html) you can call the Selenium WebDriver `PageFactory.initElements` method and pass the [WebDriverExtensionFieldDecorator](http://static.javadoc.io/com.github.webdriverextensions/webdriverextensions/1.2.1/com/github/webdriverextensions/WebDriverExtensionFieldDecorator.html) before running the test, e.g.
+Note that any class extending the [WebPage](http://static.javadoc.io/com.github.webdriverextensions/webdriverextensions/1.3.0/com/github/webdriverextensions/WebPage.html), [WebSite](http://static.javadoc.io/com.github.webdriverextensions/webdriverextensions/1.3.0/com/github/webdriverextensions/WebSite.html) or [WebRepository](http://static.javadoc.io/com.github.webdriverextensions/webdriverextensions/1.3.0/com/github/webdriverextensions/WebRepository.html) class that are added as fields in the test will automatically be injected/instantiated if the [WebDriverRunner](http://static.javadoc.io/com.github.webdriverextensions/webdriverextensions/1.3.0/com/github/webdriverextensions/junitrunner/WebDriverRunner.html) is used. If you won't run your tests with the [WebDriverRunner](http://static.javadoc.io/com.github.webdriverextensions/webdriverextensions/1.3.0/com/github/webdriverextensions/junitrunner/WebDriverRunner.html) you can call the Selenium WebDriver `PageFactory.initElements` method and pass the [WebDriverExtensionFieldDecorator](http://static.javadoc.io/com.github.webdriverextensions/webdriverextensions/1.3.0/com/github/webdriverextensions/WebDriverExtensionFieldDecorator.html) before running the test, e.g.
 
 ```java
 PageFactory.initElements(new WebDriverExtensionFieldDecorator(yourDriver), this);
@@ -481,7 +481,7 @@ PageFactory.initElements(new WebDriverExtensionFieldDecorator(yourDriver), this)
 
 
 <br>
-### Model your page components with the [WebComponent](http://static.javadoc.io/com.github.webdriverextensions/webdriverextensions/1.2.1/com/github/webdriverextensions/WebComponent.html)
+### Model your page components with the [WebComponent](http://static.javadoc.io/com.github.webdriverextensions/webdriverextensions/1.3.0/com/github/webdriverextensions/WebComponent.html)
 
 Model repeating html content, e.g. table rows
 
@@ -505,7 +505,7 @@ Model repeating html content, e.g. table rows
 </table>
 ```
 
-...by extending the [WebComponent](http://static.javadoc.io/com.github.webdriverextensions/webdriverextensions/1.2.1/com/github/webdriverextensions/WebComponent.html)
+...by extending the [WebComponent](http://static.javadoc.io/com.github.webdriverextensions/webdriverextensions/1.3.0/com/github/webdriverextensions/WebComponent.html)
 
 ```java
 import com.github.webdriverextensions.WebComponent;
@@ -537,11 +537,11 @@ assertTextEquals("Hey Joe", playlist.get(0).track); // Use WebElements in WebCom
 click(playlist.get(0));                             // Use WebComponents as WebElements
 ```
 
-Note that `@FindBy` annotation locators used inside a WebComponent have the WebComponent's html content as the search context. To locate html tags outside the WebComponent you could reset the search context by adding the [@ResetSearchContext](http://static.javadoc.io/com.github.webdriverextensions/webdriverextensions/1.2.1/com/github/webdriverextensions/annotations/ResetSearchContext.html) annotation.
+Note that `@FindBy` annotation locators used inside a WebComponent have the WebComponent's html content as the search context. To locate html tags outside the WebComponent you could reset the search context by adding the [@ResetSearchContext](http://static.javadoc.io/com.github.webdriverextensions/webdriverextensions/1.3.0/com/github/webdriverextensions/annotations/ResetSearchContext.html) annotation.
 
-If you wish to delegate the method calls of a WebComponent to an underlying WebElement you can do so by annotating a WebElement inside the WebComponent with the [@Delegate](http://static.javadoc.io/com.github.webdriverextensions/webdriverextensions/1.2.1/com/github/webdriverextensions/annotations/Delegate.html) annotation.
+If you wish to delegate the method calls of a WebComponent to an underlying WebElement you can do so by annotating a WebElement inside the WebComponent with the [@Delegate](http://static.javadoc.io/com.github.webdriverextensions/webdriverextensions/1.3.0/com/github/webdriverextensions/annotations/Delegate.html) annotation.
 
-If you won't run your tests with the [WebDriverRunner](http://static.javadoc.io/com.github.webdriverextensions/webdriverextensions/1.2.1/com/github/webdriverextensions/junitrunner/WebDriverRunner.html) you must call the Selenium WebDriver `PageFactory.initElements` method and pass the [WebDriverExtensionFieldDecorator](http://static.javadoc.io/com.github.webdriverextensions/webdriverextensions/1.2.1/com/github/webdriverextensions/WebDriverExtensionFieldDecorator.html) before running the test, e.g.
+If you won't run your tests with the [WebDriverRunner](http://static.javadoc.io/com.github.webdriverextensions/webdriverextensions/1.3.0/com/github/webdriverextensions/junitrunner/WebDriverRunner.html) you must call the Selenium WebDriver `PageFactory.initElements` method and pass the [WebDriverExtensionFieldDecorator](http://static.javadoc.io/com.github.webdriverextensions/webdriverextensions/1.3.0/com/github/webdriverextensions/WebDriverExtensionFieldDecorator.html) before running the test, e.g.
 ```java
 PageFactory.initElements(new WebDriverExtensionFieldDecorator(yourDriver), this);
 ```
@@ -550,7 +550,7 @@ PageFactory.initElements(new WebDriverExtensionFieldDecorator(yourDriver), this)
 <br>
 ### Make your test readable as instructions with the [Bot Pattern](https://code.google.com/p/selenium/wiki/BotStyleTests)
 
-Simply import the static [Bot](http://static.javadoc.io/com.github.webdriverextensions/webdriverextensions/1.2.1/com/github/webdriverextensions/Bot.html) where you want to use it
+Simply import the static [Bot](http://static.javadoc.io/com.github.webdriverextensions/webdriverextensions/1.3.0/com/github/webdriverextensions/Bot.html) where you want to use it
 
 ```java
 import static com.github.webdriverextensions.Bot.*;
@@ -604,11 +604,11 @@ waitForElementToDisplay(downloadCompletePopup, 30); // Wait for WebElements to d
 System.out.println(driver().getPageSource());
 ```
 
-For a list of provided [Bot](http://static.javadoc.io/com.github.webdriverextensions/webdriverextensions/1.2.1/com/github/webdriverextensions/Bot.html) methods take a look at the [javadoc for the Bot class](http://static.javadoc.io/com.github.webdriverextensions/webdriverextensions/1.2.1/com/github/webdriverextensions/Bot.html) or use the autocompletion tool of your IDE (usally with Ctrl + Space and then start typing).
+For a list of provided [Bot](http://static.javadoc.io/com.github.webdriverextensions/webdriverextensions/1.3.0/com/github/webdriverextensions/Bot.html) methods take a look at the [javadoc for the Bot class](http://static.javadoc.io/com.github.webdriverextensions/webdriverextensions/1.3.0/com/github/webdriverextensions/Bot.html) or use the autocompletion tool of your IDE (usally with Ctrl + Space and then start typing).
 
-If you feel that some [Bot](http://static.javadoc.io/com.github.webdriverextensions/webdriverextensions/1.2.1/com/github/webdriverextensions/Bot.html) methods are missing please describe them in a [new GitHub issue](https://github.com/webdriverextensions/webdriverextensions/issues/new) or even better clone this repository, commit the new methods and create a [Pull Request](https://help.github.com/articles/using-pull-requests/).
+If you feel that some [Bot](http://static.javadoc.io/com.github.webdriverextensions/webdriverextensions/1.3.0/com/github/webdriverextensions/Bot.html) methods are missing please describe them in a [new GitHub issue](https://github.com/webdriverextensions/webdriverextensions/issues/new) or even better clone this repository, commit the new methods and create a [Pull Request](https://help.github.com/articles/using-pull-requests/).
 
-If you won't run your tests with the [WebDriverRunner](http://static.javadoc.io/com.github.webdriverextensions/webdriverextensions/1.2.1/com/github/webdriverextensions/junitrunner/WebDriverRunner.html) make sure you set the driver in the [WebDriverExtensionsContext](http://static.javadoc.io/com.github.webdriverextensions/webdriverextensions/1.2.1/com/github/webdriverextensions/WebDriverExtensionsContext.html) before using the [Bot](http://static.javadoc.io/com.github.webdriverextensions/webdriverextensions/1.2.1/com/github/webdriverextensions/Bot.html)
+If you won't run your tests with the [WebDriverRunner](http://static.javadoc.io/com.github.webdriverextensions/webdriverextensions/1.3.0/com/github/webdriverextensions/junitrunner/WebDriverRunner.html) make sure you set the driver in the [WebDriverExtensionsContext](http://static.javadoc.io/com.github.webdriverextensions/webdriverextensions/1.3.0/com/github/webdriverextensions/WebDriverExtensionsContext.html) before using the [Bot](http://static.javadoc.io/com.github.webdriverextensions/webdriverextensions/1.3.0/com/github/webdriverextensions/Bot.html)
 
 ```java
 WebDriverExtensionsContext.setDriver(yourDriver);
@@ -663,6 +663,9 @@ The Javadoc of this project is available online hosted by javadoc.io. You can fi
 
 <br>
 # Changelog
+
+#### 1.3.0 (2015 Mars 12)
+- SELENIUM UPDATE Updated selenium version to 2.45.0
 
 #### 1.2.1 (2014 December 3)
 - ENHANCEMENT Added descriptive messages to instantiation exceptions thrown by WebDriverExtensions when WebPage, WebSite and WebRepository class is either abstract, has no no args constructor or has no accessible constructor
