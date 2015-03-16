@@ -14,6 +14,7 @@ import static java.util.concurrent.TimeUnit.NANOSECONDS;
 import static java.util.concurrent.TimeUnit.SECONDS;
 import com.github.webdriverextensions.internal.BotUtils;
 import com.github.webdriverextensions.internal.Openable;
+import com.github.webdriverextensions.internal.WebDriverExtensionException;
 import org.apache.commons.lang3.StringUtils;
 import static org.apache.commons.lang3.math.NumberUtils.*;
 import org.hamcrest.Matcher;
@@ -26,9 +27,15 @@ import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import static com.github.webdriverextensions.internal.utils.StringUtils.*;
 import com.github.webdriverextensions.internal.utils.NumberUtils;
+import static com.github.webdriverextensions.internal.utils.WebDriverUtils.getScreenshotFilePath;
+import java.io.File;
+import java.io.IOException;
+import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.HasCapabilities;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.OutputType;
 import org.openqa.selenium.Platform;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.remote.BrowserType;
 
@@ -468,6 +475,19 @@ public class Bot {
 
     public static boolean platformIsNotXP() {
         return !platformIsXP();
+    }
+
+
+
+    /* Take Screenshot */
+    public static void takeScreenshot(String fileName) {
+        File screenshotFile = ((TakesScreenshot) driver()).getScreenshotAs(OutputType.FILE);
+        String filePath = getScreenshotFilePath(fileName);
+        try {
+            FileUtils.copyFile(screenshotFile, new File(filePath));
+        } catch (IOException ex) {
+            throw new WebDriverExtensionException("Failed to save screenshot to " + quote(filePath), ex);
+        }
     }
 
 

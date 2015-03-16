@@ -5,12 +5,16 @@ import com.github.webdriverextensions.WebDriverExtensionsContext;
 import com.github.webdriverextensions.internal.WebDriverExtensionException;
 import com.github.webdriverextensions.internal.junitrunner.AnnotationUtils;
 import com.github.webdriverextensions.internal.junitrunner.DriverPathLoader;
+import com.github.webdriverextensions.internal.junitrunner.ScreenshotsPathLoader;
+import com.github.webdriverextensions.internal.junitrunner.TakeScreenshotOnFailureRunListener;
 import com.github.webdriverextensions.internal.utils.InstanceUtils;
 import com.github.webdriverextensions.internal.utils.OsUtils;
 import com.github.webdriverextensions.internal.utils.PropertyUtils;
 import static com.github.webdriverextensions.internal.utils.StringUtils.quote;
 import static com.github.webdriverextensions.internal.utils.WebDriverUtils.addCapabilities;
 import static com.github.webdriverextensions.internal.utils.WebDriverUtils.convertToJsonString;
+import static com.github.webdriverextensions.internal.utils.WebDriverUtils.hasScreenshotPathAnnotation;
+import static com.github.webdriverextensions.internal.utils.WebDriverUtils.hasTakeScreenshotOnFailureAnnotation;
 import static com.github.webdriverextensions.internal.utils.WebDriverUtils.removeCapabilities;
 import com.github.webdriverextensions.junitrunner.annotations.Android;
 import com.github.webdriverextensions.junitrunner.annotations.Browser;
@@ -36,6 +40,7 @@ import com.github.webdriverextensions.junitrunner.annotations.Opera;
 import com.github.webdriverextensions.junitrunner.annotations.PhantomJS;
 import com.github.webdriverextensions.junitrunner.annotations.RemoteAddress;
 import com.github.webdriverextensions.junitrunner.annotations.Safari;
+import com.github.webdriverextensions.junitrunner.annotations.ScreenshotsPath;
 import com.google.gson.Gson;
 import java.lang.annotation.Annotation;
 import java.net.URL;
@@ -126,6 +131,7 @@ public class WebDriverRunner extends BlockJUnit4ClassRunner {
     public WebDriverRunner(Class<?> klass) throws InitializationError {
         super(klass);
         DriverPathLoader.loadDriverPaths(getTestClass().getJavaClass().getAnnotation(DriverPaths.class));
+        ScreenshotsPathLoader.loadScreenshotsPath(getTestClass().getJavaClass().getAnnotation(ScreenshotsPath.class));
     }
 
     @Deprecated
@@ -239,6 +245,15 @@ public class WebDriverRunner extends BlockJUnit4ClassRunner {
                 } catch (Exception ex) {
                     notifier.fireTestFailure(new Failure(description, ex));
                     return;
+                }
+
+                if (hasScreenshotPathAnnotation(getTestClass())) {
+                    DriverPathLoader.loadDriverPaths(getTestClass().getJavaClass().getAnnotation(DriverPaths.class));
+                }
+
+                if (hasTakeScreenshotOnFailureAnnotation(getTestClass())) {
+                    String fileName = className + "." + methodName;
+                    notifier.addListener(new TakeScreenshotOnFailureRunListener(log, fileName));
                 }
                 runLeaf(methodBlock(method), description, notifier);
                 WebDriverExtensionsContext.getDriver().quit();

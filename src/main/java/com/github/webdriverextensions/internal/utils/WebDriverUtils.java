@@ -1,5 +1,7 @@
 package com.github.webdriverextensions.internal.utils;
 
+import com.github.webdriverextensions.junitrunner.annotations.ScreenshotsPath;
+import com.github.webdriverextensions.junitrunner.annotations.TakeScreenshotOnFailure;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
@@ -7,6 +9,9 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import java.util.Map;
 import java.util.Set;
+import org.apache.commons.io.FilenameUtils;
+import static org.apache.commons.io.FilenameUtils.concat;
+import org.junit.runners.model.TestClass;
 import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
@@ -51,4 +56,47 @@ public class WebDriverUtils {
 
         return new DesiredCapabilities(capabilities, new DesiredCapabilities(capabilitiesToAdd));
     }
+
+    public static boolean hasScreenshotPathAnnotation(TestClass testClass) {
+        return testClass.getJavaClass().getAnnotation(ScreenshotsPath.class) != null;
+    }
+
+    public static String getValueFromScreenshotPathAnnotation(TestClass testClass) {
+        return testClass.getJavaClass().getAnnotation(ScreenshotsPath.class).value();
+    }
+
+    public static boolean hasTakeScreenshotOnFailureAnnotation(TestClass testClass) {
+        return testClass.getJavaClass().getAnnotation(TakeScreenshotOnFailure.class) != null;
+    }
+
+    public static final String SCREENSHOTSPATH_PROPERTY_NAME = "webdriverextensions.screenshotspath";
+    public static final String SCREENSHOTSPATH_PROPERTY_DEFAULT_VALUE = "screenshots";
+
+    public static String getScreenshotFilePath(String filename) {
+        return FilenameUtils.concat(getScreenshotsPath(), appendFileExtensionsIfNeeded(filename));
+    }
+
+    private static String getScreenshotsPath() {
+        String workingDirectory = System.getProperty("user.dir");
+        String screenshotPath = System.getProperty(SCREENSHOTSPATH_PROPERTY_NAME);
+        System.out.println("screenshotPath = " + screenshotPath);
+        if (screenshotPath == null) {
+            screenshotPath = SCREENSHOTSPATH_PROPERTY_DEFAULT_VALUE;
+        }
+        System.out.println("workingDirectory = " + workingDirectory);
+        System.out.println("screenshotPath = " + screenshotPath);
+        return concat(workingDirectory, screenshotPath);
+    }
+
+    private static String appendFileExtensionsIfNeeded(String filename) {
+        String extension = FilenameUtils.getExtension(filename);
+        if (extension.equals("jpg")
+                || extension.equals("jpeg")
+                || extension.equals("png")) {
+            return filename;
+        } else {
+            return filename + ".jpg";
+        }
+    }
+
 }

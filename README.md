@@ -354,6 +354,17 @@ If you would like to use a custom driver path annotate the test with the  [@Driv
 @DriverPaths(chrome="path/to/chromedriver", internetExplorer ="path/to/internetexplorerdriver")
 ```
 
+To take screenshots on test failure annotate the test class with the [@TakeScreenshotOnFailure](http://static.javadoc.io/com.github.webdriverextensions/webdriverextensions/1.3.0/com/github/webdriverextensions/junitrunner/annotations/TakeScreenshotOnFailure.html). The screenshots will be saved into a directory named `screenshots` located in the project root. The path to the screenshots directory can be configured either by annotating the test class with the  [@ScreenshotsPath](http://static.javadoc.io/com.github.webdriverextensions/webdriverextensions/1.3.0/com/github/webdriverextensions/junitrunner/annotations/ScreenshotsPath.html) annotation or by setting the `webdriverextensions.screenshotspath` property. E.g.
+
+```java
+@RunWith(WebDriverRunner.class)
+@Firefox
+@TakeScreenshotOnFailure
+@ScreenshotsPath("path/to/screenshots")
+public class CrossBrowserTest {
+	...
+}
+```
 
 
 <br>
@@ -604,6 +615,12 @@ waitForElementToDisplay(downloadCompletePopup, 30); // Wait for WebElements to d
 System.out.println(driver().getPageSource());
 ```
 
+...and take screenshots
+
+```java
+takeScreenshots("screenshotfilename") // Save a screenshot to the screenshots directory in the project root
+```
+
 For a list of provided [Bot](http://static.javadoc.io/com.github.webdriverextensions/webdriverextensions/1.3.0/com/github/webdriverextensions/Bot.html) methods take a look at the [javadoc for the Bot class](http://static.javadoc.io/com.github.webdriverextensions/webdriverextensions/1.3.0/com/github/webdriverextensions/Bot.html) or use the autocompletion tool of your IDE (usally with Ctrl + Space and then start typing).
 
 If you feel that some [Bot](http://static.javadoc.io/com.github.webdriverextensions/webdriverextensions/1.3.0/com/github/webdriverextensions/Bot.html) methods are missing please describe them in a [new GitHub issue](https://github.com/webdriverextensions/webdriverextensions/issues/new) or even better clone this repository, commit the new methods and create a [Pull Request](https://help.github.com/articles/using-pull-requests/).
@@ -663,7 +680,9 @@ The Javadoc of this project is available online hosted by javadoc.io. You can fi
 
 <br>
 # Changelog
-#### Next release (???)
+#### 1.4.0 (???)
+- FEATURE Added @TakeScreenshotOnFailure and @ScreenshotsPath annotations to WebDriverRunner
+- FEATURE Added takeScreenshot method to Bot
 - BUGFIX Corrected that the @DriverPath and @RemoteAddress annotations are now only allowed as class annotations
 
 #### 1.3.0 (2015 Mars 12)
