@@ -3,6 +3,7 @@ package com.github.webdriverextensions.internal;
 import com.github.webdriverextensions.Bot;
 import com.github.webdriverextensions.exceptions.WebAssertionError;
 import static com.github.webdriverextensions.internal.utils.StringUtils.*;
+import java.util.concurrent.TimeUnit;
 import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.WebElement;
 
@@ -401,5 +402,33 @@ public class BotUtils {
         if (lessThan(number, actual)) {
             throw new WebAssertionError(name + " is not greater than or equal to " + quote(number), webElement);
         }
+    }
+
+    public static long asNanos(double time, TimeUnit unit) {
+        long nanos = 0;
+        switch (unit) {
+            case DAYS:
+                nanos = (long) (time * 24 * 60 * 60 * 1000000000);
+                break;
+            case HOURS:
+                nanos = (long) (time * 60 * 60 * 1000000000);
+                break;
+            case MINUTES:
+                nanos = (long) (time * 60 * 1000000000);
+                break;
+            case SECONDS:
+                nanos = (long) (time * 1000000000);
+                break;
+            case MILLISECONDS:
+                nanos = (long) (time * 1000000);
+                break;
+            case MICROSECONDS:
+                nanos = (long) (time * 1000);
+                break;
+            case NANOSECONDS:
+                nanos = (long) (time);
+                break;
+        }
+        return nanos;
     }
 }

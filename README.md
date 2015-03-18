@@ -605,8 +605,8 @@ if (browserIsInternetExplorer()) {   // Check if browser is Internet Explorer
 ...and wait for specific time and conditions
 
 ```java
-waitFor(3, MINUTES);                                // Wait for specific time
-waitForElementToDisplay(downloadCompletePopup, 30); // Wait for WebElements to display within specific time
+waitFor(3, MINUTES);                                         // Wait for specific time
+waitForElementToDisplay(downloadCompletePopup, 30, SECONDS); // Wait for WebElements to display within specific time
 ```
 
 ...and use the driver
@@ -681,6 +681,7 @@ The Javadoc of this project is available online hosted by javadoc.io. You can fi
 <br>
 # Changelog
 #### 1.4.0 (???)
+- FEATURE Added Bot method waitForElementToDisplay with TimeUnit as parameter
 - FEATURE Added @TakeScreenshotOnFailure and @ScreenshotsPath annotations to WebDriverRunner
 - FEATURE Added takeScreenshot method to Bot
 - BUGFIX Corrected that the @DriverPath and @RemoteAddress annotations are now only allowed as class annotations

@@ -5,14 +5,8 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
-import static java.util.concurrent.TimeUnit.DAYS;
-import static java.util.concurrent.TimeUnit.HOURS;
-import static java.util.concurrent.TimeUnit.MICROSECONDS;
-import static java.util.concurrent.TimeUnit.MILLISECONDS;
-import static java.util.concurrent.TimeUnit.MINUTES;
-import static java.util.concurrent.TimeUnit.NANOSECONDS;
-import static java.util.concurrent.TimeUnit.SECONDS;
 import com.github.webdriverextensions.internal.BotUtils;
+import static com.github.webdriverextensions.internal.BotUtils.asNanos;
 import com.github.webdriverextensions.internal.Openable;
 import com.github.webdriverextensions.internal.WebDriverExtensionException;
 import org.apache.commons.lang3.StringUtils;
@@ -200,37 +194,14 @@ public class Bot {
     }
 
     public static void waitFor(double time, TimeUnit unit) {
-        long nanos = 0;
-        switch (unit) {
-            case DAYS:
-                nanos = (long) (time * 24 * 60 * 60 * 1000000000);
-                break;
-            case HOURS:
-                nanos = (long) (time * 60 * 60 * 1000000000);
-                break;
-            case MINUTES:
-                nanos = (long) (time * 60 * 1000000000);
-                break;
-            case SECONDS:
-                nanos = (long) (time * 1000000000);
-                break;
-            case MILLISECONDS:
-                nanos = (long) (time * 1000000);
-                break;
-            case MICROSECONDS:
-                nanos = (long) (time * 1000);
-                break;
-            case NANOSECONDS:
-                nanos = (long) (time);
-                break;
+        if (time <= 0) {
+            return;
         }
-        if (time > 0) {
-            try {
-                TimeUnit.NANOSECONDS.sleep(nanos);
-            } catch (InterruptedException ex) {
-                // Swallow exception
-                ex.printStackTrace();
-            }
+        try {
+            TimeUnit.NANOSECONDS.sleep(asNanos(time, unit));
+        } catch (InterruptedException ex) {
+            // Swallow exception
+            ex.printStackTrace();
         }
     }
 
@@ -243,8 +214,18 @@ public class Bot {
         wait.until(ExpectedConditions.visibilityOf(webElement));
     }
 
+    public static void waitForElementToDisplay(WebElement webElement, double timeToWait, TimeUnit unit) {
+        WebDriverWait wait = new WebDriverWait(driver(), asNanos(timeToWait, unit));
+        wait.until(ExpectedConditions.visibilityOf(webElement));
+    }
+
     public static void waitForElementToDisplay(WebElement webElement, long secondsToWait, long sleepInMillis) {
         WebDriverWait wait = new WebDriverWait(driver(), secondsToWait, sleepInMillis);
+        wait.until(ExpectedConditions.visibilityOf(webElement));
+    }
+
+    public static void waitForElementToDisplay(WebElement webElement, double timeToWait, TimeUnit unit, long sleepInMillis) {
+        WebDriverWait wait = new WebDriverWait(driver(), asNanos(timeToWait, unit), sleepInMillis);
         wait.until(ExpectedConditions.visibilityOf(webElement));
     }
 
