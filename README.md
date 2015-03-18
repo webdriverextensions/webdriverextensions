@@ -684,7 +684,7 @@ The Javadoc of this project is available online hosted by javadoc.io. You can fi
 - FEATURE Added Bot method waitForElementToDisplay with TimeUnit as parameter
 - FEATURE Added @TakeScreenshotOnFailure and @ScreenshotsPath annotations to WebDriverRunner
 - FEATURE Added takeScreenshot method to Bot
-- BUGFIX Corrected that the @DriverPath and @RemoteAddress annotations are now only allowed as class annotations
+- BUGFIX Made @DriverPath and @RemoteAddress annotations only applicable as class annotations
 
 #### 1.3.0 (2015 Mars 12)
 - SELENIUM UPDATE Updated selenium version to 2.45.0
