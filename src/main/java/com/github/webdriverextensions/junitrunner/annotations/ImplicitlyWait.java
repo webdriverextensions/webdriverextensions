@@ -43,7 +43,7 @@ import java.util.concurrent.TimeUnit;
  *
  * <p>The annotation sets the implicitly wait by calling {@code driver.manage().timeouts().implicitlyWait(value, unit)}</p>
  *
- * @see WebDriverRunner
+ * @see com.github.webdriverextensions.junitrunner.WebDriverRunner
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Inherited
