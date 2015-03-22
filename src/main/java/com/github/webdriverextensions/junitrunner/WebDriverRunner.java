@@ -13,6 +13,9 @@ import com.github.webdriverextensions.internal.utils.PropertyUtils;
 import static com.github.webdriverextensions.internal.utils.StringUtils.quote;
 import static com.github.webdriverextensions.internal.utils.WebDriverUtils.addCapabilities;
 import static com.github.webdriverextensions.internal.utils.WebDriverUtils.convertToJsonString;
+import static com.github.webdriverextensions.internal.utils.WebDriverUtils.getUnitFromImplicitlyWaitAnnotation;
+import static com.github.webdriverextensions.internal.utils.WebDriverUtils.getValueFromImplicitlyWaitAnnotation;
+import static com.github.webdriverextensions.internal.utils.WebDriverUtils.hasImplicitlyWaitAnnotation;
 import static com.github.webdriverextensions.internal.utils.WebDriverUtils.hasScreenshotPathAnnotation;
 import static com.github.webdriverextensions.internal.utils.WebDriverUtils.hasTakeScreenshotOnFailureAnnotation;
 import static com.github.webdriverextensions.internal.utils.WebDriverUtils.removeCapabilities;
@@ -48,6 +51,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
@@ -201,6 +205,7 @@ public class WebDriverRunner extends BlockJUnit4ClassRunner {
                 log.trace("Skipping test {}. Current platform is not " + browser.platform, testName);
                 notifier.fireTestIgnored(description);
             } else {
+                WebDriver driver;
                 try {
                     if (hasRemoteAddress) {
                         String remoteAddress;
@@ -209,10 +214,11 @@ public class WebDriverRunner extends BlockJUnit4ClassRunner {
                         } else {
                             remoteAddress = ((RemoteAddress) getTestClass().getJavaClass().getAnnotation(RemoteAddress.class)).value();
                         }
-                        WebDriverExtensionsContext.setDriver(browser.createDriver(new URL(remoteAddress)));
+                        driver = browser.createDriver(new URL(remoteAddress));
+                        WebDriverExtensionsContext.setDriver(driver);
                     } else {
                         try {
-                            WebDriver driver = browser.createDriver();
+                            driver = browser.createDriver();
                             BrowserConfiguration driverBrowser = new BrowserConfiguration(driver);
                             if (testMethodContext.isBrowserIgnored(driverBrowser)) {
                                 driver.quit();
@@ -229,6 +235,13 @@ public class WebDriverRunner extends BlockJUnit4ClassRunner {
                             return;
                         }
                     }
+
+                    if (hasImplicitlyWaitAnnotation(getTestClass(), method)) {
+                        Long implicitlyWaitAnnotationValue = getValueFromImplicitlyWaitAnnotation(getTestClass(), method);
+                        TimeUnit implicitlyWaitAnnotationUnit = getUnitFromImplicitlyWaitAnnotation(getTestClass(), method);
+                        driver.manage().timeouts().implicitlyWait(implicitlyWaitAnnotationValue, implicitlyWaitAnnotationUnit);
+                    }
+
                     log.info("Running test {}", testName);
                     log.trace("{} threadId = {}", testName, Thread.currentThread().getId());
                     log.trace("Desired Capabilities");
@@ -237,7 +250,7 @@ public class WebDriverRunner extends BlockJUnit4ClassRunner {
                     log.trace("platform = " + browser.getPlatform());
                     log.trace("desiredCapabilities = " + convertToJsonString(browser.getDesiredCapabilities()));
                     log.trace("Capabilities");
-                    Capabilities capabilities = ((HasCapabilities) WebDriverExtensionsContext.getDriver()).getCapabilities();
+                    Capabilities capabilities = ((HasCapabilities) driver).getCapabilities();
                     log.trace("browserName = " + capabilities.getBrowserName());
                     log.trace("version = " + capabilities.getVersion());
                     log.trace("platform = " + capabilities.getCapability(PLATFORM));
@@ -256,7 +269,7 @@ public class WebDriverRunner extends BlockJUnit4ClassRunner {
                     notifier.addListener(new TakeScreenshotOnFailureRunListener(log, fileName));
                 }
                 runLeaf(methodBlock(method), description, notifier);
-                WebDriverExtensionsContext.getDriver().quit();
+                driver.quit();
             }
         } else {
             // Not a Selenium Grid Anotated test, treat as normal test

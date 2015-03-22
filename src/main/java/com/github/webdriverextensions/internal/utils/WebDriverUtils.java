@@ -1,5 +1,6 @@
 package com.github.webdriverextensions.internal.utils;
 
+import com.github.webdriverextensions.junitrunner.annotations.ImplicitlyWait;
 import com.github.webdriverextensions.junitrunner.annotations.ScreenshotsPath;
 import com.github.webdriverextensions.junitrunner.annotations.TakeScreenshotOnFailure;
 import com.google.common.base.Predicate;
@@ -9,8 +10,10 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import java.util.Map;
 import java.util.Set;
+import java.util.concurrent.TimeUnit;
 import org.apache.commons.io.FilenameUtils;
 import static org.apache.commons.io.FilenameUtils.concat;
+import org.junit.runners.model.FrameworkMethod;
 import org.junit.runners.model.TestClass;
 import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.remote.DesiredCapabilities;
@@ -99,4 +102,31 @@ public class WebDriverUtils {
         }
     }
 
+    public static boolean hasImplicitlyWaitAnnotation(TestClass testClass, FrameworkMethod testMethod) {
+        return hasImplicitlyWaitTestClassAnnotation(testClass) || hasImplicitlyWaitTestMethodAnnotation(testMethod);
+    }
+
+    public static long getValueFromImplicitlyWaitAnnotation(TestClass testClass, FrameworkMethod testMethod) {
+        if (hasImplicitlyWaitTestMethodAnnotation(testMethod)) {
+            return testMethod.getAnnotation(ImplicitlyWait.class).value();
+        } else {
+            return testClass.getJavaClass().getAnnotation(ImplicitlyWait.class).value();
+        }
+    }
+
+    public static TimeUnit getUnitFromImplicitlyWaitAnnotation(TestClass testClass, FrameworkMethod testMethod) {
+        if (hasImplicitlyWaitTestMethodAnnotation(testMethod)) {
+            return testMethod.getAnnotation(ImplicitlyWait.class).unit();
+        } else {
+            return testClass.getJavaClass().getAnnotation(ImplicitlyWait.class).unit();
+        }
+    }
+
+    private static boolean hasImplicitlyWaitTestClassAnnotation(TestClass testClass) {
+        return testClass.getJavaClass().getAnnotation(ImplicitlyWait.class) != null;
+    }
+
+    private static boolean hasImplicitlyWaitTestMethodAnnotation(FrameworkMethod testMethod) {
+        return testMethod.getAnnotation(ImplicitlyWait.class) != null;
+    }
 }

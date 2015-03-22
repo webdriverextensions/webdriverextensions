@@ -361,11 +361,43 @@ To take screenshots on test failure annotate the test class with the [@TakeScree
 @Firefox
 @TakeScreenshotOnFailure
 @ScreenshotsPath("path/to/screenshots")
-public class CrossBrowserTest {
+public class SomeTest {
 	...
 }
 ```
 
+The implicitly wait for tests can be set by annotating test classes or methods with the [@ImplicitlyWait](http://static.javadoc.io/com.github.webdriverextensions/webdriverextensions/1.3.0/com/github/webdriverextensions/junitrunner/annotations/ImplicitlyWait.html) annotation. E.g.
+
+```java
+@RunWith(WebDriverRunner.class)
+@Firefox
+@ImplicitlyWait(1)
+public class SomeTest {
+    @Test
+    public void somethingToTest() {
+        // Implicittly wait is set to one second
+    }
+    @Test
+    @ImplicitlyWait(value = 1, unit = MINUTES)
+    public void somethingElseToTest() {
+        // Implicittly wait is set to one minute
+    }
+}
+```
+
+To set other driver specific setting use the JUnit @Before annotation. The driver
+can be retreived by using the [driver()](http://static.javadoc.io/com.github.webdriverextensions/webdriverextensions/1.3.0/com/github/webdriverextensions/Bot.html#driver--) method in the [Bot](http://static.javadoc.io/com.github.webdriverextensions/webdriverextensions/1.3.0/com/github/webdriverextensions/Bot.html) class. E.g.
+
+```java
+@RunWith(WebDriverRunner.class)
+@Firefox
+public class SomeTest {
+    @Before
+    public void configure() {
+        driver().manage().timeouts().pageLoadTimeout(10, SECONDS);
+    }
+}
+```
 
 <br>
 ### Model your website with the [Page Object Pattern](https://code.google.com/p/selenium/wiki/PageObjects)
@@ -682,6 +714,7 @@ The Javadoc of this project is available online hosted by javadoc.io. You can fi
 # Changelog
 #### 1.4.0 (???)
 - FEATURE Added Bot method waitForElementToDisplay with TimeUnit as parameter
+- FEATURE Added @ImplicitlyWait annotation to WebDriverRunner
 - FEATURE Added @TakeScreenshotOnFailure and @ScreenshotsPath annotations to WebDriverRunner
 - FEATURE Added takeScreenshot method to Bot
 - BUGFIX Made @DriverPath and @RemoteAddress annotations only applicable as class annotations
