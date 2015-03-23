@@ -461,6 +461,13 @@ public class Bot {
 
 
     /* Take Screenshot */
+    /**
+     * Takes a screenshot and saves it as a file in a directory called {@code screenshots}.
+     * A custom path to the directory where the screenshots are saved can be set by setting
+     * the system property {@code webdriverextensions.screenshotspath}.
+     *
+     * @param fileName the filename of the screenshot file without the file extension
+     */
     public static void takeScreenshot(String fileName) {
         File screenshotFile = ((TakesScreenshot) driver()).getScreenshotAs(OutputType.FILE);
         String filePath = getScreenshotFilePath(fileName);
