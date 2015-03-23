@@ -396,6 +396,7 @@ public class SomeTest {
     public void configure() {
         driver().manage().timeouts().pageLoadTimeout(10, SECONDS);
     }
+    ...
 }
 ```
 
