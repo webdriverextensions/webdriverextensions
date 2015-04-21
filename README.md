@@ -233,6 +233,8 @@ The plugin will download the most suitable driver for  your OS. The bit of the d
 
 The drivers will placed in a folder called `drivers` in the project root. If you will use the provided [WebDriverRunner](http://static.javadoc.io/com.github.webdriverextensions/webdriverextensions/1.4.0/com/github/webdriverextensions/junitrunner/WebDriverRunner.html) there is no need for passing driver paths as System Properties since the framework will take care of the for you. If you won't be using it make sure to point the drivers out manually.
 
+If you have configured a proxy in the settings.xml file the first encountered active proxy will be used. To specify a specific proxy to use you can provide the proxy id in the configuration.
+
 For more information on configuring the driver please visit the [WebDriver Extensions Maven Plugin GitHub page](https://github.com/webdriverextensions/webdriverextensions-maven-plugin). If the latest drivers are not available yet please create an issue [here](https://github.com/webdriverextensions/webdriverextensions-maven-plugin/issues/new).
 
 
