@@ -7,7 +7,7 @@ import java.lang.reflect.Type;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
-import com.github.webdriverextensions.WebComponent;
+import java.lang.reflect.TypeVariable;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.pagefactory.ElementLocator;
 
@@ -27,10 +27,40 @@ public class ReflectionUtils {
         }
     }
 
-    public static Class<? extends WebComponent> getListType(Field field) {
+    public static Class getType(Field field, ParameterizedType genericTypeArguments) {
+        Type genericType = field.getGenericType();
+        if (genericType instanceof TypeVariable) {
+            TypeVariable genericTypeVariable = (TypeVariable) genericType;
+            TypeVariable<?>[] classGenericTypeParameters = ((TypeVariable) genericType).getGenericDeclaration().getTypeParameters();
+            for (int i = 0; i < classGenericTypeParameters.length; i++) {
+                if (classGenericTypeParameters[i].getName().equals(genericTypeVariable.getName())) {
+                    return (Class) genericTypeArguments.getActualTypeArguments()[i];
+                }
+            }
+            throw new WebDriverExtensionException("Could not find genericTypeVariableName = " + genericTypeVariable.getName() + " in class");
+        } else {
+            return field.getType();
+        }
+    }
+
+    public static Class getListType(Field field, ParameterizedType genericTypeArguments) {
         Type genericType = field.getGenericType();
         Type listType = ((ParameterizedType) genericType).getActualTypeArguments()[0];
-        return (Class<? extends WebComponent>) listType;
+
+        if (listType instanceof TypeVariable) {
+            String genericTypeVariableName = ((TypeVariable) listType).getName();
+            TypeVariable<?>[] classGenericTypeParameters = ((TypeVariable) listType).getGenericDeclaration().getTypeParameters();
+            for (int i = 0; i < classGenericTypeParameters.length; i++) {
+                if (classGenericTypeParameters[i].getName().equals(genericTypeVariableName)) {
+                    return (Class) genericTypeArguments.getActualTypeArguments()[i];
+                }
+            }
+            throw new WebDriverExtensionException("Could not find genericTypeVariableName = " + genericTypeVariableName + " in class");
+        } if (listType instanceof ParameterizedType) {
+            return (Class) ((ParameterizedType) listType).getRawType();
+        } else {
+            return (Class) listType;
+        }
     }
 
     public static Field[] getAnnotatedDeclaredFields(Class clazz,

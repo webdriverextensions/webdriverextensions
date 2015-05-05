@@ -715,6 +715,25 @@ The Javadoc of this project is available online hosted by javadoc.io. You can fi
 
 <br>
 # Changelog
+#### 1.5.0 (2015 ??? ??)
+- FEATURE Added support for passing WebComponents as generic arguments to other WebComponents, WebPages and WebRepositories [fixes issue #50](https://github.com/webdriverextensions/webdriverextensions/issues/50). E.g.
+
+```java
+public class TableComponent<T extends WebComponent> extends WebComponent {
+    @FindBy(...)
+    public List<T> rowList;
+}
+
+public class ASearchResultType extends WebComponent {
+    // the model for the search result row
+}
+
+@FindBy(...)
+TableComponent<ASearchResultType> resultTable;
+```
+
+- ENHANCEMENT Added descriptive messages to general field instantiation exceptions thrown by WebDriverExtensions
+
 #### 1.4.0 (2015 Mars 23)
 - FEATURE Added Bot method waitForElementToDisplay with TimeUnit as parameter
 - FEATURE Added @ImplicitlyWait annotation to WebDriverRunner

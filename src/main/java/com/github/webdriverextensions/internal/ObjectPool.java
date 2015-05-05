@@ -7,14 +7,43 @@ import com.github.webdriverextensions.WebPage;
 import com.github.webdriverextensions.WebRepository;
 import com.github.webdriverextensions.WebSite;
 import static com.github.webdriverextensions.internal.utils.StringUtils.quote;
+import java.lang.reflect.ParameterizedType;
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.openqa.selenium.WebDriver;
 
 public class ObjectPool {
 
     private final WebDriver driver;
-    private final HashMap<Class<?>, WebSite> siteObjects = new HashMap<Class<?>, WebSite>();;
-    private final HashMap<Class<?>, WebPage> pageObjects = new HashMap<Class<?>, WebPage>();;
-    private final HashMap<Class<?>, WebRepository> repositoryObjects = new HashMap<Class<?>, WebRepository>();;
+    private final HashMap<Class<?>, WebSite> siteObjects = new HashMap<Class<?>, WebSite>();
+    private final HashMap<ClassGeneric, WebPage> pageObjects = new HashMap<ClassGeneric, WebPage>();
+    private final HashMap<ClassGeneric, WebRepository> repositoryObjects = new HashMap<ClassGeneric, WebRepository>();
+
+    public static class ClassGeneric {
+        Class<?> clazz;
+        ParameterizedType generics;
+
+        @Override
+        public int hashCode() {
+            return new HashCodeBuilder()
+                    .append(clazz)
+                    .append(generics)
+                    .toHashCode();
+        }
+
+        @Override
+        public boolean equals(final Object obj) {
+            if (obj instanceof ClassGeneric) {
+                final ClassGeneric other = (ClassGeneric) obj;
+                return new EqualsBuilder()
+                        .append(clazz, other.clazz)
+                        .append(generics, other.generics)
+                        .isEquals();
+            } else {
+                return false;
+            }
+        }
+    }
 
     public ObjectPool(WebDriver driver) {
         this.driver = driver;
@@ -31,20 +60,36 @@ public class ObjectPool {
     }
 
     public WebPage getPageObject(Field field, WebDriverExtensionFieldDecorator decorator) {
-        WebPage pageObject = pageObjects.get(field.getType());
+        ClassGeneric key = new ClassGeneric();
+        key.clazz = field.getType();
+        if (field.getGenericType() instanceof ParameterizedType) {
+            key.generics = (ParameterizedType)field.getGenericType();
+        }
+        WebPage pageObject = pageObjects.get(key);
         if (pageObject == null) {
             pageObject = createPageObject(field);
-            pageObjects.put(field.getType(), pageObject);
+            pageObjects.put(key, pageObject);
+            if (field.getGenericType() instanceof ParameterizedType) {
+                decorator.setGenericTypeArguments((ParameterizedType) field.getGenericType());
+            }
             pageObject.initElements(decorator);
         }
         return pageObject;
     }
 
     public WebRepository getRepositoryObject(Field field, WebDriverExtensionFieldDecorator decorator) {
-        WebRepository repositoryObject = repositoryObjects.get(field.getType());
+        ClassGeneric key = new ClassGeneric();
+        key.clazz = field.getType();
+        if (field.getGenericType() instanceof ParameterizedType) {
+            key.generics = (ParameterizedType)field.getGenericType();
+        }
+        WebRepository repositoryObject = repositoryObjects.get(key);
         if (repositoryObject == null) {
             repositoryObject = createRepositoryObject(field);
-            repositoryObjects.put(field.getType(), repositoryObject);
+            repositoryObjects.put(key, repositoryObject);
+            if (field.getGenericType() instanceof ParameterizedType) {
+                decorator.setGenericTypeArguments((ParameterizedType) field.getGenericType());
+            }
             repositoryObject.initElements(decorator);
         }
         return repositoryObject;

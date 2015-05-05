@@ -7,6 +7,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
 import com.github.webdriverextensions.WebComponent;
+import java.lang.reflect.ParameterizedType;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
@@ -18,6 +19,7 @@ public class WebComponentList<T extends WebComponent> implements List<T> {
     private List<T> webComponents;
     private WebComponentFactory webComponentFactory = new DefaultWebComponentFactory();
     private WebDriver driver;
+    private ParameterizedType genericTypeArguments;
 
     public WebComponentList(Class<T> webComponentClass, List<WebElement> webElements, WebComponentFactory webComponentFactory, WebDriver driver) {
         this.webComponentClass = webComponentClass;
@@ -26,16 +28,24 @@ public class WebComponentList<T extends WebComponent> implements List<T> {
         this.driver = driver;
     }
 
+    public WebComponentList(Class<T> webComponentClass, List<WebElement> webElements, WebComponentFactory webComponentFactory, WebDriver driver, ParameterizedType genericTypeArguments) {
+        this.webComponentClass = webComponentClass;
+        this.wrappedWebElements = webElements;
+        this.webComponentFactory = webComponentFactory;
+        this.driver = driver;
+        this.genericTypeArguments = genericTypeArguments;
+    }
+
     public void createWebComponents() {
         webComponents = new ArrayList<T>();
         for (WebElement webElement : wrappedWebElements) {
             try {
                 // Create web component and add it to list
                 T webComponent = webComponentFactory.create(webComponentClass, webElement);
-                PageFactory.initElements(new WebDriverExtensionFieldDecorator(webElement, driver), webComponent);
+                PageFactory.initElements(new WebDriverExtensionFieldDecorator(webElement, driver, genericTypeArguments), webComponent);
                 webComponents.add(webComponent);
             } catch (Exception e) {
-                throw new RuntimeException(e);
+                throw new WebDriverExtensionException(e);
             }
         }
     }

@@ -9,9 +9,12 @@ import com.github.webdriverextensions.internal.DefaultWebComponentFactory;
 import com.github.webdriverextensions.internal.DefaultWebComponentListFactory;
 import com.github.webdriverextensions.internal.ReflectionUtils;
 import com.github.webdriverextensions.internal.ObjectPool;
+import static com.github.webdriverextensions.internal.ReflectionUtils.getListType;
 import com.github.webdriverextensions.internal.WebComponentFactory;
 import com.github.webdriverextensions.internal.WebComponentListFactory;
 import com.github.webdriverextensions.internal.WebDriverExtensionElementLocatorFactory;
+import com.github.webdriverextensions.internal.WebDriverExtensionException;
+import java.lang.reflect.TypeVariable;
 import org.openqa.selenium.SearchContext;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -27,6 +30,11 @@ public class WebDriverExtensionFieldDecorator extends DefaultFieldDecorator {
     private final ObjectPool pool;
     private final WebComponentFactory webComponentFactory;
     private final WebComponentListFactory webComponentListFactory;
+    private ParameterizedType genericTypeArguments;
+
+    public void setGenericTypeArguments(ParameterizedType genericTypeArguments) {
+        this.genericTypeArguments = genericTypeArguments;
+    }
 
     public WebDriverExtensionFieldDecorator(final WebDriver driver) {
         super(new WebDriverExtensionElementLocatorFactory(driver, driver));
@@ -34,6 +42,7 @@ public class WebDriverExtensionFieldDecorator extends DefaultFieldDecorator {
         this.pool = new ObjectPool(driver);
         this.webComponentFactory = new DefaultWebComponentFactory();
         this.webComponentListFactory = new DefaultWebComponentListFactory(webComponentFactory);
+        this.genericTypeArguments = null;
     }
 
     public WebDriverExtensionFieldDecorator(final SearchContext searchContext, final WebDriver driver) {
@@ -42,32 +51,64 @@ public class WebDriverExtensionFieldDecorator extends DefaultFieldDecorator {
         this.pool = new ObjectPool(driver);
         this.webComponentFactory = new DefaultWebComponentFactory();
         this.webComponentListFactory = new DefaultWebComponentListFactory(webComponentFactory);
+        this.genericTypeArguments = null;
+    }
+
+    public WebDriverExtensionFieldDecorator(final SearchContext searchContext, final WebDriver driver, final ParameterizedType genericTypeArguments) {
+        super(new WebDriverExtensionElementLocatorFactory(searchContext, driver));
+        this.driver = driver;
+        this.pool = new ObjectPool(driver);
+        this.webComponentFactory = new DefaultWebComponentFactory();
+        this.webComponentListFactory = new DefaultWebComponentListFactory(webComponentFactory);
+        this.genericTypeArguments = genericTypeArguments;
     }
 
     @Override
     public Object decorate(ClassLoader loader, Field field) {
-        if (isDecoratableWebComponent(field)) {
-            return decorateWebComponent(loader, field);
+        try {
+            if (isDecoratableWebComponent(field)) {
+                if (field.getGenericType() instanceof TypeVariable) {
+                    return decorateWebComponent(loader, field, genericTypeArguments);
+                } else if (field.getGenericType() instanceof ParameterizedType) {
+                    return decorateWebComponent(loader, field, (ParameterizedType) field.getGenericType());
+                } else {
+                    return decorateWebComponent(loader, field, null);
+                }
+            }
+            if (isDecoratableWebComponentList(field)) {
+                Type listType = ((ParameterizedType) field.getGenericType()).getActualTypeArguments()[0];
+                if (listType instanceof TypeVariable) {
+                    return decorateWebComponentList(loader, field, genericTypeArguments);
+                } else if (listType instanceof ParameterizedType) {
+                    return decorateWebComponentList(loader, field, (ParameterizedType) listType);
+                } else {
+                    return decorateWebComponentList(loader, field, null);
+                }
+            }
+            if (isDecoratableSiteObject(field)) {
+                return pool.getSiteObject(field, this);
+            }
+            if (isDecoratablePageObject(field)) {
+                return pool.getPageObject(field, this);
+            }
+            if (isDecoratableRepositoryObject(field)) {
+                return pool.getRepositoryObject(field, this);
+            }
+            if ("wrappedWebElement".equals(field.getName())) {
+                return null;
+            }
+            if ("delegateWebElement".equals(field.getName())) {
+                return null;
+            }
+            return super.decorate(loader, field);
+        } catch (Exception ex) {
+            if (ex instanceof WebDriverExtensionException) {
+                throw (WebDriverExtensionException) ex; // re-throw it
+            } else {
+                throw new WebDriverExtensionException("Failed to decorate field " + field.getName() + " in class " + field.getDeclaringClass(), ex);
+            }
         }
-        if (isDecoratableWebComponentList(field)) {
-            return decorateWebComponentList(loader, field);
-        }
-        if (isDecoratableSiteObject(field)) {
-            return pool.getSiteObject(field, this);
-        }
-        if (isDecoratablePageObject(field)) {
-            return pool.getPageObject(field, this);
-        }
-        if (isDecoratableRepositoryObject(field)) {
-            return pool.getRepositoryObject(field, this);
-        }
-        if ("wrappedWebElement".equals(field.getName())) {
-            return null;
-        }
-        if ("delegateWebElement".equals(field.getName())) {
-            return null;
-        }
-        return super.decorate(loader, field);
+
     }
 
     private boolean isDecoratableWebComponent(Field field) {
@@ -92,8 +133,18 @@ public class WebDriverExtensionFieldDecorator extends DefaultFieldDecorator {
 
         Type listType = ((ParameterizedType) genericType).getActualTypeArguments()[0];
 
-        if (!WebComponent.class.isAssignableFrom((Class) listType)) {
-            return false;
+        if (listType instanceof TypeVariable) {
+            if (!WebComponent.class.isAssignableFrom(getListType(field, genericTypeArguments))) {
+                return false;
+            }
+        } else if (listType instanceof ParameterizedType) {
+            if (!WebComponent.class.isAssignableFrom((Class) ((ParameterizedType) listType).getRawType())) {
+                return false;
+            }
+        } else {
+            if (!WebComponent.class.isAssignableFrom((Class) listType)) {
+                return false;
+            }
         }
 
         if (field.getAnnotation(FindBy.class) == null
@@ -128,21 +179,21 @@ public class WebDriverExtensionFieldDecorator extends DefaultFieldDecorator {
         return true;
     }
 
-    private Object decorateWebComponent(final ClassLoader loader, final Field field) {
+    private Object decorateWebComponent(ClassLoader loader, Field field, ParameterizedType genericTypeArguments) {
         ElementLocator locator = factory.createLocator(field);
-        Class type = (Class<? extends WebComponent>) field.getType();
+        Class type = ReflectionUtils.getType(field, genericTypeArguments);
         final WebElement webElement = proxyForLocator(loader, locator);
         final WebComponent webComponent = webComponentFactory.create(type, webElement);
-        PageFactory.initElements(new WebDriverExtensionFieldDecorator(webElement, driver), webComponent);
+        PageFactory.initElements(new WebDriverExtensionFieldDecorator(webElement, driver, genericTypeArguments), webComponent);
         webComponent.delegateWebElement = WebDriverExtensionAnnotations.getDelagate(webComponent);
         return webComponent;
     }
 
-    private Object decorateWebComponentList(final ClassLoader loader, final Field field) {
+    private Object decorateWebComponentList(final ClassLoader loader, final Field field, ParameterizedType genericTypeArguments) {
         ElementLocator locator = factory.createLocator(field);
-        Class listType = ReflectionUtils.getListType(field);
+        Class listType = ReflectionUtils.getListType(field, genericTypeArguments);
         List<WebElement> webElements = proxyForListLocator(loader, locator);
-        final List<? extends WebComponent> webComponentList = webComponentListFactory.create(listType, webElements, driver);
+        final List<? extends WebComponent> webComponentList = webComponentListFactory.create(listType, webElements, driver, genericTypeArguments);
         return webComponentList;
     }
 }
