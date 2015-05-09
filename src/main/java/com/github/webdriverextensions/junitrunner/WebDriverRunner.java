@@ -222,6 +222,7 @@ public class WebDriverRunner extends BlockJUnit4ClassRunner {
                             BrowserConfiguration driverBrowser = new BrowserConfiguration(driver);
                             if (testMethodContext.isBrowserIgnored(driverBrowser)) {
                                 driver.quit();
+                                WebDriverExtensionsContext.removeDriver();
                                 log.trace("Skipping test {}. Test is annotated to be ignored, ignore annotations = {}.", testName,
                                         testMethodContext.ignoreBrowsers.toString());
                                 notifier.fireTestIgnored(description);
@@ -270,6 +271,7 @@ public class WebDriverRunner extends BlockJUnit4ClassRunner {
                 }
                 runLeaf(methodBlock(method), description, notifier);
                 driver.quit();
+                WebDriverExtensionsContext.removeDriver();
             }
         } else {
             // Not a Selenium Grid Anotated test, treat as normal test

@@ -733,6 +733,7 @@ TableComponent<ASearchResultType> resultTable;
 ```
 
 - ENHANCEMENT Added descriptive messages to general field instantiation exceptions thrown by WebDriverExtensions
+- BUGFIX Removed driver from ThreadLocal when test finished running or failed
 
 #### 1.4.0 (2015 Mars 23)
 - FEATURE Added Bot method waitForElementToDisplay with TimeUnit as parameter
