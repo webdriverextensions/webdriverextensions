@@ -750,7 +750,7 @@ The Javadoc of this project is available online hosted by javadoc.io. You can fi
 
 <br>
 # Changelog
-#### 1.5.0 (2015 ??? ??)
+#### 1.5.0 (2015 May 12)
 - FEATURE Added support for passing WebComponents as generic arguments to other WebComponents, WebPages and WebRepositories [fixes issue #50](https://github.com/webdriverextensions/webdriverextensions/issues/50). E.g.
 
 ```java
