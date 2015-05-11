@@ -235,6 +235,41 @@ The drivers will placed in a folder called `drivers` in the project root. If you
 
 If you have configured a proxy in the settings.xml file the first encountered active proxy will be used. To specify a specific proxy to use you can provide the proxy id in the configuration.
 
+If you run your tests from eclipse make sure you've allowed the webdriverextensions-maven-plugin to run the install-drivers goal. You can do this by adding the following to your pom.xml
+```xml
+<pluginManagement>
+    <plugins>
+        <!--Eclipse m2e settings needed to install drivers with the webdriverextensions-maven-plugin -->
+        <plugin>
+            <groupId>org.eclipse.m2e</groupId>
+            <artifactId>lifecycle-mapping</artifactId>
+            <version>1.0.0</version>
+            <configuration>
+                <lifecycleMappingMetadata>
+                    <pluginExecutions>
+                        <pluginExecution>
+                            <pluginExecutionFilter>
+                                <groupId>com.github.webdriverextensions</groupId>
+                                <artifactId>webdriverextensions-maven-plugin</artifactId>
+                                <versionRange>[1.0,)</versionRange>
+                                <goals>
+                                    <goal>install-drivers</goal>
+                                </goals>
+                            </pluginExecutionFilter>
+                            <action>
+                                <execute>
+                                    <runOnIncremental>true</runOnIncremental>
+                                </execute>
+                            </action>
+                        </pluginExecution>
+                    </pluginExecutions>
+                </lifecycleMappingMetadata>
+            </configuration>
+        </plugin>
+    </plugins>
+</pluginManagement>
+```
+
 For more information on configuring the driver please visit the [WebDriver Extensions Maven Plugin GitHub page](https://github.com/webdriverextensions/webdriverextensions-maven-plugin). If the latest drivers are not available yet please create an issue [here](https://github.com/webdriverextensions/webdriverextensions-maven-plugin/issues/new).
 
 
