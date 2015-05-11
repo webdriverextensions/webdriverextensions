@@ -316,7 +316,7 @@
                                     <pluginExecutionFilter>
                                         <groupId>com.github.webdriverextensions</groupId>
                                         <artifactId>webdriverextensions-maven-plugin</artifactId>
-                                        <versionRange>[1.0.1,)</versionRange>
+                                        <versionRange>[1.0,)</versionRange>
                                         <goals>
                                             <goal>install-drivers</goal>
                                         </goals>
@@ -401,7 +401,7 @@
                             </execution>
                         </executions>
                     </plugin>
-                    
+
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-gpg-plugin</artifactId>
