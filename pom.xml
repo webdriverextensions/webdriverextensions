@@ -278,25 +278,25 @@
                             <name>chromedriver</name>
                             <platform>windows</platform>
                             <bit>32</bit>
-                            <version>2.14</version>
+                            <version>2.15</version>
                         </driver>
                         <driver>
                             <name>chromedriver</name>
                             <platform>mac</platform>
                             <bit>32</bit>
-                            <version>2.14</version>
+                            <version>2.15</version>
                         </driver>
                         <driver>
                             <name>chromedriver</name>
                             <platform>linux</platform>
                             <bit>32</bit>
-                            <version>2.14</version>
+                            <version>2.15</version>
                         </driver>
                         <driver>
                             <name>chromedriver</name>
                             <platform>linux</platform>
                             <bit>64</bit>
-                            <version>2.14</version>
+                            <version>2.15</version>
                         </driver>
                     </drivers>
                 </configuration>
