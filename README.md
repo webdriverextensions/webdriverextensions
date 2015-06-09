@@ -750,7 +750,7 @@ The Javadoc of this project is available online hosted by javadoc.io. You can fi
 
 <br>
 # Changelog
-#### 1.3.0 (2015 June 9)
+#### 1.6.0 (2015 June 9)
 - SELENIUM UPDATE Updated selenium version to 2.46.0
 
 #### 1.5.0 (2015 May 12)
