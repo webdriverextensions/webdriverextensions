@@ -21,7 +21,7 @@ If you find a bug or have a feature request please [create a new GitHub issue](h
 
 <br>
 ### Have any Questions?
-If you have question [ask them at Stack Overflow with the webdriverextensions tag](http://stackoverflow.com/questions/ask?tags=webdriverextensions).
+If you have question you can [ask them in a GitHub issue](https://github.com/webdriverextensions/webdriverextensions/issues/new).
 
 <br>
 # Content
