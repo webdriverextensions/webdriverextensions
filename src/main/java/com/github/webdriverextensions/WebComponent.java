@@ -3,8 +3,10 @@ package com.github.webdriverextensions;
 import java.util.List;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
+import org.openqa.selenium.OutputType;
 import org.openqa.selenium.Point;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.internal.Coordinates;
 
@@ -253,5 +255,10 @@ public abstract class WebComponent implements org.openqa.selenium.WebElement, or
         } else {
             return ((org.openqa.selenium.internal.Locatable) wrappedWebElement).getCoordinates();
         }
+    }
+
+    @Override
+    public <X> X getScreenshotAs(OutputType<X> ot) throws WebDriverException {
+        return ((org.openqa.selenium.WebElement) wrappedWebElement).getScreenshotAs(ot);
     }
 }
