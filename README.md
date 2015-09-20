@@ -192,7 +192,7 @@ Note that Groovy examples will not be covered by this document.
 
 ### Requirements
 The Selenium project is compiled with Java 7 since version 2.47.0. Therefore WebDriver Extensions also requires you to use Java 7 in version 2.0.0 and above.
-Maven is not a requirement but is preferred and reffered to in this document.
+Maven is not a requirement but is preferred and refered to in this document.
 
 - Java 7 or above
 - Maven 3 or higher
