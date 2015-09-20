@@ -152,13 +152,6 @@
             <artifactId>selenium-java</artifactId>
             <version>${selenium.version}</version>
         </dependency>
-
-        <!-- PhanromJS -->
-        <dependency>
-            <groupId>com.github.detro</groupId>
-            <artifactId>phantomjsdriver</artifactId>
-            <version>1.2.0</version>
-        </dependency>
     </dependencies>
 
     <build>
