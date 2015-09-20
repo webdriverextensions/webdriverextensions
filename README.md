@@ -764,10 +764,10 @@ The Javadoc of this project is available online hosted by javadoc.io. You can fi
 
 <br>
 # Changelog
-#### 2.0.0 (2015 Sep 20)
+#### 2.0.0 (2015 September 20)
 - JAVA 7 REQUIREMENT Now compiled with java 7 as target since selenium already does that since the 2.47.0 version
 
-#### 1.7.0 (2015 Aug 11)
+#### 1.7.0 (2015 August 11)
 - SELENIUM UPDATE Updated selenium version to 2.47.1
 
 #### 1.6.0 (2015 June 9)
