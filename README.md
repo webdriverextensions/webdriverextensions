@@ -33,6 +33,7 @@ If you have question you can [ask them in a GitHub issue](https://github.com/web
     - [Without WebDriver Extensions](#without-webdriver-extensions)
     - [Further increased readability with Groovy](#further-increased-readability-with-groovy)
 - [Getting Started](#getting-started)
+    - [Requirements](#requirements)
     - [Use Maven to add WebDriver Extensions](#use-maven-to-add-webdriver-extensions)
     - [Download and manage your drivers with the Maven Plugin](#download-and-manage-your-drivers-with-the-maven-plugin)
     - [Speed up your tests by running them in parallel](#speed-up-your-tests-by-running-them-in-parallel)
@@ -189,6 +190,16 @@ Note that Groovy examples will not be covered by this document.
 <br>
 # Getting Started
 
+### Requirements
+The Selenium project is compiled with Java 7 since version 2.47.0. Therefore WebDriver Extensions also requires you to use Java 7 in version 2.0.0 and above.
+Maven is not a requirement but is preferred and reffered to in this document.
+
+- Java 7 or above
+- Maven 3 or higher
+
+
+
+<br>
 ### Use Maven to add WebDriver Extensions
 Add
 ```xml
@@ -753,6 +764,9 @@ The Javadoc of this project is available online hosted by javadoc.io. You can fi
 
 <br>
 # Changelog
+#### 2.0.0 (2015 Sep 20)
+- JAVA 7 REQUIREMENT Now compiled with java 7 as target since selenium already does that since the 2.47.0 version
+
 #### 1.7.0 (2015 Aug 11)
 - SELENIUM UPDATE Updated selenium version to 2.47.1
 
