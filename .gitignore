@@ -39,3 +39,8 @@ target/
 ############
 nbproject/private/
 /nb-configuration.xml
+
+# IDEA
+############
+.idea
+webdriverextensions.iml
