@@ -265,12 +265,21 @@ public class WebDriverRunner extends BlockJUnit4ClassRunner {
                     DriverPathLoader.loadDriverPaths(getTestClass().getJavaClass().getAnnotation(DriverPaths.class));
                 }
 
-                if (hasTakeScreenshotOnFailureAnnotation(getTestClass())) {
+                boolean hasTakeScreenshotOnFailureAnnotation = hasTakeScreenshotOnFailureAnnotation(getTestClass());
+                TakeScreenshotOnFailureRunListener screenshotRunListener = null;
+
+                if (hasTakeScreenshotOnFailureAnnotation) {
                     String fileName = className + "." + methodName;
-                    notifier.addListener(new TakeScreenshotOnFailureRunListener(log, fileName));
+                    screenshotRunListener = new TakeScreenshotOnFailureRunListener(log, fileName);
+                    notifier.addListener(screenshotRunListener);
                 }
+
                 runLeaf(methodBlock(method), description, notifier);
                 driver.quit();
+
+                if (hasTakeScreenshotOnFailureAnnotation)
+                    notifier.removeListener(screenshotRunListener);
+
                 WebDriverExtensionsContext.removeDriver();
             }
         } else {
