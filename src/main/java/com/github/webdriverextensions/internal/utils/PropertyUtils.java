@@ -17,7 +17,7 @@ public class PropertyUtils {
     }
 
     public static void setPropertyIfNotExists(String key, String value) {
-        if (value == null) {
+        if (value == null || StringUtils.isBlank(value)) {
             return;
         }
         if (!propertyExists(key)) {

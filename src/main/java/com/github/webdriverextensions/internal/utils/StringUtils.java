@@ -36,4 +36,8 @@ public class StringUtils {
     public static String indent(String string, String indent) {
         return string.replaceAll("\n", "\n" + indent);
     }
+
+    public static boolean isBlank(String string) {
+        return org.apache.commons.lang3.StringUtils.isBlank(string);
+    }
 }
