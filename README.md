@@ -405,6 +405,12 @@ If you would like to use a custom driver path annotate the test with the  [@Driv
 @DriverPaths(chrome="path/to/chromedriver", internetExplorer ="path/to/internetexplorerdriver")
 ```
 
+If you want to run your test against 64bit Internet Explorer versions you can specify the path to the 64 bit driver with the [@DriverPaths](http://static.javadoc.io/com.github.webdriverextensions/webdriverextensions/2.1.2/com/github/webdriverextensions/junitrunner/annotations/DriverPaths.html) annotation like this
+```java
+@DriverPaths(internetExplorer ="drivers/internetexplorerdriver-windows-64bit.exe")
+```
+another way to do it is to set the `webdriverextensions.ie.driver.use64Bit` to `true`, e.g. when running the tests with maven: `mvn test -Dwebdriverextensions.ie.driver.use64Bit=true`.
+
 To take screenshots on test failure annotate the test class with the [@TakeScreenshotOnFailure](http://static.javadoc.io/com.github.webdriverextensions/webdriverextensions/2.1.2/com/github/webdriverextensions/junitrunner/annotations/TakeScreenshotOnFailure.html). The screenshots will be saved into a directory named `screenshots` located in the project root. The path to the screenshots directory can be configured either by annotating the test class with the  [@ScreenshotsPath](http://static.javadoc.io/com.github.webdriverextensions/webdriverextensions/2.1.2/com/github/webdriverextensions/junitrunner/annotations/ScreenshotsPath.html) annotation or by setting the `webdriverextensions.screenshotspath` property. E.g.
 
 ```java
