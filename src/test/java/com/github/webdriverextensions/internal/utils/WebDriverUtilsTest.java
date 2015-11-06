@@ -17,7 +17,8 @@ public class WebDriverUtilsTest {
     public void testThatScreenshotsPathIsSetToDefaultValue() {
         String anyFileName = "anyfilename";
         String screenshotDirectory = WebDriverUtils.getScreenshotFilePath(anyFileName);
-        assertThat(screenshotDirectory, endsWith("webdriverextensions" + separator + "screenshots" + separator + anyFileName + ".jpg"));
+        assertThat(screenshotDirectory, endsWith("webdriverextensions" + separator + "screenshots" + separator +
+                anyFileName + ".png"));
     }
 
     @Test
@@ -25,7 +26,8 @@ public class WebDriverUtilsTest {
         String anyFileName = "anyfilename";
         System.setProperty("webdriverextensions.screenshotspath", "screenshots");
         String screenshotDirectory = WebDriverUtils.getScreenshotFilePath(anyFileName);
-        assertThat(screenshotDirectory, endsWith("webdriverextensions" + separator + "screenshots" + separator + anyFileName + ".jpg"));
+        assertThat(screenshotDirectory, endsWith("webdriverextensions" + separator + "screenshots" + separator +
+                anyFileName + ".png"));
     }
 
     @Test
@@ -33,7 +35,7 @@ public class WebDriverUtilsTest {
         String anyFileName = "anyfilename";
         System.setProperty("webdriverextensions.screenshotspath", separator + "screenshots");
         String screenshotDirectory = WebDriverUtils.getScreenshotFilePath(anyFileName);
-        assertThat(screenshotDirectory, endsWith(separator + "screenshots" + separator + anyFileName + ".jpg"));
+        assertThat(screenshotDirectory, endsWith(separator + "screenshots" + separator + anyFileName + ".png"));
     }
 
 }
