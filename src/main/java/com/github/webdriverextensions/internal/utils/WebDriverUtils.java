@@ -98,7 +98,7 @@ public class WebDriverUtils {
                 || extension.equals("png")) {
             return filename;
         } else {
-            return filename + ".png";
+            return filename + ".jpg";
         }
     }
 
