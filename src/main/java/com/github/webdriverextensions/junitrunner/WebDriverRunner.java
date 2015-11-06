@@ -288,6 +288,12 @@ public class WebDriverRunner extends BlockJUnit4ClassRunner {
         }
     }
 
+    @Override
+    protected Description describeChild(FrameworkMethod method) {
+        return Description.createTestDescription(getTestClass().getJavaClass(),
+                testName(method), method.getAnnotations());
+    }
+
     private class TestMethodContext {
 
         List<BrowserConfiguration> browsers = new ArrayList<BrowserConfiguration>();
