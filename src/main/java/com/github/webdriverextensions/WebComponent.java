@@ -1,13 +1,8 @@
 package com.github.webdriverextensions;
 
 import java.util.List;
-import org.openqa.selenium.By;
-import org.openqa.selenium.Dimension;
-import org.openqa.selenium.OutputType;
-import org.openqa.selenium.Point;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebDriverException;
-import org.openqa.selenium.WebElement;
+
+import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.internal.Coordinates;
 
 public abstract class WebComponent implements org.openqa.selenium.WebElement, org.openqa.selenium.internal.FindsByLinkText, org.openqa.selenium.internal.FindsById, org.openqa.selenium.internal.FindsByName, org.openqa.selenium.internal.FindsByTagName, org.openqa.selenium.internal.FindsByClassName, org.openqa.selenium.internal.FindsByCssSelector, org.openqa.selenium.internal.FindsByXPath, org.openqa.selenium.internal.WrapsDriver, org.openqa.selenium.internal.Locatable {
@@ -141,6 +136,14 @@ public abstract class WebComponent implements org.openqa.selenium.WebElement, or
             return wrappedWebElement.getSize();
         }
     }
+
+    @Override
+    public Rectangle getRect() {
+        if (delegateWebElement != null) {
+            return delegateWebElement.getRect();
+        } else {
+            return wrappedWebElement.getRect();
+        }    }
 
     @Override
     public String getCssValue(String propertyName) {
