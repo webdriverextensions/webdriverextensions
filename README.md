@@ -152,7 +152,7 @@ For the sake of simplicity this example does not demonstrate the [Page Object Pa
 If wanted one could further increase readability by using the Groovy language instead of Java. Then the Hello World example would look like this
 
 ```groovy
-@Grab(group='com.github.webdriverextensions', module='webdriverextensions', version='1.7.0')
+@Grab(group='com.github.webdriverextensions', module='webdriverextensions', version='2.4.0')
 @RunWith(WebDriverRunner)
 @Firefox
 @Chrome
@@ -206,7 +206,7 @@ Add
 <dependency>
 	<groupId>com.github.webdriverextensions</groupId>
 	<artifactId>webdriverextensions</artifactId>
-	<version>1.7.0</version>
+	<version>2.4.0</version>
 </dependency>
 ```
 ...as a dependency in your [pom.xml](https://gist.github.com/andidev/ad006a454edfd9f0e9e5#file-pom-xml) file.
