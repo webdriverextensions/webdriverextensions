@@ -58,7 +58,7 @@ public class BotUtils {
 
 
     /* String Equals */
-    public static boolean equals(String text1, String text2) {
+    public static boolean isEqual(String text1, String text2) {
         return StringUtils.equals(text1, text2);
     }
 
@@ -144,7 +144,7 @@ public class BotUtils {
     }
 
     public static void assertNotEquals(String name, String notExpected, String actual) {
-        if (equals(notExpected, actual)) {
+        if (isEqual(notExpected, actual)) {
             throw new WebAssertionError(name + " is equal to " + quote(notExpected) + " when it shouldn't", name, actual);
         }
     }
@@ -204,7 +204,7 @@ public class BotUtils {
     }
 
     public static void assertNotEquals(String name, String notExpected, String actual, WebElement webElement) {
-        if (equals(notExpected, actual)) {
+        if (isEqual(notExpected, actual)) {
             throw new WebAssertionError(name + " is equal to " + quote(notExpected) + " when it shouldn't", webElement);
         }
     }
@@ -308,7 +308,7 @@ public class BotUtils {
 
 
     /* Double Equals */
-    public static boolean equals(double number, double actual) {
+    public static boolean isEqual(double number, double actual) {
         return actual == number;
     }
 
@@ -339,7 +339,7 @@ public class BotUtils {
     }
 
     public static void assertNotEquals(String name, double number, double actual) {
-        if (equals(number, actual)) {
+        if (isEqual(number, actual)) {
             throw new WebAssertionError(name + " is equal to " + quote(number) + " when it shouldn't", name, actual);
         }
     }
@@ -375,7 +375,7 @@ public class BotUtils {
     }
 
     public static void assertNotEquals(String name, double number, double actual, WebElement webElement) {
-        if (equals(number, actual)) {
+        if (isEqual(number, actual)) {
             throw new WebAssertionError(name + " is equal to " + quote(number) + " when it shouldn't", webElement);
         }
     }

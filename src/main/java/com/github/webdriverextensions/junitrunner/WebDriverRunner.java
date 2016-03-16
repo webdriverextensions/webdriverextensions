@@ -138,6 +138,9 @@ public class WebDriverRunner extends BlockJUnit4ClassRunner {
         ScreenshotsPathLoader.loadScreenshotsPath(getTestClass().getJavaClass().getAnnotation(ScreenshotsPath.class));
     }
 
+    /**
+     * @deprecated retained for backward compatibility
+     */
     @Deprecated
     @Override
     protected void validateInstanceMethods(List<Throwable> errors) {
