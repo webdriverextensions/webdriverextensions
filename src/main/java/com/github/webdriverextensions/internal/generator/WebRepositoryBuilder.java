@@ -53,11 +53,7 @@ public class WebRepositoryBuilder implements Builder<Boolean> {
             createFields();
             generate();
             return true;
-        } catch (IOException ex) {
-            error("Failed to generate GeneratedWebRepository!", processingEnv);
-            error(ExceptionUtils.getStackTrace(ex), processingEnv);
-            return false;
-        } catch (JClassAlreadyExistsException ex) {
+        } catch (IOException|JClassAlreadyExistsException ex) {
             error("Failed to generate GeneratedWebRepository!", processingEnv);
             error(ExceptionUtils.getStackTrace(ex), processingEnv);
             return false;
