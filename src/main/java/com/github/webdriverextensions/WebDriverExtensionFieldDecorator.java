@@ -193,7 +193,6 @@ public class WebDriverExtensionFieldDecorator extends DefaultFieldDecorator {
         ElementLocator locator = factory.createLocator(field);
         Class listType = ReflectionUtils.getListType(field, genericTypeArguments);
         List<WebElement> webElements = proxyForListLocator(loader, locator);
-        final List<? extends WebComponent> webComponentList = webComponentListFactory.create(listType, webElements, driver, genericTypeArguments);
-        return webComponentList;
+        return webComponentListFactory.create(listType, webElements, driver, genericTypeArguments);
     }
 }

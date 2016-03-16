@@ -7,8 +7,7 @@ public class DefaultWebComponentFactory implements WebComponentFactory {
 
     @Override
     public <T extends WebComponent> T create(Class<T> webComponentClass, WebElement webElement) {
-        final T webComponent = createInstanceOf(webComponentClass, webElement);
-        return webComponent;
+        return createInstanceOf(webComponentClass, webElement);
     }
 
     private <T extends WebComponent> T createInstanceOf(final Class<T> webComponentClass, final WebElement webElement) {
