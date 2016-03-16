@@ -37,7 +37,7 @@ public class WebComponentList<T extends WebComponent> implements List<T> {
     }
 
     public void createWebComponents() {
-        webComponents = new ArrayList<T>();
+        webComponents = new ArrayList<>();
         for (WebElement webElement : wrappedWebElements) {
             try {
                 // Create web component and add it to list

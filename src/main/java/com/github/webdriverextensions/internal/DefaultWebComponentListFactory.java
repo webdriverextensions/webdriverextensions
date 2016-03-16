@@ -16,6 +16,6 @@ public class DefaultWebComponentListFactory implements WebComponentListFactory {
 
     @Override
     public <T extends WebComponent> List<T> create(Class<T> webComponentClass, List<WebElement> webElements, WebDriver driver, ParameterizedType genericTypeArguments) {
-        return new WebComponentList<T>(webComponentClass, webElements, webComponentFactory, driver, genericTypeArguments);
+        return new WebComponentList<>(webComponentClass, webElements, webComponentFactory, driver, genericTypeArguments);
     }
 }
