@@ -20,6 +20,8 @@ import org.openqa.selenium.remote.DesiredCapabilities;
 
 public class WebDriverUtils {
 
+    private WebDriverUtils() {}
+    
     public static String convertToJsonString(Capabilities capabilities) {
         if (capabilities == null) {
             return "{}";

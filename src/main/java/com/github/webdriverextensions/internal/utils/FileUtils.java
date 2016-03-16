@@ -4,6 +4,8 @@ import java.io.File;
 
 public class FileUtils {
 
+    private FileUtils() {}
+    
     public static void makeExecutable(String path) {
         if (path == null) {
             return;

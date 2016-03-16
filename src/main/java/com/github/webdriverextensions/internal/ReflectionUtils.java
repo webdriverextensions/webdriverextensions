@@ -13,6 +13,8 @@ import org.openqa.selenium.support.pagefactory.ElementLocator;
 
 public class ReflectionUtils {
 
+    private ReflectionUtils() {}
+    
     public static ElementLocator getLocator(WebElement webElement) {
         try {
             Field locatorField = webElement.getClass().getDeclaredField("locator");

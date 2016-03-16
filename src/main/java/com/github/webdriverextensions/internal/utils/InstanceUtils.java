@@ -5,6 +5,8 @@ import java.lang.reflect.InvocationTargetException;
 
 public class InstanceUtils {
 
+    private InstanceUtils() {}
+    
     public static <T> T newInstance(Class clazz, Class<T> returnedClazz) {
         try {
             return (T) clazz.getConstructor().newInstance();
