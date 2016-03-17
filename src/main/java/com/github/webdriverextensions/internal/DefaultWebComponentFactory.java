@@ -16,13 +16,7 @@ public class DefaultWebComponentFactory implements WebComponentFactory {
             T webComponent = (T) webComponentClass.newInstance();
             webComponent.init(webElement);
             return webComponent;
-        } catch (IllegalArgumentException e) {
-            throw new RuntimeException(e);
-        } catch (SecurityException e) {
-            throw new RuntimeException(e);
-        } catch (InstantiationException e) {
-            throw new RuntimeException(e);
-        } catch (IllegalAccessException e) {
+        } catch (IllegalArgumentException|SecurityException|InstantiationException|IllegalAccessException e) {
             throw new RuntimeException(e);
         }
     }

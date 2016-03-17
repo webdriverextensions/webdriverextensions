@@ -20,9 +20,7 @@ public class ReflectionUtils {
             ElementLocator locator = (ElementLocator) locatorField.get(locatorField);
             locatorField.setAccessible(false);
             return locator;
-        } catch (IllegalAccessException e) {
-            throw new RuntimeException(e);
-        } catch (NoSuchFieldException e) {
+        } catch (IllegalAccessException|NoSuchFieldException e) {
             throw new RuntimeException(e);
         }
     }
