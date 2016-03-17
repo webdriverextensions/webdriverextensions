@@ -151,7 +151,7 @@ public class WebDriverRunner extends BlockJUnit4ClassRunner {
     @Override
     protected List<FrameworkMethod> computeTestMethods() {
         List<FrameworkMethod> testAnnotatedMethods = getTestClass().getAnnotatedMethods(Test.class);
-        List<FrameworkMethod> testMethods = new ArrayList<FrameworkMethod>();
+        List<FrameworkMethod> testMethods = new ArrayList<>();
         for (FrameworkMethod testAnnotatedMethod : testAnnotatedMethods) {
             TestMethodContext testMethodContext = new TestMethodContext().addBrowsersFromClassAnnotations(getTestClass()).addBrowsersFromMethodAnnotations(testAnnotatedMethod);
             if (!testMethodContext.getBrowsers().isEmpty()) {
@@ -296,8 +296,8 @@ public class WebDriverRunner extends BlockJUnit4ClassRunner {
 
     private class TestMethodContext {
 
-        List<BrowserConfiguration> browsers = new ArrayList<BrowserConfiguration>();
-        List<BrowserConfiguration> ignoreBrowsers = new ArrayList<BrowserConfiguration>();
+        List<BrowserConfiguration> browsers = new ArrayList<>();
+        List<BrowserConfiguration> ignoreBrowsers = new ArrayList<>();
 
         public List<BrowserConfiguration> getBrowsers() {
             return browsers;

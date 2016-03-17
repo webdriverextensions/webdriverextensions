@@ -66,7 +66,7 @@ public class ReflectionUtils {
     public static Field[] getAnnotatedDeclaredFields(Class clazz,
             Class<? extends Annotation> annotationClass) {
         Field[] allFields = getDeclaredFields(clazz);
-        List<Field> annotatedFields = new LinkedList<Field>();
+        List<Field> annotatedFields = new LinkedList<>();
 
         for (Field field : allFields) {
             if (field.isAnnotationPresent(annotationClass)) {
@@ -78,7 +78,7 @@ public class ReflectionUtils {
     }
 
     public static Field[] getDeclaredFields(Class clazz) {
-        List<Field> fields = new LinkedList<Field>();
+        List<Field> fields = new LinkedList<>();
         Field[] declaredFields = clazz.getDeclaredFields();
         Collections.addAll(fields, declaredFields);
 

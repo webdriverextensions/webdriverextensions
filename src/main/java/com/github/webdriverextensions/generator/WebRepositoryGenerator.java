@@ -21,10 +21,10 @@ public class WebRepositoryGenerator extends AbstractProcessor {
     Logger log = LoggerFactory.getLogger(this.getClass().getName());
 
     protected boolean debug = true;
-    final private Set<TypeElement> annotatedSiteClasses = new LinkedHashSet<TypeElement>();
-    final private Set<TypeElement> annotatedPageClasses = new LinkedHashSet<TypeElement>();
-    final private Set<TypeElement> annotatedRepositoryClasses = new LinkedHashSet<TypeElement>();
-    final private Set<TypeElement> annotatedOtherClasses = new LinkedHashSet<TypeElement>();
+    final private Set<TypeElement> annotatedSiteClasses = new LinkedHashSet<>();
+    final private Set<TypeElement> annotatedPageClasses = new LinkedHashSet<>();
+    final private Set<TypeElement> annotatedRepositoryClasses = new LinkedHashSet<>();
+    final private Set<TypeElement> annotatedOtherClasses = new LinkedHashSet<>();
 
     @Override
     public SourceVersion getSupportedSourceVersion() {

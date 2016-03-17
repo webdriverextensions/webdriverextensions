@@ -38,7 +38,7 @@ public abstract class AnnotationUtils {
     /** The attribute name for annotations with a single element */
     static final String VALUE = "value";
 
-    private static final Map<Class, Boolean> annotatedInterfaceCache = new WeakHashMap<Class, Boolean>();
+    private static final Map<Class, Boolean> annotatedInterfaceCache = new WeakHashMap<>();
 
 
     private static boolean isInterfaceWithAnnotatedMethods(Class<?> iface) {
@@ -79,7 +79,7 @@ public abstract class AnnotationUtils {
      * corresponding attribute values as values
      */
     public static Map<String, Object> getAnnotationAttributes(Annotation annotation, boolean classValuesAsString) {
-        Map<String, Object> attrs = new HashMap<String, Object>();
+        Map<String, Object> attrs = new HashMap<>();
         Method[] methods = annotation.annotationType().getDeclaredMethods();
         for (Method method : methods) {
             if (method.getParameterTypes().length == 0 && method.getReturnType() != void.class) {

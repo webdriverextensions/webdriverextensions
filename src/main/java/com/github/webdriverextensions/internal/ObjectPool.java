@@ -15,9 +15,9 @@ import org.openqa.selenium.WebDriver;
 public class ObjectPool {
 
     private final WebDriver driver;
-    private final HashMap<Class<?>, WebSite> siteObjects = new HashMap<Class<?>, WebSite>();
-    private final HashMap<ClassGeneric, WebPage> pageObjects = new HashMap<ClassGeneric, WebPage>();
-    private final HashMap<ClassGeneric, WebRepository> repositoryObjects = new HashMap<ClassGeneric, WebRepository>();
+    private final HashMap<Class<?>, WebSite> siteObjects = new HashMap<>();
+    private final HashMap<ClassGeneric, WebPage> pageObjects = new HashMap<>();
+    private final HashMap<ClassGeneric, WebRepository> repositoryObjects = new HashMap<>();
 
     public static class ClassGeneric {
         Class<?> clazz;
