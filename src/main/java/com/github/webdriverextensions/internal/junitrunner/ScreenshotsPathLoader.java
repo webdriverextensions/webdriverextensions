@@ -6,6 +6,8 @@ import com.github.webdriverextensions.junitrunner.annotations.ScreenshotsPath;
 
 public class ScreenshotsPathLoader {
 
+    private ScreenshotsPathLoader() {}
+    
     public static void loadScreenshotsPath(ScreenshotsPath screenshotsPathAnnotation) {
         String screenshotsPathAnnotationValue = screenshotsPathAnnotation != null ? screenshotsPathAnnotation.value() : null;
         PropertyUtils.setPropertyIfNotExists(SCREENSHOTSPATH_PROPERTY_NAME, screenshotsPathAnnotationValue);

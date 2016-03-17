@@ -9,6 +9,8 @@ import org.openqa.selenium.WebElement;
 
 public class BotUtils {
 
+    private BotUtils() {}
+    
     /* Html */
     public static String htmlOf(WebElement webElement) {
         if (webElement == null) {

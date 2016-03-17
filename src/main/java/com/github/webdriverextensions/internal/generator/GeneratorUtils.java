@@ -23,6 +23,8 @@ import org.openqa.selenium.support.How;
 
 public class GeneratorUtils {
 
+    private GeneratorUtils() {}
+    
     public static void error(String msg, ProcessingEnvironment processingEnv) {
         processingEnv.getMessager().printMessage(Diagnostic.Kind.ERROR, msg);
     }

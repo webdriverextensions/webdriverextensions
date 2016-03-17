@@ -6,6 +6,8 @@ import javax.lang.model.element.PackageElement;
 
 public class ElementUtils {
 
+    private ElementUtils() {}
+    
     private static final org.slf4j.Logger log = org.slf4j.LoggerFactory.getLogger(ElementUtils.class);
 
     public static boolean isClass(Element element) {

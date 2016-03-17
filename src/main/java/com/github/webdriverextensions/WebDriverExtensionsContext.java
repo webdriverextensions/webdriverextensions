@@ -5,6 +5,8 @@ import org.openqa.selenium.WebDriver;
 
 public class WebDriverExtensionsContext {
 
+    private WebDriverExtensionsContext() {}
+
     private static InheritableThreadLocal<WebDriver> threadLocalDriver = new InheritableThreadLocal<>();
 
     public static WebDriver getDriver() {

@@ -4,6 +4,8 @@ import org.openqa.selenium.Platform;
 
 public class OsUtils {
 
+    private OsUtils() {}
+    
     public static boolean isWindows() {
         return Platform.getCurrent().is(Platform.WINDOWS);
     }
