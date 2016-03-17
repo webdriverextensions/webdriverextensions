@@ -533,11 +533,8 @@ public class Bot {
     public static boolean isDisplayed(WebElement webElement, long secondsToWait) {
         try {
             WebElement foundWebElement = new WebDriverWait(driver(), secondsToWait).until(ExpectedConditions.visibilityOf(webElement));
-            if (foundWebElement != null) {
-                return true;
-            } else {
-                return false;
-            }
+
+            return foundWebElement != null;
         } catch (RuntimeException e) {
             return false;
         }

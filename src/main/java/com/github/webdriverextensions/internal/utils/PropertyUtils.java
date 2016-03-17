@@ -9,11 +9,7 @@ public class PropertyUtils {
     }
 
     public static boolean propertyExists(String key) {
-        if (System.getProperty(key) != null) {
-            return true;
-        } else {
-            return false;
-        }
+        return System.getProperty(key) != null;
     }
 
     public static void setPropertyIfNotExists(String key, String value) {

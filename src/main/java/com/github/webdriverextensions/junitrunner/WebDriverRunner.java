@@ -512,10 +512,9 @@ public class WebDriverRunner extends BlockJUnit4ClassRunner {
             finalDesiredCapabilities.setBrowserName(browserName);
             finalDesiredCapabilities.setVersion(version);
             finalDesiredCapabilities.setCapability(PLATFORM, platform);
-            RemoteWebDriver driver = new RemoteWebDriver(
+            return new RemoteWebDriver(
                     url,
                     finalDesiredCapabilities);
-            return driver;
         }
 
         @Override
