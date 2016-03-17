@@ -17,7 +17,7 @@ public class WebDriverExtensionAnnotations extends Annotations {
     }
 
     boolean isSearchContextReset() {
-        return (field.getAnnotation(ResetSearchContext.class) != null);
+        return field.getAnnotation(ResetSearchContext.class) != null;
     }
 
     public static WebElement getDelagate(WebComponent webComponent) {

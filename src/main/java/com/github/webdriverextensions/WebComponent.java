@@ -262,6 +262,6 @@ public abstract class WebComponent implements org.openqa.selenium.WebElement, or
 
     @Override
     public <X> X getScreenshotAs(OutputType<X> ot) throws WebDriverException {
-        return ((org.openqa.selenium.WebElement) wrappedWebElement).getScreenshotAs(ot);
+        return wrappedWebElement.getScreenshotAs(ot);
     }
 }

@@ -576,7 +576,7 @@ public class Bot {
     }
 
     public static boolean sizeEquals(int number, Collection collection) {
-        return BotUtils.equals((double) number, (double) collection.size());
+        return BotUtils.isEqual((double) number, (double) collection.size());
     }
 
     public static boolean sizeNotEquals(int number, Collection collection) {
@@ -630,7 +630,7 @@ public class Bot {
     }
 
     public static boolean currentUrlEquals(String url) {
-        return BotUtils.equals(url, currentUrl());
+        return BotUtils.isEqual(url, currentUrl());
     }
 
     public static boolean currentUrlNotEquals(String url) {
@@ -717,7 +717,7 @@ public class Bot {
     }
 
     public static boolean titleEquals(String title) {
-        return BotUtils.equals(title, title());
+        return BotUtils.isEqual(title, title());
     }
 
     public static boolean titleNotEquals(String title) {
@@ -804,7 +804,7 @@ public class Bot {
     }
 
     public static boolean tagNameEquals(String value, WebElement webElement) {
-        return BotUtils.equals(value, tagNameOf(webElement));
+        return BotUtils.isEqual(value, tagNameOf(webElement));
     }
 
     public static boolean tagNameNotEquals(String value, WebElement webElement) {
@@ -857,7 +857,7 @@ public class Bot {
     }
 
     public static boolean attributeEquals(String name, String value, WebElement webElement) {
-        return BotUtils.equals(value, attributeIn(name, webElement));
+        return BotUtils.isEqual(value, attributeIn(name, webElement));
     }
 
     public static boolean attributeNotEquals(String name, String value, WebElement webElement) {
@@ -969,7 +969,7 @@ public class Bot {
     }
 
     public static boolean attributeEquals(String name, double number, WebElement webElement) {
-        return BotUtils.equals(number, attributeInAsNumber(name, webElement));
+        return BotUtils.isEqual(number, attributeInAsNumber(name, webElement));
     }
 
     public static boolean attributeNotEquals(String name, double number, WebElement webElement) {
@@ -1345,7 +1345,7 @@ public class Bot {
     public static boolean hasClass(String className, WebElement webElement) {
         List<String> classes = classesIn(webElement);
         for (String clazz : classes) {
-            if (BotUtils.equals(className, clazz)) {
+            if (BotUtils.isEqual(className, clazz)) {
                 return true;
             }
         }
@@ -1873,11 +1873,11 @@ public class Bot {
     }
 
     public static boolean hasNotText(WebElement webElement) {
-        return BotUtils.equals("", textIn(webElement));
+        return BotUtils.isEqual("", textIn(webElement));
     }
 
     public static boolean textEquals(String text, WebElement webElement) {
-        return BotUtils.equals(text, textIn(webElement));
+        return BotUtils.isEqual(text, textIn(webElement));
     }
 
     public static boolean textNotEquals(String text, WebElement webElement) {
@@ -2089,7 +2089,7 @@ public class Bot {
     }
 
     public static boolean textEquals(double number, WebElement webElement) {
-        return BotUtils.equals(number, textInAsNumber(webElement));
+        return BotUtils.isEqual(number, textInAsNumber(webElement));
     }
 
     public static boolean textNotEquals(double number, WebElement webElement) {
