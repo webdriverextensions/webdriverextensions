@@ -11,14 +11,7 @@ import com.github.webdriverextensions.internal.utils.InstanceUtils;
 import com.github.webdriverextensions.internal.utils.OsUtils;
 import com.github.webdriverextensions.internal.utils.PropertyUtils;
 import static com.github.webdriverextensions.internal.utils.StringUtils.quote;
-import static com.github.webdriverextensions.internal.utils.WebDriverUtils.addCapabilities;
-import static com.github.webdriverextensions.internal.utils.WebDriverUtils.convertToJsonString;
-import static com.github.webdriverextensions.internal.utils.WebDriverUtils.getUnitFromImplicitlyWaitAnnotation;
-import static com.github.webdriverextensions.internal.utils.WebDriverUtils.getValueFromImplicitlyWaitAnnotation;
-import static com.github.webdriverextensions.internal.utils.WebDriverUtils.hasImplicitlyWaitAnnotation;
-import static com.github.webdriverextensions.internal.utils.WebDriverUtils.hasScreenshotPathAnnotation;
-import static com.github.webdriverextensions.internal.utils.WebDriverUtils.hasTakeScreenshotOnFailureAnnotation;
-import static com.github.webdriverextensions.internal.utils.WebDriverUtils.removeCapabilities;
+import static com.github.webdriverextensions.internal.utils.WebDriverUtils.*;
 import com.github.webdriverextensions.junitrunner.annotations.Android;
 import com.github.webdriverextensions.junitrunner.annotations.Browser;
 import com.github.webdriverextensions.junitrunner.annotations.Chrome;
@@ -272,7 +265,7 @@ public class WebDriverRunner extends BlockJUnit4ClassRunner {
                 TakeScreenshotOnFailureRunListener screenshotRunListener = null;
 
                 if (hasTakeScreenshotOnFailureAnnotation) {
-                    String fileName = className + "." + methodName;
+                    String fileName = className + "." + methodName + "-" + getCurrentDateAndTime();
                     screenshotRunListener = new TakeScreenshotOnFailureRunListener(log, fileName);
                     notifier.addListener(screenshotRunListener);
                 }

@@ -8,6 +8,10 @@ import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
@@ -21,7 +25,7 @@ import org.openqa.selenium.remote.DesiredCapabilities;
 public class WebDriverUtils {
 
     private WebDriverUtils() {}
-    
+
     public static String convertToJsonString(Capabilities capabilities) {
         if (capabilities == null) {
             return "{}";
@@ -79,6 +83,11 @@ public class WebDriverUtils {
 
     public static String getScreenshotFilePath(String filename) {
         return FilenameUtils.concat(getScreenshotsPath(), appendFileExtensionsIfNeeded(filename));
+    }
+
+    public static String getCurrentDateAndTime() {
+        DateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm");
+        return df.format(new Date());
     }
 
     private static String getScreenshotsPath() {
