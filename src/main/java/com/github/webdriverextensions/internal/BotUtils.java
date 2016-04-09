@@ -8,8 +8,6 @@ import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.WebElement;
 
 public class BotUtils {
-
-    private BotUtils() {}
     
     /* Html */
     public static String htmlOf(WebElement webElement) {

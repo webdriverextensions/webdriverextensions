@@ -34,8 +34,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.remote.BrowserType;
 
 public class Bot {
-    
-    private Bot() {}
 
     private static final org.slf4j.Logger log = org.slf4j.LoggerFactory.getLogger(Bot.class);
 
