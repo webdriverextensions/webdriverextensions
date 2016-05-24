@@ -16,11 +16,14 @@ import org.hamcrest.MatcherAssert;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import static com.github.webdriverextensions.internal.utils.StringUtils.*;
 import com.github.webdriverextensions.internal.utils.NumberUtils;
+import com.google.common.base.Predicate;
+
 import static com.github.webdriverextensions.internal.utils.WebDriverUtils.getScreenshotFilePath;
 import java.io.File;
 import java.io.IOException;
@@ -49,8 +52,16 @@ public class Bot {
         webElement.click();
     }
 
+    
+    
+    /* Double Click */
+    public static void doubleClick(WebElement webElement) {
+	Actions action = new Actions(driver());
+	action.doubleClick(webElement).perform();
+    }
 
-
+    
+    
     /* Type */
     public static void type(String text, WebElement webElement) {
         if (text == null) {
@@ -243,8 +254,19 @@ public class Bot {
         wait.until(ExpectedConditions.visibilityOfAllElements((List<WebElement>) webElements));
     }
 
+    
+    
+    /* Wait Until */  
+    public static void waitUntil(Predicate<WebDriver> perdicate) {
+	waitUntil(perdicate, 30);
+    }
 
-
+    public static void waitUntil(Predicate<WebDriver> perdicate, long secondsToWait) {
+	new WebDriverWait(WebDriverExtensionsContext.getDriver(), secondsToWait).until(perdicate);
+    }
+    
+    
+    
     /* Scrolling */
     public static Object scrollTo(WebElement webElement) {
         return executeJavascript("arguments[0].scrollIntoView(true);", webElement);
