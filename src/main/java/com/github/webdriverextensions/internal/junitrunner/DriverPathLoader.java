@@ -8,7 +8,7 @@ import com.github.webdriverextensions.junitrunner.annotations.DriverPaths;
 public class DriverPathLoader {
 
     private DriverPathLoader() {}
-    
+
     private static final String CHROME_DRIVER_PROPERTY_NAME = "webdriver.chrome.driver";
     private static final String IE_DRIVER_PROPERTY_NAME = "webdriver.ie.driver";
     private static final String INTERNET_EXPLORER_DRIVER_PROPERTY_NAME = "webdriver.internetexplorer.driver"; // Alternative property name that follows naming convention
@@ -54,11 +54,20 @@ public class DriverPathLoader {
 
     private static String getInternetExplorerDriverDefaultPath() {
         if (OsUtils.isWindows()) {
-            if (PropertyUtils.isTrue(IE_DRIVER_USE64BIT_PROPERTY_NAME)
-                    || PropertyUtils.isTrue(INTERNET_EXPLORER_DRIVER_USE64BIT_PROPERTY_NAME)) {
-                return "drivers/internetexplorerdriver-windows-64bit.exe";
+            if (!PropertyUtils.propertyExists(IE_DRIVER_USE64BIT_PROPERTY_NAME)
+                    || !PropertyUtils.propertyExists(INTERNET_EXPLORER_DRIVER_USE64BIT_PROPERTY_NAME)) {
+                if (OsUtils.isWindows10()) {
+                    return "drivers/internetexplorerdriver-windows-64bit.exe";
+                } else {
+                    return "drivers/internetexplorerdriver-windows-32bit.exe";
+                }
             } else {
-                return "drivers/internetexplorerdriver-windows-32bit.exe";
+                if (PropertyUtils.isTrue(IE_DRIVER_USE64BIT_PROPERTY_NAME)
+                        || PropertyUtils.isTrue(INTERNET_EXPLORER_DRIVER_USE64BIT_PROPERTY_NAME)) {
+                    return "drivers/internetexplorerdriver-windows-64bit.exe";
+                } else {
+                    return "drivers/internetexplorerdriver-windows-32bit.exe";
+                }
             }
         }
         return null;

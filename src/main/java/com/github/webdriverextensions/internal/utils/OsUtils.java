@@ -5,9 +5,13 @@ import org.openqa.selenium.Platform;
 public class OsUtils {
 
     private OsUtils() {}
-    
+
     public static boolean isWindows() {
         return Platform.getCurrent().is(Platform.WINDOWS);
+    }
+
+    public static boolean isWindows10() {
+        return Platform.getCurrent().is(Platform.WIN10);
     }
 
     public static boolean isMac() {
