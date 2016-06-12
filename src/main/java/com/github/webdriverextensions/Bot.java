@@ -52,16 +52,16 @@ public class Bot {
         webElement.click();
     }
 
-    
-    
+
+
     /* Double Click */
     public static void doubleClick(WebElement webElement) {
 	Actions action = new Actions(driver());
 	action.doubleClick(webElement).perform();
     }
 
-    
-    
+
+
     /* Type */
     public static void type(String text, WebElement webElement) {
         if (text == null) {
@@ -254,9 +254,9 @@ public class Bot {
         wait.until(ExpectedConditions.visibilityOfAllElements((List<WebElement>) webElements));
     }
 
-    
-    
-    /* Wait Until */  
+
+
+    /* Wait Until */
     public static void waitUntil(Predicate<WebDriver> perdicate) {
 	waitUntil(perdicate, 30);
     }
@@ -264,9 +264,9 @@ public class Bot {
     public static void waitUntil(Predicate<WebDriver> perdicate, long secondsToWait) {
 	new WebDriverWait(WebDriverExtensionsContext.getDriver(), secondsToWait).until(perdicate);
     }
-    
-    
-    
+
+
+
     /* Scrolling */
     public static Object scrollTo(WebElement webElement) {
         return executeJavascript("arguments[0].scrollIntoView(true);", webElement);
@@ -462,6 +462,14 @@ public class Bot {
 
     public static boolean platformIsNotWin8_1() {
         return !platformIsWin8_1();
+    }
+
+    public static boolean platformIsWin10() {
+        return platformIs(Platform.WIN10);
+    }
+
+    public static boolean platformIsNotWin10() {
+        return !platformIsWin10();
     }
 
     public static boolean platformIsVista() {
