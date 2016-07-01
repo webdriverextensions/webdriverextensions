@@ -8,9 +8,9 @@ import java.lang.annotation.RetentionPolicy;
 @Retention(RetentionPolicy.RUNTIME)
 @Inherited
 public @interface Browser {
-    public String browserName();
-    public String version() default "";
-    public String platform() default "ANY";
-    public String desiredCapabilities() default "";
-    public Class desiredCapabilitiesClass() default NoDesiredCapabilities.class;
+    String browserName();
+    String version() default "";
+    String platform() default "ANY";
+    String desiredCapabilities() default "";
+    Class desiredCapabilitiesClass() default NoDesiredCapabilities.class;
 }

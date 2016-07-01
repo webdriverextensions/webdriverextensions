@@ -7,7 +7,7 @@ import java.lang.annotation.RetentionPolicy;
 @Retention(RetentionPolicy.RUNTIME)
 @Inherited
 public @interface IgnoreBrowser {
-    public String browserName();
-    public String version() default "";
+    String browserName();
+    String version() default "";
     public String platform() default "ANY";
 }

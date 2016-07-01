@@ -9,8 +9,8 @@ import org.openqa.selenium.Platform;
 @Retention(RetentionPolicy.RUNTIME)
 @Inherited
 public @interface Android {
-    public String version() default "";
-    public Platform platform() default Platform.ANY;
-    public String desiredCapabilities() default "";
-    public Class desiredCapabilitiesClass() default NoDesiredCapabilities.class;
+    String version() default "";
+    Platform platform() default Platform.ANY;
+    String desiredCapabilities() default "";
+    Class desiredCapabilitiesClass() default NoDesiredCapabilities.class;
 }

@@ -8,6 +8,6 @@ import org.openqa.selenium.Platform;
 @Retention(RetentionPolicy.RUNTIME)
 @Inherited
 public @interface IgnoreHtmlUnit {
-    public String version() default "";
-    public Platform platform() default Platform.ANY;
+    String version() default "";
+    Platform platform() default Platform.ANY;
 }

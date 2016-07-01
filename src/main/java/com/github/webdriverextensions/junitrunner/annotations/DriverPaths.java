@@ -10,6 +10,6 @@ import java.lang.annotation.Target;
 @Inherited
 @Target(ElementType.TYPE)
 public @interface DriverPaths {
-    public String chrome() default "";
-    public String internetExplorer() default "";
+    String chrome() default "";
+    String internetExplorer() default "";
 }

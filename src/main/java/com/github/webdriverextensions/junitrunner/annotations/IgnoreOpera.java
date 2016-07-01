@@ -8,6 +8,6 @@ import org.openqa.selenium.Platform;
 @Retention(RetentionPolicy.RUNTIME)
 @Inherited
 public @interface IgnoreOpera {
-    public String version() default "";
-    public Platform platform() default Platform.ANY;
+    String version() default "";
+    Platform platform() default Platform.ANY;
 }

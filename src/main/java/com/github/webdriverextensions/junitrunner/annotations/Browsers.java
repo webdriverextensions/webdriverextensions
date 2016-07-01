@@ -7,15 +7,15 @@ import java.lang.annotation.RetentionPolicy;
 @Retention(RetentionPolicy.RUNTIME)
 @Inherited
 public @interface Browsers {
-    public Android[] android() default {};
-    public Chrome[] chrome() default {};
-    public Firefox[] firefox() default {};
-    public HtmlUnit[] htmlUnit() default {};
-    public IPhone[] iPhone() default {};
-    public IPad[] iPad() default {};
-    public InternetExplorer[] internetExplorer() default {};
-    public Opera[] opera() default {};
-    public PhantomJS[] phantomJS() default {};
-    public Safari[] safari() default {};
-    public Browser[] browser() default {};
+    Android[] android() default {};
+    Chrome[] chrome() default {};
+    Firefox[] firefox() default {};
+    HtmlUnit[] htmlUnit() default {};
+    IPhone[] iPhone() default {};
+    IPad[] iPad() default {};
+    InternetExplorer[] internetExplorer() default {};
+    Opera[] opera() default {};
+    PhantomJS[] phantomJS() default {};
+    Safari[] safari() default {};
+    Browser[] browser() default {};
 }

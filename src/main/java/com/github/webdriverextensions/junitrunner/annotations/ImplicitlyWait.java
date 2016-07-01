@@ -48,6 +48,6 @@ import java.util.concurrent.TimeUnit;
 @Retention(RetentionPolicy.RUNTIME)
 @Inherited
 public @interface ImplicitlyWait {
-    public int value();
-    public TimeUnit unit() default TimeUnit.SECONDS;
+    int value();
+    TimeUnit unit() default TimeUnit.SECONDS;
 }

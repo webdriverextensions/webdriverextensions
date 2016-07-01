@@ -16,5 +16,5 @@ import java.lang.annotation.Target;
 @Inherited
 @Target(ElementType.TYPE)
 public @interface ScreenshotsPath {
-    public String value();
+    String value();
 }
