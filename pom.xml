@@ -97,7 +97,7 @@
         <maven-compiler-plugin.version>3.1</maven-compiler-plugin.version>
         <maven-processor-plugin.version>2.2.4</maven-processor-plugin.version>
         <maven-surefire-plugin.version>2.18.1</maven-surefire-plugin.version>
-        <webdriverextensions-maven-plugin.version>2.1.0</webdriverextensions-maven-plugin.version>
+        <webdriverextensions-maven-plugin.version>3.0.0</webdriverextensions-maven-plugin.version>
         <maven-source-plugin.version>2.2.1</maven-source-plugin.version>
         <maven-javadoc-plugin.version>2.9.1</maven-javadoc-plugin.version>
         <maven-gpg-plugin.version>1.5</maven-gpg-plugin.version>
@@ -289,25 +289,25 @@
                             <name>chromedriver</name>
                             <platform>windows</platform>
                             <bit>32</bit>
-                            <version>2.21</version>
+                            <version>2.22</version>
                         </driver>
                         <driver>
                             <name>chromedriver</name>
                             <platform>mac</platform>
                             <bit>32</bit>
-                            <version>2.21</version>
+                            <version>2.22</version>
                         </driver>
                         <driver>
                             <name>chromedriver</name>
                             <platform>linux</platform>
                             <bit>32</bit>
-                            <version>2.21</version>
+                            <version>2.22</version>
                         </driver>
                         <driver>
                             <name>chromedriver</name>
                             <platform>linux</platform>
                             <bit>64</bit>
-                            <version>2.21</version>
+                            <version>2.22</version>
                         </driver>
                     </drivers>
                 </configuration>
