@@ -280,6 +280,12 @@
                             <version>2.53</version>
                         </driver>
                         <driver>
+                            <name>edgedriver</name>
+                            <platform>windows</platform>
+                            <bit>64</bit>
+                            <version>3.14366</version>
+                        </driver>
+                        <driver>
                             <name>internetexplorerdriver</name>
                             <platform>windows</platform>
                             <bit>64</bit>

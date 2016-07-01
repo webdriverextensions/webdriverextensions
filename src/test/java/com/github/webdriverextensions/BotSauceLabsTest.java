@@ -2,17 +2,8 @@ package com.github.webdriverextensions;
 
 import static com.github.webdriverextensions.Bot.*;
 import com.github.webdriverextensions.junitrunner.WebDriverRunner;
-import com.github.webdriverextensions.junitrunner.annotations.Android;
-import com.github.webdriverextensions.junitrunner.annotations.Chrome;
-import com.github.webdriverextensions.junitrunner.annotations.Firefox;
-import com.github.webdriverextensions.junitrunner.annotations.HtmlUnit;
-import com.github.webdriverextensions.junitrunner.annotations.IPad;
-import com.github.webdriverextensions.junitrunner.annotations.IPhone;
-import com.github.webdriverextensions.junitrunner.annotations.InternetExplorer;
-import com.github.webdriverextensions.junitrunner.annotations.Opera;
-import com.github.webdriverextensions.junitrunner.annotations.PhantomJS;
-import com.github.webdriverextensions.junitrunner.annotations.RemoteAddress;
-import com.github.webdriverextensions.junitrunner.annotations.Safari;
+import com.github.webdriverextensions.junitrunner.annotations.*;
+
 import static org.hamcrest.Matchers.equalTo;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -38,6 +29,7 @@ public class BotSauceLabsTest {
         assertThat(browser(), equalTo(BrowserType.ANDROID));
         assertThat(browserIsAndroid(), equalTo(true));
         assertThat(browserIsNotChrome(), equalTo(true));
+        assertThat(browserIsNotEdge(), equalTo(true));
         assertThat(browserIsNotFirefox(), equalTo(true));
         assertThat(browserIsNotHtmlUnit(), equalTo(true));
         assertThat(browserIsNotIPad(), equalTo(true));
@@ -70,6 +62,7 @@ public class BotSauceLabsTest {
         assertThat(browser(), equalTo(BrowserType.FIREFOX));
         assertThat(browserIsNotAndroid(), equalTo(true));
         assertThat(browserIsNotChrome(), equalTo(true));
+        assertThat(browserIsNotEdge(), equalTo(true));
         assertThat(browserIsFirefox(), equalTo(true));
         assertThat(browserIsNotHtmlUnit(), equalTo(true));
         assertThat(browserIsNotIPad(), equalTo(true));
@@ -87,6 +80,7 @@ public class BotSauceLabsTest {
         assertThat(browser(), equalTo(BrowserType.HTMLUNIT));
         assertThat(browserIsNotAndroid(), equalTo(true));
         assertThat(browserIsNotChrome(), equalTo(true));
+        assertThat(browserIsNotEdge(), equalTo(true));
         assertThat(browserIsNotFirefox(), equalTo(true));
         assertThat(browserIsHtmlUnit(), equalTo(true));
         assertThat(browserIsNotIPad(), equalTo(true));
@@ -104,6 +98,7 @@ public class BotSauceLabsTest {
         assertThat(browser(), equalTo(BrowserType.IPAD));
         assertThat(browserIsNotAndroid(), equalTo(true));
         assertThat(browserIsNotChrome(), equalTo(true));
+        assertThat(browserIsNotEdge(), equalTo(true));
         assertThat(browserIsNotFirefox(), equalTo(true));
         assertThat(browserIsNotHtmlUnit(), equalTo(true));
         assertThat(browserIsIPad(), equalTo(true));
@@ -121,6 +116,7 @@ public class BotSauceLabsTest {
         assertThat(browser(), equalTo(BrowserType.IPHONE));
         assertThat(browserIsNotAndroid(), equalTo(true));
         assertThat(browserIsNotChrome(), equalTo(true));
+        assertThat(browserIsNotEdge(), equalTo(true));
         assertThat(browserIsNotFirefox(), equalTo(true));
         assertThat(browserIsNotHtmlUnit(), equalTo(true));
         assertThat(browserIsNotIPad(), equalTo(true));
@@ -136,6 +132,7 @@ public class BotSauceLabsTest {
     public void browserIsInternetExplorerTest() {
         assertThat(browserIsNotAndroid(), equalTo(true));
         assertThat(browserIsNotChrome(), equalTo(true));
+        assertThat(browserIsNotEdge(), equalTo(true));
         assertThat(browserIsNotFirefox(), equalTo(true));
         assertThat(browserIsNotHtmlUnit(), equalTo(true));
         assertThat(browserIsNotIPad(), equalTo(true));
@@ -147,11 +144,28 @@ public class BotSauceLabsTest {
     }
 
     @Test
+    @Edge
+    public void browserIsEdgeTest() {
+        assertThat(browserIsNotAndroid(), equalTo(true));
+        assertThat(browserIsNotChrome(), equalTo(true));
+        assertThat(browserIsEdge(), equalTo(true));
+        assertThat(browserIsNotFirefox(), equalTo(true));
+        assertThat(browserIsNotHtmlUnit(), equalTo(true));
+        assertThat(browserIsNotIPad(), equalTo(true));
+        assertThat(browserIsNotIPhone(), equalTo(true));
+        assertThat(browserIsNotInternetExplorer(), equalTo(true));
+        assertThat(browserIsNotOpera(), equalTo(true));
+        assertThat(browserIsNotPhantomJS(), equalTo(true));
+        assertThat(browserIsNotSafari(), equalTo(true));
+    }
+
+    @Test
     @Opera
     public void browserIsOperaTest() {
         assertThat(browser(), equalTo(BrowserType.OPERA));
         assertThat(browserIsNotAndroid(), equalTo(true));
         assertThat(browserIsNotChrome(), equalTo(true));
+        assertThat(browserIsNotEdge(), equalTo(true));
         assertThat(browserIsNotFirefox(), equalTo(true));
         assertThat(browserIsNotHtmlUnit(), equalTo(true));
         assertThat(browserIsNotIPad(), equalTo(true));
@@ -169,6 +183,7 @@ public class BotSauceLabsTest {
         assertThat(browser(), equalTo(BrowserType.PHANTOMJS));
         assertThat(browserIsNotAndroid(), equalTo(true));
         assertThat(browserIsNotChrome(), equalTo(true));
+        assertThat(browserIsNotEdge(), equalTo(true));
         assertThat(browserIsNotFirefox(), equalTo(true));
         assertThat(browserIsNotHtmlUnit(), equalTo(true));
         assertThat(browserIsNotIPad(), equalTo(true));
@@ -185,6 +200,7 @@ public class BotSauceLabsTest {
         assertThat(browser(), equalTo(BrowserType.SAFARI));
         assertThat(browserIsNotAndroid(), equalTo(true));
         assertThat(browserIsNotChrome(), equalTo(true));
+        assertThat(browserIsNotEdge(), equalTo(true));
         assertThat(browserIsNotFirefox(), equalTo(true));
         assertThat(browserIsNotHtmlUnit(), equalTo(true));
         assertThat(browserIsNotIPad(), equalTo(true));

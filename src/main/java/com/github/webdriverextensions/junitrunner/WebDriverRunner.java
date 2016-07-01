@@ -12,31 +12,8 @@ import com.github.webdriverextensions.internal.utils.OsUtils;
 import com.github.webdriverextensions.internal.utils.PropertyUtils;
 import static com.github.webdriverextensions.internal.utils.StringUtils.quote;
 import static com.github.webdriverextensions.internal.utils.WebDriverUtils.*;
-import com.github.webdriverextensions.junitrunner.annotations.Android;
-import com.github.webdriverextensions.junitrunner.annotations.Browser;
-import com.github.webdriverextensions.junitrunner.annotations.Chrome;
-import com.github.webdriverextensions.junitrunner.annotations.DriverPaths;
-import com.github.webdriverextensions.junitrunner.annotations.Firefox;
-import com.github.webdriverextensions.junitrunner.annotations.HtmlUnit;
-import com.github.webdriverextensions.junitrunner.annotations.IPad;
-import com.github.webdriverextensions.junitrunner.annotations.IPhone;
-import com.github.webdriverextensions.junitrunner.annotations.IgnoreAndroid;
-import com.github.webdriverextensions.junitrunner.annotations.IgnoreBrowser;
-import com.github.webdriverextensions.junitrunner.annotations.IgnoreChrome;
-import com.github.webdriverextensions.junitrunner.annotations.IgnoreFirefox;
-import com.github.webdriverextensions.junitrunner.annotations.IgnoreHtmlUnit;
-import com.github.webdriverextensions.junitrunner.annotations.IgnoreIPad;
-import com.github.webdriverextensions.junitrunner.annotations.IgnoreIPhone;
-import com.github.webdriverextensions.junitrunner.annotations.IgnoreInternetExplorer;
-import com.github.webdriverextensions.junitrunner.annotations.IgnoreOpera;
-import com.github.webdriverextensions.junitrunner.annotations.IgnorePhantomJS;
-import com.github.webdriverextensions.junitrunner.annotations.IgnoreSafari;
-import com.github.webdriverextensions.junitrunner.annotations.InternetExplorer;
-import com.github.webdriverextensions.junitrunner.annotations.Opera;
-import com.github.webdriverextensions.junitrunner.annotations.PhantomJS;
-import com.github.webdriverextensions.junitrunner.annotations.RemoteAddress;
-import com.github.webdriverextensions.junitrunner.annotations.Safari;
-import com.github.webdriverextensions.junitrunner.annotations.ScreenshotsPath;
+
+import com.github.webdriverextensions.junitrunner.annotations.*;
 import com.google.gson.Gson;
 import java.lang.annotation.Annotation;
 import java.net.URL;
@@ -64,6 +41,7 @@ import org.openqa.selenium.HasCapabilities;
 import org.openqa.selenium.Platform;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
@@ -101,6 +79,7 @@ public class WebDriverRunner extends BlockJUnit4ClassRunner {
     private static final List<Class> supportedBrowserAnnotations = Arrays.asList(new Class[]{
         Android.class,
         Chrome.class,
+        Edge.class,
         Firefox.class,
         HtmlUnit.class,
         IPhone.class,
@@ -114,6 +93,7 @@ public class WebDriverRunner extends BlockJUnit4ClassRunner {
     private static final List<Class> supportedIgnoreBrowserAnnotations = Arrays.asList(new Class[]{
         IgnoreAndroid.class,
         IgnoreChrome.class,
+        IgnoreEdge.class,
         IgnoreFirefox.class,
         IgnoreHtmlUnit.class,
         IgnoreIPhone.class,
@@ -193,6 +173,9 @@ public class WebDriverRunner extends BlockJUnit4ClassRunner {
             } else if (!hasRemoteAddress && BrowserType.IE.equalsIgnoreCase(browser.getBrowserName()) && !OsUtils.isWindows()
                     || (BrowserType.IEXPLORE.equalsIgnoreCase(browser.getBrowserName()) && !OsUtils.isWindows())) {
                 log.trace("Skipping test {}. Internet Explorer is only supported on Windows platforms.", testName);
+                notifier.fireTestIgnored(description);
+            } else if (!hasRemoteAddress && BrowserType.EDGE.equalsIgnoreCase(browser.getBrowserName()) && !OsUtils.isWindows()) {
+                log.trace("Skipping test {}. Edge is only supported on Windows platforms.", testName);
                 notifier.fireTestIgnored(description);
             } else if (!hasRemoteAddress && BrowserType.SAFARI.equalsIgnoreCase(browser.getBrowserName()) && (!OsUtils.isWindows() && !OsUtils.isMac())) {
                 log.trace("Skipping test {}. Safari is only supported on Windows and Mac platforms.", testName);
@@ -337,6 +320,7 @@ public class WebDriverRunner extends BlockJUnit4ClassRunner {
                     com.github.webdriverextensions.junitrunner.annotations.Browsers browsersAnnotation = (com.github.webdriverextensions.junitrunner.annotations.Browsers) annotation;
                     addBrowsersFromAnnotations(browsersAnnotation.android());
                     addBrowsersFromAnnotations(browsersAnnotation.chrome());
+                    addBrowsersFromAnnotations(browsersAnnotation.edge());
                     addBrowsersFromAnnotations(browsersAnnotation.firefox());
                     addBrowsersFromAnnotations(browsersAnnotation.htmlUnit());
                     addBrowsersFromAnnotations(browsersAnnotation.iPhone());
@@ -350,6 +334,7 @@ public class WebDriverRunner extends BlockJUnit4ClassRunner {
                     com.github.webdriverextensions.junitrunner.annotations.IgnoreBrowsers ignoreBrowsersAnnotation = (com.github.webdriverextensions.junitrunner.annotations.IgnoreBrowsers) annotation;
                     addIgnoreBrowsersFromAnnotations(ignoreBrowsersAnnotation.android());
                     addIgnoreBrowsersFromAnnotations(ignoreBrowsersAnnotation.chrome());
+                    addIgnoreBrowsersFromAnnotations(ignoreBrowsersAnnotation.edge());
                     addIgnoreBrowsersFromAnnotations(ignoreBrowsersAnnotation.firefox());
                     addIgnoreBrowsersFromAnnotations(ignoreBrowsersAnnotation.htmlUnit());
                     addIgnoreBrowsersFromAnnotations(ignoreBrowsersAnnotation.iPhone());
@@ -410,6 +395,9 @@ public class WebDriverRunner extends BlockJUnit4ClassRunner {
             } else if (annotation.annotationType().equals(Chrome.class)
                     || annotation.annotationType().equals(IgnoreChrome.class)) {
                 browserName = BrowserType.CHROME;
+            } else if (annotation.annotationType().equals(Edge.class)
+                    || annotation.annotationType().equals(IgnoreEdge.class)) {
+                browserName = BrowserType.EDGE;
             } else if (annotation.annotationType().equals(Firefox.class)
                     || annotation.annotationType().equals(IgnoreFirefox.class)) {
                 browserName = BrowserType.FIREFOX;
@@ -494,6 +482,10 @@ public class WebDriverRunner extends BlockJUnit4ClassRunner {
             if (BrowserType.IE.equalsIgnoreCase(browserName)
                     || BrowserType.IEXPLORE.equalsIgnoreCase(browserName)) {
                 return new InternetExplorerDriver(desiredCapabilities);
+            }
+
+            if (BrowserType.EDGE.equalsIgnoreCase(browserName)) {
+                return new EdgeDriver(desiredCapabilities);
             }
 
             if (BrowserType.SAFARI.equalsIgnoreCase(browserName)) {

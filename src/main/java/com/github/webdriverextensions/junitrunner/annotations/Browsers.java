@@ -9,6 +9,7 @@ import java.lang.annotation.RetentionPolicy;
 public @interface Browsers {
     Android[] android() default {};
     Chrome[] chrome() default {};
+    Edge[] edge() default {};
     Firefox[] firefox() default {};
     HtmlUnit[] htmlUnit() default {};
     IPhone[] iPhone() default {};
