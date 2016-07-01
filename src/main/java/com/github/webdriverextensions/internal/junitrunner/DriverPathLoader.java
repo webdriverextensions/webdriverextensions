@@ -5,15 +5,15 @@ import com.github.webdriverextensions.internal.utils.OsUtils;
 import com.github.webdriverextensions.internal.utils.PropertyUtils;
 import com.github.webdriverextensions.junitrunner.annotations.DriverPaths;
 
+import static com.github.webdriverextensions.WebDriverExtensionsProperties.IE_DRIVER_USE64BIT_PROPERTY_NAME;
+import static com.github.webdriverextensions.WebDriverExtensionsProperties.INTERNET_EXPLORER_DRIVER_PROPERTY_NAME;
+import static com.github.webdriverextensions.WebDriverExtensionsProperties.INTERNET_EXPLORER_DRIVER_USE64BIT_PROPERTY_NAME;
+import static com.github.webdriverextensions.WebDriverProperties.CHROME_DRIVER_PROPERTY_NAME;
+import static com.github.webdriverextensions.WebDriverProperties.IE_DRIVER_PROPERTY_NAME;
+
 public class DriverPathLoader {
 
     private DriverPathLoader() {}
-
-    private static final String CHROME_DRIVER_PROPERTY_NAME = "webdriver.chrome.driver";
-    private static final String IE_DRIVER_PROPERTY_NAME = "webdriver.ie.driver";
-    private static final String INTERNET_EXPLORER_DRIVER_PROPERTY_NAME = "webdriver.internetexplorer.driver"; // Alternative property name that follows naming convention
-    private static final String IE_DRIVER_USE64BIT_PROPERTY_NAME = "webdriverextensions.ie.driver.use64Bit";
-    private static final String INTERNET_EXPLORER_DRIVER_USE64BIT_PROPERTY_NAME = "webdriverextensions.internetexplorer.driver.use64Bit";
 
     public static void loadDriverPaths(DriverPaths driverPaths) {
         loadChromeDriverPath(driverPaths != null ? driverPaths.chrome() : null);
