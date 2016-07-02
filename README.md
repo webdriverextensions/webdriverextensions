@@ -333,6 +333,7 @@ import com.github.webdriverextensions.junitrunner.annotations.*;
 @Firefox
 @Chrome
 @InternetExplorer
+@Edge
 public class CrossBrowserTest {
 
     // Add WebElements, WebPages and other supported web models to use in tests
@@ -367,6 +368,7 @@ public class CrossBrowserTest {
 @Firefox
 @Chrome
 @InternetExplorer
+@Edge
 public class CrossBrowserTest {
 	...
 }

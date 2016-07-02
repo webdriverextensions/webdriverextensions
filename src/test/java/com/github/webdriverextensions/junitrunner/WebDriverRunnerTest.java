@@ -1,12 +1,8 @@
 package com.github.webdriverextensions.junitrunner;
 
 import static com.github.webdriverextensions.Bot.*;
-import com.github.webdriverextensions.junitrunner.annotations.Browsers;
-import com.github.webdriverextensions.junitrunner.annotations.Chrome;
-import com.github.webdriverextensions.junitrunner.annotations.Firefox;
-import com.github.webdriverextensions.junitrunner.annotations.HtmlUnit;
-import com.github.webdriverextensions.junitrunner.annotations.InternetExplorer;
-import com.github.webdriverextensions.junitrunner.annotations.Safari;
+
+import com.github.webdriverextensions.junitrunner.annotations.*;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -15,6 +11,7 @@ import org.junit.runner.RunWith;
 @Chrome
 @InternetExplorer
 @HtmlUnit
+@Edge
 //@Safari Disabled until bug is solved, see https://code.google.com/p/selenium/issues/detail?id=7933
 @Browsers(chrome = {
     @Chrome(desiredCapabilities = "{chromeOptions: {args: ['start-maximized']}}"),

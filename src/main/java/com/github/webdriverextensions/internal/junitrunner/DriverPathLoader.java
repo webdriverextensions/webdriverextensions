@@ -9,6 +9,7 @@ import static com.github.webdriverextensions.WebDriverExtensionsProperties.IE_DR
 import static com.github.webdriverextensions.WebDriverExtensionsProperties.INTERNET_EXPLORER_DRIVER_PROPERTY_NAME;
 import static com.github.webdriverextensions.WebDriverExtensionsProperties.INTERNET_EXPLORER_DRIVER_USE64BIT_PROPERTY_NAME;
 import static com.github.webdriverextensions.WebDriverProperties.CHROME_DRIVER_PROPERTY_NAME;
+import static com.github.webdriverextensions.WebDriverProperties.EDGE_DRIVER_PROPERTY_NAME;
 import static com.github.webdriverextensions.WebDriverProperties.IE_DRIVER_PROPERTY_NAME;
 
 public class DriverPathLoader {
@@ -17,6 +18,7 @@ public class DriverPathLoader {
 
     public static void loadDriverPaths(DriverPaths driverPaths) {
         loadChromeDriverPath(driverPaths != null ? driverPaths.chrome() : null);
+        loadEdgeDriverPath(driverPaths != null ? driverPaths.edge() : null);
         loadInternetExplorerDriverPath(driverPaths != null ? driverPaths.internetExplorer() : null);
         makeSureDriversAreExecutable();
     }
@@ -24,6 +26,11 @@ public class DriverPathLoader {
     private static void loadChromeDriverPath(String path) {
         PropertyUtils.setPropertyIfNotExists(CHROME_DRIVER_PROPERTY_NAME, path);
         PropertyUtils.setPropertyIfNotExists(CHROME_DRIVER_PROPERTY_NAME, getChromeDriverDefaultPath());
+    }
+
+    private static void loadEdgeDriverPath(String path) {
+        PropertyUtils.setPropertyIfNotExists(EDGE_DRIVER_PROPERTY_NAME, path);
+        PropertyUtils.setPropertyIfNotExists(EDGE_DRIVER_PROPERTY_NAME, getEdgeDefaultPath());
     }
 
     private static void loadInternetExplorerDriverPath(String path) {
@@ -47,6 +54,17 @@ public class DriverPathLoader {
                 return "drivers/chromedriver-linux-64bit";
             } else {
                 return "drivers/chromedriver-linux-32bit";
+            }
+        }
+        return null;
+    }
+
+    private static String getEdgeDefaultPath() {
+        if (OsUtils.isWindows()) {
+            if (OsUtils.is64Bit()) {
+                return "drivers/edgedriver-windows-64bit";
+            } else {
+                return "drivers/edgedriver-windows-32bit";
             }
         }
         return null;

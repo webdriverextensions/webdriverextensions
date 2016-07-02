@@ -9,6 +9,7 @@ import java.lang.annotation.RetentionPolicy;
 public @interface IgnoreBrowsers {
     IgnoreAndroid[] android() default {};
     IgnoreChrome[] chrome() default {};
+    IgnoreEdge[] edge() default {};
     IgnoreFirefox[] firefox() default {};
     IgnoreHtmlUnit[] htmlUnit() default {};
     IgnoreIPhone[] iPhone() default {};

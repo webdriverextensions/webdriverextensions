@@ -314,6 +314,14 @@ public class Bot {
         return !browserIsChrome();
     }
 
+    public static boolean browserIsEdge() {
+        return browserIs(BrowserType.EDGE);
+    }
+
+    public static boolean browserIsNotEdge() {
+        return !browserIsEdge();
+    }
+
     public static boolean browserIsFirefox() {
         return browserIs(BrowserType.FIREFOX);
     }
