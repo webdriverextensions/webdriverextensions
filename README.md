@@ -219,7 +219,7 @@ There is no need to download any drivers manually. Instead use the [WebDriver Ex
 <plugin>
     <groupId>com.github.webdriverextensions</groupId>
     <artifactId>webdriverextensions-maven-plugin</artifactId>
-    <version>2.0.0</version>
+    <version>3.0.2</version>
     <executions>
         <execution>
             <goals>
