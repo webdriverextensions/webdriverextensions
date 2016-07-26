@@ -152,7 +152,7 @@ For the sake of simplicity this example does not demonstrate the [Page Object Pa
 If wanted one could further increase readability by using the Groovy language instead of Java. Then the Hello World example would look like this
 
 ```groovy
-@Grab(group='com.github.webdriverextensions', module='webdriverextensions', version='2.7.0')
+@Grab(group='com.github.webdriverextensions', module='webdriverextensions', version='2.8.0')
 @RunWith(WebDriverRunner)
 @Firefox
 @Chrome
