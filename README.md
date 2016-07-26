@@ -235,7 +235,7 @@ There is no need to download any drivers manually. Instead use the [WebDriver Ex
             </driver>
             <driver>
                 <name>chromedriver</name>
-                <version>2.21</version>
+                <version>2.22</version>
             </driver>
         </drivers>
     </configuration>
