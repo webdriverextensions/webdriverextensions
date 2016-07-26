@@ -775,7 +775,7 @@ The Javadoc of this project is available online hosted by javadoc.io. You can fi
 <br>
 # Changelog
 #### 2.8.0 (2016 July 2)
-- ENHANCEMENT Added support for [@Edge](http://static.javadoc.io/com.github.webdriverextensions/webdriverextensions/2.8.0/com/github/webdriverextensions/junitrunner/annotations/Edge.html) driver 
+- ENHANCEMENT Added support for [@Edge](http://static.javadoc.io/com.github.webdriverextensions/webdriverextensions/2.8.0/com/github/webdriverextensions/junitrunner/annotations/Edge.html) browser 
 
 #### 2.7.0 (2016 May 24)
 - ENHANCEMENT Added doubleClick(WebElement webElement), waitUntil(Predicate<WebDriver> perdicate) and waitUntil(Predicate<WebDriver> perdicate, long secondsToWait) to Bot (thanks to [@dve](https://github.com/dve))
