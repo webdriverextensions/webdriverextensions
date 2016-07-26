@@ -206,7 +206,7 @@ Add
 <dependency>
 	<groupId>com.github.webdriverextensions</groupId>
 	<artifactId>webdriverextensions</artifactId>
-	<version>2.7.0</version>
+	<version>2.8.0</version>
 </dependency>
 ```
 ...as a dependency in your [pom.xml](https://gist.github.com/andidev/ad006a454edfd9f0e9e5#file-pom-xml) file.
