@@ -231,7 +231,7 @@ There is no need to download any drivers manually. Instead use the [WebDriver Ex
         <drivers>
             <driver>
                 <name>internetexplorerdriver</name>
-                <version>2.53</version>
+                <version>2.53.1</version>
             </driver>
             <driver>
                 <name>chromedriver</name>
