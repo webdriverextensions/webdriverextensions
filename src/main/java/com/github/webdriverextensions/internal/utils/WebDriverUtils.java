@@ -86,7 +86,7 @@ public class WebDriverUtils {
     }
 
     public static String getCurrentDateAndTime() {
-        DateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm");
+        DateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH.mm");
         return df.format(new Date());
     }
 
