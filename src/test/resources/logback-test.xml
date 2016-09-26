@@ -21,7 +21,7 @@
     <logger name="log4jdbc.debug" level="ERROR"/>
 
     <!-- WebDriver Extensions -->
-    <logger name="com.github.webdriverextensions" level="TRACE"/>
+    <logger name="com.github.webdriverextensions" level="INFO"/>
 
     <!-- Main log level (levels: TRACE, DEBUG, INFO, WARN, ERROR, ALL, OFF, INHERITED) -->
     <root level="WARN">
