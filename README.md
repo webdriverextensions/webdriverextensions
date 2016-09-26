@@ -237,6 +237,10 @@ There is no need to download any drivers manually. Instead use the [WebDriver Ex
                 <name>chromedriver</name>
                 <version>2.22</version>
             </driver>
+            <driver>
+                <name>phantomjs</name>
+                <version>2.1.1</version>
+            </driver>
         </drivers>
     </configuration>
 </plugin>
@@ -334,6 +338,7 @@ import com.github.webdriverextensions.junitrunner.annotations.*;
 @Chrome
 @InternetExplorer
 @Edge
+@PhantomJS
 public class CrossBrowserTest {
 
     // Add WebElements, WebPages and other supported web models to use in tests
@@ -369,6 +374,7 @@ public class CrossBrowserTest {
 @Chrome
 @InternetExplorer
 @Edge
+@PhantomJS
 public class CrossBrowserTest {
 	...
 }
@@ -774,6 +780,9 @@ The Javadoc of this project is available online hosted by javadoc.io. You can fi
 
 <br>
 # Changelog
+#### 2.9.0 (2016 ? ?)
+- ENHANCEMENT Added support for running tests with PhantomJS driver locally
+
 #### 2.8.1 (2016 September 16)
 - BUGFIX Fixes invalid screenshot filename on Windows platform ([PR 68](https://github.com/webdriverextensions/webdriverextensions/pull/68) thanks to [@consulbit](https://github.com/consulbit))
 

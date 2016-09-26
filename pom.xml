@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.github.webdriverextensions</groupId>
     <artifactId>webdriverextensions</artifactId>
-    <version>2.8.2-SNAPSHOT</version>
+    <version>2.9.0-SNAPSHOT</version>
     <packaging>jar</packaging>
 
     <parent>
@@ -14,7 +15,10 @@
     </parent>
 
     <name>WebDriver Extensions</name>
-    <description>WebDriver Extensions is designed to simplify Java based Selenium/WebDriver tests. It's built on top of Selenium/WebDriver to make your tests more readable, reusabable and maintainable by combining the Page Object Pattern and Bot Pattern.</description>
+    <description>WebDriver Extensions is designed to simplify Java based Selenium/WebDriver tests. It's built on top of
+        Selenium/WebDriver to make your tests more readable, reusabable and maintainable by combining the Page Object
+        Pattern and Bot Pattern.
+    </description>
     <url>https://github.com/webdriverextensions/webdriverextensions</url>
 
     <licenses>
@@ -89,6 +93,7 @@
         <logback.version>1.1.5</logback.version>
         <selenium.version>2.53.1</selenium.version>
         <htmlunit-driver.version>2.21</htmlunit-driver.version>
+        <phantomjsdriver.version>1.3.0</phantomjsdriver.version>
 
         <!-- Plugin Versions -->
         <maven-deploy-plugin.version>2.8.1</maven-deploy-plugin.version>
@@ -163,6 +168,11 @@
             <artifactId>htmlunit-driver</artifactId>
             <version>${htmlunit-driver.version}</version>
         </dependency>
+        <dependency>
+            <groupId>com.codeborne</groupId>
+            <artifactId>phantomjsdriver</artifactId>
+            <version>${phantomjsdriver.version}</version>
+        </dependency>
     </dependencies>
 
     <build>
@@ -205,7 +215,8 @@
                     <compilerVersion>1.7</compilerVersion>
                     <source>1.7</source>
                     <target>1.7</target>
-                    <compilerArgument>-proc:none</compilerArgument><!-- Disable annotation processors during normal compilation so that processors can be run with maven-processor-plugin instead -->
+                    <compilerArgument>-proc:none
+                    </compilerArgument><!-- Disable annotation processors during normal compilation so that processors can be run with maven-processor-plugin instead -->
                 </configuration>
             </plugin>
 
@@ -280,16 +291,16 @@
                             <version>2.53</version>
                         </driver>
                         <driver>
-                            <name>edgedriver</name>
-                            <platform>windows</platform>
-                            <bit>64</bit>
-                            <version>3.14366</version>
-                        </driver>
-                        <driver>
                             <name>internetexplorerdriver</name>
                             <platform>windows</platform>
                             <bit>64</bit>
                             <version>2.53</version>
+                        </driver>
+                        <driver>
+                            <name>edgedriver</name>
+                            <platform>windows</platform>
+                            <bit>64</bit>
+                            <version>3.14366</version>
                         </driver>
                         <driver>
                             <name>chromedriver</name>
@@ -314,6 +325,10 @@
                             <platform>linux</platform>
                             <bit>64</bit>
                             <version>2.22</version>
+                        </driver>
+                        <driver>
+                            <name>phantomjs</name>
+                            <version>2.1.1</version>
                         </driver>
                     </drivers>
                 </configuration>
@@ -371,7 +386,7 @@
                                         </goals>
                                     </pluginExecutionFilter>
                                     <action>
-                                        <ignore />
+                                        <ignore/>
                                     </action>
                                 </pluginExecution>
                             </pluginExecutions>

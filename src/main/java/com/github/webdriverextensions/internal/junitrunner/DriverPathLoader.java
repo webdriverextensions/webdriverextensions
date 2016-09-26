@@ -8,9 +8,7 @@ import com.github.webdriverextensions.junitrunner.annotations.DriverPaths;
 import static com.github.webdriverextensions.WebDriverExtensionsProperties.IE_DRIVER_USE64BIT_PROPERTY_NAME;
 import static com.github.webdriverextensions.WebDriverExtensionsProperties.INTERNET_EXPLORER_DRIVER_PROPERTY_NAME;
 import static com.github.webdriverextensions.WebDriverExtensionsProperties.INTERNET_EXPLORER_DRIVER_USE64BIT_PROPERTY_NAME;
-import static com.github.webdriverextensions.WebDriverProperties.CHROME_DRIVER_PROPERTY_NAME;
-import static com.github.webdriverextensions.WebDriverProperties.EDGE_DRIVER_PROPERTY_NAME;
-import static com.github.webdriverextensions.WebDriverProperties.IE_DRIVER_PROPERTY_NAME;
+import static com.github.webdriverextensions.WebDriverProperties.*;
 
 public class DriverPathLoader {
 
@@ -20,6 +18,7 @@ public class DriverPathLoader {
         loadChromeDriverPath(driverPaths != null ? driverPaths.chrome() : null);
         loadEdgeDriverPath(driverPaths != null ? driverPaths.edge() : null);
         loadInternetExplorerDriverPath(driverPaths != null ? driverPaths.internetExplorer() : null);
+        loadPhantomJsDriverPath(driverPaths != null ? driverPaths.internetExplorer() : null);
         makeSureDriversAreExecutable();
     }
 
@@ -37,6 +36,11 @@ public class DriverPathLoader {
         PropertyUtils.setPropertyIfNotExists(IE_DRIVER_PROPERTY_NAME, System.getProperty(INTERNET_EXPLORER_DRIVER_PROPERTY_NAME)); // Alternative property name that follows naming convention
         PropertyUtils.setPropertyIfNotExists(IE_DRIVER_PROPERTY_NAME, path);
         PropertyUtils.setPropertyIfNotExists(IE_DRIVER_PROPERTY_NAME, getInternetExplorerDriverDefaultPath());
+    }
+
+    private static void loadPhantomJsDriverPath(String path) {
+        PropertyUtils.setPropertyIfNotExists(PHANTOMJS_BINARY_PROPERTY_NAME, path);
+        PropertyUtils.setPropertyIfNotExists(PHANTOMJS_BINARY_PROPERTY_NAME, getPhantomJsDefaultPath());
     }
 
     private static void makeSureDriversAreExecutable() {
@@ -65,6 +69,21 @@ public class DriverPathLoader {
                 return "drivers/edgedriver-windows-64bit";
             } else {
                 return "drivers/edgedriver-windows-32bit";
+            }
+        }
+        return null;
+    }
+
+    private static String getPhantomJsDefaultPath() {
+        if (OsUtils.isWindows()) {
+            return "drivers/phantomjs-windows-64bit.exe";
+        } else if (OsUtils.isMac()) {
+            return "drivers/phantomjs-mac-64bit";
+        } else if (OsUtils.isLinux()) {
+            if (OsUtils.is64Bit()) {
+                return "drivers/phantomjs-linux-64bit";
+            } else {
+                return "drivers/phantomjs-linux-32bit";
             }
         }
         return null;

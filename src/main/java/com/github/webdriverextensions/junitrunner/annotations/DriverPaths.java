@@ -13,4 +13,5 @@ public @interface DriverPaths {
     String chrome() default "";
     String edge() default "";
     String internetExplorer() default "";
+    String phantomJs() default "";
 }

@@ -45,6 +45,7 @@ import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
+import org.openqa.selenium.phantomjs.PhantomJSDriver;
 import org.openqa.selenium.remote.BrowserType;
 import static org.openqa.selenium.remote.CapabilityType.BROWSER_NAME;
 import static org.openqa.selenium.remote.CapabilityType.PLATFORM;
@@ -164,24 +165,24 @@ public class WebDriverRunner extends BlockJUnit4ClassRunner {
                     || ((RemoteAddress) getTestClass().getJavaClass().getAnnotation(RemoteAddress.class)) != null;
 
             if (method.getAnnotation(Ignore.class) != null) {
-                log.trace("Skipping test {}. Test is annotated to be ignored with @Ignore annotation", testName);
+                log.info("Skipping test {} since Test is annotated to be ignored with @Ignore annotation", testName);
                 notifier.fireTestIgnored(description);
             } else if (testMethodContext.isBrowserIgnored(browser)) {
-                log.trace("Skipping test {}. Test is annotated to be ignored, ignore annotations = {}.", testName,
+                log.info("Skipping test {} since Test is annotated to be ignored, ignore annotations = {}.", testName,
                         testMethodContext.ignoreBrowsers.toString());
                 notifier.fireTestIgnored(description);
             } else if (!hasRemoteAddress && BrowserType.IE.equalsIgnoreCase(browser.getBrowserName()) && !OsUtils.isWindows()
                     || (BrowserType.IEXPLORE.equalsIgnoreCase(browser.getBrowserName()) && !OsUtils.isWindows())) {
-                log.trace("Skipping test {}. Internet Explorer is only supported on Windows platforms.", testName);
+                log.info("Skipping test {} since Internet Explorer only runs on Windows platforms.", testName);
                 notifier.fireTestIgnored(description);
             } else if (!hasRemoteAddress && BrowserType.EDGE.equalsIgnoreCase(browser.getBrowserName()) && !OsUtils.isWindows()) {
-                log.trace("Skipping test {}. Edge is only supported on Windows platforms.", testName);
+                log.info("Skipping test {} since Edge only runs on Windows platforms.", testName);
                 notifier.fireTestIgnored(description);
             } else if (!hasRemoteAddress && BrowserType.SAFARI.equalsIgnoreCase(browser.getBrowserName()) && (!OsUtils.isWindows() && !OsUtils.isMac())) {
-                log.trace("Skipping test {}. Safari is only supported on Windows and Mac platforms.", testName);
+                log.info("Skipping test {} since Safari only runs on Windows and Mac platforms.", testName);
                 notifier.fireTestIgnored(description);
             } else if (!hasRemoteAddress && !OsUtils.isCurrentPlatform(browser.platform)) {
-                log.trace("Skipping test {}. Current platform is not " + browser.platform, testName);
+                log.info("Skipping test {} since current platform is not the browser platform " + browser.platform, testName);
                 notifier.fireTestIgnored(description);
             } else {
                 WebDriver driver;
@@ -202,15 +203,14 @@ public class WebDriverRunner extends BlockJUnit4ClassRunner {
                             if (testMethodContext.isBrowserIgnored(driverBrowser)) {
                                 driver.quit();
                                 WebDriverExtensionsContext.removeDriver();
-                                log.trace("Skipping test {}. Test is annotated to be ignored, ignore annotations = {}.", testName,
+                                log.info("Skipping test {} since Test is annotated to be ignored, ignore annotations = {}.", testName,
                                         testMethodContext.ignoreBrowsers.toString());
                                 notifier.fireTestIgnored(description);
                                 return;
                             }
                             WebDriverExtensionsContext.setDriver(driver);
                         } catch (BrowserNotSupported ex) {
-                            log.trace("Skipping test {}. {} has no driver for running tests in browser {}.", testName,
-                                    WebDriverRunner.class.getSimpleName(), quote(browser.getBrowserName()));
+                            log.info("Skipping test {} since browser {} is not supported to run locally", testName, quote(browser.getBrowserName()));
                             notifier.fireTestIgnored(description);
                             return;
                         }
@@ -262,7 +262,7 @@ public class WebDriverRunner extends BlockJUnit4ClassRunner {
                 WebDriverExtensionsContext.removeDriver();
             }
         } else {
-            // Not a Selenium Grid Anotated test, treat as normal test
+            // Not a Selenium Grid Annotated test, treat as normal test
             super.runChild(method, notifier);
         }
     }
@@ -490,6 +490,14 @@ public class WebDriverRunner extends BlockJUnit4ClassRunner {
 
             if (BrowserType.SAFARI.equalsIgnoreCase(browserName)) {
                 return new SafariDriver(desiredCapabilities);
+            }
+
+            if (BrowserType.PHANTOMJS.equalsIgnoreCase(browserName)) {
+                Capabilities caps = new DesiredCapabilities();
+                ((DesiredCapabilities) caps).setJavascriptEnabled(true);
+                ((DesiredCapabilities) caps).setCapability("takesScreenshot", true);
+                WebDriver driver = new PhantomJSDriver(caps);
+                return driver;
             }
 
             throw new BrowserNotSupported();
