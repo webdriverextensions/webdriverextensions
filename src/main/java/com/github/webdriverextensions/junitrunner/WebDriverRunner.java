@@ -10,18 +10,8 @@ import com.github.webdriverextensions.internal.junitrunner.TakeScreenshotOnFailu
 import com.github.webdriverextensions.internal.utils.InstanceUtils;
 import com.github.webdriverextensions.internal.utils.OsUtils;
 import com.github.webdriverextensions.internal.utils.PropertyUtils;
-import static com.github.webdriverextensions.internal.utils.StringUtils.quote;
-import static com.github.webdriverextensions.internal.utils.WebDriverUtils.*;
-
 import com.github.webdriverextensions.junitrunner.annotations.*;
 import com.google.gson.Gson;
-import java.lang.annotation.Annotation;
-import java.net.URL;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
-import java.util.concurrent.TimeUnit;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
@@ -30,6 +20,8 @@ import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.Description;
+import org.junit.runner.manipulation.Filter;
+import org.junit.runner.manipulation.NoTestsRemainException;
 import org.junit.runner.notification.Failure;
 import org.junit.runner.notification.RunNotifier;
 import org.junit.runners.BlockJUnit4ClassRunner;
@@ -46,13 +38,19 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.remote.BrowserType;
-import static org.openqa.selenium.remote.CapabilityType.BROWSER_NAME;
-import static org.openqa.selenium.remote.CapabilityType.PLATFORM;
-import static org.openqa.selenium.remote.CapabilityType.VERSION;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.safari.SafariDriver;
 import org.openqa.selenium.support.PageFactory;
+
+import java.lang.annotation.Annotation;
+import java.net.URL;
+import java.util.*;
+import java.util.concurrent.TimeUnit;
+
+import static com.github.webdriverextensions.internal.utils.StringUtils.quote;
+import static com.github.webdriverextensions.internal.utils.WebDriverUtils.*;
+import static org.openqa.selenium.remote.CapabilityType.*;
 
 public class WebDriverRunner extends BlockJUnit4ClassRunner {
 
@@ -105,6 +103,20 @@ public class WebDriverRunner extends BlockJUnit4ClassRunner {
         IgnoreBrowser.class
     });
 
+    private final Object childrenLock = new Object();
+    private volatile Collection<FrameworkMethod> filteredTestAnnotatedMethods = null; // Guarded by childrenLock
+
+    private Collection<FrameworkMethod> getFilteredTestAnnotatedMethods() {
+        if (filteredTestAnnotatedMethods == null) {
+            synchronized (childrenLock) {
+                if (filteredTestAnnotatedMethods == null) {
+                    filteredTestAnnotatedMethods = Collections.unmodifiableCollection(getTestAnnotatedMethods());
+                }
+            }
+        }
+        return filteredTestAnnotatedMethods;
+    }
+
     public WebDriverRunner(Class<?> klass) throws InitializationError {
         super(klass);
         DriverPathLoader.loadDriverPaths(getTestClass().getJavaClass().getAnnotation(DriverPaths.class));
@@ -126,9 +138,8 @@ public class WebDriverRunner extends BlockJUnit4ClassRunner {
 
     @Override
     protected List<FrameworkMethod> computeTestMethods() {
-        List<FrameworkMethod> testAnnotatedMethods = getTestClass().getAnnotatedMethods(Test.class);
         List<FrameworkMethod> testMethods = new ArrayList<>();
-        for (FrameworkMethod testAnnotatedMethod : testAnnotatedMethods) {
+        for (FrameworkMethod testAnnotatedMethod : getFilteredTestAnnotatedMethods()) {
             TestMethodContext testMethodContext = new TestMethodContext().addBrowsersFromClassAnnotations(getTestClass()).addBrowsersFromMethodAnnotations(testAnnotatedMethod);
             if (!testMethodContext.getBrowsers().isEmpty()) {
                 for (BrowserConfiguration browser : testMethodContext.getBrowsers()) {
@@ -142,10 +153,23 @@ public class WebDriverRunner extends BlockJUnit4ClassRunner {
         return testMethods;
     }
 
+    protected List<FrameworkMethod> getTestAnnotatedMethods() {
+        List<FrameworkMethod> testAnnotatedMethods = getTestClass().getAnnotatedMethods(Test.class);
+        List<FrameworkMethod> testMethods = new ArrayList<>();
+        for (FrameworkMethod testAnnotatedMethod : testAnnotatedMethods) {
+            testMethods.add(testAnnotatedMethod);
+        }
+        return testMethods;
+    }
+
     @Override
     protected Object createTest() throws Exception {
         Object test = super.createTest();
-        PageFactory.initElements(new WebDriverExtensionFieldDecorator(WebDriverExtensionsContext.getDriver()), test);
+        try {
+            PageFactory.initElements(new WebDriverExtensionFieldDecorator(WebDriverExtensionsContext.getDriver()), test);
+        } catch (WebDriverExtensionException e) {
+            // Swallow "WebDriverExtensionsContext is not set" exceptions to allow running normal JUnit tests
+        }
         return test;
     }
 
@@ -366,6 +390,29 @@ public class WebDriverRunner extends BlockJUnit4ClassRunner {
         private TestMethodContext addIgnoreBrowserFromAnnotation(Annotation annotation) {
             ignoreBrowsers.add(new BrowserConfiguration(annotation));
             return this;
+        }
+    }
+
+    @Override
+    public void filter(Filter filter) throws NoTestsRemainException {
+        synchronized (childrenLock) {
+            List<FrameworkMethod> children = new ArrayList<>(getFilteredTestAnnotatedMethods());
+            for (Iterator<FrameworkMethod> iter = children.iterator(); iter.hasNext(); ) {
+                FrameworkMethod each = iter.next();
+                if (filter.shouldRun(describeChild(each))) {
+                    try {
+                        filter.apply(each);
+                    } catch (NoTestsRemainException e) {
+                        iter.remove();
+                    }
+                } else {
+                    iter.remove();
+                }
+            }
+            filteredTestAnnotatedMethods = Collections.unmodifiableCollection(children);
+            if (filteredTestAnnotatedMethods.isEmpty()) {
+                throw new NoTestsRemainException();
+            }
         }
     }
 
