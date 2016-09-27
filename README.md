@@ -774,6 +774,10 @@ The Javadoc of this project is available online hosted by javadoc.io. You can fi
 
 <br>
 # Changelog
+#### 2.9.0 (To be released)
+- ENHANCEMENT Added support to run test against PhantomJS locally
+- ENHANCEMENT Implemented Filterable support for WebDriverRunner (makes it possible to run single test methods from IntelliJ)
+
 #### 2.8.2 (2016 September 27)
 - SELENIUM UPDATE Updated selenium version to 2.53.1
 
