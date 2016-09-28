@@ -780,7 +780,10 @@ The Javadoc of this project is available online hosted by javadoc.io. You can fi
 
 <br>
 # Changelog
-#### 2.9.0 (To be released)
+#### 2.9.1 (2016 September 28)
+- SELENIUM UPDATE Updated to latest htmlunit-driver version
+
+#### 2.9.0 (2016 September 28)
 - ENHANCEMENT Added support to run test against PhantomJS locally
 - ENHANCEMENT Implemented Filterable support for WebDriverRunner (makes it possible to run single test methods from IntelliJ)
 
