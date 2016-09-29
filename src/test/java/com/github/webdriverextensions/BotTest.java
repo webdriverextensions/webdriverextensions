@@ -5,9 +5,7 @@ import java.util.concurrent.TimeUnit;
 import static com.github.webdriverextensions.Bot.*;
 import com.github.webdriverextensions.generator.GeneratedWebRepository;
 import com.github.webdriverextensions.junitrunner.WebDriverRunner;
-import com.github.webdriverextensions.junitrunner.annotations.Chrome;
-import com.github.webdriverextensions.junitrunner.annotations.Firefox;
-import com.github.webdriverextensions.junitrunner.annotations.IgnoreChrome;
+import com.github.webdriverextensions.junitrunner.annotations.*;
 import org.junit.Assert;
 import static org.hamcrest.Matchers.*;
 import org.junit.Before;
@@ -16,6 +14,10 @@ import org.junit.runner.RunWith;
 
 @RunWith(WebDriverRunner.class)
 @Chrome
+@Firefox
+@InternetExplorer
+@PhantomJS
+@HtmlUnit
 public class BotTest extends GeneratedWebRepository {
 
     @Before
@@ -377,18 +379,29 @@ public class BotTest extends GeneratedWebRepository {
 
     /* Option */
     @Test
-    @IgnoreChrome // Ignore chrome and run tests in Firefox instead since test fails cause Chrome does not trim spaces
-    @Firefox      // see bug report https://code.google.com/p/selenium/issues/detail?id=7473, remove this when bug is solved!
     public void optionTest() {
-        // Selected/Deselected
-        assertOptionIsSelected("Option 1", botTestPage.select);
-        assertOptionIsDeselected("Option 2", botTestPage.select);
-        assertOptionIsDeselected("Option 3", botTestPage.select);
+        if (browserIsChrome() || browserIsPhantomJS()) {
+            // Selected/Deselected
+            assertOptionIsSelected(" Option 1 ", botTestPage.select);
+            assertOptionIsDeselected(" Option 2 ", botTestPage.select);
+            assertOptionIsDeselected(" Option 3 ", botTestPage.select);
 
-        // Enabled/Disabled
-        assertOptionIsEnabled("Option 1", botTestPage.select);
-        assertOptionIsEnabled("Option 2", botTestPage.select);
-        assertOptionIsDisabled("Option 3", botTestPage.select);
+            // Enabled/Disabled
+            assertOptionIsEnabled(" Option 1 ", botTestPage.select);
+            assertOptionIsEnabled(" Option 2 ", botTestPage.select);
+            assertOptionIsDisabled(" Option 3 ", botTestPage.select);
+        } else {
+            // Selected/Deselected
+            assertOptionIsSelected("Option 1", botTestPage.select);
+            assertOptionIsDeselected("Option 2", botTestPage.select);
+            assertOptionIsDeselected("Option 3", botTestPage.select);
+
+            // Enabled/Disabled
+            assertOptionIsEnabled("Option 1", botTestPage.select);
+            assertOptionIsEnabled("Option 2", botTestPage.select);
+            assertOptionIsDisabled("Option 3", botTestPage.select);
+        }
+
     }
 
     /* Option Value */
