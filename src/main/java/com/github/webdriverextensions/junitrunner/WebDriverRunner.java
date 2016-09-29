@@ -192,21 +192,21 @@ public class WebDriverRunner extends BlockJUnit4ClassRunner {
                 log.info("Skipping test {} since Test is annotated to be ignored with @Ignore annotation", testName);
                 notifier.fireTestIgnored(description);
             } else if (testMethodContext.isBrowserIgnored(browser)) {
-                log.info("Skipping test {} since Test is annotated to be ignored, ignore annotations = {}.", testName,
+                log.info("Skipping test {} since Test is annotated to ignore browser {}", testName,
                         testMethodContext.ignoreBrowsers.toString());
                 notifier.fireTestIgnored(description);
             } else if (!hasRemoteAddress && BrowserType.IE.equalsIgnoreCase(browser.getBrowserName()) && !OsUtils.isWindows()
                     || (BrowserType.IEXPLORE.equalsIgnoreCase(browser.getBrowserName()) && !OsUtils.isWindows())) {
-                log.info("Skipping test {} since Internet Explorer only runs on Windows platforms.", testName);
+                log.info("Skipping test {} since Internet Explorer only runs on Windows platform", testName);
                 notifier.fireTestIgnored(description);
             } else if (!hasRemoteAddress && BrowserType.EDGE.equalsIgnoreCase(browser.getBrowserName()) && !OsUtils.isWindows()) {
-                log.info("Skipping test {} since Edge only runs on Windows platforms.", testName);
+                log.info("Skipping test {} since Edge only runs on Windows platform", testName);
                 notifier.fireTestIgnored(description);
             } else if (!hasRemoteAddress && BrowserType.SAFARI.equalsIgnoreCase(browser.getBrowserName()) && (!OsUtils.isWindows() && !OsUtils.isMac())) {
-                log.info("Skipping test {} since Safari only runs on Windows and Mac platforms.", testName);
+                log.info("Skipping test {} since Safari only runs on Windows and Mac platform", testName);
                 notifier.fireTestIgnored(description);
             } else if (!hasRemoteAddress && !OsUtils.isCurrentPlatform(browser.platform)) {
-                log.info("Skipping test {} since current platform is not the browser platform " + browser.platform, testName);
+                log.info("Skipping test {} since current platform is not " + browser.platform, testName);
                 notifier.fireTestIgnored(description);
             } else {
                 WebDriver driver;
@@ -227,7 +227,7 @@ public class WebDriverRunner extends BlockJUnit4ClassRunner {
                             if (testMethodContext.isBrowserIgnored(driverBrowser)) {
                                 driver.quit();
                                 WebDriverExtensionsContext.removeDriver();
-                                log.info("Skipping test {} since Test is annotated to be ignored, ignore annotations = {}.", testName,
+                                log.info("Skipping test {} since Test is annotated to ignore browser {}", testName,
                                         testMethodContext.ignoreBrowsers.toString());
                                 notifier.fireTestIgnored(description);
                                 return;
