@@ -1903,7 +1903,8 @@ public class Bot {
      * @return the visible text
      */
     public static String textIn(WebElement webElement) {
-        return webElement.getText();
+        // Text is trimmed to normalize behavior since Chrome and PhantomJS driver incorrectly returns spaces around the text (Not according the the WebElement tetText docs), see bug report https://github.com/seleniumhq/selenium-google-code-issue-archive/issues/7473 remove this when bug is solved!
+        return StringUtils.trim(webElement.getText());
     }
 
     public static boolean hasText(WebElement webElement) {
@@ -2110,7 +2111,7 @@ public class Bot {
      * @return the visible text as a number
      */
      public static double textInAsNumber(WebElement webElement) {
-        return createDouble(webElement.getText());
+        return createDouble(textIn(webElement));
     }
 
     public static boolean textIsNumber(WebElement webElement) {

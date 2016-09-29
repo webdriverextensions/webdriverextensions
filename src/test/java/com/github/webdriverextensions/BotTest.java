@@ -392,28 +392,15 @@ public class BotTest extends GeneratedWebRepository {
     /* Option */
     @Test
     public void optionTest() {
-        if (browserIsChrome() || browserIsPhantomJS()) {
-            // Selected/Deselected
-            assertOptionIsSelected(" Option 1 ", botTestPage.select);
-            assertOptionIsDeselected(" Option 2 ", botTestPage.select);
-            assertOptionIsDeselected(" Option 3 ", botTestPage.select);
+        // Selected/Deselected
+        assertOptionIsSelected("Option 1", botTestPage.select);
+        assertOptionIsDeselected("Option 2", botTestPage.select);
+        assertOptionIsDeselected("Option 3", botTestPage.select);
 
-            // Enabled/Disabled
-            assertOptionIsEnabled(" Option 1 ", botTestPage.select);
-            assertOptionIsEnabled(" Option 2 ", botTestPage.select);
-            assertOptionIsDisabled(" Option 3 ", botTestPage.select);
-        } else {
-            // Selected/Deselected
-            assertOptionIsSelected("Option 1", botTestPage.select);
-            assertOptionIsDeselected("Option 2", botTestPage.select);
-            assertOptionIsDeselected("Option 3", botTestPage.select);
-
-            // Enabled/Disabled
-            assertOptionIsEnabled("Option 1", botTestPage.select);
-            assertOptionIsEnabled("Option 2", botTestPage.select);
-            assertOptionIsDisabled("Option 3", botTestPage.select);
-        }
-
+        // Enabled/Disabled
+        assertOptionIsEnabled("Option 1", botTestPage.select);
+        assertOptionIsEnabled("Option 2", botTestPage.select);
+        assertOptionIsDisabled("Option 3", botTestPage.select);
     }
 
     /* Option Value */
