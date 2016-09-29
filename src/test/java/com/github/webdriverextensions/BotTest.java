@@ -156,11 +156,15 @@ public class BotTest extends GeneratedWebRepository {
     /* Url */
     @Test
     public void urlTest() {
-        assertCurrentUrlEquals(botTestPage.url);
+        if (browserIsHtmlUnit()) {
+            assertCurrentUrlEquals(botTestPage.url.replace("file:///", "file:/"));
+        } else {
+            assertCurrentUrlEquals(botTestPage.url);
+        }
         assertCurrentUrlNotEquals("xxx");
         assertCurrentUrlContains("bot-test");
         assertCurrentUrlNotContains("xxx");
-        assertCurrentUrlStartsWith("file://");
+        assertCurrentUrlStartsWith("file:/");
         assertCurrentUrlNotStartsWith("xxx");
         assertCurrentUrlEndsWith("/bot-test.html");
         assertCurrentUrlNotEndsWith("xxx");
@@ -291,11 +295,19 @@ public class BotTest extends GeneratedWebRepository {
     /* Href */
     @Test
     public void hrefTest() {
-        assertHrefEquals("prefixhrefsuffix", botTestPage.attributesSpan);
+        if (browserIsHtmlUnit()) {
+            assertHrefEquals("file:/Users/anders/Workspace/webdriverextensions/target/test-classes/html/prefixhrefsuffix", botTestPage.attributesSpan);
+        } else {
+            assertHrefEquals("prefixhrefsuffix", botTestPage.attributesSpan);
+        }
         assertHrefNotEquals("xxx", botTestPage.attributesSpan);
         assertHrefContains("href", botTestPage.attributesSpan);
         assertHrefNotContains("xxx", botTestPage.attributesSpan);
-        assertHrefStartsWith("prefixhref", botTestPage.attributesSpan);
+        if (browserIsHtmlUnit()) {
+            assertHrefStartsWith("file:/Users/anders/Workspace/webdriverextensions/target/test-classes/html/prefixhref", botTestPage.attributesSpan);
+        } else {
+            assertHrefStartsWith("prefixhref", botTestPage.attributesSpan);
+        }
         assertHrefNotStartsWith("xxx", botTestPage.attributesSpan);
         assertHrefEndsWith("hrefsuffix", botTestPage.attributesSpan);
         assertHrefNotEndsWith("xxx", botTestPage.attributesSpan);

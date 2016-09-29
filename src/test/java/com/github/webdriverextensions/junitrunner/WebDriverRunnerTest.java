@@ -22,7 +22,7 @@ public class WebDriverRunnerTest {
 
     @Test
     public void successfulTest() {
-        open("http://htmlunit.sf.net");
+        open("http://htmlunit.sourceforge.net/");
         assertCurrentUrlContains("htmlunit");
     }
 }
