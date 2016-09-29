@@ -1,6 +1,7 @@
 package com.github.webdriverextensions.junitrunner;
 
 import static com.github.webdriverextensions.Bot.*;
+import static java.util.concurrent.TimeUnit.SECONDS;
 
 import com.github.webdriverextensions.junitrunner.annotations.*;
 import org.junit.Test;
@@ -23,6 +24,9 @@ public class WebDriverRunnerTest {
     @Test
     public void successfulTest() {
         open("http://htmlunit.sourceforge.net/");
+        if (browserIsHtmlUnit()) {
+            waitFor(5, SECONDS);
+        }
         assertCurrentUrlContains("htmlunit");
     }
 }
