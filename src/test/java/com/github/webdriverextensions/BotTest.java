@@ -296,7 +296,8 @@ public class BotTest extends GeneratedWebRepository {
     @Test
     public void hrefTest() {
         if (browserIsHtmlUnit()) {
-            assertHrefEquals("file:/Users/anders/Workspace/webdriverextensions/target/test-classes/html/prefixhrefsuffix", botTestPage.attributesSpan);
+            String filePath = botTestPage.url.replace("file:///", "file:/").replace("bot-test.html", "");
+            assertHrefEquals(filePath + "prefixhrefsuffix", botTestPage.attributesSpan);
         } else {
             assertHrefEquals("prefixhrefsuffix", botTestPage.attributesSpan);
         }
@@ -304,7 +305,8 @@ public class BotTest extends GeneratedWebRepository {
         assertHrefContains("href", botTestPage.attributesSpan);
         assertHrefNotContains("xxx", botTestPage.attributesSpan);
         if (browserIsHtmlUnit()) {
-            assertHrefStartsWith("file:/Users/anders/Workspace/webdriverextensions/target/test-classes/html/prefixhref", botTestPage.attributesSpan);
+            String filePath = botTestPage.url.replace("file:///", "file:/").replace("bot-test.html", "");
+            assertHrefStartsWith(filePath + "prefixhref", botTestPage.attributesSpan);
         } else {
             assertHrefStartsWith("prefixhref", botTestPage.attributesSpan);
         }
