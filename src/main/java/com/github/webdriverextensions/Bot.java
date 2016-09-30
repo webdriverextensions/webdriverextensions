@@ -262,7 +262,7 @@ public class Bot {
     }
 
     public static void waitUntil(Predicate<WebDriver> perdicate, long secondsToWait) {
-	new WebDriverWait(WebDriverExtensionsContext.getDriver(), secondsToWait).until(perdicate);
+	new WebDriverWait(driver(), secondsToWait).until(perdicate);
     }
 
 
