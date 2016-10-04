@@ -18,7 +18,7 @@ public class DriverPathLoader {
         loadChromeDriverPath(driverPaths != null ? driverPaths.chrome() : null);
         loadEdgeDriverPath(driverPaths != null ? driverPaths.edge() : null);
         loadInternetExplorerDriverPath(driverPaths != null ? driverPaths.internetExplorer() : null);
-        loadPhantomJsDriverPath(driverPaths != null ? driverPaths.internetExplorer() : null);
+        loadPhantomJsDriverPath(driverPaths != null ? driverPaths.phantomJs() : null);
         makeSureDriversAreExecutable();
     }
 
