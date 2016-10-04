@@ -11,6 +11,7 @@ import java.lang.annotation.Target;
 @Target(ElementType.TYPE)
 public @interface DriverPaths {
     String chrome() default "";
+    String firefox() default "";
     String edge() default "";
     String internetExplorer() default "";
     String phantomJs() default "";

@@ -16,6 +16,7 @@ public class DriverPathLoader {
 
     public static void loadDriverPaths(DriverPaths driverPaths) {
         loadChromeDriverPath(driverPaths != null ? driverPaths.chrome() : null);
+        loadFirefoxDriverPath(driverPaths != null ? driverPaths.firefox() : null);
         loadEdgeDriverPath(driverPaths != null ? driverPaths.edge() : null);
         loadInternetExplorerDriverPath(driverPaths != null ? driverPaths.internetExplorer() : null);
         loadPhantomJsDriverPath(driverPaths != null ? driverPaths.phantomJs() : null);
@@ -25,6 +26,11 @@ public class DriverPathLoader {
     private static void loadChromeDriverPath(String path) {
         PropertyUtils.setPropertyIfNotExists(CHROME_DRIVER_PROPERTY_NAME, path);
         PropertyUtils.setPropertyIfNotExists(CHROME_DRIVER_PROPERTY_NAME, getChromeDriverDefaultPath());
+    }
+
+    private static void loadFirefoxDriverPath(String path) {
+        PropertyUtils.setPropertyIfNotExists(FIREFOX_DRIVER_PROPERTY_NAME, path);
+        PropertyUtils.setPropertyIfNotExists(FIREFOX_DRIVER_PROPERTY_NAME, getFirefoxDriverDefaultPath());
     }
 
     private static void loadEdgeDriverPath(String path) {
@@ -59,6 +65,17 @@ public class DriverPathLoader {
             } else {
                 return "drivers/chromedriver-linux-32bit";
             }
+        }
+        return null;
+    }
+
+    private static String getFirefoxDriverDefaultPath() {
+        if (OsUtils.isWindows()) {
+            return "drivers/geckodriver-windows-64bit.exe";
+        } else if (OsUtils.isMac()) {
+            return "drivers/geckodriver-mac-64bit";
+        } else if (OsUtils.isLinux()) {
+            return "drivers/geckodriver-linux-64bit";
         }
         return null;
     }

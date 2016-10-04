@@ -331,6 +331,10 @@
                             <version>2.22</version>
                         </driver>
                         <driver>
+                            <name>geckodriver</name>
+                            <version>0.10.0</version>
+                        </driver>
+                        <driver>
                             <name>phantomjs</name>
                             <version>2.1.1</version>
                         </driver>
