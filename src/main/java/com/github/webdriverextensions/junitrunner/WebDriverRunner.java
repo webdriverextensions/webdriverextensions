@@ -540,11 +540,10 @@ public class WebDriverRunner extends BlockJUnit4ClassRunner {
             }
 
             if (BrowserType.PHANTOMJS.equalsIgnoreCase(browserName)) {
-                Capabilities caps = new DesiredCapabilities();
-                ((DesiredCapabilities) caps).setJavascriptEnabled(true);
-                ((DesiredCapabilities) caps).setCapability("takesScreenshot", true);
-                WebDriver driver = new PhantomJSDriver(caps);
-                return driver;
+                DesiredCapabilities newDesiredCapabilities = new DesiredCapabilities(desiredCapabilities);
+                newDesiredCapabilities.setJavascriptEnabled(true);
+                newDesiredCapabilities.setCapability("takesScreenshot", true);
+                return new PhantomJSDriver(newDesiredCapabilities);
             }
 
             throw new BrowserNotSupported();
