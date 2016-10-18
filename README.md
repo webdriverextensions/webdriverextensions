@@ -780,6 +780,10 @@ The Javadoc of this project is available online hosted by javadoc.io. You can fi
 
 <br>
 # Changelog
+#### 3.0.0 (2016 September 19)
+- SELENIUM UPDATE Selenium 3.0 support
+- ENHANCEMENT Added support for Marionette/Geckodriver
+
 #### 2.9.2 (2016 September 30)
 - BUGFIX Added missing htmlunit dependency
 - BUGFIX Normalized Bot.textIn(WebElement webElement) method to trim spaces so that Chrome and PhantomJs drivers behaves as other drivers according to WebElement docs  

@@ -45,7 +45,6 @@ import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.safari.SafariDriver;
 import org.openqa.selenium.support.PageFactory;
 
-import java.io.File;
 import java.lang.annotation.Annotation;
 import java.net.URL;
 import java.nio.file.Files;
@@ -526,6 +525,7 @@ public class WebDriverRunner extends BlockJUnit4ClassRunner {
                 DesiredCapabilities newDesiredCapabilities = new DesiredCapabilities(desiredCapabilities);
                 String driverPath = System.getProperty(WebDriverProperties.FIREFOX_DRIVER_PROPERTY_NAME);
                 if (Files.exists(Paths.get(driverPath))) {
+                    log.info("Using marionette driver from " + driverPath);
                     newDesiredCapabilities.setCapability("marionette", true);
                 }
                 return new FirefoxDriver(newDesiredCapabilities);
