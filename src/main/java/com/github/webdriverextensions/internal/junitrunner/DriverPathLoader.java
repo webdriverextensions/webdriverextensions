@@ -5,6 +5,9 @@ import com.github.webdriverextensions.internal.utils.OsUtils;
 import com.github.webdriverextensions.internal.utils.PropertyUtils;
 import com.github.webdriverextensions.junitrunner.annotations.DriverPaths;
 
+import java.nio.file.Files;
+import java.nio.file.Paths;
+
 import static com.github.webdriverextensions.WebDriverExtensionsProperties.IE_DRIVER_USE64BIT_PROPERTY_NAME;
 import static com.github.webdriverextensions.WebDriverExtensionsProperties.INTERNET_EXPLORER_DRIVER_PROPERTY_NAME;
 import static com.github.webdriverextensions.WebDriverExtensionsProperties.INTERNET_EXPLORER_DRIVER_USE64BIT_PROPERTY_NAME;
@@ -16,6 +19,7 @@ public class DriverPathLoader {
 
     public static void loadDriverPaths(DriverPaths driverPaths) {
         loadChromeDriverPath(driverPaths != null ? driverPaths.chrome() : null);
+        loadFirefoxDriverPath(driverPaths != null ? driverPaths.firefox() : null);
         loadEdgeDriverPath(driverPaths != null ? driverPaths.edge() : null);
         loadInternetExplorerDriverPath(driverPaths != null ? driverPaths.internetExplorer() : null);
         loadPhantomJsDriverPath(driverPaths != null ? driverPaths.phantomJs() : null);
@@ -25,6 +29,11 @@ public class DriverPathLoader {
     private static void loadChromeDriverPath(String path) {
         PropertyUtils.setPropertyIfNotExists(CHROME_DRIVER_PROPERTY_NAME, path);
         PropertyUtils.setPropertyIfNotExists(CHROME_DRIVER_PROPERTY_NAME, getChromeDriverDefaultPath());
+    }
+
+    private static void loadFirefoxDriverPath(String path) {
+        PropertyUtils.setPropertyIfNotExists(FIREFOX_DRIVER_PROPERTY_NAME, path);
+        PropertyUtils.setPropertyIfNotExists(FIREFOX_DRIVER_PROPERTY_NAME, getFirefoxDriverDefaultPath());
     }
 
     private static void loadEdgeDriverPath(String path) {
@@ -52,9 +61,13 @@ public class DriverPathLoader {
         if (OsUtils.isWindows()) {
             return "drivers/chromedriver-windows-32bit.exe";
         } else if (OsUtils.isMac()) {
-            return "drivers/chromedriver-mac-32bit";
+            if (OsUtils.is64Bit() && (Files.exists(Paths.get("./drivers/chromedriver-mac-64bit")) || Files.notExists(Paths.get("./drivers/chromedriver-mac-32bit")))) {
+                return "drivers/chromedriver-mac-64bit";
+            } else {
+                return "drivers/chromedriver-mac-32bit";
+            }
         } else if (OsUtils.isLinux()) {
-            if (OsUtils.is64Bit()) {
+            if (OsUtils.is64Bit() && (Files.exists(Paths.get("./drivers/chromedriver-linux-64bit")) || Files.notExists(Paths.get("./drivers/chromedriver-linux-32bit")))) {
                 return "drivers/chromedriver-linux-64bit";
             } else {
                 return "drivers/chromedriver-linux-32bit";
@@ -63,9 +76,32 @@ public class DriverPathLoader {
         return null;
     }
 
+    private static String getFirefoxDriverDefaultPath() {
+        if (OsUtils.isWindows()) {
+            if (OsUtils.is64Bit() && (Files.exists(Paths.get("./drivers/geckodriver-windows-64bit")) || Files.notExists(Paths.get("./drivers/geckodriver-windows-32bit")))) {
+                return "drivers/geckodriver-windows-64bit.exe";
+            } else {
+                return "drivers/geckodriver-windows-32bit.exe";
+            }
+        } else if (OsUtils.isMac()) {
+            if (OsUtils.is64Bit() && (Files.exists(Paths.get("./drivers/geckodriver-mac-64bit")) || Files.notExists(Paths.get("./drivers/geckodriver-mac-32bit")))) {
+                return "drivers/geckodriver-mac-64bit";
+            } else {
+                return "drivers/geckodriver-mac-32bit";
+            }
+        } else if (OsUtils.isLinux()) {
+            if (OsUtils.is64Bit() && (Files.exists(Paths.get("./drivers/geckodriver-linux-64bit")) || Files.notExists(Paths.get("./drivers/geckodriver-linux-32bit")))) {
+                return "drivers/geckodriver-linux-64bit";
+            } else {
+                return "drivers/geckodriver-linux-32bit";
+            }
+        }
+        return null;
+    }
+
     private static String getEdgeDefaultPath() {
         if (OsUtils.isWindows()) {
-            if (OsUtils.is64Bit()) {
+            if (OsUtils.is64Bit() && (Files.exists(Paths.get("./drivers/edgedriver-windows-64bit")) || Files.notExists(Paths.get("./drivers/edgedriver-windows-32bit")))) {
                 return "drivers/edgedriver-windows-64bit";
             } else {
                 return "drivers/edgedriver-windows-32bit";
@@ -80,7 +116,7 @@ public class DriverPathLoader {
         } else if (OsUtils.isMac()) {
             return "drivers/phantomjs-mac-64bit";
         } else if (OsUtils.isLinux()) {
-            if (OsUtils.is64Bit()) {
+            if (OsUtils.is64Bit() && (Files.exists(Paths.get("./drivers/phantomjs-linux-64bit")) || Files.notExists(Paths.get("./drivers/phantomjs-linux-32bit")))) {
                 return "drivers/phantomjs-linux-64bit";
             } else {
                 return "drivers/phantomjs-linux-32bit";

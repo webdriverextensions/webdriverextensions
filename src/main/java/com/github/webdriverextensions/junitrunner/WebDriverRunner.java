@@ -2,6 +2,7 @@ package com.github.webdriverextensions.junitrunner;
 
 import com.github.webdriverextensions.WebDriverExtensionFieldDecorator;
 import com.github.webdriverextensions.WebDriverExtensionsContext;
+import com.github.webdriverextensions.WebDriverProperties;
 import com.github.webdriverextensions.internal.WebDriverExtensionException;
 import com.github.webdriverextensions.internal.junitrunner.AnnotationUtils;
 import com.github.webdriverextensions.internal.junitrunner.DriverPathLoader;
@@ -46,6 +47,8 @@ import org.openqa.selenium.support.PageFactory;
 
 import java.lang.annotation.Annotation;
 import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
 
@@ -519,7 +522,12 @@ public class WebDriverRunner extends BlockJUnit4ClassRunner {
             }
 
             if (BrowserType.FIREFOX.equalsIgnoreCase(browserName)) {
-                return new FirefoxDriver(desiredCapabilities);
+                DesiredCapabilities newDesiredCapabilities = new DesiredCapabilities(desiredCapabilities);
+                String driverPath = System.getProperty(WebDriverProperties.FIREFOX_DRIVER_PROPERTY_NAME);
+                if (Files.exists(Paths.get(driverPath))) {
+                    newDesiredCapabilities.setCapability("marionette", true);
+                }
+                return new FirefoxDriver(newDesiredCapabilities);
             }
 
             if (BrowserType.HTMLUNIT.equalsIgnoreCase(browserName)) {
