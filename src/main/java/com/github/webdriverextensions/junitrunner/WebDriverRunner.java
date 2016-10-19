@@ -525,7 +525,6 @@ public class WebDriverRunner extends BlockJUnit4ClassRunner {
                 DesiredCapabilities newDesiredCapabilities = new DesiredCapabilities(desiredCapabilities);
                 String driverPath = System.getProperty(WebDriverProperties.FIREFOX_DRIVER_PROPERTY_NAME);
                 if (Files.exists(Paths.get(driverPath))) {
-                    log.info("Using marionette driver from " + driverPath);
                     newDesiredCapabilities.setCapability("marionette", true);
                 }
                 return new FirefoxDriver(newDesiredCapabilities);
