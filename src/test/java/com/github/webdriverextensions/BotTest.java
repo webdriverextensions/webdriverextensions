@@ -17,6 +17,8 @@ import org.openqa.selenium.Platform;
 @Chrome
 @Firefox
 @InternetExplorer
+@Edge
+@Safari
 @PhantomJS
 @HtmlUnit
 public class BotTest extends GeneratedWebRepository {
@@ -71,6 +73,7 @@ public class BotTest extends GeneratedWebRepository {
 
     /* Select/Deselect */
     @Test
+    @IgnoreSafari // Fails to select on click in Safari
     public void selectDeselectTest() {
         select(botTestPage.multipleSelectOption2);
         assertIsSelected(botTestPage.multipleSelectOption2);
@@ -89,6 +92,7 @@ public class BotTest extends GeneratedWebRepository {
 
     /* Open */
     @Test
+    @IgnoreSafari // throws UnsupportedCommandException from RemoteWebElement.isDisplayed() for some reason
     public void openTest() {
         debug(driver().getPageSource());
         open(botTestPage);
@@ -97,6 +101,7 @@ public class BotTest extends GeneratedWebRepository {
 
     /* Wait For */
     @Test
+    @IgnoreSafari // throws UnsupportedCommandException from RemoteWebElement.isDisplayed() for some reason
     public void waitForTest() {
         waitForElementToDisplay(botTestPage.firstAppendedSpan);
         assertIsDisplayed(botTestPage.firstAppendedSpan);
@@ -111,7 +116,9 @@ public class BotTest extends GeneratedWebRepository {
         assertIsDisplayed(botTestPage.firstAppendedSpan);
         assertIsDisplayed(botTestPage.secondAppendedSpan);
     }
+
     @Test
+    @IgnoreSafari // throws UnsupportedCommandException from RemoteWebElement.isDisplayed() for some reason
     public void waitForElementsToDisplayTest() {
         waitForElementsToDisplay(botTestPage.appendedSpans);
         assertIsDisplayed(botTestPage.firstAppendedSpan);
@@ -129,6 +136,7 @@ public class BotTest extends GeneratedWebRepository {
 
     /* Is Open */
     @Test
+    @IgnoreSafari // throws UnsupportedCommandException from RemoteWebElement.isDisplayed() for some reason
     public void isOpenTest() {
         assertIsOpen(botTestPage);
         assertIsNotOpen(webDriverExtensionSite);
@@ -136,6 +144,7 @@ public class BotTest extends GeneratedWebRepository {
 
     /* Is Display */
     @Test
+    @IgnoreSafari // throws UnsupportedCommandException from RemoteWebElement.isDisplayed() for some reason
     @IgnoreHtmlUnit(platform = Platform.LINUX) // Ignore html unit tests on linux platforms since it seems to fail for some reson in drone.io
     public void isDisplayedTest() {
         assertIsDisplayed(botTestPage.textSpan);
