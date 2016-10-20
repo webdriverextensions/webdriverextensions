@@ -780,6 +780,9 @@ The Javadoc of this project is available online hosted by javadoc.io. You can fi
 
 <br>
 # Changelog
+#### 3.0.1 (2016 September 20)
+- BUGFIX Fixed issue with Marionette/Geckodriver not loading pages (caused by WebDriverRunner using an incorrect property)
+
 #### 3.0.0 (2016 September 19)
 - SELENIUM UPDATE Selenium 3.0 support
 - ENHANCEMENT Added support for Marionette/Geckodriver
