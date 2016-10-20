@@ -8,6 +8,8 @@ import com.github.webdriverextensions.junitrunner.WebDriverRunner;
 import com.github.webdriverextensions.junitrunner.annotations.*;
 import org.junit.Assert;
 import static org.hamcrest.Matchers.*;
+import static org.openqa.selenium.Platform.LINUX;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -16,6 +18,7 @@ import org.openqa.selenium.Platform;
 @RunWith(WebDriverRunner.class)
 @Chrome
 @Firefox
+@IgnoreFirefox(platform = LINUX) // Ignore on linux since travic ci seems to fail with current version of geckodriver
 @InternetExplorer
 @Edge
 @Safari
@@ -145,7 +148,7 @@ public class BotTest extends GeneratedWebRepository {
     /* Is Display */
     @Test
     @IgnoreSafari // throws UnsupportedCommandException from RemoteWebElement.isDisplayed() for some reason
-    @IgnoreHtmlUnit(platform = Platform.LINUX) // Ignore html unit tests on linux platforms since it seems to fail for some reson in drone.io
+    @IgnoreHtmlUnit(platform = LINUX) // Ignore html unit tests on linux platforms since it seems to fail for some reson in drone.io
     public void isDisplayedTest() {
         assertIsDisplayed(botTestPage.textSpan);
         assertIsDisplayed(botTestPage.firstAppendedSpan, 2);
