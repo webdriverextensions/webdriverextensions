@@ -6,7 +6,7 @@ WebDriver Extensions
 
 WebDriver Extensions is designed to simplify Java based Selenium/WebDriver tests. It's built on top of Selenium/WebDriver to make your tests more readable, reusabable and maintainable by combining the [Page Object Pattern](https://code.google.com/p/selenium/wiki/PageObjects) and [Bot Pattern](https://code.google.com/p/selenium/wiki/BotStyleTests).
 
-Available through the [Maven Central Repository](http://mvnrepository.com/search?q=webdriverextensions)! Latest release is version 3.0.1 which includes selenium-java 2.53.1 as a transitive dependency.
+Available through the [Maven Central Repository](http://mvnrepository.com/search?q=webdriverextensions)! Latest release is version 3.0.1 which includes selenium-java 3.0.1 as a transitive dependency.
 
 
 <br>
@@ -784,7 +784,7 @@ The Javadoc of this project is available online hosted by javadoc.io. You can fi
 - BUGFIX Fixed issue with Marionette/Geckodriver not loading pages (caused by WebDriverRunner using an incorrect property)
 
 #### 3.0.0 (2016 September 19)
-- SELENIUM UPDATE Selenium 3.0 support
+- SELENIUM UPDATE Selenium 3.0.1 support
 - ENHANCEMENT Added support for Marionette/Geckodriver
 
 #### 2.9.2 (2016 September 30)
