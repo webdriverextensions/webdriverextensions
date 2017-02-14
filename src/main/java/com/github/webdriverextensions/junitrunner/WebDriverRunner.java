@@ -2,6 +2,7 @@ package com.github.webdriverextensions.junitrunner;
 
 import com.github.webdriverextensions.WebDriverExtensionFieldDecorator;
 import com.github.webdriverextensions.WebDriverExtensionsContext;
+import com.github.webdriverextensions.WebDriverProperties;
 import com.github.webdriverextensions.internal.WebDriverExtensionException;
 import com.github.webdriverextensions.internal.junitrunner.AnnotationUtils;
 import com.github.webdriverextensions.internal.junitrunner.DriverPathLoader;
@@ -47,6 +48,8 @@ import org.openqa.selenium.support.PageFactory;
 
 import java.lang.annotation.Annotation;
 import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
 
