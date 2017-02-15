@@ -7,4 +7,5 @@ public class WebDriverProperties {
     public static final String PHANTOMJS_BINARY_PROPERTY_NAME = "phantomjs.binary.path";
     public static final String OPERA_DRIVER_PROPERTY_NAME = "webdriver.opera.driver";
     public static final String EDGE_DRIVER_PROPERTY_NAME = "webdriver.edge.driver";
+    public static final String DISABLED_BROWSERS_PROPERTY_NAME = "webdriverextensions.disabledbrowsers";
 }
