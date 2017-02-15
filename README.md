@@ -780,6 +780,14 @@ The Javadoc of this project is available online hosted by javadoc.io. You can fi
 
 <br>
 # Changelog
+#### 3.1.0 (2017 February 15)
+- ENHANCEMENT Added possibility to disable specific browsers tests by system property "webdriverextensions.disabledbrowsers"
+E.g.
+```bash
+mvn install -Dwebdriverextensions.disabledbrowsers=firefox,chrome,safari
+```
+thanks to [@alexnb](https://github.com/alexnb)) and [@dve](https://github.com/dve)
+
 #### 3.0.1 (2016 September 20)
 - BUGFIX Fixed issue with Marionette/Geckodriver not loading pages (caused by WebDriverRunner using an incorrect property)
 
