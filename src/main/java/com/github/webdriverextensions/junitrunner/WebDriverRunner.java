@@ -59,7 +59,6 @@ import static org.openqa.selenium.remote.CapabilityType.*;
 
 public class WebDriverRunner extends BlockJUnit4ClassRunner {
 
-    public static final String PROPERTY_DISABLED_BROWSERS = "webdriverextensions.disabledbrowsers";
     private static final org.slf4j.Logger log = org.slf4j.LoggerFactory.getLogger(WebDriverRunner.class);
     private static final List<String> disabledBrowsers = getDisabledBrowsers();
 
@@ -125,7 +124,7 @@ public class WebDriverRunner extends BlockJUnit4ClassRunner {
     }
 
     protected static List<String> getDisabledBrowsers() {
-        String disabledBrowsersString = System.getProperty(PROPERTY_DISABLED_BROWSERS, "");
+        String disabledBrowsersString = System.getProperty(WebDriverProperties.DISABLED_BROWSERS_PROPERTY_NAME, "");
         List<String> disabledBrowsersList = parseDisabledBrowserString(disabledBrowsersString);
 	log.info("Browsers disabled by system property: {}", disabledBrowsersList);
         return disabledBrowsersList;

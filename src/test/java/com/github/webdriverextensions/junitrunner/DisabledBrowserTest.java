@@ -4,6 +4,8 @@ import static org.junit.Assert.*;
 import static org.hamcrest.Matchers.*;
 import org.junit.Test;
 
+import com.github.webdriverextensions.WebDriverProperties;
+
 public class DisabledBrowserTest {
 
     @Test
@@ -24,7 +26,7 @@ public class DisabledBrowserTest {
     
     @Test
     public void testGetDisabledBrowsers() {
-	System.setProperty(WebDriverRunner.PROPERTY_DISABLED_BROWSERS, "firefox");
+	System.setProperty(WebDriverProperties.DISABLED_BROWSERS_PROPERTY_NAME, "firefox");
 	assertThat(WebDriverRunner.getDisabledBrowsers().size(), is(1));
     }
 }
