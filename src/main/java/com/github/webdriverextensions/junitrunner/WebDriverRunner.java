@@ -132,7 +132,7 @@ public class WebDriverRunner extends BlockJUnit4ClassRunner {
 	List<String> result = new ArrayList<>();
         for (String disabledbrowserString : disabledBrowsersString.split(",")) {
             if (StringUtils.isNotBlank(disabledbrowserString)) {
-                result.add(disabledbrowserString);
+                result.add(disabledbrowserString.trim());
                 System.out.println("disabled browser: " + disabledbrowserString);
             }
         }
