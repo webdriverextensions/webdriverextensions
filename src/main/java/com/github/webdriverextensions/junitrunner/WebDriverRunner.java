@@ -59,6 +59,7 @@ import static org.openqa.selenium.remote.CapabilityType.*;
 
 public class WebDriverRunner extends BlockJUnit4ClassRunner {
 
+    public static final String PROPERTY_DISABLED_BROWSERS = "webdriverextensions.disabledbrowsers";
     private static final org.slf4j.Logger log = org.slf4j.LoggerFactory.getLogger(WebDriverRunner.class);
     private static final List<String> disabledBrowsers = getDisabledBrowsers();
 
@@ -123,16 +124,21 @@ public class WebDriverRunner extends BlockJUnit4ClassRunner {
         return filteredTestAnnotatedMethods;
     }
 
-    private static List<String> getDisabledBrowsers() {
-        String disabledBrowsersString = System.getProperty("webdriverextensions.disabledbrowsers", "");
-        List<String> result = new ArrayList<>();
+    protected static List<String> getDisabledBrowsers() {
+        String disabledBrowsersString = System.getProperty(PROPERTY_DISABLED_BROWSERS, "");
+        List<String> disabledBrowsersList = parseDisabledBrowserString(disabledBrowsersString);
+	log.info("Browsers disabled by system property: {}", disabledBrowsersList);
+        return disabledBrowsersList;
+    }
+
+    protected static List<String> parseDisabledBrowserString(String disabledBrowsersString) {
+	List<String> result = new ArrayList<>();
         for (String disabledbrowserString : disabledBrowsersString.split(",")) {
             if (StringUtils.isNotBlank(disabledbrowserString)) {
-                result.add(disabledbrowserString);
-                System.out.println("disabled browser: " + disabledbrowserString);
+                result.add(disabledbrowserString.trim());
             }
         }
-        return result;
+	return result;
     }
 
     public WebDriverRunner(Class<?> klass) throws InitializationError {
