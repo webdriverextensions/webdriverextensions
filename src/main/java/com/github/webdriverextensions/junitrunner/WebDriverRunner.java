@@ -123,9 +123,11 @@ public class WebDriverRunner extends BlockJUnit4ClassRunner {
         return filteredTestAnnotatedMethods;
     }
 
-    private static List<String> getDisabledBrowsers() {
+    protected static List<String> getDisabledBrowsers() {
         String disabledBrowsersString = System.getProperty("webdriverextensions.disabledbrowsers", "");
-        return parseDisabledBrowserString(disabledBrowsersString);
+        List<String> disabledBrowsersList = parseDisabledBrowserString(disabledBrowsersString);
+	log.info("Browsers disabled by system property: {}", disabledBrowsersList);
+        return disabledBrowsersList;
     }
 
     protected static List<String> parseDisabledBrowserString(String disabledBrowsersString) {
@@ -133,7 +135,6 @@ public class WebDriverRunner extends BlockJUnit4ClassRunner {
         for (String disabledbrowserString : disabledBrowsersString.split(",")) {
             if (StringUtils.isNotBlank(disabledbrowserString)) {
                 result.add(disabledbrowserString.trim());
-                System.out.println("disabled browser: " + disabledbrowserString);
             }
         }
 	return result;

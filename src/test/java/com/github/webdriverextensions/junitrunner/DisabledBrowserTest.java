@@ -21,4 +21,10 @@ public class DisabledBrowserTest {
 	assertThat(WebDriverRunner.parseDisabledBrowserString("firefox , chrome"), hasItem("firefox"));
 	assertThat(WebDriverRunner.parseDisabledBrowserString("firefox , chrome"), hasItem("chrome"));
     }
+    
+    @Test
+    public void testGetDisabledBrowsers() {
+	System.setProperty("webdriverextensions.disabledbrowsers", "firefox");
+	assertThat(WebDriverRunner.getDisabledBrowsers().size(), is(1));
+    }
 }
