@@ -125,14 +125,18 @@ public class WebDriverRunner extends BlockJUnit4ClassRunner {
 
     private static List<String> getDisabledBrowsers() {
         String disabledBrowsersString = System.getProperty("webdriverextensions.disabledbrowsers", "");
-        List<String> result = new ArrayList<>();
+        return parseDisabledBrowserString(disabledBrowsersString);
+    }
+
+    protected static List<String> parseDisabledBrowserString(String disabledBrowsersString) {
+	List<String> result = new ArrayList<>();
         for (String disabledbrowserString : disabledBrowsersString.split(",")) {
             if (StringUtils.isNotBlank(disabledbrowserString)) {
                 result.add(disabledbrowserString);
                 System.out.println("disabled browser: " + disabledbrowserString);
             }
         }
-        return result;
+	return result;
     }
 
     public WebDriverRunner(Class<?> klass) throws InitializationError {
