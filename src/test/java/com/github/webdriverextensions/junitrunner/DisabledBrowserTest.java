@@ -24,7 +24,7 @@ public class DisabledBrowserTest {
     
     @Test
     public void testGetDisabledBrowsers() {
-	System.setProperty("webdriverextensions.disabledbrowsers", "firefox");
+	System.setProperty(WebDriverRunner.PROPERTY_DISABLED_BROWSERS, "firefox");
 	assertThat(WebDriverRunner.getDisabledBrowsers().size(), is(1));
     }
 }
