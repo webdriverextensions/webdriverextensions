@@ -13,6 +13,7 @@ import com.github.webdriverextensions.internal.utils.OsUtils;
 import com.github.webdriverextensions.internal.utils.PropertyUtils;
 import com.github.webdriverextensions.junitrunner.annotations.*;
 import com.google.gson.Gson;
+
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
@@ -59,6 +60,7 @@ import static org.openqa.selenium.remote.CapabilityType.*;
 public class WebDriverRunner extends BlockJUnit4ClassRunner {
 
     private static final org.slf4j.Logger log = org.slf4j.LoggerFactory.getLogger(WebDriverRunner.class);
+    private static final List<String> disabledBrowsers = getDisabledBrowsers();
 
     public static class WebDriverFrameworkMethod extends FrameworkMethod {
 
@@ -119,6 +121,18 @@ public class WebDriverRunner extends BlockJUnit4ClassRunner {
             }
         }
         return filteredTestAnnotatedMethods;
+    }
+
+    private static List<String> getDisabledBrowsers() {
+        String disabledBrowsersString = System.getProperty("webdriverextensions.disabledbrowsers", "");
+        List<String> result = new ArrayList<>();
+        for (String disabledbrowserString : disabledBrowsersString.split(",")) {
+            if (StringUtils.isNotBlank(disabledbrowserString)) {
+                result.add(disabledbrowserString);
+                System.out.println("disabled browser: " + disabledbrowserString);
+            }
+        }
+        return result;
     }
 
     public WebDriverRunner(Class<?> klass) throws InitializationError {
@@ -324,6 +338,9 @@ public class WebDriverRunner extends BlockJUnit4ClassRunner {
         }
 
         public boolean isBrowserIgnored(BrowserConfiguration browser) {
+            if (disabledBrowsers.contains(browser.getBrowserName())) {
+                return true;
+            }
             for (BrowserConfiguration ignoreBrowser : ignoreBrowsers) {
                 if (browser.matches(ignoreBrowser)) {
                     return true;
