@@ -12,4 +12,6 @@ before_script:
   - "mkdir -p /tmp/webdriverextensions-maven-plugin/cache"
   - "mkdir -p /tmp/webdriverextensions-maven-plugin/drivers"
   - "mkdir -p /tmp/webdriverextensions-maven-plugin/temp"
-  
+
+addons:
+  firefox: "latest"
