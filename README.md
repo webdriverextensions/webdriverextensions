@@ -1,4 +1,3 @@
-[![Build Status](https://drone.io/github.com/webdriverextensions/webdriverextensions/status.png)](https://drone.io/github.com/webdriverextensions/webdriverextensions/latest)
 [![Maven Central](https://img.shields.io/maven-central/v/com.github.webdriverextensions/webdriverextensions.svg)](http://search.maven.org/#search%7Cga%7C1%7Cg%3Acom.github.webdriverextensions)
 
 WebDriver Extensions
