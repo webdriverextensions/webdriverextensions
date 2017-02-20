@@ -7,10 +7,9 @@ addons:
   firefox: "latest"
       
 script:
-  - mvn install -Dwebdriverextensions.disabledbrowsers=firefox
+  - mvn install -Dwebdriverextensions.disabledbrowsers=firefox -Dchrome.binary.path=chromium-browser
   
 before_script:
-  - "export chrome.binary.path=chromium-browser"
   - "export DISPLAY=:99.0"
   - "sh -e /etc/init.d/xvfb start" 
   - "mkdir -p /tmp/webdriverextensions-maven-plugin/cache"
