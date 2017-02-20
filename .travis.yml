@@ -1,10 +1,15 @@
 language: java
 
+sudo: required
+
 jdk:
   - oraclejdk8
 
 addons:
   firefox: "latest"
+  apt:
+    packages:
+      - chromium-browser
       
 script:
   - mvn install -Dwebdriverextensions.disabledbrowsers=firefox -Dchrome.binary.path=/usr/bin/chromium-browser
