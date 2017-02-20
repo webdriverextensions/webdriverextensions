@@ -35,6 +35,7 @@ import org.openqa.selenium.HasCapabilities;
 import org.openqa.selenium.Platform;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
@@ -519,6 +520,13 @@ public class WebDriverRunner extends BlockJUnit4ClassRunner {
                 desiredCapabilities = addCapabilities(desiredCapabilities, desiredCapabilitiesJsonMap);
             }
 
+            if( browserName.equals(BrowserType.CHROME) && System.getProperty(WebDriverProperties.CHROME_BINARY_PROPERTY_NAME) != null) {
+        	ChromeOptions chromeOptions = new ChromeOptions();
+        	chromeOptions.setBinary(System.getProperty(WebDriverProperties.CHROME_BINARY_PROPERTY_NAME));
+        	DesiredCapabilities capabilitiesToAdd = new DesiredCapabilities();
+        	capabilitiesToAdd.setCapability(ChromeOptions.CAPABILITY, chromeOptions);
+        	desiredCapabilities = addCapabilities(desiredCapabilities, capabilitiesToAdd.asMap());
+            }
         }
 
         public String getBrowserName() {

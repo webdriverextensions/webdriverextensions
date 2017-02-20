@@ -2,6 +2,7 @@ package com.github.webdriverextensions;
 
 public class WebDriverProperties {
     public static final String CHROME_DRIVER_PROPERTY_NAME = "webdriver.chrome.driver";
+    public static final String CHROME_BINARY_PROPERTY_NAME = "chrome.binary.path";
     public static final String FIREFOX_DRIVER_PROPERTY_NAME = "webdriver.gecko.driver";
     public static final String IE_DRIVER_PROPERTY_NAME = "webdriver.ie.driver";
     public static final String PHANTOMJS_BINARY_PROPERTY_NAME = "phantomjs.binary.path";
