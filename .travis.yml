@@ -4,7 +4,7 @@ jdk:
   - oraclejdk8
 
 script:
-  - mvn install
+  - mvn install -Dwebdriverextensions.disabledbrowsers=firefox
   
 before_script:
   - "export DISPLAY=:99.0"
