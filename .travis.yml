@@ -3,6 +3,13 @@ language: java
 jdk:
   - oraclejdk8
 
+addons:
+  apt:
+    sources:
+      - google-chrome
+    packages:
+      - google-chrome-stable
+      
 script:
   - mvn install -Dwebdriverextensions.disabledbrowsers=firefox
   
