@@ -11,7 +11,7 @@ addons:
   firefox: "latest"
       
 script:
-  - mvn install -Dchrome.binary.path=/usr/bin/chromium-browser
+  - mvn install -Dchrome.binary.path=/usr/bin/chromium-browser -Ptravis-ci
   
 before_script:
   - "export DISPLAY=:99.0"
