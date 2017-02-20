@@ -25,6 +25,7 @@ public class BotSauceLabsTest {
 
     @Test
     @Android
+    @Ignore("See https://github.com/webdriverextensions/webdriverextensions/issues/79")
     public void browserIsAndroidTest() {
         assertThat(browser(), equalTo(BrowserType.ANDROID));
         assertThat(browserIsAndroid(), equalTo(true));
