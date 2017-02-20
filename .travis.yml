@@ -7,7 +7,7 @@ addons:
   firefox: "latest"
       
 script:
-  - mvn install -Dwebdriverextensions.disabledbrowsers=firefox -Dchrome.binary.path=chromium-browser
+  - mvn install -Dwebdriverextensions.disabledbrowsers=firefox -Dchrome.binary.path=/usr/bin/chromium-browser
   
 before_script:
   - "export DISPLAY=:99.0"
