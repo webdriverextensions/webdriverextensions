@@ -26,9 +26,9 @@ public class BotSauceLabsTest {
     @Test
     @Android
     public void browserIsAndroidTest() {
-        assertThat(browser(), equalTo(BrowserType.ANDROID));
-        assertThat(browserIsAndroid(), equalTo(true));
-        assertThat(browserIsNotChrome(), equalTo(true));
+        assertThat(browser(), equalTo(BrowserType.CHROME)); // Browser is chrome for Android devices since android 4.0
+        assertThat(browserIsNotAndroid(), equalTo(true));
+        assertThat(browserIsChrome(), equalTo(true));
         assertThat(browserIsNotEdge(), equalTo(true));
         assertThat(browserIsNotFirefox(), equalTo(true));
         assertThat(browserIsNotHtmlUnit(), equalTo(true));
