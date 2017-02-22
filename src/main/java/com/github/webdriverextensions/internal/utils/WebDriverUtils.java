@@ -50,7 +50,7 @@ public class WebDriverUtils {
         return capabilities;
     }
 
-    public static Capabilities addCapabilities(Capabilities capabilities, Map<String, Object> capabilitiesToAdd) {
+    public static Capabilities addCapabilities(Capabilities capabilities, Map<String, ?> capabilitiesToAdd) {
         if (capabilities == null && capabilitiesToAdd == null) {
             return new DesiredCapabilities();
         }

@@ -1,18 +1,31 @@
 package com.github.webdriverextensions.junitrunner;
 
-import com.github.webdriverextensions.WebDriverExtensionFieldDecorator;
-import com.github.webdriverextensions.WebDriverExtensionsContext;
-import com.github.webdriverextensions.WebDriverProperties;
-import com.github.webdriverextensions.internal.WebDriverExtensionException;
-import com.github.webdriverextensions.internal.junitrunner.AnnotationUtils;
-import com.github.webdriverextensions.internal.junitrunner.DriverPathLoader;
-import com.github.webdriverextensions.internal.junitrunner.ScreenshotsPathLoader;
-import com.github.webdriverextensions.internal.junitrunner.TakeScreenshotOnFailureRunListener;
-import com.github.webdriverextensions.internal.utils.InstanceUtils;
-import com.github.webdriverextensions.internal.utils.OsUtils;
-import com.github.webdriverextensions.internal.utils.PropertyUtils;
-import com.github.webdriverextensions.junitrunner.annotations.*;
-import com.google.gson.Gson;
+import static com.github.webdriverextensions.internal.utils.StringUtils.quote;
+import static com.github.webdriverextensions.internal.utils.WebDriverUtils.addCapabilities;
+import static com.github.webdriverextensions.internal.utils.WebDriverUtils.convertToJsonString;
+import static com.github.webdriverextensions.internal.utils.WebDriverUtils.getCurrentDateAndTime;
+import static com.github.webdriverextensions.internal.utils.WebDriverUtils.getUnitFromImplicitlyWaitAnnotation;
+import static com.github.webdriverextensions.internal.utils.WebDriverUtils.getValueFromImplicitlyWaitAnnotation;
+import static com.github.webdriverextensions.internal.utils.WebDriverUtils.hasImplicitlyWaitAnnotation;
+import static com.github.webdriverextensions.internal.utils.WebDriverUtils.hasScreenshotPathAnnotation;
+import static com.github.webdriverextensions.internal.utils.WebDriverUtils.hasTakeScreenshotOnFailureAnnotation;
+import static com.github.webdriverextensions.internal.utils.WebDriverUtils.removeCapabilities;
+import static org.openqa.selenium.remote.CapabilityType.BROWSER_NAME;
+import static org.openqa.selenium.remote.CapabilityType.PLATFORM;
+import static org.openqa.selenium.remote.CapabilityType.VERSION;
+
+import java.lang.annotation.Annotation;
+import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.builder.ToStringBuilder;
@@ -35,6 +48,7 @@ import org.openqa.selenium.HasCapabilities;
 import org.openqa.selenium.Platform;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
@@ -46,16 +60,45 @@ import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.safari.SafariDriver;
 import org.openqa.selenium.support.PageFactory;
 
-import java.lang.annotation.Annotation;
-import java.net.URL;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.util.*;
-import java.util.concurrent.TimeUnit;
-
-import static com.github.webdriverextensions.internal.utils.StringUtils.quote;
-import static com.github.webdriverextensions.internal.utils.WebDriverUtils.*;
-import static org.openqa.selenium.remote.CapabilityType.*;
+import com.github.webdriverextensions.WebDriverExtensionFieldDecorator;
+import com.github.webdriverextensions.WebDriverExtensionsContext;
+import com.github.webdriverextensions.WebDriverProperties;
+import com.github.webdriverextensions.internal.WebDriverExtensionException;
+import com.github.webdriverextensions.internal.junitrunner.AnnotationUtils;
+import com.github.webdriverextensions.internal.junitrunner.DriverPathLoader;
+import com.github.webdriverextensions.internal.junitrunner.ScreenshotsPathLoader;
+import com.github.webdriverextensions.internal.junitrunner.TakeScreenshotOnFailureRunListener;
+import com.github.webdriverextensions.internal.utils.InstanceUtils;
+import com.github.webdriverextensions.internal.utils.OsUtils;
+import com.github.webdriverextensions.internal.utils.PropertyUtils;
+import com.github.webdriverextensions.junitrunner.annotations.Android;
+import com.github.webdriverextensions.junitrunner.annotations.Browser;
+import com.github.webdriverextensions.junitrunner.annotations.Chrome;
+import com.github.webdriverextensions.junitrunner.annotations.DriverPaths;
+import com.github.webdriverextensions.junitrunner.annotations.Edge;
+import com.github.webdriverextensions.junitrunner.annotations.Firefox;
+import com.github.webdriverextensions.junitrunner.annotations.HtmlUnit;
+import com.github.webdriverextensions.junitrunner.annotations.IPad;
+import com.github.webdriverextensions.junitrunner.annotations.IPhone;
+import com.github.webdriverextensions.junitrunner.annotations.IgnoreAndroid;
+import com.github.webdriverextensions.junitrunner.annotations.IgnoreBrowser;
+import com.github.webdriverextensions.junitrunner.annotations.IgnoreChrome;
+import com.github.webdriverextensions.junitrunner.annotations.IgnoreEdge;
+import com.github.webdriverextensions.junitrunner.annotations.IgnoreFirefox;
+import com.github.webdriverextensions.junitrunner.annotations.IgnoreHtmlUnit;
+import com.github.webdriverextensions.junitrunner.annotations.IgnoreIPad;
+import com.github.webdriverextensions.junitrunner.annotations.IgnoreIPhone;
+import com.github.webdriverextensions.junitrunner.annotations.IgnoreInternetExplorer;
+import com.github.webdriverextensions.junitrunner.annotations.IgnoreOpera;
+import com.github.webdriverextensions.junitrunner.annotations.IgnorePhantomJS;
+import com.github.webdriverextensions.junitrunner.annotations.IgnoreSafari;
+import com.github.webdriverextensions.junitrunner.annotations.InternetExplorer;
+import com.github.webdriverextensions.junitrunner.annotations.Opera;
+import com.github.webdriverextensions.junitrunner.annotations.PhantomJS;
+import com.github.webdriverextensions.junitrunner.annotations.RemoteAddress;
+import com.github.webdriverextensions.junitrunner.annotations.Safari;
+import com.github.webdriverextensions.junitrunner.annotations.ScreenshotsPath;
+import com.google.gson.Gson;
 
 public class WebDriverRunner extends BlockJUnit4ClassRunner {
 
@@ -208,7 +251,7 @@ public class WebDriverRunner extends BlockJUnit4ClassRunner {
             String methodName = method.getName();
             String testName = String.format("%s.%s", className, methodName);
             boolean hasRemoteAddress = PropertyUtils.propertyExists("webdriverextensions.remoteaddress")
-                    || ((RemoteAddress) getTestClass().getJavaClass().getAnnotation(RemoteAddress.class)) != null;
+                    || (getTestClass().getJavaClass().getAnnotation(RemoteAddress.class)) != null;
 
             if (method.getAnnotation(Ignore.class) != null) {
                 log.info("Skipping test {} since Test is annotated to be ignored with @Ignore annotation", testName);
@@ -238,7 +281,7 @@ public class WebDriverRunner extends BlockJUnit4ClassRunner {
                         if (PropertyUtils.propertyExists("webdriverextensions.remoteaddress")) {
                             remoteAddress = System.getProperty("webdriverextensions.remoteaddress");
                         } else {
-                            remoteAddress = ((RemoteAddress) getTestClass().getJavaClass().getAnnotation(RemoteAddress.class)).value();
+                            remoteAddress = getTestClass().getJavaClass().getAnnotation(RemoteAddress.class).value();
                         }
                         driver = browser.createDriver(new URL(remoteAddress));
                         WebDriverExtensionsContext.setDriver(driver);
@@ -518,7 +561,6 @@ public class WebDriverRunner extends BlockJUnit4ClassRunner {
                 Map<String, Object> desiredCapabilitiesJsonMap = new Gson().fromJson(desiredCapabilitiesJson, Map.class);
                 desiredCapabilities = addCapabilities(desiredCapabilities, desiredCapabilitiesJsonMap);
             }
-
         }
 
         public String getBrowserName() {
@@ -540,6 +582,13 @@ public class WebDriverRunner extends BlockJUnit4ClassRunner {
         private WebDriver createDriver() throws Exception {
             if (BrowserType.CHROME.equalsIgnoreCase(browserName)
                     || BrowserType.GOOGLECHROME.equalsIgnoreCase(browserName)) {
+		if (System.getProperty(WebDriverProperties.CHROME_BINARY_PROPERTY_NAME) != null) {
+		    ChromeOptions chromeOptions = new ChromeOptions();
+		    chromeOptions.setBinary(System.getProperty(WebDriverProperties.CHROME_BINARY_PROPERTY_NAME));
+		    DesiredCapabilities capabilitiesToAdd = new DesiredCapabilities();
+		    capabilitiesToAdd.setCapability(ChromeOptions.CAPABILITY, chromeOptions);
+		    desiredCapabilities = addCapabilities(desiredCapabilities, capabilitiesToAdd.asMap());
+                }
                 return new ChromeDriver(desiredCapabilities);
             }
 
