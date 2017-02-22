@@ -257,8 +257,11 @@ public class WebDriverRunner extends BlockJUnit4ClassRunner {
                 log.info("Skipping test {} since Test is annotated to be ignored with @Ignore annotation", testName);
                 notifier.fireTestIgnored(description);
             } else if (testMethodContext.isBrowserIgnored(browser)) {
-                log.info("Skipping test {} since Test is annotated to ignore browser {}", testName,
-                        testMethodContext.ignoreBrowsers.toString());
+		log.info(
+			"Skipping test {} since Test is ignored. Ignored browser by annotations: {}, ignored browsers by system property "
+				+ WebDriverProperties.DISABLED_BROWSERS_PROPERTY_NAME + ": {}",
+			testName,
+			testMethodContext.ignoreBrowsers.toString(), disabledBrowsers);
                 notifier.fireTestIgnored(description);
             } else if (!hasRemoteAddress && BrowserType.IE.equalsIgnoreCase(browser.getBrowserName()) && !OsUtils.isWindows()
                     || (BrowserType.IEXPLORE.equalsIgnoreCase(browser.getBrowserName()) && !OsUtils.isWindows())) {
