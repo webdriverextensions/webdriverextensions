@@ -1,24 +1,31 @@
 package com.github.webdriverextensions;
 
+import static com.github.webdriverextensions.Bot.*;
+import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.Matchers.hasItem;
+
 import java.util.List;
 import java.util.concurrent.TimeUnit;
-import static com.github.webdriverextensions.Bot.*;
-import com.github.webdriverextensions.generator.GeneratedWebRepository;
-import com.github.webdriverextensions.junitrunner.WebDriverRunner;
-import com.github.webdriverextensions.junitrunner.annotations.*;
-import org.junit.Assert;
-import static org.hamcrest.Matchers.*;
-import static org.openqa.selenium.Platform.LINUX;
 
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.openqa.selenium.Platform;
+
+import com.github.webdriverextensions.generator.GeneratedWebRepository;
+import com.github.webdriverextensions.junitrunner.WebDriverRunner;
+import com.github.webdriverextensions.junitrunner.annotations.Chrome;
+import com.github.webdriverextensions.junitrunner.annotations.Edge;
+import com.github.webdriverextensions.junitrunner.annotations.Firefox;
+import com.github.webdriverextensions.junitrunner.annotations.HtmlUnit;
+import com.github.webdriverextensions.junitrunner.annotations.IgnoreSafari;
+import com.github.webdriverextensions.junitrunner.annotations.InternetExplorer;
+import com.github.webdriverextensions.junitrunner.annotations.PhantomJS;
+import com.github.webdriverextensions.junitrunner.annotations.Safari;
 
 @RunWith(WebDriverRunner.class)
 @Chrome
 @Firefox
-@IgnoreFirefox(platform = LINUX) // Ignore on linux since travic ci seems to fail with current version of geckodriver
 @InternetExplorer
 @Edge
 @Safari
@@ -148,7 +155,6 @@ public class BotTest extends GeneratedWebRepository {
     /* Is Display */
     @Test
     @IgnoreSafari // throws UnsupportedCommandException from RemoteWebElement.isDisplayed() for some reason
-    @IgnoreHtmlUnit(platform = LINUX) // Ignore html unit tests on linux platforms since it seems to fail for some reson in drone.io
     public void isDisplayedTest() {
         assertIsDisplayed(botTestPage.textSpan);
         assertIsDisplayed(botTestPage.firstAppendedSpan, 2);
