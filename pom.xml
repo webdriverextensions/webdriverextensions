@@ -284,7 +284,7 @@
                     <drivers>
                         <driver>
                             <name>internetexplorerdriver</name>
-                            <version>3.1.0</version>
+                            <version>3.2.0</version>
                         </driver>
                         <driver>
                             <name>edgedriver</name>
