@@ -22,11 +22,13 @@ import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import static com.github.webdriverextensions.internal.utils.StringUtils.*;
 import com.github.webdriverextensions.internal.utils.NumberUtils;
-import com.google.common.base.Predicate;
 
 import static com.github.webdriverextensions.internal.utils.WebDriverUtils.getScreenshotFilePath;
 import java.io.File;
 import java.io.IOException;
+import java.util.function.Function;
+import java.util.function.Predicate;
+
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.HasCapabilities;
 import org.openqa.selenium.JavascriptExecutor;
@@ -257,12 +259,12 @@ public class Bot {
 
 
     /* Wait Until */
-    public static void waitUntil(Predicate<WebDriver> perdicate) {
-	waitUntil(perdicate, 30);
+    public static void waitUntil(Predicate<WebDriver> predicate) {
+        waitUntil(predicate, 30);
     }
 
-    public static void waitUntil(Predicate<WebDriver> perdicate, long secondsToWait) {
-	new WebDriverWait(driver(), secondsToWait).until(perdicate);
+    public static void waitUntil(Predicate<WebDriver> predicate, long secondsToWait) {
+        new WebDriverWait(driver(), secondsToWait).until(webDriver -> predicate.test(webDriver));
     }
 
 
