@@ -9,6 +9,7 @@ Available through the [Maven Central Repository](http://mvnrepository.com/search
 
 
 <br>
+
 ### What's included in this framework?
 - A [Maven Plugin](https://github.com/webdriverextensions/webdriverextensions-maven-plugin#webdriver-extensions-maven-plugin) to manage, download and install drivers
 - [Annotation based JUnit Runner](http://static.javadoc.io/com.github.webdriverextensions/webdriverextensions/3.4.0/com/github/webdriverextensions/junitrunner/WebDriverRunner.html) for running Selenium/WebDriver tests locally or remotely against multiple browsers
@@ -18,14 +19,17 @@ Available through the [Maven Central Repository](http://mvnrepository.com/search
 - A [Maven Archetype](https://github.com/webdriverextensions/webdriverextensions-archetype-quickstart#webdriver-extension-archetype-quickstart) for creating new projects
 
 <br>
+
 ### Want to Contribute?
 If you find a bug or have a feature request please [create a new GitHub issue](https://github.com/webdriverextensions/webdriverextensions/issues/new) or even better clone this repository, commit your changes and make a [Pull Request](https://help.github.com/articles/using-pull-requests/).
 
 <br>
+
 ### Have any Questions?
 If you have question you can [ask them in a GitHub issue](https://github.com/webdriverextensions/webdriverextensions/issues/new).
 
 <br>
+
 # Content
 - [Hello World Example](#hello-world-example)
     - [With WebDriver Extensions](#with-webdriver-extensions)
@@ -49,6 +53,7 @@ If you have question you can [ask them in a GitHub issue](https://github.com/web
 
 
 <br>
+
 # Hello World Example
 Here is an example of how a cross browser test looks like with and without the WebDriver Extensions Framework. The test will run on Firefox, Chrome and Internet Explorer. It will google for "Hello World" and assert that the search result contains the searched text "Hello World".
 
@@ -88,6 +93,7 @@ _<sub>Imports are hidden for the sake of simplicity, for imports and instruction
 
 
 <br>
+
 ### Without WebDriver Extensions
 ```java
 @RunWith(Parameterized.class)
@@ -147,6 +153,7 @@ For the sake of simplicity this example does not demonstrate the [Page Object Pa
 
 
 <br>
+
 ### Further increased readability with Groovy
 If wanted one could further increase readability by using the Groovy language instead of Java. Then the Hello World example would look like this
 
@@ -187,6 +194,7 @@ Note that Groovy examples will not be covered by this document.
 
 
 <br>
+
 # Getting Started
 
 ### Requirements
@@ -199,6 +207,7 @@ Maven is not a requirement but is preferred and referred to in this document.
 
 
 <br>
+
 ### Use Maven to add WebDriver Extensions
 Add
 ```xml
@@ -212,6 +221,7 @@ Add
 
 
 <br>
+
 ### Download and manage your drivers with the [Maven Plugin](https://github.com/webdriverextensions/webdriverextensions-maven-plugin#webdriver-extensions-maven-plugin)
 There is no need to download any drivers manually. Instead use the [WebDriver Extensions Maven Plugin GitHub](https://github.com/webdriverextensions/webdriverextensions-maven-plugin) to download and manage your drivers by adding
 ```xml
@@ -296,6 +306,7 @@ For more information on configuring the driver please visit the [WebDriver Exten
 
 
 <br>
+
 ### Speed up your tests by running them in parallel
 Run your tests in parallel by adding
 ```xml
@@ -328,6 +339,7 @@ also be other reasons not to run tests in parallel.
 
 
 <br>
+
 ### Cross Browser test your website with the JUnitRunner
 
 Run your tests locally by using the [WebDriverRunner](http://static.javadoc.io/com.github.webdriverextensions/webdriverextensions/3.4.0/com/github/webdriverextensions/junitrunner/WebDriverRunner.html)
@@ -469,6 +481,7 @@ public class SomeTest {
 ```
 
 <br>
+
 ### Model your website with the [Page Object Pattern](https://code.google.com/p/selenium/wiki/PageObjects)
 
 Model your website pages, e.g. a login page
@@ -593,6 +606,7 @@ PageFactory.initElements(new WebDriverExtensionFieldDecorator(yourDriver), this)
 
 
 <br>
+
 ### Model your page components with the [WebComponent](http://static.javadoc.io/com.github.webdriverextensions/webdriverextensions/3.4.0/com/github/webdriverextensions/WebComponent.html)
 
 Model repeating html content, e.g. table rows
@@ -660,6 +674,7 @@ PageFactory.initElements(new WebDriverExtensionFieldDecorator(yourDriver), this)
 
 
 <br>
+
 ### Make your test readable as instructions with the [Bot Pattern](https://code.google.com/p/selenium/wiki/BotStyleTests)
 
 Simply import the static [Bot](http://static.javadoc.io/com.github.webdriverextensions/webdriverextensions/3.4.0/com/github/webdriverextensions/Bot.html) where you want to use it
@@ -735,6 +750,7 @@ WebDriverExtensionsContext.setDriver(yourDriver);
 There is now also a VaadinBot that can be used if testing an application using the [Vaadin Framework](https://vaadin.com/home)
 
 <br>
+
 ### Create new projects with the [Maven Archetype](https://github.com/webdriverextensions/webdriverextensions-archetype-quickstart#webdriver-extension-archetype-quickstart)
 Open your terminal and run
 ```sh
@@ -777,11 +793,13 @@ mvn test
 
 
 <br>
+
 # Javadoc
 The Javadoc of this project is available online hosted by javadoc.io. You can find the latest documentation over  [here](http://www.javadoc.io/doc/com.github.webdriverextensions/webdriverextensions). Please note that at the moment the documentation of the java classes and methods are limited (except for this documentation). I will try to add the Javadoc as soon as possible.
 
 
 <br>
+
 # Changelog
 #### 3.4.0 (2017 Mars 15)
 - SELENIUM UPDATE Updated selenium version to 3.3.1
@@ -933,6 +951,7 @@ TableComponent<ASearchResultType> resultTable;
 
 
 <br>
+
 # Contributors
 - Thanks [Sauce Labs](https://saucelabs.com/) and [TestingBot](http://testingbot.com) for supporting this project with a free account for testing the remote setting for the [WebDriverRunner](http://static.javadoc.io/com.github.webdriverextensions/webdriverextensions/1.2.1/com/github/webdriverextensions/junitrunner/WebDriverRunner.html)
 - Thanks [Eniro](http://www.eniro.se/) for helping me develop and test this this framework
@@ -941,6 +960,7 @@ TableComponent<ASearchResultType> resultTable;
 
 
 <br>
+
 # License
 
 Licensed under the Apache License, Version 2.0 (the "License");
