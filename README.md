@@ -239,16 +239,20 @@ There is no need to download any drivers manually. Instead use the [WebDriver Ex
     <configuration>
         <drivers>
             <driver>
+                <name>edgedriver</name>
+                <version>4.15063</version>
+            </driver>
+            <driver>
                 <name>internetexplorerdriver</name>
-                <version>3.3.0</version>
+                <version>3.4.0</version>
             </driver>
             <driver>
                 <name>chromedriver</name>
-                <version>2.28</version>
+                <version>2.29</version>
             </driver>
             <driver>
                 <name>geckodriver</name>
-                <version>0.15.0</version>
+                <version>0.16.0</version>
             </driver>
             <driver>
                 <name>phantomjs</name>
