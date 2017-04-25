@@ -605,7 +605,9 @@ public class WebDriverRunner extends BlockJUnit4ClassRunner {
             }
 
             if (BrowserType.HTMLUNIT.equalsIgnoreCase(browserName)) {
-                return new HtmlUnitDriver(desiredCapabilities);
+                DesiredCapabilities newDesiredCapabilities = new DesiredCapabilities(desiredCapabilities);
+                newDesiredCapabilities.setBrowserName(BrowserType.HTMLUNIT);
+                return new HtmlUnitDriver(newDesiredCapabilities);
             }
 
             if (BrowserType.IE.equalsIgnoreCase(browserName)
