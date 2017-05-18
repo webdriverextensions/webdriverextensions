@@ -805,6 +805,12 @@ The Javadoc of this project is available online hosted by javadoc.io. You can fi
 <br>
 
 # Changelog
+#### 3.5.1 (2017 May 18)
+- BUGFIX Fixed Edge driver can't find file /drivers/edgedriver-windows-64bit issue
+
+#### 3.5.0 (2017 April 26)
+- SELENIUM UPDATE Updated selenium version to 3.4.0
+
 #### 3.4.0 (2017 Mars 15)
 - SELENIUM UPDATE Updated selenium version to 3.3.1
 
