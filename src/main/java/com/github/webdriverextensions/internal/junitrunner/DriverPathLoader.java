@@ -78,7 +78,7 @@ public class DriverPathLoader {
 
     private static String getFirefoxDriverDefaultPath() {
         if (OsUtils.isWindows()) {
-            if (OsUtils.is64Bit() && (Files.exists(Paths.get("./drivers/geckodriver-windows-64bit")) || Files.notExists(Paths.get("./drivers/geckodriver-windows-32bit")))) {
+            if (OsUtils.is64Bit() && (Files.exists(Paths.get("./drivers/geckodriver-windows-64bit.exe")) || Files.notExists(Paths.get("./drivers/geckodriver-windows-32bit.exe")))) {
                 return "drivers/geckodriver-windows-64bit.exe";
             } else {
                 return "drivers/geckodriver-windows-32bit.exe";
@@ -101,10 +101,10 @@ public class DriverPathLoader {
 
     private static String getEdgeDefaultPath() {
         if (OsUtils.isWindows()) {
-            if (OsUtils.is64Bit() && (Files.exists(Paths.get("./drivers/edgedriver-windows-64bit")) || Files.notExists(Paths.get("./drivers/edgedriver-windows-32bit")))) {
-                return "drivers/edgedriver-windows-64bit";
+            if (OsUtils.is64Bit() && (Files.exists(Paths.get("./drivers/edgedriver-windows-64bit.exe")) || Files.notExists(Paths.get("./drivers/edgedriver-windows-32bit.exe")))) {
+                return "drivers/edgedriver-windows-64bit.exe";
             } else {
-                return "drivers/edgedriver-windows-32bit";
+                return "drivers/edgedriver-windows-32bit.exe";
             }
         }
         return null;
