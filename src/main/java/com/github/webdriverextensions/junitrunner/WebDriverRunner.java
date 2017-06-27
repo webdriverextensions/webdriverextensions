@@ -219,6 +219,16 @@ public class WebDriverRunner extends BlockJUnit4ClassRunner {
         return testMethods;
     }
 
+    @Override
+    public Description getDescription() {
+        Description description = Description.createSuiteDescription(getName(),
+                getRunnerAnnotations());
+        for (FrameworkMethod child : getFilteredTestAnnotatedMethods()) {
+            description.addChild(describeChild(child));
+        }
+        return description;
+    }
+
     protected List<FrameworkMethod> getTestAnnotatedMethods() {
         List<FrameworkMethod> testAnnotatedMethods = getTestClass().getAnnotatedMethods(Test.class);
         List<FrameworkMethod> testMethods = new ArrayList<>();
