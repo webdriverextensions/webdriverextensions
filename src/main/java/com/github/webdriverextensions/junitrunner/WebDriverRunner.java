@@ -155,7 +155,7 @@ public class WebDriverRunner extends BlockJUnit4ClassRunner {
     private final Object childrenLock = new Object();
     private volatile Collection<FrameworkMethod> filteredTestAnnotatedMethods = null; // Guarded by childrenLock
 
-    private Collection<FrameworkMethod> getFilteredTestAnnotatedMethods() {
+    protected Collection<FrameworkMethod> getFilteredTestAnnotatedMethods() {
         if (filteredTestAnnotatedMethods == null) {
             synchronized (childrenLock) {
                 if (filteredTestAnnotatedMethods == null) {
