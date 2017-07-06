@@ -5,7 +5,7 @@ WebDriver Extensions
 
 WebDriver Extensions is designed to simplify Java based Selenium/WebDriver tests. It's built on top of Selenium/WebDriver to make your tests more readable, reusabable and maintainable by combining the [Page Object Pattern](https://code.google.com/p/selenium/wiki/PageObjects) and [Bot Pattern](https://code.google.com/p/selenium/wiki/BotStyleTests).
 
-Available through the [Maven Central Repository](http://mvnrepository.com/search?q=webdriverextensions)! Latest release is version 3.5.1 which includes selenium-java 3.3.1 as a transitive dependency.
+Available through the [Maven Central Repository](http://mvnrepository.com/search?q=webdriverextensions)! Latest release is version 3.5.2 which includes selenium-java 3.3.1 as a transitive dependency.
 
 
 <br>
@@ -214,7 +214,7 @@ Add
 <dependency>
 	<groupId>com.github.webdriverextensions</groupId>
 	<artifactId>webdriverextensions</artifactId>
-	<version>3.5.1</version>
+	<version>3.5.2</version>
 </dependency>
 ```
 ...as a dependency in your [pom.xml](https://gist.github.com/andidev/ad006a454edfd9f0e9e5#file-pom-xml) file.
@@ -805,6 +805,9 @@ The Javadoc of this project is available online hosted by javadoc.io. You can fi
 <br>
 
 # Changelog
+#### 3.5.2 (2017 July 6)
+- TODO
+
 #### 3.5.1 (2017 May 18)
 - BUGFIX Fixed Edge driver can't find file /drivers/edgedriver-windows-64bit issue
 
