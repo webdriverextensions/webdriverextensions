@@ -26,7 +26,7 @@ import com.github.webdriverextensions.junitrunner.annotations.Safari;
 
 @RunWith(WebDriverRunner.class)
 @Chrome
-@Firefox
+//@Firefox
 @InternetExplorer
 @Edge
 @Safari
@@ -195,7 +195,6 @@ public class BotTest extends GeneratedWebRepository {
 
     /* Title */
     @Test
-    @Ignore
     public void titleTest() {
         assertTitleEquals("prefixtitlesuffix");
         assertTitleNotEquals("xxx");
