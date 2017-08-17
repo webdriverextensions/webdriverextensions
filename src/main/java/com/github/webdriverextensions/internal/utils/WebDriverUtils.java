@@ -93,12 +93,9 @@ public class WebDriverUtils {
     private static String getScreenshotsPath() {
         String workingDirectory = System.getProperty("user.dir");
         String screenshotPath = System.getProperty(SCREENSHOTSPATH_PROPERTY_NAME);
-        System.out.println("screenshotPath = " + screenshotPath);
         if (screenshotPath == null) {
             screenshotPath = SCREENSHOTSPATH_PROPERTY_DEFAULT_VALUE;
         }
-        System.out.println("workingDirectory = " + workingDirectory);
-        System.out.println("screenshotPath = " + screenshotPath);
         return concat(workingDirectory, screenshotPath);
     }
 
