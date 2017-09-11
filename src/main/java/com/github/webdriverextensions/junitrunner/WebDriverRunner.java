@@ -595,12 +595,12 @@ public class WebDriverRunner extends BlockJUnit4ClassRunner {
         private WebDriver createDriver() throws Exception {
             if (BrowserType.CHROME.equalsIgnoreCase(browserName)
                     || BrowserType.GOOGLECHROME.equalsIgnoreCase(browserName)) {
-		if (System.getProperty(WebDriverProperties.CHROME_BINARY_PROPERTY_NAME) != null) {
-		    ChromeOptions chromeOptions = new ChromeOptions();
-		    chromeOptions.setBinary(System.getProperty(WebDriverProperties.CHROME_BINARY_PROPERTY_NAME));
-		    DesiredCapabilities capabilitiesToAdd = new DesiredCapabilities();
-		    capabilitiesToAdd.setCapability(ChromeOptions.CAPABILITY, chromeOptions);
-		    desiredCapabilities = addCapabilities(desiredCapabilities, capabilitiesToAdd.asMap());
+                if (System.getProperty(WebDriverProperties.CHROME_BINARY_PROPERTY_NAME) != null) {
+                    ChromeOptions chromeOptions = new ChromeOptions();
+                    chromeOptions.setBinary(System.getProperty(WebDriverProperties.CHROME_BINARY_PROPERTY_NAME));
+                    DesiredCapabilities capabilitiesToAdd = new DesiredCapabilities();
+                    capabilitiesToAdd.setCapability(ChromeOptions.CAPABILITY, chromeOptions);
+                    desiredCapabilities = addCapabilities(desiredCapabilities, capabilitiesToAdd.asMap());
                 }
                 return new ChromeDriver(desiredCapabilities);
             }
