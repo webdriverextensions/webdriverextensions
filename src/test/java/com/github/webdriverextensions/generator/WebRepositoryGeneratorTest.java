@@ -6,15 +6,21 @@ import static com.github.webdriverextensions.Bot.click;
 import static com.github.webdriverextensions.Bot.open;
 import com.github.webdriverextensions.junitrunner.WebDriverRunner;
 import com.github.webdriverextensions.junitrunner.annotations.Chrome;
+import com.github.webdriverextensions.model.WebDriverExtensionSite;
+import com.github.webdriverextensions.model.pages.ExamplesPage;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 @RunWith(WebDriverRunner.class)
 @Chrome
-public class WebRepositoryGeneratorTest extends GeneratedWebRepository {
+public class WebRepositoryGeneratorTest {
 
     public final String url = "file://" + getClass().getResource("/html/model-test.html").getPath();
 
+    WebDriverExtensionSite webDriverExtensionSite;
+    ExamplesPage examplesPage;
+    
     @Test
     public void webSiteTest() {
         open(webDriverExtensionSite.url);
@@ -23,13 +29,13 @@ public class WebRepositoryGeneratorTest extends GeneratedWebRepository {
 
     @Test
     public void webPageTest() {
-        open(examplesPage);
-        assertIsOpen(examplesPage);
+        open(webDriverExtensionSite.examplesPage);
+        assertIsOpen(webDriverExtensionSite.examplesPage);
     }
 
     @Test
     public void webRepositoryTest() {
-        open(webDriverExtensionRepository.url);
+        open(examplesPage.);
         assertIsOpen(webDriverExtensionRepository.examplesPage);
     }
     

@@ -105,6 +105,7 @@
         <maven-source-plugin.version>2.2.1</maven-source-plugin.version>
         <maven-javadoc-plugin.version>2.9.1</maven-javadoc-plugin.version>
         <maven-gpg-plugin.version>1.6</maven-gpg-plugin.version>
+        <extent-reports.version>3.0.7</extent-reports.version>
     </properties>
 
     <dependencies>
@@ -182,6 +183,11 @@
             <artifactId>phantomjsdriver</artifactId>
             <version>${phantomjsdriver.version}</version>
         </dependency>
+        <dependency>
+			<groupId>com.aventstack</groupId>
+			<artifactId>extentreports</artifactId>
+			<version>${extent-reports.version}</version>
+		</dependency>
     </dependencies>
 
     <build>

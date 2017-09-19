@@ -1,18 +1,28 @@
 package com.github.webdriverextensions;
 
-import static com.github.webdriverextensions.Bot.*;
-import com.github.webdriverextensions.junitrunner.WebDriverRunner;
-import com.github.webdriverextensions.junitrunner.annotations.Chrome;
-import com.github.webdriverextensions.model.components.UserRow;
-import com.github.webdriverextensions.generator.GeneratedWebRepository;
+import static com.github.webdriverextensions.Bot.assertCurrentUrlEndsWith;
+import static com.github.webdriverextensions.Bot.assertIsDisplayed;
+import static com.github.webdriverextensions.Bot.assertSizeEquals;
+import static com.github.webdriverextensions.Bot.assertTextEndsWith;
+import static com.github.webdriverextensions.Bot.assertTextEquals;
+import static com.github.webdriverextensions.Bot.click;
+import static com.github.webdriverextensions.Bot.open;
+import static com.github.webdriverextensions.Bot.type;
+import static com.github.webdriverextensions.Bot.waitFor;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.WebElement;
 
+import com.github.webdriverextensions.generator.WebRepositoryGenerator;
+import com.github.webdriverextensions.junitrunner.WebDriverRunner;
+import com.github.webdriverextensions.junitrunner.annotations.Chrome;
+import com.github.webdriverextensions.model.components.UserRow;
+
 @RunWith(WebDriverRunner.class)
 @Chrome
-public class WebDriverExtensionFieldDecoratorTest extends GeneratedWebRepository {
+public class WebDriverExtensionFieldDecoratorTest extends WebRepositoryGenerator {
 
     Double delayTime = 0.0;
 

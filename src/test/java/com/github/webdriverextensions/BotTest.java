@@ -12,7 +12,6 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import com.github.webdriverextensions.generator.GeneratedWebRepository;
 import com.github.webdriverextensions.junitrunner.WebDriverRunner;
 import com.github.webdriverextensions.junitrunner.annotations.Chrome;
 import com.github.webdriverextensions.junitrunner.annotations.Edge;
@@ -22,6 +21,7 @@ import com.github.webdriverextensions.junitrunner.annotations.IgnoreSafari;
 import com.github.webdriverextensions.junitrunner.annotations.InternetExplorer;
 import com.github.webdriverextensions.junitrunner.annotations.PhantomJS;
 import com.github.webdriverextensions.junitrunner.annotations.Safari;
+import com.github.webdriverextensions.model.pages.BotTestPage;
 
 @RunWith(WebDriverRunner.class)
 @Chrome
@@ -31,73 +31,73 @@ import com.github.webdriverextensions.junitrunner.annotations.Safari;
 @Safari
 @PhantomJS
 @HtmlUnit
-public class BotTest extends GeneratedWebRepository {
+public class BotTest extends BotTestPage {
 
     @Before
     public void before() {
-        open(botTestPage.url);
+        open(url);
     }
 
     /* Click */
     @Test
     public void clickTest() {
-        click(botTestPage.checkbox2);
-        assertIsChecked(botTestPage.checkbox2);
+        click(checkbox2);
+        assertIsChecked(checkbox2);
     }
 
     /* Type */
     @Test
     public void typeTest() {
-        clear(botTestPage.textInput);
-        type("text", botTestPage.textInput);
-        assertValueEquals("text", botTestPage.textInput);
-        clear(botTestPage.textInput);
-        type(42.0, botTestPage.textInput);
-        assertValueEquals(42.0, botTestPage.textInput);
+        clear(textInput);
+        type("text", textInput);
+        assertValueEquals("text", textInput);
+        clear(textInput);
+        type(42.0, textInput);
+        assertValueEquals(42.0, textInput);
     }
 
     /* Clear */
     @Test
     public void clearTest() {
-        clear(botTestPage.textInput);
-        assertValueEquals("", botTestPage.textInput);
-        clearAndType("text", botTestPage.textInput);
-        assertValueEquals("text", botTestPage.textInput);
-        clearAndType(42.0, botTestPage.textInput);
-        assertValueEquals(42.0, botTestPage.textInput);
+        clear(textInput);
+        assertValueEquals("", textInput);
+        clearAndType("text", textInput);
+        assertValueEquals("text", textInput);
+        clearAndType(42.0, textInput);
+        assertValueEquals(42.0, textInput);
     }
 
     /* Press Keys */
     @Test
     public void pressKeysTest() {
-        clear(botTestPage.textInput);
-        pressKeys(botTestPage.textInput, "t");
-        assertValueEquals("t", botTestPage.textInput);
-        pressKeys(botTestPage.textInput, "e");
-        assertValueEquals("te", botTestPage.textInput);
-        pressKeys(botTestPage.textInput, "x");
-        assertValueEquals("tex", botTestPage.textInput);
-        pressKeys(botTestPage.textInput, "t");
-        assertValueEquals("text", botTestPage.textInput);
+        clear(textInput);
+        pressKeys(textInput, "t");
+        assertValueEquals("t", textInput);
+        pressKeys(textInput, "e");
+        assertValueEquals("te", textInput);
+        pressKeys(textInput, "x");
+        assertValueEquals("tex", textInput);
+        pressKeys(textInput, "t");
+        assertValueEquals("text", textInput);
     }
 
     /* Select/Deselect */
     @Test
     @IgnoreSafari // Fails to select on click in Safari
     public void selectDeselectTest() {
-        select(botTestPage.multipleSelectOption2);
-        assertIsSelected(botTestPage.multipleSelectOption2);
-        deselect(botTestPage.multipleSelectOption1);
-        assertIsDeselected(botTestPage.multipleSelectOption1);
+        select(multipleSelectOption2);
+        assertIsSelected(multipleSelectOption2);
+        deselect(multipleSelectOption1);
+        assertIsDeselected(multipleSelectOption1);
     }
 
     /* Check/Uncheck */
     @Test
     public void checkUncheckTest() {
-        check(botTestPage.checkbox2);
-        assertIsChecked(botTestPage.checkbox2);
-        uncheck(botTestPage.checkbox1);
-        assertIsUnchecked(botTestPage.checkbox1);
+        check(checkbox2);
+        assertIsChecked(checkbox2);
+        uncheck(checkbox1);
+        assertIsUnchecked(checkbox1);
     }
 
     /* Open */
@@ -105,17 +105,17 @@ public class BotTest extends GeneratedWebRepository {
     @IgnoreSafari // throws UnsupportedCommandException from RemoteWebElement.isDisplayed() for some reason
     public void openTest() {
         debug(driver().getPageSource());
-        open(botTestPage);
-        assertIsOpen(botTestPage);
+        //open(botTestPage);
+        //assertIsOpen(botTestPage);
     }
 
     /* Wait For */
     @Test
     @IgnoreSafari // throws UnsupportedCommandException from RemoteWebElement.isDisplayed() for some reason
     public void waitForTest() {
-        waitForElementToDisplay(botTestPage.firstAppendedSpan);
-        assertIsDisplayed(botTestPage.firstAppendedSpan);
-        assertIsNotDisplayed(botTestPage.secondAppendedSpan, 0);
+        waitForElementToDisplay(firstAppendedSpan);
+        assertIsDisplayed(firstAppendedSpan);
+        assertIsNotDisplayed(secondAppendedSpan, 0);
         waitFor(0.8);
         waitFor(0.2 / 24 / 60 / 60, TimeUnit.DAYS);
         waitFor(0.2 / 60 / 60, TimeUnit.HOURS);
@@ -123,63 +123,63 @@ public class BotTest extends GeneratedWebRepository {
         waitFor(0.2, TimeUnit.SECONDS);
         waitFor(0.2 * 1000, TimeUnit.MILLISECONDS);
         waitFor(0.2 * 1000 * 1000, TimeUnit.MICROSECONDS);
-        assertIsDisplayed(botTestPage.firstAppendedSpan);
-        assertIsDisplayed(botTestPage.secondAppendedSpan);
+        assertIsDisplayed(firstAppendedSpan);
+        assertIsDisplayed(secondAppendedSpan);
     }
 
     @Test
     @IgnoreSafari // throws UnsupportedCommandException from RemoteWebElement.isDisplayed() for some reason
     public void waitForElementsToDisplayTest() {
-        waitForElementsToDisplay(botTestPage.appendedSpans);
-        assertIsDisplayed(botTestPage.firstAppendedSpan);
-        assertIsNotDisplayed(botTestPage.secondAppendedSpan);
+        waitForElementsToDisplay(appendedSpans);
+        assertIsDisplayed(firstAppendedSpan);
+        assertIsNotDisplayed(secondAppendedSpan);
     }
 
     /* Debug */
     @Test
     public void debugTest() {
         debug("Text to debug");
-        debug(botTestPage.attributesSpan);
-        debug(botTestPage.selectAllOption);
-        debug(botTestPage.body);
+        debug(attributesSpan);
+        debug(selectAllOption);
+        debug(body);
     }
 
     /* Is Open */
     @Test
     @IgnoreSafari // throws UnsupportedCommandException from RemoteWebElement.isDisplayed() for some reason
     public void isOpenTest() {
-        assertIsOpen(botTestPage);
-        assertIsNotOpen(webDriverExtensionSite);
+        //assertIsOpen(botTestPage);
+        //assertIsNotOpen(webDriverExtensionSite);
     }
 
     /* Is Display */
     @Test
     @IgnoreSafari // throws UnsupportedCommandException from RemoteWebElement.isDisplayed() for some reason
     public void isDisplayedTest() {
-        assertIsDisplayed(botTestPage.textSpan);
-        assertIsDisplayed(botTestPage.firstAppendedSpan, 2);
-        assertIsNotDisplayed(botTestPage.secondAppendedSpan);
-        assertIsDisplayed(botTestPage.secondAppendedSpan, 2);
+        assertIsDisplayed(textSpan);
+        assertIsDisplayed(firstAppendedSpan, 2);
+        assertIsNotDisplayed(secondAppendedSpan);
+        assertIsDisplayed(secondAppendedSpan, 2);
     }
 
     /* Size */
     @Test
     public void sizeTest() {
-        assertSizeEquals(3, botTestPage.selectAllOption);
-        assertSizeNotEquals(0, botTestPage.selectAllOption);
-        assertSizeLessThan(4, botTestPage.selectAllOption);
-        assertSizeLessThanOrEquals(3, botTestPage.selectAllOption);
-        assertSizeGreaterThan(2, botTestPage.selectAllOption);
-        assertSizeGreaterThanOrEquals(3, botTestPage.selectAllOption);
+        assertSizeEquals(3, selectAllOption);
+        assertSizeNotEquals(0, selectAllOption);
+        assertSizeLessThan(4, selectAllOption);
+        assertSizeLessThanOrEquals(3, selectAllOption);
+        assertSizeGreaterThan(2, selectAllOption);
+        assertSizeGreaterThanOrEquals(3, selectAllOption);
     }
 
     /* Url */
     @Test
     public void urlTest() {
         if (browserIsHtmlUnit()) {
-            assertCurrentUrlEquals(botTestPage.url.replace("file:///", "file:/"));
+            assertCurrentUrlEquals(url.replace("file:///", "file:/"));
         } else {
-            assertCurrentUrlEquals(botTestPage.url);
+            assertCurrentUrlEquals(url);
         }
         assertCurrentUrlNotEquals("xxx");
         assertCurrentUrlContains("bot-test");
@@ -210,64 +210,64 @@ public class BotTest extends GeneratedWebRepository {
     /* Tag Name */
     @Test
     public void tagNameTest() {
-        assertTagNameEquals("span", botTestPage.attributesSpan);
-        assertTagNameNotEquals("xxx", botTestPage.attributesSpan);
+        assertTagNameEquals("span", attributesSpan);
+        assertTagNameNotEquals("xxx", attributesSpan);
     }
 
     /* Attribute */
     @Test
     public void attributeTest() {
-        assertAttributeEquals("id", "prefixidsuffix", botTestPage.attributesSpan);
-        assertAttributeNotEquals("id", "xxx", botTestPage.attributesSpan);
-        assertAttributeContains("id", "id", botTestPage.attributesSpan);
-        assertAttributeNotContains("id", "xxx", botTestPage.attributesSpan);
-        assertAttributeStartsWith("id", "prefixid", botTestPage.attributesSpan);
-        assertAttributeNotStartsWith("id", "xxx", botTestPage.attributesSpan);
-        assertAttributeEndsWith("id", "idsuffix", botTestPage.attributesSpan);
-        assertAttributeNotEndsWith("id", "xxx", botTestPage.attributesSpan);
-        assertAttributeMatches("id", ".*id.*", botTestPage.attributesSpan);
-        assertAttributeNotMatches("id", ".*xxx.*", botTestPage.attributesSpan);
+        assertAttributeEquals("id", "prefixidsuffix", attributesSpan);
+        assertAttributeNotEquals("id", "xxx", attributesSpan);
+        assertAttributeContains("id", "id", attributesSpan);
+        assertAttributeNotContains("id", "xxx", attributesSpan);
+        assertAttributeStartsWith("id", "prefixid", attributesSpan);
+        assertAttributeNotStartsWith("id", "xxx", attributesSpan);
+        assertAttributeEndsWith("id", "idsuffix", attributesSpan);
+        assertAttributeNotEndsWith("id", "xxx", attributesSpan);
+        assertAttributeMatches("id", ".*id.*", attributesSpan);
+        assertAttributeNotMatches("id", ".*xxx.*", attributesSpan);
     }
 
     /* Id */
     @Test
     public void idTest() {
-        assertIdEquals("prefixidsuffix", botTestPage.attributesSpan);
-        assertIdNotEquals("xxx", botTestPage.attributesSpan);
-        assertIdContains("id", botTestPage.attributesSpan);
-        assertIdNotContains("xxx", botTestPage.attributesSpan);
-        assertIdStartsWith("prefixid", botTestPage.attributesSpan);
-        assertIdNotStartsWith("xxx", botTestPage.attributesSpan);
-        assertIdEndsWith("idsuffix", botTestPage.attributesSpan);
-        assertIdNotEndsWith("xxx", botTestPage.attributesSpan);
-        assertIdMatches(".*id.*", botTestPage.attributesSpan);
-        assertIdNotMatches(".*xxx.*", botTestPage.attributesSpan);
+        assertIdEquals("prefixidsuffix", attributesSpan);
+        assertIdNotEquals("xxx", attributesSpan);
+        assertIdContains("id", attributesSpan);
+        assertIdNotContains("xxx", attributesSpan);
+        assertIdStartsWith("prefixid", attributesSpan);
+        assertIdNotStartsWith("xxx", attributesSpan);
+        assertIdEndsWith("idsuffix", attributesSpan);
+        assertIdNotEndsWith("xxx", attributesSpan);
+        assertIdMatches(".*id.*", attributesSpan);
+        assertIdNotMatches(".*xxx.*", attributesSpan);
     }
 
     /* Name */
     @Test
     public void nameTest() {
-        assertNameEquals("prefixnamesuffix", botTestPage.attributesSpan);
-        assertNameNotEquals("xxx", botTestPage.attributesSpan);
-        assertNameContains("name", botTestPage.attributesSpan);
-        assertNameNotContains("xxx", botTestPage.attributesSpan);
-        assertNameStartsWith("prefixname", botTestPage.attributesSpan);
-        assertNameNotStartsWith("xxx", botTestPage.attributesSpan);
-        assertNameEndsWith("namesuffix", botTestPage.attributesSpan);
-        assertNameNotEndsWith("xxx", botTestPage.attributesSpan);
-        assertNameMatches(".*name.*", botTestPage.attributesSpan);
-        assertNameNotMatches(".*xxx.*", botTestPage.attributesSpan);
+        assertNameEquals("prefixnamesuffix", attributesSpan);
+        assertNameNotEquals("xxx", attributesSpan);
+        assertNameContains("name", attributesSpan);
+        assertNameNotContains("xxx", attributesSpan);
+        assertNameStartsWith("prefixname", attributesSpan);
+        assertNameNotStartsWith("xxx", attributesSpan);
+        assertNameEndsWith("namesuffix", attributesSpan);
+        assertNameNotEndsWith("xxx", attributesSpan);
+        assertNameMatches(".*name.*", attributesSpan);
+        assertNameNotMatches(".*xxx.*", attributesSpan);
     }
 
     /* Class */
     @Test
     public void classTest() {
-        assertHasClass("prefixclass1suffix", botTestPage.attributesSpan);
-        assertHasClass("prefixclass2suffix", botTestPage.attributesSpan);
-        assertHasClass("prefixclass3suffix", botTestPage.attributesSpan);
+        assertHasClass("prefixclass1suffix", attributesSpan);
+        assertHasClass("prefixclass2suffix", attributesSpan);
+        assertHasClass("prefixclass3suffix", attributesSpan);
 
-        Assert.assertThat(classIn(botTestPage.attributesSpan), equalTo(" prefixclass1suffix prefixclass2suffix prefixclass3suffix "));
-        List<String> classes = classesIn(botTestPage.attributesSpan);
+        Assert.assertThat(classIn(attributesSpan), equalTo(" prefixclass1suffix prefixclass2suffix prefixclass3suffix "));
+        List<String> classes = classesIn(attributesSpan);
         Assert.assertThat(classes, hasItem("prefixclass1suffix"));
         Assert.assertThat(classes, hasItem("prefixclass2suffix"));
         Assert.assertThat(classes, hasItem("prefixclass3suffix"));
@@ -276,180 +276,180 @@ public class BotTest extends GeneratedWebRepository {
     /* Value */
     @Test
     public void valueTest() {
-        assertValueEquals("prefixvaluesuffix", botTestPage.attributesSpan);
-        assertValueNotEquals("xxx", botTestPage.attributesSpan);
-        assertValueContains("value", botTestPage.attributesSpan);
-        assertValueNotContains("xxx", botTestPage.attributesSpan);
-        assertValueStartsWith("prefixvalue", botTestPage.attributesSpan);
-        assertValueNotStartsWith("xxx", botTestPage.attributesSpan);
-        assertValueEndsWith("valuesuffix", botTestPage.attributesSpan);
-        assertValueNotEndsWith("xxx", botTestPage.attributesSpan);
-        assertValueMatches(".*value.*", botTestPage.attributesSpan);
-        assertValueNotMatches(".*xxx.*", botTestPage.attributesSpan);
+        assertValueEquals("prefixvaluesuffix", attributesSpan);
+        assertValueNotEquals("xxx", attributesSpan);
+        assertValueContains("value", attributesSpan);
+        assertValueNotContains("xxx", attributesSpan);
+        assertValueStartsWith("prefixvalue", attributesSpan);
+        assertValueNotStartsWith("xxx", attributesSpan);
+        assertValueEndsWith("valuesuffix", attributesSpan);
+        assertValueNotEndsWith("xxx", attributesSpan);
+        assertValueMatches(".*value.*", attributesSpan);
+        assertValueNotMatches(".*xxx.*", attributesSpan);
     }
 
     /* Value Number */
     @Test
     public void valueNumberTest() {
         // floatNumberInput
-        assertValueIsNumber(botTestPage.floatNumberInput);
-        assertValueIsNotNumber(botTestPage.textInput);
-        assertValueEquals(42.0, botTestPage.floatNumberInput);
-        assertValueNotEquals(43.0, botTestPage.floatNumberInput);
-        assertValueLessThan(43.0, botTestPage.floatNumberInput);
-        assertValueLessThanOrEquals(42.0, botTestPage.floatNumberInput);
-        assertValueGreaterThan(41.0, botTestPage.floatNumberInput);
-        assertValueGreaterThanOrEquals(42.0, botTestPage.floatNumberInput);
+        assertValueIsNumber(floatNumberInput);
+        assertValueIsNotNumber(textInput);
+        assertValueEquals(42.0, floatNumberInput);
+        assertValueNotEquals(43.0, floatNumberInput);
+        assertValueLessThan(43.0, floatNumberInput);
+        assertValueLessThanOrEquals(42.0, floatNumberInput);
+        assertValueGreaterThan(41.0, floatNumberInput);
+        assertValueGreaterThanOrEquals(42.0, floatNumberInput);
 
         // intNumberInput
-        assertValueIsNumber(botTestPage.intNumberInput);
-        assertValueIsNotNumber(botTestPage.textInput);
-        assertValueEquals(42.0, botTestPage.intNumberInput);
-        assertValueNotEquals(43.0, botTestPage.intNumberInput);
-        assertValueLessThan(43.0, botTestPage.intNumberInput);
-        assertValueLessThanOrEquals(42.0, botTestPage.intNumberInput);
-        assertValueGreaterThan(41.0, botTestPage.intNumberInput);
-        assertValueGreaterThanOrEquals(42.0, botTestPage.intNumberInput);
+        assertValueIsNumber(intNumberInput);
+        assertValueIsNotNumber(textInput);
+        assertValueEquals(42.0, intNumberInput);
+        assertValueNotEquals(43.0, intNumberInput);
+        assertValueLessThan(43.0, intNumberInput);
+        assertValueLessThanOrEquals(42.0, intNumberInput);
+        assertValueGreaterThan(41.0, intNumberInput);
+        assertValueGreaterThanOrEquals(42.0, intNumberInput);
     }
 
     /* Href */
     @Test
     public void hrefTest() {
         if (browserIsHtmlUnit()) {
-            String filePath = botTestPage.url.replace("file:///", "file:/").replace("bot-test.html", "");
-            assertHrefEquals(filePath + "prefixhrefsuffix", botTestPage.attributesSpan);
+            String filePath = url.replace("file:///", "file:/").replace("bot-test.html", "");
+            assertHrefEquals(filePath + "prefixhrefsuffix", attributesSpan);
         } else {
-            assertHrefEquals("prefixhrefsuffix", botTestPage.attributesSpan);
+            assertHrefEquals("prefixhrefsuffix", attributesSpan);
         }
-        assertHrefNotEquals("xxx", botTestPage.attributesSpan);
-        assertHrefContains("href", botTestPage.attributesSpan);
-        assertHrefNotContains("xxx", botTestPage.attributesSpan);
+        assertHrefNotEquals("xxx", attributesSpan);
+        assertHrefContains("href", attributesSpan);
+        assertHrefNotContains("xxx", attributesSpan);
         if (browserIsHtmlUnit()) {
-            String filePath = botTestPage.url.replace("file:///", "file:/").replace("bot-test.html", "");
-            assertHrefStartsWith(filePath + "prefixhref", botTestPage.attributesSpan);
+            String filePath = url.replace("file:///", "file:/").replace("bot-test.html", "");
+            assertHrefStartsWith(filePath + "prefixhref", attributesSpan);
         } else {
-            assertHrefStartsWith("prefixhref", botTestPage.attributesSpan);
+            assertHrefStartsWith("prefixhref", attributesSpan);
         }
-        assertHrefNotStartsWith("xxx", botTestPage.attributesSpan);
-        assertHrefEndsWith("hrefsuffix", botTestPage.attributesSpan);
-        assertHrefNotEndsWith("xxx", botTestPage.attributesSpan);
-        assertHrefMatches(".*href.*", botTestPage.attributesSpan);
-        assertHrefNotMatches(".*xxx.*", botTestPage.attributesSpan);
+        assertHrefNotStartsWith("xxx", attributesSpan);
+        assertHrefEndsWith("hrefsuffix", attributesSpan);
+        assertHrefNotEndsWith("xxx", attributesSpan);
+        assertHrefMatches(".*href.*", attributesSpan);
+        assertHrefNotMatches(".*xxx.*", attributesSpan);
     }
 
     /* Text */
     @Test
     public void textTest() {
-        assertTextEquals("prefixtextsuffix", botTestPage.textSpan);
-        assertTextNotEquals("xxx", botTestPage.textSpan);
-        assertTextEqualsIgnoreCase("PREFIXTEXTSUFFIX", botTestPage.textSpan);
-        assertTextNotEqualsIgnoreCase("xxx", botTestPage.textSpan);
-        assertTextContains("text", botTestPage.textSpan);
-        assertTextNotContains("xxx", botTestPage.textSpan);
-        assertTextContainsIgnoreCase("TEXT", botTestPage.textSpan);
-        assertTextNotContainsIgnoreCase("xxx", botTestPage.textSpan);
-        assertTextStartsWith("prefixtext", botTestPage.textSpan);
-        assertTextNotStartsWith("xxx", botTestPage.textSpan);
-        assertTextStartsWithIgnoreCase("PREFIXTEXT", botTestPage.textSpan);
-        assertTextNotStartsWithIgnoreCase("xxx", botTestPage.textSpan);
-        assertTextEndsWith("textsuffix", botTestPage.textSpan);
-        assertTextNotEndsWith("xxx", botTestPage.textSpan);
-        assertTextEndsWithIgnoreCase("TEXTSUFFIX", botTestPage.textSpan);
-        assertTextNotEndsWithIgnoreCase("xxx", botTestPage.textSpan);
-        assertTextMatches(".*text.*", botTestPage.textSpan);
-        assertTextNotMatches(".*xxx.*", botTestPage.textSpan);
+        assertTextEquals("prefixtextsuffix", textSpan);
+        assertTextNotEquals("xxx", textSpan);
+        assertTextEqualsIgnoreCase("PREFIXTEXTSUFFIX", textSpan);
+        assertTextNotEqualsIgnoreCase("xxx", textSpan);
+        assertTextContains("text", textSpan);
+        assertTextNotContains("xxx", textSpan);
+        assertTextContainsIgnoreCase("TEXT", textSpan);
+        assertTextNotContainsIgnoreCase("xxx", textSpan);
+        assertTextStartsWith("prefixtext", textSpan);
+        assertTextNotStartsWith("xxx", textSpan);
+        assertTextStartsWithIgnoreCase("PREFIXTEXT", textSpan);
+        assertTextNotStartsWithIgnoreCase("xxx", textSpan);
+        assertTextEndsWith("textsuffix", textSpan);
+        assertTextNotEndsWith("xxx", textSpan);
+        assertTextEndsWithIgnoreCase("TEXTSUFFIX", textSpan);
+        assertTextNotEndsWithIgnoreCase("xxx", textSpan);
+        assertTextMatches(".*text.*", textSpan);
+        assertTextNotMatches(".*xxx.*", textSpan);
     }
 
     /* Text Number */
     @Test
     public void textNumberTest() {
         // floatNumberSpan
-        assertTextIsNumber(botTestPage.floatNumberSpan);
-        assertTextIsNotNumber(botTestPage.textSpan);
-        assertTextEquals(42.0, botTestPage.floatNumberSpan);
-        assertTextNotEquals(43.0, botTestPage.floatNumberSpan);
-        assertTextLessThan(43.0, botTestPage.floatNumberSpan);
-        assertTextLessThanOrEquals(42.0, botTestPage.floatNumberSpan);
-        assertTextGreaterThan(41.0, botTestPage.floatNumberSpan);
-        assertTextGreaterThanOrEquals(42.0, botTestPage.floatNumberSpan);
+        assertTextIsNumber(floatNumberSpan);
+        assertTextIsNotNumber(textSpan);
+        assertTextEquals(42.0, floatNumberSpan);
+        assertTextNotEquals(43.0, floatNumberSpan);
+        assertTextLessThan(43.0, floatNumberSpan);
+        assertTextLessThanOrEquals(42.0, floatNumberSpan);
+        assertTextGreaterThan(41.0, floatNumberSpan);
+        assertTextGreaterThanOrEquals(42.0, floatNumberSpan);
 
         // intNumberSpan
-        assertTextIsNumber(botTestPage.intNumberSpan);
-        assertTextIsNotNumber(botTestPage.textSpan);
-        assertTextEquals(42.0, botTestPage.intNumberSpan);
-        assertTextNotEquals(43.0, botTestPage.intNumberSpan);
-        assertTextLessThan(43.0, botTestPage.intNumberSpan);
-        assertTextLessThanOrEquals(42.0, botTestPage.intNumberSpan);
-        assertTextGreaterThan(41.0, botTestPage.intNumberSpan);
-        assertTextGreaterThanOrEquals(42.0, botTestPage.intNumberSpan);
+        assertTextIsNumber(intNumberSpan);
+        assertTextIsNotNumber(textSpan);
+        assertTextEquals(42.0, intNumberSpan);
+        assertTextNotEquals(43.0, intNumberSpan);
+        assertTextLessThan(43.0, intNumberSpan);
+        assertTextLessThanOrEquals(42.0, intNumberSpan);
+        assertTextGreaterThan(41.0, intNumberSpan);
+        assertTextGreaterThanOrEquals(42.0, intNumberSpan);
     }
 
     /* Selected/Deselected */
     @Test
     public void selectedDeselectedTest() {
-        assertIsSelected(botTestPage.selectOption1);
-        assertIsDeselected(botTestPage.selectOption2);
+        assertIsSelected(selectOption1);
+        assertIsDeselected(selectOption2);
     }
 
     /* Checked/Unchecked */
     @Test
     public void checkedUncheckedTest() {
         // checkboxes
-        assertIsChecked(botTestPage.checkbox1);
-        assertIsUnchecked(botTestPage.checkbox2);
+        assertIsChecked(checkbox1);
+        assertIsUnchecked(checkbox2);
 
         // radiobuttons
-        assertIsChecked(botTestPage.radiobutton1);
-        assertIsUnchecked(botTestPage.radiobutton2);
+        assertIsChecked(radiobutton1);
+        assertIsUnchecked(radiobutton2);
     }
 
     /* Enabled/Disabled */
     @Test
     public void enabledDisabledTest() {
-        assertIsEnabled(botTestPage.selectOption1);
-        assertIsEnabled(botTestPage.selectOption2);
-        assertIsDisabled(botTestPage.selectOption3);
+        assertIsEnabled(selectOption1);
+        assertIsEnabled(selectOption2);
+        assertIsDisabled(selectOption3);
     }
 
     /* Option */
     @Test
     public void optionTest() {
         // Selected/Deselected
-        assertOptionIsSelected("Option 1", botTestPage.select);
-        assertOptionIsDeselected("Option 2", botTestPage.select);
-        assertOptionIsDeselected("Option 3", botTestPage.select);
+        assertOptionIsSelected("Option 1", select);
+        assertOptionIsDeselected("Option 2", select);
+        assertOptionIsDeselected("Option 3", select);
 
         // Enabled/Disabled
-        assertOptionIsEnabled("Option 1", botTestPage.select);
-        assertOptionIsEnabled("Option 2", botTestPage.select);
-        assertOptionIsDisabled("Option 3", botTestPage.select);
+        assertOptionIsEnabled("Option 1", select);
+        assertOptionIsEnabled("Option 2", select);
+        assertOptionIsDisabled("Option 3", select);
     }
 
     /* Option Value */
     @Test
     public void optionValueTest() {
         // Selected/Deselected
-        assertOptionWithValueIsSelected("option1value", botTestPage.select);
-        assertOptionWithValueIsDeselected("option2value", botTestPage.select);
-        assertOptionWithValueIsDeselected("option3value", botTestPage.select);
+        assertOptionWithValueIsSelected("option1value", select);
+        assertOptionWithValueIsDeselected("option2value", select);
+        assertOptionWithValueIsDeselected("option3value", select);
 
         // Enabled/Disabled
-        assertOptionWithValueIsEnabled("option1value", botTestPage.select);
-        assertOptionWithValueIsEnabled("option2value", botTestPage.select);
-        assertOptionWithValueIsDisabled("option3value", botTestPage.select);
+        assertOptionWithValueIsEnabled("option1value", select);
+        assertOptionWithValueIsEnabled("option2value", select);
+        assertOptionWithValueIsDisabled("option3value", select);
     }
 
     /* Option Index */
     @Test
     public void optionIndexTest() {
         // Selected/Deselected
-        assertOptionWithIndexIsSelected(0, botTestPage.select);
-        assertOptionWithIndexIsDeselected(1, botTestPage.select);
-        assertOptionWithIndexIsDeselected(2, botTestPage.select);
+        assertOptionWithIndexIsSelected(0, select);
+        assertOptionWithIndexIsDeselected(1, select);
+        assertOptionWithIndexIsDeselected(2, select);
 
         // Enabled/Disabled
-        assertOptionWithIndexIsEnabled(0, botTestPage.select);
-        assertOptionWithIndexIsEnabled(1, botTestPage.select);
-        assertOptionWithIndexIsDisabled(2, botTestPage.select);
+        assertOptionWithIndexIsEnabled(0, select);
+        assertOptionWithIndexIsEnabled(1, select);
+        assertOptionWithIndexIsDisabled(2, select);
     }
 }

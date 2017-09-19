@@ -2,7 +2,9 @@ package com.github.webdriverextensions.internal;
 
 public class WebDriverExtensionException extends RuntimeException {
 
-    public WebDriverExtensionException() {
+	private static final long serialVersionUID = 8194945043825905740L;
+
+	public WebDriverExtensionException() {
     }
 
     public WebDriverExtensionException(String string) {

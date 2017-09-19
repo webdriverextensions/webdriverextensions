@@ -9,4 +9,6 @@ public class WebDriverProperties {
     public static final String OPERA_DRIVER_PROPERTY_NAME = "webdriver.opera.driver";
     public static final String EDGE_DRIVER_PROPERTY_NAME = "webdriver.edge.driver";
     public static final String DISABLED_BROWSERS_PROPERTY_NAME = "webdriverextensions.disabledbrowsers";
+    public static final String REPORT_DIRECTORY_NAME = "webdriverextensions.report.directory.name";
+    public static final String REPORT_FILE_NAME = "webdriverextensions.report.file.name";
 }

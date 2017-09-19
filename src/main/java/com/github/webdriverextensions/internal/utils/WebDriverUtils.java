@@ -1,5 +1,6 @@
 package com.github.webdriverextensions.internal.utils;
 
+import com.github.webdriverextensions.junitrunner.annotations.Attributes;
 import com.github.webdriverextensions.junitrunner.annotations.ImplicitlyWait;
 import com.github.webdriverextensions.junitrunner.annotations.ScreenshotsPath;
 import com.github.webdriverextensions.junitrunner.annotations.TakeScreenshotOnFailure;
@@ -140,4 +141,90 @@ public class WebDriverUtils {
     private static boolean hasImplicitlyWaitTestMethodAnnotation(FrameworkMethod testMethod) {
         return testMethod.getAnnotation(ImplicitlyWait.class) != null;
     }
+    
+    /**
+	 * Checks for attributes annotation.
+	 *
+	 * @param testClass
+	 *            the test class
+	 * @param testMethod
+	 *            the test method
+	 * @return true, if successful
+	 */
+	public static boolean hasAttributesAnnotation(TestClass testClass, FrameworkMethod testMethod) {
+		return hasAttributesTestClassAnnotation(testClass) || hasAttributesTestMethodAnnotation(testMethod);
+	}
+
+	/**
+	 * Checks for attributes test class annotation.
+	 *
+	 * @param testClass
+	 *            the test class
+	 * @return true, if successful
+	 */
+	private static boolean hasAttributesTestClassAnnotation(TestClass testClass) {
+		return testClass.getJavaClass().getAnnotation(Attributes.class) != null;
+	}
+
+	/**
+	 * Gets the value from author annotation.
+	 *
+	 * @param testClass
+	 *            the test class
+	 * @param testMethod
+	 *            the test method
+	 * @return the value from author annotation
+	 */
+	public static String getValueFromAuthorAnnotation(TestClass testClass, FrameworkMethod testMethod) {
+		if (hasAttributesTestMethodAnnotation(testMethod)) {
+			return testMethod.getAnnotation(Attributes.class).Author();
+		} else {
+			return testClass.getJavaClass().getAnnotation(Attributes.class).Author();
+		}
+	}
+
+	/**
+	 * Gets the value from description annotation.
+	 *
+	 * @param testClass
+	 *            the test class
+	 * @param testMethod
+	 *            the test method
+	 * @return the value from description annotation
+	 */
+	public static String getValueFromDescriptionAnnotation(TestClass testClass, FrameworkMethod testMethod) {
+		if (hasAttributesTestMethodAnnotation(testMethod)) {
+			return testMethod.getAnnotation(Attributes.class).Description();
+		} else {
+			return testClass.getJavaClass().getAnnotation(Attributes.class).Description();
+		}
+	}
+
+	/**
+	 * Gets the value from category annotation.
+	 *
+	 * @param testClass
+	 *            the test class
+	 * @param testMethod
+	 *            the test method
+	 * @return the value from category annotation
+	 */
+	public static String getValueFromCategoryAnnotation(TestClass testClass, FrameworkMethod testMethod) {
+		if (hasAttributesTestMethodAnnotation(testMethod)) {
+			return testMethod.getAnnotation(Attributes.class).Category();
+		} else {
+			return testClass.getJavaClass().getAnnotation(Attributes.class).Category();
+		}
+	}
+
+	/**
+	 * Checks for attributes test method annotation.
+	 *
+	 * @param testMethod
+	 *            the test method
+	 * @return true, if successful
+	 */
+	private static boolean hasAttributesTestMethodAnnotation(FrameworkMethod testMethod) {
+		return testMethod.getAnnotation(Attributes.class) != null;
+	}
 }

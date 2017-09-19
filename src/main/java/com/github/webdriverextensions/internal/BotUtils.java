@@ -39,7 +39,9 @@ public class BotUtils {
         return (String) Bot.executeJavascript("return arguments[0].innerHTML;", webElement);
     }
 
-
+    public static String quoteRed(String text) {
+		return "<font color=\"red\">\"<b>" + text + "\"</b></font>";
+	}
 
     /* Attributes */
     public static String attributesIn(WebElement webElement) {
