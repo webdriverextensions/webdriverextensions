@@ -3,8 +3,9 @@ package com.github.webdriverextensions.internal.utils;
 import static org.apache.commons.lang3.StringUtils.contains;
 
 public class StringUtils {
-    
-    private StringUtils() {}
+
+    private StringUtils() {
+    }
 
     public static String appendNewLineIfContainsNewLine(String string) {
         if (contains(string, "\n")) {

@@ -5,7 +5,12 @@ import java.util.List;
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.internal.Coordinates;
 
-public abstract class WebComponent implements org.openqa.selenium.WebElement, org.openqa.selenium.internal.FindsByLinkText, org.openqa.selenium.internal.FindsById, org.openqa.selenium.internal.FindsByName, org.openqa.selenium.internal.FindsByTagName, org.openqa.selenium.internal.FindsByClassName, org.openqa.selenium.internal.FindsByCssSelector, org.openqa.selenium.internal.FindsByXPath, org.openqa.selenium.internal.WrapsDriver, org.openqa.selenium.internal.Locatable {
+public abstract class WebComponent
+        implements org.openqa.selenium.WebElement, org.openqa.selenium.internal.FindsByLinkText,
+        org.openqa.selenium.internal.FindsById, org.openqa.selenium.internal.FindsByName,
+        org.openqa.selenium.internal.FindsByTagName, org.openqa.selenium.internal.FindsByClassName,
+        org.openqa.selenium.internal.FindsByCssSelector, org.openqa.selenium.internal.FindsByXPath,
+        org.openqa.selenium.internal.WrapsDriver, org.openqa.selenium.internal.Locatable {
 
     WebElement wrappedWebElement;
     WebElement delegateWebElement;
@@ -143,7 +148,8 @@ public abstract class WebComponent implements org.openqa.selenium.WebElement, or
             return delegateWebElement.getRect();
         } else {
             return wrappedWebElement.getRect();
-        }    }
+        }
+    }
 
     @Override
     public String getCssValue(String propertyName) {
@@ -168,77 +174,77 @@ public abstract class WebComponent implements org.openqa.selenium.WebElement, or
 
     @Override
     public WebElement findElementByLinkText(String using) {
-            return ((org.openqa.selenium.internal.FindsByLinkText) wrappedWebElement).findElementByLinkText(using);
+        return ((org.openqa.selenium.internal.FindsByLinkText) wrappedWebElement).findElementByLinkText(using);
     }
 
     @Override
     public List<WebElement> findElementsByLinkText(String using) {
-            return ((org.openqa.selenium.internal.FindsByLinkText) wrappedWebElement).findElementsByLinkText(using);
+        return ((org.openqa.selenium.internal.FindsByLinkText) wrappedWebElement).findElementsByLinkText(using);
     }
 
     @Override
     public WebElement findElementByPartialLinkText(String using) {
-            return ((org.openqa.selenium.internal.FindsByLinkText) wrappedWebElement).findElementByPartialLinkText(using);
+        return ((org.openqa.selenium.internal.FindsByLinkText) wrappedWebElement).findElementByPartialLinkText(using);
     }
 
     @Override
     public List<WebElement> findElementsByPartialLinkText(String using) {
-            return ((org.openqa.selenium.internal.FindsByLinkText) wrappedWebElement).findElementsByPartialLinkText(using);
+        return ((org.openqa.selenium.internal.FindsByLinkText) wrappedWebElement).findElementsByPartialLinkText(using);
     }
 
     @Override
     public WebElement findElementById(String using) {
-            return ((org.openqa.selenium.internal.FindsById) wrappedWebElement).findElementById(using);
+        return ((org.openqa.selenium.internal.FindsById) wrappedWebElement).findElementById(using);
     }
 
     @Override
     public List<WebElement> findElementsById(String using) {
-            return ((org.openqa.selenium.internal.FindsById) wrappedWebElement).findElementsById(using);
+        return ((org.openqa.selenium.internal.FindsById) wrappedWebElement).findElementsById(using);
     }
 
     @Override
     public WebElement findElementByName(String using) {
-            return ((org.openqa.selenium.internal.FindsByName) wrappedWebElement).findElementByName(using);
+        return ((org.openqa.selenium.internal.FindsByName) wrappedWebElement).findElementByName(using);
     }
 
     @Override
     public List<WebElement> findElementsByName(String using) {
-            return ((org.openqa.selenium.internal.FindsByName) wrappedWebElement).findElementsByName(using);
+        return ((org.openqa.selenium.internal.FindsByName) wrappedWebElement).findElementsByName(using);
     }
 
     @Override
     public WebElement findElementByTagName(String using) {
-            return ((org.openqa.selenium.internal.FindsByTagName) wrappedWebElement).findElementByTagName(using);
+        return ((org.openqa.selenium.internal.FindsByTagName) wrappedWebElement).findElementByTagName(using);
     }
 
     @Override
     public List<WebElement> findElementsByTagName(String using) {
-            return ((org.openqa.selenium.internal.FindsByTagName) wrappedWebElement).findElementsByTagName(using);
+        return ((org.openqa.selenium.internal.FindsByTagName) wrappedWebElement).findElementsByTagName(using);
     }
 
     @Override
     public WebElement findElementByClassName(String using) {
-            return ((org.openqa.selenium.internal.FindsByClassName) wrappedWebElement).findElementByClassName(using);
+        return ((org.openqa.selenium.internal.FindsByClassName) wrappedWebElement).findElementByClassName(using);
     }
 
     @Override
     public List<WebElement> findElementsByClassName(String using) {
-            return ((org.openqa.selenium.internal.FindsByClassName) wrappedWebElement).findElementsByClassName(using);
+        return ((org.openqa.selenium.internal.FindsByClassName) wrappedWebElement).findElementsByClassName(using);
     }
 
     @Override
     public WebElement findElementByCssSelector(String using) {
-            return ((org.openqa.selenium.internal.FindsByCssSelector) wrappedWebElement).findElementByCssSelector(using);
+        return ((org.openqa.selenium.internal.FindsByCssSelector) wrappedWebElement).findElementByCssSelector(using);
     }
 
     @Override
     public List<WebElement> findElementsByCssSelector(String using) {
-            return ((org.openqa.selenium.internal.FindsByCssSelector) wrappedWebElement).findElementsByCssSelector(using);
+        return ((org.openqa.selenium.internal.FindsByCssSelector) wrappedWebElement).findElementsByCssSelector(using);
     }
 
     @Override
     public WebElement findElementByXPath(String using) {
-            return ((org.openqa.selenium.internal.FindsByXPath) wrappedWebElement).findElementByXPath(using);
+        return ((org.openqa.selenium.internal.FindsByXPath) wrappedWebElement).findElementByXPath(using);
     }
 
     @Override

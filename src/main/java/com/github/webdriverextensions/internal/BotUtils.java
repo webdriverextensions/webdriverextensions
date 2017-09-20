@@ -8,7 +8,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.WebElement;
 
 public class BotUtils {
-    
+
     /* Html */
     public static String htmlOf(WebElement webElement) {
         if (webElement == null) {
@@ -19,8 +19,7 @@ public class BotUtils {
             return "<" + Bot.tagNameOf(webElement) + prependSpaceIfNotBlank(attributesIn(webElement)) + " />";
         }
         return "<" + Bot.tagNameOf(webElement) + prependSpaceIfNotBlank(attributesIn(webElement)) + ">"
-                + surroundNewLinesIfContainsNewLine(innerHtml)
-                + "</" + Bot.tagNameOf(webElement) + ">";
+                + surroundNewLinesIfContainsNewLine(innerHtml) + "</" + Bot.tagNameOf(webElement) + ">";
 
     }
 
@@ -32,7 +31,8 @@ public class BotUtils {
         if (StringUtils.isBlank(innerHtml)) {
             return "<" + Bot.tagNameOf(webElement) + prependSpaceIfNotBlank(attributesIn(webElement)) + " />";
         }
-        return "<" + Bot.tagNameOf(webElement) + prependSpaceIfNotBlank(attributesIn(webElement)) + ">...</" + Bot.tagNameOf(webElement) + ">";
+        return "<" + Bot.tagNameOf(webElement) + prependSpaceIfNotBlank(attributesIn(webElement)) + ">...</"
+                + Bot.tagNameOf(webElement) + ">";
     }
 
     public static String innerHtmlOf(WebElement webElement) {
@@ -40,24 +40,17 @@ public class BotUtils {
     }
 
     public static String quoteRed(String text) {
-		return "<font color=\"red\">\"<b>" + text + "\"</b></font>";
-	}
+        return "<font color=\"red\">\"<b>" + text + "\"</b></font>";
+    }
 
     /* Attributes */
     public static String attributesIn(WebElement webElement) {
-        return (String) Bot.executeJavascript(
-                "var attrsString = '';"
+        return (String) Bot.executeJavascript("var attrsString = '';"
                 + "for (var attr, i=0, attrs=arguments[0].attributes, l=attrs.length; i<l; i++) {"
-                + "    var attr = attrs.item(i);"
-                + "    if (i != 0) {"
-                + "        attrsString = attrsString + ' ';"
-                + "    }"
-                + "    attrsString = attrsString + attr.nodeName + '=\"' + attr.nodeValue + '\"';"
-                + "}"
+                + "    var attr = attrs.item(i);" + "    if (i != 0) {" + "        attrsString = attrsString + ' ';"
+                + "    }" + "    attrsString = attrsString + attr.nodeName + '=\"' + attr.nodeValue + '\"';" + "}"
                 + "return attrsString;", webElement);
     }
-
-
 
     /* String Equals */
     public static boolean isEqual(String text1, String text2) {
@@ -147,7 +140,8 @@ public class BotUtils {
 
     public static void assertNotEquals(String name, String notExpected, String actual) {
         if (isEqual(notExpected, actual)) {
-            throw new WebAssertionError(name + " is equal to " + quote(notExpected) + " when it shouldn't", name, actual);
+            throw new WebAssertionError(name + " is equal to " + quote(notExpected) + " when it shouldn't", name,
+                    actual);
         }
     }
 
@@ -171,7 +165,8 @@ public class BotUtils {
 
     public static void assertNotContains(String name, String searchText, String actual) {
         if (contains(searchText, actual)) {
-            throw new WebAssertionError(name + " is containing " + quote(searchText) + " when it shouldn't", name, actual);
+            throw new WebAssertionError(name + " is containing " + quote(searchText) + " when it shouldn't", name,
+                    actual);
         }
     }
 
@@ -183,7 +178,8 @@ public class BotUtils {
 
     public static void assertNotStartsWith(String name, String prefix, String actual) {
         if (startsWith(prefix, actual)) {
-            throw new WebAssertionError(name + " is starting with " + quote(prefix) + " when it shouldn't", name, actual);
+            throw new WebAssertionError(name + " is starting with " + quote(prefix) + " when it shouldn't", name,
+                    actual);
         }
     }
 
@@ -217,7 +213,8 @@ public class BotUtils {
         }
     }
 
-    public static void assertNotEqualsIgnoreCase(String name, String notExpected, String actual, WebElement webElement) {
+    public static void assertNotEqualsIgnoreCase(String name, String notExpected, String actual,
+            WebElement webElement) {
         if (equalsIgnoreCase(notExpected, actual)) {
             throw new WebAssertionError(name + " is equal to " + quote(notExpected) + " when it shouldn't", webElement);
         }
@@ -243,7 +240,8 @@ public class BotUtils {
 
     public static void assertNotContains(String name, String searchText, String actual, WebElement webElement) {
         if (contains(searchText, actual)) {
-            throw new WebAssertionError(name + " is containing " + quote(searchText) + " when it shouldn't", webElement);
+            throw new WebAssertionError(name + " is containing " + quote(searchText) + " when it shouldn't",
+                    webElement);
         }
     }
 
@@ -253,9 +251,11 @@ public class BotUtils {
         }
     }
 
-    public static void assertNotContainsIgnoreCase(String name, String searchText, String actual, WebElement webElement) {
+    public static void assertNotContainsIgnoreCase(String name, String searchText, String actual,
+            WebElement webElement) {
         if (containsIgnoreCase(searchText, actual)) {
-            throw new WebAssertionError(name + " is containing " + quote(searchText) + " when it shouldn't", webElement);
+            throw new WebAssertionError(name + " is containing " + quote(searchText) + " when it shouldn't",
+                    webElement);
         }
     }
 
@@ -306,8 +306,6 @@ public class BotUtils {
             throw new WebAssertionError(name + " is ending with " + quote(suffix) + " when it shouldn't", webElement);
         }
     }
-
-
 
     /* Double Equals */
     public static boolean isEqual(double number, double actual) {
@@ -409,27 +407,27 @@ public class BotUtils {
     public static long asNanos(double time, TimeUnit unit) {
         long nanos = 0;
         switch (unit) {
-            case DAYS:
-                nanos = (long) (time * 24 * 60 * 60 * 1000000000);
-                break;
-            case HOURS:
-                nanos = (long) (time * 60 * 60 * 1000000000);
-                break;
-            case MINUTES:
-                nanos = (long) (time * 60 * 1000000000);
-                break;
-            case SECONDS:
-                nanos = (long) (time * 1000000000);
-                break;
-            case MILLISECONDS:
-                nanos = (long) (time * 1000000);
-                break;
-            case MICROSECONDS:
-                nanos = (long) (time * 1000);
-                break;
-            case NANOSECONDS:
-                nanos = (long) (time);
-                break;
+        case DAYS:
+            nanos = (long) (time * 24 * 60 * 60 * 1000000000);
+            break;
+        case HOURS:
+            nanos = (long) (time * 60 * 60 * 1000000000);
+            break;
+        case MINUTES:
+            nanos = (long) (time * 60 * 1000000000);
+            break;
+        case SECONDS:
+            nanos = (long) (time * 1000000000);
+            break;
+        case MILLISECONDS:
+            nanos = (long) (time * 1000000);
+            break;
+        case MICROSECONDS:
+            nanos = (long) (time * 1000);
+            break;
+        case NANOSECONDS:
+            nanos = (long) (time);
+            break;
         }
         return nanos;
     }

@@ -15,25 +15,25 @@ import java.lang.annotation.RetentionPolicy;
 @Inherited
 
 public @interface Attributes {
-	
-	/**
-	 * Author.
-	 *
-	 * @return the string
-	 */
-	String Author();
 
-	/**
-	 * Description.
-	 *
-	 * @return the string
-	 */
-	String Description();
+    /**
+     * Author.
+     *
+     * @return the string
+     */
+    String Author();
 
-	/**
-	 * Category.
-	 *
-	 * @return the string
-	 */
-	String Category();
+    /**
+     * Description.
+     *
+     * @return the string
+     */
+    String Description();
+
+    /**
+     * Category.
+     *
+     * @return the string
+     */
+    String Category();
 }

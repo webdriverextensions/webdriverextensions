@@ -4,8 +4,9 @@ import org.apache.commons.lang3.BooleanUtils;
 
 public class PropertyUtils {
 
-    private PropertyUtils() {}
-    
+    private PropertyUtils() {
+    }
+
     public static boolean isTrue(String key) {
         return BooleanUtils.toBoolean(System.getProperty(key));
     }
