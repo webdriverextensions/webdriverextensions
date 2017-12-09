@@ -159,6 +159,7 @@ public class BotSauceLabsTest {
         assertThat(browserIsNotSafari(), equalTo(true));
     }
 
+    @Ignore // Not available at Sauce Labs
     @Test
     @Opera
     public void browserIsOperaTest() {
@@ -284,6 +285,7 @@ public class BotSauceLabsTest {
         assertThat(platformIsNotXP(), equalTo(true));
     }
 
+    @Ignore // since platform is not correctly set by sauce labs
     @Test
     @Firefox(platform = Platform.WINDOWS)
     public void platformIsWindowsTest() {
