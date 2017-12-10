@@ -244,15 +244,15 @@ There is no need to download any drivers manually. Instead use the [WebDriver Ex
             </driver>
             <driver>
                 <name>internetexplorerdriver</name>
-                <version>3.6.0</version>
+                <version>3.8.0</version>
             </driver>
             <driver>
                 <name>chromedriver</name>
-                <version>2.29</version>
+                <version>2.33</version>
             </driver>
             <driver>
                 <name>geckodriver</name>
-                <version>0.19.0</version>
+                <version>0.19.1</version>
             </driver>
             <driver>
                 <name>phantomjs</name>
@@ -805,7 +805,7 @@ The Javadoc of this project is available online hosted by javadoc.io. You can fi
 <br>
 
 # Changelog
-#### 3.8.1 (2017 December 10)
+#### 3.8.0 (2017 December 10)
 - SELENIUM UPDATE Updated selenium version to 3.8.1
 - DEPENDENCY UPDATE Updated htmlunit-driver to 2.28
 - DEPENDENCY ADDED Added jna-platform as a dependency since it was removed from selenium
