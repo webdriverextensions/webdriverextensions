@@ -451,4 +451,18 @@ public class BotTest extends TestWebRepository {
         assertOptionWithIndexIsEnabled(1, botTestPage.select);
         assertOptionWithIndexIsDisabled(2, botTestPage.select);
     }
+
+    @Test
+    public void scrollToWebElementTest() {
+        waitFor(3, TimeUnit.SECONDS);
+        scrollTo(botTestPage.webElementToScrollTo);
+        waitFor(3, TimeUnit.SECONDS);
+    }
+
+    @Test
+    public void scrollToWebComponentTest() {
+        waitFor(3, TimeUnit.SECONDS);
+        scrollTo(botTestPage.webComponentToScrollTo);
+        waitFor(3, TimeUnit.SECONDS);
+    }
 }

@@ -271,6 +271,9 @@ public class Bot {
 
     /* Scrolling */
     public static Object scrollTo(WebElement webElement) {
+        if (webElement instanceof WebComponent) {
+            return executeJavascript("arguments[0].scrollIntoView(true);", ((WebComponent) webElement).getWrappedWebElement());
+        }
         return executeJavascript("arguments[0].scrollIntoView(true);", webElement);
     }
 

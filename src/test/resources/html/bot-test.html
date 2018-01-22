@@ -4,29 +4,29 @@
 	<script src="../javascripts/jquery-1.10.1.js"></script>
 	<script type="text/javascript">
 	    setTimeout(function() {
-	        $("body").append('<span id="firstappended-span" class="appended-span">first apended span</span>');
+	        $("#append").append('<span id="firstappended-span" class="appended-span">first apended span</span>');
 	    }, 2000);
 	    setTimeout(function() {
-	        $("body").append('<span id="secondappended-span" class="appended-span">second apended span</span>');
+	        $("#append").append('<span id="secondappended-span" class="appended-span">second apended span</span>');
 	    }, 4000);
 	</script>
 </head>
 <body>
 	<!-- Texts -->
 	<span id="text-span">
-		 prefixtextsuffix 
+		 prefixtextsuffix
 	</span>
 	<input id="text-input" name="text-input" value="prefixtextsuffix"/>
 
 	<!-- Integers -->
 	<span id="intnumber-span">
-		 42 
+		 42
 	</span>
 	<input id="intnumber-input" name="intnumber-input" value="42"/>
 
 	<!-- Floats -->
 	<span id="floatnumber-span">
-		 42.0 
+		 42.0
 	</span>
 	<input id="floatnumber-input" name="floatnumber-input" value="42.0"/>
 
@@ -52,5 +52,12 @@
 
 	<!-- Attributes -->
 	<span id="prefixidsuffix" name="prefixnamesuffix" class=" prefixclass1suffix prefixclass2suffix prefixclass3suffix " value="prefixvaluesuffix" href="prefixhrefsuffix"/>
+
+	<!-- Append to this dig -->
+    <div id="append"></div>
+
+	<!-- Scroll to -->
+    <div style="height: 2000px;"></div>
+	<div id="scroll-to">scroll success</div>
 </body>
 </html>

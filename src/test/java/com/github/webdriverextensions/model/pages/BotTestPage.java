@@ -4,6 +4,7 @@ import java.util.List;
 import static com.github.webdriverextensions.Bot.assertIsDisplayed;
 import static com.github.webdriverextensions.WebDriverExtensionsContext.*;
 import com.github.webdriverextensions.WebPage;
+import com.github.webdriverextensions.model.components.ScrollTo;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
@@ -85,6 +86,14 @@ public class BotTestPage extends WebPage {
     public WebElement secondAppendedSpan;
     @FindBy(css = ".appended-span")
     public List<WebElement> appendedSpans;
+
+    // scrollTo
+    @FindBy(css = "#scroll-to")
+    public WebElement webElementToScrollTo;
+
+    // scrollTo
+    @FindBy(css = "#scroll-to")
+    public ScrollTo webComponentToScrollTo;
 
     @Override
     public void open(Object... arguments) {

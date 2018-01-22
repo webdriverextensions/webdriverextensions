@@ -19,6 +19,14 @@ public abstract class WebComponent implements org.openqa.selenium.WebElement, or
         this.delegateWebElement = delegateWebElement;
     }
 
+    public WebElement getWrappedWebElement() {
+        return wrappedWebElement;
+    }
+
+    public WebElement getDelegateWebElement() {
+        return delegateWebElement;
+    }
+
     @Override
     public void click() {
         if (delegateWebElement != null) {
