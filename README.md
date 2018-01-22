@@ -248,7 +248,7 @@ There is no need to download any drivers manually. Instead use the [WebDriver Ex
             </driver>
             <driver>
                 <name>chromedriver</name>
-                <version>2.33</version>
+                <version>2.35</version>
             </driver>
             <driver>
                 <name>geckodriver</name>
