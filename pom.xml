@@ -91,8 +91,8 @@
         <lambdaj.version>2.3.3</lambdaj.version>
         <logback.version>1.2.3</logback.version>
         <selenium.version>3.8.1</selenium.version>
-        <htmlunit-driver.version>2.28</htmlunit-driver.version>
-        <phantomjsdriver.version>1.4.3</phantomjsdriver.version>
+        <htmlunit-driver.version>2.29.0</htmlunit-driver.version>
+        <phantomjsdriver.version>1.4.4</phantomjsdriver.version>
         <jna-platform.version>4.1.0</jna-platform.version>
 
         <!-- Plugin Versions -->
@@ -171,11 +171,6 @@
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
             <artifactId>htmlunit-driver</artifactId>
-            <version>${htmlunit-driver.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>net.sourceforge.htmlunit</groupId>
-            <artifactId>htmlunit</artifactId>
             <version>${htmlunit-driver.version}</version>
         </dependency>
         <dependency>
