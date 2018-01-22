@@ -3,14 +3,10 @@ package com.github.webdriverextensions.model.pages;
 import static com.github.webdriverextensions.Bot.*;
 import static com.github.webdriverextensions.WebDriverExtensionsContext.*;
 import com.github.webdriverextensions.WebPage;
-import com.github.webdriverextensions.generator.annotations.AddToRepository;
-import com.github.webdriverextensions.generator.annotations.AddToWebSite;
 import com.github.webdriverextensions.model.WebDriverExtensionSite;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-@AddToRepository
-@AddToWebSite
 public class HomePage extends WebPage {
 
     WebDriverExtensionSite site;

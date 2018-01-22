@@ -7,17 +7,15 @@ import static org.hamcrest.Matchers.hasItem;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
+import com.github.webdriverextensions.model.TestWebRepository;
 import org.junit.Assert;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import com.github.webdriverextensions.generator.GeneratedWebRepository;
 import com.github.webdriverextensions.junitrunner.WebDriverRunner;
 import com.github.webdriverextensions.junitrunner.annotations.Chrome;
 import com.github.webdriverextensions.junitrunner.annotations.Edge;
-import com.github.webdriverextensions.junitrunner.annotations.Firefox;
 import com.github.webdriverextensions.junitrunner.annotations.HtmlUnit;
 import com.github.webdriverextensions.junitrunner.annotations.IgnoreSafari;
 import com.github.webdriverextensions.junitrunner.annotations.InternetExplorer;
@@ -32,7 +30,7 @@ import com.github.webdriverextensions.junitrunner.annotations.Safari;
 @Safari
 @PhantomJS
 @HtmlUnit
-public class BotTest extends GeneratedWebRepository {
+public class BotTest extends TestWebRepository {
 
     @Before
     public void before() {

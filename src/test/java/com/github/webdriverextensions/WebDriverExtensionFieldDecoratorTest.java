@@ -3,8 +3,8 @@ package com.github.webdriverextensions;
 import static com.github.webdriverextensions.Bot.*;
 import com.github.webdriverextensions.junitrunner.WebDriverRunner;
 import com.github.webdriverextensions.junitrunner.annotations.Chrome;
+import com.github.webdriverextensions.model.TestWebRepository;
 import com.github.webdriverextensions.model.components.UserRow;
-import com.github.webdriverextensions.generator.GeneratedWebRepository;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -12,7 +12,7 @@ import org.openqa.selenium.WebElement;
 
 @RunWith(WebDriverRunner.class)
 @Chrome
-public class WebDriverExtensionFieldDecoratorTest extends GeneratedWebRepository {
+public class WebDriverExtensionFieldDecoratorTest extends TestWebRepository {
 
     Double delayTime = 0.0;
 

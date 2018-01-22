@@ -11,10 +11,6 @@ import com.github.webdriverextensions.model.components.Body;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.support.FindBy;
 
-@RunWith(WebDriverRunner.class)
-@Chrome
-@AddToRepository
-@AddToWebSite
 public class WebDriverExtensionRepository extends WebRepository {
 
     public final String url = "file://" + getClass().getResource("/html/model-test.html").getPath();

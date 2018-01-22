@@ -4,8 +4,6 @@ import java.util.List;
 import static com.github.webdriverextensions.Bot.*;
 import static com.github.webdriverextensions.WebDriverExtensionsContext.*;
 import com.github.webdriverextensions.WebPage;
-import com.github.webdriverextensions.generator.annotations.AddToRepository;
-import com.github.webdriverextensions.generator.annotations.AddToWebSite;
 import com.github.webdriverextensions.model.components.Body;
 import com.github.webdriverextensions.model.components.Menu;
 import com.github.webdriverextensions.model.components.MenuButtonGroup;
@@ -15,8 +13,6 @@ import com.github.webdriverextensions.model.WebDriverExtensionSite;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-@AddToRepository
-@AddToWebSite
 public class ExamplesPage extends WebPage {
 
     WebDriverExtensionSite site;
