@@ -805,6 +805,10 @@ The Javadoc of this project is available online hosted by javadoc.io. You can fi
 <br>
 
 # Changelog
+#### 3.8.1 (2017 January 22)
+- ENHANCEMENT Add getters wrappedWebComponent and delegatedWebComponent in WebComponents    
+- BUGFIX Fixed issue with scrollTo throwing exceptions for WebComponents
+
 #### 3.8.0 (2017 December 10)
 - SELENIUM UPDATE Updated selenium version to 3.8.1
 - DEPENDENCY UPDATE Updated htmlunit-driver to 2.28
