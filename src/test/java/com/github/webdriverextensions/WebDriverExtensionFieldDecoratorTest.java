@@ -88,4 +88,13 @@ public class WebDriverExtensionFieldDecoratorTest extends TestWebRepository {
         assertIsDisplayed(examplesPage.body.menu.update);
         assertIsDisplayed(examplesPage.body.menu.delete);
     }
+
+    @Test
+    public void findAllTest() {
+        click(examplesPage.menuAnnotatedWithFindAll.get(0));
+        waitFor(delayTime);
+        assertIsDisplayed(examplesPage.menuAnnotatedWithFindAll.get(0).create);
+        assertIsDisplayed(examplesPage.menuAnnotatedWithFindAll.get(0).update);
+        assertIsDisplayed(examplesPage.menuAnnotatedWithFindAll.get(0).delete);
+    }
 }

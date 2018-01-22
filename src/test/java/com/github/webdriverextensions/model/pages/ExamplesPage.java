@@ -11,7 +11,9 @@ import com.github.webdriverextensions.model.components.UserRow;
 import com.github.webdriverextensions.model.components.UserTableSearchContext;
 import com.github.webdriverextensions.model.WebDriverExtensionSite;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindAll;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.How;
 
 public class ExamplesPage extends WebPage {
 
@@ -39,6 +41,8 @@ public class ExamplesPage extends WebPage {
     // Wrapper Testing
     @FindBy(css = ".btn-group")
     public Menu menu;
+    @FindAll({@FindBy(how = How.CSS, using = ".btn-group")})
+    public List<Menu> menuAnnotatedWithFindAll;
 //    @FindBy(css = "#user-table")
 //    public UserTable userTable;
     @FindBy(css = "body")

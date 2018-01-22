@@ -18,6 +18,7 @@ import java.lang.reflect.TypeVariable;
 import org.openqa.selenium.SearchContext;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindAll;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.FindBys;
 import org.openqa.selenium.support.PageFactory;
@@ -148,7 +149,8 @@ public class WebDriverExtensionFieldDecorator extends DefaultFieldDecorator {
         }
 
         if (field.getAnnotation(FindBy.class) == null
-                && field.getAnnotation(FindBys.class) == null) {
+                && field.getAnnotation(FindBys.class) == null
+                && field.getAnnotation(FindAll.class) == null) {
             return false;
         }
 

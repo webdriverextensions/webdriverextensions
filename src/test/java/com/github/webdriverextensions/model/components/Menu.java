@@ -7,8 +7,6 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.FindBys;
 import org.openqa.selenium.support.How;
 
-@FindBy(how = How.CSS, using = ".btn-group")
-//@FindBys({@FindBy(how = How.CSS, using = ".btn-group")})
 public class Menu extends WebComponent {
 
     @Delegate
