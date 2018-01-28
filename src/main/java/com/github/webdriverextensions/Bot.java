@@ -26,6 +26,7 @@ import com.github.webdriverextensions.internal.utils.NumberUtils;
 import static com.github.webdriverextensions.internal.utils.WebDriverUtils.getScreenshotFilePath;
 import java.io.File;
 import java.io.IOException;
+import java.util.Set;
 import java.util.function.Function;
 import java.util.function.Predicate;
 
@@ -35,6 +36,7 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.Platform;
 import org.openqa.selenium.TakesScreenshot;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.remote.BrowserType;
 
@@ -277,7 +279,81 @@ public class Bot {
         return executeJavascript("arguments[0].scrollIntoView(true);", webElement);
     }
 
+    /* Tabs support */
+    public static void openInNewTab(WebElement element) {
+        type(Keys.chord(getPlatformControlKey(), Keys.RETURN), element);
+    }
 
+    public static String openInNewTabAndFocus(WebElement element) {
+        String oldHandle = currentWindowHandle(); // handle for navigating back to old tab
+        openInNewTab(element);
+        switchToWindow(getNewTabHandle(availableWindowHandles()));
+        waitForPageToLoad();
+        return oldHandle;
+    }
+
+    private static String getNewTabHandle(Set<String> oldWindowHandles) {
+        waitForNewTabToOpen(oldWindowHandles);
+        Set<String> newWindowHandles = availableWindowHandles();
+        newWindowHandles.removeAll(oldWindowHandles);
+        return newWindowHandles.iterator().next();
+    }
+
+    public static Set<String> availableWindowHandles() {
+        return driver().getWindowHandles();
+    }
+
+    public static String currentWindowHandle() {
+        return driver().getWindowHandle();
+    }
+
+    public static Keys getPlatformControlKey() {
+        return platform().equals(com.sun.jna.Platform.MAC) ? Keys.COMMAND : Keys.CONTROL;
+    }
+
+    public static void switchToWindow(String handle) {
+        driver().switchTo().window(handle);
+    }
+
+    public static void waitForNewTabToOpen(Set<String> oldWindowHandles) {
+        waitForNewTabToOpen(oldWindowHandles, 10);
+    }
+
+    public static void waitForNewTabToOpen(Set<String> oldWindowHandles, int seconds) {
+        new WebDriverWait(driver(), seconds).until((WebDriver) -> {
+            return availableWindowHandles().size() > oldWindowHandles.size();
+        });
+    }
+
+    public static void waitForPageToLoad() {
+        waitForPageToLoad(10);
+    }
+
+    public static void waitForPageToLoad(int seconds) {
+        try {
+            new WebDriverWait(driver(), seconds).until((WebDriver) -> {
+                return String.valueOf(executeJavascript("return document.readyState"))
+                        .equals("complete");
+            });
+        } catch (TimeoutException ex) {
+            // don't throw if page is still loading. Some pages never 
+            // archive readyState == complete, but are functionaly correct
+        }
+    }
+
+    public static void executeForLink(WebElement link, Runnable function) {
+        // Open link in new tab and execute code when in this tab
+        String oldWindowHandle = openInNewTabAndFocus(link);
+        function.run();
+        driver().close();
+        driver().switchTo().window(oldWindowHandle);
+    }
+    
+    public static void executeForLinks(Collection<WebElement> links, Runnable function) {
+        for (WebElement link : links) {
+            executeForLink(link, function);
+        }
+    }
 
     /* Execute Javascript */
     public static Object executeJavascript(String script, Object... arguments) {
