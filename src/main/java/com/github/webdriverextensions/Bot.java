@@ -281,22 +281,15 @@ public class Bot {
 
     /* Tabs support */
     public static void openInNewTab(WebElement element) {
-        type(Keys.chord(getPlatformControlKey(), Keys.RETURN), element);
+        type(Keys.chord(BotUtils.getPlatformControlKey(), Keys.RETURN), element);
     }
 
     public static String openInNewTabAndFocus(WebElement element) {
         String oldHandle = currentWindowHandle(); // handle for navigating back to old tab
         openInNewTab(element);
-        switchToWindow(getNewTabHandle(availableWindowHandles()));
+        switchToWindow(BotUtils.getNewTabHandle(availableWindowHandles()));
         waitForPageToLoad();
         return oldHandle;
-    }
-
-    private static String getNewTabHandle(Set<String> oldWindowHandles) {
-        waitForNewTabToOpen(oldWindowHandles);
-        Set<String> newWindowHandles = availableWindowHandles();
-        newWindowHandles.removeAll(oldWindowHandles);
-        return newWindowHandles.iterator().next();
     }
 
     public static Set<String> availableWindowHandles() {
@@ -305,10 +298,6 @@ public class Bot {
 
     public static String currentWindowHandle() {
         return driver().getWindowHandle();
-    }
-
-    public static Keys getPlatformControlKey() {
-        return platform().equals(com.sun.jna.Platform.MAC) ? Keys.COMMAND : Keys.CONTROL;
     }
 
     public static void switchToWindow(String handle) {
@@ -336,7 +325,7 @@ public class Bot {
                         .equals("complete");
             });
         } catch (TimeoutException ex) {
-            // don't throw if page is still loading. Some pages never 
+            // don't throw if page is still loading. Some pages never
             // archive readyState == complete, but are functionaly correct
         }
     }
@@ -348,7 +337,7 @@ public class Bot {
         driver().close();
         driver().switchTo().window(oldWindowHandle);
     }
-    
+
     public static void executeForLinks(Collection<WebElement> links, Runnable function) {
         for (WebElement link : links) {
             executeForLink(link, function);

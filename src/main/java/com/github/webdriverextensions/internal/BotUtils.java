@@ -3,12 +3,15 @@ package com.github.webdriverextensions.internal;
 import com.github.webdriverextensions.Bot;
 import com.github.webdriverextensions.exceptions.WebAssertionError;
 import static com.github.webdriverextensions.internal.utils.StringUtils.*;
+
+import java.util.Set;
 import java.util.concurrent.TimeUnit;
 import org.apache.commons.lang3.StringUtils;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 
 public class BotUtils {
-    
+
     /* Html */
     public static String htmlOf(WebElement webElement) {
         if (webElement == null) {
@@ -430,5 +433,16 @@ public class BotUtils {
                 break;
         }
         return nanos;
+    }
+
+    public static Keys getPlatformControlKey() {
+        return Bot.platform().equals(com.sun.jna.Platform.MAC) ? Keys.COMMAND : Keys.CONTROL;
+    }
+
+    public static String getNewTabHandle(Set<String> oldWindowHandles) {
+        Bot.waitForNewTabToOpen(oldWindowHandles);
+        Set<String> newWindowHandles = Bot.availableWindowHandles();
+        newWindowHandles.removeAll(oldWindowHandles);
+        return newWindowHandles.iterator().next();
     }
 }

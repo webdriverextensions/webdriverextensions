@@ -7,6 +7,7 @@ import static org.hamcrest.Matchers.hasItem;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
+import com.github.webdriverextensions.junitrunner.annotations.*;
 import com.github.webdriverextensions.model.TestWebRepository;
 import org.junit.Assert;
 import org.junit.Before;
@@ -14,17 +15,10 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.github.webdriverextensions.junitrunner.WebDriverRunner;
-import com.github.webdriverextensions.junitrunner.annotations.Chrome;
-import com.github.webdriverextensions.junitrunner.annotations.Edge;
-import com.github.webdriverextensions.junitrunner.annotations.HtmlUnit;
-import com.github.webdriverextensions.junitrunner.annotations.IgnoreSafari;
-import com.github.webdriverextensions.junitrunner.annotations.InternetExplorer;
-import com.github.webdriverextensions.junitrunner.annotations.PhantomJS;
-import com.github.webdriverextensions.junitrunner.annotations.Safari;
 
 @RunWith(WebDriverRunner.class)
 @Chrome
-//@Firefox
+@Firefox
 @InternetExplorer
 @Edge
 @Safari
