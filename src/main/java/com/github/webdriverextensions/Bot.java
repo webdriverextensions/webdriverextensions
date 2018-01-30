@@ -24,13 +24,18 @@ import static com.github.webdriverextensions.internal.utils.StringUtils.*;
 import com.github.webdriverextensions.internal.utils.NumberUtils;
 
 import static com.github.webdriverextensions.internal.utils.WebDriverUtils.getScreenshotFilePath;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Set;
 import java.util.function.Function;
 import java.util.function.Predicate;
+import javax.imageio.ImageIO;
 
 import org.apache.commons.io.FileUtils;
+import org.openqa.selenium.Dimension;
 import org.openqa.selenium.HasCapabilities;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.OutputType;
@@ -586,7 +591,92 @@ public class Bot {
         }
     }
 
+    private static int renderedPageHeight() {
+        // returns full size of rendered page instead of current viewport
+        String js = "var body = document.body,\n"
+                + "    html = document.documentElement;\n"
+                + "return Math.max( body.scrollHeight, body.offsetHeight, \n"
+                + "                       html.clientHeight, html.scrollHeight, html.offsetHeight );";
 
+        return (int) (long) executeJavascript(js);
+    }
+
+    /* Take Full-Page Screenshot */
+    /**
+     * Takes a full-page screenshot and saves it as a file in a directory called {@code screenshots}.
+     * A custom path to the directory where the screenshots are saved can be set by setting
+     * the system property {@code webdriverextensions.screenshotspath}.
+     *
+     * @param fileName the filename of the screenshot file without the file extension
+     */
+    public static void takeFullPageScreenshot(String fileName) {
+        // get inner window size
+        // driver().manage().window().getSize() doesn't work, because it returns
+        // whole window size, with tab bars, scrolls etc.
+        Dimension windowSize = new Dimension((int)(long)executeJavascript("return window.innerWidth;"), 
+                (int)(long)executeJavascript("return window.innerHeight;"));
+
+        
+        // scroll through whole page to render all it's content
+        int lastHeight = 0;
+        while (lastHeight != renderedPageHeight()) {      
+            lastHeight = (int) renderedPageHeight();
+            executeJavascript("window.scrollBy(0," + windowSize.height + ")");
+            waitForPageToLoad(); // doesn't wait for rendering for some reason
+            waitFor(0.5, TimeUnit.SECONDS); // simple hard coded wait will work in most cases
+        }
+        
+        int totalPageHeight = lastHeight;
+        
+        // go back to the top of window
+        executeJavascript("window.scrollBy(0,-999999999)");
+        
+        List<BufferedImage> imageParts = new ArrayList<>();
+        
+        // make screenshot of current viewport, then scroll, then make
+        // scrennshot etc. until the of the rendered page
+        int lastImageEnd = 0;
+        while(lastImageEnd < totalPageHeight) {
+            byte[] bytes = ((TakesScreenshot) driver()).getScreenshotAs(OutputType.BYTES);       
+            try {
+                imageParts.add(ImageIO.read(new ByteArrayInputStream(bytes)));
+            } catch (IOException ex) {
+                // bytes must be well formet at this point
+            }
+            // scroll down by exactly one screenshot height
+            executeJavascript("window.scrollBy(0," + windowSize.height + ")");
+            lastImageEnd += windowSize.height;
+        }
+        
+        // at the bottom of the page, there may (and most likely will) be some 
+        // overlapping of last 2 screenshots 
+        // this section fixes that overlapping
+        
+        // final image that will be stored in file
+        BufferedImage finalImage = new BufferedImage(
+                windowSize.width, 
+                totalPageHeight, 
+                BufferedImage.TYPE_INT_RGB);
+        
+        // merge subImages into one. 
+        // omit last image that may overlap
+        for(int i=0; i<imageParts.size() - 1; ++i) {
+            finalImage.createGraphics().drawImage(imageParts.get(i), 0, i*windowSize.height, null);
+        }
+        
+        // make an offset for last image
+        BufferedImage lastImage = imageParts.get(imageParts.size()-1);
+        finalImage.createGraphics().drawImage(lastImage, 0, finalImage.getHeight() - windowSize.height, null);
+        
+        String filePath = getScreenshotFilePath(fileName);
+        File file = new File(filePath);
+        file.mkdirs(); // make target direcory tree if doesn't exists
+        try {
+            ImageIO.write(finalImage, "png", file);
+        } catch (IOException ex) {
+            throw new WebDriverExtensionException("Failed to save full-page screenshot to " + quote(filePath), ex);
+        }
+    }
 
     /* Debug */
     public static void debug(String str) {
