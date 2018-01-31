@@ -24,6 +24,9 @@ import static com.github.webdriverextensions.internal.utils.StringUtils.*;
 import com.github.webdriverextensions.internal.utils.NumberUtils;
 
 import static com.github.webdriverextensions.internal.utils.WebDriverUtils.getScreenshotFilePath;
+import java.awt.BasicStroke;
+import java.awt.Color;
+import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.File;
@@ -40,6 +43,7 @@ import org.openqa.selenium.HasCapabilities;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.Platform;
+import org.openqa.selenium.Rectangle;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
@@ -282,6 +286,14 @@ public class Bot {
             return executeJavascript("arguments[0].scrollIntoView(true);", ((WebComponent) webElement).getWrappedWebElement());
         }
         return executeJavascript("arguments[0].scrollIntoView(true);", webElement);
+    }
+    
+    public static void scrollToCenter(WebElement webElement) {
+        WebElement target = (webElement instanceof WebComponent)? ((WebComponent) webElement).getWrappedWebElement() : webElement;
+        String js = "var viewPortHeight = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);"
+                + "var elementTop = arguments[0].getBoundingClientRect().top;"
+                + "window.scrollBy(0, elementTop-(viewPortHeight/2));";
+        executeJavascript(js, target);
     }
 
     /* Tabs support */
@@ -678,6 +690,112 @@ public class Bot {
         }
     }
 
+    /* Take Screenshot of the target webElement without surroundings*/
+    /**
+     * Takes a screenshot of the page and crops the 
+     * target webElement out of it as standalone image
+     * @param fileName the filename of the screenshot file without the file extension
+     */
+    public static void takeScreenshotOf(WebElement element, String fileName) {
+        scrollToCenter(element);
+        
+        BufferedImage windowImage = null;
+        byte[] bytes = ((TakesScreenshot) driver()).getScreenshotAs(OutputType.BYTES);
+        try {
+            windowImage = ImageIO.read(new ByteArrayInputStream(bytes));
+        } catch (IOException ex) {
+            // bytes should be well formed at this point
+            throw new WebDriverExtensionException("Failed to read screenshot into memory for highlighting element", ex);
+        }
+        
+        Rectangle elementRect = new Rectangle(element.getLocation(), element.getSize());
+        int viewportOffset = (int) (long) executeJavascript("return window.pageYOffset");
+        BufferedImage elementImage = windowImage.getSubimage(
+                elementRect.x, 
+                elementRect.y - viewportOffset, 
+                elementRect.width, 
+                elementRect.height);
+
+        String filePath = getScreenshotFilePath(fileName);
+        File file = new File(filePath);
+        file.mkdirs(); // make target direcory tree if doesn't exists
+        try {
+            ImageIO.write(elementImage, "png", file);
+        } catch (IOException ex) {
+            throw new WebDriverExtensionException("Failed to save screenshot of element to " + quote(filePath), ex);
+        }
+    }
+
+    public static void takeScreenshotWithHighlight(WebElement element, String fileName) {
+        takeScreenshotWithHighlight(element, Color.RED, fileName);
+    }
+
+    public static void takeScreenshotWithHighlight(WebElement element, int borderWidth, String fileName) {
+        takeScreenshotWithHighlight(element, borderWidth, Color.RED, fileName);
+    }
+
+    public static void takeScreenshotWithHighlight(WebElement element, Color highlightColor, String fileName) {
+        takeScreenshotWithHighlight(element, 1, highlightColor, fileName);
+    }
+
+    public static void takeScreenshotWithHighlight(WebElement element, String fileName, int borderOffset) {
+        takeScreenshotWithHighlight(element, Color.RED, borderOffset, fileName);
+    }
+
+    public static void takeScreenshotWithHighlight(WebElement element, int borderWidth, Color highlightColor, String fileName) {
+        takeScreenshotWithHighlight(element, borderWidth, highlightColor, 1, fileName);
+    }
+
+    public static void takeScreenshotWithHighlight(WebElement element, Color highlightColor, int borderOffset, String fileName) {
+        takeScreenshotWithHighlight(element, 1, highlightColor, borderOffset, fileName);
+    }
+
+    public static void takeScreenshotWithHighlight(WebElement element, int borderWidth, int borderOffset, String fileName) {
+        takeScreenshotWithHighlight(element, borderWidth, Color.RED, borderOffset, fileName);
+    }
+
+    /* Take screenshot of current viewport and highlight specified webElement*/
+    /**
+     * This function will try to center target webElement in the viewport.
+     * @param borderWidth determines how thicks the surrounding rectangle will be
+     * @param highlightColor determines color of surrounding rectangle
+     * @param borderOffset determines how much bigger/smaller the surrounding rectangle will be
+     * @param fileName the filename of the screenshot file without the file extension
+     */
+    public static void takeScreenshotWithHighlight(WebElement element, int borderWidth, Color highlightColor, int borderOffset, String fileName) {
+        scrollToCenter(element);
+
+        BufferedImage windowImage;
+        byte[] bytes = ((TakesScreenshot) driver()).getScreenshotAs(OutputType.BYTES);
+        try {
+            windowImage = ImageIO.read(new ByteArrayInputStream(bytes));
+        } catch (IOException ex) {
+            // should must be well formed at this point
+            throw new WebDriverExtensionException("Failed to read screenshot into memory for extracting element image. ", ex);
+        }
+
+        Rectangle elementRect = new Rectangle(element.getLocation(), element.getSize());
+        int viewportOffset = (int) (long) executeJavascript("return window.pageYOffset");
+        Graphics2D graph = windowImage.createGraphics();
+        graph.setStroke(new BasicStroke(borderWidth));
+        graph.setColor(highlightColor);
+        graph.drawRect(
+                elementRect.x - borderOffset,
+                elementRect.y - viewportOffset - borderOffset,
+                elementRect.width + (2 * borderOffset),
+                elementRect.height + (2 * borderOffset));
+        graph.dispose();
+
+        String filePath = getScreenshotFilePath(fileName);
+        File file = new File(filePath);
+        file.mkdirs(); // make target direcory tree if doesn't exists
+        try {
+            ImageIO.write(windowImage, "png", file);
+        } catch (IOException ex) {
+            throw new WebDriverExtensionException("Failed to save screenshot with hightlighted element to " + quote(filePath), ex);
+        }
+    }
+    
     /* Debug */
     public static void debug(String str) {
         log.debug(str);
