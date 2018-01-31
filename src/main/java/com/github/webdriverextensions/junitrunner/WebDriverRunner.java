@@ -108,9 +108,11 @@ public class WebDriverRunner extends BlockJUnit4ClassRunner {
     public static class WebDriverFrameworkMethod extends FrameworkMethod {
 
         final private BrowserConfiguration browser;
+        final private FrameworkMethod baseFrameworkMethod;
 
         public WebDriverFrameworkMethod(BrowserConfiguration browser, FrameworkMethod method) {
             super(method.getMethod());
+            this.baseFrameworkMethod = method;
             this.browser = browser;
         }
 
@@ -159,7 +161,7 @@ public class WebDriverRunner extends BlockJUnit4ClassRunner {
         if (filteredTestAnnotatedMethods == null) {
             synchronized (childrenLock) {
                 if (filteredTestAnnotatedMethods == null) {
-                    filteredTestAnnotatedMethods = Collections.unmodifiableCollection(getTestAnnotatedMethods());
+                    filteredTestAnnotatedMethods = Collections.unmodifiableCollection(createBrowserSpecificTestMethods(getTestAnnotatedMethods()));
                 }
             }
         }
@@ -204,8 +206,12 @@ public class WebDriverRunner extends BlockJUnit4ClassRunner {
 
     @Override
     protected List<FrameworkMethod> computeTestMethods() {
+        return new ArrayList<>(getFilteredTestAnnotatedMethods());
+    }
+
+    protected List<FrameworkMethod> createBrowserSpecificTestMethods(List<FrameworkMethod> testAnnotatedMethods) {
         List<FrameworkMethod> testMethods = new ArrayList<>();
-        for (FrameworkMethod testAnnotatedMethod : getFilteredTestAnnotatedMethods()) {
+        for (FrameworkMethod testAnnotatedMethod : testAnnotatedMethods) {
             TestMethodContext testMethodContext = new TestMethodContext().addBrowsersFromClassAnnotations(getTestClass()).addBrowsersFromMethodAnnotations(testAnnotatedMethod);
             if (!testMethodContext.getBrowsers().isEmpty()) {
                 for (BrowserConfiguration browser : testMethodContext.getBrowsers()) {
@@ -481,6 +487,12 @@ public class WebDriverRunner extends BlockJUnit4ClassRunner {
             for (Iterator<FrameworkMethod> iter = children.iterator(); iter.hasNext(); ) {
                 FrameworkMethod each = iter.next();
                 if (filter.shouldRun(describeChild(each))) {
+                    try {
+                        filter.apply(each);
+                    } catch (NoTestsRemainException e) {
+                        iter.remove();
+                    }
+                } else if (each instanceof WebDriverFrameworkMethod && filter.shouldRun(describeChild(((WebDriverFrameworkMethod) each).baseFrameworkMethod))) {
                     try {
                         filter.apply(each);
                     } catch (NoTestsRemainException e) {
