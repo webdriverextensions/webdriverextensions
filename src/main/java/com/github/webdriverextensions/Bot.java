@@ -287,7 +287,7 @@ public class Bot {
         }
         return executeJavascript("arguments[0].scrollIntoView(true);", webElement);
     }
-    
+
     public static void scrollToCenter(WebElement webElement) {
         WebElement target = (webElement instanceof WebComponent)? ((WebComponent) webElement).getWrappedWebElement() : webElement;
         String js = "var viewPortHeight = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);"
@@ -603,16 +603,6 @@ public class Bot {
         }
     }
 
-    private static int renderedPageHeight() {
-        // returns full size of rendered page instead of current viewport
-        String js = "var body = document.body,\n"
-                + "    html = document.documentElement;\n"
-                + "return Math.max( body.scrollHeight, body.offsetHeight, \n"
-                + "                       html.clientHeight, html.scrollHeight, html.offsetHeight );";
-
-        return (int) (long) executeJavascript(js);
-    }
-
     /* Take Full-Page Screenshot */
     /**
      * Takes a full-page screenshot and saves it as a file in a directory called {@code screenshots}.
@@ -625,31 +615,31 @@ public class Bot {
         // get inner window size
         // driver().manage().window().getSize() doesn't work, because it returns
         // whole window size, with tab bars, scrolls etc.
-        Dimension windowSize = new Dimension((int)(long)executeJavascript("return window.innerWidth;"), 
+        Dimension windowSize = new Dimension((int)(long)executeJavascript("return window.innerWidth;"),
                 (int)(long)executeJavascript("return window.innerHeight;"));
 
-        
+
         // scroll through whole page to render all it's content
         int lastHeight = 0;
-        while (lastHeight != renderedPageHeight()) {      
-            lastHeight = (int) renderedPageHeight();
+        while (lastHeight != BotUtils.renderedPageHeight()) {
+            lastHeight = (int) BotUtils.renderedPageHeight();
             executeJavascript("window.scrollBy(0," + windowSize.height + ")");
             waitForPageToLoad(); // doesn't wait for rendering for some reason
             waitFor(0.5, TimeUnit.SECONDS); // simple hard coded wait will work in most cases
         }
-        
+
         int totalPageHeight = lastHeight;
-        
+
         // go back to the top of window
         executeJavascript("window.scrollBy(0,-999999999)");
-        
+
         List<BufferedImage> imageParts = new ArrayList<>();
-        
+
         // make screenshot of current viewport, then scroll, then make
         // scrennshot etc. until the of the rendered page
         int lastImageEnd = 0;
         while(lastImageEnd < totalPageHeight) {
-            byte[] bytes = ((TakesScreenshot) driver()).getScreenshotAs(OutputType.BYTES);       
+            byte[] bytes = ((TakesScreenshot) driver()).getScreenshotAs(OutputType.BYTES);
             try {
                 imageParts.add(ImageIO.read(new ByteArrayInputStream(bytes)));
             } catch (IOException ex) {
@@ -659,27 +649,27 @@ public class Bot {
             executeJavascript("window.scrollBy(0," + windowSize.height + ")");
             lastImageEnd += windowSize.height;
         }
-        
-        // at the bottom of the page, there may (and most likely will) be some 
-        // overlapping of last 2 screenshots 
+
+        // at the bottom of the page, there may (and most likely will) be some
+        // overlapping of last 2 screenshots
         // this section fixes that overlapping
-        
+
         // final image that will be stored in file
         BufferedImage finalImage = new BufferedImage(
-                windowSize.width, 
-                totalPageHeight, 
+                windowSize.width,
+                totalPageHeight,
                 BufferedImage.TYPE_INT_RGB);
-        
-        // merge subImages into one. 
+
+        // merge subImages into one.
         // omit last image that may overlap
         for(int i=0; i<imageParts.size() - 1; ++i) {
             finalImage.createGraphics().drawImage(imageParts.get(i), 0, i*windowSize.height, null);
         }
-        
+
         // make an offset for last image
         BufferedImage lastImage = imageParts.get(imageParts.size()-1);
         finalImage.createGraphics().drawImage(lastImage, 0, finalImage.getHeight() - windowSize.height, null);
-        
+
         String filePath = getScreenshotFilePath(fileName);
         File file = new File(filePath);
         file.mkdirs(); // make target direcory tree if doesn't exists
@@ -692,13 +682,13 @@ public class Bot {
 
     /* Take Screenshot of the target webElement without surroundings*/
     /**
-     * Takes a screenshot of the page and crops the 
+     * Takes a screenshot of the page and crops the
      * target webElement out of it as standalone image
      * @param fileName the filename of the screenshot file without the file extension
      */
     public static void takeScreenshotOf(WebElement element, String fileName) {
         scrollToCenter(element);
-        
+
         BufferedImage windowImage = null;
         byte[] bytes = ((TakesScreenshot) driver()).getScreenshotAs(OutputType.BYTES);
         try {
@@ -707,13 +697,13 @@ public class Bot {
             // bytes should be well formed at this point
             throw new WebDriverExtensionException("Failed to read screenshot into memory for highlighting element", ex);
         }
-        
+
         Rectangle elementRect = new Rectangle(element.getLocation(), element.getSize());
         int viewportOffset = (int) (long) executeJavascript("return window.pageYOffset");
         BufferedImage elementImage = windowImage.getSubimage(
-                elementRect.x, 
-                elementRect.y - viewportOffset, 
-                elementRect.width, 
+                elementRect.x,
+                elementRect.y - viewportOffset,
+                elementRect.width,
                 elementRect.height);
 
         String filePath = getScreenshotFilePath(fileName);
@@ -795,7 +785,7 @@ public class Bot {
             throw new WebDriverExtensionException("Failed to save screenshot with hightlighted element to " + quote(filePath), ex);
         }
     }
-    
+
     /* Debug */
     public static void debug(String str) {
         log.debug(str);

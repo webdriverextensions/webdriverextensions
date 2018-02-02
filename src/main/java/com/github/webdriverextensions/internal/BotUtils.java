@@ -445,4 +445,14 @@ public class BotUtils {
         newWindowHandles.removeAll(oldWindowHandles);
         return newWindowHandles.iterator().next();
     }
+
+    public static int renderedPageHeight() {
+        // returns full size of rendered page instead of current viewport
+        String js = "var body = document.body,\n"
+            + "    html = document.documentElement;\n"
+            + "return Math.max( body.scrollHeight, body.offsetHeight, \n"
+            + "                       html.clientHeight, html.scrollHeight, html.offsetHeight );";
+
+        return (int) (long) Bot.executeJavascript(js);
+    }
 }
