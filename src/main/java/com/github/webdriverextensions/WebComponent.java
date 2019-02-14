@@ -3,7 +3,7 @@ package com.github.webdriverextensions;
 import java.util.List;
 
 import org.openqa.selenium.*;
-import org.openqa.selenium.interactions.internal.Coordinates;
+import org.openqa.selenium.interactions.Coordinates;
 
 public abstract class WebComponent
     implements org.openqa.selenium.WebElement, org.openqa.selenium.WrapsDriver, org.openqa.selenium.interactions.Locatable {
