@@ -2545,6 +2545,9 @@ public class Bot {
     public static boolean optionIsEnabled(String text, WebElement webElement) {
         List<WebElement> options = new Select(webElement).getOptions();
         for (WebElement option : options) {
+            System.out.println("text=" + text);
+            System.out.println("option=" + option.getText());
+            System.out.println("webElement.isEnabled()=" + webElement.isEnabled());
             if (textEquals(text, option) && isEnabled(option)) {
                 return true;
             }

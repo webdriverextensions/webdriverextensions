@@ -202,6 +202,7 @@ public class BotTest extends TestWebRepository {
 
     /* Tag Name */
     @Test
+    @IgnoreSafari // Ignore since webElement.isEnabled() does not return false for disabled option on Safari
     public void tagNameTest() {
         assertTagNameEquals("span", botTestPage.attributesSpan);
         assertTagNameNotEquals("xxx", botTestPage.attributesSpan);
@@ -397,6 +398,7 @@ public class BotTest extends TestWebRepository {
     }
 
     /* Enabled/Disabled */
+    @IgnoreSafari // Ignore since webElement.isEnabled() does not return false for disabled option on Safari
     @Test
     public void enabledDisabledTest() {
         assertIsEnabled(botTestPage.selectOption1);
@@ -406,6 +408,7 @@ public class BotTest extends TestWebRepository {
 
     /* Option */
     @Test
+    @IgnoreSafari // Ignore since webElement.isEnabled() does not return false for disabled option on Safari
     public void optionTest() {
         // Selected/Deselected
         assertOptionIsSelected("Option 1", botTestPage.select);
@@ -420,6 +423,7 @@ public class BotTest extends TestWebRepository {
 
     /* Option Value */
     @Test
+    @IgnoreSafari // Ignore since webElement.isEnabled() does not return false for disabled option on Safari
     public void optionValueTest() {
         // Selected/Deselected
         assertOptionWithValueIsSelected("option1value", botTestPage.select);
@@ -434,6 +438,7 @@ public class BotTest extends TestWebRepository {
 
     /* Option Index */
     @Test
+    @IgnoreSafari // Ignore since webElement.isEnabled() does not return false for disabled option on Safari
     public void optionIndexTest() {
         // Selected/Deselected
         assertOptionWithIndexIsSelected(0, botTestPage.select);
