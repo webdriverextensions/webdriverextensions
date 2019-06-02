@@ -15,15 +15,10 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.github.webdriverextensions.junitrunner.WebDriverRunner;
+import org.openqa.selenium.interactions.Actions;
 
 @RunWith(WebDriverRunner.class)
 @Chrome
-@Firefox
-@InternetExplorer
-@Edge
-@Safari
-@PhantomJS
-@HtmlUnit
 public class BotTest extends TestWebRepository {
 
     @Before
@@ -36,6 +31,19 @@ public class BotTest extends TestWebRepository {
     public void clickTest() {
         click(botTestPage.checkbox2);
         assertIsChecked(botTestPage.checkbox2);
+    }
+
+    @Test
+    public void doubleClickTest() {
+        click(botTestPage.checkbox2);
+        assertIsChecked(botTestPage.checkbox2);
+    }
+
+    @Test
+    public void getWrappedWebElementTest() {
+        Actions action = new Actions(botTestPage.checkBox2WebComponentExtended.getWrappedDriver());
+        action.doubleClick(botTestPage.checkBox2WebComponentExtended).perform();
+        assertIsUnchecked(botTestPage.checkBox2WebComponentExtended);
     }
 
     /* Type */

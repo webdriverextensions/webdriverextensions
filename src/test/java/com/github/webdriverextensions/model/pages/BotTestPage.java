@@ -5,6 +5,7 @@ import static com.github.webdriverextensions.Bot.assertIsDisplayed;
 import static com.github.webdriverextensions.WebDriverExtensionsContext.*;
 import com.github.webdriverextensions.WebPage;
 import com.github.webdriverextensions.model.components.ScrollTo;
+import com.github.webdriverextensions.model.components.WebComponentExtended;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
@@ -68,6 +69,8 @@ public class BotTestPage extends WebPage {
     public WebElement checkbox1;
     @FindBy(css = "#checkbox2")
     public WebElement checkbox2;
+    @FindBy(css = "#checkbox2")
+    public WebComponentExtended checkBox2WebComponentExtended;
 
     // Radiobuttons
     @FindBy(css = "#radiobutton1")

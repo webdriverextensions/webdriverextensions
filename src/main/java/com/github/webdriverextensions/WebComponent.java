@@ -241,7 +241,7 @@ public abstract class WebComponent
     }
 
     public WebDriver getWrappedDriver() {
-        return ((org.openqa.selenium.WrapsDriver) wrappedWebElement).getWrappedDriver();
+        return ((WrapsDriver) ((WrapsElement) wrappedWebElement).getWrappedElement()).getWrappedDriver();
     }
 
     @Override
