@@ -3,11 +3,19 @@ package com.github.webdriverextensions.internal;
 import com.github.webdriverextensions.Bot;
 import com.github.webdriverextensions.exceptions.WebAssertionError;
 import static com.github.webdriverextensions.internal.utils.StringUtils.*;
+import java.lang.reflect.Proxy;
+import java.util.List;
 
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
+import javax.xml.xpath.XPath;
+import javax.xml.xpath.XPathExpressionException;
+import javax.xml.xpath.XPathFactory;
 import org.apache.commons.lang3.StringUtils;
+import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
+import org.openqa.selenium.SearchContext;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 public class BotUtils {
@@ -454,5 +462,327 @@ public class BotUtils {
             + "                       html.clientHeight, html.scrollHeight, html.offsetHeight );";
 
         return (int) (long) Bot.executeJavascript(js);
+    }
+    
+    public static WebElement proxyOf(WebElement element) {
+        if(Proxy.isProxyClass(element.getClass())) {
+            return element;
+        }
+        By by = By.xpath(xpathOf(element));
+        return getDecoratedElement(Bot.driver(), Bot.driver(), by);
+    }
+    
+    public static String xpathOf(WebElement element) {
+//        *not implemented yet*
+//        if (isPageObject(element)) {
+//            return null;
+//        }
+        
+        String result = (String) Bot.executeJavascript("function getXPath(element, generated) {"
+            + "var childTag = element.tagName;"
+            + "if (document.documentElement === element) {"
+            + "    return '/' + document.documentElement.tagName + generated;"
+            + "}"
+            + "var parentElement = element.parentElement;"
+            + "var childrenElements = parentElement.children;"
+            + "var count = 0;"
+            + "for (i = 0; i < childrenElements.length; i++) {"
+            + "    var childElement = childrenElements[i];"
+            + "    var childElementTag = childElement.tagName;"
+            + "    if(childTag == childElementTag) {"
+            + "        count += 1;"
+            + "    }"
+            + "    if(element == childElement) {"
+            + "        return getXPath(parentElement, '/' + childTag + '[' + count + ']' + generated);"
+            + "    }"
+            + "}"
+            + "return null;"
+            + "}"
+            + ""
+            + "return getXPath(arguments[0], '');", element);
+        assertXPathValid(result);
+        return result;
+    }
+    
+    /**
+     * Returns parent element of the element.
+     * For page root (html) returns "Page Object"
+     * For "Page Object" returns null
+     */
+    public static WebElement parentOf(WebElement element) {
+        return (WebElement) Bot.executeJavascript("return arguments[0].parentNode;", element);
+    }
+    
+    public static boolean isParentOf(WebElement parent, WebElement child) {
+        try {
+            return parentOf(child).equals(parent);
+        } catch (Exception ex) {
+            return false;
+        }
+    }
+    
+    public static List<WebElement> childrenOf(WebElement element) {
+        return element.findElements(By.xpath("./*"));
+    }
+    
+    public static boolean isDocumentRoot(WebElement elem) {
+        try {
+            return (boolean) Bot.executeJavascript("return arguments[0] == document.documentElement;", elem);
+        } catch (Exception ex) {
+            return false;
+        }
+    }
+    
+    public static boolean isPageObjectDefined() {
+        WebElement documentRoot = Bot.driver().findElement(By.xpath("/*"));
+        return parentOf(documentRoot) != null;
+    }
+    
+    public static boolean isPageObject(WebElement elem) {
+        try {
+            return isPageObjectDefined() && parentOf(elem) == null;
+        } catch (Exception ex) {
+            return false;
+        }
+    }
+    
+    public static boolean isDescendantOf(WebElement element, WebElement descendand) {
+        if (element == null) {
+            return false;
+        }
+        if (descendand == null) {
+            return false;
+        }
+        if (element == descendand) {
+            return false;
+        }
+        if (element.equals(descendand)) {
+            return false;
+        }
+        if (isPageObject(element)) {
+            return true;
+        }
+        return xpathOf(descendand).startsWith(xpathOf(element));
+    }
+    
+    // internal
+    private static String commonXPath(String s1, String s2) {
+        StringBuilder result = new StringBuilder("");
+
+        int i = 0;
+        while (i < s1.length() && i < s2.length()) {
+            if (s1.charAt(i) == '/' && s2.charAt(i) == '/') {
+                result.append('/');
+                ++i;
+            } else {
+                StringBuilder tokenBuilder = new StringBuilder("");
+                while (i < s1.length() && i < s2.length() && s1.charAt(i) != '/') {
+                    if (s1.charAt(i) == s2.charAt(i)) {
+                        tokenBuilder.append(s1.charAt(i));
+                    } else {
+                        return result.toString();
+                    }
+                    ++i;
+                }
+                result.append(tokenBuilder.toString());
+            }
+        }
+        return result.toString();
+    }
+    
+    public static String relativeXPath(WebElement from, WebElement to) {
+        String fromXPath = xpathOf(from);
+        assertXPathValid(fromXPath);
+        String toXPath = xpathOf(to);
+        assertXPathValid(toXPath);
+        String overlap = commonXPath(fromXPath, toXPath);
+        int overlapLength = overlap.length();
+        String truncatedFromXPath = fromXPath.substring(overlapLength, fromXPath.length());
+        String truncatedToXPath = toXPath.substring(overlapLength, toXPath.length());
+        StringBuilder result = new StringBuilder("./");
+        for (int i = 0; i < StringUtils.countMatches(truncatedFromXPath, "/")
+                + /* same line */ (truncatedToXPath.length() > 0 ? 1 : 0); ++i) {
+            result.append("../");
+        }
+        result.append(truncatedToXPath);
+        assertXPathValid(result.toString());
+        return result.toString();
+    }
+    
+    public static boolean isValidXPath(String xpath) {
+        boolean result;
+        XPathFactory factory = XPathFactory.newInstance();
+        XPath test = factory.newXPath();
+        try {
+            System.out.println("test.compile(xpath).toString() = " + test.compile(xpath));
+            result = true;
+        } catch (XPathExpressionException ex) {
+            result = false;
+        }
+        return result;
+    }
+    
+    public static void assertXPathValid(String xpath) {
+        if (!isValidXPath(xpath)) {
+            throw new WebDriverExtensionException("XPATH \"" + xpath + "\" is not valid!");
+        }
+    }
+    
+    public static boolean isSiblingOf(WebElement element, WebElement sibling) {
+        if (element == null) {
+            return false;
+        }
+        if (sibling == null) {
+            return false;
+        }
+        if (element == sibling) {
+            return false;
+        }
+        if (element.equals(sibling)) {
+            return false;
+        }
+        return parentOf(element) != null
+                && parentOf(sibling) != null
+                && parentOf(element).equals(parentOf(sibling));
+    }
+    
+    public static WebElement getDecoratedElement(SearchContext root, WebDriver driver, By by) {
+        return new WebDriverExtensionsByDecoratorFactory()
+                .create(root, driver)
+                .decorate(by);
+    }
+
+    public static List<WebElement> getDecoratedElementList(SearchContext root, WebDriver driver, By by) {
+        return new WebDriverExtensionsByDecoratorFactory()
+                .create(root, driver)
+                .decorateList(by);
+    }
+    
+    public static WebElement findByXPath(SearchContext root, String xpath) {
+        return getDecoratedElement(root, Bot.driver(), By.xpath(xpath));
+    }
+
+    public static WebElement findByXPath(String xpath) {
+        return findByXPath(Bot.driver(), xpath);
+    }
+    
+    public static WebElement findByCssSelector(SearchContext root, String cssSelector) {
+        return getDecoratedElement(root, Bot.driver(), By.cssSelector(cssSelector));
+    }
+
+    public static WebElement findByCssSelector(String cssSelector) {
+        return findByCssSelector(Bot.driver(), cssSelector);
+    }
+    
+    public static WebElement findById(SearchContext root, String id) {
+        return getDecoratedElement(root, Bot.driver(), By.id(id));
+    }
+
+    public static WebElement findById(String id) {
+        return findById(Bot.driver(), id);
+    }
+    
+    public static WebElement findByClassName(SearchContext root, String className) {
+        return getDecoratedElement(root, Bot.driver(), By.className(className));
+    }
+
+    public static WebElement findByClassName(String className) {
+        return findByClassName(Bot.driver(), className);
+    }
+    
+    public static WebElement findByLinkText(SearchContext root, String linkText) {
+        return getDecoratedElement(root, Bot.driver(), By.linkText(linkText));
+    }
+
+    public static WebElement findByLinkText(String linkText) {
+        return findByLinkText(Bot.driver(), linkText);
+    }
+    
+    public static WebElement findByName(SearchContext root, String name) {
+        return getDecoratedElement(root, Bot.driver(), By.name(name));
+    }
+
+    public static WebElement findByName(String name) {
+        return findByName(Bot.driver(), name);
+    }
+    
+    public static WebElement findByPartialLinkText(SearchContext root, String partialLinkText) {
+        return getDecoratedElement(root, Bot.driver(), By.partialLinkText(partialLinkText));
+    }
+
+    public static WebElement findByPartialLinkText(String partialLinkText) {
+        return findByPartialLinkText(Bot.driver(), partialLinkText);
+    }
+    
+    public static WebElement findByTagName(SearchContext root, String tagName) {
+        return getDecoratedElement(root, Bot.driver(), By.tagName(tagName));
+    }
+
+    public static WebElement findByTagName(String tagName) {
+        return findByTagName(Bot.driver(), tagName);
+    }
+
+    public static List<WebElement> findByXPathMultiple(SearchContext root, String xpath) {
+        return getDecoratedElementList(root, Bot.driver(), By.xpath(xpath));
+    }
+    
+    public static List<WebElement> findByXPathMultiple(String xpath) {
+        return findByXPathMultiple(Bot.driver(), xpath);
+    }
+
+    public static List<WebElement> findByCssSelectorMultiple(SearchContext root, String cssSelector) {
+        return getDecoratedElementList(root, Bot.driver(), By.cssSelector(cssSelector));
+    }
+
+    public static List<WebElement> findByCssSelectorMultiple(String cssSelector) {
+        return findByCssSelectorMultiple(Bot.driver(), cssSelector);
+    }
+    
+    public static List<WebElement> findByIdMultiple(SearchContext root, String id) {
+        return getDecoratedElementList(root, Bot.driver(), By.id(id));
+    }
+
+    public static List<WebElement> findByIdMultiple(String id) {
+        return findByIdMultiple(Bot.driver(), id);
+    }
+    
+    public static List<WebElement> findByClassNameMultiple(SearchContext root, String className) {
+        return getDecoratedElementList(root, Bot.driver(), By.className(className));
+    }
+
+    public static List<WebElement> findByClassNameMultiple(String className) {
+        return findByClassNameMultiple(Bot.driver(), className);
+    }
+    
+    public static List<WebElement> findByLinkTextMultiple(SearchContext root, String linkText) {
+        return getDecoratedElementList(root, Bot.driver(), By.linkText(linkText));
+    }
+
+    public static List<WebElement> findByLinkTextMultiple(String linkText) {
+        return findByLinkTextMultiple(Bot.driver(), linkText);
+    }
+    
+    public static List<WebElement> findByNameMultiple(SearchContext root, String name) {
+        return getDecoratedElementList(root, Bot.driver(), By.name(name));
+    }
+
+    public static List<WebElement> findByNameMultiple(String name) {
+        return findByNameMultiple(Bot.driver(), name);
+    }
+    
+    public static List<WebElement> findByPartialLinkTextMultiple(SearchContext root, String partialLinkText) {
+        return getDecoratedElementList(root, Bot.driver(), By.partialLinkText(partialLinkText));
+    }
+
+    public static List<WebElement> findByPartialLinkTextMultiple(String partialLinkText) {
+        return findByPartialLinkTextMultiple(Bot.driver(), partialLinkText);
+    }
+    
+    public static List<WebElement> findByTagNameMultiple(SearchContext root, String tagName) {
+        return getDecoratedElementList(root, Bot.driver(), By.tagName(tagName));
+    }
+
+    public static List<WebElement> findByTagNameMultiple(String tagName) {
+        return findByTagNameMultiple(Bot.driver(), tagName);
     }
 }

@@ -1,5 +1,6 @@
 package com.github.webdriverextensions;
 
+import com.github.webdriverextensions.internal.CustomFieldDecorator;
 import com.github.webdriverextensions.internal.WebDriverExtensionAnnotations;
 import java.lang.reflect.Field;
 import java.lang.reflect.ParameterizedType;
@@ -22,10 +23,9 @@ import org.openqa.selenium.support.FindAll;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.FindBys;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.pagefactory.DefaultFieldDecorator;
 import org.openqa.selenium.support.pagefactory.ElementLocator;
 
-public class WebDriverExtensionFieldDecorator extends DefaultFieldDecorator {
+public class WebDriverExtensionFieldDecorator extends CustomFieldDecorator {
 
     private final WebDriver driver;
     private final ObjectPool pool;
